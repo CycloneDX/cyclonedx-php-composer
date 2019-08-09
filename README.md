@@ -10,3 +10,11 @@ CycloneDX PHP Composer Plugin
 =========
 
 Help wanted
+
+
+License
+-------------------
+
+Permission to modify and redistribute is granted under the terms of the Apache 2.0 license. See the [LICENSE] file for the full license.
+
+[License]: https://github.com/CycloneDX/cyclonedx-php-composer/blob/master/LICENSE
