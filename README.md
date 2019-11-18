@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/CycloneDX/cyclonedx-php-composer.svg?branch=master)](https://travis-ci.org/CycloneDX/cyclonedx-php-composer)
+[![Build Status](https://github.com/CycloneDX/cyclonedx-php-composer/workflows/PHP%20CI/badge.svg)](https://github.com/CycloneDX/cyclonedx-php-composer/actions?workflow=PHP+CI)
 [![Packagist Version](https://img.shields.io/packagist/v/cyclonedx/bom)](https://packagist.org/)
 [![License](https://img.shields.io/badge/license-Apache%202.0-brightgreen.svg)][License]
 [![Website](https://img.shields.io/badge/https://-cyclonedx.org-blue.svg)](https://cyclonedx.org/)
