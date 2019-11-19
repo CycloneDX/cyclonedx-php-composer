@@ -1,0 +1,25 @@
+{
+    "name": "cyclonedx/cyclonedx-php-composer",
+    "description": "Creates CycloneDX Software Bill-of-Materials (SBOM) from PHP Composer projects",
+    "type": "composer-plugin",
+    "license": "Apache-2.0",
+    "authors": [
+        {
+            "name": "nscuro",
+            "email": "nscuro@protonmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.5",
+        "composer-plugin-api": "^1.0",
+        "composer/semver": "^1.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "CycloneDX\\": "src"
+        }
+    },
+    "extra": {
+        "class": "CycloneDX\\ComposerPlugin"
+    }
+}
