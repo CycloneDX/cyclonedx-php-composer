@@ -1,5 +1,24 @@
 <?php
 
+/*
+ * This file is part of the CycloneDX PHP Composer Plugin.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ * Copyright (c) Steve Springett. All Rights Reserved.
+ */
+
 namespace CycloneDX;
 
 use CycloneDX\Model\Bom;
@@ -13,6 +32,9 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
+/**
+ * @author nscuro
+ */
 class ComposerCommandProvider implements CommandProvider
 {
     public function getCommands()
@@ -21,6 +43,11 @@ class ComposerCommandProvider implements CommandProvider
     }   
 }
 
+/**
+ * The Plugin's makeBom command.
+ * 
+ * @author nscuro
+ */
 class MakeBomCommand extends BaseCommand
 {
     protected function configure()
@@ -29,82 +56,34 @@ class MakeBomCommand extends BaseCommand
             ->setName("makeBom")
             ->setDescription("Generate a CycloneDX Bill of Materials");
 
-        $this->addOption("outputFile", null, InputOption::VALUE_REQUIRED, "Path to the Output File");
-        $this->addOption("excludeDev", null, InputOption::VALUE_NONE, "Exclude Dev Dependencies");
-        $this->addOption("excludePlugins", null, InputOption::VALUE_NONE, "Exclude Composer Plugins");
+        $this->addOption("outputFile", null, InputOption::VALUE_REQUIRED, "Path to the output file (default is bom.xml)");
+        $this->addOption("excludeDev", null, InputOption::VALUE_NONE, "Exclude dev dependencies");
+        $this->addOption("excludePlugins", null, InputOption::VALUE_NONE, "Exclude composer plugins");
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $locker = $this->getComposer()->getLocker();
 
-        if (!$locker->isLocked() || !$locker->isFresh()) {
-            $output->writeln("[x] Lockfile does not exist or is outdated");
+        if (!$locker->isLocked()) {
+            $output->writeln("<error>Lockfile does not exist</error>");
             return;
         }
-            
-        $lockData = $locker->getLockData();
-        $packages = $lockData["packages"];
+        
+        $output->writeln("<info>Generating BOM...</info>");
+        $bomGenerator = new BomGenerator($output);
+        $bom = $bomGenerator->generateBom(
+            $locker->getLockData(), 
+            $input->getOption("excludeDev") !== false, 
+            $input->getOption("excludePlugins") !== false
+        );
 
-        if ($input->getOption("excludeDev") !== true) {
-            array_merge($packages, $lockData["packages-dev"]);
-        } else {
-            $output->writeln("[!] Dev dependencies will be excluded");
-        }
-
-        $output->writeln("[+] Collecting components...");
-        $components = array();
-        foreach ($packages as &$package) {
-            if ($package["type"] === "composer-plugin" && $input->getOption("excludePlugins") !== false) {
-                $output->writeln("[!] Skipping plugin " . $package["name"]);
-                continue;
-            }
-
-            array_push($components, $this->buildComponent($package));
-        }
-
-        $bom = new Bom;
-        $bom->setComponents($components);
-
-        $output->writeln("[+] Generating BOM...");
-        $bomWriter = new BomWriter;
+        $output->writeln("<info>Writing BOM XML...</info>");
+        $bomWriter = new BomXmlWriter($output);
         $bomXml = $bomWriter->writeBom($bom);
         
         $outputFile = $input->getOption("outputFile") ? $input->getOption("outputFile") : "bom.xml";
-        $output->writeln("[+] Writing BOM to " . $outputFile . "...");
+        $output->writeln("<info>Writing BOM to " . $outputFile . "...</info>");
         \file_put_contents($outputFile, $bomXml);
     }
-
-    private function buildComponent(array $package)
-    {
-        $component = new Component;
-
-        $splittedName = \explode("/", $package["name"], 2);
-        $splittedNameCount = count($splittedName);
-        if ($splittedNameCount == 2) {
-            $component->setGroup($splittedName[0]);
-            $component->setName($splittedName[1]);
-        } else if ($splittedNameCount == 1) {
-            $component->setName($splittedName[0]);
-        }
-
-        $versionParser = new VersionParser;
-        $component->setVersion($versionParser->normalize($package["version"]));
-        
-        // TODO: Research possible types in composer
-        $component->setType("library");
-
-        // TODO: Validate License with SPDX license list
-        $component->setLicenses($package["license"]);
-
-        if (\array_key_exists("shasum", $package["dist"]) && $package["dist"]["shasum"]) {
-            $component->setHashes(array("sha1" => $package["dist"]["shasum"]));
-        }
-
-        // TODO: Find a more robust way to put this together?
-        $component->setPackageUrl(\sprintf("pkg://composer/%s/%s@%s", $component->getGroup(), $component->getName(), $component->getVersion()));
-
-        return $component;
-    }
-
 }

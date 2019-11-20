@@ -7,8 +7,6 @@
 
 # CycloneDX PHP Composer Plugin
 
-Help wanted
-
 ## Usage
 
 ### Installation
@@ -23,9 +21,9 @@ Usage:
   makeBom [options]
 
 Options:
-      --outputFile=OUTPUTFILE    Path to the Output File
-      --excludeDev               Exclude Dev Dependencies
-      --excludePlugins           Exclude Composer Plugins
+      --outputFile=OUTPUTFILE    Path to the output file (default is bom.xml)
+      --excludeDev               Exclude dev dependencies
+      --excludePlugins           Exclude composer plugins
   -h, --help                     Display this help message
   -q, --quiet                    Do not output any message
   -V, --version                  Display this application version
