@@ -66,11 +66,6 @@ class Component
      */
     private $hashes;
 
-    /**
-     * @var bool
-     */
-    private $modified;
-
     public function getName() {
         return $this->name;
     }
@@ -133,14 +128,6 @@ class Component
 
     public function setHashes(array $hashes) {
         $this->hashes = $hashes;
-    }
-
-    public function isModified() {
-        return $this->modified;
-    }
-
-    public function setModified(bool $modified) {
-        $this->modified = $modified;
     }
 
 }

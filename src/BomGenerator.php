@@ -106,9 +106,6 @@ class BomGenerator
         // https://getcomposer.org/doc/04-schema.md#type
         $component->setType("library");
 
-        // No straightforward way to determine this...
-        $component->setModified(false);
-
         // TODO: Validate License with SPDX license list
         if (array_key_exists("license", $package) && is_array($package["license"])) {
             $component->setLicenses(array_map(

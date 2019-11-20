@@ -123,7 +123,6 @@ class BomGeneratorTest extends TestCase
         $this->assertArrayHasKey("SHA-1", $component->getHashes());
         $this->assertEquals("7e240de74fb1ed08fa08d38063f6a6a91462a815", $component->getHashes()["SHA-1"]);
         $this->assertEquals("pkg://composer/vendorName/packageName@6.6.6", $component->getPackageUrl());
-        $this->assertEquals(false, $component->isModified());
     }
 
     public function testBuildComponentWithoutVendor() 
@@ -142,7 +141,6 @@ class BomGeneratorTest extends TestCase
         $this->assertNull($component->getLicenses());
         $this->assertNull($component->getHashes());
         $this->assertEquals("pkg://composer/packageName@1.0", $component->getPackageUrl());
-        $this->assertEquals(false, $component->isModified());
     }
 
 }

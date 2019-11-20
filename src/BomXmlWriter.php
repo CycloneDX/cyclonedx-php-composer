@@ -53,7 +53,7 @@ class BomXmlWriter
         \xmlwriter_set_indent($writer, 4);
 
         \xmlwriter_start_document($writer, "1.0", "UTF-8");
-        \xmlwriter_start_element_ns($writer, null, "bom", "http://cyclonedx.org/schema/bom/1.0");
+        \xmlwriter_start_element_ns($writer, null, "bom", "http://cyclonedx.org/schema/bom/1.1");
 
         \xmlwriter_start_element($writer, "components");
         foreach ($bom->getComponents() as &$component) {
@@ -115,8 +115,6 @@ class BomXmlWriter
         if ($component->getPackageUrl()) {
             $this->writeTextElement($writer, "purl", $component->getPackageUrl());
         }
-
-        $this->writeTextElement($writer, "modified", $component->isModified() ? "true" : "false");
 
         \xmlwriter_end_element($writer);
     }

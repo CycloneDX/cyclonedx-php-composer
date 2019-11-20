@@ -41,7 +41,7 @@ class BomXmlWriterTest extends TestCase
 
         $domDocument = new DOMDocument("1.0", "UTF-8");
         $domDocument->loadXML($bomXml);
-        $this->assertTrue($domDocument->schemaValidate(__DIR__ . "/schema/bom-1.0.xsd"));
+        $this->assertTrue($domDocument->schemaValidate(__DIR__ . "/schema/bom-1.1.xsd"));
     }
 
 }
