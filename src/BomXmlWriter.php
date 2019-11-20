@@ -122,7 +122,7 @@ class BomXmlWriter
      * @param string $elementName Name of the element
      * @param string $elementText Text of the element
      */
-    private function writeTextElement($writer, $elementName, $elementText)
+    private function writeTextElement($writer, string $elementName, string $elementText)
     {
         \xmlwriter_start_element($writer, $elementName);
         \xmlwriter_text($writer, $elementText);
