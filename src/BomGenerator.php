@@ -106,15 +106,7 @@ class BomGenerator
         // https://getcomposer.org/doc/04-schema.md#type
         $component->setType("library");
 
-        // TODO: Validate License with SPDX license list
-        if (array_key_exists("license", $package) && is_array($package["license"])) {
-            $component->setLicenses(array_map(
-                function($licenseId) { 
-                    return new License($licenseId); 
-                }, 
-                $package["license"])
-            );
-        }
+        $component->setLicenses($this->readLicenses($package));
 
         if (array_key_exists("dist", $package) && array_key_exists("shasum", $package["dist"]) && $package["dist"]["shasum"]) {
             $component->setHashes(array("SHA-1" => $package["dist"]["shasum"]));
@@ -147,4 +139,42 @@ class BomGenerator
         return $packageVersion;
     }
 
+    /**
+     * See https://getcomposer.org/doc/04-schema.md#license
+     * 
+     * @param array
+     * @return array
+     */
+    public function readLicenses($package)
+    {
+        if (!array_key_exists("license", $package) || !$package["license"]) {
+            return array();
+        }
+
+        $licenseData = $package["license"];
+        if (is_string($licenseData)) {
+            if (preg_match("/\((([\w\.\-]+)(\ or\ |\ and\ )?)+\)/", $licenseData)) {
+                // Conjunctive or disjunctive license provided as string
+                $licenses = preg_split("/[\(\)]/", $licenseData, -1, PREG_SPLIT_NO_EMPTY);
+                $licenses = preg_split("/(\ or\ |\ and\ )/", $licenses[0], -1, PREG_SPLIT_NO_EMPTY);
+                return array_map(
+                    function($licenseId) { 
+                        return new License($licenseId); 
+                    }, 
+                    $licenses
+                );
+            } else {
+                // A single license provided as string
+                return array(new License($licenseData));
+            }
+        } else if (is_array($licenseData)) {
+            // Disjunctive license provided as array
+            return array_map(
+                function($licenseId) { 
+                    return new License($licenseId); 
+                }, 
+                $licenseData
+            );
+        }
+    }
 }
