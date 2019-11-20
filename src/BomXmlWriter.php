@@ -89,19 +89,11 @@ class BomXmlWriter
             $this->writeTextElement($writer, "description", $component->getDescription());
         }
 
-        if ($component->getLicenses()) {
-            \xmlwriter_start_element($writer, "licenses");
-            foreach ($component->getLicenses() as &$license) {
-                $this->writeTextElement($writer, "license", $license);
-            }
-            \xmlwriter_end_element($writer);
-        }
-
         if ($component->getHashes()) {
             \xmlwriter_start_element($writer, "hashes");
             foreach ($component->getHashes() as $hashType => $hashValue) {
                 \xmlwriter_start_element($writer, "hash");
-                \xmlwriter_start_attribute($writer, "algo");
+                \xmlwriter_start_attribute($writer, "alg");
                 \xmlwriter_text($writer, $hashType);
                 \xmlwriter_end_attribute($writer);
                 \xmlwriter_text($writer, $hashValue);
@@ -110,9 +102,21 @@ class BomXmlWriter
             \xmlwriter_end_element($writer);
         }
 
+        if ($component->getLicenses()) {
+            \xmlwriter_start_element($writer, "licenses");
+            foreach ($component->getLicenses() as &$license) {
+                xmlwriter_start_element($writer, "license");
+                $this->writeTextElement($writer, "id", $license->getId());
+                xmlwriter_end_element($writer);
+            }
+            \xmlwriter_end_element($writer);
+        }
+
         if ($component->getPackageUrl()) {
             $this->writeTextElement($writer, "purl", $component->getPackageUrl());
         }
+
+        $this->writeTextElement($writer, "modified", $component->isModified() ? "true" : "false");
 
         \xmlwriter_end_element($writer);
     }

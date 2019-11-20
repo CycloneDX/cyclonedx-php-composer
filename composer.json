@@ -20,5 +20,14 @@
     },
     "extra": {
         "class": "CycloneDX\\ComposerPlugin"
+    },
+    "scripts": {
+        "test": [
+            "phpunit --bootstrap vendor/autoload.php tests"
+        ]
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^7",
+        "composer/composer": "^1.9"
     }
 }

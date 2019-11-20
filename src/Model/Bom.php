@@ -24,7 +24,7 @@ namespace CycloneDX\Model;
 /**
  * @author nscuro
  */
-class BOM 
+class Bom
 {
     /**
      * @var array

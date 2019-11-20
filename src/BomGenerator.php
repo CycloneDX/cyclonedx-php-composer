@@ -23,7 +23,7 @@ namespace CycloneDX;
 
 use CycloneDX\Model\Bom;
 use CycloneDX\Model\Component;
-
+use CycloneDX\Model\License;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
@@ -56,7 +56,7 @@ class BomGenerator
         $packagesDev = $lockData["packages-dev"];
 
         if (!$excludeDev) {
-            array_merge($packages, $packagesDev);
+            $packages = array_merge($packages, $packagesDev);
         } else {
             $this->output->writeln("<warning>Dev dependencies will be skipped</warning>");
         }
@@ -78,7 +78,7 @@ class BomGenerator
      * @param array $package The lockData's package data to build a component from
      * @return Component The resulting component
      */
-    private function buildComponent(array $package)
+    public function buildComponent(array $package)
     {
         $component = new Component;
 
@@ -98,16 +98,29 @@ class BomGenerator
         }
 
         $component->setVersion($this->normalizeVersion($package["version"]));
-        $component->setDescription($package["description"]);
+
+        if (array_key_exists("description", $package) && $package["description"]) {
+            $component->setDescription($package["description"]);
+        }
         
         // https://getcomposer.org/doc/04-schema.md#type
         $component->setType("library");
 
-        // TODO: Validate License with SPDX license list
-        $component->setLicenses($package["license"]);
+        // No straightforward way to determine this...
+        $component->setModified(false);
 
-        if (\array_key_exists("shasum", $package["dist"]) && $package["dist"]["shasum"]) {
-            $component->setHashes(array("sha1" => $package["dist"]["shasum"]));
+        // TODO: Validate License with SPDX license list
+        if (array_key_exists("license", $package) && is_array($package["license"])) {
+            $component->setLicenses(array_map(
+                function($licenseId) { 
+                    return new License($licenseId); 
+                }, 
+                $package["license"])
+            );
+        }
+
+        if (array_key_exists("dist", $package) && array_key_exists("shasum", $package["dist"]) && $package["dist"]["shasum"]) {
+            $component->setHashes(array("SHA-1" => $package["dist"]["shasum"]));
         }
 
         if ($component->getGroup()) {
