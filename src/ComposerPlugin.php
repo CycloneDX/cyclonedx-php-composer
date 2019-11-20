@@ -34,6 +34,7 @@ class ComposerPlugin implements PluginInterface, Capable
 {
     public function activate(Composer $composer, IOInterface $io) 
     {
+        // Nothing to do
     }
 
     public function getCapabilities()

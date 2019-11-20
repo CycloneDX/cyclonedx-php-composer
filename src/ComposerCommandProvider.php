@@ -70,7 +70,7 @@ class MakeBomCommand extends BaseCommand
             return;
         }
         
-        $output->writeln("<info>Generating BOM...</info>");
+        $output->writeln("<info>Generating BOM from lockfile</info>");
         $bomGenerator = new BomGenerator($output);
         $bom = $bomGenerator->generateBom(
             $locker->getLockData(), 
@@ -78,12 +78,12 @@ class MakeBomCommand extends BaseCommand
             $input->getOption("excludePlugins") !== false
         );
 
-        $output->writeln("<info>Writing BOM XML...</info>");
+        $output->writeln("<info>Writing BOM XML</info>");
         $bomWriter = new BomXmlWriter($output);
         $bomXml = $bomWriter->writeBom($bom);
         
         $outputFile = $input->getOption("outputFile") ? $input->getOption("outputFile") : "bom.xml";
-        $output->writeln("<info>Writing BOM to " . $outputFile . "...</info>");
+        $output->writeln("<info>Writing output to " . $outputFile . "</info>");
         \file_put_contents($outputFile, $bomXml);
     }
 }
