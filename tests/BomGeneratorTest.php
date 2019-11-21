@@ -117,7 +117,7 @@ class BomGeneratorTest extends TestCase
         $this->assertEquals("packageDescription", $component->getDescription());
         $this->assertEquals("library", $component->getType());
         $this->assertEquals(1, sizeof($component->getLicenses()));
-        $this->assertContains("MIT", array_map(function($license) { return $license->getId(); }, $component->getLicenses()));
+        $this->assertContains("MIT", $component->getLicenses());
         $this->assertArrayHasKey("SHA-1", $component->getHashes());
         $this->assertEquals("7e240de74fb1ed08fa08d38063f6a6a91462a815", $component->getHashes()["SHA-1"]);
         $this->assertEquals("pkg://composer/vendorName/packageName@6.6.6", $component->getPackageUrl());
@@ -137,41 +137,58 @@ class BomGeneratorTest extends TestCase
         $this->assertEquals("1.0", $component->getVersion());
         $this->assertNull($component->getDescription());
         $this->assertEmpty($component->getLicenses());
-        $this->assertNull($component->getHashes());
+        $this->assertEmpty($component->getHashes());
         $this->assertEquals("pkg://composer/packageName@1.0", $component->getPackageUrl());
+    }
+
+    public function testBuildComponentWithoutName() 
+    {
+        $packageData = array("version" => "1.0");
+
+        $this->expectException(UnexpectedValueException::class);
+        $this->expectExceptionMessage("Encountered package without name: {\"version\":\"1.0\"}");
+
+        $this->bomGenerator->buildComponent($packageData);
+    }
+
+    public function testBuildComponentWithoutVersion() 
+    {
+        $packageData = array("name" => "vendorName/packageName");
+
+        $this->expectException(UnexpectedValueException::class);
+        $this->expectExceptionMessage("Encountered package without version: vendorName/packageName");
+
+        $this->bomGenerator->buildComponent($packageData);
     }
 
     public function testReadLicensesWithLicenseString() 
     {
         $licenses = $this->bomGenerator->readLicenses(array("license" => "MIT"));
         $this->assertEquals(1, sizeof($licenses));
-        $this->assertContains("MIT", array_map(function($license) { return $license->getId(); }, $licenses));
+        $this->assertContains("MIT", $licenses);
     }
 
     public function testReadLicensesWithDisjunctiveLicenseString() 
     {
         $licenses = $this->bomGenerator->readLicenses(array("license" => "(MIT or Apache-2.0)"));
         $this->assertEquals(2, sizeof($licenses));
-        $licenseIds = array_map(function($license) { return $license->getId(); }, $licenses);
-        $this->assertContains("MIT", $licenseIds);
-        $this->assertContains("Apache-2.0", $licenseIds);
+        $this->assertContains("MIT", $licenses);
+        $this->assertContains("Apache-2.0", $licenses);
     }
 
     public function testReadLicensesWithConjunctiveLicenseString() 
     {
         $licenses = $this->bomGenerator->readLicenses(array("license" => "(MIT and Apache-2.0)"));
         $this->assertEquals(2, sizeof($licenses));
-        $licenseIds = array_map(function($license) { return $license->getId(); }, $licenses);
-        $this->assertContains("MIT", $licenseIds);
-        $this->assertContains("Apache-2.0", $licenseIds);
+        $this->assertContains("MIT", $licenses);
+        $this->assertContains("Apache-2.0", $licenses);
     }
 
     public function testReadLicensesWithDisjunctiveLicenseArray() 
     {
         $licenses = $this->bomGenerator->readLicenses(array("license" => array("MIT", "Apache-2.0")));
         $this->assertEquals(2, sizeof($licenses));
-        $licenseIds = array_map(function($license) { return $license->getId(); }, $licenses);
-        $this->assertContains("MIT", $licenseIds);
-        $this->assertContains("Apache-2.0", $licenseIds);
+        $this->assertContains("MIT", $licenses);
+        $this->assertContains("Apache-2.0", $licenses);
     }
 }

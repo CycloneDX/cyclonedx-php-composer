@@ -33,7 +33,7 @@ class BomXmlWriterTest extends TestCase
         $component->setDescription("componentDescription");
         $component->setVersion("1.0");
         $component->setType("library");
-        $component->setLicenses(array(new License("MIT"), new License("Apache-2.0")));
+        $component->setLicenses(array("MIT", "Apache-2.0"));
         $component->setHashes(array("SHA-1" => "7e240de74fb1ed08fa08d38063f6a6a91462a815"));
         $bom = new Bom(array($component));
 
