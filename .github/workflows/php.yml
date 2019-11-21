@@ -16,7 +16,7 @@ jobs:
         uses: shivammathur/setup-php@master
         with:
           php-version: ${{ matrix.php-versions }}
-          extension-csv: ext-dom # Required by phpunit
+          extension-csv: dom # Required by phpunit
       - name: Validate composer.json and composer.lock
         run: composer validate
 
