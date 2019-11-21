@@ -7,15 +7,25 @@
 
 # CycloneDX PHP Composer Plugin
 
+A plugin for PHP's [Composer](https://getcomposer.org/) that generates Bill of Materials in [CycloneDX](https://cyclonedx.org/) format.
+
 ## Usage
+
+### Requirements
+
+The plugin supports PHP 5.5 or later. This includes PHP 7.0 and later.
 
 ### Installation
 
 `composer require --dev cyclonedx/cyclonedx-php-composer`
 
+**There's no stable release available yet**. You can test this plugin by either [setting your `minimum-stability` to `dev`](https://getcomposer.org/doc/04-schema.md#minimum-stability) or explicitly requesting the `dev-master` version: `composer require --dev cyclonedx/cyclonedx-php-composer:dev-master`.
+
 ### Options
 
-```sh 
+After successful installation, the composer command `makeBom` is available.
+
+```sh
 $ composer makeBom -h
 Usage:
   makeBom [options]
