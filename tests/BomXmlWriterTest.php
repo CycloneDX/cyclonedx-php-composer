@@ -3,7 +3,6 @@
 use CycloneDX\BomXmlWriter;
 use CycloneDX\Model\Bom;
 use CycloneDX\Model\Component;
-use CycloneDX\Model\License;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -21,6 +20,8 @@ class BomXmlWriterTest extends TestCase
 
     protected function setUp() 
     {
+        parent::setUp();
+        
         $this->outputMock = $this->createMock(OutputInterface::class);
         $this->bomXmlWriter = new BomXmlWriter($this->outputMock);
     }

@@ -16,8 +16,10 @@ class BomGeneratorTest extends TestCase
      */
     private $bomGenerator;
 
-    protected function setUp() 
+    protected function setUp()
     {
+        parent::setUp();
+
         $this->outputMock = $this->createMock(OutputInterface::class);
         $this->bomGenerator = new BomGenerator($this->outputMock);
     }
