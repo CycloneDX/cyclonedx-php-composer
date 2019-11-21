@@ -128,7 +128,7 @@ class BomXmlWriter
      * @param string $elementName Name of the element
      * @param string $elementText Text of the element
      */
-    private function writeTextElement(XMLWriter $xmlWriter, string $elementName, string $elementText)
+    private function writeTextElement(XMLWriter $xmlWriter, $elementName, $elementText)
     {
         $xmlWriter->startElement($elementName);
         $xmlWriter->text($elementText);

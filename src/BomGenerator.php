@@ -50,7 +50,7 @@ class BomGenerator
      * @param bool $excludePlugins Exclude composer plugins
      * @return Bom The resulting BOM
      */
-    public function generateBom(array $lockData, bool $excludeDev, bool $excludePlugins)
+    public function generateBom(array $lockData, $excludeDev, $excludePlugins)
     {
         $packages = $lockData["packages"];
         $packagesDev = $lockData["packages-dev"];
@@ -140,7 +140,7 @@ class BomGenerator
      * @param $packageVersion The version to normalize
      * @return string The normalized version
      */
-    private function normalizeVersion(string $packageVersion) 
+    private function normalizeVersion($packageVersion) 
     {
         if (!$packageVersion) {
             return null;
