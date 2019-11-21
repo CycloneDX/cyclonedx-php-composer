@@ -1,1 +1,4 @@
 /vendor/
+
+# Because we're supporting PHP 5 and 7, we cannot distribute the lockfile
+composer.lock
