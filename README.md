@@ -23,17 +23,17 @@ The plugin supports PHP 5.5 or later. This includes PHP 7.0 and later.
 
 ### Options
 
-After successful installation, the composer command `makeBom` is available.
+After successful installation, the composer command `make-bom` is available.
 
 ```sh
-$ composer makeBom -h
+$ composer make-bom -h
 Usage:
-  makeBom [options]
+  make-bom [options]
 
 Options:
-      --outputFile=OUTPUTFILE    Path to the output file (default is bom.xml)
-      --excludeDev               Exclude dev dependencies
-      --excludePlugins           Exclude composer plugins
+      --output-file=OUTPUT-FILE  Path to the output file (default is bom.xml)
+      --exclude-dev              Exclude dev dependencies
+      --exclude-plugins          Exclude composer plugins
   -h, --help                     Display this help message
   -q, --quiet                    Do not output any message
   -V, --version                  Display this application version
