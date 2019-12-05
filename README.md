@@ -13,13 +13,11 @@ A plugin for PHP's [Composer](https://getcomposer.org/) that generates Bill of M
 
 ### Requirements
 
-The plugin supports PHP 5.5 or later. This includes PHP 7.0 and later.
+The plugin supports PHP 5.5 and later.
 
 ### Installation
 
 `composer require --dev cyclonedx/cyclonedx-php-composer`
-
-**There's no stable release available yet**. You can test this plugin by either [setting your `minimum-stability` to `dev`](https://getcomposer.org/doc/04-schema.md#minimum-stability) or explicitly requesting the `dev-master` version: `composer require --dev cyclonedx/cyclonedx-php-composer:dev-master`.
 
 ### Options
 
