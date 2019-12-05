@@ -25,6 +25,7 @@ use CycloneDX\Model\Bom;
 use CycloneDX\Model\Component;
 
 use Symfony\Component\Console\Output\OutputInterface;
+use XMLWriter;
 
 /**
  * Writes BOMs in XML format.
@@ -49,86 +50,89 @@ class BomXmlWriter
      */
     public function writeBom(Bom $bom) 
     {
-        $writer = \xmlwriter_open_memory();
-        \xmlwriter_set_indent($writer, 4);
+        $xmlWriter = new XMLWriter;
+        $xmlWriter->openMemory();
+        $xmlWriter->setIndent(true);
+        $xmlWriter->setIndentString("    ");
 
-        \xmlwriter_start_document($writer, "1.0", "UTF-8");
-        \xmlwriter_start_element_ns($writer, null, "bom", "http://cyclonedx.org/schema/bom/1.1");
+        $xmlWriter->startDocument("1.0", "utf-8");
+        $xmlWriter->startElementNs(null, "bom", "http://cyclonedx.org/schema/bom/1.1");
 
-        \xmlwriter_start_element($writer, "components");
+        $xmlWriter->startElement("components");
         foreach ($bom->getComponents() as &$component) {
-            $this->writeComponent($writer, $component);
+            $this->writeComponent($xmlWriter, $component);
         }
-        \xmlwriter_end_element($writer);
+        $xmlWriter->endElement(); // components
 
-        \xmlwriter_end_element($writer);
-        \xmlwriter_end_document($writer);
-        return \xmlwriter_output_memory($writer);
+        $xmlWriter->endElement(); // bom
+        $xmlWriter->endDocument();
+        return $xmlWriter->outputMemory();
     }
 
     /**
-     * @param $writer XMLWriter resource
+     * @param XMLWriter $xmlWriter The XMLWriter instance to use
      * @param Component $component The component to write
      */
-    private function writeComponent($writer, Component $component) 
+    private function writeComponent(XMLWriter $xmlWriter, Component $component) 
     {
-        \xmlwriter_start_element($writer, "component");
+        $xmlWriter->startElement("component");
 
-        \xmlwriter_start_attribute($writer, "type");
-        \xmlwriter_text($writer, $component->getType());
-        \xmlwriter_end_attribute($writer);
+        $xmlWriter->startAttribute("type");
+        $xmlWriter->text($component->getType());
+        $xmlWriter->endAttribute();
 
         if ($component->getGroup()) {
-            $this->writeTextElement($writer, "group", $component->getGroup());
+            $this->writeTextElement($xmlWriter, "group", $component->getGroup());
         }
-
-        $this->writeTextElement($writer, "name", $component->getName());
-        $this->writeTextElement($writer, "version", $component->getVersion());
+        $this->writeTextElement($xmlWriter, "name", $component->getName());
+        $this->writeTextElement($xmlWriter, "version", $component->getVersion());
 
         if ($component->getDescription()) {
-            $this->writeTextElement($writer, "description", $component->getDescription());
+            $this->writeTextElement($xmlWriter, "description", $component->getDescription());
         }
 
         if ($component->getHashes()) {
-            \xmlwriter_start_element($writer, "hashes");
+            $xmlWriter->startElement("hashes");
             foreach ($component->getHashes() as $hashType => $hashValue) {
-                \xmlwriter_start_element($writer, "hash");
-                \xmlwriter_start_attribute($writer, "alg");
-                \xmlwriter_text($writer, $hashType);
-                \xmlwriter_end_attribute($writer);
-                \xmlwriter_text($writer, $hashValue);
-                \xmlwriter_end_element($writer);
+                $xmlWriter->startElement("hash");
+                
+                $xmlWriter->startAttribute("alg");
+                $xmlWriter->text($hashType);
+                $xmlWriter->endAttribute();
+                
+                $xmlWriter->text($hashValue);
+                $xmlWriter->endElement(); // hash
             }
-            \xmlwriter_end_element($writer);
+            $xmlWriter->endElement(); // hashes
         }
 
         if ($component->getLicenses()) {
-            \xmlwriter_start_element($writer, "licenses");
+            $xmlWriter->startElement("licenses");
             foreach ($component->getLicenses() as &$license) {
-                xmlwriter_start_element($writer, "license");
-                $this->writeTextElement($writer, "id", $license->getId());
-                xmlwriter_end_element($writer);
+                $xmlWriter->startElement("license");
+                $this->writeTextElement($xmlWriter, "id", $license);
+                $xmlWriter->endElement(); // license
             }
-            \xmlwriter_end_element($writer);
+            $xmlWriter->endElement(); // licenses
         }
 
         if ($component->getPackageUrl()) {
-            $this->writeTextElement($writer, "purl", $component->getPackageUrl());
+            $this->writeTextElement($xmlWriter, "purl", $component->getPackageUrl());
         }
 
-        \xmlwriter_end_element($writer);
+        $xmlWriter->endElement(); // component
     }
 
     /**
-     * @param $writer XMLWriter resource
+     * @param XMLWriter $writer The XMLWriter instance to use
      * @param string $elementName Name of the element
      * @param string $elementText Text of the element
      */
-    private function writeTextElement($writer, string $elementName, string $elementText)
+    private function writeTextElement(XMLWriter $xmlWriter, $elementName, $elementText)
     {
-        \xmlwriter_start_element($writer, $elementName);
-        \xmlwriter_text($writer, $elementText);
-        \xmlwriter_end_element($writer);
+        $xmlWriter->startElement($elementName);
+        $xmlWriter->text($elementText);
+        $xmlWriter->endElement();
     }
 
 }

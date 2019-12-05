@@ -25,7 +25,6 @@ use Composer\Composer;
 use Composer\IO\IOInterface;
 use Composer\Plugin\Capable;
 use Composer\Plugin\PluginInterface;
-use Composer\EventDispatcher\EventSubscriberInterface;
 
 /**
  * @author nscuro

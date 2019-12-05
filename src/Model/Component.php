@@ -70,63 +70,108 @@ class Component
         return $this->name;
     }
 
-    public function setName(string $name) {
+    /**
+     * @param string $name
+     */
+    public function setName($name) {
         $this->name = $name;
     }
 
+    /**
+     * @return string
+     */
     public function getGroup() {
         return $this->group;
     }
 
-    public function setGroup(string $group) {
+    /**
+     * @param string $group
+     */
+    public function setGroup($group) {
         $this->group = $group;
     }
 
+    /**
+     * @return string
+     */
     public function getType() {
         return $this->type;
     }
 
-    public function setType(string $type) {
+    /**
+     * @param string $type
+     */
+    public function setType($type) {
         $this->type = $type;
     }
 
+    /**
+     * @return string
+     */
     public function getVersion() {
         return $this->version;
     }
 
-    public function setVersion(string $version) {
+    /**
+     * @param string $version
+     */
+    public function setVersion($version) {
         $this->version = $version;
     }
 
+    /**
+     * @return string
+     */
     public function getDescription() {
         return $this->description;
     }
 
-    public function setDescription(string $description) {
+    /**
+     * @param string $description
+     */
+    public function setDescription($description) {
         $this->description = $description;
     }
 
+    /**
+     * @return array
+     */
     public function getLicenses() {
         return $this->licenses;
     }
 
-    public function setLicenses(array $licenses) {
+    /**
+     * @param array $licenses
+     */
+    public function setLicenses($licenses) {
         $this->licenses = $licenses;
     }
 
+    /**
+     * @return string
+     */
     public function getPackageUrl() {
         return $this->packageUrl;
     }
 
-    public function setPackageUrl(string $packageUrl) {
+    /**
+     * @param string $packageUrl
+     */
+    public function setPackageUrl($packageUrl) {
         $this->packageUrl = $packageUrl;
     }
 
+    /**
+     * @return array
+     */
     public function getHashes() {
         return $this->hashes;
     }
 
-    public function setHashes(array $hashes) {
+    /**
+     * @param array $hashes
+     */
+    public function setHashes($hashes) {
         $this->hashes = $hashes;
     }
 
