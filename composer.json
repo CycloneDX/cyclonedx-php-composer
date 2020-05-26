@@ -15,7 +15,8 @@
     },
     "require-dev": {
         "phpunit/phpunit": ">=5.0 <7.0",
-        "composer/composer": "^1.9"
+        "composer/composer": "^1.9",
+        "swaggest/json-schema": "^0.12.29"
     },
     "autoload": {
         "psr-4": {
