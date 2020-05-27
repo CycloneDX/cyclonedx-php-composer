@@ -59,7 +59,7 @@ class MakeBomCommand extends BaseCommand
         $this->addOption($this::OPTION_OUTPUT_FILE, null, InputOption::VALUE_REQUIRED, "Path to the output file (default is bom.xml or bom.json)");
         $this->addOption($this::OPTION_EXCLUDE_DEV, null, InputOption::VALUE_NONE, "Exclude dev dependencies");
         $this->addOption($this::OPTION_EXCLUDE_PLUGINS, null, InputOption::VALUE_NONE, "Exclude composer plugins");
-        $this->addOption($this::OPTION_JSON, null, InputOption::VALUE_NONE, "Produce the BOM in JSON format (preview support)");
+        $this->addOption($this::OPTION_JSON, null, InputOption::VALUE_NONE, "Produce the BOM in JSON format");
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)

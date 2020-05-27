@@ -29,7 +29,7 @@ class BomJsonWriterTest extends TestCase
 
     public function testBomJsonWriter() 
     {
-        $schemaJson = file_get_contents(__DIR__ . "/schema/bom-1.2.schema-SNAPSHOT.json");
+        $schemaJson = file_get_contents(__DIR__ . "/schema/bom-1.2.schema.json");
         $schema = Schema::import(json_decode($schemaJson));
         $component = new Component;
         $component->setGroup("componentGroup");

@@ -33,7 +33,7 @@ Options:
       --output-file=OUTPUT-FILE  Path to the output file (default is bom.xml or bom.json)
       --exclude-dev              Exclude dev dependencies
       --exclude-plugins          Exclude composer plugins
-      --json                     Produce the BOM in JSON format (preview support)
+      --json                     Produce the BOM in JSON format
   -h, --help                     Display this help message
   -q, --quiet                    Do not output any message
   -V, --version                  Display this application version
