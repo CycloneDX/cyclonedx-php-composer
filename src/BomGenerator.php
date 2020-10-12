@@ -122,9 +122,9 @@ class BomGenerator
         }
 
         if ($component->getGroup()) {
-            $component->setPackageUrl(sprintf("pkg://composer/%s/%s@%s", $component->getGroup(), $component->getName(), $component->getVersion()));
+            $component->setPackageUrl(sprintf("pkg:composer/%s/%s@%s", $component->getGroup(), $component->getName(), $component->getVersion()));
         } else {
-            $component->setPackageUrl(sprintf("pkg://composer/%s@%s", $component->getName(), $component->getVersion()));
+            $component->setPackageUrl(sprintf("pkg:composer/%s@%s", $component->getName(), $component->getVersion()));
         }
 
         return $component;
