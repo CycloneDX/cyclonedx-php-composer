@@ -1,0 +1,48 @@
+# This workflow is used for publishing releases.
+#
+# Before triggering a release the `semver.txt` file should be updated in the
+# relevant branch.
+#
+# When commiting the version change in `semver.txt` the commit message is
+# important as it will be used for the release in GitHub.
+#
+# For an example commit browse to
+# https://github.com/CycloneDX/cyclonedx-dotnet/commit/d110af854371374460430bb8438225a7d7a84274.
+# 
+# The resulting release is here
+# https://github.com/CycloneDX/cyclonedx-dotnet/releases/tag/v1.0.0.
+#
+# Releases are triggered manually. This can be done by browsing to
+# https://github.com/CycloneDX/cyclonedx-php-composer/actions?query=workflow%3ARelease
+# and selecting "Run workflow". If releasing a patch for a previous version
+# make sure the correct branch is selected. It will default to the default
+# branch.
+name: Release
+
+on:
+  workflow_dispatch
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v2.3.3
+      
+      - name: Set the version
+        id: set_version
+        run: |
+          VERSION=`cat semver.txt`
+          echo "##[set-output name=version;]$VERSION"
+
+      - name: Create github release and git tag for release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          release_name: ${{ steps.set_version.outputs.version }}
+          tag_name: v${{ steps.set_version.outputs.version }}
+          draft: false
+          prerelease: false
