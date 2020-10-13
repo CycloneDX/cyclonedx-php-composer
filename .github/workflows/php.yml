@@ -1,14 +1,18 @@
+# For details of what checks are run for PRs please refer below
 name: PHP CI
 
-on: [push, pull_request]
+on: [pull_request, workflow_dispatch]
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
         php-versions: ["5.6", "7.0", "7.1", "7.2", "7.3"]
-    name: PHP ${{ matrix.php-versions }}
+    timeout-minutes: 30
+
+    name: PHP ${{ matrix.os}} ${{ matrix.php-versions }}
     steps:
       - name: Checkout
         uses: actions/checkout@v1
