@@ -36,6 +36,16 @@ class ComposerPlugin implements PluginInterface, Capable
         // Nothing to do
     }
 
+    public function deactivate(Composer $composer, IOInterface $io)
+    {
+        // Nothing to do
+    }
+
+    public function uninstall(Composer $composer, IOInterface $io)
+    {
+        // Nothing to do
+    }
+
     public function getCapabilities()
     {
         return array(
