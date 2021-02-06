@@ -18,7 +18,8 @@
     "require-dev": {
         "ext-dom": "*",
         "phpunit/phpunit": ">=5.0 <7.0",
-        "composer/composer": "^2.0"
+        "composer/composer": "^2.0",
+        "swaggest/json-schema": "^0.12.29"
     },
     "autoload": {
         "psr-4": {

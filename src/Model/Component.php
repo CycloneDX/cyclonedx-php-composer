@@ -24,7 +24,7 @@ namespace CycloneDX\Model;
 /**
  * @author nscuro
  */
-class Component 
+class Component implements \JsonSerializable
 {
     /**
      * @var string
@@ -175,4 +175,23 @@ class Component
         $this->hashes = $hashes;
     }
 
+    public function jsonSerialize() {
+        $licenses = [];
+        foreach ($this->licenses as $license) {
+            $licenses[] = [
+                "license" => [
+                    "id" => $license,
+                ],
+            ];
+        }
+        return [
+            "name" => $this->name,
+            "group" => $this->group,
+            "type" => $this->type,
+            "version" => $this->version,
+            "description" => $this->description,
+            "licenses" => $licenses,
+            "purl" => $this->packageUrl,
+        ];
+    }
 }
