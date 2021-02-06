@@ -23,6 +23,7 @@ namespace CycloneDX;
 
 use CycloneDX\Model\Bom;
 use CycloneDX\Model\Component;
+use CycloneDX\Spdx\XmlLicense;
 
 use Symfony\Component\Console\Output\OutputInterface;
 use XMLWriter;
@@ -108,11 +109,17 @@ class BomXmlWriter
 
         if ($component->getLicenses()) {
             $xmlWriter->startElement("licenses");
+            $spdxLicense = new XmlLicense();
             foreach ($component->getLicenses() as &$license) {
                 $xmlWriter->startElement("license");
-                $this->writeTextElement($xmlWriter, "id", $license);
+                if ($spdxLicense->validate($license)) {
+                    $this->writeTextElement($xmlWriter, "id", $spdxLicense->getLicense($license));
+                } else {
+                    $this->writeTextElement($xmlWriter, "name", $license);
+                }
                 $xmlWriter->endElement(); // license
             }
+            unset($license, $spdxLicense);
             $xmlWriter->endElement(); // licenses
         }
 
