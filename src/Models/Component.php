@@ -27,6 +27,7 @@ use UnexpectedValueException;
  * Class Component.
  *
  * @author nscuro
+ * @author jkowalleck
  */
 class Component
 {
@@ -84,16 +85,16 @@ class Component
      *
      * @var License[]
      */
-    private $licenses;
+    private $licenses = [];
 
     /**
      * Hashes.
      *
      * Specifies the file hashes of the component.
      *
-     * @var string[]
+     * @var array<string, string>
      */
-    private $hashes;
+    private $hashes = [];
 
     /**
      * Version.
@@ -171,19 +172,19 @@ class Component
     }
 
     /**
-     * @return string[]
+     * @return array<string, string>
      */
     public function getHashes(): array
     {
-        /* @TODO add validation ala XSD's `hashType` */
         return $this->hashes;
     }
 
     /**
-     * @param string[] $hashes
+     * @param array<string, string> $hashes
      */
     public function setHashes(array $hashes): void
     {
+        /* @TODO add validation ala XSD's `hashType` */
         $this->hashes = $hashes;
     }
 
