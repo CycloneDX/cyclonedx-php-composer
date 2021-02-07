@@ -21,6 +21,8 @@
 
 namespace CycloneDX\Models;
 
+use UnexpectedValueException;
+
 /**
  * Class Component.
  *
@@ -132,12 +134,12 @@ class Component
      * @param string|null $type For a ist of Valid values see this
      *                          {@link https://cyclonedx.org/schema/bom/1.1 XSD} for `classification`.
      *
-     * @throws \Exception on invalid value
+     * @throws UnexpectedValueException
      */
     public function setType(?string $type): void
     {
         if (!in_array($type, ['application', 'framework', 'library', 'operating-system', 'file'])) {
-            throw new \Exception("Invalid value: {$type}");
+            throw new UnexpectedValueException("Invalid value: {$type}");
         }
         $this->type = $type;
     }

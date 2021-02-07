@@ -50,4 +50,14 @@ class Bom
     {
         $this->components = $components;
     }
+
+    /**
+     * @param Component[] $components
+     *
+     * @uses \CycloneDX\Models\Bom::setComponents()
+     */
+    public function __construct(array $components = [])
+    {
+        $this->setComponents($components);
+    }
 }
