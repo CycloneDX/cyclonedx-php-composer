@@ -31,6 +31,25 @@ use UnexpectedValueException;
  */
 class Component
 {
+    public const TYPE_APPLICATION = 'application';
+    public const TYPE_FRAMEWORK = 'framework';
+    public const TYPE_LIBRARY = 'library';
+    public const TYPE_OS = 'operating-system';
+    public const TYPE_FILE = 'file';
+
+    /**
+     * @see https://cyclonedx.org/schema/bom/1.1
+     *
+     * @var string[]
+     */
+    private const TYPES = [
+        self::TYPE_APPLICATION,
+        self::TYPE_FRAMEWORK,
+        self::TYPE_LIBRARY,
+        self::TYPE_OS,
+        self::TYPE_FILE,
+    ];
+
     /**
      * Name.
      *
@@ -67,7 +86,7 @@ class Component
      * Refer to the {@link https://cyclonedx.org/schema/bom/1.1 bom:classification documentation}
      * for information describing each one.
      *
-     * @var string|null
+     * @var string
      */
     private $type;
 
@@ -111,9 +130,14 @@ class Component
         return $this->name;
     }
 
-    public function setName(string $name): void
+    /**
+     * @return $this
+     */
+    public function setName(string $name): self
     {
         $this->name = $name;
+
+        return $this;
     }
 
     public function getGroup(): ?string
@@ -121,28 +145,38 @@ class Component
         return $this->group;
     }
 
-    public function setGroup(?string $group): void
+    /**
+     * @return $this
+     */
+    public function setGroup(?string $group): self
     {
         $this->group = $group;
+
+        return $this;
     }
 
-    public function getType(): ?string
+    public function getType(): string
     {
         return $this->type;
     }
 
     /**
-     * @param string|null $type For a ist of Valid values see this
-     *                          {@link https://cyclonedx.org/schema/bom/1.1 XSD} for `classification`.
+     * @param string $type For a ist of Valid values see this
+     *                     {@link https://cyclonedx.org/schema/bom/1.1 XSD} for `classification`.
+     *                     Example: {@see TYPE_LIBRARY}
      *
      * @throws UnexpectedValueException
+     *
+     * @return $this
      */
-    public function setType(?string $type): void
+    public function setType(string $type): self
     {
-        if (!in_array($type, ['application', 'framework', 'library', 'operating-system', 'file'])) {
+        if (!in_array($type, self::TYPES)) {
             throw new UnexpectedValueException("Invalid value: {$type}");
         }
         $this->type = $type;
+
+        return $this;
     }
 
     public function getDescription(): ?string
@@ -150,9 +184,14 @@ class Component
         return $this->description;
     }
 
-    public function setDescription(?string $description): void
+    /**
+     * @return $this
+     */
+    public function setDescription(?string $description): self
     {
         $this->description = $description;
+
+        return $this;
     }
 
     /**
@@ -165,10 +204,14 @@ class Component
 
     /**
      * @param License[] $licenses
+     *
+     * @return $this
      */
-    public function setLicenses(array $licenses): void
+    public function setLicenses(array $licenses): self
     {
         $this->licenses = $licenses;
+
+        return $this;
     }
 
     /**
@@ -181,11 +224,15 @@ class Component
 
     /**
      * @param array<string, string> $hashes
+     *
+     * @return $this;
      */
-    public function setHashes(array $hashes): void
+    public function setHashes(array $hashes): self
     {
         /* @TODO add validation ala XSD's `hashType` */
         $this->hashes = $hashes;
+
+        return $this;
     }
 
     public function getVersion(): string
@@ -193,9 +240,14 @@ class Component
         return $this->version;
     }
 
-    public function setVersion(string $version): void
+    /**
+     * @return $this
+     */
+    public function setVersion(string $version): self
     {
         $this->version = $version;
+
+        return $this;
     }
 
     /**
@@ -219,8 +271,9 @@ class Component
      * @uses \CycloneDX\Models\Component::setName()
      * @uses \CycloneDX\Models\Component::setVersion()
      */
-    public function __construct(string $name, string $version)
+    public function __construct(string $type, string $name, string $version)
     {
+        $this->setType($type);
         $this->setName($name);
         $this->setVersion($version);
     }

@@ -90,9 +90,14 @@ class License
         return $this->text;
     }
 
-    public function setText(?string $text): void
+    /**
+     * @return $this
+     */
+    public function setText(?string $text): self
     {
         $this->text = $text;
+
+        return $this;
     }
 
     public function getUrl(): ?string
@@ -102,13 +107,17 @@ class License
 
     /**
      * @throws UnexpectedValueException
+     *
+     * @return $this
      */
-    public function setUrl(?string $url): void
+    public function setUrl(?string $url): self
     {
         if (null !== $url && false === filter_var($url, FILTER_VALIDATE_URL)) {
             throw new UnexpectedValueException("invalid value: ${url}");
         }
         $this->url = $url;
+
+        return $this;
     }
 
     /**
@@ -122,8 +131,10 @@ class License
      *
      * @uses \CycloneDX\Spdx\License::validate()
      * @uses \CycloneDX\Spdx\License::getLicense()
+     *
+     * @return $this
      */
-    public function setNameOrId(string $nameOrId): void
+    public function setNameOrId(string $nameOrId): self
     {
         $spdx = new \CycloneDX\Spdx\License();
         if ($spdx->validate($nameOrId)) {
@@ -133,6 +144,8 @@ class License
             $this->name = $nameOrId;
             $this->id = null;
         }
+
+        return $this;
     }
 
     /**

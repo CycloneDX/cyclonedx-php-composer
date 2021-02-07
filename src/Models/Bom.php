@@ -21,6 +21,8 @@
 
 namespace CycloneDX\Models;
 
+use UnexpectedValueException;
+
 /**
  * Class Bom.
  *
@@ -36,6 +38,18 @@ class Bom
     private $components;
 
     /**
+     * Version.
+     *
+     * The version allows component publishers/authors to make changes to existing BOMs to update various aspects of the document such as description or licenses.
+     * When a system is presented with multiple BOMs for the same component, the system should use the most recent version of the BOM.
+     * The default version is '1' and should be incremented for each version of the BOM that is published.
+     * Each version of a component should have a unique BOM and if no changes are made to the BOMs, then each BOM will have a version of '1'.
+     *
+     * @var int
+     */
+    private $version = 1;
+
+    /**
      * @return Component[]
      */
     public function getComponents(): array
@@ -45,10 +59,32 @@ class Bom
 
     /**
      * @param Component[] $components
+     *
+     * @return $this
      */
-    public function setComponents(array $components): void
+    public function setComponents(array $components): self
     {
         $this->components = $components;
+
+        return $this;
+    }
+
+    public function getVersion(): int
+    {
+        return $this->version;
+    }
+
+    /**
+     * @return $this
+     */
+    public function setVersion(int $version): self
+    {
+        if ($version <= 0) {
+            throw new UnexpectedValueException("Invalid value: {$version}");
+        }
+        $this->version = $version;
+
+        return $this;
     }
 
     /**
