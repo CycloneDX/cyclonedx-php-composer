@@ -1,0 +1,17 @@
+{
+    "name": "cyclonedx/demo-cyclonedx-php-composer",
+    "description": "See cyclonedx/cyclonedx-php-composer in action",
+    "type": "project",
+    "license": "Apache-2.0",
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "cyclonedx/cyclonedx-php-composer": "*"
+    }
+}

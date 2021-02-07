@@ -18,6 +18,7 @@
         "composer-plugin-api": "^1.0 || ^2.0"
     },
     "require-dev": {
+        "composer/composer": "^1.0 || ^2.0",
         "friendsofphp/php-cs-fixer": "^2.18",
         "phpstan/phpstan": "^0.12.72",
         "phpstan/phpstan-phpunit": "^0.12.17",
@@ -44,6 +45,13 @@
             "@test:phpstan",
             "@test:codestyle",
             "@test:phpunit"
+        ],
+        "demo:setup": "@composer -dtestProject install",
+        "demo:run" : "@composer -dtestProject make-bom",
+        "demo": [
+            "@demo:setup",
+            "@demo:run --output-file=-",
+            "@demo:run --output-file=- --json"
         ],
         "cs-fix": "php-cs-fixer fix --diff"
     }

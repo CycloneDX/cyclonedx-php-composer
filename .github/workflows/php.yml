@@ -44,3 +44,6 @@ jobs:
 
       - name: Run test suite
         run: composer test
+
+      - name: Run demo
+        run: composer demo
