@@ -30,7 +30,8 @@ Usage:
   make-bom [options]
 
 Options:
-      --output-file=OUTPUT-FILE  Path to the output file (default is bom.xml or bom.json)
+      --output-file=OUTPUT-FILE  Path to the output file (default is bom.xml or bom.json).
+                                 Set to "-" to write to STDOUT.
       --exclude-dev              Exclude dev dependencies
       --exclude-plugins          Exclude composer plugins
       --json                     Produce the BOM in JSON format (preview support)
