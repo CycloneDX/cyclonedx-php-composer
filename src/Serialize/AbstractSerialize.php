@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of CycloneDX PHP Composer Plugin.
  *
@@ -19,37 +21,41 @@
  * Copyright (c) Steve Springett. All Rights Reserved.
  */
 
-namespace CycloneDX;
+namespace CycloneDX\Serialize;
 
-use Composer\Composer;
-use Composer\IO\IOInterface;
-use Composer\Plugin\Capable;
-use Composer\Plugin\PluginInterface;
+use CycloneDX\Specs\SpecInterface;
 
 /**
- * @author nscuro
+ * @author jkowalleck
  */
-class ComposerPlugin implements PluginInterface, Capable
+abstract class AbstractSerialize
 {
-    public function activate(Composer $composer, IOInterface $io)
+    // region spec
+
+    /**
+     * @psalm-var SpecInterface
+     */
+    protected $spec;
+
+    public function getSpec(): SpecInterface
     {
-        // Nothing to do
+        return $this->spec;
     }
 
-    public function deactivate(Composer $composer, IOInterface $io)
+    /**
+     * @psalm-return $this
+     */
+    public function setSpec(SpecInterface $spec): self
     {
-        // Nothing to do
+        $this->spec = $spec;
+
+        return $this;
     }
 
-    public function uninstall(Composer $composer, IOInterface $io)
+    public function __construct(SpecInterface $spec)
     {
-        // Nothing to do
+        $this->spec = $spec;
     }
 
-    public function getCapabilities()
-    {
-        return [
-            'Composer\Plugin\Capability\CommandProvider' => 'CycloneDX\ComposerCommandProvider',
-        ];
-    }
+    // endregion spec
 }

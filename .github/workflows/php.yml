@@ -29,9 +29,7 @@ jobs:
         php:
           - "8.0" # highest supported
           - "7.4"
-          - "7.3"
-          - "7.2"
-          - "7.1" # lowest supported
+          - "7.3" # lowest supported
         composer: [ 2 ]
         dependencies: [ "lowest", "highest" ]
         include:
@@ -47,7 +45,7 @@ jobs:
             dependencies: "highest"
           - # lowest supported php/composer/deps
             os: ubuntu-latest
-            php: "7.1"
+            php: "7.3"
             composer: 1
             dependencies: "lowest"
     timeout-minutes: 30
@@ -123,7 +121,7 @@ jobs:
             composer: 2
             dependencies: "highest"
           - # lowest supported
-            php: "7.1"
+            php: "7.3"
             composer: 1
             dependencies: "lowest"
     steps:
@@ -296,7 +294,7 @@ jobs:
           - subject: symfony
             deps-pinned: false
             # lowest supported by the project
-            php: "7.1"
+            php: "7.3"
             composer: 1
           - subject: laravel-7.12.0
             deps-pinned: true
@@ -308,8 +306,8 @@ jobs:
               json: results/bom.json
           - subject: laravel-7.12.0
             deps-pinned: true
-            # lowest supported by this demo
-            php: "7.2"
+            # lowest supported by the project
+            php: "7.3"
             composer: 1
             reproducible: # relative paths to reproducible SBOM files
               xml: results/bom.xml

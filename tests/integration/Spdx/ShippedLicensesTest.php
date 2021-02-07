@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of CycloneDX PHP Composer Plugin.
  *
@@ -19,25 +21,27 @@
  * Copyright (c) Steve Springett. All Rights Reserved.
  */
 
-use CycloneDX\Spdx\XmlLicense;
+namespace CycloneDX\Tests\integration\Spdx;
+
+use CycloneDX\Spdx\License;
 use PHPUnit\Framework\TestCase;
 
 /**
  * @coversNothing
  */
-class ShippedXmlSpdxLicensesTest extends TestCase
+class ShippedLicensesTest extends TestCase
 {
     /**
-     * @var string
+     * @psalm-var string
      */
     private $file;
 
     /**
      * @retrun void
      */
-    public function setUp(): void
+    protected function setUp(): void
     {
-        $this->file = XmlLicense::getResourcesFile();
+        $this->file = License::getResourcesFile();
     }
 
     public function test(): void
@@ -45,15 +49,10 @@ class ShippedXmlSpdxLicensesTest extends TestCase
         self::assertFileExists($this->file);
 
         $json = file_get_contents($this->file);
+        self::assertIsString($json);
         self::assertJson($json);
 
-        $options = 0;
-
-        if (defined('JSON_THROW_ON_ERROR')) {
-            $options |= JSON_THROW_ON_ERROR;
-        }
-
-        $licenses = json_decode($json, false, 512, $options);
+        $licenses = json_decode($json, false, 512, JSON_THROW_ON_ERROR);
         self::assertIsArray($licenses);
         self::assertNotEmpty($licenses);
 
