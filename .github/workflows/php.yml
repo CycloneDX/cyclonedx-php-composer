@@ -9,23 +9,38 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
-        php-versions: ["5.6", "7.0", "7.1", "7.2", "7.3"]
+        php-versions: ["7.3", "7.4", "8.0"]
+        composer-version: [1, 2]
     timeout-minutes: 30
 
-    name: PHP ${{ matrix.os}} ${{ matrix.php-versions }}
+    name: ${{ matrix.os}} php${{ matrix.php-versions }} omposer${{ matrix.php-versions }}
     steps:
       - name: Checkout
+        # see https://github.com/actions/checkout
         uses: actions/checkout@v1
+
       - name: Setup PHP
-        uses: shivammathur/setup-php@master
+        # see https://github.com/shivammathur/setup-php
+        uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php-versions }}
-          extension-csv: dom # Required by phpunit
+          tools: composer:v${{ matrix.composer-versions }}
+          # extensions: json
+          # coverage: pcov
+
       - name: Validate composer.json and composer.lock
-        run: composer validate
+        run: >
+          composer validate
+          --no-interaction
+          --with-dependencies
 
       - name: Install dependencies
-        run: composer install --prefer-dist --no-progress --no-suggest
+        run: >
+          composer install
+          --no-interaction
+          --no-progress
+          --no-suggest
+          --prefer-dist
 
       - name: Run test suite
         run: composer test
