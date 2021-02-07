@@ -24,7 +24,7 @@ The plugin supports PHP 5.5 and later.
 
 After successful installation, the composer command `make-bom` is available.
 
-```sh
+```
 $ composer make-bom -h
 Usage:
   make-bom [options]
@@ -49,6 +49,11 @@ Options:
 Help:
   Generate a CycloneDX Bill of Materials
 ```
+
+# Contributing
+
+Feel free to open pull requests.  
+After editing make sure to run `composer cs-fix` to have your changes aligned with our coding style.
 
 # License
 
