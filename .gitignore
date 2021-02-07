@@ -1,4 +1,14 @@
 /vendor/
 
-# Because we're supporting PHP 5 and 7, we cannot distribute the lockfile
-composer.lock
+# This is a plugin, not a project.
+# Therefore we MUST NOT keep the lock file, so to support (CI-)tests on different setups/systems.
+# That is also the reason why we dont do exact dev-requirements pinning but use ranges.
+/composer.lock
+
+/.php_cs
+/.php_cs.cache
+
+/phpunit.xml
+/.phpunit.cache/
+
+/phpstan.neon
