@@ -21,40 +21,54 @@
 
 namespace CycloneDX\Spdx;
 
+use JsonException;
 use RuntimeException;
 
 /**
  * Work with known SPDX licences.
  *
  * @author jkowalleck
+ *
+ * @internal
  */
-class XmlLicense
+class License
 {
-    const LICENSES_FILE = 'xml-spdx-licenses.json';
+    private const LICENSES_FILE = 'spdx-licenses.json';
 
     /**
      * @var string[]
      */
     private $licenses;
 
+    /**
+     * XmlLicense constructor.
+     */
     public function __construct()
     {
         $this->loadLicenses();
     }
 
-
-    /**
-     * @return string
-     */
-    public static function getResourcesFile()
+    public static function getResourcesFile(): string
     {
-        return __DIR__ . '/../../res/' . self::LICENSES_FILE;
+        return __DIR__.'/../../res/'.self::LICENSES_FILE;
+    }
+
+    public function validate(string $identifier): bool
+    {
+        return isset($this->licenses[strtolower($identifier)]);
+    }
+
+    public function getLicense(string $identifier): ?string
+    {
+        $key = strtolower($identifier);
+
+        return $this->licenses[$key] ?? null;
     }
 
     /**
-     * @return void
+     * @throws RuntimeException
      */
-    private function loadLicenses()
+    private function loadLicenses(): void
     {
         if (null !== $this->licenses) {
             return;
@@ -63,42 +77,18 @@ class XmlLicense
         $file = self::getResourcesFile();
         $json = file_get_contents($file);
         if (false === $json) {
-            throw new RuntimeException('Missing license file in ' . $file);
+            throw new RuntimeException("Missing licenses file ${file}");
         }
 
-        $this->licenses = array();
-
-        $options = 0;
-
-        if (defined('JSON_THROW_ON_ERROR')) {
-            $options |= JSON_THROW_ON_ERROR;
+        try {
+            $licenses = json_decode($json, false, 2, JSON_THROW_ON_ERROR);
+        } catch (JsonException $ex) {
+            throw new RuntimeException("Malformed licenses file ${file}", 0, $ex);
         }
 
-        foreach (json_decode($json, false, 2, $options) as $license) {
+        $this->licenses = [];
+        foreach ($licenses as $license) {
             $this->licenses[strtolower($license)] = $license;
         }
     }
-
-    /**
-     * @param string
-     * @return bool
-     */
-    public function validate($identifier)
-    {
-        return isset($this->licenses[strtolower($identifier)]);
-    }
-
-    /**
-     * @param string
-     * @return null|string
-     */
-    public function getLicense($identifier)
-    {
-        $key = strtolower($identifier);
-        return array_key_exists($key, $this->licenses)
-            ? $this->licenses[$key]
-            : null;
-    }
-
-
 }
