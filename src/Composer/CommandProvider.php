@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of CycloneDX PHP Composer Plugin.
  *
@@ -19,42 +21,20 @@
  * Copyright (c) Steve Springett. All Rights Reserved.
  */
 
-namespace CycloneDX;
-
-use CycloneDX\Model\Bom;
-use Symfony\Component\Console\Output\OutputInterface;
+namespace CycloneDX\Composer;
 
 /**
- * Writes BOMs in JSON format.
- *
  * @author nscuro
+ *
+ * @internal
  */
-class BomJsonWriter
+class CommandProvider implements \Composer\Plugin\Capability\CommandProvider
 {
     /**
-     * @var OutputInterface
+     * @psalm-suppress MissingThrowsDocblock - Exceptions are handled by caller
      */
-    private $output;
-
-    public function __construct(OutputInterface $output)
+    public function getCommands(): array
     {
-        $this->output = $output;
-    }
-
-    /**
-     * @param Bom $bom The BOM to write
-     *
-     * @return string The BOM as JSON formatted string
-     */
-    public function writeBom(Bom $bom)
-    {
-        $jsonBom = [
-            'bomFormat' => 'CycloneDX',
-            'specVersion' => '1.2',
-            'version' => 1,
-            'components' => $bom->getComponents(),
-        ];
-
-        return json_encode($jsonBom, JSON_PRETTY_PRINT);
+        return [new BomCommand()];
     }
 }

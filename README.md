@@ -16,7 +16,8 @@ A plugin for PHP's [Composer](https://getcomposer.org/) that generates Bill of M
 
 ### Requirements
 
-The plugin supports PHP 7.1 and later.
+The plugin supports PHP `^7.3 || ^8.0`
+with composer `^1.3 || ^2.0`.
 
 ### Installation
 
@@ -35,6 +36,7 @@ Options:
       --output-format=OUTPUT-FORMAT  Which output format to use.
                                      Values: "XML", "JSON" [default: "XML"]
       --output-file=OUTPUT-FILE      Path to the output file (default is bom.xml or bom.json)
+                                     Set to "-" to write to STDOUT.
       --exclude-dev                  Exclude dev dependencies
       --exclude-plugins              Exclude composer plugins
       --json                         Produce the BOM in JSON format (preview support)

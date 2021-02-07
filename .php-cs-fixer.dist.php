@@ -31,9 +31,9 @@ return (new PhpCsFixer\Config())
     // docs: https://github.com/FriendsOfPHP/PHP-CS-Fixer/blob/3.0/doc/rules/index.rst
     // assistance via tool: https://mlocati.github.io/php-cs-fixer-configurator/
         [
-            '@PHP71Migration' => true,
+            '@PHP73Migration' => true,
             '@Symfony' => true,
-            // 'declare_strict_types' => true, // @TODO have this enabled via issue#39
+            'declare_strict_types' => true,
             'phpdoc_order' => true,
             'header_comment' => ['header' => $header],
         ]

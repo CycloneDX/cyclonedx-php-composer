@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of CycloneDX PHP Composer Plugin.
  *
@@ -19,22 +21,26 @@
  * Copyright (c) Steve Springett. All Rights Reserved.
  */
 
-use CycloneDX\BomGenerator;
+namespace CycloneDX\Tests\functional\Composer;
+
+use CycloneDX\Composer\BomGenerator;
+use CycloneDX\Enums\HashAlgorithm;
+use CycloneDX\Models\Component;
+use CycloneDX\Models\License;
+use PackageUrl\PackageUrl;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Output\OutputInterface;
+use UnexpectedValueException;
 
 /**
+ * Class BomGeneratorTest.
+ *
  * @coversNothing
  */
 class BomGeneratorTest extends TestCase
 {
     /**
-     * @var OutputInterface
-     */
-    private $outputMock;
-
-    /**
-     * @var BomGenerator
+     * @psalm-var BomGenerator
      */
     private $bomGenerator;
 
@@ -42,8 +48,13 @@ class BomGeneratorTest extends TestCase
     {
         parent::setUp();
 
-        $this->outputMock = $this->createMock(OutputInterface::class);
-        $this->bomGenerator = new BomGenerator($this->outputMock);
+        $outputMock = $this->createMock(OutputInterface::class);
+        $this->bomGenerator = new BomGenerator($outputMock);
+    }
+
+    private function getComponentsNames(Component $component): string
+    {
+        return $component->getName();
     }
 
     public function testGenerateBom(): void
@@ -68,11 +79,9 @@ class BomGeneratorTest extends TestCase
         ];
 
         $bom = $this->bomGenerator->generateBom($lockData, false, false);
-        self::assertCount(2, $bom->getComponents());
 
-        $componentNames = array_map(static function ($component) { return $component->getName(); }, $bom->getComponents());
-        self::assertContains('packageName', $componentNames);
-        self::assertContains('packageNameDev', $componentNames);
+        $componentNames = array_map([$this, 'getComponentsNames'], $bom->getComponents());
+        self::assertEquals(['packageName', 'packageNameDev'], $componentNames);
     }
 
     public function testGenerateBomExcludeDev(): void
@@ -97,10 +106,9 @@ class BomGeneratorTest extends TestCase
         ];
 
         $bom = $this->bomGenerator->generateBom($lockData, true, false);
-        self::assertCount(1, $bom->getComponents());
 
-        $componentNames = array_map(static function ($component) { return $component->getName(); }, $bom->getComponents());
-        self::assertContains('packageName', $componentNames);
+        $componentNames = array_map([$this, 'getComponentsNames'], $bom->getComponents());
+        self::assertEquals(['packageName'], $componentNames);
     }
 
     public function testGenerateBomExcludePlugins(): void
@@ -118,7 +126,7 @@ class BomGeneratorTest extends TestCase
         ];
 
         $bom = $this->bomGenerator->generateBom($lockData, false, true);
-        self::assertCount(0, $bom->getComponents());
+        self::assertEmpty($bom->getComponents());
     }
 
     public function testBuildComponent(): void
@@ -135,16 +143,20 @@ class BomGeneratorTest extends TestCase
 
         $component = $this->bomGenerator->buildComponent($packageData);
 
-        self::assertSame('packageName', $component->getName());
-        self::assertSame('vendorName', $component->getGroup());
-        self::assertSame('6.6.6', $component->getVersion());
-        self::assertSame('packageDescription', $component->getDescription());
-        self::assertSame('library', $component->getType());
-        self::assertCount(1, $component->getLicenses());
-        self::assertContains('MIT', $component->getLicenses());
-        self::assertArrayHasKey('SHA-1', $component->getHashes());
-        self::assertSame('7e240de74fb1ed08fa08d38063f6a6a91462a815', $component->getHashes()['SHA-1']);
-        self::assertSame('pkg:composer/vendorName/packageName@6.6.6', $component->getPackageUrl());
+        self::assertEquals('packageName', $component->getName());
+        self::assertEquals('vendorName', $component->getGroup());
+        self::assertEquals('6.6.6', $component->getVersion());
+        self::assertEquals('packageDescription', $component->getDescription());
+        self::assertEquals('library', $component->getType());
+        self::assertEquals([new License('MIT')], $component->getLicenses());
+        self::assertEquals([HashAlgorithm::SHA_1 => '7e240de74fb1ed08fa08d38063f6a6a91462a815'], $component->getHashes());
+        self::assertEquals(
+            (new PackageUrl('composer', 'packageName'))
+                ->setNamespace('vendorName')
+                ->setVersion('6.6.6')
+                ->setChecksums(['sha1:7e240de74fb1ed08fa08d38063f6a6a91462a815']),
+            $component->getPackageUrl()
+        );
     }
 
     public function testBuildComponentWithoutVendor(): void
@@ -156,13 +168,17 @@ class BomGeneratorTest extends TestCase
 
         $component = $this->bomGenerator->buildComponent($packageData);
 
-        self::assertSame('packageName', $component->getName());
+        self::assertEquals('packageName', $component->getName());
         self::assertNull($component->getGroup());
-        self::assertSame('1.0', $component->getVersion());
+        self::assertEquals('1.0', $component->getVersion());
         self::assertNull($component->getDescription());
         self::assertEmpty($component->getLicenses());
         self::assertEmpty($component->getHashes());
-        self::assertSame('pkg:composer/packageName@1.0', $component->getPackageUrl());
+        self::assertEquals(
+            (new PackageUrl('composer', 'packageName'))
+                ->setVersion('1.0'),
+            $component->getPackageUrl()
+        );
     }
 
     public function testBuildComponentWithoutName(): void
@@ -183,36 +199,5 @@ class BomGeneratorTest extends TestCase
         $this->expectExceptionMessage('Encountered package without version: vendorName/packageName');
 
         $this->bomGenerator->buildComponent($packageData);
-    }
-
-    public function testReadLicensesWithLicenseString(): void
-    {
-        $licenses = $this->bomGenerator->readLicenses(['license' => 'MIT']);
-        self::assertCount(1, $licenses);
-        self::assertContains('MIT', $licenses);
-    }
-
-    public function testReadLicensesWithDisjunctiveLicenseString(): void
-    {
-        $licenses = $this->bomGenerator->readLicenses(['license' => '(MIT or Apache-2.0)']);
-        self::assertCount(2, $licenses);
-        self::assertContains('MIT', $licenses);
-        self::assertContains('Apache-2.0', $licenses);
-    }
-
-    public function testReadLicensesWithConjunctiveLicenseString(): void
-    {
-        $licenses = $this->bomGenerator->readLicenses(['license' => '(MIT and Apache-2.0)']);
-        self::assertCount(2, $licenses);
-        self::assertContains('MIT', $licenses);
-        self::assertContains('Apache-2.0', $licenses);
-    }
-
-    public function testReadLicensesWithDisjunctiveLicenseArray(): void
-    {
-        $licenses = $this->bomGenerator->readLicenses(['license' => ['MIT', 'Apache-2.0']]);
-        self::assertCount(2, $licenses);
-        self::assertContains('MIT', $licenses);
-        self::assertContains('Apache-2.0', $licenses);
     }
 }

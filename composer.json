@@ -15,7 +15,7 @@
         }
     ],
     "extra": {
-        "class": "CycloneDX\\ComposerPlugin",
+        "class": "CycloneDX\\Composer\\Plugin",
         "unused": [
             "composer-plugin-api"
         ]
@@ -26,21 +26,27 @@
     },
     "prefer-stable": true,
     "require": {
-        "php": "^7.1 || ^8.0",
+        "php": "^7.3 || ^8.0",
         "ext-json": "*",
-        "ext-xmlwriter": "*",
-        "composer-plugin-api": "^1.1 || ^2.0"
+        "ext-libxml": "*",
+        "composer-plugin-api": "^1.1 || ^2.0",
+        "package-url/packageurl-php": "^1.0",
+        "symfony/console": ">=5.0"
     },
     "require-dev": {
-        "ext-dom": "*",
         "composer/composer": "^1.10.22 || ^2.0.13",
-        "phpunit/phpunit": "7.5.20 || 8.5.15 || 9.5.4",
-        "swaggest/json-schema": "0.12.33",
-        "symfony/console": "^3.4.35 || ^4.4 || ^5.0"
+        "phpunit/phpunit": "9.5.4",
+        "roave/security-advisories": "dev-latest",
+        "swaggest/json-schema": "0.12.31"
     },
     "autoload": {
         "psr-4": {
             "CycloneDX\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "CycloneDX\\Tests\\": "tests"
         }
     },
     "scripts": {
