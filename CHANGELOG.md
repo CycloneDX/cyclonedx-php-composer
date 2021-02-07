@@ -7,7 +7,7 @@
 * Requires php `>=7.3`, was `^5.5 || ^7.0`. 
 * Complete rewrite/refactor.  
   Expect library classes/methods/functions to be removed, renamed or incompatible to previous versions.  
-  ClI via `composer make-bom` did not change.
+  CLI via `composer make-bom` did not change.
 
 ### Added 
 
