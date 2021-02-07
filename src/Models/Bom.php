@@ -19,26 +19,35 @@
  * Copyright (c) Steve Springett. All Rights Reserved.
  */
 
-namespace CycloneDX\Model;
+namespace CycloneDX\Models;
 
 /**
+ * Class Bom.
+ *
  * @author nscuro
  */
 class Bom
 {
     /**
-     * @var array
+     * Components.
+     *
+     * @var Component[]
      */
     private $components;
 
-    function __construct(array $components)
-    {
-        $this->components = $components;
-    }
-
-    public function getComponents() 
+    /**
+     * @return Component[]
+     */
+    public function getComponents(): array
     {
         return $this->components;
     }
 
+    /**
+     * @param Component[] $components
+     */
+    public function setComponents(array $components): void
+    {
+        $this->components = $components;
+    }
 }
