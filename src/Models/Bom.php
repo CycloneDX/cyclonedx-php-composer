@@ -35,7 +35,7 @@ class Bom
      *
      * @var Component[]
      */
-    private $components;
+    private $components = [];
 
     /**
      * Version.
@@ -85,15 +85,5 @@ class Bom
         $this->version = $version;
 
         return $this;
-    }
-
-    /**
-     * @param Component[] $components
-     *
-     * @uses \CycloneDX\Models\Bom::setComponents()
-     */
-    public function __construct(array $components = [])
-    {
-        $this->setComponents($components);
     }
 }

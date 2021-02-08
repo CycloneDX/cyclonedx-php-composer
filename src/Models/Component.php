@@ -38,17 +38,19 @@ class Component
     public const TYPE_FILE = 'file';
 
     /**
-     * @see https://cyclonedx.org/schema/bom/1.1
+     * Known types.
      *
-     * @var string[]
+     * See {@link https://cyclonedx.org/schema/bom/1.1 Schema} for `classification`.
+     *
+     * @return string[]
      */
-    private const TYPES = [
-        self::TYPE_APPLICATION,
-        self::TYPE_FRAMEWORK,
-        self::TYPE_LIBRARY,
-        self::TYPE_OS,
-        self::TYPE_FILE,
-    ];
+    public const TYPES = [
+            self::TYPE_APPLICATION,
+            self::TYPE_FRAMEWORK,
+            self::TYPE_LIBRARY,
+            self::TYPE_OS,
+            self::TYPE_FILE,
+        ];
 
     /**
      * Name.
@@ -111,7 +113,7 @@ class Component
      *
      * Specifies the file hashes of the component.
      *
-     * @var array<string, string>
+     * @var Hash[]
      */
     private $hashes = [];
 
@@ -171,8 +173,8 @@ class Component
      */
     public function setType(string $type): self
     {
-        if (!in_array($type, self::TYPES)) {
-            throw new UnexpectedValueException("Invalid value: {$type}");
+        if (!in_array($type, self::TYPES, true)) {
+            throw new UnexpectedValueException("Invalid type: {$type}");
         }
         $this->type = $type;
 
@@ -215,7 +217,7 @@ class Component
     }
 
     /**
-     * @return array<string, string>
+     * @return Hash[]
      */
     public function getHashes(): array
     {
@@ -223,13 +225,12 @@ class Component
     }
 
     /**
-     * @param array<string, string> $hashes
+     * @param Hash[] $hashes
      *
      * @return $this;
      */
     public function setHashes(array $hashes): self
     {
-        /* @TODO add validation ala XSD's `hashType` */
         $this->hashes = $hashes;
 
         return $this;
