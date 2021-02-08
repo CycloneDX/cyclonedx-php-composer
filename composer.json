@@ -22,10 +22,11 @@
         "friendsofphp/php-cs-fixer": "^2.18",
         "phpstan/phpstan": "^0.12.72",
         "phpstan/phpstan-phpunit": "^0.12.17",
-        "phpunit/phpunit": "^9.5"
+        "phpunit/phpunit": "^9.5",
+        "swaggest/json-schema": "^0.12.31"
     },
     "extra": {
-        "class": "CycloneDX\\ComposerPlugin"
+        "class": "CycloneDX\\Composer\\Plugin"
     },
     "autoload": {
         "psr-4": {
@@ -46,7 +47,10 @@
             "@test:codestyle",
             "@test:phpunit"
         ],
-        "demo:setup": "@composer -dtestProject install",
+        "demo:setup": [
+            "@composer -dtestProject install",
+            "@composer -dtestProject update"
+        ],
         "demo:run" : "@composer -dtestProject make-bom",
         "demo": [
             "@demo:setup",

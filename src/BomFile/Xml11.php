@@ -19,44 +19,25 @@
  * Copyright (c) Steve Springett. All Rights Reserved.
  */
 
-namespace CycloneDX;
+namespace CycloneDX\BomFile;
 
-use CycloneDX\Model\Bom;
-use CycloneDX\Model\Component;
-
-use Symfony\Component\Console\Output\OutputInterface;
+use CycloneDX\Models\Bom;
 
 /**
- * Writes BOMs in JSON format.
- * 
- * @author nscuro
+ * Writes BOMs in XML format.
+ *
+ * @author jkowalleck
  */
-class BomJsonWriter 
+class Xml11 implements SerializerInterface
 {
-
     /**
-     * @var OutputInterface
+     * The spec this Serializer is implementing.
      */
-    private $output;
+    public const SPEC_VERSION = '1.1';
 
-    function __construct(OutputInterface &$output) {
-        $this->output = $output;
-    }
-
-    /**
-     * @param Bom $bom The BOM to write
-     * @return string The BOM as JSON formatted string
-     */
-    public function writeBom(Bom $bom) 
+    public function serialize(Bom $bom): string
     {
-        $jsonBom = [
-            "bomFormat" => "CycloneDX",
-            "specVersion" => "1.2",
-            "version" => 1,
-            "components" => $bom->getComponents(),
-        ];
-
-        return json_encode($jsonBom, JSON_PRETTY_PRINT);
+        // TODO: Implement.
+        return '<TODO/>';
     }
-
 }

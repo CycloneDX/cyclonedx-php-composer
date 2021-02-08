@@ -19,7 +19,7 @@
  * Copyright (c) Steve Springett. All Rights Reserved.
  */
 
-namespace CycloneDX;
+namespace CycloneDX\Composer;
 
 use Composer\Composer;
 use Composer\IO\IOInterface;
@@ -28,28 +28,30 @@ use Composer\Plugin\PluginInterface;
 
 /**
  * @author nscuro
+ *
+ * @internal
  */
-class ComposerPlugin implements PluginInterface, Capable
+class Plugin implements PluginInterface, Capable
 {
-    public function activate(Composer $composer, IOInterface $io) 
+    public function activate(Composer $composer, IOInterface $io): void
     {
         // Nothing to do
     }
 
-    public function deactivate(Composer $composer, IOInterface $io)
+    public function deactivate(Composer $composer, IOInterface $io): void
     {
         // Nothing to do
     }
 
-    public function uninstall(Composer $composer, IOInterface $io)
+    public function uninstall(Composer $composer, IOInterface $io): void
     {
         // Nothing to do
     }
 
-    public function getCapabilities()
+    public function getCapabilities(): array
     {
-        return array(
-            'Composer\Plugin\Capability\CommandProvider' => 'CycloneDX\ComposerCommandProvider',
-        );
+        return [
+            \Composer\Plugin\Capability\CommandProvider::class => CommandProvider::class,
+        ];
     }
 }

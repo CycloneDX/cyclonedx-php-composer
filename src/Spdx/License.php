@@ -36,9 +36,17 @@ class License
     private const LICENSES_FILE = 'spdx-licenses.json';
 
     /**
-     * @var string[]
+     * @var array<string, string>
      */
     private $licenses;
+
+    /**
+     * @return array<string, string>
+     */
+    public function getLicenses(): array
+    {
+        return $this->licenses;
+    }
 
     /**
      * XmlLicense constructor.
