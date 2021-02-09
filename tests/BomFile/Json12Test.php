@@ -43,14 +43,42 @@ class Json12Test extends TestCase
 
     /**
      * @throws \JsonException
-     * @dataProvider \CycloneDX\Tests\BomFile\AbstractDataProvider::bomWithComponentLicense()
+     * @dataProvider \CycloneDX\Tests\BomFile\AbstractDataProvider::bomWithComponentPlain()
      */
-    public function testComponentsHaveLicenses(Bom $bom): void
+    public function testBomHasComponent(Bom $bom): void
+    {
+        $data = $this->json_decode($this->json_encode($bom));
+        self::assertIsArray($data->components);
+        self::assertNotEmpty($data->components);
+    }
+
+    /**
+     * @throws \JsonException
+     * @dataProvider \CycloneDX\Tests\BomFile\AbstractDataProvider::bomWithComponentLicenseId()
+     */
+    public function testComponentsHaveLicenseId(Bom $bom): void
     {
         $data = $this->json_decode($this->json_encode($bom));
         foreach ($data->components as $component) {
-            self::assertIsArray($component->licenses);
-            self::assertNotEmpty($component->licenses);
+            foreach ($component->licenses as $license) {
+                self::assertObjectHasAttribute('id', $license->license);
+                self::assertObjectNotHasAttribute('name', $license->license);
+            }
+        }
+    }
+
+    /**
+     * @throws \JsonException
+     * @dataProvider \CycloneDX\Tests\BomFile\AbstractDataProvider::bomWithComponentLicenseName()
+     */
+    public function testComponentsHaveLicenseName(Bom $bom): void
+    {
+        $data = $this->json_decode($this->json_encode($bom));
+        foreach ($data->components as $component) {
+            foreach ($component->licenses as $license) {
+                self::assertObjectHasAttribute('name', $license->license);
+                self::assertObjectNotHasAttribute('id', $license->license);
+            }
         }
     }
 

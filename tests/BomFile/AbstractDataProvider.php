@@ -21,8 +21,9 @@ abstract class AbstractDataProvider
     {
         yield from self::bomPlain();
         yield from self::bomWithComponentPlain();
-        yield from self::bomWithComponentLicense();
         yield from self::bomWithComponentVersion();
+        yield from self::bomWithComponentLicenseId();
+        yield from self::bomWithComponentLicenseName();
     }
 
     /**
@@ -52,15 +53,27 @@ abstract class AbstractDataProvider
      *
      * @return Generator<array{0: Bom}>
      */
-    public static function bomWithComponentLicense(): Generator
+    public static function bomWithComponentLicenseId(): Generator
     {
-        $licenses = ['MIT', 'some text'];
-        foreach ($licenses as $license) {
-            yield "license: ${license}" => [(new Bom())->setComponents([
-                (new Component(Component::TYPE_LIBRARY, 'name', 'version'))
-                    ->setLicenses([new License($license)]),
-            ])];
-        }
+        $license = 'MIT';
+        yield "license: ${license}" => [(new Bom())->setComponents([
+            (new Component(Component::TYPE_LIBRARY, 'name', 'version'))
+                ->setLicenses([new License($license)]),
+        ])];
+    }
+
+    /**
+     * BOMs with one component that has one license.
+     *
+     * @return Generator<array{0: Bom}>
+     */
+    public static function bomWithComponentLicenseName(): Generator
+    {
+        $license = 'some text';
+        yield "license: ${license}" => [(new Bom())->setComponents([
+            (new Component(Component::TYPE_LIBRARY, 'name', 'version'))
+                ->setLicenses([new License($license)]),
+        ])];
     }
 
     /**

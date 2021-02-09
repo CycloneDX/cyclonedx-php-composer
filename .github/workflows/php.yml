@@ -51,7 +51,6 @@ jobs:
           php-version: ${{ matrix.php-versions }}
           tools: composer:v${{ matrix.composer-versions }}
           extensions: json
-          # TODO: coverage: pcov, xdebug
       - name: Install dependencies
         run: >
           composer install
@@ -61,7 +60,6 @@ jobs:
           --prefer-dist
       - name: Run all tests
         run: composer test
-      # TODO> gather junit on error
 
   demo:
     name: "Demo: php${{ matrix.php-versions }} composer${{ matrix.composer-version }}"
