@@ -86,15 +86,25 @@ class Json12 implements SerializerInterface
     public function serialize(Bom $bom): string
     {
         return (string) json_encode(
-            $jsonBom = [
-                'bomFormat' => 'CycloneDX',
-                'specVersion' => self::SPEC_VERSION,
-                'version' => $bom->getVersion(),
-                'components' => array_map(
-                    [$this, 'genComponent'],
-                    $bom->getComponents()
-                ),
-            ], JSON_THROW_ON_ERROR | $this->serializeOptions);
+            $this->genBom($bom),
+            JSON_THROW_ON_ERROR | JSON_PRESERVE_ZERO_FRACTION | $this->serializeOptions
+        );
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function genBom(Bom $bom): array
+    {
+        return [
+            'bomFormat' => 'CycloneDX',
+            'specVersion' => self::SPEC_VERSION,
+            'version' => $bom->getVersion(),
+            'components' => array_map(
+                [$this, 'genComponent'],
+                $bom->getComponents()
+            ),
+        ];
     }
 
     /**
