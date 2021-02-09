@@ -4,8 +4,6 @@ namespace CycloneDX\Tests\BomFile;
 
 use CycloneDX\BomFile\Json12;
 use CycloneDX\Models\Bom;
-use CycloneDX\Models\Component;
-use CycloneDX\Models\License;
 use PHPUnit\Framework\TestCase;
 use Swaggest\JsonSchema\Schema;
 
@@ -36,9 +34,7 @@ class Json12Test extends TestCase
      * @throws \JsonException
      * @throws \Swaggest\JsonSchema\InvalidValue
      *
-     * @dataProvider bomEmptyDataProvider
-     * @dataProvider bomWithComponentLicenseDataProvider
-     * @dataProvider bomWithComponentVersionDataProvider
+     * @dataProvider \CycloneDX\Tests\BomFile\AbstractDataProvider::all()
      */
     public function testSchema(Bom $bom): void
     {
@@ -49,7 +45,7 @@ class Json12Test extends TestCase
 
     /**
      * @throws \JsonException
-     * @dataProvider bomWithComponentLicenseDataProvider
+     * @dataProvider \CycloneDX\Tests\BomFile\AbstractDataProvider::bomWithComponentLicense()
      */
     public function testComponentsHaveLicenses(Bom $bom): void
     {
@@ -57,41 +53,6 @@ class Json12Test extends TestCase
         foreach ($data->components as $component) {
             self::assertIsArray($component->licenses);
             self::assertNotEmpty($component->licenses);
-        }
-    }
-
-    /**
-     * @return \Generator<array{0: Bom}>
-     */
-    public function bomEmptyDataProvider(): \Generator
-    {
-        yield 'plain' => [new Bom()];
-    }
-
-    /**
-     * @return \Generator<array{0: Bom}>
-     */
-    public function bomWithComponentVersionDataProvider(): \Generator
-    {
-        $versions = ['1.0', 'dev-master'];
-        foreach ($versions as $version) {
-            yield "version: {$version}" => [(new Bom())->setComponents([
-                new Component(Component::TYPE_LIBRARY, 'name', $version),
-            ])];
-        }
-    }
-
-    /**
-     * @return \Generator<array{0: Bom}>
-     */
-    public function bomWithComponentLicenseDataProvider(): \Generator
-    {
-        $licenses = ['MIT', 'some text'];
-        foreach ($licenses as $license) {
-            yield "license: ${license}" => [(new Bom())->setComponents([
-                (new Component(Component::TYPE_LIBRARY, 'name', 'version'))
-                    ->setLicenses([new License($license)]),
-            ])];
         }
     }
 
