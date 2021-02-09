@@ -4,6 +4,7 @@ namespace CycloneDX\Tests\BomFile;
 
 use CycloneDX\Models\Bom;
 use CycloneDX\Models\Component;
+use CycloneDX\Models\Hash;
 use CycloneDX\Models\License;
 use Generator;
 
@@ -24,6 +25,8 @@ abstract class AbstractDataProvider
         yield from self::bomWithComponentVersion();
         yield from self::bomWithComponentLicenseId();
         yield from self::bomWithComponentLicenseName();
+        yield from self::bomWithComponentAllHashAlgorithms();
+        yield from self::bomFromAssocLists();
     }
 
     /**
@@ -89,5 +92,39 @@ abstract class AbstractDataProvider
                 new Component(Component::TYPE_LIBRARY, 'name', $version),
             ])];
         }
+    }
+
+    /**
+     * BOMs with all hash algorithms available.
+     *
+     * @return Generator<array{0: Bom}>
+     */
+    public static function bomWithComponentAllHashAlgorithms(): Generator
+    {
+        yield 'every hash alg' => [(new Bom())->setComponents([
+            (new Component(Component::TYPE_LIBRARY, 'name', '1.0'))
+            ->setHashes(
+                array_map(
+                    static function (string $alg): Hash {
+                        return new Hash($alg, '12345678901234567890123456789012');
+                    },
+                    Hash::ALGORITHMS
+                )
+            ),
+        ])];
+    }
+
+    /**
+     * BOMs with every list possible as set from assoc array.
+     *
+     * @return Generator<array{0: Bom}>
+     */
+    public static function bomFromAssocLists(): Generator
+    {
+        yield 'every list from assoc' => [(new Bom())->setComponents([
+            'myComponent' => (new Component(Component::TYPE_LIBRARY, 'name', '1.0'))
+                ->setHashes(['myHash' => new Hash(Hash::ALG_SHA_1, '12345678901234567890123456789012')])
+                ->setLicenses(['myLicense' => new License('some license')]),
+        ])];
     }
 }

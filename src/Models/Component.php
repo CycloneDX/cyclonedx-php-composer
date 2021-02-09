@@ -167,7 +167,7 @@ class Component
      *                     {@link https://cyclonedx.org/schema/bom/1.1 XSD} for `classification`.
      *                     Example: {@see TYPE_LIBRARY}
      *
-     * @throws UnexpectedValueException
+     * @throws UnexpectedValueException if value is unknown
      *
      * @return $this
      */
@@ -207,11 +207,18 @@ class Component
     /**
      * @param License[] $licenses
      *
+     * @throws UnexpectedValueException if list contains element that is not instance of {@see \CycloneDX\Models\License}
+     *
      * @return $this
      */
     public function setLicenses(array $licenses): self
     {
-        $this->licenses = $licenses;
+        foreach ($licenses as $license) {
+            if (!$license instanceof License) {
+                throw new UnexpectedValueException('Not a License: '.var_export($license, true));
+            }
+        }
+        $this->licenses = array_values($licenses);
 
         return $this;
     }
@@ -227,11 +234,18 @@ class Component
     /**
      * @param Hash[] $hashes
      *
+     * @throws UnexpectedValueException if list contains element that is not instance of {@see \CycloneDX\Models\Hash}
+     *
      * @return $this;
      */
     public function setHashes(array $hashes): self
     {
-        $this->hashes = $hashes;
+        foreach ($hashes as $hash) {
+            if (!$hash instanceof Hash) {
+                throw new UnexpectedValueException('Not a Hash: '.var_export($hash, true));
+            }
+        }
+        $this->hashes = array_values($hashes);
 
         return $this;
     }
@@ -269,8 +283,9 @@ class Component
     /**
      * Component constructor.
      *
-     * @uses \CycloneDX\Models\Component::setName()
-     * @uses \CycloneDX\Models\Component::setVersion()
+     * @see \CycloneDX\Models\Component::setType()
+     * @see \CycloneDX\Models\Component::setName()
+     * @see \CycloneDX\Models\Component::setVersion()
      */
     public function __construct(string $type, string $name, string $version)
     {

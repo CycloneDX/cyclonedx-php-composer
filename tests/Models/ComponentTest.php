@@ -11,7 +11,12 @@ use PHPUnit\Framework\TestCase;
  */
 class ComponentTest extends TestCase
 {
-    public function test(): void
+    public function testPackageUrlWithGroup(): void
+    {
+        self::markTestSkipped('TODO');
+    }
+
+    public function testPackageUrlWithoutGroup(): void
     {
         self::markTestSkipped('TODO');
     }

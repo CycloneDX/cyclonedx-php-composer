@@ -60,7 +60,7 @@ class Hash
     }
 
     /**
-     * @throws UnexpectedValueException;
+     * @throws UnexpectedValueException if value is an unknown algorithm
      *
      * @return $this
      */

@@ -106,7 +106,7 @@ class License
     }
 
     /**
-     * @throws UnexpectedValueException
+     * @throws UnexpectedValueException if value is an invalid URL
      *
      * @return $this
      */
@@ -151,7 +151,7 @@ class License
     /**
      * License constructor.
      *
-     * @uses \CycloneDX\Models\License::setNameOrVersion()
+     * @see \CycloneDX\Models\License::setNameOrVersion()
      */
     public function __construct(string $nameOrId)
     {

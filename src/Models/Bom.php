@@ -60,11 +60,18 @@ class Bom
     /**
      * @param Component[] $components
      *
+     * @throws UnexpectedValueException if list contains element that is not instance of {@see \CycloneDX\Models\Component}
+     *
      * @return $this
      */
     public function setComponents(array $components): self
     {
-        $this->components = $components;
+        foreach ($components as $component) {
+            if (!$component instanceof Component) {
+                throw new UnexpectedValueException('Not a Component: '.var_export($component, true));
+            }
+        }
+        $this->components = array_values($components);
 
         return $this;
     }
