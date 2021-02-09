@@ -40,23 +40,37 @@
     },
     "scripts": {
         "test:phpunit": "phpunit",
-        "test:phpstan": "phpstan analyse" ,
-        "test:codestyle": "php-cs-fixer fix --no-interaction --dry-run --diff",
+        "test:sca": "phpstan analyse" ,
+        "test:cs": "php-cs-fixer fix --no-interaction --dry-run --diff",
         "test": [
-            "@test:phpstan",
-            "@test:codestyle",
-            "@test:phpunit"
+            "@test:phpunit",
+            "@test:sca",
+            "@test:cs"
         ],
         "demo:setup": [
             "@composer -dtestProject install",
             "@composer -dtestProject update"
         ],
         "demo:run" : "@composer -dtestProject make-bom",
+        "demo:xml" : "@demo:run --output-file=-",
+        "demo:json" : "@demo:run --output-file=- --json",
         "demo": [
             "@demo:setup",
-            "@demo:run --output-file=-",
-            "@demo:run --output-file=- --json"
+            "@demo:xml",
+            "@demo:json"
         ],
         "cs-fix": "php-cs-fixer fix --diff"
+    },
+    "scripts-descriptions": {
+        "test": "Run all tests!",
+        "test:phpunit": "Run phpunit tests.",
+        "test:sca": "Run static code analysis." ,
+        "test:cs": "Test coding standards.",
+        "demo": "Setup and run 'make-bom' for XML and JSON in demo.",
+        "demo:setup": "Setup a demo.",
+        "demo:run" : "Run 'make-bom' in a demo.",
+        "demo:xml" : "Run 'make-bom' for XML in a demo.",
+        "demo:json" : "Run 'make-bom' for JSON in a demo.",
+        "cs-fix": "Fix coding standards."
     }
 }

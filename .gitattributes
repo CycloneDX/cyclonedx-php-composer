@@ -1,0 +1,3 @@
+
+# files that are ignored when installing as "dist"
+.integrationDemo export-ignore

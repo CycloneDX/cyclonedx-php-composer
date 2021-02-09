@@ -26,7 +26,7 @@ abstract class AbstractDataProvider
     }
 
     /**
-     * Just an plain  BOM.
+     * Just an plain BOM.
      *
      * @return Generator<array{0: Bom}>
      */

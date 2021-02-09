@@ -1,10 +1,38 @@
 # For details of what checks are run for PRs please refer below
 name: PHP CI
 
-on: [pull_request, workflow_dispatch]
+on:
+  push:
+    branches: ["master"]
+  pull_request:
+  workflow_dispatch:
 
 jobs:
-  build:
+  validate:
+    name: "validate: composer${{ matrix.composer-versions }}"
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        composer-version: [1, 2]
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        # see https://github.com/actions/checkout
+        uses: actions/checkout@v2
+      - name: Setup PHP
+        # see https://github.com/shivammathur/setup-php
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.0"
+          tools: composer:v${{ matrix.composer-versions }}
+      - name: Validate composer.json and composer.lock
+        run: >
+          composer validate
+          --no-interaction
+          --with-dependencies
+
+  tests:
+    name: "PHPUnit: ${{ matrix.os}} php${{ matrix.php-versions }} composer${{ matrix.composer-version }}"
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -12,28 +40,18 @@ jobs:
         php-versions: ["7.3", "7.4", "8.0"]
         composer-version: [1, 2]
     timeout-minutes: 30
-
-    name: ${{ matrix.os}} php${{ matrix.php-versions }} omposer${{ matrix.php-versions }}
     steps:
       - name: Checkout
         # see https://github.com/actions/checkout
-        uses: actions/checkout@v1
-
+        uses: actions/checkout@v2
       - name: Setup PHP
         # see https://github.com/shivammathur/setup-php
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php-versions }}
           tools: composer:v${{ matrix.composer-versions }}
-          # extensions: json
-          # coverage: pcov
-
-      - name: Validate composer.json and composer.lock
-        run: >
-          composer validate
-          --no-interaction
-          --with-dependencies
-
+          extensions: json
+          # TODO: coverage: pcov, xdebug
       - name: Install dependencies
         run: >
           composer install
@@ -41,9 +59,27 @@ jobs:
           --no-progress
           --no-suggest
           --prefer-dist
-
-      - name: Run test suite
+      - name: Run all tests
         run: composer test
+      # TODO> gather junit on error
 
+  demo:
+    name: "Demo: php${{ matrix.php-versions }} composer${{ matrix.composer-version }}"
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php-versions: [ "7.3", "7.4", "8.0" ]
+        composer-version: [1, 2]
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        # see https://github.com/actions/checkout
+        uses: actions/checkout@v2
+      - name: Setup PHP
+        # see https://github.com/shivammathur/setup-php
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-versions }}
+          tools: composer:v${{ matrix.composer-versions }}
       - name: Run demo
         run: composer demo

@@ -24,10 +24,8 @@ class Json12Test extends TestCase
 
         $this->serializer = new Json12(false);
 
-        if (null === $this->schema) {
-            $schema_file = __DIR__.'/../schema/bom-1.2.schema-SNAPSHOT.json';
-            $this->schema = Schema::import('file://'.realpath($schema_file));
-        }
+        $schema_file = __DIR__.'/../schema/bom-1.2.schema-SNAPSHOT.json';
+        $this->schema = Schema::import('file://'.realpath($schema_file));
     }
 
     /**

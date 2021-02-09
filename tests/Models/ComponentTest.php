@@ -11,5 +11,8 @@ use PHPUnit\Framework\TestCase;
  */
 class ComponentTest extends TestCase
 {
-    // @TODO
+    public function test(): void
+    {
+        self::markTestSkipped('TODO');
+    }
 }

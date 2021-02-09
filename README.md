@@ -54,7 +54,8 @@ Help:
 # Contributing
 
 Feel free to open pull requests.  
-After editing make sure to run `composer cs-fix` to have your changes aligned with our coding style.
+Make sure to run `composer cs-fix` to have your changes aligned with our coding style.  
+Make sure to run `composer test` and pass all tests.
 
 # License
 
