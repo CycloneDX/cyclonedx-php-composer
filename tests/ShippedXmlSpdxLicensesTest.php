@@ -15,7 +15,7 @@ class ShippedXmlSpdxLicensesTest extends TestCase
     /**
      * @retrun void
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->file = XmlLicense::getResourcesFile();
     }
@@ -23,7 +23,7 @@ class ShippedXmlSpdxLicensesTest extends TestCase
     /**
      * @return void
      */
-    public function test ()
+    public function test()
     {
         $this->assertFileExists($this->file);
 
@@ -38,12 +38,11 @@ class ShippedXmlSpdxLicensesTest extends TestCase
         }
 
         $licenses = json_decode($json, false, 512, $options);
-        $this->assertInternalType('array', $licenses);
+        $this->assertIsArray($licenses);
         $this->assertNotEmpty($licenses);
 
         foreach ($licenses as &$license) {
-            $this->assertInternalType('string', $license);
+            $this->assertIsString($license);
         }
     }
-
 }
