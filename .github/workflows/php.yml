@@ -50,5 +50,32 @@ jobs:
           --no-progress
           --no-suggest
           --prefer-dist
-      - name: Run all tests
-        run: composer test
+      - name: Run phpunit tests
+        run: composer test:phpunit
+      - name: Run static code analysis
+        run: composer test:sca
+  style:
+    name: Coding Standards
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        # see https://github.com/actions/checkout
+        uses: actions/checkout@v2
+      - name: Setup PHP
+        # see https://github.com/shivammathur/setup-php
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.0"
+          extensions: json
+          tools: composer:v2
+          coverage: none
+      - name: Install dependencies
+        run: >
+          composer install
+          --no-interaction
+          --no-progress
+          --no-suggest
+          --prefer-dist
+      - name: Test coding standards
+        run: composer test:cs

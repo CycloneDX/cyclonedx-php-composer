@@ -13,7 +13,7 @@
         "sort-packages": true
     },
     "require": {
-        "php": ">=7.3",
+        "php": "^7.3 || ^8.0",
         "ext-json": "*",
         "composer-plugin-api": "^1.0 || ^2.0"
     },
