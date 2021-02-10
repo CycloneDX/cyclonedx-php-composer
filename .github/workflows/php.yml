@@ -3,17 +3,28 @@ name: PHP CI
 
 on:
   push:
-    branches: ["master"]
+    # TODO remove my custom branch
+    branches: ["master", "php_ge_73"]
   pull_request:
   workflow_dispatch:
+  schedule:
+    # schedule weekly tests, since install dependencies are not intended to be pinned
+    # this means: at 23:42 on Fridays
+    - cron: '42 23 * * 5'
 
 jobs:
-  validate:
-    name: "validate: composer${{ matrix.composer-versions }}"
-    runs-on: ubuntu-latest
+  tests:
+    name: >
+      PHPUnit:
+      ${{ matrix.os}}
+      php${{ matrix.php }}
+      ${{ matrix.stability }}
+    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        composer-version: [1, 2]
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        php: ["7.3", "7.4", "8.0"]
+        stability: [prefer-lowest, prefer-stable]
     timeout-minutes: 30
     steps:
       - name: Checkout
@@ -23,37 +34,19 @@ jobs:
         # see https://github.com/shivammathur/setup-php
         uses: shivammathur/setup-php@v2
         with:
-          php-version: "8.0"
-          tools: composer:v${{ matrix.composer-versions }}
+          php-version: ${{ matrix.php }}
+          extensions: json
+          tools: composer:v2
+          coverage: none
       - name: Validate composer.json and composer.lock
         run: >
           composer validate
           --no-interaction
           --with-dependencies
-
-  tests:
-    name: "PHPUnit: ${{ matrix.os}} php${{ matrix.php-versions }} composer${{ matrix.composer-version }}"
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
-        php-versions: ["7.3", "7.4", "8.0"]
-        composer-version: [1, 2]
-    timeout-minutes: 30
-    steps:
-      - name: Checkout
-        # see https://github.com/actions/checkout
-        uses: actions/checkout@v2
-      - name: Setup PHP
-        # see https://github.com/shivammathur/setup-php
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: ${{ matrix.php-versions }}
-          tools: composer:v${{ matrix.composer-versions }}
-          extensions: json
       - name: Install dependencies
         run: >
-          composer install
+          composer update
+          --${{ matrix.stability }}
           --no-interaction
           --no-progress
           --no-suggest
@@ -62,12 +55,17 @@ jobs:
         run: composer test
 
   demo:
-    name: "Demo: php${{ matrix.php-versions }} composer${{ matrix.composer-version }}"
-    runs-on: ubuntu-latest
+    name: >
+      Demo:
+      ${{ matrix.os}}
+      php${{ matrix.php }}
+      composer${{ matrix.composer }}
+    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        php-versions: [ "7.3", "7.4", "8.0" ]
-        composer-version: [1, 2]
+        os: [ ubuntu-latest, windows-latest, macos-latest ]
+        php: [ "7.3", "7.4", "8.0" ]
+        composer: [ 1, 2 ]
     timeout-minutes: 30
     steps:
       - name: Checkout
@@ -77,7 +75,9 @@ jobs:
         # see https://github.com/shivammathur/setup-php
         uses: shivammathur/setup-php@v2
         with:
-          php-version: ${{ matrix.php-versions }}
-          tools: composer:v${{ matrix.composer-versions }}
+          php-version: ${{ matrix.php }}
+          extensions: json
+          tools: composer:v${{ matrix.composer }}
+          coverage: none
       - name: Run demo
         run: composer demo

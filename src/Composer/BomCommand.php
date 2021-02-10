@@ -65,7 +65,7 @@ class BomCommand extends BaseCommand
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $composer = $this->getComposer();
-        if (null === $composer) {
+        if (null == $composer) {
             $output->writeln('<error>Composer does not exist</error>');
 
             return self::EXIT_MISSING_COMPOSER;
