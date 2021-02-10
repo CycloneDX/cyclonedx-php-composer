@@ -21,7 +21,7 @@
 
 namespace CycloneDX\Models;
 
-use UnexpectedValueException;
+use InvalidArgumentException;
 
 /**
  * Work with known SPDX licences.
@@ -106,14 +106,14 @@ class License
     }
 
     /**
-     * @throws UnexpectedValueException if value is an invalid URL
+     * @throws InvalidArgumentException if value is an invalid URL
      *
      * @return $this
      */
     public function setUrl(?string $url): self
     {
         if (null !== $url && false === filter_var($url, FILTER_VALIDATE_URL)) {
-            throw new UnexpectedValueException("Invalid URL: ${url}");
+            throw new InvalidArgumentException("Invalid URL: ${url}");
         }
         $this->url = $url;
 

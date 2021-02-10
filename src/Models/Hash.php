@@ -2,7 +2,7 @@
 
 namespace CycloneDX\Models;
 
-use UnexpectedValueException;
+use DomainException;
 
 /**
  * @author jkowalleck
@@ -44,6 +44,7 @@ class Hash
 
     /**
      * Specifies the algorithm used to create the hash.
+     * Like {@see ALG_MD5}.
      *
      * @var string
      */
@@ -60,14 +61,17 @@ class Hash
     }
 
     /**
-     * @throws UnexpectedValueException if value is an unknown algorithm
+     * Specify the algorithm used to create the hash.
+     * Like {@see ALG_MD5}.
+     *
+     * @throws DomainException if value is an unknown algorithm
      *
      * @return $this
      */
     public function setAlg(string $alg): self
     {
-        if (!in_array($alg, self::ALGORITHMS, true)) {
-            throw new UnexpectedValueException("Unknown algorithm: {$alg}");
+        if (false === in_array($alg, self::ALGORITHMS, true)) {
+            throw new DomainException("Unknown algorithm: {$alg}");
         }
         $this->alg = $alg;
 

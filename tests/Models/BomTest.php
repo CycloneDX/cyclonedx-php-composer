@@ -53,7 +53,7 @@ class BomTest extends TestCase
     public function testVersionSetterInvalidValue(): void
     {
         $version = 0 - random_int(1, 255);
-        $this->expectException(\UnexpectedValueException::class);
+        $this->expectException(\DomainException::class);
         $this->bom->setVersion($version);
     }
 }

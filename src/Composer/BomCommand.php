@@ -66,6 +66,7 @@ class BomCommand extends BaseCommand
     {
         $composer = $this->getComposer();
         if (null == $composer) {
+            // earlier versions of composer may return `null`
             $output->writeln('<error>Composer does not exist</error>');
 
             return self::EXIT_MISSING_COMPOSER;
@@ -87,15 +88,15 @@ class BomCommand extends BaseCommand
         );
 
         $outputFile = $input->getOption($this::OPTION_OUTPUT_FILE);
-        if (!is_string($outputFile) || '' === $outputFile) {
+        if (false === is_string($outputFile) || '' === $outputFile) {
             $outputFile = null;
         }
-        if (false !== $input->getOption($this::OPTION_JSON)) {
-            $outputFile = $outputFile ?? self::OUTPUT_FILE_DEFAULT_XML;
-            $bomWriter = new Json();
-        } else {
+        if (false === $input->getOption($this::OPTION_JSON)) {
             $outputFile = $outputFile ?? self::OUTPUT_FILE_DEFAULT_JSON;
             $bomWriter = new Xml();
+        } else {
+            $outputFile = $outputFile ?? self::OUTPUT_FILE_DEFAULT_XML;
+            $bomWriter = new Json();
         }
 
         $output->writeln('<info>Serializing BOM</info>');

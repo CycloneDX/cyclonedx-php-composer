@@ -159,7 +159,7 @@ class Json12 implements SerializerInterface
      */
     private function genHash(Hash $hash): ?array
     {
-        if (!in_array($hash->getAlg(), self::HASH_ALGORITHMS, true)) {
+        if (false === in_array($hash->getAlg(), self::HASH_ALGORITHMS, true)) {
             return null;
         }
 

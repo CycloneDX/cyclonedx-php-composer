@@ -61,10 +61,10 @@ class BomGenerator
         $packages = $lockData['packages'] ?? [];
         $packagesDev = $lockData['packages-dev'] ?? [];
 
-        if (!$excludeDev) {
-            $packages = array_merge($packages, $packagesDev);
-        } else {
+        if ($excludeDev) {
             $this->output->writeln('<warning>Dev dependencies will be skipped</warning>');
+        } else {
+            $packages = array_merge($packages, $packagesDev);
         }
         unset($packagesDev);
 
@@ -89,11 +89,11 @@ class BomGenerator
      */
     public function buildComponent(array $package): Component
     {
-        if (empty($package['name'])) {
+        if (false === isset($package['name']) || '' === $package['name']) {
             throw new UnexpectedValueException('Encountered package without name: '.json_encode($package));
         }
 
-        if (empty($package['version'])) {
+        if (false === isset($package['version']) || '' === $package['version']) {
             throw new UnexpectedValueException("Encountered package without version: {$package['name']}");
         }
 

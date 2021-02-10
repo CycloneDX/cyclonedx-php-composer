@@ -21,7 +21,7 @@
 
 namespace CycloneDX\Models;
 
-use UnexpectedValueException;
+use InvalidArgumentException;
 
 /**
  * Class Component.
@@ -167,14 +167,14 @@ class Component
      *                     {@link https://cyclonedx.org/schema/bom/1.1 XSD} for `classification`.
      *                     Example: {@see TYPE_LIBRARY}
      *
-     * @throws UnexpectedValueException if value is unknown
+     * @throws InvalidArgumentException if value is unknown
      *
      * @return $this
      */
     public function setType(string $type): self
     {
-        if (!in_array($type, self::TYPES, true)) {
-            throw new UnexpectedValueException("Invalid type: {$type}");
+        if (false === in_array($type, self::TYPES, true)) {
+            throw new InvalidArgumentException("Invalid type: {$type}");
         }
         $this->type = $type;
 
@@ -207,15 +207,16 @@ class Component
     /**
      * @param License[] $licenses
      *
-     * @throws UnexpectedValueException if list contains element that is not instance of {@see \CycloneDX\Models\License}
+     * @throws InvalidArgumentException if list contains element that is not instance of {@see \CycloneDX\Models\License}
      *
      * @return $this
      */
     public function setLicenses(array $licenses): self
     {
         foreach ($licenses as $license) {
-            if (!$license instanceof License) {
-                throw new UnexpectedValueException('Not a License: '.var_export($license, true));
+            /* @phpstan-ignore-next-line */
+            if (false === $license instanceof License) {
+                throw new InvalidArgumentException('Not a License: '.var_export($license, true));
             }
         }
         $this->licenses = array_values($licenses);
@@ -234,15 +235,16 @@ class Component
     /**
      * @param Hash[] $hashes
      *
-     * @throws UnexpectedValueException if list contains element that is not instance of {@see \CycloneDX\Models\Hash}
+     * @throws InvalidArgumentException if list contains element that is not instance of {@see \CycloneDX\Models\Hash}
      *
      * @return $this;
      */
     public function setHashes(array $hashes): self
     {
         foreach ($hashes as $hash) {
-            if (!$hash instanceof Hash) {
-                throw new UnexpectedValueException('Not a Hash: '.var_export($hash, true));
+            /* @phpstan-ignore-next-line */
+            if (false === $hash instanceof Hash) {
+                throw new InvalidArgumentException('Not a Hash: '.var_export($hash, true));
             }
         }
         $this->hashes = array_values($hashes);

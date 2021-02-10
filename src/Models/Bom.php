@@ -21,7 +21,8 @@
 
 namespace CycloneDX\Models;
 
-use UnexpectedValueException;
+use DomainException;
+use InvalidArgumentException;
 
 /**
  * Class Bom.
@@ -60,15 +61,16 @@ class Bom
     /**
      * @param Component[] $components
      *
-     * @throws UnexpectedValueException if list contains element that is not instance of {@see \CycloneDX\Models\Component}
+     * @throws InvalidArgumentException if list contains element that is not instance of {@see \CycloneDX\Models\Component}
      *
      * @return $this
      */
     public function setComponents(array $components): self
     {
         foreach ($components as $component) {
-            if (!$component instanceof Component) {
-                throw new UnexpectedValueException('Not a Component: '.var_export($component, true));
+            /* @phpstan-ignore-next-line */
+            if (false === $component instanceof Component) {
+                throw new InvalidArgumentException('Not a Component: '.var_export($component, true));
             }
         }
         $this->components = array_values($components);
@@ -82,12 +84,16 @@ class Bom
     }
 
     /**
+     * @param int $version a value >= 1
+     *
+     * @throws DomainException
+     *
      * @return $this
      */
     public function setVersion(int $version): self
     {
         if ($version <= 0) {
-            throw new UnexpectedValueException("Invalid value: {$version}");
+            throw new DomainException("Invalid value: {$version}");
         }
         $this->version = $version;
 
