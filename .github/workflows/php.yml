@@ -15,7 +15,6 @@ on:
 jobs:
   tests:
     name: >
-      PHPUnit:
       ${{ matrix.os}}
       php${{ matrix.php }}
       ${{ matrix.stability }}
@@ -53,31 +52,3 @@ jobs:
           --prefer-dist
       - name: Run all tests
         run: composer test
-
-  demo:
-    name: >
-      Demo:
-      ${{ matrix.os}}
-      php${{ matrix.php }}
-      composer${{ matrix.composer }}
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ ubuntu-latest, windows-latest, macos-latest ]
-        php: [ "7.3", "7.4", "8.0" ]
-        composer: [ 1, 2 ]
-    timeout-minutes: 30
-    steps:
-      - name: Checkout
-        # see https://github.com/actions/checkout
-        uses: actions/checkout@v2
-      - name: Setup PHP
-        # see https://github.com/shivammathur/setup-php
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: ${{ matrix.php }}
-          extensions: json
-          tools: composer:v${{ matrix.composer }}
-          coverage: none
-      - name: Run demo
-        run: composer demo
