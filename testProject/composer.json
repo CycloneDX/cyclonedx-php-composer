@@ -13,7 +13,7 @@
         {
             "type": "path",
             "url": "../",
-            "symlink": true
+            "symlink": false
         }
     ],
     "minimum-stability": "dev",
