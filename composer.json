@@ -9,7 +9,11 @@
             "email": "nscuro@protonmail.com"
         }
     ],
+    "extra": {
+        "class": "CycloneDX\\Composer\\Plugin"
+    },
     "config": {
+        "preferred-install": "dist",
         "sort-packages": true
     },
     "require": {
@@ -19,14 +23,8 @@
     },
     "require-dev": {
         "composer/composer": "^1.3 || ^2.0",
-        "friendsofphp/php-cs-fixer": "^2.18",
-        "phpstan/phpstan": "^0.12.72",
-        "phpstan/phpstan-phpunit": "^0.12.17",
         "phpunit/phpunit": "^9.5",
         "swaggest/json-schema": "^0.12.31"
-    },
-    "extra": {
-        "class": "CycloneDX\\Composer\\Plugin"
     },
     "autoload": {
         "psr-4": {
@@ -39,38 +37,31 @@
         }
     },
     "scripts": {
-        "test:phpunit": "phpunit",
-        "test:sca": "phpstan analyse" ,
-        "test:cs": "php-cs-fixer fix --no-interaction --dry-run --diff",
+        "test:unit": "phpunit",
+        "test:sca": "@phpstan analyse" ,
+        "test:cs": "@php-cs-fixer fix --no-interaction --dry-run --diff",
         "test": [
-            "@test:phpunit",
             "@test:sca",
+            "@test:unit",
             "@test:cs"
         ],
-        "demo:setup": [
-            "@composer -dtestProject install",
-            "@composer -dtestProject update"
-        ],
-        "demo:run" : "@composer -dtestProject make-bom",
-        "demo:xml" : "@demo:run --output-file=-",
-        "demo:json" : "@demo:run --output-file=- --json",
-        "demo": [
-            "@demo:setup",
-            "@demo:xml",
-            "@demo:json"
-        ],
-        "cs-fix": "php-cs-fixer fix --diff"
+        "cs-fix": "@php-cs-fixer fix --diff",
+        "php-cs-fixer": "@php tools/php-cs-fixer/bin/php-cs-fixer",
+        "phpstan": "@php tools/phpstan/bin/phpstan",
+        "dev-setup": [
+            "@composer install",
+            "@composer -dtools/php-cs-fixer install",
+            "@composer -dtools/phpstan install"
+        ]
     },
     "scripts-descriptions": {
         "test": "Run all tests!",
         "test:phpunit": "Run phpunit tests.",
         "test:sca": "Run static code analysis." ,
         "test:cs": "Test coding standards.",
-        "demo": "Setup and run 'make-bom' for XML and JSON in demo.",
-        "demo:setup": "Setup a demo.",
-        "demo:run" : "Run 'make-bom' in a demo.",
-        "demo:xml" : "Run 'make-bom' for XML in a demo.",
-        "demo:json" : "Run 'make-bom' for JSON in a demo.",
-        "cs-fix": "Fix coding standards."
+        "cs-fix": "Fix files according to coding standards.",
+        "php-cs-fixer": "Run tool: php-cs-fixer",
+        "phpstan": "Run tool: phpstan",
+        "dev-setup": "Setup this project for development."
     }
 }

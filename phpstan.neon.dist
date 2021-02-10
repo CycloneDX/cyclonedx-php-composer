@@ -1,6 +1,6 @@
 includes:
-   - vendor/phpstan/phpstan-phpunit/extension.neon
-   - vendor/phpstan/phpstan-phpunit/rules.neon
+   - tools/phpstan/vendored/phpstan/phpstan-phpunit/extension.neon
+   - tools/phpstan/vendored/phpstan/phpstan-phpunit/rules.neon
 
 parameters:
     level: 8

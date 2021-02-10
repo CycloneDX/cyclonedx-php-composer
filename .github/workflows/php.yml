@@ -50,10 +50,17 @@ jobs:
           --no-progress
           --no-suggest
           --prefer-dist
-      - name: Run phpunit tests
-        run: composer test:phpunit
+      - name: Install tool for static code analysis
+        run: >
+          composer -dtools/phpstan install
+          --no-interaction
+          --no-progress
+          --no-suggest
+          --prefer-dist
       - name: Run static code analysis
-        run: composer test:sca
+        run: composer run-script test:sca
+      - name: Run phpunit tests
+        run: composer run-script test:unit
   style:
     name: Coding Standards
     runs-on: ubuntu-latest
@@ -70,12 +77,12 @@ jobs:
           extensions: json
           tools: composer:v2
           coverage: none
-      - name: Install dependencies
+      - name: Install tool
         run: >
-          composer install
+          composer -dtools/php-cs-fixer install
           --no-interaction
           --no-progress
           --no-suggest
           --prefer-dist
       - name: Test coding standards
-        run: composer test:cs
+        run: composer run-script test:cs

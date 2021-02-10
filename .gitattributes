@@ -1,3 +1,15 @@
+* text=auto
 
-# files that are ignored when installing as "dist"
-.integrationDemo export-ignore
+*.md  diff=markdown
+*.php diff=php
+
+# files that are not bundled into the "dist" release are marked `export-ignore`
+/.gitattributes     export-ignore
+/.gitignore         export-ignore
+/.github            export-ignore
+/tests              export-ignore
+/tools              export-ignore
+/.php_cs.dist       export-ignore
+/phpstan.neon.dist  export-ignore
+/phpunit.xml.dist   export-ignore
+/CHANGELOG.md       export-ignore
