@@ -14,7 +14,8 @@ A plugin for PHP's [Composer](https://getcomposer.org/) that generates Bill of M
 
 ### Requirements
 
-The plugin supports PHP 5.5 and later.
+The plugin supports PHP `^7.3 || ^8.0`
+with composer `^1.3 || ^2.0`.
 
 ### Installation
 
