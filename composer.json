@@ -38,19 +38,16 @@
     },
     "scripts": {
         "test:unit": "phpunit",
-        "test:sca": "@phpstan analyse" ,
-        "test:cs": "@php-cs-fixer fix --no-interaction --dry-run --diff",
+        "test:sca": "tools/phpstan/bin/phpstan analyse" ,
+        "test:cs": "tools/php-cs-fixer fix --no-interaction --dry-run --diff",
         "test": [
             "@test:sca",
             "@test:unit",
             "@test:cs"
         ],
-        "cs-fix": "@php-cs-fixer fix --diff",
-        "php-cs-fixer": "@php tools/php-cs-fixer/bin/php-cs-fixer",
-        "phpstan": "@php tools/phpstan/bin/phpstan",
+        "cs-fix": "tools/php-cs-fixer fix --diff",
         "dev-setup": [
             "@composer install",
-            "@composer -dtools/php-cs-fixer install",
             "@composer -dtools/phpstan install"
         ]
     },
@@ -60,8 +57,6 @@
         "test:sca": "Run static code analysis." ,
         "test:cs": "Test coding standards.",
         "cs-fix": "Fix files according to coding standards.",
-        "php-cs-fixer": "Run tool: php-cs-fixer",
-        "phpstan": "Run tool: phpstan",
         "dev-setup": "Setup this project for development."
     }
 }

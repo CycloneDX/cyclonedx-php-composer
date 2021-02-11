@@ -8,7 +8,7 @@ on:
   pull_request:
   workflow_dispatch:
   schedule:
-    # schedule weekly tests, since install dependencies are not intended to be pinned
+    # schedule weekly tests, since dependencies are not intended to be pinned
     # this means: at 23:42 on Fridays
     - cron: '42 23 * * 5'
 
@@ -35,16 +35,15 @@ jobs:
         with:
           php-version: ${{ matrix.php }}
           extensions: json
-          tools: composer:v2
           coverage: none
       - name: Validate composer.json and composer.lock
         run: >
-          composer validate
+          tools/composer validate
           --no-interaction
           --with-dependencies
       - name: Install dependencies
         run: >
-          composer update
+          tools/composer update
           --${{ matrix.stability }}
           --no-interaction
           --no-progress
@@ -52,15 +51,21 @@ jobs:
           --prefer-dist
       - name: Install tool for static code analysis
         run: >
-          composer -dtools/phpstan install
+          tools/composer -dtools/phpstan install
           --no-interaction
           --no-progress
           --no-suggest
           --prefer-dist
       - name: Run static code analysis
-        run: composer run-script test:sca
+        run: >
+          tools/composer run-script --
+          test:sca
+          --no-interaction
+          --no-progress
       - name: Run phpunit tests
-        run: composer run-script test:unit
+        run: >
+          composer run-script --
+          test:unit
   style:
     name: Coding Standards
     runs-on: ubuntu-latest
@@ -75,14 +80,10 @@ jobs:
         with:
           php-version: "8.0"
           extensions: json
-          tools: composer:v2
           coverage: none
-      - name: Install tool
-        run: >
-          composer -dtools/php-cs-fixer install
-          --no-interaction
-          --no-progress
-          --no-suggest
-          --prefer-dist
       - name: Test coding standards
-        run: composer run-script test:cs
+        run: >
+          tools/composer run-script --
+          test:cs
+          --no-interaction
+          --show-progress=none

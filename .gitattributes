@@ -1,15 +1,27 @@
 * text=auto
 
-*.md  diff=markdown
-*.php diff=php
+*.md          diff=markdown
+*.php         diff=php
+composer.lock diff=json
+.php_cs       diff=php
+.php_cs.dist  diff=php
+*.xml.dist    diff=xml
+*.neon        diff=yaml
+*.neon.dist   diff=yaml
 
 # files that are not bundled into the "dist" release are marked `export-ignore`
 /.gitattributes     export-ignore
 /.gitignore         export-ignore
 /.github            export-ignore
+/.phive             export-ignore
 /tests              export-ignore
 /tools              export-ignore
+/.editorconfig      export-ignore
 /.php_cs.dist       export-ignore
 /phpstan.neon.dist  export-ignore
 /phpunit.xml.dist   export-ignore
 /CHANGELOG.md       export-ignore
+
+# generated or vendored diles
+/.phive/**   linguist-generated
+/tools/*     linguist-vendored binary
