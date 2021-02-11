@@ -93,6 +93,9 @@ class Hash
         return $this;
     }
 
+    /**
+     * @throws DomainException if parameter `alg` is unknown
+     */
     public function __construct(string $alg, string $value)
     {
         $this->setAlg($alg);
