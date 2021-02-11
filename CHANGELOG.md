@@ -4,23 +4,27 @@
 
 ### Breaking Changes
 
-* Requires php `>=7.3`, was `^5.5 || ^7.0`. 
+* Now requires php `^7.3 || ^8.0`, was `^5.5 || ^7.0`. 
 * Complete rewrite/refactor.  
   Expect library classes/methods/functions to be removed, renamed or incompatible to previous versions.  
   CLI via `composer make-bom` did not change.
 
 ### Added 
 
-* Support for php8.
+* Support for `php>=8.0` was enabled.
 * CLI: Support for output to _STDOUT_. Use option `--output-file=-`.
 
 ### Removed 
 
-* Support for php<7.3.
+* This library no longer supports `php<7.3`. 
 
 ### Fixed
 
 * Some cases when the JSON BoM generator created schema-invalid data.
+
+### Misc
+
+* Added more tests during the build process.
 
 ## 1.2
 

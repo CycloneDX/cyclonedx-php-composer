@@ -66,14 +66,14 @@ class BomCommand extends BaseCommand
     {
         $composer = $this->getComposer();
         if (null == $composer) {
-            // earlier versions of composer may return `null`
+            // earlier versions of composer may return `null` instead of throwing an error.
             $output->writeln('<error>Composer does not exist</error>');
 
             return self::EXIT_MISSING_COMPOSER;
         }
         $locker = $composer->getLocker();
 
-        if (!$locker->isLocked()) {
+        if (false === $locker->isLocked()) {
             $output->writeln('<error>Lockfile does not exist</error>');
 
             return self::EXIT_MISSING_LOCK;
@@ -87,10 +87,13 @@ class BomCommand extends BaseCommand
             false !== $input->getOption($this::OPTION_EXCLUDE_PLUGINS)
         );
 
+        /* @var string|null $outputFile */
         $outputFile = $input->getOption($this::OPTION_OUTPUT_FILE);
         if (false === is_string($outputFile) || '' === $outputFile) {
             $outputFile = null;
         }
+
+        /* @var \CycloneDX\BomFile\SerializerInterface $bomWriter */
         if (false === $input->getOption($this::OPTION_JSON)) {
             $outputFile = $outputFile ?? self::OUTPUT_FILE_DEFAULT_JSON;
             $bomWriter = new Xml();
@@ -104,8 +107,10 @@ class BomCommand extends BaseCommand
 
         if (self::OUTPUT_FILE_STDOUT === $outputFile) {
             $output->writeln('<info>Writing output to STDOUT</info>');
-            fwrite(STDOUT, $bomContents); // don't use `$output->writeln()`, so to support `-q` cli param
-            $output->writeln(''); // straighten up and add a linebreak.
+            // don't use `$output->writeln()`, so to support `-q` cli param.
+            fwrite(STDOUT, $bomContents);
+            // straighten up and add a linebreak. raw output might not have done it.
+            $output->writeln('');
         } else {
             $output->writeln('<info>Writing output to '.OutputFormatter::escape($outputFile).'</info>');
             \file_put_contents($outputFile, $bomContents);

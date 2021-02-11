@@ -4,6 +4,7 @@ namespace CycloneDX\Tests\Models;
 
 use CycloneDX\Models\Bom;
 use CycloneDX\Models\Component;
+use Generator;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -35,9 +36,9 @@ class BomTest extends TestCase
     }
 
     /**
-     * @return \Generator<array{0: array<Component>}>
+     * @return Generator<array{0: array<Component>}>
      */
-    public function componentDataProvider(): \Generator
+    public function componentDataProvider(): Generator
     {
         yield 'empty' => [[]];
         yield 'some' => [[$this->createMock(Component::class)]];

@@ -4,6 +4,7 @@ namespace CycloneDX\Tests\BomFile;
 
 use CycloneDX\BomFile\Json12;
 use CycloneDX\Models\Bom;
+use JsonException;
 use PHPUnit\Framework\TestCase;
 use Swaggest\JsonSchema\Schema;
 
@@ -29,7 +30,7 @@ class Json12Test extends TestCase
     }
 
     /**
-     * @throws \JsonException
+     * @throws JsonException
      * @throws \Swaggest\JsonSchema\InvalidValue
      *
      * @dataProvider \CycloneDX\Tests\BomFile\AbstractDataProvider::all()
@@ -42,7 +43,7 @@ class Json12Test extends TestCase
     }
 
     /**
-     * @throws \JsonException
+     * @throws JsonException
      * @dataProvider \CycloneDX\Tests\BomFile\AbstractDataProvider::bomWithComponentPlain()
      */
     public function testBomHasComponent(Bom $bom): void
@@ -53,7 +54,7 @@ class Json12Test extends TestCase
     }
 
     /**
-     * @throws \JsonException
+     * @throws JsonException
      * @dataProvider \CycloneDX\Tests\BomFile\AbstractDataProvider::bomWithComponentLicenseId()
      */
     public function testComponentsHaveLicenseId(Bom $bom): void
@@ -68,7 +69,7 @@ class Json12Test extends TestCase
     }
 
     /**
-     * @throws \JsonException
+     * @throws JsonException
      * @dataProvider \CycloneDX\Tests\BomFile\AbstractDataProvider::bomWithComponentLicenseName()
      */
     public function testComponentsHaveLicenseName(Bom $bom): void
@@ -83,7 +84,7 @@ class Json12Test extends TestCase
     }
 
     /**
-     * @throws \JsonException
+     * @throws JsonException
      */
     private function json_encode(Bom $bom): string
     {
@@ -91,7 +92,7 @@ class Json12Test extends TestCase
     }
 
     /**
-     * @throws \JsonException
+     * @throws JsonException
      *
      * @return mixed
      */
