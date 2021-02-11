@@ -24,6 +24,7 @@ jobs:
         os: [ubuntu-latest, windows-latest, macos-latest]
         php: ["7.3", "7.4", "8.0"]
         stability: [prefer-lowest, prefer-stable]
+      fail-fast: false
     timeout-minutes: 30
     steps:
       - name: Checkout
@@ -64,7 +65,7 @@ jobs:
           --no-progress
       - name: Run phpunit tests
         run: >
-          composer run-script --
+          tools/composer run-script --
           test:unit
   style:
     name: Coding Standards
