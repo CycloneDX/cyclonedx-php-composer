@@ -21,6 +21,7 @@
 
 namespace CycloneDX\Models;
 
+use DomainException;
 use InvalidArgumentException;
 
 /**
@@ -167,14 +168,14 @@ class Component
      *                     {@link https://cyclonedx.org/schema/bom/1.1 XSD} for `classification`.
      *                     Example: {@see TYPE_LIBRARY}
      *
-     * @throws InvalidArgumentException if value is unknown
+     * @throws DomainException if value is unknown
      *
      * @return $this
      */
     public function setType(string $type): self
     {
         if (false === in_array($type, self::TYPES, true)) {
-            throw new InvalidArgumentException("Invalid type: {$type}");
+            throw new DomainException("Invalid type: {$type}");
         }
         $this->type = $type;
 

@@ -12,3 +12,7 @@
 /.phpunit.cache/
 
 /phpstan.neon
+
+
+# this dir must not exist, so CI can to its job
+/.CItmp

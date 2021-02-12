@@ -16,5 +16,4 @@ class HashTest extends TestCase
         $this->expectExceptionMessageMatches('/unknown algorithm/i');
         new Hash('something unknown', '12345678901234567890123456789012');
     }
-
 }

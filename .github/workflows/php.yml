@@ -12,6 +12,10 @@ on:
     # this means: at 23:42 on Fridays
     - cron: '42 23 * * 5'
 
+env:
+  reports-directory: .CItmp
+  reports-artifact: reports
+
 jobs:
   tests:
     name: >
@@ -30,43 +34,60 @@ jobs:
       - name: Checkout
         # see https://github.com/actions/checkout
         uses: actions/checkout@v2
+      - name: create reports dir
+        run: mkdir -p ${{ env.reports-directory }}
       - name: Setup PHP
         # see https://github.com/shivammathur/setup-php
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php }}
           extensions: json
-          coverage: none
+          ini-values: pcov.enabled=0 # will enable on demand
+          coverage: pcov
       - name: Validate composer.json and composer.lock
         run: >
           tools/composer validate
-          --no-interaction
           --with-dependencies
+          --no-interaction
       - name: Install dependencies
         run: >
           tools/composer update
           --${{ matrix.stability }}
+          --prefer-dist
           --no-interaction
           --no-progress
           --no-suggest
-          --prefer-dist
       - name: Install tool for static code analysis
         run: >
           tools/composer -dtools/phpstan install
+          --prefer-dist
           --no-interaction
           --no-progress
           --no-suggest
-          --prefer-dist
       - name: Run static code analysis
         run: >
-          tools/composer run-script --
-          test:sca
-          --no-interaction
+          tools/phpstan/bin/phpstan
+          analyse
+          --verbose
           --no-progress
+          --no-interaction
       - name: Run phpunit tests
         run: >
-          tools/composer run-script --
-          test:unit
+          php -dpcov.directory=src -dpcov.enabled=1
+          vendor/bin/phpunit
+          -dpcov.directory=src -dpcov.enabled=1
+          --log-junit=${{ env.reports-directory }}/tests.${{ matrix.os}}_php${{ matrix.php }}_${{ matrix.stability }}.junit.xml
+          --coverage-clover=${{ env.reports-directory }}/coverage.${{ matrix.os}}_php${{ matrix.php }}_${{ matrix.stability }}.clover.xml
+          --no-interaction
+          --do-not-cache-result
+      - name: Artifact reports
+        if: ${{ ! cancelled() && ! matrix.no-reports }}
+        # see https://github.com/actions/upload-artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: ${{ env.reports-artifact }}
+          path: ${{ env.reports-directory }}
+          if-no-files-found: error
   style:
     name: Coding Standards
     runs-on: ubuntu-latest
@@ -84,7 +105,9 @@ jobs:
           coverage: none
       - name: Test coding standards
         run: >
-          tools/composer run-script --
-          test:cs
+          tools/php-cs-fixer
+          fix --dry-run
+          --diff-format=udiff
+          --using-cache=no
+          --show-progress=dots
           --no-interaction
-          --show-progress=none

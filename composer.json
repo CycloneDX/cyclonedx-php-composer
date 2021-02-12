@@ -37,15 +37,15 @@
         }
     },
     "scripts": {
-        "test:unit": "@php vendor/bin/phpunit",
-        "test:sca": "@php tools/phpstan/bin/phpstan analyse" ,
-        "test:cs": "@php tools/php-cs-fixer fix --dry-run --diff",
+        "test:phpunit": "@php vendor/bin/phpunit",
+        "test:phpstan": "@php tools/phpstan/bin/phpstan analyse" ,
+        "test:cs-fixer": "@php tools/php-cs-fixer fix --dry-run --diff-format=udiff",
         "test": [
-            "@test:sca",
-            "@test:unit",
-            "@test:cs"
+            "@test:phpstan",
+            "@test:phpunit",
+            "@test:cs-fixer"
         ],
-        "cs-fix": "@php tools/php-cs-fixer fix --diff",
+        "cs-fix": "@php tools/php-cs-fixer fix --diff-format=udiff",
         "dev-setup": [
             "@composer install",
             "@composer -dtools/phpstan install"
