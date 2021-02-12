@@ -37,8 +37,8 @@
         }
     },
     "scripts": {
-        "test:phpunit": "@php vendor/bin/phpunit",
-        "test:phpstan": "@php tools/phpstan/bin/phpstan analyse" ,
+        "test:phpunit": "phpunit",
+        "test:phpstan": "@php tools/phpstan/bin/phpstan.phar analyse" ,
         "test:cs-fixer": "@php tools/php-cs-fixer fix --dry-run --diff-format=udiff",
         "test": [
             "@test:phpstan",
@@ -53,9 +53,9 @@
     },
     "scripts-descriptions": {
         "test": "Run all tests!",
-        "test:phpunit": "Run phpunit tests.",
-        "test:sca": "Run static code analysis." ,
-        "test:cs": "Test coding standards.",
+        "test:phpunit": "Run tests with PHPUnit.",
+        "test:phpstan": "Run static code analysis with PHPStan." ,
+        "test:cs-fixer": "Test coding standards with PHP-CS-fixer.",
         "cs-fix": "Fix files according to coding standards.",
         "dev-setup": "Setup this project for development."
     }

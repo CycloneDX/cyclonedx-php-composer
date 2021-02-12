@@ -18,17 +18,22 @@ env:
 
 jobs:
   tests:
-    name: >
-      ${{ matrix.os}}
-      php${{ matrix.php }}
-      ${{ matrix.stability }}
+    name: Tests (${{ matrix.os}}, ${{ matrix.php }}, ${{ matrix.stability }})
     runs-on: ${{ matrix.os }}
     strategy:
-      matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
-        php: ["7.3", "7.4", "8.0"]
-        stability: [prefer-lowest, prefer-stable]
       fail-fast: false
+      matrix:
+        os:
+          - ubuntu-latest
+          - windows-latest
+          - macos-latest
+        php:
+          - "7.3"
+          - "7.4"
+          - "8.0"
+        stability:
+          - lowest
+          - stable
     timeout-minutes: 30
     steps:
       - name: Checkout
@@ -40,40 +45,41 @@ jobs:
         with:
           php-version: ${{ matrix.php }}
           extensions: json
-          ini-values: pcov.enabled=0 # will enable on demand
           coverage: pcov
       - name: Validate composer.json and composer.lock
         run: >
-          tools/composer validate
+          php
+          ./tools/composer validate
           --with-dependencies
           --no-interaction
       - name: Install dependencies
         run: >
-          tools/composer update
-          --${{ matrix.stability }}
+          php
+          ./tools/composer update
+          --prefer-${{ matrix.stability }}
           --prefer-dist
           --no-interaction
           --no-progress
           --no-suggest
       - name: Install tool for static code analysis
         run: >
-          tools/composer -dtools/phpstan install
+          php
+          ./tools/composer -dtools/phpstan install
           --prefer-dist
           --no-interaction
           --no-progress
           --no-suggest
       - name: Run static code analysis
         run: >
-          tools/phpstan/bin/phpstan
-          analyse
+          php
+          tools/phpstan/bin/phpstan.phar analyse
           --verbose
           --no-progress
           --no-interaction
       - name: Run phpunit tests
         run: >
-          php -dpcov.directory=src -dpcov.enabled=1
-          vendor/bin/phpunit
-          -dpcov.directory=src -dpcov.enabled=1
+          php ./tools/composer exec --
+          phpunit
           --log-junit=${{ env.reports-directory }}/tests.${{ matrix.os}}_php${{ matrix.php }}_${{ matrix.stability }}.junit.xml
           --coverage-clover=${{ env.reports-directory }}/coverage.${{ matrix.os}}_php${{ matrix.php }}_${{ matrix.stability }}.clover.xml
           --no-interaction
@@ -103,6 +109,7 @@ jobs:
           coverage: none
       - name: Test coding standards
         run: >
+          php
           tools/php-cs-fixer
           fix --dry-run
           --diff-format=udiff
