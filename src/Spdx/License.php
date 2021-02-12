@@ -48,17 +48,17 @@ class License
         return $this->licenses;
     }
 
+    public static function getResourcesFile(): string
+    {
+        return __DIR__.'/../../res/'.self::LICENSES_FILE;
+    }
+
     /**
      * XmlLicense constructor.
      */
     public function __construct()
     {
         $this->loadLicenses();
-    }
-
-    public static function getResourcesFile(): string
-    {
-        return __DIR__.'/../../res/'.self::LICENSES_FILE;
     }
 
     public function validate(string $identifier): bool
@@ -68,9 +68,7 @@ class License
 
     public function getLicense(string $identifier): ?string
     {
-        $key = strtolower($identifier);
-
-        return $this->licenses[$key] ?? null;
+        return $this->licenses[strtolower($identifier)] ?? null;
     }
 
     /**
@@ -85,7 +83,7 @@ class License
         $file = self::getResourcesFile();
         $json = file_get_contents($file);
         if (false === $json) {
-            throw new RuntimeException("Missing licenses file ${file}");
+            throw new RuntimeException("Missing licenses file: ${file}");
         }
 
         try {

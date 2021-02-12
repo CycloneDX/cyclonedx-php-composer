@@ -21,9 +21,9 @@
 
 namespace CycloneDX\Composer;
 
+use CycloneDX\Hash\Algorithm as HashAlgorithm;
 use CycloneDX\Models\Bom;
 use CycloneDX\Models\Component;
-use CycloneDX\Models\Hash;
 use CycloneDX\Models\License;
 use Symfony\Component\Console\Formatter\OutputFormatter;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -109,7 +109,7 @@ class BomGenerator
         ));
 
         if (!empty($package['dist']['shasum'])) {
-            $component->setHashes([new Hash(Hash::ALG_SHA_1, $package['dist']['shasum'])]);
+            $component->setHashes([HashAlgorithm::SHA_1 => $package['dist']['shasum']]);
         }
 
         return $component;

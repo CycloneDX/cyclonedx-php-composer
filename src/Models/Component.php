@@ -21,6 +21,7 @@
 
 namespace CycloneDX\Models;
 
+use CycloneDX\Hash\Algorithm as HashAlgorithm;
 use DomainException;
 use InvalidArgumentException;
 
@@ -114,7 +115,7 @@ class Component
      *
      * Specifies the file hashes of the component.
      *
-     * @var Hash[]
+     * @var array<string, string>
      */
     private $hashes = [];
 
@@ -226,7 +227,7 @@ class Component
     }
 
     /**
-     * @return Hash[]
+     * @return array<string, string>
      */
     public function getHashes(): array
     {
@@ -234,21 +235,28 @@ class Component
     }
 
     /**
-     * @param Hash[] $hashes
+     * @param array<string, string> $hashes
      *
-     * @throws InvalidArgumentException if list contains element that is not instance of {@see \CycloneDX\Models\Hash}
+     * @throws DomainException          if any of hashes' keys is not valid to {@see HashAlgorithm::validate()}
+     * @throws InvalidArgumentException if any of hashes' values is not a string
      *
      * @return $this;
      */
     public function setHashes(array $hashes): self
     {
-        foreach ($hashes as $hash) {
-            /* @phpstan-ignore-next-line */
-            if (false === $hash instanceof Hash) {
-                throw new InvalidArgumentException('Not a Hash: '.var_export($hash, true));
+        $hashAlgorithm = new HashAlgorithm();
+        $cleanHashes = [];
+        foreach ($hashes as $alg => $content) {
+            if (false === $hashAlgorithm->validate($alg)) {
+                throw new DomainException("Unknown hash algorithm: {$alg}");
             }
+            /* @phpstan-ignore-next-line */
+            if (false === is_string($content)) {
+                throw new InvalidArgumentException("Hash content for '{$alg}' is not string.");
+            }
+            $cleanHashes[$hashAlgorithm->getAlgorithm($alg)] = $content;
         }
-        $this->hashes = array_values($hashes);
+        $this->hashes = $cleanHashes;
 
         return $this;
     }

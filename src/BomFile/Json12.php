@@ -21,9 +21,9 @@
 
 namespace CycloneDX\BomFile;
 
+use CycloneDX\Hash\Algorithm as HashAlgorithm;
 use CycloneDX\Models\Bom;
 use CycloneDX\Models\Component;
-use CycloneDX\Models\Hash;
 use CycloneDX\Models\License;
 
 /**
@@ -36,23 +36,37 @@ use CycloneDX\Models\License;
 class Json12 implements SerializerInterface
 {
     /**
-     * The spec this Serializer is implementing.
+     * The schema version this Serializer is implementing.
      */
     public const SPEC_VERSION = '1.2';
 
-    private const HASH_ALGORITHMS = [
-        Hash::ALG_MD5,
-        Hash::ALG_SHA_1,
-        Hash::ALG_SHA_256,
-        Hash::ALG_SHA_384,
-        Hash::ALG_SHA_512,
-        Hash::ALG_SHA3_256,
-        Hash::ALG_SHA3_512,
-        Hash::ALG_BLAKE2B_256,
-        Hash::ALG_BLAKE2B_384,
-        Hash::ALG_BLAKE2B_512,
-        Hash::ALG_BLAKE3,
-    ];
+    /**
+     * list of hash algorithms loaded by this schema version.
+     *
+     * @var string[]
+     */
+    private $hashAlgorithms;
+
+    public function loadHashAlgorithms(): void
+    {
+        if (null !== $this->hashAlgorithms) {
+            return;
+        }
+
+        $this->hashAlgorithms = [
+            HashAlgorithm::MD5,
+            HashAlgorithm::SHA_1,
+            HashAlgorithm::SHA_256,
+            HashAlgorithm::SHA_384,
+            HashAlgorithm::SHA_512,
+            HashAlgorithm::SHA3_256,
+            HashAlgorithm::SHA3_512,
+            HashAlgorithm::BLAKE2B_256,
+            HashAlgorithm::BLAKE2B_384,
+            HashAlgorithm::BLAKE2B_512,
+            HashAlgorithm::BLAKE3,
+        ];
+    }
 
     /**
      * Serialization options.
@@ -68,6 +82,7 @@ class Json12 implements SerializerInterface
         if ($pretty) {
             $this->serializeOptions |= JSON_PRETTY_PRINT;
         }
+        $this->loadHashAlgorithms();
     }
 
     /**
@@ -76,6 +91,14 @@ class Json12 implements SerializerInterface
     private function filter_notNull($value): bool
     {
         return null !== $value;
+    }
+
+    /**
+     * @param mixed|null $value
+     */
+    private function filter_knownHashAlgorithms($value): bool
+    {
+        return in_array($value, $this->hashAlgorithms, true);
     }
 
     /**
@@ -124,11 +147,8 @@ class Json12 implements SerializerInterface
                     $component->getLicenses()
                 ),
                 'hashes' => array_filter(
-                    array_map(
-                        [$this, 'genHash'],
-                        $component->getHashes()
-                    ),
-                    [$this, 'filter_notNull']
+                    $component->getHashes(),
+                    [$this, 'filter_knownHashAlgorithms']
                 ),
                 'purl' => $component->getPackageUrl(),
             ],
@@ -151,21 +171,6 @@ class Json12 implements SerializerInterface
                 ],
                 [$this, 'filter_notNull']
             ),
-        ];
-    }
-
-    /**
-     * @return array<string, mixed>|null
-     */
-    private function genHash(Hash $hash): ?array
-    {
-        if (false === in_array($hash->getAlg(), self::HASH_ALGORITHMS, true)) {
-            return null;
-        }
-
-        return [
-            'alg' => $hash->getAlg(),
-            'content' => $hash->getValue(),
         ];
     }
 }

@@ -2,9 +2,9 @@
 
 namespace CycloneDX\Tests\BomFile;
 
+use CycloneDX\Hash\Algorithm as HashAlgorithm;
 use CycloneDX\Models\Bom;
 use CycloneDX\Models\Component;
-use CycloneDX\Models\Hash;
 use CycloneDX\Models\License;
 use Generator;
 
@@ -104,11 +104,9 @@ abstract class AbstractDataProvider
         yield 'every hash alg' => [(new Bom())->setComponents([
             (new Component(Component::TYPE_LIBRARY, 'name', '1.0'))
             ->setHashes(
-                array_map(
-                    static function (string $alg): Hash {
-                        return new Hash($alg, '12345678901234567890123456789012');
-                    },
-                    Hash::ALGORITHMS
+                array_fill_keys(
+                    (new HashAlgorithm())->getAlgorithms(),
+                    '12345678901234567890123456789012'
                 )
             ),
         ])];
@@ -123,7 +121,6 @@ abstract class AbstractDataProvider
     {
         yield 'every list from assoc' => [(new Bom())->setComponents([
             'myComponent' => (new Component(Component::TYPE_LIBRARY, 'name', '1.0'))
-                ->setHashes(['myHash' => new Hash(Hash::ALG_SHA_1, '12345678901234567890123456789012')])
                 ->setLicenses(['myLicense' => new License('some license')]),
         ])];
     }
