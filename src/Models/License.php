@@ -129,8 +129,8 @@ class License
      *
      * @param string $nameOrId name or ID of a license
      *
-     * @uses \CycloneDX\Spdx\License::validate()
-     * @uses \CycloneDX\Spdx\License::getLicense()
+     * @see \CycloneDX\Spdx\License::validate()
+     * @see \CycloneDX\Spdx\License::getLicense()
      *
      * @return $this
      */

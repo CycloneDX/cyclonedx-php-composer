@@ -10,6 +10,11 @@ use Swaggest\JsonSchema\Schema;
 
 /**
  * @covers \CycloneDX\BomFile\Json12
+ *
+ * @uses \CycloneDX\Models\Bom
+ * @uses \CycloneDX\Models\Component
+ * @uses \CycloneDX\Models\Hash
+ * @uses \CycloneDX\Models\License
  */
 class Json12Test extends TestCase
 {

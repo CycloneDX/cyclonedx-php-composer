@@ -9,6 +9,8 @@ use PHPUnit\Framework\TestCase;
  * Class LicenseTest.
  *
  * @covers \CycloneDX\Models\License
+ *
+ * @uses \CycloneDX\Spdx\License
  */
 class LicenseTest extends TestCase
 {

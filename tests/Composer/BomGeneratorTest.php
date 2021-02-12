@@ -14,6 +14,12 @@ use UnexpectedValueException;
  * Class BomGeneratorTest.
  *
  * @covers \CycloneDX\Composer\BomGenerator
+ *
+ * @uses \CycloneDX\Models\Bom
+ * @uses \CycloneDX\Models\Component
+ * @uses \CycloneDX\Models\Hash
+ * @uses \CycloneDX\Models\License
+ * @uses \CycloneDX\Spdx\License
  */
 class BomGeneratorTest extends TestCase
 {
