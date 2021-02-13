@@ -25,9 +25,13 @@ use CycloneDX\Helpers\SimpleDomTrait;
 use CycloneDX\Models\Bom;
 use CycloneDX\Models\Component;
 use CycloneDX\Models\License;
+use CycloneDX\Specs\Spec10;
+use CycloneDX\Specs\Spec11;
+use CycloneDX\Specs\Spec12;
 use DomainException;
 use DOMDocument;
 use DOMElement;
+use DOMException;
 use Generator;
 use RuntimeException;
 
@@ -36,28 +40,35 @@ use RuntimeException;
  *
  * @author jkowalleck
  */
-class Xml extends AbstractFile implements SerializeInterface
+class Xml extends AbstractFile
 {
     use SimpleDomTrait;
 
     // region Serialize
 
     /**
-     * @throws RuntimeException when serialization to string failed
-     * @throws DomainException  when a component's type is unsupported
+     * @throws DOMException
+     * @throws DomainException  if a component's type is unsupported
+     * @throws RuntimeException if spec version is not supported
      */
     public function serialize(Bom $bom, bool $pretty = true): string
     {
+        $spec = $this->getSpec();
+        if (false === ($spec instanceof Spec10 || $spec instanceof Spec11 || $spec instanceof Spec12)) {
+            throw new RuntimeException('unsupported spec version');
+        }
+        unset($spec);
+
         $document = new DOMDocument('1.0', 'UTF-8');
         $document->appendChild($this->bomToDom($document, $bom));
 
         $document->formatOutput = $pretty;
-        $saved = $document->saveXML(null, LIBXML_NOEMPTYTAG);
-        if (false === $saved) {
-            throw new RuntimeException('Failed to serialize to XML.');
+        $xml = $document->saveXML(null, LIBXML_NOEMPTYTAG);
+        if (false === $xml) {
+            throw new DOMException('Failed to serialize to XML.');
         }
 
-        return $saved;
+        return $xml;
     }
 
     /**

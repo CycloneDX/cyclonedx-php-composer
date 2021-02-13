@@ -24,15 +24,17 @@ namespace CycloneDX\BomFile;
 use CycloneDX\Models\Bom;
 use CycloneDX\Models\Component;
 use CycloneDX\Models\License;
+use CycloneDX\Specs\Spec12;
 use DomainException;
 use JsonException;
+use RuntimeException;
 
 /**
  * Writes BOMs in JSON format.
  *
  * @author jkowalleck
  */
-class Json extends AbstractFile implements SerializeInterface
+class Json extends AbstractFile
 {
     // region Serialize
 
@@ -40,16 +42,26 @@ class Json extends AbstractFile implements SerializeInterface
      * Serialize a Bom to JSON.
      *
      * @throws JsonException
-     * @throws DomainException when a component's type is unsupported
+     * @throws DomainException  if a component's type is unsupported
+     * @throws RuntimeException if spec version is not supported
      */
     public function serialize(Bom $bom, bool $pretty = true): string
     {
+        if (false === $this->getSpec() instanceof Spec12) {
+            throw new RuntimeException('unsupported spec version');
+        }
+
         $options = JSON_THROW_ON_ERROR | JSON_PRESERVE_ZERO_FRACTION;
         if ($pretty) {
             $options |= JSON_PRETTY_PRINT;
         }
 
-        return (string) json_encode($this->bomToJson($bom), $options);
+        $json = json_encode($this->bomToJson($bom), $options);
+        if (false === $json) {
+            throw new JsonException('Failed to serialize to JSON.');
+        }
+
+        return $json;
     }
 
     /**
