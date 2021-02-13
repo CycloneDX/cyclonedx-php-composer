@@ -21,10 +21,12 @@
 
 namespace CycloneDX\BomFile;
 
-use CycloneDX\Hash\Algorithm as HashAlgorithm;
 use CycloneDX\Models\Bom;
 use CycloneDX\Models\Component;
 use CycloneDX\Models\License;
+use CycloneDX\Specs\Spec12;
+use DomainException;
+use JsonException;
 
 /**
  * Writes BOMs in JSON format.
@@ -33,133 +35,86 @@ use CycloneDX\Models\License;
  *
  * @author jkowalleck
  */
-class Json12 implements SerializerInterface
+class Json12 extends Spec12 implements SerializeInterface
 {
-    /**
-     * The schema version this Serializer is implementing.
-     */
-    public const SPEC_VERSION = '1.2';
-
-    /**
-     * list of hash algorithms loaded by this schema version.
-     *
-     * @var string[]
-     */
-    private $hashAlgorithms;
-
-    public function loadHashAlgorithms(): void
-    {
-        if (null !== $this->hashAlgorithms) {
-            return;
-        }
-
-        $this->hashAlgorithms = [
-            HashAlgorithm::MD5,
-            HashAlgorithm::SHA_1,
-            HashAlgorithm::SHA_256,
-            HashAlgorithm::SHA_384,
-            HashAlgorithm::SHA_512,
-            HashAlgorithm::SHA3_256,
-            HashAlgorithm::SHA3_512,
-            HashAlgorithm::BLAKE2B_256,
-            HashAlgorithm::BLAKE2B_384,
-            HashAlgorithm::BLAKE2B_512,
-            HashAlgorithm::BLAKE3,
-        ];
-    }
-
-    /**
-     * Serialization options.
-     *
-     * @see https://www.php.net/manual/en/json.constants.php
-     *
-     * @var int
-     */
-    private $serializeOptions = 0;
-
-    public function __construct(bool $pretty = true)
-    {
-        if ($pretty) {
-            $this->serializeOptions |= JSON_PRETTY_PRINT;
-        }
-        $this->loadHashAlgorithms();
-    }
-
     /**
      * @param mixed|null $value
      */
-    private function filter_notNull($value): bool
+    private function isNotNull($value): bool
     {
         return null !== $value;
     }
 
     /**
-     * @param mixed|null $value
-     */
-    private function filter_knownHashAlgorithms($value): bool
-    {
-        return in_array($value, $this->hashAlgorithms, true);
-    }
-
-    /**
      * Serialize a Bom to JSON.
      *
-     * @throws \JsonException
+     * @throws JsonException
+     * @throws DomainException when a component's type is unsupported
      */
-    public function serialize(Bom $bom): string
+    public function serialize(Bom $bom, bool $pretty = true): string
     {
-        return (string) json_encode(
-            $this->genBom($bom),
-            JSON_THROW_ON_ERROR | JSON_PRESERVE_ZERO_FRACTION | $this->serializeOptions
-        );
+        $options = JSON_THROW_ON_ERROR | JSON_PRESERVE_ZERO_FRACTION;
+        if ($pretty) {
+            $options |= JSON_PRETTY_PRINT;
+        }
+
+        return (string) json_encode($this->bomToJson($bom), $options);
     }
 
     /**
+     * @throws DomainException when a component's type is unsupported
+     *
      * @return array<string, mixed>
+     *
+     * @internal
      */
-    private function genBom(Bom $bom): array
+    public function bomToJson(Bom $bom): array
     {
         return [
             'bomFormat' => 'CycloneDX',
-            'specVersion' => self::SPEC_VERSION,
+            'specVersion' => $this->getSpecVersion(),
             'version' => $bom->getVersion(),
             'components' => array_map(
-                [$this, 'genComponent'],
+                [$this, 'componentToJson'],
                 $bom->getComponents()
             ),
         ];
     }
 
     /**
+     * @throws DomainException
+     *
      * @return array<string, mixed>
      */
-    private function genComponent(Component $component): array
+    private function componentToJson(Component $component): array
     {
+        $type = $component->getType();
+        if (false === $this->isSupportedComponentType($type)) {
+            throw new DomainException("Unsupported component type: {$type}");
+        }
+
         return array_filter(
             [
-                'type' => $component->getType(),
+                'type' => $type,
                 'name' => $component->getName(),
                 'version' => $component->getVersion(),
                 'group' => $component->getGroup(),
                 'description' => $component->getDescription(),
                 'licenses' => array_map(
-                    [$this, 'genLicense'],
+                    [$this, 'licenseToJson'],
                     $component->getLicenses()
                 ),
-                'hashes' => array_filter(
-                    $component->getHashes(),
-                    [$this, 'filter_knownHashAlgorithms']
-                ),
+                'hashes' => iterator_to_array($this->hashesToJson($component->getHashes())),
                 'purl' => $component->getPackageUrl(),
             ],
-            [$this, 'filter_notNull']
+            [$this, 'isNotNull']
         );
     }
 
     /**
      * @return array{license: array<string, mixed>}
      */
-    private function genLicense(License $license): array
+    private function licenseToJson(License $license): array
     {
         return [
             'license' => array_filter(
@@ -169,8 +124,31 @@ class Json12 implements SerializerInterface
                     'text' => $license->getText(),
                     'url' => $license->getUrl(),
                 ],
-                [$this, 'filter_notNull']
+                [$this, 'isNotNull']
             ),
         ];
+    }
+
+    /**
+     * @param array<string, string> $hashes
+     *
+     * @return \Generator<array{alg: string, content: string}>
+     */
+    private function hashesToJson(array $hashes): \Generator
+    {
+        foreach ($hashes as $algorithm => $content) {
+            if (false === $this->isSupportedHashAlgorithm($algorithm)) {
+                trigger_error("skipped Hash with invalid algorithm: {$algorithm}", E_USER_WARNING);
+                continue;
+            }
+            if (false === $this->isSupportedHashContent($content)) {
+                trigger_error("skipped Hash with invalid content: {$content}", E_USER_WARNING);
+                continue;
+            }
+            yield [
+                'alg' => $algorithm,
+                'content' => $content,
+            ];
+        }
     }
 }

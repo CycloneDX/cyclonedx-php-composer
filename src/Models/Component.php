@@ -21,7 +21,8 @@
 
 namespace CycloneDX\Models;
 
-use CycloneDX\Hash\Algorithm as HashAlgorithm;
+use CycloneDX\Enums\AbstractClassification;
+use CycloneDX\Enums\AbstractHashAlgorithm;
 use DomainException;
 use InvalidArgumentException;
 
@@ -33,27 +34,6 @@ use InvalidArgumentException;
  */
 class Component
 {
-    public const TYPE_APPLICATION = 'application';
-    public const TYPE_FRAMEWORK = 'framework';
-    public const TYPE_LIBRARY = 'library';
-    public const TYPE_OS = 'operating-system';
-    public const TYPE_FILE = 'file';
-
-    /**
-     * Known types.
-     *
-     * See {@link https://cyclonedx.org/schema/bom/1.1 Schema} for `classification`.
-     *
-     * @return string[]
-     */
-    public const TYPES = [
-            self::TYPE_APPLICATION,
-            self::TYPE_FRAMEWORK,
-            self::TYPE_LIBRARY,
-            self::TYPE_OS,
-            self::TYPE_FILE,
-        ];
-
     /**
      * Name.
      *
@@ -165,17 +145,16 @@ class Component
     }
 
     /**
-     * @param string $type For a ist of Valid values see this
-     *                     {@link https://cyclonedx.org/schema/bom/1.1 XSD} for `classification`.
-     *                     Example: {@see TYPE_LIBRARY}
+     * @param string $type For a ist of Valid values see {@see AbstractClassification}
      *
-     * @throws DomainException if value is unknown
+     *@throws DomainException if value is unknown
      *
      * @return $this
      */
     public function setType(string $type): self
     {
-        if (false === in_array($type, self::TYPES, true)) {
+        $types = (new \ReflectionClass(AbstractClassification::class))->getConstants();
+        if (false === in_array($type, $types, true)) {
             throw new DomainException("Invalid type: {$type}");
         }
         $this->type = $type;
@@ -235,28 +214,26 @@ class Component
     }
 
     /**
-     * @param array<string, string> $hashes
+     * @param array<string, string> $hashes array<$algorithm, $content>
      *
-     * @throws DomainException          if any of hashes' keys is not valid to {@see HashAlgorithm::validate()}
-     * @throws InvalidArgumentException if any of hashes' values is not a string
+     *@throws InvalidArgumentException if any of hashes' values is not a string
+     * @throws DomainException if any of hashes' keys is not in {@see AbstractHashAlgorithm}
      *
      * @return $this;
      */
     public function setHashes(array $hashes): self
     {
-        $hashAlgorithm = new HashAlgorithm();
-        $cleanHashes = [];
+        $algorithms = (new \ReflectionClass(AbstractHashAlgorithm::class))->getConstants();
         foreach ($hashes as $alg => $content) {
-            if (false === $hashAlgorithm->validate($alg)) {
+            if (false === in_array($alg, $algorithms, true)) {
                 throw new DomainException("Unknown hash algorithm: {$alg}");
             }
             /* @phpstan-ignore-next-line */
             if (false === is_string($content)) {
                 throw new InvalidArgumentException("Hash content for '{$alg}' is not string.");
             }
-            $cleanHashes[$hashAlgorithm->getAlgorithm($alg)] = $content;
         }
-        $this->hashes = $cleanHashes;
+        $this->hashes = $hashes;
 
         return $this;
     }

@@ -15,7 +15,7 @@ use Swaggest\JsonSchema\Schema;
  * @uses \CycloneDX\Models\Component
  * @uses \CycloneDX\Models\License
  */
-class Json12Test extends TestCase
+class Json12SerializeTest extends TestCase
 {
     /** @var Json12 */
     private $serializer;
@@ -27,9 +27,9 @@ class Json12Test extends TestCase
     {
         parent::setUp();
 
-        $this->serializer = new Json12(false);
+        $this->serializer = new Json12();
 
-        $schema_file = __DIR__.'/../../res/bom-1.2.schema-SNAPSHOT.json';
+        $schema_file = __DIR__.'/../../res/bom-1.2.schema.json';
         $this->schema = Schema::import('file://'.realpath($schema_file));
     }
 
@@ -41,9 +41,13 @@ class Json12Test extends TestCase
      */
     public function testSchema(Bom $bom): void
     {
-        $json = $this->json_encode($bom);
+        $json = @$this->json_encode($bom);
         self::assertJson($json);
-        $this->schema->in($this->json_decode($json)); // throws on schema mismatch
+        self::assertInstanceOf(
+            \Swaggest\JsonSchema\Structure\ObjectItem::class,
+            $this->schema->in($this->json_decode($json)), // throws on schema mismatch
+            $json
+        );
     }
 
     /**
@@ -92,13 +96,13 @@ class Json12Test extends TestCase
      */
     private function json_encode(Bom $bom): string
     {
-        return $this->serializer->serialize($bom);
+        return $this->serializer->serialize($bom, false);
     }
 
     /**
      * @throws JsonException
      *
-     * @return mixed
+     * @return mixed|array|object
      */
     private function json_decode(string $json, bool $associative = false)
     {

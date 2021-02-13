@@ -3,7 +3,7 @@
 namespace CycloneDX\Tests\Composer;
 
 use CycloneDX\Composer\BomGenerator;
-use CycloneDX\Hash\Algorithm as HashAlgorithm;
+use CycloneDX\Enums\AbstractHashAlgorithm;
 use CycloneDX\Models\Component;
 use CycloneDX\Models\License;
 use PHPUnit\Framework\TestCase;
@@ -19,7 +19,6 @@ use UnexpectedValueException;
  * @uses \CycloneDX\Models\Component
  * @uses \CycloneDX\Models\License
  * @uses \CycloneDX\Spdx\License
- * @uses \CycloneDX\Hash\Algorithm
  */
 class BomGeneratorTest extends TestCase
 {
@@ -133,7 +132,7 @@ class BomGeneratorTest extends TestCase
         self::assertEquals('packageDescription', $component->getDescription());
         self::assertEquals('library', $component->getType());
         self::assertEquals([new License('MIT')], $component->getLicenses());
-        self::assertEquals([HashAlgorithm::SHA_1 => '7e240de74fb1ed08fa08d38063f6a6a91462a815'], $component->getHashes());
+        self::assertEquals([AbstractHashAlgorithm::SHA_1 => '7e240de74fb1ed08fa08d38063f6a6a91462a815'], $component->getHashes());
         self::assertEquals('pkg:composer/vendorName/packageName@6.6.6', $component->getPackageUrl());
     }
 

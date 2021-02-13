@@ -2,6 +2,7 @@
 
 namespace CycloneDX\Tests\Models;
 
+use CycloneDX\Enums\AbstractClassification;
 use CycloneDX\Models\Component;
 use PHPUnit\Framework\TestCase;
 
@@ -19,7 +20,7 @@ class ComponentTest extends TestCase
     {
         parent::setUp();
 
-        $this->component = new Component(Component::TYPE_LIBRARY, 'name', 'version');
+        $this->component = new Component(AbstractClassification::LIBRARY, 'name', 'version');
     }
 
     public function testSetTypeWithUnknownValue(): void

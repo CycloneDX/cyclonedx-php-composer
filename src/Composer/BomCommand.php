@@ -93,7 +93,7 @@ class BomCommand extends BaseCommand
             $outputFile = null;
         }
 
-        /* @var \CycloneDX\BomFile\SerializerInterface $bomWriter */
+        /* @var \CycloneDX\BomFile\AbstractSerializer $bomWriter */
         if (false === $input->getOption($this::OPTION_JSON)) {
             $outputFile = $outputFile ?? self::OUTPUT_FILE_DEFAULT_JSON;
             $bomWriter = new Xml();
@@ -103,7 +103,7 @@ class BomCommand extends BaseCommand
         }
 
         $output->writeln('<info>Serializing BOM</info>');
-        $bomContents = $bomWriter->serialize($bom);
+        $bomContents = $bomWriter->serialize($bom, true);
 
         if (self::OUTPUT_FILE_STDOUT === $outputFile) {
             $output->writeln('<info>Writing output to STDOUT</info>');

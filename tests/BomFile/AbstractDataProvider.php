@@ -2,7 +2,8 @@
 
 namespace CycloneDX\Tests\BomFile;
 
-use CycloneDX\Hash\Algorithm as HashAlgorithm;
+use CycloneDX\Enums\AbstractClassification;
+use CycloneDX\Enums\AbstractHashAlgorithm;
 use CycloneDX\Models\Bom;
 use CycloneDX\Models\Component;
 use CycloneDX\Models\License;
@@ -47,7 +48,7 @@ abstract class AbstractDataProvider
     public static function bomWithComponentPlain(): Generator
     {
         yield 'component: plain' => [(new Bom())->setComponents([
-            (new Component(Component::TYPE_LIBRARY, 'name', 'version')),
+            (new Component(AbstractClassification::LIBRARY, 'name', 'version')),
         ])];
     }
 
@@ -60,7 +61,7 @@ abstract class AbstractDataProvider
     {
         $license = 'MIT';
         yield "license: ${license}" => [(new Bom())->setComponents([
-            (new Component(Component::TYPE_LIBRARY, 'name', 'version'))
+            (new Component(AbstractClassification::LIBRARY, 'name', 'version'))
                 ->setLicenses([new License($license)]),
         ])];
     }
@@ -74,7 +75,7 @@ abstract class AbstractDataProvider
     {
         $license = 'some text';
         yield "license: ${license}" => [(new Bom())->setComponents([
-            (new Component(Component::TYPE_LIBRARY, 'name', 'version'))
+            (new Component(AbstractClassification::LIBRARY, 'name', 'version'))
                 ->setLicenses([new License($license)]),
         ])];
     }
@@ -89,7 +90,7 @@ abstract class AbstractDataProvider
         $versions = ['1.0', 'dev-master'];
         foreach ($versions as $version) {
             yield "version: {$version}" => [(new Bom())->setComponents([
-                new Component(Component::TYPE_LIBRARY, 'name', $version),
+                new Component(AbstractClassification::LIBRARY, 'name', $version),
             ])];
         }
     }
@@ -102,10 +103,10 @@ abstract class AbstractDataProvider
     public static function bomWithComponentAllHashAlgorithms(): Generator
     {
         yield 'every hash alg' => [(new Bom())->setComponents([
-            (new Component(Component::TYPE_LIBRARY, 'name', '1.0'))
+            (new Component(AbstractClassification::LIBRARY, 'name', '1.0'))
             ->setHashes(
                 array_fill_keys(
-                    (new HashAlgorithm())->getAlgorithms(),
+                    (new \ReflectionClass(AbstractHashAlgorithm::class))->getConstants(),
                     '12345678901234567890123456789012'
                 )
             ),
@@ -120,7 +121,7 @@ abstract class AbstractDataProvider
     public static function bomFromAssocLists(): Generator
     {
         yield 'every list from assoc' => [(new Bom())->setComponents([
-            'myComponent' => (new Component(Component::TYPE_LIBRARY, 'name', '1.0'))
+            'myComponent' => (new Component(AbstractClassification::LIBRARY, 'name', '1.0'))
                 ->setLicenses(['myLicense' => new License('some license')]),
         ])];
     }
