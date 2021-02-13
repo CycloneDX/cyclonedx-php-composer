@@ -25,10 +25,10 @@ use CycloneDX\Helpers\SimpleDomTrait;
 use CycloneDX\Models\Bom;
 use CycloneDX\Models\Component;
 use CycloneDX\Models\License;
-use CycloneDX\Specs\Spec11;
 use DomainException;
 use DOMDocument;
 use DOMElement;
+use Generator;
 use RuntimeException;
 
 /**
@@ -36,11 +36,11 @@ use RuntimeException;
  *
  * @author jkowalleck
  */
-class Xml11 extends Spec11 implements SerializeInterface
+class Xml extends AbstractFile implements SerializeInterface
 {
     use SimpleDomTrait;
 
-    public const NS_URL = 'http://cyclonedx.org/schema/bom/1.1';
+    // region Serialize
 
     /**
      * @throws RuntimeException when serialization to string failed
@@ -67,7 +67,10 @@ class Xml11 extends Spec11 implements SerializeInterface
      */
     public function bomToDom(DOMDocument $document, Bom $bom): DOMElement
     {
-        $element = $document->createElementNS(self::NS_URL, 'bom');
+        $element = $document->createElementNS(
+            "http://cyclonedx.org/schema/bom/{$this->getSpec()->getVersion()}",
+            'bom'
+        );
         $this->simpleDomSetAttributes($element, [
             'version' => $bom->getVersion(),
             // serialNumber
@@ -85,11 +88,13 @@ class Xml11 extends Spec11 implements SerializeInterface
 
     /**
      * @throws DomainException when type is unsupported
+     *
+     * @internal
      */
-    private function componentToDom(DOMDocument $document, Component $component): DOMElement
+    public function componentToDom(DOMDocument $document, Component $component): DOMElement
     {
         $type = $component->getType();
-        if (false === $this->isSupportedComponentType($type)) {
+        if (false === $this->getSpec()->isSupportedComponentType($type)) {
             throw new DomainException("Unsupported component type: {$type}");
         }
 
@@ -106,13 +111,14 @@ class Xml11 extends Spec11 implements SerializeInterface
             // skope
             $this->simpleDomAppendChildren(
                 $document->createElement('hashes'),
-                $this->simpleDomDocumentMap($document, [$this, 'hashToDom'], $component->getHashes())),
+                $this->hashesToDom($document, $component->getHashes())
+            ),
             $this->simpleDomAppendChildren(
                 $document->createElement('licenses'),
                 $this->simpleDomDocumentMap($document, [$this, 'licenseToDom'], $component->getLicenses())
             ),
             // copyright
-            // cpe <-- DEPRECATED
+            // cpe <-- DEPRECATED in latest spec
             $this->simpleDomSaveTextElement($document, 'purl', $component->getPackageUrl()),
             // modified
             // pedigree
@@ -123,18 +129,35 @@ class Xml11 extends Spec11 implements SerializeInterface
         return $element;
     }
 
-    private function hashToDom(DOMDocument $document, string $content, string $algorithm): ?DOMElement
+    /**
+     * @param array<string, string> $hashes
+     *
+     * @return Generator<DOMElement>
+     */
+    private function hashesToDom(DOMDocument $document, array $hashes): Generator
     {
-        if (false === $this->isSupportedHashAlgorithm($algorithm)) {
-            trigger_error("skipped Hash with invalid algorithm: {$algorithm}", E_USER_WARNING);
-
-            return null;
+        foreach ($hashes as $algorithm => $content) {
+            try {
+                yield $this->hashToDom($document, $algorithm, $content);
+            } catch (DomainException $ex) {
+                trigger_error("skipped hash: {$ex->getMessage()} ({$algorithm}, {$content})", E_USER_WARNING);
+                unset($ex);
+            }
         }
-        if (false === $this->isSupportedHashContent($content)) {
-            trigger_error("skipped Hash with invalid content: {$content}", E_USER_WARNING);
+    }
 
-            return null;
+    /**
+     * @throws DomainException if hash is not supported by spec. Code 1: algorithm unsupported Code 2:  content unsupported
+     */
+    public function hashToDom(DOMDocument $document, string $algorithm, string $content): DOMElement
+    {
+        if (false === $this->getSpec()->isSupportedHashAlgorithm($algorithm)) {
+            throw new DomainException('invalid algorithm', 1);
         }
+        if (false === $this->getSpec()->isSupportedHashContent($content)) {
+            throw new DomainException('invalid content', 2);
+        }
+
         $element = $this->simpleDomSaveTextElement($document, 'hash', $content);
         assert(null !== $element);
         $this->simpleDomSetAttributes($element, [
@@ -156,4 +179,6 @@ class Xml11 extends Spec11 implements SerializeInterface
 
         return $element;
     }
+
+    // endregion Serialize
 }

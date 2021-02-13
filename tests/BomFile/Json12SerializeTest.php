@@ -2,22 +2,23 @@
 
 namespace CycloneDX\Tests\BomFile;
 
-use CycloneDX\BomFile\Json12;
+use CycloneDX\BomFile\Json;
 use CycloneDX\Models\Bom;
+use CycloneDX\Specs\Spec12;
 use JsonException;
 use PHPUnit\Framework\TestCase;
 use Swaggest\JsonSchema\Schema;
 
 /**
- * @covers \CycloneDX\BomFile\Json12
+ * @covers \CycloneDX\BomFile\Json
  *
  * @uses \CycloneDX\Models\Bom
  * @uses \CycloneDX\Models\Component
  * @uses \CycloneDX\Models\License
  */
-class Json12SerializeTest extends TestCase
+class JsonSerializeTest extends TestCase
 {
-    /** @var Json12 */
+    /** @var Json */
     private $serializer;
 
     /** @var \Swaggest\JsonSchema\SchemaContract */
@@ -27,7 +28,7 @@ class Json12SerializeTest extends TestCase
     {
         parent::setUp();
 
-        $this->serializer = new Json12();
+        $this->serializer = new Json(new Spec12());
 
         $schema_file = __DIR__.'/../../res/bom-1.2.schema.json';
         $this->schema = Schema::import('file://'.realpath($schema_file));
@@ -38,6 +39,8 @@ class Json12SerializeTest extends TestCase
      * @throws \Swaggest\JsonSchema\InvalidValue
      *
      * @dataProvider \CycloneDX\Tests\BomFile\AbstractDataProvider::all()
+     *
+     * @coversNothing
      */
     public function testSchema(Bom $bom): void
     {

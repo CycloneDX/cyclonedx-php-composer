@@ -8,11 +8,16 @@ use CycloneDX\Enums\AbstractHashAlgorithm;
 /**
  * @author jkowalleck
  */
-class Spec12
+class Spec12 implements SpecInterface
 {
     use SupportsTrait;
 
-    private const VERSION = '1.2';
+    public function getVersion(): string
+    {
+        return '1.2';
+    }
+
+    // region SupportsTrait
 
     private const COMPONENT_TYPES = [
         AbstractClassification::APPLICATION,
@@ -40,4 +45,6 @@ class Spec12
     ];
 
     private const HASH_CONTENT_REGEX = '/^([a-fA-F0-9]{32}|[a-fA-F0-9]{40}|[a-fA-F0-9]{64}|[a-fA-F0-9]{96}|[a-fA-F0-9]{128})$/';
+
+    // endregion SupportsTrait
 }

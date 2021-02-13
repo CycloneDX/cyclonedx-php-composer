@@ -22,8 +22,9 @@
 namespace CycloneDX\Composer;
 
 use Composer\Command\BaseCommand;
-use CycloneDX\BomFile\Json12 as Json;
-use CycloneDX\BomFile\Xml11 as Xml;
+use CycloneDX\BomFile\Json;
+use CycloneDX\BomFile\Xml;
+use CycloneDX\Specs\Spec12;
 use Symfony\Component\Console\Formatter\OutputFormatter;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -93,13 +94,13 @@ class BomCommand extends BaseCommand
             $outputFile = null;
         }
 
-        /* @var \CycloneDX\BomFile\AbstractSerializer $bomWriter */
+        /* @var \CycloneDX\BomFile\SerializeInterface $bomWriter */
         if (false === $input->getOption($this::OPTION_JSON)) {
             $outputFile = $outputFile ?? self::OUTPUT_FILE_DEFAULT_JSON;
-            $bomWriter = new Xml();
+            $bomWriter = new Xml(new Spec12());
         } else {
             $outputFile = $outputFile ?? self::OUTPUT_FILE_DEFAULT_XML;
-            $bomWriter = new Json();
+            $bomWriter = new Json(new Spec12());
         }
 
         $output->writeln('<info>Serializing BOM</info>');

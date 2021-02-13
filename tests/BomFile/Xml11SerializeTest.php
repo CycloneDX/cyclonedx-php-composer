@@ -2,17 +2,18 @@
 
 namespace CycloneDX\Tests\BomFile;
 
-use CycloneDX\BomFile\Xml11;
+use CycloneDX\BomFile\Xml;
 use CycloneDX\Models\Bom;
+use CycloneDX\Specs\Spec11;
 use DOMDocument;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \CycloneDX\BomFile\Xml11
+ * @covers \CycloneDX\BomFile\Xml
  */
-class Xml11SerializeTest extends TestCase
+class XmlSerializeTest extends TestCase
 {
-    /** @var Xml11 */
+    /** @var Xml */
     private $serializer;
 
     /** @var string */
@@ -22,7 +23,7 @@ class Xml11SerializeTest extends TestCase
     {
         parent::setUp();
 
-        $this->serializer = new Xml11();
+        $this->serializer = new Xml(new Spec11());
 
         $this->schema = __DIR__.'/../../res/bom-1.1.xsd';
     }
@@ -31,6 +32,8 @@ class Xml11SerializeTest extends TestCase
      * @throws \Swaggest\JsonSchema\InvalidValue
      *
      * @dataProvider \CycloneDX\Tests\BomFile\AbstractDataProvider::all()
+     *
+     * @coversNothing
      */
     public function testSchema(Bom $bom): void
     {

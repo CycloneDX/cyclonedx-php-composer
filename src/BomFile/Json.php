@@ -24,26 +24,17 @@ namespace CycloneDX\BomFile;
 use CycloneDX\Models\Bom;
 use CycloneDX\Models\Component;
 use CycloneDX\Models\License;
-use CycloneDX\Specs\Spec12;
 use DomainException;
 use JsonException;
 
 /**
  * Writes BOMs in JSON format.
  *
- * See {@link https://cyclonedx.org/schema/bom-1.2.schema.json Schema} for format.
- *
  * @author jkowalleck
  */
-class Json12 extends Spec12 implements SerializeInterface
+class Json extends AbstractFile implements SerializeInterface
 {
-    /**
-     * @param mixed|null $value
-     */
-    private function isNotNull($value): bool
-    {
-        return null !== $value;
-    }
+    // region Serialize
 
     /**
      * Serialize a Bom to JSON.
@@ -62,6 +53,14 @@ class Json12 extends Spec12 implements SerializeInterface
     }
 
     /**
+     * @param mixed|null $value
+     */
+    private function isNotNull($value): bool
+    {
+        return null !== $value;
+    }
+
+    /**
      * @throws DomainException when a component's type is unsupported
      *
      * @return array<string, mixed>
@@ -72,7 +71,7 @@ class Json12 extends Spec12 implements SerializeInterface
     {
         return [
             'bomFormat' => 'CycloneDX',
-            'specVersion' => $this->getSpecVersion(),
+            'specVersion' => $this->getSpec()->getVersion(),
             'version' => $bom->getVersion(),
             'components' => array_map(
                 [$this, 'componentToJson'],
@@ -86,10 +85,10 @@ class Json12 extends Spec12 implements SerializeInterface
      *
      * @return array<string, mixed>
      */
-    private function componentToJson(Component $component): array
+    public function componentToJson(Component $component): array
     {
         $type = $component->getType();
-        if (false === $this->isSupportedComponentType($type)) {
+        if (false === $this->getSpec()->isSupportedComponentType($type)) {
             throw new DomainException("Unsupported component type: {$type}");
         }
 
@@ -114,7 +113,7 @@ class Json12 extends Spec12 implements SerializeInterface
     /**
      * @return array{license: array<string, mixed>}
      */
-    private function licenseToJson(License $license): array
+    public function licenseToJson(License $license): array
     {
         return [
             'license' => array_filter(
@@ -137,18 +136,34 @@ class Json12 extends Spec12 implements SerializeInterface
     private function hashesToJson(array $hashes): \Generator
     {
         foreach ($hashes as $algorithm => $content) {
-            if (false === $this->isSupportedHashAlgorithm($algorithm)) {
-                trigger_error("skipped Hash with invalid algorithm: {$algorithm}", E_USER_WARNING);
-                continue;
+            try {
+                yield $this->hashToJson($algorithm, $content);
+            } catch (DomainException $ex) {
+                trigger_error("skipped hash: {$ex->getMessage()} ({$algorithm}, {$content})", E_USER_WARNING);
+                unset($ex);
             }
-            if (false === $this->isSupportedHashContent($content)) {
-                trigger_error("skipped Hash with invalid content: {$content}", E_USER_WARNING);
-                continue;
-            }
-            yield [
-                'alg' => $algorithm,
-                'content' => $content,
-            ];
         }
     }
+
+    /**
+     * @throws DomainException if hash is not supported by spec. Code 1: algorithm unsupported Code 2:  content unsupported
+     *
+     * @return array{alg: string, content: string}
+     */
+    public function hashToJson(string $algorithm, string $content): array
+    {
+        if (false === $this->getSpec()->isSupportedHashAlgorithm($algorithm)) {
+            throw new DomainException('invalid algorithm', 1);
+        }
+        if (false === $this->getSpec()->isSupportedHashContent($content)) {
+            throw new DomainException('invalid content', 2);
+        }
+
+        return [
+            'alg' => $algorithm,
+            'content' => $content,
+        ];
+    }
+
+    // endregion Serialize
 }

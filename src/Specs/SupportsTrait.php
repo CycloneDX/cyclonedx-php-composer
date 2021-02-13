@@ -9,11 +9,6 @@ namespace CycloneDX\Specs;
  */
 trait SupportsTrait
 {
-    public function getSpecVersion(): string
-    {
-        return self::VERSION;
-    }
-
     public function isSupportedHashAlgorithm(string $alg): bool
     {
         return in_array($alg, self::HASH_ALGORITHMS, true);
