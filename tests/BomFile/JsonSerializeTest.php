@@ -5,7 +5,6 @@ namespace CycloneDX\Tests\BomFile;
 use CycloneDX\BomFile\Json;
 use CycloneDX\Models\Bom;
 use CycloneDX\Specs\Spec12;
-use CycloneDX\Specs\SpecInterface;
 use JsonException;
 use PHPUnit\Framework\TestCase;
 use Swaggest\JsonSchema\Schema;

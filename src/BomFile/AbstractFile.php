@@ -5,9 +5,13 @@ namespace CycloneDX\BomFile;
 use CycloneDX\Models\Bom;
 use CycloneDX\Specs\SpecInterface;
 
+/**
+ * @internal
+ *
+ * @author jkowalleck
+ */
 abstract class AbstractFile
 {
-
     // region spec
 
     /**
@@ -44,4 +48,12 @@ abstract class AbstractFile
      * @param bool $pretty pretty print*
      */
     abstract public function serialize(Bom $bom, bool $pretty = false): string;
+
+    /**
+     * Deserialize a Bom to a string.
+     *
+     * May throw {@see \RuntimeException} if spec version is not supported.
+     * May throw additional implementation-dependent Exceptions.
+     */
+    abstract public function deserialize(string $data): Bom;
 }

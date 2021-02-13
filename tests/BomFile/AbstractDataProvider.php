@@ -38,6 +38,7 @@ abstract class AbstractDataProvider
     public static function bomPlain(): Generator
     {
         yield 'plain' => [new Bom()];
+        yield 'plain v23' => [(new Bom())->setVersion(23)];
     }
 
     /**

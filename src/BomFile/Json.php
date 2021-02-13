@@ -26,6 +26,7 @@ use CycloneDX\Models\Component;
 use CycloneDX\Models\License;
 use CycloneDX\Specs\Spec12;
 use DomainException;
+use InvalidArgumentException;
 use JsonException;
 use RuntimeException;
 
@@ -178,4 +179,78 @@ class Json extends AbstractFile
     }
 
     // endregion Serialize
+
+    // region Deserialize
+
+    /**
+     * @throws InvalidArgumentException
+     * @throws JsonException
+     */
+    public function deserialize(string $data): Bom
+    {
+        // @TODO validate schema?
+        $json = json_decode($data, true, 512, JSON_THROW_ON_ERROR);
+        if (false === is_array($json)) {
+            throw new InvalidArgumentException('does not deserialize to expected structure');
+        }
+
+        return $this->bomFromJson($json);
+    }
+
+    /**
+     * @param array<string, mixed> $json
+     */
+    public function bomFromJson(array $json): Bom
+    {
+        return (new Bom())
+            ->setVersion($json['version'] ?? 1)
+            ->setComponents(
+                array_map(
+                    [$this, 'componentFromJson'],
+                    $json['components'] ?? []
+                )
+            );
+    }
+
+    /**
+     * @param array<string, mixed> $json
+     */
+    public function componentFromJson(array $json): Component
+    {
+        return (new Component($json['type'], $json['name'], $json['version']))
+            ->setGroup($json['group'] ?? null)
+            ->setDescription($json['description'] ?? null)
+            ->setLicenses(array_map([$this, 'licenseFromJson'], $json['licenses'] ?? []))
+            ->setHashes(iterator_to_array($this->hashesFromJson($json['hashes'] ?? [])));
+    }
+
+    /**
+     * @param array<string, mixed> $json
+     */
+    public function licenseFromJson(array $json): License
+    {
+        if (isset($json['license'])) {
+            $license = $json['license'];
+
+            return (new License($license['name'] ?? $license['id']))
+                ->setUrl($license['url'] ?? null)
+                ->setText($license['text'] ?? null);
+        }
+
+        return new License($json['expression']);
+    }
+
+    /**
+     * @param array<string, mixed> $json
+     *
+     * @return \Generator<string, string>
+     */
+    public function hashesFromJson(array $json): \Generator
+    {
+        foreach ($json as ['alg' => $algorithm, 'content' => $content]) {
+            yield $algorithm => $content;
+        }
+    }
+
+    // endregion Deserialize
 }

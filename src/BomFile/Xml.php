@@ -192,4 +192,13 @@ class Xml extends AbstractFile
     }
 
     // endregion Serialize
+
+    // region Deserialize
+
+    public function deserialize(string $data): Bom
+    {
+        return new Bom();
+    }
+
+    // endregion Deserialize
 }
