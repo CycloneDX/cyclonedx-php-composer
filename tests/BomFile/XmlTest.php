@@ -15,7 +15,10 @@ use PHPUnit\Framework\TestCase;
 class XmlTest extends TestCase
 {
     /**
-     * @dataProvider \CycloneDX\Tests\BomFile\AbstractDataProvider::all()
+     * This test might be slow.
+     * This test might require online-connectivity.
+     *
+     * @dataProvider \CycloneDX\Tests\BomFile\AbstractDataProvider::fullBomTestData()
      */
     public function testSchema11(Bom $bom): void
     {
@@ -33,8 +36,17 @@ class XmlTest extends TestCase
             $doc->schemaValidate($schema), // warns on schema mismatch. might be handled by PHPUnit as error.
             $xml
         );
+    }
 
-        self::assertEquals($bom, $file->deserialize($xml));
+    /**
+     * @dataProvider \CycloneDX\Tests\BomFile\AbstractDataProvider::fullBomTestData()
+     */
+    public function testSerializer11(Bom $bom): void
+    {
+        $file = new Xml(new Spec11());
+        $serialized = @$file->serialize($bom);
+        $deserialized = @$file->deserialize($serialized);
+        self::assertEquals($bom, $deserialized);
     }
 
     /**

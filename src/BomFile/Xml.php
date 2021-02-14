@@ -201,7 +201,6 @@ class Xml extends AbstractFile
             $this->simpleDomSaveTextElement($document, 'id', $license->getId()),
             $this->simpleDomSaveTextElement($document, 'name', $license->getName()),
             $this->simpleDomSaveTextElement($document, 'url', $license->getUrl()),
-            $this->simpleDomSaveTextElement($document, 'text', $license->getText()),
         ]);
 
         return $element;
@@ -266,6 +265,9 @@ class Xml extends AbstractFile
                 case 'group':
                     $group = $childElement->nodeValue;
                     break;
+                case 'description':
+                    $description = $childElement->nodeValue;
+                    break;
                 case 'licenses':
                     $licenses = iterator_to_array($this->licensesFromDom($childElement));
                     break;
@@ -302,7 +304,7 @@ class Xml extends AbstractFile
                         // @TOD implement a model for LicenseExpression
                         yield new License($element->nodeValue);
                     } else {
-                        // @TODO split on LicenseExpression
+                        trigger_error('Found unsupported LicenseExpression. Using License instead', E_USER_NOTICE);
                         yield new License($element->nodeValue);
                     }
                     break;
@@ -312,13 +314,31 @@ class Xml extends AbstractFile
 
     public function licenseFromDom(DOMElement $element): License
     {
-        return new License($element->nodeValue);
+        $nameOrId = null; // essentials
+        $url = null; // non-essentials
+        foreach ($this->simpleDomGetChildElements($element) as $childElement) {
+            switch ($childElement->nodeName) {
+                case 'name':
+                case 'id':
+                    $nameOrId = $childElement->nodeValue;
+                    break;
+                case 'url':
+                    $url = $childElement->nodeValue;
+                    break;
+            }
+        }
+
+        // asserted by SCHEMA
+        assert(null !== $nameOrId);
+
+        return (new License($nameOrId))
+            ->setUrl($url);
     }
 
     /**
      * @return Generator<string, string>
      */
-    private function hashesFromDom(DOMElement $element): Generator
+    public function hashesFromDom(DOMElement $element): Generator
     {
         foreach ($this->simpleDomGetChildElements($element) as $childElement) {
             yield from $this->hashFromDom($childElement);

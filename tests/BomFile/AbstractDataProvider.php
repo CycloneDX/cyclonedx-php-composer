@@ -15,17 +15,19 @@ use Generator;
 abstract class AbstractDataProvider
 {
     /**
-     * All available DataProviders at once.
+     * a set of Bom structures.
      *
      * @return Generator<array{0: Bom}>
      */
-    public static function all(): Generator
+    public static function fullBomTestData(): Generator
     {
         yield from self::bomPlain();
         yield from self::bomWithComponentPlain();
         yield from self::bomWithComponentVersion();
+        yield from self::bomWithComponentDescription();
         yield from self::bomWithComponentLicenseId();
         yield from self::bomWithComponentLicenseName();
+        yield from self::bomWithComponentLicenseUrl();
         yield from self::bomWithComponentAllHashAlgorithms();
         yield from self::bomFromAssocLists();
     }
@@ -74,10 +76,23 @@ abstract class AbstractDataProvider
      */
     public static function bomWithComponentLicenseName(): Generator
     {
-        $license = 'some text';
-        yield "license: ${license}" => [(new Bom())->setComponents([
+        yield 'license: random' => [(new Bom())->setComponents([
             (new Component(AbstractClassification::LIBRARY, 'name', 'version'))
-                ->setLicenses([new License($license)]),
+                ->setLicenses([new License('random '.bin2hex(random_bytes(32)))]),
+        ])];
+    }
+
+    /**
+     * @return Generator<array{0: Bom}>
+     */
+    public static function bomWithComponentLicenseUrl(): Generator
+    {
+        yield 'License with URL' => [(new Bom())->setComponents([
+            (new Component(AbstractClassification::LIBRARY, 'name', 'version'))
+                ->setLicenses([
+                    (new License('some text'))
+                        ->setUrl('https://example.com/license')
+                ]),
         ])];
     }
 
@@ -144,13 +159,13 @@ abstract class AbstractDataProvider
             (new Component(AbstractClassification::LIBRARY, 'name', '1.0'))
                 ->setDescription(''),
         ])];
+        yield 'description: random' => [(new Bom())->setComponents([
+            (new Component(AbstractClassification::LIBRARY, 'name', '1.0'))
+                ->setDescription(bin2hex(random_bytes(255))),
+        ])];
         yield 'description: spaces' => [(new Bom())->setComponents([
             (new Component(AbstractClassification::LIBRARY, 'name', '1.0'))
                 ->setDescription("\ta  test   "),
-        ])];
-        yield 'description: linebreaks' => [(new Bom())->setComponents([
-            (new Component(AbstractClassification::LIBRARY, 'name', '1.0'))
-                ->setDescription("some\ntest"),
         ])];
         yield 'description: XML special chars' => [(new Bom())->setComponents([
             (new Component(AbstractClassification::LIBRARY, 'name', '1.0'))

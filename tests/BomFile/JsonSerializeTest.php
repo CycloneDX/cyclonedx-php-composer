@@ -38,7 +38,7 @@ class JsonSerializeTest extends TestCase
      * @throws JsonException
      * @throws \Swaggest\JsonSchema\InvalidValue
      *
-     * @dataProvider \CycloneDX\Tests\BomFile\AbstractDataProvider::all()
+     * @dataProvider \CycloneDX\Tests\BomFile\AbstractDataProvider::fullBomTestData()
      *
      * @coversNothing
      */

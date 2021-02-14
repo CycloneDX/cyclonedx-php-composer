@@ -19,7 +19,7 @@ class Spec10 implements SpecInterface
 
     // region SupportsTrait
 
-    private const COMPONENT_TYPES = [
+    public const COMPONENT_TYPES = [
         AbstractClassification::APPLICATION,
         AbstractClassification::FRAMEWORK,
         AbstractClassification::LIBRARY,
@@ -27,7 +27,7 @@ class Spec10 implements SpecInterface
         AbstractClassification::DEVICE,
     ];
 
-    private const HASH_ALGORITHMS = [
+    public const HASH_ALGORITHMS = [
         AbstractHashAlgorithm::MD5,
         AbstractHashAlgorithm::SHA_1,
         AbstractHashAlgorithm::SHA_256,
@@ -37,7 +37,7 @@ class Spec10 implements SpecInterface
         AbstractHashAlgorithm::SHA3_512,
     ];
 
-    private const HASH_CONTENT_REGEX = '/^(?:[a-fA-F0-9]{32}|[a-fA-F0-9]{40}|[a-fA-F0-9]{64}|[a-fA-F0-9]{96}|[a-fA-F0-9]{128})$/';
+    public const HASH_CONTENT_REGEX = '/^(?:[a-fA-F0-9]{32}|[a-fA-F0-9]{40}|[a-fA-F0-9]{64}|[a-fA-F0-9]{96}|[a-fA-F0-9]{128})$/';
 
     // endregion SupportsTrait
 }

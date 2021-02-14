@@ -31,7 +31,7 @@ class XmlSerializeTest extends TestCase
     /**
      * @throws \Swaggest\JsonSchema\InvalidValue
      *
-     * @dataProvider \CycloneDX\Tests\BomFile\AbstractDataProvider::all()
+     * @dataProvider \CycloneDX\Tests\BomFile\AbstractDataProvider::fullBomTestData()
      *
      * @coversNothing
      */

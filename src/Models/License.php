@@ -51,15 +51,6 @@ class License
     private $name;
 
     /**
-     * Text.
-     *
-     * Specifies the optional full text of the license.
-     *
-     * @var string|null
-     */
-    private $text;
-
-    /**
      * Url.
      *
      * The URL to the license file.
@@ -83,21 +74,6 @@ class License
     public function getName(): ?string
     {
         return $this->name;
-    }
-
-    public function getText(): ?string
-    {
-        return $this->text;
-    }
-
-    /**
-     * @return $this
-     */
-    public function setText(?string $text): self
-    {
-        $this->text = $text;
-
-        return $this;
     }
 
     public function getUrl(): ?string

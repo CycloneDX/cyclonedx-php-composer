@@ -134,7 +134,6 @@ class Json extends AbstractFile
                 [
                     'id' => $license->getId(),
                     'name' => $license->getName(),
-                    'text' => $license->getText(),
                     'url' => $license->getUrl(),
                 ],
                 [$this, 'isNotNull']
@@ -147,7 +146,7 @@ class Json extends AbstractFile
      *
      * @return \Generator<array{alg: string, content: string}>
      */
-    private function hashesToJson(array $hashes): \Generator
+    private function hashesToJson(array $hashes): Generator
     {
         foreach ($hashes as $algorithm => $content) {
             try {
@@ -221,8 +220,25 @@ class Json extends AbstractFile
         return (new Component($json['type'], $json['name'], $json['version']))
             ->setGroup($json['group'] ?? null)
             ->setDescription($json['description'] ?? null)
-            ->setLicenses(array_map([$this, 'licenseFromJson'], $json['licenses'] ?? []))
+            ->setLicenses(iterator_to_array($this->licensesFromJson($json['licenses'] ?? [])))
             ->setHashes(iterator_to_array($this->hashesFromJson($json['hashes'] ?? [])));
+    }
+
+    /**
+     * @param array<array<string, mixed>> $json
+     *
+     * @return Generator<License>
+     */
+    public function licensesFromJson(array $json): Generator
+    {
+        foreach ($json as $license) {
+            if (isset($license['license'])) {
+                yield $this->licenseFromJson($license['license']);
+            } elseif (isset($license['expression'])) {
+                // @TOD implement a model for LicenseExpression
+                yield $this->licenseFromJson($license['expression']);
+            }
+        }
     }
 
     /**
@@ -230,18 +246,8 @@ class Json extends AbstractFile
      */
     public function licenseFromJson(array $json): License
     {
-        if (isset($json['license'])) {
-            $license = $json['license'];
-
-            return (new License($license['name'] ?? $license['id']))
-                ->setUrl($license['url'] ?? null)
-                ->setText($license['text'] ?? null);
-        }
-
-        /* a helper until we become schema 1.2 complete
-         * @TOD implement a model for LicenseExpression
-         */
-        return new License($json['expression']);
+        return (new License($json['name'] ?? $json['id']))
+            ->setUrl($json['url'] ?? null);
     }
 
     /**
