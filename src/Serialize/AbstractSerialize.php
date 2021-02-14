@@ -21,7 +21,10 @@ abstract class AbstractSerialize
         return $this->spec;
     }
 
-    public function setSpec(SpecInterface $spec): AbstractSerialize
+    /**
+     * @return $this
+     */
+    public function setSpec(SpecInterface $spec): self
     {
         $this->spec = $spec;
 

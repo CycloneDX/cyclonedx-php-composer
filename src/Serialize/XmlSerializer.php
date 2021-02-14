@@ -139,7 +139,7 @@ class XmlSerializer extends AbstractSerialize implements SerializerInterface
      *
      * @return Generator<DOMElement>
      */
-    private function hashesToDom(DOMDocument $document, array $hashes): Generator
+    public function hashesToDom(DOMDocument $document, array $hashes): Generator
     {
         foreach ($hashes as $algorithm => $content) {
             try {

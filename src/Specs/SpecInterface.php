@@ -11,9 +11,19 @@ interface SpecInterface
 
     // region Supports
 
+    public function isSupportedComponentType(string $classification): bool;
+
+    /**
+     * @return array<string>
+     */
+    public function getSupportedComponentTypes(): array;
+
     public function isSupportedHashAlgorithm(string $alg): bool;
 
-    public function isSupportedComponentType(string $classification): bool;
+    /**
+     * @return array<string>
+     */
+    public function getSupportedHashAlgorithms(): array;
 
     public function isSupportedHashContent(string $content): bool;
 

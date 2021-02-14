@@ -58,8 +58,13 @@ Feel free to open pull requests.
 
 To start developing simply run `tools/composer run-script dev-setup` to install dev-dependencies and tools.
 
-Make sure to run `tools/composer run-script cs-fix` to have your changes aligned with our coding standards.  
-Make sure to run `tools/composer run-script test` and pass all tests.
+Make sure 
+* to run `tools/composer run-script cs-fix` to have your changes aligned with our coding standards.  
+* to run `tools/composer run-script test` and pass all tests.
+
+Rules: 
+* This plugin/library must not have any requirements to other libraries,
+  so that the real BoM is not modified where not needed.
 
 # License
 

@@ -9,14 +9,24 @@ namespace CycloneDX\Specs;
  */
 trait SupportsTrait
 {
+    public function isSupportedComponentType(string $classification): bool
+    {
+        return in_array($classification, self::COMPONENT_TYPES, true);
+    }
+
+    public function getSupportedComponentTypes(): array
+    {
+        return self::COMPONENT_TYPES;
+    }
+
     public function isSupportedHashAlgorithm(string $alg): bool
     {
         return in_array($alg, self::HASH_ALGORITHMS, true);
     }
 
-    public function isSupportedComponentType(string $classification): bool
+    public function getSupportedHashAlgorithms(): array
     {
-        return in_array($classification, self::COMPONENT_TYPES, true);
+        return self::HASH_ALGORITHMS;
     }
 
     public function isSupportedHashContent(string $content): bool

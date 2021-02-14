@@ -110,10 +110,7 @@ class JsonSerializer extends AbstractSerialize implements SerializerInterface
                 'version' => $component->getVersion(),
                 'group' => $component->getGroup(),
                 'description' => $component->getDescription(),
-                'licenses' => array_map(
-                    [$this, 'licenseToJson'],
-                    $component->getLicenses()
-                ),
+                'licenses' => iterator_to_array($this->licensesToJson($component->getLicenses())),
                 'hashes' => iterator_to_array($this->hashesToJson($component->getHashes())),
                 'purl' => $component->getPackageUrl(),
             ],
@@ -122,28 +119,38 @@ class JsonSerializer extends AbstractSerialize implements SerializerInterface
     }
 
     /**
-     * @return array{license: array<string, mixed>}
+     * @param array<License> $licenses
+     *
+     * @return Generator<array{license: array<string, mixed>}>
+     */
+    public function licensesToJson(array $licenses): Generator
+    {
+        foreach ($licenses as $license) {
+            yield ['license' => $this->licenseToJson($license)];
+        }
+    }
+
+    /**
+     * @return array<string, mixed>
      */
     public function licenseToJson(License $license): array
     {
-        return [
-            'license' => array_filter(
-                [
-                    'id' => $license->getId(),
-                    'name' => $license->getName(),
-                    'url' => $license->getUrl(),
-                ],
-                [$this, 'isNotNull']
-            ),
-        ];
+        return array_filter(
+            [
+                'id' => $license->getId(),
+                'name' => $license->getName(),
+                'url' => $license->getUrl(),
+            ],
+            [$this, 'isNotNull']
+        );
     }
 
     /**
      * @param array<string, string> $hashes
      *
-     * @return \Generator<array{alg: string, content: string}>
+     * @return Generator<array{alg: string, content: string}>
      */
-    private function hashesToJson(array $hashes): Generator
+    public function hashesToJson(array $hashes): Generator
     {
         foreach ($hashes as $algorithm => $content) {
             try {

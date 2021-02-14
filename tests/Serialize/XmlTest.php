@@ -15,13 +15,16 @@ use PHPUnit\Framework\TestCase;
  */
 class XmlTest extends TestCase
 {
+    // region Spec11
+
     /**
      * This test might be slow.
      * This test might require online-connectivity.
      *
      * @large
      *
-     * @dataProvider \CycloneDX\Tests\Serialize\AbstractDataProvider::fullBomTestData()
+     * @dataProvider \CycloneDX\Tests\Serialize\AbstractDataProvider::fullBomTestData
+     * @dataProvider \CycloneDX\Tests\Serialize\AbstractDataProvider::bomWithComponentAllHashAlgorithms
      */
     public function testSchema11(Bom $bom): void
     {
@@ -44,7 +47,8 @@ class XmlTest extends TestCase
     }
 
     /**
-     * @dataProvider \CycloneDX\Tests\Serialize\AbstractDataProvider::fullBomTestData()
+     * @dataProvider \CycloneDX\Tests\Serialize\AbstractDataProvider::fullBomTestData
+     * @dataProvider \CycloneDX\Tests\Serialize\AbstractDataProvider::bomWithComponentHashAlgorithmsSpec11()
      */
     public function testSerializer11(Bom $bom): void
     {
@@ -52,11 +56,17 @@ class XmlTest extends TestCase
         $serializer = new XmlSerializer($spec);
         $deserializer = new XmlDeserializer($spec);
 
+        $expected = clone $bom;
+
         $serialized = @$serializer->serialize($bom);
         $deserialized = @$deserializer->deserialize($serialized);
 
-        self::assertEquals($bom, $deserialized);
+        self::assertEquals($expected, $deserialized);
     }
+
+    // endregion Spec11
+
+    // region helpers
 
     /**
      * @throws DOMException
@@ -78,4 +88,6 @@ class XmlTest extends TestCase
 
         return $doc;
     }
+
+    // endregion helpers
 }

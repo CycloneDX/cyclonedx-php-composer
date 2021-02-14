@@ -7,6 +7,9 @@ use CycloneDX\Enums\AbstractHashAlgorithm;
 use CycloneDX\Models\Bom;
 use CycloneDX\Models\Component;
 use CycloneDX\Models\License;
+use CycloneDX\Specs\Spec10;
+use CycloneDX\Specs\Spec11;
+use CycloneDX\Specs\Spec12;
 use Generator;
 
 /**
@@ -28,7 +31,6 @@ abstract class AbstractDataProvider
         yield from self::bomWithComponentLicenseId();
         yield from self::bomWithComponentLicenseName();
         yield from self::bomWithComponentLicenseUrl();
-        yield from self::bomWithComponentAllHashAlgorithms();
         yield from self::bomFromAssocLists();
     }
 
@@ -118,14 +120,53 @@ abstract class AbstractDataProvider
      */
     public static function bomWithComponentAllHashAlgorithms(): Generator
     {
-        yield 'every hash alg' => [(new Bom())->setComponents([
+        yield from self::bomWithComponentHashAlgorithmsFromSpec((new \ReflectionClass(AbstractHashAlgorithm::class))->getConstants());
+    }
+
+    /**
+     * BOMs with all hash algorithms available. in Spec11.
+     *
+     * @return Generator<array{0: Bom}>
+     */
+    public static function bomWithComponentHashAlgorithmsSpec10(): Generator
+    {
+        yield from self::bomWithComponentHashAlgorithmsFromSpec((new Spec10())->getSupportedHashAlgorithms());
+    }
+
+    /**
+     * BOMs with all hash algorithms available. in Spec11.
+     *
+     * @return Generator<array{0: Bom}>
+     */
+    public static function bomWithComponentHashAlgorithmsSpec11(): Generator
+    {
+        yield from self::bomWithComponentHashAlgorithmsFromSpec((new Spec11())->getSupportedHashAlgorithms());
+    }
+
+    /**
+     * BOMs with all hash algorithms available. in Spec11.
+     *
+     * @return Generator<array{0: Bom}>
+     */
+    public static function bomWithComponentHashAlgorithmsSpec12(): Generator
+    {
+        yield from self::bomWithComponentHashAlgorithmsFromSpec((new Spec12())->getSupportedHashAlgorithms());
+    }
+
+    /**
+     * BOMs with all hash algorithms available in a spec.
+     *
+     * @param string[] $hashAlgorithms
+     *
+     * @return Generator<array{0: Bom}>
+     */
+    public static function bomWithComponentHashAlgorithmsFromSpec(array $hashAlgorithms): Generator
+    {
+        $hashAlgorithms = array_unique($hashAlgorithms, SORT_STRING);
+        $label = implode(',', $hashAlgorithms);
+        yield "hash algs: {{$label}}" => [(new Bom())->setComponents([
             (new Component(AbstractClassification::LIBRARY, 'name', '1.0'))
-            ->setHashes(
-                array_fill_keys(
-                    (new \ReflectionClass(AbstractHashAlgorithm::class))->getConstants(),
-                    '12345678901234567890123456789012'
-                )
-            ),
+                ->setHashes(array_fill_keys($hashAlgorithms, '12345678901234567890123456789012')),
         ])];
     }
 
