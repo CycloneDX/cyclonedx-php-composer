@@ -1,9 +1,11 @@
 <?php
 
-namespace CycloneDX\Tests\BomFile;
+namespace CycloneDX\Tests\Serialize;
 
-use CycloneDX\BomFile\Json;
 use CycloneDX\Models\Bom;
+use CycloneDX\Serialize\JsonDeserializer;
+use CycloneDX\Serialize\JsonSerializer;
+use CycloneDX\Specs\Spec10;
 use CycloneDX\Specs\Spec11;
 use CycloneDX\Specs\Spec12;
 use JsonException;
@@ -16,40 +18,57 @@ use Swaggest\JsonSchema;
  */
 class JsonTest extends TestCase
 {
+    /**
+     * Schema 1.0 is not specified for JSON.
+     */
     public function testSerialization10(): void
     {
-        $file = new Json(new Spec11());
+        $spec = new Spec10();
+        $serializer = new JsonSerializer($spec);
+
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage('unsupported spec version');
-        @$file->serialize(new Bom());
+
+        @$serializer->serialize(new Bom());
     }
 
+    /**
+     * Schema 1.1 is not specified for JSON.
+     */
     public function testSerialization11(): void
     {
-        $file = new Json(new Spec11());
+        $spec = new Spec11();
+        $serializer = new JsonSerializer($spec);
+
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage('unsupported spec version');
-        @$file->serialize(new Bom());
+
+        @$serializer->serialize(new Bom());
     }
 
     /**
      * This test might be slow.
      * This test might require online-connectivity.
      *
-     * @dataProvider \CycloneDX\Tests\BomFile\AbstractDataProvider::fullBomTestData()
+     * @large
+     *
+     * @dataProvider \CycloneDX\Tests\Serialize\AbstractDataProvider::fullBomTestData()
      *
      * @throws JsonException
+     * @throws JsonSchema\Exception
      * @throws JsonSchema\InvalidValue
      */
     public function testSchema12(Bom $bom): void
     {
-        $file = new Json(new Spec12());
-
+        $spec = new Spec12();
         $schema = realpath(__DIR__.'/../../res/bom-1.2.schema.json');
+
         self::assertIsString($schema);
         self::assertFileExists($schema);
 
-        $json = @$file->serialize($bom);
+        $serializer = new JsonSerializer($spec);
+
+        $json = @$serializer->serialize($bom);
         self::assertJson($json);
         $data = json_decode($json, false, 512, JSON_THROW_ON_ERROR);
 
@@ -61,13 +80,17 @@ class JsonTest extends TestCase
     }
 
     /**
-     * @dataProvider \CycloneDX\Tests\BomFile\AbstractDataProvider::fullBomTestData()
+     * @dataProvider \CycloneDX\Tests\Serialize\AbstractDataProvider::fullBomTestData()
      */
     public function testSerialization12(Bom $bom): void
     {
-        $file = new Json(new Spec12());
-        $serialized = @$file->serialize($bom);
-        $deserialized = @$file->deserialize($serialized);
+        $spec = new Spec12();
+        $serializer = new JsonSerializer($spec);
+        $deserializer = new JsonDeserializer($spec);
+
+        $serialized = @$serializer->serialize($bom);
+        $deserialized = @$deserializer->deserialize($serialized);
+
         self::assertEquals($bom, $deserialized);
     }
 }

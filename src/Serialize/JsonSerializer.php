@@ -19,7 +19,7 @@
  * Copyright (c) Steve Springett. All Rights Reserved.
  */
 
-namespace CycloneDX\BomFile;
+namespace CycloneDX\Serialize;
 
 use CycloneDX\Models\Bom;
 use CycloneDX\Models\Component;
@@ -27,7 +27,6 @@ use CycloneDX\Models\License;
 use CycloneDX\Specs\Spec12;
 use DomainException;
 use Generator;
-use InvalidArgumentException;
 use JsonException;
 use RuntimeException;
 
@@ -36,9 +35,10 @@ use RuntimeException;
  *
  * @author jkowalleck
  */
-class Json extends AbstractFile
+class JsonSerializer extends AbstractSerialize implements SerializerInterface
 {
-    // region Serialize
+
+    // region SerializerInterface
 
     /**
      * Serialize a Bom to JSON.
@@ -178,89 +178,6 @@ class Json extends AbstractFile
         ];
     }
 
-    // endregion Serialize
+    // endregion SerializerInterface
 
-    // region Deserialize
-
-    /**
-     * @throws InvalidArgumentException
-     * @throws JsonException
-     */
-    public function deserialize(string $data): Bom
-    {
-        // @TODO validate schema?
-        $json = json_decode($data, true, 512, JSON_THROW_ON_ERROR);
-        if (false === is_array($json)) {
-            throw new InvalidArgumentException('does not deserialize to expected structure');
-        }
-
-        return $this->bomFromJson($json);
-    }
-
-    /**
-     * @param array<string, mixed> $json
-     */
-    public function bomFromJson(array $json): Bom
-    {
-        return (new Bom())
-            ->setVersion($json['version'] ?? 1)
-            ->setComponents(
-                array_map(
-                    [$this, 'componentFromJson'],
-                    $json['components'] ?? []
-                )
-            );
-    }
-
-    /**
-     * @param array<string, mixed> $json
-     */
-    public function componentFromJson(array $json): Component
-    {
-        return (new Component($json['type'], $json['name'], $json['version']))
-            ->setGroup($json['group'] ?? null)
-            ->setDescription($json['description'] ?? null)
-            ->setLicenses(iterator_to_array($this->licensesFromJson($json['licenses'] ?? [])))
-            ->setHashes(iterator_to_array($this->hashesFromJson($json['hashes'] ?? [])));
-    }
-
-    /**
-     * @param array<array<string, mixed>> $json
-     *
-     * @return Generator<License>
-     */
-    public function licensesFromJson(array $json): Generator
-    {
-        foreach ($json as $license) {
-            if (isset($license['license'])) {
-                yield $this->licenseFromJson($license['license']);
-            } elseif (isset($license['expression'])) {
-                // @TOD implement a model for LicenseExpression
-                yield $this->licenseFromJson($license['expression']);
-            }
-        }
-    }
-
-    /**
-     * @param array<string, mixed> $json
-     */
-    public function licenseFromJson(array $json): License
-    {
-        return (new License($json['name'] ?? $json['id']))
-            ->setUrl($json['url'] ?? null);
-    }
-
-    /**
-     * @param array<string, mixed> $json
-     *
-     * @return Generator<string, string>
-     */
-    public function hashesFromJson(array $json): Generator
-    {
-        foreach ($json as ['alg' => $algorithm, 'content' => $content]) {
-            yield $algorithm => $content;
-        }
-    }
-
-    // endregion Deserialize
 }

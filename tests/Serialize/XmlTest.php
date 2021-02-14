@@ -1,9 +1,10 @@
 <?php
 
-namespace CycloneDX\Tests\BomFile;
+namespace CycloneDX\Tests\Serialize;
 
-use CycloneDX\BomFile\Xml;
 use CycloneDX\Models\Bom;
+use CycloneDX\Serialize\XmlDeserializer;
+use CycloneDX\Serialize\XmlSerializer;
 use CycloneDX\Specs\Spec11;
 use DOMDocument;
 use DOMException;
@@ -18,17 +19,21 @@ class XmlTest extends TestCase
      * This test might be slow.
      * This test might require online-connectivity.
      *
-     * @dataProvider \CycloneDX\Tests\BomFile\AbstractDataProvider::fullBomTestData()
+     * @large
+     *
+     * @dataProvider \CycloneDX\Tests\Serialize\AbstractDataProvider::fullBomTestData()
      */
     public function testSchema11(Bom $bom): void
     {
-        $file = new Xml(new Spec11());
-
+        $spec = new Spec11();
         $schema = realpath(__DIR__.'/../../res/bom-1.1.xsd');
+
         self::assertIsString($schema);
         self::assertFileExists($schema);
 
-        $xml = @$file->serialize($bom);
+        $serializer = new XmlSerializer($spec);
+
+        $xml = @$serializer->serialize($bom);
         $doc = $this->loadDomFromXml($xml); // throws on error
 
         libxml_use_internal_errors(false); // send errors to PHPUnit
@@ -39,13 +44,17 @@ class XmlTest extends TestCase
     }
 
     /**
-     * @dataProvider \CycloneDX\Tests\BomFile\AbstractDataProvider::fullBomTestData()
+     * @dataProvider \CycloneDX\Tests\Serialize\AbstractDataProvider::fullBomTestData()
      */
     public function testSerializer11(Bom $bom): void
     {
-        $file = new Xml(new Spec11());
-        $serialized = @$file->serialize($bom);
-        $deserialized = @$file->deserialize($serialized);
+        $spec = new Spec11();
+        $serializer = new XmlSerializer($spec);
+        $deserializer = new XmlDeserializer($spec);
+
+        $serialized = @$serializer->serialize($bom);
+        $deserialized = @$deserializer->deserialize($serialized);
+
         self::assertEquals($bom, $deserialized);
     }
 
