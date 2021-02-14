@@ -11,6 +11,7 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @covers \CycloneDX\Serialize\JsonSerializer
+ *
  * @uses \CycloneDX\Serialize\AbstractSerialize
  */
 class SerializeTest extends TestCase
@@ -40,7 +41,6 @@ class SerializeTest extends TestCase
         $spec->method('isSupportedHashAlgorithm')->with($algorithm)->willReturn(false);
         $spec->method('isSupportedHashContent')->willReturn(true);
         $serializer = new JsonSerializer($spec);
-
 
         $this->expectException(DomainException::class);
         $this->expectExceptionMessageMatches('/invalid algorithm/i');
