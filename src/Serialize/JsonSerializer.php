@@ -31,13 +31,12 @@ use JsonException;
 use RuntimeException;
 
 /**
- * Writes BOMs in JSON format.
+ * transform data models to Json.
  *
  * @author jkowalleck
  */
 class JsonSerializer extends AbstractSerialize implements SerializerInterface
 {
-
     // region SerializerInterface
 
     /**
@@ -78,8 +77,6 @@ class JsonSerializer extends AbstractSerialize implements SerializerInterface
      * @throws DomainException when a component's type is unsupported
      *
      * @return array<string, mixed>
-     *
-     * @internal
      */
     public function bomToJson(Bom $bom): array
     {
@@ -179,5 +176,4 @@ class JsonSerializer extends AbstractSerialize implements SerializerInterface
     }
 
     // endregion SerializerInterface
-
 }

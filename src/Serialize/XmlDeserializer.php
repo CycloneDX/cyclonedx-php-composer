@@ -31,7 +31,7 @@ use Generator;
 use InvalidArgumentException;
 
 /**
- * Writes BOMs in XML format.
+ * transform XML to data models.
  *
  * @author jkowalleck
  */
@@ -185,5 +185,4 @@ class XmlDeserializer extends AbstractSerialize implements DeserializerInterface
     }
 
     // endregion DeserializerInterface
-
 }

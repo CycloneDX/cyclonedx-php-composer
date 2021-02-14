@@ -36,7 +36,7 @@ use Generator;
 use RuntimeException;
 
 /**
- * Writes BOMs in XML format.
+ * transform data models to XML.
  *
  * @author jkowalleck
  */
@@ -70,8 +70,6 @@ class XmlSerializer extends AbstractSerialize implements SerializerInterface
     }
 
     /**
-     * @internal
-     *
      * @throws DomainException when a component's type is unsupported
      */
     public function bomToDom(DOMDocument $document, Bom $bom): DOMElement
@@ -97,8 +95,6 @@ class XmlSerializer extends AbstractSerialize implements SerializerInterface
 
     /**
      * @throws DomainException when type is unsupported
-     *
-     * @internal
      */
     public function componentToDom(DOMDocument $document, Component $component): DOMElement
     {

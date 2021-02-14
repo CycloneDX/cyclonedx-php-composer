@@ -2,12 +2,9 @@
 
 namespace CycloneDX\Serialize;
 
-use CycloneDX\Models\Bom;
 use CycloneDX\Specs\SpecInterface;
 
 /**
- * @internal
- *
  * @author jkowalleck
  */
 abstract class AbstractSerialize
@@ -37,5 +34,4 @@ abstract class AbstractSerialize
     }
 
     // endregion spec
-
 }

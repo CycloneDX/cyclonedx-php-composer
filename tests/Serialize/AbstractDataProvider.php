@@ -91,7 +91,7 @@ abstract class AbstractDataProvider
             (new Component(AbstractClassification::LIBRARY, 'name', 'version'))
                 ->setLicenses([
                     (new License('some text'))
-                        ->setUrl('https://example.com/license')
+                        ->setUrl('https://example.com/license'),
                 ]),
         ])];
     }

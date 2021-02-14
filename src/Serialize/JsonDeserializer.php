@@ -29,13 +29,12 @@ use InvalidArgumentException;
 use JsonException;
 
 /**
- * Writes BOMs in JSON format.
+ * transform JSON to data models.
  *
  * @author jkowalleck
  */
 class JsonDeserializer extends AbstractSerialize implements DeserializerInterface
 {
-
     // region DeserializerInterface
 
     /**
@@ -119,5 +118,4 @@ class JsonDeserializer extends AbstractSerialize implements DeserializerInterfac
     }
 
     // endregion DeserializerInterface
-
 }

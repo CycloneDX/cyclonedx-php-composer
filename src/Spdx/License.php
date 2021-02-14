@@ -28,8 +28,6 @@ use RuntimeException;
  * Work with known SPDX licences.
  *
  * @author jkowalleck
- *
- * @internal
  */
 class License
 {

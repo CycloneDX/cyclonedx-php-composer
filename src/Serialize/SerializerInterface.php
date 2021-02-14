@@ -3,16 +3,12 @@
 namespace CycloneDX\Serialize;
 
 use CycloneDX\Models\Bom;
-use CycloneDX\Specs\SpecInterface;
 
 /**
- * @internal
- *
  * @author jkowalleck
  */
 interface SerializerInterface
 {
-
     /**
      * Serialize a Bom to a string.
      *
