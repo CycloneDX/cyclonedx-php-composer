@@ -11,6 +11,7 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @covers \CycloneDX\Serialize\JsonSerializer
+ * @uses \CycloneDX\Serialize\AbstractSerialize
  */
 class SerializeTest extends TestCase
 {
