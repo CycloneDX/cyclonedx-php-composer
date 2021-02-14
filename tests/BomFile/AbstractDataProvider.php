@@ -146,7 +146,7 @@ abstract class AbstractDataProvider
         ])];
         yield 'description: spaces' => [(new Bom())->setComponents([
             (new Component(AbstractClassification::LIBRARY, 'name', '1.0'))
-                ->setDescription('   a test   '),
+                ->setDescription("\ta  test   "),
         ])];
         yield 'description: linebreaks' => [(new Bom())->setComponents([
             (new Component(AbstractClassification::LIBRARY, 'name', '1.0'))
@@ -157,7 +157,7 @@ abstract class AbstractDataProvider
                 ->setDescription(
                     'thisa&that'. // an & that is not a XML entity
                     '<strong>html<strong>'. // things that might cause schema-invalid XML
-                    'bar ]]> foo' // unexpected CDATA end
+                    'bar ]]><[CDATA[baz]]> foo' // unexpected CDATA end
                 ),
         ])];
     }

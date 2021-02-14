@@ -28,11 +28,13 @@ use CycloneDX\Models\License;
 use CycloneDX\Specs\Spec10;
 use CycloneDX\Specs\Spec11;
 use CycloneDX\Specs\Spec12;
+use CycloneDX\Specs\SpecInterface;
 use DomainException;
 use DOMDocument;
 use DOMElement;
 use DOMException;
 use Generator;
+use InvalidArgumentException;
 use RuntimeException;
 
 /**
@@ -44,6 +46,22 @@ class Xml extends AbstractFile
 {
     use SimpleDomTrait;
 
+    /**
+     * @var string
+     */
+    private $namespaceUrl;
+
+    public function getNamespaceUrl(): string
+    {
+        return $this->namespaceUrl;
+    }
+
+    public function __construct(SpecInterface $spec)
+    {
+        parent::__construct($spec);
+        $this->namespaceUrl = 'http://cyclonedx.org/schema/bom/'.$spec->getVersion();
+    }
+
     // region Serialize
 
     /**
@@ -53,11 +71,9 @@ class Xml extends AbstractFile
      */
     public function serialize(Bom $bom, bool $pretty = true): string
     {
-        $spec = $this->getSpec();
-        if (false === ($spec instanceof Spec10 || $spec instanceof Spec11 || $spec instanceof Spec12)) {
+        if (false === ($this->spec instanceof Spec10 || $this->spec instanceof Spec11 || $this->spec instanceof Spec12)) {
             throw new RuntimeException('unsupported spec version');
         }
-        unset($spec);
 
         $document = new DOMDocument('1.0', 'UTF-8');
         $document->appendChild($this->bomToDom($document, $bom));
@@ -79,7 +95,7 @@ class Xml extends AbstractFile
     public function bomToDom(DOMDocument $document, Bom $bom): DOMElement
     {
         $element = $document->createElementNS(
-            "http://cyclonedx.org/schema/bom/{$this->getSpec()->getVersion()}",
+            $this->getNamespaceUrl(),
             'bom'
         );
         $this->simpleDomSetAttributes($element, [
@@ -105,7 +121,7 @@ class Xml extends AbstractFile
     public function componentToDom(DOMDocument $document, Component $component): DOMElement
     {
         $type = $component->getType();
-        if (false === $this->getSpec()->isSupportedComponentType($type)) {
+        if (false === $this->spec->isSupportedComponentType($type)) {
             throw new DomainException("Unsupported component type: {$type}");
         }
 
@@ -119,7 +135,7 @@ class Xml extends AbstractFile
             $this->simpleDomSaveTextElement($document, 'name', $component->getName()),
             $this->simpleDomSaveTextElement($document, 'version', $component->getVersion()),
             $this->simpleDomSaveTextElement($document, 'description', $component->getDescription()),
-            // skope
+            // scope
             $this->simpleDomAppendChildren(
                 $document->createElement('hashes'),
                 $this->hashesToDom($document, $component->getHashes())
@@ -162,10 +178,10 @@ class Xml extends AbstractFile
      */
     public function hashToDom(DOMDocument $document, string $algorithm, string $content): DOMElement
     {
-        if (false === $this->getSpec()->isSupportedHashAlgorithm($algorithm)) {
+        if (false === $this->spec->isSupportedHashAlgorithm($algorithm)) {
             throw new DomainException('invalid algorithm', 1);
         }
-        if (false === $this->getSpec()->isSupportedHashContent($content)) {
+        if (false === $this->spec->isSupportedHashContent($content)) {
             throw new DomainException('invalid content', 2);
         }
 
@@ -195,9 +211,126 @@ class Xml extends AbstractFile
 
     // region Deserialize
 
+    /**
+     * @throws InvalidArgumentException
+     */
     public function deserialize(string $data): Bom
     {
-        return new Bom();
+        $dom = new DOMDocument();
+        // @TODO add NOBLANKS ? see if all tests still pass
+        $options = LIBXML_NOCDATA | LIBXML_NOBLANKS | LIBXML_NONET;
+        if (defined('LIBXML_COMPACT')) {
+            $options |= LIBXML_COMPACT;
+        }
+        if (defined('LIBXML_PARSEHUGE')) {
+            $options |= LIBXML_PARSEHUGE;
+        }
+        $loaded = $dom->loadXML($data, $options);
+        if (false === $loaded || null === $dom->documentElement) {
+            throw new InvalidArgumentException('does not deserialize to expected structure');
+        }
+
+        // @TODO normalize
+
+        return $this->bomFromDom($dom->documentElement);
+    }
+
+    public function bomFromDom(DOMElement $element): Bom
+    {
+        $bom = new Bom();
+        $bom->setVersion((int) $this->simpleDomGetAttribute('version', $element, '1'));
+        foreach ($this->simpleDomGetChildElements($element) as $childElement) {
+            if ('components' === $childElement->tagName) {
+                $bom->setComponents(array_map(
+                    [$this, 'componentFromDom'],
+                    iterator_to_array($this->simpleDomGetChildElements($childElement))
+                ));
+            }
+        }
+
+        return $bom;
+    }
+
+    public function componentFromDom(DOMElement $element): Component
+    {
+        $name = $version = null; // essentials
+        $group = $description = $licenses = $hashes = null; // non-essentials
+        foreach ($this->simpleDomGetChildElements($element) as $childElement) {
+            switch ($childElement->nodeName) {
+                case 'name':
+                    $name = $childElement->nodeValue;
+                    break;
+                case 'version':
+                    $version = $childElement->nodeValue;
+                    break;
+                case 'group':
+                    $group = $childElement->nodeValue;
+                    break;
+                case 'licenses':
+                    $licenses = iterator_to_array($this->licensesFromDom($childElement));
+                    break;
+                case 'hashes':
+                    $hashes = iterator_to_array($this->hashesFromDom($childElement));
+                    break;
+            }
+        }
+
+        // asserted by SCHEMA
+        $type = $element->getAttribute('type');
+        assert(null !== $name);
+        assert(null !== $version);
+
+        return (new Component($type, $name, $version))
+            ->setGroup($group)
+            ->setDescription($description)
+            ->setLicenses($licenses ?? [])
+            ->setHashes($hashes ?? []);
+    }
+
+    /**
+     * @return Generator<License>
+     */
+    public function licensesFromDom(DOMElement $element): Generator
+    {
+        foreach ($this->simpleDomGetChildElements($element) as $childElement) {
+            switch ($childElement->nodeName) {
+                case 'license':
+                    yield $this->licenseFromDom($childElement);
+                    break;
+                case 'expression':
+                    if ($this->spec->getVersion() >= '1.2') {
+                        // @TOD implement a model for LicenseExpression
+                        yield new License($element->nodeValue);
+                    } else {
+                        // @TODO split on LicenseExpression
+                        yield new License($element->nodeValue);
+                    }
+                    break;
+            }
+        }
+    }
+
+    public function licenseFromDom(DOMElement $element): License
+    {
+        return new License($element->nodeValue);
+    }
+
+    /**
+     * @return Generator<string, string>
+     */
+    private function hashesFromDom(DOMElement $element): Generator
+    {
+        foreach ($this->simpleDomGetChildElements($element) as $childElement) {
+            yield from $this->hashFromDom($childElement);
+        }
+    }
+
+    /**
+     * @return Generator<string, string>
+     */
+    public function hashFromDom(DOMElement $element): Generator
+    {
+        yield $element->getAttribute('alg') => $element->nodeValue;
     }
 
     // endregion Deserialize

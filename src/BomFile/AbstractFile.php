@@ -17,7 +17,7 @@ abstract class AbstractFile
     /**
      * @var SpecInterface
      */
-    private $spec;
+    protected $spec;
 
     public function getSpec(): SpecInterface
     {
@@ -38,6 +38,9 @@ abstract class AbstractFile
 
     // endregion spec
 
+    // region serialize
+    // @TODO move to won structures/interface
+
     /**
      * Serialize a Bom to a string.
      *
@@ -56,4 +59,6 @@ abstract class AbstractFile
      * May throw additional implementation-dependent Exceptions.
      */
     abstract public function deserialize(string $data): Bom;
+
+    // endregion serialize
 }

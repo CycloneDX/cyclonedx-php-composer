@@ -22,10 +22,11 @@ class XmlTest extends TestCase
         $file = new Xml(new Spec11());
 
         $schema = realpath(__DIR__.'/../../res/bom-1.1.xsd');
+        self::assertIsString($schema);
         self::assertFileExists($schema);
 
         $xml = @$file->serialize($bom);
-        $doc = $this->loadDomFromXml($xml);
+        $doc = $this->loadDomFromXml($xml); // throws on error
 
         libxml_use_internal_errors(false); // send errors to PHPUnit
         self::assertTrue(

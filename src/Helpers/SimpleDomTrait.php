@@ -71,4 +71,27 @@ trait SimpleDomTrait
             yield $key => $callback($document, $item, $key);
         }
     }
+
+    private function simpleDomGetAttribute(string $attribute, DOMElement $element, string $default = ''): string
+    {
+        return $element->hasAttribute($attribute)
+            ? $element->getAttribute($attribute)
+            : $default;
+    }
+
+    /**
+     * An iterator that ignores everything but {@see DOMElement}s.
+     *
+     * Needed since `$element->getElementsByTagName()` would also find tags in nested children.
+     *
+     * @return Generator<DOMElement>
+     */
+    private function simpleDomGetChildElements(DOMElement $element): Generator
+    {
+        foreach ($element->childNodes as $childNode) {
+            if ($childNode instanceof DOMElement) {
+                yield $childNode;
+            }
+        }
+    }
 }

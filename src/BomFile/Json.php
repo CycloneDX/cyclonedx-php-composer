@@ -48,7 +48,7 @@ class Json extends AbstractFile
      */
     public function serialize(Bom $bom, bool $pretty = true): string
     {
-        if (false === $this->getSpec() instanceof Spec12) {
+        if (false === $this->spec instanceof Spec12) {
             throw new RuntimeException('unsupported spec version');
         }
 
@@ -84,7 +84,7 @@ class Json extends AbstractFile
     {
         return [
             'bomFormat' => 'CycloneDX',
-            'specVersion' => $this->getSpec()->getVersion(),
+            'specVersion' => $this->spec->getVersion(),
             'version' => $bom->getVersion(),
             'components' => array_map(
                 [$this, 'componentToJson'],
@@ -101,7 +101,7 @@ class Json extends AbstractFile
     public function componentToJson(Component $component): array
     {
         $type = $component->getType();
-        if (false === $this->getSpec()->isSupportedComponentType($type)) {
+        if (false === $this->spec->isSupportedComponentType($type)) {
             throw new DomainException("Unsupported component type: {$type}");
         }
 
@@ -165,10 +165,10 @@ class Json extends AbstractFile
      */
     public function hashToJson(string $algorithm, string $content): array
     {
-        if (false === $this->getSpec()->isSupportedHashAlgorithm($algorithm)) {
+        if (false === $this->spec->isSupportedHashAlgorithm($algorithm)) {
             throw new DomainException('invalid algorithm', 1);
         }
-        if (false === $this->getSpec()->isSupportedHashContent($content)) {
+        if (false === $this->spec->isSupportedHashContent($content)) {
             throw new DomainException('invalid content', 2);
         }
 
@@ -237,6 +237,9 @@ class Json extends AbstractFile
                 ->setText($license['text'] ?? null);
         }
 
+        /* a helper until we become schema 1.2 complete
+         * @TOD implement a model for LicenseExpression
+         */
         return new License($json['expression']);
     }
 
