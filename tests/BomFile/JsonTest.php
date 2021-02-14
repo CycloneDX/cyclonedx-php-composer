@@ -48,7 +48,6 @@ class JsonTest extends TestCase
         $schema = realpath(__DIR__.'/../../res/bom-1.2.schema.json');
         self::assertFileExists($schema);
 
-
         $json = @$file->serialize($bom);
         self::assertJson($json);
         $data = json_decode($json, false, 512, JSON_THROW_ON_ERROR);

@@ -123,13 +123,11 @@ abstract class AbstractDataProvider
      */
     public static function bomFromAssocLists(): Generator
     {
-
         yield 'every list from assoc' => [(new Bom())->setComponents([
             'myComponent' => (new Component(AbstractClassification::LIBRARY, 'name', '1.0'))
                 ->setLicenses(['myLicense' => new License('some license')]),
         ])];
     }
-
 
     /**
      * BOMs with components that have a description.
