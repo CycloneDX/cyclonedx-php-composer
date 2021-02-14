@@ -18,47 +18,46 @@ class SerializeTest extends TestCase
 
     public function testHashToJson(): void
     {
-        $hash = ['alg' => random_bytes(8), 'content' => random_bytes(32)];
+        $hash = ['alg' => $this->getRandomString(), 'content' => $this->getRandomString()];
 
-        $serializer = $this->getSerializer();
-        /** @var \PHPUnit\Framework\MockObject\MockObject $spec */
-        $spec = $serializer->getSpec();
-        $spec->method('isSupportedHashAlgorithm')->willReturn(true);
-        $spec->method('isSupportedHashContent')->willReturn(true);
+        $spec = $this->createMock(SpecInterface::class);
+        $spec->method('isSupportedHashAlgorithm')->with($hash['alg'])->willReturn(true);
+        $spec->method('isSupportedHashContent')->with($hash['content'])->willReturn(true);
+        $serializer = new JsonSerializer($spec);
 
         $data = $serializer->hashToJson($hash['alg'], $hash['content']);
+
         self::assertIsArray($data);
         self::assertEquals($hash, $data);
     }
 
     public function testHashToJsonInvalidAlgorithm(): void
     {
-        $algorithm = random_bytes(32);
+        $algorithm = $this->getRandomString();
 
-        $serializer = $this->getSerializer();
-        /** @var \PHPUnit\Framework\MockObject\MockObject $spec */
-        $spec = $serializer->getSpec();
+        $spec = $this->createMock(SpecInterface::class);
         $spec->method('isSupportedHashAlgorithm')->with($algorithm)->willReturn(false);
         $spec->method('isSupportedHashContent')->willReturn(true);
+        $serializer = new JsonSerializer($spec);
+
 
         $this->expectException(DomainException::class);
         $this->expectExceptionMessageMatches('/invalid algorithm/i');
-        $serializer->hashToJson($algorithm, random_bytes(32));
+        $serializer->hashToJson($algorithm, $this->getRandomString());
     }
 
     public function testHashToJsonInvalidContent(): void
     {
-        $content = random_bytes(32);
+        $content = $this->getRandomString();
 
-        $serializer = $this->getSerializer();
-        /** @var \PHPUnit\Framework\MockObject\MockObject $spec */
-        $spec = $serializer->getSpec();
+        $spec = $this->createMock(SpecInterface::class);
         $spec->method('isSupportedHashAlgorithm')->willReturn(true);
         $spec->method('isSupportedHashContent')->with($content)->willReturn(false);
+        $serializer = new JsonSerializer($spec);
 
         $this->expectException(DomainException::class);
         $this->expectExceptionMessageMatches('/invalid content/i');
-        $serializer->hashToJson(random_bytes(32), $content);
+        $serializer->hashToJson($this->getRandomString(), $content);
     }
 
     // endregion hashToJson
@@ -72,7 +71,7 @@ class SerializeTest extends TestCase
      */
     public function testLicenseToJson(License $license, $expected): void
     {
-        $serializer = $this->getSerializer();
+        $serializer = new JsonSerializer($this->createMock(SpecInterface::class));
         $data = $serializer->licenseToJson($license);
         self::assertEquals($expected, $data);
     }
@@ -82,20 +81,20 @@ class SerializeTest extends TestCase
      */
     public function licenseDataProvider(): Generator
     {
-        $name = random_bytes(32);
+        $name = $this->getRandomString();
         $license = $this->createStub(License::class);
         $license->method('getName')->willReturn($name);
         $expected = ['name' => $name];
         yield 'withName' => [$license, $expected];
 
-        $id = random_bytes(32);
+        $id = $this->getRandomString();
         $license = $this->createStub(License::class);
         $license->method('getId')->willReturn($id);
         $expected = ['id' => $id];
         yield 'withId' => [$license, $expected];
 
-        $name = random_bytes(32);
-        $url = 'https://example.com/license/'.random_bytes(32);
+        $name = $this->getRandomString();
+        $url = 'https://example.com/license/'.$this->getRandomString();
         $license = $this->createStub(License::class);
         $license->method('getUrl')->willReturn($url);
         $license->method('getName')->willReturn($name);
@@ -109,16 +108,16 @@ class SerializeTest extends TestCase
 
     public function testHashesToJson(): void
     {
-        $serializer = $this->getSerializer(['hashToJson']);
+        $serializer = $this->createPartialMock(JsonSerializer::class, ['hashToJson']);
 
-        $algorithm = random_bytes(32);
-        $content = random_bytes(32);
+        $algorithm = $this->getRandomString();
+        $content = $this->getRandomString();
         $hashes = [
             $algorithm => $content,
         ];
         $hashToJsonFake = [$algorithm, $content];
-
         $expected = [$hashToJsonFake];
+
         $serializer->method('hashToJson')
             ->with($algorithm, $content)
             ->willReturn($hashToJsonFake);
@@ -128,19 +127,35 @@ class SerializeTest extends TestCase
         self::assertEquals($expected, $serialized);
     }
 
+    public function testHashesToJsonThrows(): void
+    {
+        $serializer = $this->createPartialMock(JsonSerializer::class, ['hashToJson']);
+
+        $errorMessage = $this->getRandomString();
+        $algorithm = $this->getRandomString();
+        $content = $this->getRandomString();
+        $hashes = [
+            $algorithm => $content,
+        ];
+
+        $serializer->method('hashToJson')
+            ->with($algorithm, $content)
+            ->willThrowException(new DomainException($errorMessage));
+
+        $this->expectWarning();
+        $this->expectWarningMessageMatches('/skipped hash/i');
+        $this->expectWarningMessageMatches('/'.preg_quote($errorMessage, '/').'/');
+
+        iterator_to_array($serializer->hashesToJson($hashes));
+    }
+
     // endregion
 
     // region helpers
 
-    /**
-     * @param string[] $methods
-     *
-     * @return JsonSerializer|\PHPUnit\Framework\MockObject\MockObject
-     */
-    private function getSerializer(array $methods = [])
+    private function getRandomString(int $length = 128): string
     {
-        return $this->createPartialMock(JsonSerializer::class, $methods)
-            ->setSpec($this->createStub(SpecInterface::class));
+        return bin2hex(random_bytes($length));
     }
 
     // endregion helpers
