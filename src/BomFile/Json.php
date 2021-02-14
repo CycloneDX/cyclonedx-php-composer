@@ -26,6 +26,7 @@ use CycloneDX\Models\Component;
 use CycloneDX\Models\License;
 use CycloneDX\Specs\Spec12;
 use DomainException;
+use Generator;
 use InvalidArgumentException;
 use JsonException;
 use RuntimeException;
@@ -246,9 +247,9 @@ class Json extends AbstractFile
     /**
      * @param array<string, mixed> $json
      *
-     * @return \Generator<string, string>
+     * @return Generator<string, string>
      */
-    public function hashesFromJson(array $json): \Generator
+    public function hashesFromJson(array $json): Generator
     {
         foreach ($json as ['alg' => $algorithm, 'content' => $content]) {
             yield $algorithm => $content;
