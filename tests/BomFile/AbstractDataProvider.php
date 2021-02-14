@@ -117,13 +117,50 @@ abstract class AbstractDataProvider
     /**
      * BOMs with every list possible as set from assoc array.
      *
+     * assoc lists might cause json encoder produce schema-invalid data if implemented wrong.
+     *
      * @return Generator<array{0: Bom}>
      */
     public static function bomFromAssocLists(): Generator
     {
+
         yield 'every list from assoc' => [(new Bom())->setComponents([
             'myComponent' => (new Component(AbstractClassification::LIBRARY, 'name', '1.0'))
                 ->setLicenses(['myLicense' => new License('some license')]),
+        ])];
+    }
+
+
+    /**
+     * BOMs with components that have a description.
+     *
+     * @return Generator<array{0: Bom}>
+     */
+    public static function bomWithComponentDescription(): Generator
+    {
+        yield 'description: none' => [(new Bom())->setComponents([
+            (new Component(AbstractClassification::LIBRARY, 'name', '1.0'))
+                ->setDescription(null),
+        ])];
+        yield 'description: empty' => [(new Bom())->setComponents([
+            (new Component(AbstractClassification::LIBRARY, 'name', '1.0'))
+                ->setDescription(''),
+        ])];
+        yield 'description: spaces' => [(new Bom())->setComponents([
+            (new Component(AbstractClassification::LIBRARY, 'name', '1.0'))
+                ->setDescription('   a test   '),
+        ])];
+        yield 'description: linebreaks' => [(new Bom())->setComponents([
+            (new Component(AbstractClassification::LIBRARY, 'name', '1.0'))
+                ->setDescription("some\ntest"),
+        ])];
+        yield 'description: XML special chars' => [(new Bom())->setComponents([
+            (new Component(AbstractClassification::LIBRARY, 'name', '1.0'))
+                ->setDescription(
+                    'thisa&that'. // an & that is not a XML entity
+                    '<strong>html<strong>'. // things that might cause schema-invalid XML
+                    'bar ]]> foo' // unexpected CDATA end
+                ),
         ])];
     }
 }

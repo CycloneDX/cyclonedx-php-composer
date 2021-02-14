@@ -45,13 +45,15 @@ class JsonTest extends TestCase
     {
         $file = new Json(new Spec12());
 
+        $schema = realpath(__DIR__.'/../../res/bom-1.2.schema.json');
+        self::assertFileExists($schema);
+
+
         $json = @$file->serialize($bom);
         self::assertJson($json);
         $data = json_decode($json, false, 512, JSON_THROW_ON_ERROR);
 
-        $schema = JsonSchema\Schema::import(
-            'file://'.realpath(__DIR__.'/../../res/bom-1.2.schema.json')
-        );
+        $schema = JsonSchema\Schema::import('file://'.$schema);
         self::assertInstanceOf(
             JsonSchema\Structure\ObjectItem::class,
             $schema->in($data) // throws on schema mismatch
