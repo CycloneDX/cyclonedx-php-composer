@@ -14,7 +14,7 @@ use PHPUnit\Framework\TestCase;
  *
  * @uses \CycloneDX\Serialize\AbstractSerialize
  */
-class SerializeTest extends TestCase
+class JasonSerializeTest extends TestCase
 {
     // region hashToJson
 
