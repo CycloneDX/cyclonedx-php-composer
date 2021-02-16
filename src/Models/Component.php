@@ -216,8 +216,8 @@ class Component
     /**
      * @param array<string, string> $hashes array<$algorithm, $content>
      *
-     *@throws InvalidArgumentException if any of hashes' values is not a string
-     * @throws DomainException if any of hashes' keys is not in {@see AbstractHashAlgorithm}
+     * @throws InvalidArgumentException if any of hashes' values is not a string
+     * @throws DomainException          if any of hashes' keys is not in {@see AbstractHashAlgorithm}
      *
      * @return $this;
      */
