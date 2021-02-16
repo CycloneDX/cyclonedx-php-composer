@@ -20,7 +20,7 @@ abstract class AbstractDataProvider
     /**
      * a set of Bom structures.
      *
-     * @return Generator<array{0: Bom}>
+     * @return Generator<array{Bom}>
      */
     public static function fullBomTestData(): Generator
     {
@@ -37,7 +37,7 @@ abstract class AbstractDataProvider
     /**
      * Just an plain BOM.
      *
-     * @return Generator<array{0: Bom}>
+     * @return Generator<array{Bom}>
      */
     public static function bomPlain(): Generator
     {
@@ -48,7 +48,7 @@ abstract class AbstractDataProvider
     /**
      * BOM with one plain component.
      *
-     * @return Generator<array{0: Bom}>
+     * @return Generator<array{Bom}>
      */
     public static function bomWithComponentPlain(): Generator
     {
@@ -60,7 +60,7 @@ abstract class AbstractDataProvider
     /**
      * BOMs with one component that has one license.
      *
-     * @return Generator<array{0: Bom}>
+     * @return Generator<array{Bom}>
      */
     public static function bomWithComponentLicenseId(): Generator
     {
@@ -74,7 +74,7 @@ abstract class AbstractDataProvider
     /**
      * BOMs with one component that has one license.
      *
-     * @return Generator<array{0: Bom}>
+     * @return Generator<array{Bom}>
      */
     public static function bomWithComponentLicenseName(): Generator
     {
@@ -85,7 +85,7 @@ abstract class AbstractDataProvider
     }
 
     /**
-     * @return Generator<array{0: Bom}>
+     * @return Generator<array{Bom}>
      */
     public static function bomWithComponentLicenseUrl(): Generator
     {
@@ -101,7 +101,7 @@ abstract class AbstractDataProvider
     /**
      * BOMs with one component that has a version.
      *
-     * @return Generator<array{0: Bom}>
+     * @return Generator<array{Bom}>
      */
     public static function bomWithComponentVersion(): Generator
     {
@@ -116,7 +116,7 @@ abstract class AbstractDataProvider
     /**
      * BOMs with all hash algorithms available.
      *
-     * @return Generator<array{0: Bom}>
+     * @return Generator<array{Bom}>
      */
     public static function bomWithComponentAllHashAlgorithms(): Generator
     {
@@ -126,7 +126,7 @@ abstract class AbstractDataProvider
     /**
      * BOMs with all hash algorithms available. in Spec11.
      *
-     * @return Generator<array{0: Bom}>
+     * @return Generator<array{Bom}>
      */
     public static function bomWithComponentHashAlgorithmsSpec10(): Generator
     {
@@ -136,7 +136,7 @@ abstract class AbstractDataProvider
     /**
      * BOMs with all hash algorithms available. in Spec11.
      *
-     * @return Generator<array{0: Bom}>
+     * @return Generator<array{Bom}>
      */
     public static function bomWithComponentHashAlgorithmsSpec11(): Generator
     {
@@ -146,7 +146,7 @@ abstract class AbstractDataProvider
     /**
      * BOMs with all hash algorithms available. in Spec11.
      *
-     * @return Generator<array{0: Bom}>
+     * @return Generator<array{Bom}>
      */
     public static function bomWithComponentHashAlgorithmsSpec12(): Generator
     {
@@ -158,7 +158,7 @@ abstract class AbstractDataProvider
      *
      * @param string[] $hashAlgorithms
      *
-     * @return Generator<array{0: Bom}>
+     * @return Generator<array{Bom}>
      */
     public static function bomWithComponentHashAlgorithmsFromSpec(array $hashAlgorithms): Generator
     {
@@ -175,7 +175,7 @@ abstract class AbstractDataProvider
      *
      * assoc lists might cause json encoder produce schema-invalid data if implemented wrong.
      *
-     * @return Generator<array{0: Bom}>
+     * @return Generator<array{Bom}>
      */
     public static function bomFromAssocLists(): Generator
     {
@@ -188,7 +188,7 @@ abstract class AbstractDataProvider
     /**
      * BOMs with components that have a description.
      *
-     * @return Generator<array{0: Bom}>
+     * @return Generator<array{Bom}>
      */
     public static function bomWithComponentDescription(): Generator
     {

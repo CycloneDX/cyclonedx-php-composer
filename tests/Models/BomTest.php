@@ -36,7 +36,7 @@ class BomTest extends TestCase
     }
 
     /**
-     * @return Generator<array{0: array<Component>}>
+     * @return Generator<array{array<Component>}>
      */
     public function componentDataProvider(): Generator
     {

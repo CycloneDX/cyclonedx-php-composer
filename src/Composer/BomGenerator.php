@@ -119,7 +119,7 @@ class BomGenerator
     /**
      * @param string $packageName package name
      *
-     * @return array{0: string, 1: ?string}
+     * @return array{string, ?string}
      */
     private function splitNameAndVendor(string $packageName): array
     {
