@@ -26,6 +26,7 @@ use CycloneDX\Enums\AbstractHashAlgorithm;
 use CycloneDX\Models\Bom;
 use CycloneDX\Models\Component;
 use CycloneDX\Models\License;
+use Generator;
 use Symfony\Component\Console\Formatter\OutputFormatter;
 use Symfony\Component\Console\Output\OutputInterface;
 use UnexpectedValueException;
@@ -51,38 +52,61 @@ class BomGenerator
     }
 
     /**
-     * @param mixed[] $lockData       Composer's lockData to generate a BOM for
-     * @param bool    $excludeDev     Exclude Dev dependencies
-     * @param bool    $excludePlugins Exclude composer plugins
+     * @param array<string, mixed> $lockData
      *
-     * @return Bom The resulting BOM
+     * @return array<string, mixed>
      */
-    public function generateBom(array $lockData, bool $excludeDev, bool $excludePlugins): Bom
+    public function getPackagesFromLock(array $lockData, bool $excludeDev): array
     {
         $packages = $lockData['packages'] ?? [];
         $packagesDev = $lockData['packages-dev'] ?? [];
 
         if ($excludeDev) {
             $this->output->writeln('<warning>Dev dependencies will be skipped</warning>');
-        } else {
-            $packages = array_merge($packages, $packagesDev);
-        }
-        unset($packagesDev);
 
-        $components = [];
-        foreach ($packages as $package) {
-            if ('composer-plugin' === $package['type'] && $excludePlugins) {
-                $this->output->writeln('<warning>Skipping plugin '.OutputFormatter::escape($package['name']).'</warning>');
-                continue;
-            }
-            $components[] = $this->buildComponent($package);
+            return $packages;
         }
 
-        return (new Bom())->setComponents($components);
+        return array_merge($packages, $packagesDev);
     }
 
     /**
-     * @param mixed[] $package The lockData's package data to build a component from
+     * @param array<array<string, mixed>> $packages
+     *
+     * @return Generator<array<string, mixed>>
+     */
+    public function filterOutPlugins(array $packages): Generator
+    {
+        foreach ($packages as $package) {
+            if ('composer-plugin' === $package['type']) {
+                $this->output->writeln('<warning>Skipping plugin '.OutputFormatter::escape($package['name']).'</warning>');
+                continue;
+            }
+            yield $package;
+        }
+    }
+
+    /**
+     * @param array<string, mixed> $lockData       Composer's lockData to generate a BOM for
+     * @param bool                 $excludeDev     Exclude Dev dependencies
+     * @param bool                 $excludePlugins Exclude composer plugins
+     *
+     * @return Bom The resulting BOM
+     */
+    public function generateBom(array $lockData, bool $excludeDev, bool $excludePlugins): Bom
+    {
+        $packages = $this->getPackagesFromLock($lockData, $excludeDev);
+        if ($excludePlugins) {
+            $packages = iterator_to_array($this->filterOutPlugins($packages));
+        }
+        $components = array_map([$this, 'buildComponent'], $packages);
+
+        return (new Bom())
+            ->setComponents($components);
+    }
+
+    /**
+     * @param array<string, mixed> $package The lockData's package data to build a component from
      *
      * @throws UnexpectedValueException When the given package does not provide a name or version
      *
@@ -101,13 +125,13 @@ class BomGenerator
         [$name, $vendor] = $this->splitNameAndVendor($package['name']);
         $version = $this->normalizeVersion($package['version']);
 
-        $component = new Component(AbstractClassification::LIBRARY, $name, $version);
-        $component->setGroup($vendor);
-        $component->setDescription($package['description'] ?? null);
-        $component->setLicenses(array_map(
+        $component = (new Component(AbstractClassification::LIBRARY, $name, $version))
+            ->setGroup($vendor)
+            ->setDescription($package['description'] ?? null)
+            ->setLicenses(array_map(
                 static function (string $license): License { return new License($license); },
                 $this->splitLicenses($package['license'] ?? [])
-        ));
+            ));
 
         if (!empty($package['dist']['shasum'])) {
             $component->setHashes([AbstractHashAlgorithm::SHA_1 => $package['dist']['shasum']]);
@@ -147,6 +171,8 @@ class BomGenerator
      * @param string $packageVersion The version to normalize
      *
      * @return string The normalized version
+     *
+     * @internal this functionality is pretty clumsy and might be reworked in the future
      */
     private function normalizeVersion(string $packageVersion): string
     {
@@ -164,6 +190,8 @@ class BomGenerator
      * @param string|string[] $licenseData
      *
      * @return string[]
+     *
+     * @internal this functionality is pretty clumsy and might be reworked in the future
      */
     public function splitLicenses($licenseData): array
     {

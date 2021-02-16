@@ -3,24 +3,15 @@
 namespace CycloneDX\Tests\unit\Composer;
 
 use CycloneDX\Composer\BomGenerator;
-use CycloneDX\Enums\AbstractHashAlgorithm;
-use CycloneDX\Models\Component;
-use CycloneDX\Models\License;
+use Generator;
 use PHPUnit\Framework\TestCase;
+use ReflectionClass;
 use Symfony\Component\Console\Output\OutputInterface;
-use UnexpectedValueException;
 
 /**
  * Class BomGeneratorTest.
  *
  * @covers \CycloneDX\Composer\BomGenerator
- *
- * @TODO make this an actual unit test. currently its a mix of functional and unit.
- *
- * @uses \CycloneDX\Models\Bom
- * @uses \CycloneDX\Models\Component
- * @uses \CycloneDX\Models\License
- * @uses \CycloneDX\Spdx\License
  */
 class BomGeneratorTest extends TestCase
 {
@@ -29,152 +20,154 @@ class BomGeneratorTest extends TestCase
      */
     private $bomGenerator;
 
-    protected function setUp(): void
+    /**
+     * @var \PHPUnit\Framework\MockObject\MockObject|OutputInterface
+     */
+    private $outputMock;
+
+    public function setUp(): void
     {
         parent::setUp();
 
-        $outputMock = $this->createMock(OutputInterface::class);
-        $this->bomGenerator = new BomGenerator($outputMock);
+        $this->outputMock = $this->createMock(OutputInterface::class);
+        $this->bomGenerator = new BomGenerator($this->outputMock);
     }
 
-    private static function getComponentsNames(Component $component): string
+    // region getPackagesFromLock
+
+    /**
+     * @dataProvider LockProvider
+     *
+     * @param array<string, mixed> $lock
+     * @param array<string, mixed> $expected
+     */
+    public function testGetPackagesFromLock(array $lock, bool $excludeDev, array $expected): void
     {
-        return $component->getName();
+        /* @see BomGenerator::getPackagesFromLock() */
+        $getPackagesFromLock = (new ReflectionClass(BomGenerator::class))->getMethod('getPackagesFromLock');
+        $getPackagesFromLock->setAccessible(true);
+
+        if ($excludeDev) {
+            $this->outputMock
+                ->expects(self::once())
+                ->method('writeln')
+                ->with(self::matchesRegularExpression('/dev dependencies will be skipped/i'));
+        }
+
+        $packages = $getPackagesFromLock->invoke($this->bomGenerator, $lock, $excludeDev);
+        self::assertEquals($expected, $packages);
     }
 
-    public function testGenerateBom(): void
+    /**
+     * @return Generator<array{array, bool, array}>
+     */
+    public function LockProvider(): Generator
     {
-        $packages = [
-            [
-                'name' => 'vendorName/packageName',
-                'version' => '1.0',
-                'type' => 'library',
-            ],
-        ];
-        $packagesDev = [
-            [
-                'name' => 'vendorNameDev/packageNameDev',
-                'version' => '2.0',
-                'type' => 'library',
-            ],
-        ];
-        $lockData = [
-            'packages' => $packages,
-            'packages-dev' => $packagesDev,
-        ];
+        $packages = [];
+        $packagesDev = [];
 
-        $bom = $this->bomGenerator->generateBom($lockData, false, false);
-
-        $componentNames = array_map([self::class, 'getComponentsNames'], $bom->getComponents());
-        self::assertEquals(['packageName', 'packageNameDev'], $componentNames);
+        yield 'both, includeDev' => [
+            ['packages' => $packages, 'packages-dev' => $packagesDev],
+            false,
+            $packages,
+        ];
+        yield 'packagesDev, includeDev' => [
+            ['packages-dev' => $packagesDev],
+            false,
+            [],
+        ];
+        yield 'both, excludeDev' => [
+            ['packages' => $packages, 'packages-dev' => $packagesDev],
+            true,
+            array_merge($packages, $packagesDev),
+        ];
+        yield 'packages, excludeDev' => [
+            ['packages' => $packages],
+            true,
+            $packages,
+        ];
+        yield 'packagesDev, excludeDev' => [
+            ['packages-dev' => $packagesDev],
+            true,
+            $packagesDev,
+        ];
     }
 
-    public function testGenerateBomExcludeDev(): void
+    // endregion getPackagesFromLock
+
+    // region filterOutPlugins
+
+    /**
+     * @dataProvider packageProvider
+     *
+     * @param array<string, mixed> $notPlugins
+     * @param array<string, mixed> $plugins
+     */
+    public function testFilterOutPlugins(array $notPlugins, array $plugins): void
     {
-        $packages = [
-            [
-                'name' => 'vendorName/packageName',
-                'version' => '1.0',
-                'type' => 'library',
-            ],
-        ];
-        $packagesDev = [
-            [
-                'name' => 'vendorNameDev/packageNameDev',
-                'version' => '2.0',
-                'type' => 'library',
-            ],
-        ];
-        $lockData = [
-            'packages' => $packages,
-            'packages-dev' => $packagesDev,
-        ];
+        $packages = array_merge($notPlugins, $plugins);
 
-        $bom = $this->bomGenerator->generateBom($lockData, true, false);
+        /* @see BomGenerator::filterOutPlugins() */
+        $filterOutPlugins = (new ReflectionClass(BomGenerator::class))->getMethod('filterOutPlugins');
+        $filterOutPlugins->setAccessible(true);
 
-        $componentNames = array_map([self::class, 'getComponentsNames'], $bom->getComponents());
-        self::assertEquals(['packageName'], $componentNames);
+        foreach ($plugins as ['name' => $pluginName]) {
+            $this->outputMock
+                ->expects(self::once())
+                ->method('writeln')
+                ->with(self::matchesRegularExpression('/Skipping plugin .*'.preg_quote($pluginName, '/').'/i'));
+        }
+
+        $filtered = iterator_to_array($filterOutPlugins->invoke($this->bomGenerator, $packages));
+        self::assertEquals($notPlugins, $filtered);
     }
 
-    public function testGenerateBomExcludePlugins(): void
+    /**
+     * @return Generator<array{array, array}>
+     */
+    public function packageProvider(): Generator
     {
-        $packages = [
-            [
-                'name' => 'vendorName/packageName',
-                'version' => '1.0',
-                'type' => 'composer-plugin',
-            ],
+        $notPlugins = [
+            ['type' => 'library', 'name' => 'acme/library'],
         ];
-        $lockData = [
-            'packages' => $packages,
-            'packages-dev' => [],
+        $plugins = [
+            ['type' => 'composer-plugin', 'name' => 'acme/plugin'],
         ];
 
-        $bom = $this->bomGenerator->generateBom($lockData, false, true);
-        self::assertEmpty($bom->getComponents());
+        yield 'non-plugins only' => [$notPlugins, []];
+        yield 'plugins only' => [[], $plugins];
+        yield 'both' => [$notPlugins, $plugins];
     }
 
-    public function testBuildComponent(): void
+    // endregion filterOutPlugins
+
+    // region normalizeVersion
+
+    /**
+     * @dataProvider versionProvider
+     */
+    public function testNormalizeVersion(string $version, string $expected): void
     {
-        $packageData = [
-            'name' => 'vendorName/packageName',
-            'version' => 'v6.6.6',
-            'description' => 'packageDescription',
-            'license' => 'MIT',
-            'dist' => [
-                'shasum' => '7e240de74fb1ed08fa08d38063f6a6a91462a815',
-            ],
-        ];
-
-        $component = $this->bomGenerator->buildComponent($packageData);
-
-        self::assertEquals('packageName', $component->getName());
-        self::assertEquals('vendorName', $component->getGroup());
-        self::assertEquals('6.6.6', $component->getVersion());
-        self::assertEquals('packageDescription', $component->getDescription());
-        self::assertEquals('library', $component->getType());
-        self::assertEquals([new License('MIT')], $component->getLicenses());
-        self::assertEquals([AbstractHashAlgorithm::SHA_1 => '7e240de74fb1ed08fa08d38063f6a6a91462a815'], $component->getHashes());
-        self::assertEquals('pkg:composer/vendorName/packageName@6.6.6', $component->getPackageUrl());
+        /* @see BomGenerator::normalizeVersion() */
+        $normalizeVersion = (new ReflectionClass(BomGenerator::class))->getMethod('normalizeVersion');
+        $normalizeVersion->setAccessible(true);
+        $normalized = $normalizeVersion->invoke($this->bomGenerator, $version);
+        self::assertEquals($expected, $normalized);
     }
 
-    public function testBuildComponentWithoutVendor(): void
+    /**
+     * @return Generator<array{string, string}>
+     */
+    public function versionProvider(): Generator
     {
-        $packageData = [
-            'name' => 'packageName',
-            'version' => '1.0',
-        ];
-
-        $component = $this->bomGenerator->buildComponent($packageData);
-
-        self::assertEquals('packageName', $component->getName());
-        self::assertNull($component->getGroup());
-        self::assertEquals('1.0', $component->getVersion());
-        self::assertNull($component->getDescription());
-        self::assertEmpty($component->getLicenses());
-        self::assertEmpty($component->getHashes());
-        self::assertEquals('pkg:composer/packageName@1.0', $component->getPackageUrl());
+        yield ['1.0.0', '1.0.0'];
+        yield ['v1.0.0', '1.0.0'];
+        yield ['dev-master', 'dev-master'];
     }
 
-    public function testBuildComponentWithoutName(): void
-    {
-        $packageData = ['version' => '1.0'];
+    // endregion normalizeVersion
 
-        $this->expectException(UnexpectedValueException::class);
-        $this->expectExceptionMessage('Encountered package without name: {"version":"1.0"}');
-
-        $this->bomGenerator->buildComponent($packageData);
-    }
-
-    public function testBuildComponentWithoutVersion(): void
-    {
-        $packageData = ['name' => 'vendorName/packageName'];
-
-        $this->expectException(UnexpectedValueException::class);
-        $this->expectExceptionMessage('Encountered package without version: vendorName/packageName');
-
-        $this->bomGenerator->buildComponent($packageData);
-    }
+    // region splitLicenses
 
     public function testReadLicensesWithLicenseString(): void
     {
@@ -199,4 +192,6 @@ class BomGeneratorTest extends TestCase
         $licenses = $this->bomGenerator->splitLicenses(['MIT', 'Apache-2.0']);
         self::assertEquals(['MIT', 'Apache-2.0'], $licenses);
     }
+
+    // endregion splitLicenses
 }
