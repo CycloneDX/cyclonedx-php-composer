@@ -64,8 +64,8 @@ class JsonTest extends TestCase
      * @group online
      * @group slow
      *
-     * @dataProvider \CycloneDX\Tests\_data\AbstractDataProvider::fullBomTestData
-     * @dataProvider \CycloneDX\Tests\_data\AbstractDataProvider::bomWithComponentHashAlgorithmsSpec12()
+     * @dataProvider \CycloneDX\Tests\_data\BomModelProvider::fullBomTestData
+     * @dataProvider \CycloneDX\Tests\_data\BomModelProvider::bomWithComponentHashAlgorithmsSpec12()
      *
      * @throws JsonException
      * @throws JsonSchema\Exception
@@ -93,8 +93,8 @@ class JsonTest extends TestCase
     }
 
     /**
-     * @dataProvider \CycloneDX\Tests\_data\AbstractDataProvider::fullBomTestData
-     * @dataProvider \CycloneDX\Tests\_data\AbstractDataProvider::bomWithComponentHashAlgorithmsSpec12()
+     * @dataProvider \CycloneDX\Tests\_data\BomModelProvider::fullBomTestData
+     * @dataProvider \CycloneDX\Tests\_data\BomModelProvider::bomWithComponentHashAlgorithmsSpec12()
      */
     public function testSerialization12(Bom $bom): void
     {

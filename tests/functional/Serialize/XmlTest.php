@@ -27,8 +27,8 @@ class XmlTest extends TestCase
      * @group online
      * @group slow
      *
-     * @dataProvider \CycloneDX\Tests\_data\AbstractDataProvider::fullBomTestData
-     * @dataProvider \CycloneDX\Tests\_data\AbstractDataProvider::bomWithComponentAllHashAlgorithms
+     * @dataProvider \CycloneDX\Tests\_data\BomModelProvider::fullBomTestData
+     * @dataProvider \CycloneDX\Tests\_data\BomModelProvider::bomWithComponentAllHashAlgorithms
      */
     public function testSchema11(Bom $bom): void
     {
@@ -51,8 +51,8 @@ class XmlTest extends TestCase
     }
 
     /**
-     * @dataProvider \CycloneDX\Tests\_data\AbstractDataProvider::fullBomTestData
-     * @dataProvider \CycloneDX\Tests\_data\AbstractDataProvider::bomWithComponentHashAlgorithmsSpec11()
+     * @dataProvider \CycloneDX\Tests\_data\BomModelProvider::fullBomTestData
+     * @dataProvider \CycloneDX\Tests\_data\BomModelProvider::bomWithComponentHashAlgorithmsSpec11()
      */
     public function testSerializer11(Bom $bom): void
     {

@@ -15,7 +15,7 @@ use Generator;
 /**
  * common DataProvider.
  */
-abstract class AbstractDataProvider
+abstract class BomModelProvider
 {
     /**
      * a set of Bom structures.
