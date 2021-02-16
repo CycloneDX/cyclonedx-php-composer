@@ -56,12 +56,10 @@ class XmlTest extends TestCase
         $serializer = new XmlSerializer($spec);
         $deserializer = new XmlDeserializer($spec);
 
-        $expected = clone $bom;
-
         $serialized = @$serializer->serialize($bom);
         $deserialized = @$deserializer->deserialize($serialized);
 
-        self::assertEquals($expected, $deserialized);
+        self::assertEquals($bom, $deserialized);
     }
 
     // endregion Spec11
