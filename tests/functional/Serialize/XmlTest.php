@@ -24,6 +24,8 @@ class XmlTest extends TestCase
      * This test might require online-connectivity.
      *
      * @large
+     * @group online
+     * @group slow
      *
      * @dataProvider \CycloneDX\Tests\_data\AbstractDataProvider::fullBomTestData
      * @dataProvider \CycloneDX\Tests\_data\AbstractDataProvider::bomWithComponentAllHashAlgorithms

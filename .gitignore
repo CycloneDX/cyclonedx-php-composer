@@ -14,5 +14,5 @@
 /phpstan.neon
 
 
-# this dir must not exist, so CI can to its job
-/.CItmp
+# this is the target of test tools and such
+/reports/
