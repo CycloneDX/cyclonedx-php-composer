@@ -119,7 +119,7 @@ class JsonSerializer extends AbstractSerialize implements SerializerInterface
     }
 
     /**
-     * @param array<License> $licenses
+     * @param License[] $licenses
      *
      * @return Generator<array{license: array<string, mixed>}>
      */
