@@ -1,6 +1,6 @@
 <?php
 
-namespace CycloneDX\Tests\Models;
+namespace CycloneDX\Tests\uni\Models;
 
 use CycloneDX\Enums\AbstractClassification;
 use CycloneDX\Models\Component;

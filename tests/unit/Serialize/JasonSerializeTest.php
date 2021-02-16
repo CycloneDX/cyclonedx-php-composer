@@ -1,6 +1,6 @@
 <?php
 
-namespace CycloneDX\Tests\Serialize;
+namespace CycloneDX\Tests\unit\Serialize;
 
 use CycloneDX\Models\License;
 use CycloneDX\Serialize\JsonSerializer;

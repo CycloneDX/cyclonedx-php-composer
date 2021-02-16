@@ -1,6 +1,6 @@
 <?php
 
-namespace CycloneDX\Tests\Serialize;
+namespace CycloneDX\Tests\functional\Serialize;
 
 use CycloneDX\Models\Bom;
 use CycloneDX\Serialize\JsonDeserializer;
@@ -18,6 +18,8 @@ use Swaggest\JsonSchema;
  */
 class JsonTest extends TestCase
 {
+    // endregion Spec10
+
     /**
      * Schema 1.0 is not specified for JSON.
      */
@@ -31,6 +33,10 @@ class JsonTest extends TestCase
 
         @$serializer->serialize(new Bom());
     }
+
+    // endregion Spec10
+
+    // region Spec11
 
     /**
      * Schema 1.1 is not specified for JSON.
@@ -46,13 +52,18 @@ class JsonTest extends TestCase
         @$serializer->serialize(new Bom());
     }
 
+    // endregion Spec11
+
+    // region Spec12
+
     /**
      * This test might be slow.
      * This test might require online-connectivity.
      *
      * @large
      *
-     * @dataProvider \CycloneDX\Tests\Serialize\AbstractDataProvider::fullBomTestData()
+     * @dataProvider \CycloneDX\Tests\_data\AbstractDataProvider::fullBomTestData
+     * @dataProvider \CycloneDX\Tests\_data\AbstractDataProvider::bomWithComponentHashAlgorithmsSpec12()
      *
      * @throws JsonException
      * @throws JsonSchema\Exception
@@ -61,7 +72,7 @@ class JsonTest extends TestCase
     public function testSchema12(Bom $bom): void
     {
         $spec = new Spec12();
-        $schema = realpath(__DIR__.'/../../res/bom-1.2.schema.json');
+        $schema = realpath(__DIR__.'/../../../res/bom-1.2.schema.json');
 
         self::assertIsString($schema);
         self::assertFileExists($schema);
@@ -80,7 +91,8 @@ class JsonTest extends TestCase
     }
 
     /**
-     * @dataProvider \CycloneDX\Tests\Serialize\AbstractDataProvider::fullBomTestData()
+     * @dataProvider \CycloneDX\Tests\_data\AbstractDataProvider::fullBomTestData
+     * @dataProvider \CycloneDX\Tests\_data\AbstractDataProvider::bomWithComponentHashAlgorithmsSpec12()
      */
     public function testSerialization12(Bom $bom): void
     {
@@ -93,4 +105,6 @@ class JsonTest extends TestCase
 
         self::assertEquals($bom, $deserialized);
     }
+
+    // endregion Spec12
 }

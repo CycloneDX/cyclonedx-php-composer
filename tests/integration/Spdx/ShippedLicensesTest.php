@@ -1,6 +1,6 @@
 <?php
 
-namespace CycloneDX\Tests\Spdx;
+namespace CycloneDX\Tests\integration\Spdx;
 
 use CycloneDX\Spdx\License;
 use PHPUnit\Framework\TestCase;

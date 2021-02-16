@@ -1,6 +1,6 @@
 <?php
 
-namespace CycloneDX\Tests\Serialize;
+namespace CycloneDX\Tests\_data;
 
 use CycloneDX\Enums\AbstractClassification;
 use CycloneDX\Enums\AbstractHashAlgorithm;

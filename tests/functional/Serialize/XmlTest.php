@@ -1,6 +1,6 @@
 <?php
 
-namespace CycloneDX\Tests\Serialize;
+namespace CycloneDX\Tests\functional\Serialize;
 
 use CycloneDX\Models\Bom;
 use CycloneDX\Serialize\XmlDeserializer;
@@ -15,6 +15,8 @@ use PHPUnit\Framework\TestCase;
  */
 class XmlTest extends TestCase
 {
+    // @TODO add Spec 10 tests
+
     // region Spec11
 
     /**
@@ -23,13 +25,13 @@ class XmlTest extends TestCase
      *
      * @large
      *
-     * @dataProvider \CycloneDX\Tests\Serialize\AbstractDataProvider::fullBomTestData
-     * @dataProvider \CycloneDX\Tests\Serialize\AbstractDataProvider::bomWithComponentAllHashAlgorithms
+     * @dataProvider \CycloneDX\Tests\_data\AbstractDataProvider::fullBomTestData
+     * @dataProvider \CycloneDX\Tests\_data\AbstractDataProvider::bomWithComponentAllHashAlgorithms
      */
     public function testSchema11(Bom $bom): void
     {
         $spec = new Spec11();
-        $schema = realpath(__DIR__.'/../../res/bom-1.1.xsd');
+        $schema = realpath(__DIR__.'/../../../res/bom-1.1.xsd');
 
         self::assertIsString($schema);
         self::assertFileExists($schema);
@@ -47,8 +49,8 @@ class XmlTest extends TestCase
     }
 
     /**
-     * @dataProvider \CycloneDX\Tests\Serialize\AbstractDataProvider::fullBomTestData
-     * @dataProvider \CycloneDX\Tests\Serialize\AbstractDataProvider::bomWithComponentHashAlgorithmsSpec11()
+     * @dataProvider \CycloneDX\Tests\_data\AbstractDataProvider::fullBomTestData
+     * @dataProvider \CycloneDX\Tests\_data\AbstractDataProvider::bomWithComponentHashAlgorithmsSpec11()
      */
     public function testSerializer11(Bom $bom): void
     {
@@ -63,6 +65,8 @@ class XmlTest extends TestCase
     }
 
     // endregion Spec11
+
+    // @TODO add Spec 12 tests
 
     // region helpers
 

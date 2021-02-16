@@ -1,6 +1,6 @@
 <?php
 
-namespace CycloneDX\Tests\Composer;
+namespace CycloneDX\Tests\unit\Composer;
 
 use CycloneDX\Composer\BomGenerator;
 use CycloneDX\Enums\AbstractHashAlgorithm;
@@ -14,6 +14,8 @@ use UnexpectedValueException;
  * Class BomGeneratorTest.
  *
  * @covers \CycloneDX\Composer\BomGenerator
+ *
+ * @TODO make this an actual unit test. currently its a mix of functional and unit.
  *
  * @uses \CycloneDX\Models\Bom
  * @uses \CycloneDX\Models\Component
