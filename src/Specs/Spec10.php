@@ -2,8 +2,8 @@
 
 namespace CycloneDX\Specs;
 
-use CycloneDX\Enums\AbstractClassification;
-use CycloneDX\Enums\AbstractHashAlgorithm;
+use CycloneDX\Enums\Classification;
+use CycloneDX\Enums\HashAlgorithm;
 
 /**
  * @author jkowalleck
@@ -20,21 +20,21 @@ class Spec10 implements SpecInterface
     // region SupportsTrait
 
     public const COMPONENT_TYPES = [
-        AbstractClassification::APPLICATION,
-        AbstractClassification::FRAMEWORK,
-        AbstractClassification::LIBRARY,
-        AbstractClassification::OPERATING_SYSTEMS,
-        AbstractClassification::DEVICE,
+        Classification::APPLICATION,
+        Classification::FRAMEWORK,
+        Classification::LIBRARY,
+        Classification::OPERATING_SYSTEMS,
+        Classification::DEVICE,
     ];
 
     public const HASH_ALGORITHMS = [
-        AbstractHashAlgorithm::MD5,
-        AbstractHashAlgorithm::SHA_1,
-        AbstractHashAlgorithm::SHA_256,
-        AbstractHashAlgorithm::SHA_384,
-        AbstractHashAlgorithm::SHA_512,
-        AbstractHashAlgorithm::SHA3_256,
-        AbstractHashAlgorithm::SHA3_512,
+        HashAlgorithm::MD5,
+        HashAlgorithm::SHA_1,
+        HashAlgorithm::SHA_256,
+        HashAlgorithm::SHA_384,
+        HashAlgorithm::SHA_512,
+        HashAlgorithm::SHA3_256,
+        HashAlgorithm::SHA3_512,
     ];
 
     public const HASH_CONTENT_REGEX = '/^(?:[a-fA-F0-9]{32}|[a-fA-F0-9]{40}|[a-fA-F0-9]{64}|[a-fA-F0-9]{96}|[a-fA-F0-9]{128})$/';

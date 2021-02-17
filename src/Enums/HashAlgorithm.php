@@ -7,7 +7,7 @@ namespace CycloneDX\Enums;
  * See {@link https://cyclonedx.org/schema/bom/1.1 Schema} for `hashAlg`.
  * See {@link https://cyclonedx.org/schema/bom/1.2 Schema} for `hashAlg`.
  */
-abstract class AbstractHashAlgorithm
+abstract class HashAlgorithm
 {
     public const MD5 = 'MD5';
     public const SHA_1 = 'SHA-1';

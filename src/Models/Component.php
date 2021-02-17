@@ -21,8 +21,8 @@
 
 namespace CycloneDX\Models;
 
-use CycloneDX\Enums\AbstractClassification;
-use CycloneDX\Enums\AbstractHashAlgorithm;
+use CycloneDX\Enums\Classification;
+use CycloneDX\Enums\HashAlgorithm;
 use DomainException;
 use InvalidArgumentException;
 
@@ -145,15 +145,15 @@ class Component
     }
 
     /**
-     * @param string $type For a ist of Valid values see {@see AbstractClassification}
+     * @param string $type For a ist of Valid values see {@see Classification}
      *
-     *@throws DomainException if value is unknown
+     * @throws DomainException if value is unknown
      *
      * @return $this
      */
     public function setType(string $type): self
     {
-        $types = (new \ReflectionClass(AbstractClassification::class))->getConstants();
+        $types = (new \ReflectionClass(Classification::class))->getConstants();
         if (false === in_array($type, $types, true)) {
             throw new DomainException("Invalid type: {$type}");
         }
@@ -216,14 +216,14 @@ class Component
     /**
      * @param array<string, string> $hashes array<$algorithm, $content>
      *
+     * @throws DomainException          if any of hashes' keys is not in {@see HashAlgorithm}
      * @throws InvalidArgumentException if any of hashes' values is not a string
-     * @throws DomainException          if any of hashes' keys is not in {@see AbstractHashAlgorithm}
      *
      * @return $this;
      */
     public function setHashes(array $hashes): self
     {
-        $algorithms = (new \ReflectionClass(AbstractHashAlgorithm::class))->getConstants();
+        $algorithms = (new \ReflectionClass(HashAlgorithm::class))->getConstants();
         foreach ($hashes as $alg => $content) {
             if (false === in_array($alg, $algorithms, true)) {
                 throw new DomainException("Unknown hash algorithm: {$alg}");

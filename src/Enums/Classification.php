@@ -7,7 +7,7 @@ namespace CycloneDX\Enums;
  * See {@link https://cyclonedx.org/schema/bom/1.1 Schema} for `classification`.
  * See {@link https://cyclonedx.org/schema/bom/1.2 Schema} for `classification`.
  */
-abstract class AbstractClassification
+abstract class Classification
 {
     public const APPLICATION = 'application';
     public const FRAMEWORK = 'framework';

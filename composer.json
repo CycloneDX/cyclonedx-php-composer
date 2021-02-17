@@ -44,14 +44,10 @@
     "scripts": {
         "test:phpunit": "phpunit",
         "test:phpstan": "@php tools/phpstan/bin/phpstan analyse" ,
-        "test:composer-require-checker": "@php tools/composer-require-checker check --config-file=.composer-require-checker.dist.json",
-        "test:composer-unused": "@php tools/composer-unused --excludeDir=tools --excludePackage=composer-plugin-api",
         "test:cs-fixer": "@php tools/php-cs-fixer fix --dry-run --diff-format=udiff",
         "test": [
             "@test:phpstan",
             "@test:phpunit",
-            "@test:composer-require-checker",
-            "@test:composer-unused",
             "@test:cs-fixer"
         ],
         "cs-fix": "@php tools/php-cs-fixer fix --diff-format=udiff",
@@ -64,8 +60,6 @@
         "test": "Run all tests!",
         "test:phpunit": "Run tests with PHPUnit.",
         "test:phpstan": "Run static code analysis with PHPStan.",
-        "test:composer-require-checker": "Check for missing requirements.",
-        "test:composer-unused": "Check for unused dependencies.",
         "test:cs-fixer": "Test coding standards with PHP-CS-fixer.",
         "cs-fix": "Fix files according to coding standards.",
         "dev-setup": "Setup this project for development."

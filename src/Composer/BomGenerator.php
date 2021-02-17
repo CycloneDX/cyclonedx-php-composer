@@ -21,8 +21,8 @@
 
 namespace CycloneDX\Composer;
 
-use CycloneDX\Enums\AbstractClassification;
-use CycloneDX\Enums\AbstractHashAlgorithm;
+use CycloneDX\Enums\Classification;
+use CycloneDX\Enums\HashAlgorithm;
 use CycloneDX\Models\Bom;
 use CycloneDX\Models\Component;
 use CycloneDX\Models\License;
@@ -125,7 +125,7 @@ class BomGenerator
         [$name, $vendor] = $this->splitNameAndVendor($package['name']);
         $version = $this->normalizeVersion($package['version']);
 
-        $component = (new Component(AbstractClassification::LIBRARY, $name, $version))
+        $component = (new Component(Classification::LIBRARY, $name, $version))
             ->setGroup($vendor)
             ->setDescription($package['description'] ?? null)
             ->setLicenses(array_map(
@@ -134,7 +134,7 @@ class BomGenerator
             ));
 
         if (!empty($package['dist']['shasum'])) {
-            $component->setHashes([AbstractHashAlgorithm::SHA_1 => $package['dist']['shasum']]);
+            $component->setHashes([HashAlgorithm::SHA_1 => $package['dist']['shasum']]);
         }
 
         return $component;
