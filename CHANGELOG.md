@@ -16,7 +16,7 @@
 
 ### Removed 
 
-* This library no longer supports `php<7.3`. 
+* This plugin no longer supports `php<7.3`. 
 
 ### Fixed
 
@@ -25,6 +25,10 @@
 ### Misc
 
 * Added more tests during the build process.
+* Added some QA tools:
+  [PHPStan](https://phpstan.org/),
+  [PHP-CS-Fixer](https://cs.symfony.com/).
+* Added a demo run of the plugin to the CI chain.
 
 ## 1.2
 

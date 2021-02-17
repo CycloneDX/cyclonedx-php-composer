@@ -14,5 +14,6 @@
 /phpstan.neon
 
 
-# this is the target of test tools and such
+# these are the target of test tools and such
 /reports/
+/CI_reports/
