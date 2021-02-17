@@ -17,8 +17,8 @@ jobs:
     name: Tests (${{ matrix.os}}, ${{ matrix.php }}, ${{ matrix.stability }})
     runs-on: ${{ matrix.os }}
     env:
-      reports-directory: reports
-      reports-artifact: test-reports
+      REPORTS_DIR: reports
+      REPORTS_ARTIFACT: test-reports
     strategy:
       fail-fast: false
       matrix:
@@ -43,6 +43,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php }}
+          # @TODO add all required extensions for plugin and tools
           extensions: json
           coverage: pcov
       - name: Validate composer.json and composer.lock
@@ -79,8 +80,8 @@ jobs:
         run: >
           php ./tools/composer exec --
           phpunit
-          --log-junit=${{ env.reports-directory }}/tests.${{ matrix.os}}_php${{ matrix.php }}_${{ matrix.stability }}.junit.xml
-          --coverage-clover=${{ env.reports-directory }}/coverage.${{ matrix.os}}_php${{ matrix.php }}_${{ matrix.stability }}.clover.xml
+          --log-junit=${REPORTS_DIR}/tests.${{ matrix.os }}_php${{ matrix.php }}_${{ matrix.stability }}.junit.xml
+          --coverage-clover=${REPORTS_DIR}/coverage.${{ matrix.os}}_php${{ matrix.php }}_${{ matrix.stability }}.clover.xml
           --no-interaction
           --do-not-cache-result
       - name: Artifact reports
@@ -88,8 +89,8 @@ jobs:
         # see https://github.com/actions/upload-artifact
         uses: actions/upload-artifact@v2
         with:
-          name: ${{ env.reports-artifact }}
-          path: ${{ env.reports-directory }}
+          name: ${{ env.REPORTS_ARTIFACT }}
+          path: ${{ env.REPORTS_DIR }}
           if-no-files-found: error
   style:
     name: Coding Standards
@@ -104,6 +105,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: "8.0"
+          # @TODO add all required extensions for plugin and tools
           extensions: json
           coverage: none
       - name: Test coding standards
@@ -120,10 +122,10 @@ jobs:
     needs: [ 'tests' ]
     runs-on: ubuntu-latest
     env:
-      plugin-directory: plugin
-      demo-directory: demo
-      reports-directory: reports
-      reports-artifact: demo-reports
+      PLUGIN_DIR: plugin
+      DEMO_DIR: demo
+      REPORTS_DIR: reports
+      REPORTS_ARTIFACT: demo-reports
     strategy:
       fail-fast: false
       matrix:
@@ -136,25 +138,26 @@ jobs:
         # see https://github.com/actions/checkout
         uses: actions/checkout@v2
         with:
-          path: ${{ env.plugin-directory }}
+          path: ${{ env.PLUGIN_DIR }}
       - name: Setup PHP
         # see https://github.com/shivammathur/setup-php
         uses: shivammathur/setup-php@v2
         with:
           php-version: "8.0"
+          # @TODO add all required extensions for plugin and tools
           tools: composer:v${{ matrix.compser }}
           coverage: none
       - name: Setup Demo
         run: |
           set -ex
 
-          mkdir -p "${{ env.reports-directory }}"
-          mkdir -p "${{ env.demo-directory }}"
+          mkdir -p ${REPORTS_DIR}
+          mkdir -p ${DEMO_DIR}
 
-          php -f "${{ env.plugin-directory}}"/tests/plugin/setup.php -- "${{ env.demo-directory }}"
+          php -f ${PLUGIN_DIR}/tests/plugin/setup.php -- ${DEMO_DIR}
 
           composer \
-            -d"${{ env.demo-directory }}"
+            -d${DEMO_DIR} \
             install \
               --prefer-dist \
               --no-interaction \
@@ -162,26 +165,28 @@ jobs:
               --no-suggest
       - name: Demo Help
         run: >
-          composer -d"${{ env.demo-directory }}"
+          composer -d${DEMO_DIR}
           make-bom -h
-          > "${{ env.reports-directory}}"/help.txt
+          > ${REPORTS_DIR}/help.txt
       - name: Demo XML
         run: >
-          composer -d"${{ env.demo-directory }}"
+          composer -d${DEMO_DIR}
           make-bom
-          --output-file="${{ env.reports-directory}}"/bom.xml
+          --output-file=-
+          > ${REPORTS_DIR}/bom.xml
       - name: Demo JSON
         run: >
-          composer -d"${{ env.demo-directory }}"
+          composer -d${DEMO_DIR}
           make-bom --json
-          --output-file="${{ env.reports-directory}}"/bom.json
+          --output-file=-
+          > ${REPORTS_DIR}/bom.json
       - name: Artifact reports
         if: ${{ ! cancelled() }}
         # see https://github.com/actions/upload-artifact
         uses: actions/upload-artifact@v2
         with:
-          name: ${{ env.reports-artifact }}
-          path: ${{ env.reports-directory }}
+          name: ${{ env.REPORTS_ARTIFACT }}
+          path: ${{ env.REPORTS_DIR }}
           if-no-files-found: error
 
 
