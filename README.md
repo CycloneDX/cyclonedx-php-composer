@@ -62,10 +62,6 @@ Make sure
 * to run `tools/composer run-script cs-fix` to have your changes aligned with our coding standards.  
 * to run `tools/composer run-script test` and pass all tests.
 
-Rules: 
-* This plugin/library must not have any requirements to other libraries,
-  so that the real BoM is not modified where not needed.
-
 # License
 
 Permission to modify and redistribute is granted under the terms of the Apache 2.0 license. See the [LICENSE] file for the full license.
