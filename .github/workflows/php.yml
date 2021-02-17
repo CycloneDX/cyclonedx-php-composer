@@ -43,20 +43,22 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php }}
-          extensions: dom,json,libxml
+          extensions: dom,filter,json,libxml
           coverage: pcov
       - name: dir setup
         run: mkdir ${{ env.REPORTS_DIR }}
       - name: Validate composer.json and composer.lock
         run: >
           php
-          ./tools/composer validate
+          ./tools/composer
+          validate
           --with-dependencies
           --no-interaction
       - name: Install dependencies
         run: >
           php
-          ./tools/composer update
+          ./tools/composer
+          update
           --prefer-${{ matrix.stability }}
           --prefer-dist
           --no-interaction
@@ -65,7 +67,9 @@ jobs:
       - name: Install tool for static code analysis
         run: >
           php
-          ./tools/composer -dtools/phpstan install
+          ./tools/composer
+          install
+          -dtools/phpstan
           --prefer-dist
           --no-interaction
           --no-progress
@@ -73,13 +77,16 @@ jobs:
       - name: Run static code analysis
         run: >
           php
-          tools/phpstan/bin/phpstan.phar analyse
+          ./tools/phpstan/bin/phpstan
+          analyse
           --verbose
           --no-progress
           --no-interaction
       - name: Run phpunit tests
         run: >
-          php ./tools/composer exec --
+          php
+          ./tools/composer
+          exec --
           phpunit
           --log-junit=${{ env.REPORTS_DIR }}/tests.${{ matrix.os }}_php${{ matrix.php }}_${{ matrix.stability }}.junit.xml
           --coverage-clover=${{ env.REPORTS_DIR }}/coverage.${{ matrix.os}}_php${{ matrix.php }}_${{ matrix.stability }}.clover.xml
@@ -106,11 +113,12 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: "8.0"
-      - name: Test coding standards
+      - name: install dependencies
         run: >
           php
-          tools/php-cs-fixer
-          fix --dry-run
+          ./tools/php-cs-fixer
+          fix
+          --dry-run
           --diff-format=udiff
           --using-cache=no
           --show-progress=dots
@@ -141,25 +149,26 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: "8.0"
-          # @TODO add all required extensions for plugin and tools
+          # this time we dont use own composer but a switching system wide version.
           tools: composer:v${{ matrix.compser }}
           coverage: none
       - name: dir setup
-        run: |
-          mkdir -p ${{ env.DEMO_DIR }}/${{ env.REPORTS_DIR }}
+        run: mkdir -p ${{ env.DEMO_DIR }}/${{ env.REPORTS_DIR }}
       - name: Setup Demo
         run: |
           set -ex
 
-          php -f ${{ env.PLUGIN_DIR }}/tests/plugin/setup.php -- ${{ env.DEMO_DIR }}
+          php \
+          -f ${{ env.PLUGIN_DIR }}/tests/plugin/setup.php \
+          -- ${{ env.DEMO_DIR }}
 
           composer \
-            -d${{ env.DEMO_DIR }} \
-            install \
-              --prefer-dist \
-              --no-interaction \
-              --no-progress \
-              --no-suggest
+          install \
+          -d${{ env.DEMO_DIR }} \
+          --prefer-dist \
+          --no-interaction \
+          --no-progress \
+          --no-suggest
       - name: Demo Help
         run: >
           composer
@@ -168,12 +177,14 @@ jobs:
         working-directory: ${{ env.DEMO_DIR }}
       - name: Demo XML
         run: >
-          composer make-bom
+          composer
+          make-bom
           --output-file=${{ env.REPORTS_DIR }}/bom.xml
         working-directory: ${{ env.DEMO_DIR }}
       - name: Demo JSON
         run: >
-          composer make-bom
+          composer
+          make-bom
           --json
           --output-file=${{ env.REPORTS_DIR }}/bom.json
         working-directory: ${{ env.DEMO_DIR }}

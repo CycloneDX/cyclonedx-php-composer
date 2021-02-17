@@ -31,13 +31,13 @@
         <include>
             <directory suffix=".php">src</directory>
         </include>
-        <report>
+        <!-- report>
             <clover outputFile="reports/coverage.clover.xml"/>
             <html outputDirectory="reports/coverage.html"/>
-        </report>
+        </report -->
     </coverage>
-    <logging>
+    <!-- logging>
         <junit outputFile="reports/phpunits.junit.xml"/>
         <testdoxText outputFile="reports/phpunits.txt"/>
-    </logging>
+    </logging -->
 </phpunit>
