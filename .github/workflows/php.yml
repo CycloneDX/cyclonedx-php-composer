@@ -147,10 +147,19 @@ jobs:
       - name: Setup Demo
         run: |
           set -ex
+
           mkdir -p "${{ env.reports-directory }}"
           mkdir -p "${{ env.demo-directory }}"
+
           php -f "${{ env.plugin-directory}}"/tests/plugin/setup.php -- "${{ env.demo-directory }}"
-          composer -d"${{ env.demo-directory }}" install
+
+          composer \
+            -d"${{ env.demo-directory }}"
+            install \
+              --prefer-dist \
+              --no-interaction \
+              --no-progress \
+              --no-suggest
       - name: Demo Help
         run: >
           composer -d"${{ env.demo-directory }}"
