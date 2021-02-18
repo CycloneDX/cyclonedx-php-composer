@@ -42,7 +42,7 @@ class Component
      *
      * Examples: commons-lang3 and jquery
      *
-     * @var string
+     * @psalm-var string
      */
     private $name;
 
@@ -56,7 +56,7 @@ class Component
      *
      * Examples include: apache, org.apache.commons, and apache.org.
      *
-     * @var string|null
+     * @psalm-var string|null
      */
     private $group;
 
@@ -70,7 +70,7 @@ class Component
      * Refer to the {@link https://cyclonedx.org/schema/bom/1.1 bom:classification documentation}
      * for information describing each one.
      *
-     * @var string
+     * @psalm-var string
      */
     private $type;
 
@@ -79,14 +79,14 @@ class Component
      *
      * Specifies a description for the component.
      *
-     * @var string|null
+     * @psalm-var string|null
      */
     private $description;
 
     /**
      * Licences.
      *
-     * @var License[]
+     * @psalm-var License[]
      */
     private $licenses = [];
 
@@ -95,7 +95,7 @@ class Component
      *
      * Specifies the file hashes of the component.
      *
-     * @var array<string, string>
+     * @psalm-var array<string, string>
      */
     private $hashes = [];
 
@@ -105,7 +105,7 @@ class Component
      * The component version. The version should ideally comply with semantic versioning
      * but is not enforced.
      *
-     * @var string
+     * @psalm-var string
      */
     private $version;
 
@@ -115,7 +115,7 @@ class Component
     }
 
     /**
-     * @return $this
+     * @psalm-return $this
      */
     public function setName(string $name): self
     {
@@ -130,7 +130,7 @@ class Component
     }
 
     /**
-     * @return $this
+     * @psalm-return $this
      */
     public function setGroup(?string $group): self
     {
@@ -145,11 +145,11 @@ class Component
     }
 
     /**
-     * @param string $type For a ist of Valid values see {@see Classification}
+     * @psalm-param string $type For a ist of Valid values see {@see Classification}
      *
      * @throws DomainException if value is unknown
      *
-     * @return $this
+     * @psalm-return $this
      */
     public function setType(string $type): self
     {
@@ -168,7 +168,7 @@ class Component
     }
 
     /**
-     * @return $this
+     * @psalm-return $this
      */
     public function setDescription(?string $description): self
     {
@@ -178,7 +178,7 @@ class Component
     }
 
     /**
-     * @return License[]
+     * @psalm-return License[]
      */
     public function getLicenses(): array
     {
@@ -186,11 +186,11 @@ class Component
     }
 
     /**
-     * @param License[] $licenses
+     * @psalm-param License[] $licenses
      *
      * @throws InvalidArgumentException if list contains element that is not instance of {@see \CycloneDX\Models\License}
      *
-     * @return $this
+     * @psalm-return $this
      */
     public function setLicenses(array $licenses): self
     {
@@ -206,7 +206,7 @@ class Component
     }
 
     /**
-     * @return array<string, string>
+     * @psalm-return array<string, string>
      */
     public function getHashes(): array
     {
@@ -214,12 +214,12 @@ class Component
     }
 
     /**
-     * @param array<string,string> $hashes
+     * @psalm-param array<string,string> $hashes
      *
      * @throws DomainException          if any of hashes' keys is not in {@see HashAlgorithm}'s constants list
      * @throws InvalidArgumentException if any of hashes' values is not a string
      *
-     * @return $this
+     * @psalm-return $this
      */
     public function setHashes(array $hashes): self
     {
@@ -244,7 +244,7 @@ class Component
     }
 
     /**
-     * @return $this
+     * @psalm-return $this
      */
     public function setVersion(string $version): self
     {

@@ -18,7 +18,7 @@ use UnexpectedValueException;
 class BomGeneratorTest extends TestCase
 {
     /**
-     * @var BomGenerator
+     * @psalm-var BomGenerator
      */
     private $bomGenerator;
 

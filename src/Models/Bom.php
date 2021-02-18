@@ -34,7 +34,7 @@ class Bom
     /**
      * Components.
      *
-     * @var Component[]
+     * @psalm-var Component[]
      */
     private $components = [];
 
@@ -46,12 +46,12 @@ class Bom
      * The default version is '1' and should be incremented for each version of the BOM that is published.
      * Each version of a component should have a unique BOM and if no changes are made to the BOMs, then each BOM will have a version of '1'.
      *
-     * @var int
+     * @psalm-var int
      */
     private $version = 1;
 
     /**
-     * @return Component[]
+     * @psalm-return Component[]
      */
     public function getComponents(): array
     {
@@ -59,11 +59,11 @@ class Bom
     }
 
     /**
-     * @param Component[] $components
+     * @psalm-param Component[] $components
      *
      * @throws InvalidArgumentException if list contains element that is not instance of {@see \CycloneDX\Models\Component}
      *
-     * @return $this
+     * @psalm-return $this
      */
     public function setComponents(array $components): self
     {
@@ -84,11 +84,11 @@ class Bom
     }
 
     /**
-     * @param int $version a value >= 1
+     * @psalm-param int $version a value >= 1
      *
      * @throws DomainException
      *
-     * @return $this
+     * @psalm-return $this
      */
     public function setVersion(int $version): self
     {

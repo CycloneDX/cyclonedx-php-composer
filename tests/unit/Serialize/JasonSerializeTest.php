@@ -67,7 +67,7 @@ class JasonSerializeTest extends TestCase
     /**
      * @dataProvider licenseDataProvider
      *
-     * @param mixed $expected
+     * @psalm-param mixed $expected
      */
     public function testLicenseToJson(License $license, $expected): void
     {
@@ -77,7 +77,7 @@ class JasonSerializeTest extends TestCase
     }
 
     /**
-     * @return Generator<string, array{0:License, 1:array}>
+     * @psalm-return Generator<string, array{0:License, 1:array}>
      */
     public function licenseDataProvider(): Generator
     {

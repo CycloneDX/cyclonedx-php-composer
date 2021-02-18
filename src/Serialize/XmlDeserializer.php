@@ -121,7 +121,7 @@ class XmlDeserializer extends AbstractSerialize implements DeserializerInterface
     }
 
     /**
-     * @return Generator<License>
+     * @psalm-return Generator<License>
      */
     public function licensesFromDom(DOMElement $element): Generator
     {
@@ -167,7 +167,7 @@ class XmlDeserializer extends AbstractSerialize implements DeserializerInterface
     }
 
     /**
-     * @return Generator<string, string>
+     * @psalm-return Generator<string, string>
      */
     public function hashesFromDom(DOMElement $element): Generator
     {
@@ -177,7 +177,7 @@ class XmlDeserializer extends AbstractSerialize implements DeserializerInterface
     }
 
     /**
-     * @return Generator<string, string>
+     * @psalm-return Generator<string, string>
      */
     public function hashFromDom(DOMElement $element): Generator
     {

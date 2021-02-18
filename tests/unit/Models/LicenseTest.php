@@ -14,7 +14,7 @@ use PHPUnit\Framework\TestCase;
  */
 class LicenseTest extends TestCase
 {
-    /** @var License */
+    /** @psalm-var License */
     private $license;
 
     public function setUp(): void

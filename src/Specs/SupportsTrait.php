@@ -15,7 +15,7 @@ trait SupportsTrait
     }
 
     /**
-     * @return list<string>
+     * @psalm-return list<string>
      */
     public function getSupportedComponentTypes(): array
     {
@@ -28,7 +28,7 @@ trait SupportsTrait
     }
 
     /**
-     * @return list<string>
+     * @psalm-return list<string>
      */
     public function getSupportedHashAlgorithms(): array
     {

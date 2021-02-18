@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
 class ShippedLicensesTest extends TestCase
 {
     /**
-     * @var string
+     * @psalm-var string
      */
     private $file;
 

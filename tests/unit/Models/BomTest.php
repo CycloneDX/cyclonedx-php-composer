@@ -14,7 +14,7 @@ use PHPUnit\Framework\TestCase;
  */
 class BomTest extends TestCase
 {
-    /** @var Bom */
+    /** @psalm-var Bom */
     private $bom;
 
     public function setUp(): void
@@ -25,7 +25,7 @@ class BomTest extends TestCase
     }
 
     /**
-     * @param Component[] $components
+     * @psalm-param Component[] $components
      *
      * @dataProvider componentDataProvider()
      */
@@ -36,7 +36,7 @@ class BomTest extends TestCase
     }
 
     /**
-     * @return Generator<array{array<Component>}>
+     * @psalm-return Generator<array{array<Component>}>
      */
     public function componentDataProvider(): Generator
     {

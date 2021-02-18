@@ -53,7 +53,7 @@ class JsonDeserializer extends AbstractSerialize implements DeserializerInterfac
     }
 
     /**
-     * @param array<string, mixed> $json
+     * @psalm-param array<string, mixed> $json
      */
     public function bomFromJson(array $json): Bom
     {
@@ -68,7 +68,7 @@ class JsonDeserializer extends AbstractSerialize implements DeserializerInterfac
     }
 
     /**
-     * @param array<string, mixed> $json
+     * @psalm-param array<string, mixed> $json
      */
     public function componentFromJson(array $json): Component
     {
@@ -80,9 +80,9 @@ class JsonDeserializer extends AbstractSerialize implements DeserializerInterfac
     }
 
     /**
-     * @param array<array<string, mixed>> $json
+     * @psalm-param array<array<string, mixed>> $json
      *
-     * @return Generator<License>
+     * @psalm-return Generator<License>
      */
     public function licensesFromJson(array $json): Generator
     {
@@ -97,7 +97,7 @@ class JsonDeserializer extends AbstractSerialize implements DeserializerInterfac
     }
 
     /**
-     * @param array<string, mixed> $json
+     * @psalm-param array<string, mixed> $json
      */
     public function licenseFromJson(array $json): License
     {
@@ -106,9 +106,9 @@ class JsonDeserializer extends AbstractSerialize implements DeserializerInterfac
     }
 
     /**
-     * @param array<string, mixed> $json
+     * @psalm-param array<string, mixed> $json
      *
-     * @return Generator<string, string>
+     * @psalm-return Generator<string, string>
      */
     public function hashesFromJson(array $json): Generator
     {

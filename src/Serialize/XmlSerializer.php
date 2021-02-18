@@ -135,9 +135,9 @@ class XmlSerializer extends AbstractSerialize implements SerializerInterface
     }
 
     /**
-     * @param array<string, string> $hashes
+     * @psalm-param array<string, string> $hashes
      *
-     * @return Generator<DOMElement>
+     * @psalm-return Generator<DOMElement>
      */
     public function hashesToDom(DOMDocument $document, array $hashes): Generator
     {

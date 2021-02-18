@@ -13,7 +13,7 @@ use PHPUnit\Framework\TestCase;
  */
 class ComponentTest extends TestCase
 {
-    /** @var Component */
+    /** @psalm-var Component */
     private $component;
 
     public function setUp(): void

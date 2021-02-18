@@ -66,7 +66,7 @@ class JsonSerializer extends AbstractSerialize implements SerializerInterface
     }
 
     /**
-     * @param mixed|null $value
+     * @psalm-param mixed|null $value
      */
     private function isNotNull($value): bool
     {
@@ -76,7 +76,7 @@ class JsonSerializer extends AbstractSerialize implements SerializerInterface
     /**
      * @throws DomainException when a component's type is unsupported
      *
-     * @return array<string, mixed>
+     * @psalm-return array<string, mixed>
      */
     public function bomToJson(Bom $bom): array
     {
@@ -94,7 +94,7 @@ class JsonSerializer extends AbstractSerialize implements SerializerInterface
     /**
      * @throws DomainException
      *
-     * @return array<string, mixed>
+     * @psalm-return array<string, mixed>
      */
     public function componentToJson(Component $component): array
     {
@@ -119,9 +119,9 @@ class JsonSerializer extends AbstractSerialize implements SerializerInterface
     }
 
     /**
-     * @param License[] $licenses
+     * @psalm-param License[] $licenses
      *
-     * @return Generator<array{license: array<string, mixed>}>
+     * @psalm-return Generator<array{license: array<string, mixed>}>
      */
     public function licensesToJson(array $licenses): Generator
     {
@@ -131,7 +131,7 @@ class JsonSerializer extends AbstractSerialize implements SerializerInterface
     }
 
     /**
-     * @return array<string, mixed>
+     * @psalm-return array<string, mixed>
      */
     public function licenseToJson(License $license): array
     {
@@ -146,9 +146,9 @@ class JsonSerializer extends AbstractSerialize implements SerializerInterface
     }
 
     /**
-     * @param array<string, string> $hashes
+     * @psalm-param array<string, string> $hashes
      *
-     * @return Generator<array{alg: string, content: string}>
+     * @psalm-return Generator<array{alg: string, content: string}>
      */
     public function hashesToJson(array $hashes): Generator
     {
@@ -165,7 +165,7 @@ class JsonSerializer extends AbstractSerialize implements SerializerInterface
     /**
      * @throws DomainException if hash is not supported by spec. Code 1: algorithm unsupported Code 2:  content unsupported
      *
-     * @return array{alg: string, content: string}
+     * @psalm-return array{alg: string, content: string}
      */
     public function hashToJson(string $algorithm, string $content): array
     {

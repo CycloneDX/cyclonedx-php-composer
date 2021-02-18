@@ -14,14 +14,14 @@ interface SpecInterface
     public function isSupportedComponentType(string $classification): bool;
 
     /**
-     * @return list<string>
+     * @psalm-return list<string>
      */
     public function getSupportedComponentTypes(): array;
 
     public function isSupportedHashAlgorithm(string $alg): bool;
 
     /**
-     * @return list<string>
+     * @psalm-return list<string>
      */
     public function getSupportedHashAlgorithms(): array;
 

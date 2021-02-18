@@ -89,13 +89,13 @@ class BomCommand extends BaseCommand
             false !== $input->getOption($this::OPTION_EXCLUDE_PLUGINS)
         );
 
-        /* @var string|null $outputFile */
+        /* @psalm-var string|null $outputFile */
         $outputFile = $input->getOption($this::OPTION_OUTPUT_FILE);
         if (false === is_string($outputFile) || '' === $outputFile) {
             $outputFile = null;
         }
 
-        /* @var \CycloneDX\Serialize\AbstractSerialize $bomWriter */
+        /* @psalm-var \CycloneDX\Serialize\AbstractSerialize $bomWriter */
         if (false === $input->getOption($this::OPTION_JSON)) {
             $outputFile = $outputFile ?? self::OUTPUT_FILE_DEFAULT_JSON;
             $bomWriter = new XmlSerializer(new Spec11());
@@ -104,7 +104,7 @@ class BomCommand extends BaseCommand
             $bomWriter = new JsonSerializer(new Spec12());
         }
 
-        /* @var \CycloneDX\Serialize\SerializerInterface $bomWriter */
+        /* @psalm-var \CycloneDX\Serialize\SerializerInterface $bomWriter */
         $output->writeln('<info>Serializing BOM</info>');
         $bomContents = $bomWriter->serialize($bom, true);
 

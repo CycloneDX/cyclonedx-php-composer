@@ -12,7 +12,7 @@ abstract class AbstractSerialize
     // region spec
 
     /**
-     * @var SpecInterface
+     * @psalm-var SpecInterface
      */
     protected $spec;
 
@@ -22,7 +22,7 @@ abstract class AbstractSerialize
     }
 
     /**
-     * @return $this
+     * @psalm-return $this
      */
     public function setSpec(SpecInterface $spec): self
     {

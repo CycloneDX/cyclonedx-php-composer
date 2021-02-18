@@ -15,7 +15,7 @@ use Generator;
 trait SimpleDomTrait
 {
     /**
-     * @param iterable<string, mixed|null> $attributes
+     * @psalm-param iterable<string, mixed|null> $attributes
      */
     private function simpleDomSetAttributes(DOMElement $element, iterable $attributes): DOMElement
     {
@@ -31,7 +31,7 @@ trait SimpleDomTrait
     }
 
     /**
-     * @param iterable<?DOMNode> $children
+     * @psalm-param iterable<?DOMNode> $children
      */
     private function simpleDomAppendChildren(DOMElement $element, iterable $children): DOMElement
     {
@@ -45,8 +45,8 @@ trait SimpleDomTrait
     }
 
     /**
-     * @param int|float|string|null $data
-     * @param bool                  $null whether to return null wgen `$data` is null
+     * @psalm-param int|float|string|null $data
+     * @psalm-param bool                  $null whether to return null wgen `$data` is null
      */
     private function simpleDomSaveTextElement(DOMDocument $document, string $name, $data, bool $null = true): ?DOMElement
     {
@@ -61,9 +61,9 @@ trait SimpleDomTrait
     }
 
     /**
-     * @param iterable<scalar, mixed> $items
+     * @psalm-param iterable<scalar, mixed> $items
      *
-     * @return Generator<mixed>
+     * @psalm-return Generator<mixed>
      */
     private function simpleDomDocumentMap(DOMDocument $document, callable $callback, iterable $items): Generator
     {
@@ -84,7 +84,7 @@ trait SimpleDomTrait
      *
      * Needed since `$element->getElementsByTagName()` would also find tags in nested children.
      *
-     * @return Generator<DOMElement>
+     * @psalm-return Generator<DOMElement>
      */
     private function simpleDomGetChildElements(DOMElement $element): Generator
     {
