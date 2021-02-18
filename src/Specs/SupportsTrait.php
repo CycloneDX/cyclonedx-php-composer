@@ -14,6 +14,9 @@ trait SupportsTrait
         return in_array($classification, self::COMPONENT_TYPES, true);
     }
 
+    /**
+     * @return list<string>
+     */
     public function getSupportedComponentTypes(): array
     {
         return self::COMPONENT_TYPES;
@@ -24,6 +27,9 @@ trait SupportsTrait
         return in_array($alg, self::HASH_ALGORITHMS, true);
     }
 
+    /**
+     * @return list<string>
+     */
     public function getSupportedHashAlgorithms(): array
     {
         return self::HASH_ALGORITHMS;

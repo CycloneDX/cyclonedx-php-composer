@@ -11,7 +11,8 @@
 /phpunit.xml
 /.phpunit.cache/
 
-/phpstan.neon
+/psalm.xml
+/.psalm.cache/
 
 
 # these are the target of test tools and such

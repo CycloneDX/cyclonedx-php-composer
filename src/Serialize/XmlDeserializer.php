@@ -56,7 +56,7 @@ class XmlDeserializer extends AbstractSerialize implements DeserializerInterface
             $options |= LIBXML_PARSEHUGE;
         }
         $loaded = $dom->loadXML($data, $options);
-        if (false === $loaded || null === $dom->documentElement) {
+        if (false === $loaded) {
             throw new InvalidArgumentException('does not deserialize to expected structure');
         }
 

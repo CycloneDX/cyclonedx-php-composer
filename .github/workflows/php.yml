@@ -78,10 +78,9 @@ jobs:
         run: >
           php
           ./tools/psalm/bin/psalm
-          analyse
-          --verbose
-          --no-progress
-          --no-interaction
+          --no-diff
+          --long-progress
+          --report=${{ env.REPORTS_DIR }}/psalm.${{ matrix.os }}_php${{ matrix.php }}_${{ matrix.stability }}.junit.xml
       - name: Run phpunit tests
         run: >
           php

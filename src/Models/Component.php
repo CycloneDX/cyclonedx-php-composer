@@ -214,12 +214,12 @@ class Component
     }
 
     /**
-     * @param array<string, string> $hashes array<$algorithm, $content>
+     * @param array<string,string> $hashes
      *
-     * @throws DomainException          if any of hashes' keys is not in {@see HashAlgorithm}
+     * @throws DomainException          if any of hashes' keys is not in {@see HashAlgorithm}'s constants list
      * @throws InvalidArgumentException if any of hashes' values is not a string
      *
-     * @return $this;
+     * @return $this
      */
     public function setHashes(array $hashes): self
     {

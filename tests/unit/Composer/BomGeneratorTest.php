@@ -15,13 +15,13 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class BomGeneratorTest extends TestCase
 {
-    /**
-     * @var BomGenerator
-     */
+
+    /** @var BomGenerator  */
     private $bomGenerator;
 
     /**
      * @var \PHPUnit\Framework\MockObject\MockObject|OutputInterface
+     * @psalm-var \PHPUnit\Framework\MockObject\MockObject&OutputInterface
      */
     private $outputMock;
 

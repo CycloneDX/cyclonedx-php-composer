@@ -29,7 +29,6 @@ class JasonSerializeTest extends TestCase
 
         $data = $serializer->hashToJson($hash['alg'], $hash['content']);
 
-        self::assertIsArray($data);
         self::assertEquals($hash, $data);
     }
 
