@@ -195,7 +195,6 @@ class Component
     public function setLicenses(array $licenses): self
     {
         foreach ($licenses as $license) {
-            /* @phpstan-ignore-next-line */
             if (false === $license instanceof License) {
                 throw new InvalidArgumentException('Not a License: '.var_export($license, true));
             }
@@ -228,7 +227,6 @@ class Component
             if (false === in_array($alg, $algorithms, true)) {
                 throw new DomainException("Unknown hash algorithm: {$alg}");
             }
-            /* @phpstan-ignore-next-line */
             if (false === is_string($content)) {
                 throw new InvalidArgumentException("Hash content for '{$alg}' is not string.");
             }

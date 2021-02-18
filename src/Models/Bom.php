@@ -68,7 +68,6 @@ class Bom
     public function setComponents(array $components): self
     {
         foreach ($components as $component) {
-            /* @phpstan-ignore-next-line */
             if (false === $component instanceof Component) {
                 throw new InvalidArgumentException('Not a Component: '.var_export($component, true));
             }
