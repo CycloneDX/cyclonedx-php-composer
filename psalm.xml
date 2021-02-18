@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<psalm
+    xmlns="https://getpsalm.org/schema/config"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://getpsalm.org/schema/config tools/psalm/vendor/vimeo/psalm/config.xsd"
+    errorLevel="3"
+    resolveFromConfigFile="true"
+>
+    <projectFiles>
+        <directory name="src"/>
+        <directory name="tests"/>
+        <ignoreFiles>
+            <directory name="vendor"/>
+            <directory name="tools"/>
+        </ignoreFiles>
+    </projectFiles>
+    <plugins>
+        <pluginClass class="Psalm\PhpUnitPlugin\Plugin"/>
+    </plugins>
+</psalm>

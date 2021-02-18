@@ -43,7 +43,7 @@
     },
     "scripts": {
         "test:phpunit": "phpunit",
-        "test:phpstan": "@php tools/phpstan/bin/phpstan analyse" ,
+        "test:psalm": "@php tools/psalm/bin/psalm" ,
         "test:cs-fixer": "@php tools/php-cs-fixer fix --dry-run --diff-format=udiff",
         "test": [
             "@test:phpstan",
@@ -53,13 +53,13 @@
         "cs-fix": "@php tools/php-cs-fixer fix --diff-format=udiff",
         "dev-setup": [
             "@composer install",
-            "@composer -dtools/phpstan install"
+            "@composer -dtools/psalm install"
         ]
     },
     "scripts-descriptions": {
         "test": "Run all tests!",
         "test:phpunit": "Run tests with PHPUnit.",
-        "test:phpstan": "Run static code analysis with PHPStan.",
+        "test:psalm": "Run static code analysis with Psalm.",
         "test:cs-fixer": "Test coding standards with PHP-CS-fixer.",
         "cs-fix": "Fix files according to coding standards.",
         "dev-setup": "Setup this project for development."
