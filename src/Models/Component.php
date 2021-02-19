@@ -70,7 +70,7 @@ class Component
      * Refer to the {@link https://cyclonedx.org/schema/bom/1.1 bom:classification documentation}
      * for information describing each one.
      *
-     * @psalm-var string
+     * @psalm-var Classification::*
      */
     private $type;
 
@@ -95,7 +95,7 @@ class Component
      *
      * Specifies the file hashes of the component.
      *
-     * @psalm-var array<string, string>
+     * @psalm-var array<HashAlgorithm::*, string>
      */
     private $hashes = [];
 
@@ -139,17 +139,22 @@ class Component
         return $this;
     }
 
+    /**
+     * @psalm-return Classification::*
+     */
     public function getType(): string
     {
         return $this->type;
     }
 
     /**
-     * @psalm-param string $type For a ist of Valid values see {@see Classification}
+     * @psalm-param Classification::*|string $type For a ist of Valid values see {@see Classification}
      *
      * @throws DomainException if value is unknown
      *
      * @psalm-return $this
+     *
+     * @psalm-suppress PropertyTypeCoercion
      */
     public function setType(string $type): self
     {
@@ -199,13 +204,24 @@ class Component
                 throw new InvalidArgumentException('Not a License: '.var_export($license, true));
             }
         }
+
         $this->licenses = array_values($licenses);
 
         return $this;
     }
 
     /**
-     * @psalm-return array<string, string>
+     * @psalm-return $this
+     */
+    public function addLicense(License ...$licenses): self
+    {
+        array_push($this->licenses, ...array_values($licenses));
+
+        return $this;
+    }
+
+    /**
+     * @psalm-return array<HashAlgorithm::*, string>
      */
     public function getHashes(): array
     {
@@ -213,25 +229,47 @@ class Component
     }
 
     /**
-     * @psalm-param array<string,string> $hashes
+     * @psalm-param array<HashAlgorithm::*|string, string> $hashes
      *
      * @throws DomainException          if any of hashes' keys is not in {@see HashAlgorithm}'s constants list
      * @throws InvalidArgumentException if any of hashes' values is not a string
      *
      * @psalm-return $this
+     *
+     * @psalm-suppress PropertyTypeCoercion
      */
     public function setHashes(array $hashes): self
     {
         $algorithms = (new \ReflectionClass(HashAlgorithm::class))->getConstants();
-        foreach ($hashes as $alg => $content) {
-            if (false === in_array($alg, $algorithms, true)) {
-                throw new DomainException("Unknown hash algorithm: {$alg}");
+        foreach ($hashes as $algorithm => $content) {
+            if (false === in_array($algorithm, $algorithms, true)) {
+                throw new DomainException("Unknown hash algorithm: {$algorithm}");
             }
             if (false === is_string($content)) {
-                throw new InvalidArgumentException("Hash content for '{$alg}' is not string.");
+                throw new InvalidArgumentException("Hash content for '{$algorithm}' is not string.");
             }
         }
         $this->hashes = $hashes;
+
+        return $this;
+    }
+
+    /**
+     * @psalm-param HashAlgorithm::*|string $algorithm
+     *
+     * @throws DomainException if any of hashes' keys is not in {@see HashAlgorithm}'s constants list
+     *
+     * @psalm-return $this
+     *
+     * @psalm-suppress PropertyTypeCoercion
+     */
+    public function setHash(string $algorithm, string $content): self
+    {
+        $algorithms = (new \ReflectionClass(HashAlgorithm::class))->getConstants();
+        if (false === in_array($algorithm, $algorithms, true)) {
+            throw new DomainException("Unknown hash algorithm: {$algorithm}");
+        }
+        $this->hashes[$algorithm] = $content;
 
         return $this;
     }
@@ -267,11 +305,11 @@ class Component
     }
 
     /**
-     * Component constructor.
-     *
      * @see \CycloneDX\Models\Component::setType()
      * @see \CycloneDX\Models\Component::setName()
      * @see \CycloneDX\Models\Component::setVersion()
+     *
+     * @psalm-param Classification::*|string $type
      */
     public function __construct(string $type, string $name, string $version)
     {

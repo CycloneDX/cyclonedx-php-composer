@@ -71,9 +71,9 @@ abstract class BomModelProvider
      */
     public static function bomWithComponentPlain(): Generator
     {
-        yield 'component: plain' => [(new Bom())->setComponents([
-            (new Component(Classification::LIBRARY, 'name', 'version')),
-        ])];
+        yield 'component: plain' => [(new Bom())->addComponent(
+            new Component(Classification::LIBRARY, 'name', 'version')
+        )];
     }
 
     /**
@@ -84,10 +84,10 @@ abstract class BomModelProvider
     public static function bomWithComponentLicenseId(): Generator
     {
         $license = 'MIT';
-        yield "license: ${license}" => [(new Bom())->setComponents([
+        yield "license: ${license}" => [(new Bom())->addComponent(
             (new Component(Classification::LIBRARY, 'name', 'version'))
-                ->setLicenses([new License($license)]),
-        ])];
+                ->addLicense(new License($license))
+        )];
     }
 
     /**
@@ -97,10 +97,10 @@ abstract class BomModelProvider
      */
     public static function bomWithComponentLicenseName(): Generator
     {
-        yield 'license: random' => [(new Bom())->setComponents([
+        yield 'license: random' => [(new Bom())->addComponent(
             (new Component(Classification::LIBRARY, 'name', 'version'))
-                ->setLicenses([new License('random '.bin2hex(random_bytes(32)))]),
-        ])];
+                ->addLicense(new License('random '.bin2hex(random_bytes(32))))
+        )];
     }
 
     /**
@@ -108,13 +108,13 @@ abstract class BomModelProvider
      */
     public static function bomWithComponentLicenseUrl(): Generator
     {
-        yield 'License with URL' => [(new Bom())->setComponents([
+        yield 'License with URL' => [(new Bom())->addComponent(
             (new Component(Classification::LIBRARY, 'name', 'version'))
-                ->setLicenses([
+                ->addLicense(
                     (new License('some text'))
                         ->setUrl('https://example.com/license'),
-                ]),
-        ])];
+                )
+        )];
     }
 
     /**
@@ -126,9 +126,9 @@ abstract class BomModelProvider
     {
         $versions = ['1.0', 'dev-master'];
         foreach ($versions as $version) {
-            yield "version: {$version}" => [(new Bom())->setComponents([
+            yield "version: {$version}" => [(new Bom())->addComponent(
                 new Component(Classification::LIBRARY, 'name', $version),
-            ])];
+            )];
         }
     }
 
@@ -136,6 +136,8 @@ abstract class BomModelProvider
      * BOMs with all hash algorithms available.
      *
      * @psalm-return Generator<array{Bom}>
+     *
+     * @psalm-suppress InvalidArgument
      */
     public static function bomWithComponentAllHashAlgorithms(): Generator
     {
@@ -175,7 +177,7 @@ abstract class BomModelProvider
     /**
      * BOMs with all hash algorithms available in a spec.
      *
-     * @psalm-param string[] $hashAlgorithms
+     * @psalm-param list<HashAlgorithm::*> $hashAlgorithms
      *
      * @psalm-return Generator<array{Bom}>
      */
@@ -183,10 +185,10 @@ abstract class BomModelProvider
     {
         $hashAlgorithms = array_unique($hashAlgorithms, SORT_STRING);
         $label = implode(',', $hashAlgorithms);
-        yield "hash algs: {{$label}}" => [(new Bom())->setComponents([
+        yield "hash algs: {{$label}}" => [(new Bom())->addComponent(
             (new Component(Classification::LIBRARY, 'name', '1.0'))
-                ->setHashes(array_fill_keys($hashAlgorithms, '12345678901234567890123456789012')),
-        ])];
+                ->setHashes(array_fill_keys($hashAlgorithms, '12345678901234567890123456789012'))
+        )];
     }
 
     /**
@@ -198,9 +200,13 @@ abstract class BomModelProvider
      */
     public static function bomFromAssocLists(): Generator
     {
-        yield 'every list from assoc' => [(new Bom())->setComponents([
+        yield 'set every list from assoc' => [(new Bom())->setComponents([
             'myComponent' => (new Component(Classification::LIBRARY, 'name', '1.0'))
                 ->setLicenses(['myLicense' => new License('some license')]),
+        ])];
+        yield 'add every list from assoc' => [(new Bom())->addComponent(...[
+            'myComponent' => (new Component(Classification::LIBRARY, 'name', '1.0'))
+                ->addLicense(...['myLicense' => new License('some license')]),
         ])];
     }
 
@@ -211,29 +217,29 @@ abstract class BomModelProvider
      */
     public static function bomWithComponentDescription(): Generator
     {
-        yield 'description: none' => [(new Bom())->setComponents([
+        yield 'description: none' => [(new Bom())->addComponent(
             (new Component(Classification::LIBRARY, 'name', '1.0'))
-                ->setDescription(null),
-        ])];
-        yield 'description: empty' => [(new Bom())->setComponents([
+                ->setDescription(null)
+        )];
+        yield 'description: empty' => [(new Bom())->addComponent(
             (new Component(Classification::LIBRARY, 'name', '1.0'))
-                ->setDescription(''),
-        ])];
-        yield 'description: random' => [(new Bom())->setComponents([
+                ->setDescription('')
+        )];
+        yield 'description: random' => [(new Bom())->addComponent(
             (new Component(Classification::LIBRARY, 'name', '1.0'))
-                ->setDescription(bin2hex(random_bytes(255))),
-        ])];
-        yield 'description: spaces' => [(new Bom())->setComponents([
+                ->setDescription(bin2hex(random_bytes(255)))
+        )];
+        yield 'description: spaces' => [(new Bom())->addComponent(
             (new Component(Classification::LIBRARY, 'name', '1.0'))
-                ->setDescription("\ta  test   "),
-        ])];
-        yield 'description: XML special chars' => [(new Bom())->setComponents([
+                ->setDescription("\ta  test   ")
+        )];
+        yield 'description: XML special chars' => [(new Bom())->addComponent(
             (new Component(Classification::LIBRARY, 'name', '1.0'))
                 ->setDescription(
                     'thisa&that'. // an & that is not a XML entity
                     '<strong>html<strong>'. // things that might cause schema-invalid XML
                     'bar ]]><[CDATA[baz]]> foo' // unexpected CDATA end
-                ),
-        ])];
+                )
+        )];
     }
 }

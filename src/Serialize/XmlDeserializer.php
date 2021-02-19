@@ -71,7 +71,7 @@ class XmlDeserializer extends AbstractSerialize implements DeserializerInterface
         $bom->setVersion((int) $this->simpleDomGetAttribute('version', $element, '1'));
         foreach ($this->simpleDomGetChildElements($element) as $childElement) {
             if ('components' === $childElement->tagName) {
-                $bom->setComponents(array_map(
+                $bom->addComponent(...array_map(
                     [$this, 'componentFromDom'],
                     iterator_to_array($this->simpleDomGetChildElements($childElement))
                 ));
@@ -83,8 +83,12 @@ class XmlDeserializer extends AbstractSerialize implements DeserializerInterface
 
     public function componentFromDom(DOMElement $element): Component
     {
-        $name = $version = null; // essentials
-        $group = $description = $licenses = $hashes = null; // non-essentials
+        $name = null;
+        $version = null;
+        $group = null;
+        $description = null;
+        $hashes = null;
+        $licenses = [];
         foreach ($this->simpleDomGetChildElements($element) as $childElement) {
             switch ($childElement->nodeName) {
                 case 'name':
@@ -100,10 +104,10 @@ class XmlDeserializer extends AbstractSerialize implements DeserializerInterface
                     $description = $childElement->nodeValue;
                     break;
                 case 'licenses':
-                    $licenses = iterator_to_array($this->licensesFromDom($childElement));
+                    $licenses = $this->licensesFromDom($childElement);
                     break;
                 case 'hashes':
-                    $hashes = iterator_to_array($this->hashesFromDom($childElement));
+                    $hashes = $this->hashesFromDom($childElement);
                     break;
             }
         }
@@ -116,8 +120,8 @@ class XmlDeserializer extends AbstractSerialize implements DeserializerInterface
         return (new Component($type, $name, $version))
             ->setGroup($group)
             ->setDescription($description)
-            ->setLicenses($licenses ?? [])
-            ->setHashes($hashes ?? []);
+            ->addLicense(...$licenses)
+            ->setHashes(null === $hashes ? [] : iterator_to_array($hashes));
     }
 
     /**

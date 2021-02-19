@@ -102,7 +102,7 @@ class BomGenerator
         $components = array_map([$this, 'buildComponent'], $packages);
 
         return (new Bom())
-            ->setComponents($components);
+            ->addComponent(...$components);
     }
 
     /**
@@ -128,13 +128,13 @@ class BomGenerator
         $component = (new Component(Classification::LIBRARY, $name, $version))
             ->setGroup($vendor)
             ->setDescription($package['description'] ?? null)
-            ->setLicenses(array_map(
+            ->addLicense(...array_map(
                 static function (string $license): License { return new License($license); },
                 $this->splitLicenses($package['license'] ?? [])
             ));
 
         if (!empty($package['dist']['shasum'])) {
-            $component->setHashes([HashAlgorithm::SHA_1 => $package['dist']['shasum']]);
+            $component->setHash(HashAlgorithm::SHA_1, $package['dist']['shasum']);
         }
 
         return $component;

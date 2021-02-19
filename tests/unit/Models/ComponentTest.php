@@ -42,11 +42,13 @@ class ComponentTest extends TestCase
         $this->component = new Component(Classification::LIBRARY, 'name', 'version');
     }
 
+    /**
+     * @psalm-suppress InvalidArgument
+     */
     public function testSetTypeWithUnknownValue(): void
     {
         $this->expectException(\DomainException::class);
         $this->component->setType('something unknown');
-        $this->component->setType('');
     }
 
     public function testPackageUrlWithGroup(): void

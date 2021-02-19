@@ -59,8 +59,8 @@ class JsonDeserializer extends AbstractSerialize implements DeserializerInterfac
     {
         return (new Bom())
             ->setVersion($json['version'] ?? 1)
-            ->setComponents(
-                array_map(
+            ->addComponent(
+                ...array_map(
                     [$this, 'componentFromJson'],
                     $json['components'] ?? []
                 )
@@ -75,7 +75,7 @@ class JsonDeserializer extends AbstractSerialize implements DeserializerInterfac
         return (new Component($json['type'], $json['name'], $json['version']))
             ->setGroup($json['group'] ?? null)
             ->setDescription($json['description'] ?? null)
-            ->setLicenses(iterator_to_array($this->licensesFromJson($json['licenses'] ?? [])))
+            ->addLicense(...$this->licensesFromJson($json['licenses'] ?? []))
             ->setHashes(iterator_to_array($this->hashesFromJson($json['hashes'] ?? [])));
     }
 

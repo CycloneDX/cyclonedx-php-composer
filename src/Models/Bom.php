@@ -72,7 +72,16 @@ class Bom
                 throw new InvalidArgumentException('Not a Component: '.var_export($component, true));
             }
         }
-        $this->components = array_values($components);
+
+        return $this;
+    }
+
+    /**
+     * @psalm-return $this
+     */
+    public function addComponent(Component ...$components): self
+    {
+        array_push($this->components, ...array_values($components));
 
         return $this;
     }

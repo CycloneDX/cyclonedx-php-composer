@@ -34,7 +34,7 @@ trait SupportsTrait
     }
 
     /**
-     * @psalm-return list<string>
+     * @psalm-return list<\ CycloneDX\Enums\Classification::*>
      */
     public function getSupportedComponentTypes(): array
     {
@@ -47,7 +47,7 @@ trait SupportsTrait
     }
 
     /**
-     * @psalm-return list<string>
+     * @psalm-return list<\CycloneDX\Enums\HashAlgorithm::*>
      */
     public function getSupportedHashAlgorithms(): array
     {

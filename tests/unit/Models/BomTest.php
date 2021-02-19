@@ -50,7 +50,7 @@ class BomTest extends TestCase
      */
     public function testComponentsSetterGetter(array $components): void
     {
-        $this->bom->setComponents($components);
+        $this->bom->addComponent(...$components);
         self::assertEquals($components, $this->bom->getComponents());
     }
 
