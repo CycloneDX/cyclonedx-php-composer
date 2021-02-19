@@ -69,11 +69,12 @@ class BomCommand extends BaseCommand
 
     /**
      * @psalm-suppress MissingThrowsDocblock - Exceptions are handled by caller
+     * @psalm-suppress DocblockTypeContradiction - Needed to assert `null !== $composer`
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $composer = $this->getComposer();
-        if (null == $composer) {
+        if (null === $composer) {
             // earlier versions of composer may return `null` instead of throwing an error.
             $output->writeln('<error>Composer does not exist</error>');
 
