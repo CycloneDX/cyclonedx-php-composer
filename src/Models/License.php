@@ -103,12 +103,14 @@ class License
      * the {@see getId()} returns a string and the {@see getName{}} returns `null`.
      * Else: the {@see getname{}} returns a string and the {@see getId{}} returns `null`.
      *
-     * @psalm-param string $nameOrId name or ID of a license
-     *
      * @see \CycloneDX\Spdx\License::validate()
      * @see \CycloneDX\Spdx\License::getLicense()
      *
-     * @psalm-return $this
+     * @param string $nameOrId name or ID of a license
+     *
+     * @throws \RuntimeException if loading known SPDX licenses failed
+     *
+     * @return $this
      */
     public function setNameOrId(string $nameOrId): self
     {
@@ -128,6 +130,8 @@ class License
      * License constructor.
      *
      * @see \CycloneDX\Models\License::setNameOrVersion()
+     *
+     * @throws \RuntimeException if loading known SPDX licenses failed
      */
     public function __construct(string $nameOrId)
     {

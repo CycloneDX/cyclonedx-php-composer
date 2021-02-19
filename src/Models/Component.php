@@ -310,6 +310,8 @@ class Component
      * @see \CycloneDX\Models\Component::setVersion()
      *
      * @psalm-param Classification::*|string $type
+     *
+     * @throws DomainException if type is unknown
      */
     public function __construct(string $type, string $name, string $version)
     {

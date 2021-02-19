@@ -38,15 +38,17 @@ class JsonDeserializer extends AbstractSerialize implements DeserializerInterfac
     // region DeserializerInterface
 
     /**
-     * @throws InvalidArgumentException
-     * @throws JsonException
+     * @throws JsonException            if json is not loadable
+     * @throws \DomainException         if a component's type is unknown
+     * @throws \DomainException         if any of a component's hashes' keys is not in {@see HashAlgorithm}'s constants list
+     * @throws InvalidArgumentException if any of a component's hashes' values is not a string
      */
     public function deserialize(string $data): Bom
     {
         // @TODO validate schema?
         $json = json_decode($data, true, 512, JSON_THROW_ON_ERROR);
         if (false === is_array($json)) {
-            throw new InvalidArgumentException('does not deserialize to expected structure');
+            throw new JsonException('does not deserialize to expected structure');
         }
 
         return $this->bomFromJson($json);
@@ -54,6 +56,10 @@ class JsonDeserializer extends AbstractSerialize implements DeserializerInterfac
 
     /**
      * @psalm-param array<string, mixed> $json
+     *
+     * @throws \DomainException         if a component's type is unknown
+     * @throws \DomainException         if any of a component's hashes' keys is not in {@see HashAlgorithm}'s constants list
+     * @throws InvalidArgumentException if any of a component's hashes' values is not a string
      */
     public function bomFromJson(array $json): Bom
     {
@@ -69,6 +75,10 @@ class JsonDeserializer extends AbstractSerialize implements DeserializerInterfac
 
     /**
      * @psalm-param array<string, mixed> $json
+     *
+     * @throws \DomainException         if type is unknown
+     * @throws \DomainException         if any of component's hashes' keys is not in {@see HashAlgorithm}'s constants list
+     * @throws InvalidArgumentException if any of component's hashes' values is not a string
      */
     public function componentFromJson(array $json): Component
     {
@@ -98,6 +108,9 @@ class JsonDeserializer extends AbstractSerialize implements DeserializerInterfac
 
     /**
      * @psalm-param array<string, mixed> $json
+     *
+     * @throws InvalidArgumentException if URL is invalid
+     * @throws \RuntimeException        if loading known SPDX licenses failed
      */
     public function licenseFromJson(array $json): License
     {

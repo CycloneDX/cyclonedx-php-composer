@@ -91,6 +91,9 @@ class BomGenerator
      * @psalm-param bool                 $excludeDev     Exclude Dev dependencies
      * @psalm-param bool                 $excludePlugins Exclude composer plugins
      *
+     * @throws UnexpectedValueException if a package does not provide a name or version
+     * @throws \DomainException         if the bom structure had unexpected values
+     *
      * @psalm-return Bom The resulting BOM
      */
     public function generateBom(array $lockData, bool $excludeDev, bool $excludePlugins): Bom
@@ -108,7 +111,8 @@ class BomGenerator
     /**
      * @psalm-param array<string, mixed> $package The lockData's package data to build a component from
      *
-     * @throws UnexpectedValueException When the given package does not provide a name or version
+     * @throws UnexpectedValueException if the given package does not provide a name or version
+     * @throws \DomainException         if the bom structure had unexpected values
      *
      * @psalm-return Component The resulting component
      */

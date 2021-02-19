@@ -53,6 +53,9 @@ class BomCommand extends BaseCommand
     private const EXIT_MISSING_COMPOSER = 1;
     private const EXIT_MISSING_LOCK = 2;
 
+    /**
+     * @psalm-suppress MissingThrowsDocblock - Exceptions are handled by caller
+     */
     protected function configure(): void
     {
         $this->setName('make-bom')
@@ -64,6 +67,9 @@ class BomCommand extends BaseCommand
         $this->addOption(self::OPTION_JSON, null, InputOption::VALUE_NONE, 'Produce the BOM in JSON format (preview support)');
     }
 
+    /**
+     * @psalm-suppress MissingThrowsDocblock - Exceptions are handled by caller
+     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $composer = $this->getComposer();

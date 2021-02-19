@@ -52,7 +52,7 @@ class License
     }
 
     /**
-     * XmlLicense constructor.
+     * @throws RuntimeException if loading licenses failed
      */
     public function __construct()
     {

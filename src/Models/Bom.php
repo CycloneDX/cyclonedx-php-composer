@@ -94,7 +94,7 @@ class Bom
     /**
      * @psalm-param int $version a value >= 1
      *
-     * @throws DomainException
+     * @throws DomainException if version <= 0
      *
      * @psalm-return $this
      */

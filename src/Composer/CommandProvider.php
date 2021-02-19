@@ -28,6 +28,9 @@ namespace CycloneDX\Composer;
  */
 class CommandProvider implements \Composer\Plugin\Capability\CommandProvider
 {
+    /**
+     * @psalm-suppress MissingThrowsDocblock - Exceptions are handled by caller
+     */
     public function getCommands(): array
     {
         return [new BomCommand()];

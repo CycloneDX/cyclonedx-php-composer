@@ -42,7 +42,8 @@ class XmlDeserializer extends AbstractSerialize implements DeserializerInterface
     // region DeserializerInterface
 
     /**
-     * @throws InvalidArgumentException
+     * @throws \DOMException    if XML cannot be loaded
+     * @throws \DomainException if version <= 0
      */
     public function deserialize(string $data): Bom
     {
@@ -57,7 +58,7 @@ class XmlDeserializer extends AbstractSerialize implements DeserializerInterface
         }
         $loaded = $dom->loadXML($data, $options);
         if (false === $loaded) {
-            throw new InvalidArgumentException('does not deserialize to expected structure');
+            throw new \DOMException('does not deserialize to expected structure');
         }
 
         // @TODO normalize
@@ -65,6 +66,9 @@ class XmlDeserializer extends AbstractSerialize implements DeserializerInterface
         return $this->bomFromDom($dom->documentElement);
     }
 
+    /**
+     * @throws \DomainException if version <= 0
+     */
     public function bomFromDom(DOMElement $element): Bom
     {
         $bom = new Bom();
@@ -81,6 +85,10 @@ class XmlDeserializer extends AbstractSerialize implements DeserializerInterface
         return $bom;
     }
 
+    /**
+     * @throws \DomainException         if any of component's hashes' keys is not in {@see HashAlgorithm}'s constants list
+     * @throws InvalidArgumentException if any of component's hashes' values is not a string
+     */
     public function componentFromDom(DOMElement $element): Component
     {
         $name = null;
@@ -147,6 +155,10 @@ class XmlDeserializer extends AbstractSerialize implements DeserializerInterface
         }
     }
 
+    /**
+     * @throws InvalidArgumentException if URL is invalid
+     * @throws \RuntimeException        if loading known SPDX licenses failed
+     */
     public function licenseFromDom(DOMElement $element): License
     {
         $nameOrId = null; // essentials
