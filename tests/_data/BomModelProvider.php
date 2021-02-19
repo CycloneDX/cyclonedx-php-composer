@@ -204,6 +204,18 @@ abstract class BomModelProvider
             'myComponent' => (new Component(Classification::LIBRARY, 'name', '1.0'))
                 ->setLicenses(['myLicense' => new License('some license')]),
         ])];
+        if (version_compare(PHP_VERSION, '8.0.0') >= 0) {
+            yield 'add every list from assoc' => [
+                (new Bom())->addComponent(
+                    ...[
+                    'myComponent' => (new Component(Classification::LIBRARY, 'name', '1.0'))
+                        ->addLicense(...[
+                            'myLicense' => new License('some license'),
+                        ]),
+                ]
+                ),
+            ];
+        }
     }
 
     /**

@@ -81,7 +81,7 @@ class Bom
      */
     public function addComponent(Component ...$components): self
     {
-        array_push($this->components, ...array_values($components));
+        array_push($this->components, ...$components);
 
         return $this;
     }
