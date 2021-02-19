@@ -257,7 +257,7 @@ class Component
     /**
      * @psalm-param HashAlgorithm::*|string $algorithm
      *
-     * @throws DomainException if any of hashes' keys is not in {@see HashAlgorithm}'s constants list
+     * @throws DomainException if $algorithm is not in {@see HashAlgorithm}'s constants list
      *
      * @psalm-return $this
      *
