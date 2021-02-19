@@ -43,6 +43,7 @@ class Component
      * Examples: commons-lang3 and jquery
      *
      * @psalm-var string
+     * @psalm-suppress PropertyNotSetInConstructor
      */
     private $name;
 
@@ -71,6 +72,7 @@ class Component
      * for information describing each one.
      *
      * @psalm-var Classification::*
+     * @psalm-suppress PropertyNotSetInConstructor
      */
     private $type;
 
@@ -106,6 +108,7 @@ class Component
      * but is not enforced.
      *
      * @psalm-var string
+     * @psalm-suppress PropertyNotSetInConstructor
      */
     private $version;
 
@@ -191,7 +194,7 @@ class Component
     }
 
     /**
-     * @psalm-param License[] $licenses
+     * @psalm-assert License[] $licenses
      *
      * @throws InvalidArgumentException if list contains element that is not instance of {@see \CycloneDX\Models\License}
      *
@@ -229,7 +232,7 @@ class Component
     }
 
     /**
-     * @psalm-param array<HashAlgorithm::*|string, string> $hashes
+     * @psalm-assert array<HashAlgorithm::*, string> $hashes
      *
      * @throws DomainException          if any of hashes' keys is not in {@see HashAlgorithm}'s constants list
      * @throws InvalidArgumentException if any of hashes' values is not a string

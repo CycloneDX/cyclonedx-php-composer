@@ -43,7 +43,7 @@
     },
     "scripts": {
         "test:phpunit": "phpunit",
-        "test:psalm": "@php tools/psalm/bin/psalm" ,
+        "test:psalm": "@php tools/psalm/bin/psalm --show-info=true" ,
         "test:cs-fixer": "@php tools/php-cs-fixer fix --dry-run --diff-format=udiff",
         "test": [
             "@test:psalm",

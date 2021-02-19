@@ -35,6 +35,7 @@ class License
 
     /**
      * @psalm-var array<string, string>
+     * @psalm-suppress PropertyNotSetInConstructor
      */
     private $licenses;
 
@@ -71,6 +72,7 @@ class License
 
     /**
      * @throws RuntimeException
+     * @psalm-suppress RedundantConditionGivenDocblockType
      */
     private function loadLicenses(): void
     {

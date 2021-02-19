@@ -78,6 +78,7 @@ jobs:
         run: >
           php
           ./tools/psalm/bin/psalm
+          --show-info=true
           --no-diff
           --long-progress
           --report=${{ env.REPORTS_DIR }}/psalm.${{ matrix.os }}_php${{ matrix.php }}_${{ matrix.stability }}.junit.xml

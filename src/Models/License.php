@@ -106,11 +106,11 @@ class License
      * @see \CycloneDX\Spdx\License::validate()
      * @see \CycloneDX\Spdx\License::getLicense()
      *
-     * @param string $nameOrId name or ID of a license
+     * @psalm-param string $nameOrId name or ID of a license
      *
      * @throws \RuntimeException if loading known SPDX licenses failed
      *
-     * @return $this
+     * @salm-return $this
      */
     public function setNameOrId(string $nameOrId): self
     {

@@ -59,7 +59,7 @@ class Bom
     }
 
     /**
-     * @psalm-param Component[] $components
+     * @psalm-assert Component[] $components
      *
      * @throws InvalidArgumentException if list contains element that is not instance of {@see \CycloneDX\Models\Component}
      *
