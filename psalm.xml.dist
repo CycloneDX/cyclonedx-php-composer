@@ -2,16 +2,12 @@
 <psalm xmlns="https://getpsalm.org/schema/config"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="https://getpsalm.org/schema/config tools/psalm/vendor/vimeo/psalm/config.xsd"
-       errorLevel="3"
+       errorLevel="2"
        resolveFromConfigFile="true"
        checkForThrowsDocblock="true"
        cacheDirectory=".psalm.cache"
 >
     <projectFiles>
         <directory name="src"/>
-        <ignoreFiles>
-            <!-- tests are part of psalm-tests.xml.dist -->
-            <directory name="tests"/>
-        </ignoreFiles>
     </projectFiles>
 </psalm>

@@ -136,8 +136,6 @@ abstract class BomModelProvider
      * BOMs with all hash algorithms available.
      *
      * @psalm-return Generator<array{Bom}>
-     *
-     * @psalm-suppress InvalidArgument
      */
     public static function bomWithComponentAllHashAlgorithms(): Generator
     {

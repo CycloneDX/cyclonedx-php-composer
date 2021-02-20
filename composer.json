@@ -47,7 +47,6 @@
         "test:cs-fixer": "@php tools/php-cs-fixer fix --dry-run --diff-format=udiff",
         "test": [
             "@test:psalm",
-            "@test:psalm -c=psalm-tests.xml.dist",
             "@test:phpunit",
             "@test:cs-fixer"
         ],
