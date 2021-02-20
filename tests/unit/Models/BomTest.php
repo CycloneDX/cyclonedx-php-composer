@@ -46,14 +46,29 @@ class BomTest extends TestCase
     }
 
     /**
-     * @psalm-param Component[] $components
-     *
      * @dataProvider componentDataProvider()
      */
     public function testComponentsSetterGetter(array $components): void
     {
+        $expected = array_values($components);
+        $this->bom->setComponents($components);
+        self::assertEquals($expected, $this->bom->getComponents());
+    }
+
+    /**
+     * @dataProvider componentDataProvider()
+     */
+    public function testComponentsAdd(array $components): void
+    {
+        if ('assoc' === $this->dataName() && 0 > version_compare(PHP_VERSION, '8.0.0')) {
+            $this->expectNotToPerformAssertions();
+
+            return;
+        }
+
+        $expected = array_values($components);
         $this->bom->addComponent(...$components);
-        self::assertEquals($components, $this->bom->getComponents());
+        self::assertEquals($expected, $this->bom->getComponents());
     }
 
     /**
@@ -62,7 +77,8 @@ class BomTest extends TestCase
     public function componentDataProvider(): Generator
     {
         yield 'empty' => [[]];
-        yield 'some' => [[$this->createMock(Component::class)]];
+        yield 'some' => [[$this->createMock(Component::class), $this->createMock(Component::class)]];
+        yield 'assoc' => [['foo' => $this->createMock(Component::class)]];
     }
 
     public function testVersionSetterGetter(): void
