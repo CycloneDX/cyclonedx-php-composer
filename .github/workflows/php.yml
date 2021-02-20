@@ -177,7 +177,7 @@ jobs:
         with:
           php-version: "8.0"
           # this time we dont use own composer but a switching system wide version.
-          tools: composer:v${{ matrix.compser }}
+          tools: composer:v${{ matrix.composer }}
           coverage: none
       - name: dir setup
         run: mkdir -p ${{ env.DEMO_DIR }}/${{ env.REPORTS_DIR }}
@@ -200,20 +200,20 @@ jobs:
         run: >
           composer
           make-bom -h
-          > ${{ env.REPORTS_DIR }}/help.composer${{ matrix.compser }}.txt
+          > ${{ env.REPORTS_DIR }}/help.composer${{ matrix.composer }}.txt
         working-directory: ${{ env.DEMO_DIR }}
       - name: Demo XML
         run: >
           composer
           make-bom
-          --output-file=${{ env.REPORTS_DIR }}/bom.composer${{ matrix.compser }}.xml
+          --output-file=${{ env.REPORTS_DIR }}/bom.composer${{ matrix.composer }}.xml
         working-directory: ${{ env.DEMO_DIR }}
       - name: Demo JSON
         run: >
           composer
           make-bom
           --json
-          --output-file=${{ env.REPORTS_DIR }}/bom.composer${{ matrix.compser }}.json
+          --output-file=${{ env.REPORTS_DIR }}/bom.composer${{ matrix.composer }}.json
         working-directory: ${{ env.DEMO_DIR }}
       - name: Artifact reports
         if: ${{ ! cancelled() }}
