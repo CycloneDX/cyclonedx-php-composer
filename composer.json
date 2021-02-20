@@ -42,7 +42,7 @@
         }
     },
     "scripts": {
-        "test:psalm": "@php tools/psalm --show-info=true" ,
+        "test:psalm": "@php tools/psalm" ,
         "test:phpunit": "phpunit",
         "test:cs-fixer": "@php tools/php-cs-fixer fix --dry-run --diff-format=udiff",
         "test": [

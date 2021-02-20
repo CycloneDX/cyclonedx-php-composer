@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the CycloneDX PHP Composer Plugin.
  *
@@ -104,20 +106,27 @@ class BomCommand extends BaseCommand
             return self::EXIT_MISSING_LOCK;
         }
 
+        $lockData = $locker->getLockData();
+        if (false === is_array($lockData)) {
+            $output->writeln('<error>Lockfile is malformed</error>');
+
+            return self::EXIT_MISSING_LOCK;
+        }
+
         $output->writeln('<info>Generating BOM from lockfile</info>');
         $bomGenerator = new BomGenerator($output);
         $bom = $bomGenerator->generateBom(
-            $locker->getLockData(),
-            false !== $input->getOption($this::OPTION_EXCLUDE_DEV),
-            false !== $input->getOption($this::OPTION_EXCLUDE_PLUGINS)
+            $lockData,
+            false !== $input->getOption(self::OPTION_EXCLUDE_DEV),
+            false !== $input->getOption(self::OPTION_EXCLUDE_PLUGINS)
         );
 
-        $outputFile = $input->getOption($this::OPTION_OUTPUT_FILE);
+        $outputFile = $input->getOption(self::OPTION_OUTPUT_FILE);
         if (false === is_string($outputFile) || '' === $outputFile) {
             $outputFile = null;
         }
 
-        if (false === $input->getOption($this::OPTION_JSON)) {
+        if (false === $input->getOption(self::OPTION_JSON)) {
             $outputFile = $outputFile ?? self::OUTPUT_FILE_DEFAULT_JSON;
             $bomWriter = new XmlSerializer(new Spec11());
         } else {

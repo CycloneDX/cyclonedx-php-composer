@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the CycloneDX PHP Composer Plugin.
  *
@@ -67,6 +69,7 @@ class JsonSerializer extends AbstractSerialize implements SerializerInterface
 
     /**
      * @psalm-param mixed|null $value
+     * @psalm-assert-if-true !null $value
      */
     private function isNotNull($value): bool
     {

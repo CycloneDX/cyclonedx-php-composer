@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the CycloneDX PHP Composer Plugin.
  *
@@ -52,20 +54,20 @@ class BomGenerator
     }
 
     /**
-     * @psalm-param array<string, mixed> $lockData
-     *
-     * @psalm-return array<string, mixed>
+     * @psalm-param mixed[] $lockData
+     * @psalm-return mixed[]
      */
     public function getPackagesFromLock(array $lockData, bool $excludeDev): array
     {
         $packages = $lockData['packages'] ?? [];
-        $packagesDev = $lockData['packages-dev'] ?? [];
 
         if ($excludeDev) {
             $this->output->writeln('<warning>Dev dependencies will be skipped</warning>');
 
             return $packages;
         }
+
+        $packagesDev = $lockData['packages-dev'] ?? [];
 
         return array_merge($packages, $packagesDev);
     }
@@ -87,9 +89,9 @@ class BomGenerator
     }
 
     /**
-     * @psalm-param array<string, mixed> $lockData       Composer's lockData to generate a BOM for
-     * @psalm-param bool                 $excludeDev     Exclude Dev dependencies
-     * @psalm-param bool                 $excludePlugins Exclude composer plugins
+     * @psalm-param mixed[] $lockData       Composer's lockData to generate a BOM for
+     * @psalm-param bool    $excludeDev     Exclude Dev dependencies
+     * @psalm-param bool    $excludePlugins Exclude composer plugins
      *
      * @throws UnexpectedValueException if a package does not provide a name or version
      * @throws \DomainException         if the bom structure had unexpected values
@@ -109,7 +111,7 @@ class BomGenerator
     }
 
     /**
-     * @psalm-param array<string, mixed> $package The lockData's package data to build a component from
+     * @psalm-param mixed[] $package The lockData's package data to build a component from
      *
      * @throws UnexpectedValueException if the given package does not provide a name or version
      * @throws \DomainException         if the bom structure had unexpected values
