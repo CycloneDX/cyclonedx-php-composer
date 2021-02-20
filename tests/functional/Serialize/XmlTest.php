@@ -91,9 +91,6 @@ class XmlTest extends TestCase
 
     // region helpers
 
-    /**
-     * @throws DOMException
-     */
     private function loadDomFromXml(string $xml): DOMDocument
     {
         $doc = new DOMDocument();

@@ -42,9 +42,6 @@ class ShippedLicensesTest extends TestCase
         $this->file = License::getResourcesFile();
     }
 
-    /**
-     * @throws \JsonException
-     */
     public function test(): void
     {
         self::assertFileExists($this->file);

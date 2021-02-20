@@ -85,10 +85,6 @@ class JsonTest extends TestCase
      *
      * @dataProvider \CycloneDX\Tests\_data\BomModelProvider::fullBomTestData
      * @dataProvider \CycloneDX\Tests\_data\BomModelProvider::bomWithComponentHashAlgorithmsSpec12()
-     *
-     * @throws JsonException
-     * @throws JsonSchema\Exception
-     * @throws JsonSchema\InvalidValue
      */
     public function testSchema12(Bom $bom): void
     {

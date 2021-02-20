@@ -82,6 +82,15 @@ jobs:
           --no-diff
           --long-progress
           --report=${{ env.REPORTS_DIR }}/psalm.${{ matrix.os }}_php${{ matrix.php }}_${{ matrix.stability }}.junit.xml
+      - name: Run static code analysis on tesss
+        run: >
+          php
+          ./tools/psalm/bin/psalm
+          -c=psalm-tests.xml.dist
+          --show-info=true
+          --no-diff
+          --long-progress
+          --report=${{ env.REPORTS_DIR }}/psalm.${{ matrix.os }}_php${{ matrix.php }}_${{ matrix.stability }}.junit.xml
       - name: Run phpunit tests
         run: >
           php

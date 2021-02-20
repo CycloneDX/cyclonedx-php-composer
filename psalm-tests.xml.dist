@@ -4,14 +4,15 @@
        xsi:schemaLocation="https://getpsalm.org/schema/config tools/psalm/vendor/vimeo/psalm/config.xsd"
        errorLevel="3"
        resolveFromConfigFile="true"
-       checkForThrowsDocblock="true"
        cacheDirectory=".psalm.cache"
 >
     <projectFiles>
-        <directory name="src"/>
-        <ignoreFiles>
-            <!-- tests are part of psalm-tests.xml.dist -->
-            <directory name="tests"/>
-        </ignoreFiles>
+        <directory name="tests"/>
     </projectFiles>
+    <plugins>
+        <pluginClass class="Psalm\PhpUnitPlugin\Plugin"/>
+    </plugins>
+    <issueHandlers>
+        <MissingConstructor errorLevel="suppress"/>
+    </issueHandlers>
 </psalm>
