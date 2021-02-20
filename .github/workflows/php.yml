@@ -64,20 +64,10 @@ jobs:
           --no-interaction
           --no-progress
           --no-suggest
-      - name: Install tool for static code analysis
-        run: >
-          php
-          ./tools/composer
-          install
-          -dtools/psalm
-          --prefer-dist
-          --no-interaction
-          --no-progress
-          --no-suggest
       - name: Run static code analysis
         run: >
           php
-          ./tools/psalm/bin/psalm
+          ./tools/psalm
           --show-info=true
           --no-diff
           --long-progress

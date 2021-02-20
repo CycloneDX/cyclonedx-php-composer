@@ -42,26 +42,21 @@
         }
     },
     "scripts": {
+        "test:psalm": "@php tools/psalm --show-info=true" ,
         "test:phpunit": "phpunit",
-        "test:psalm": "@php tools/psalm/bin/psalm --show-info=true" ,
         "test:cs-fixer": "@php tools/php-cs-fixer fix --dry-run --diff-format=udiff",
         "test": [
             "@test:psalm",
             "@test:phpunit",
             "@test:cs-fixer"
         ],
-        "cs-fix": "@php tools/php-cs-fixer fix --diff-format=udiff",
-        "dev-setup": [
-            "@composer install",
-            "@composer -dtools/psalm install"
-        ]
+        "cs-fix": "@php tools/php-cs-fixer fix --diff-format=udiff"
     },
     "scripts-descriptions": {
         "test": "Run all tests!",
-        "test:phpunit": "Run tests with PHPUnit.",
         "test:psalm": "Run static code analysis with Psalm.",
+        "test:phpunit": "Run tests with PHPUnit.",
         "test:cs-fixer": "Test coding standards with PHP-CS-fixer.",
-        "cs-fix": "Fix files according to coding standards.",
-        "dev-setup": "Setup this project for development."
+        "cs-fix": "Fix files according to coding standards."
     }
 }

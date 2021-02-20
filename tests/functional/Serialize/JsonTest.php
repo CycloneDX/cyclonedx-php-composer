@@ -27,7 +27,6 @@ use CycloneDX\Serialize\JsonSerializer;
 use CycloneDX\Specs\Spec10;
 use CycloneDX\Specs\Spec11;
 use CycloneDX\Specs\Spec12;
-use JsonException;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 use Swaggest\JsonSchema;
