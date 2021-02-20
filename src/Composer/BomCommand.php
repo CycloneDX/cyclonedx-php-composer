@@ -75,13 +75,12 @@ class BomCommand extends BaseCommand
      * Needed to assert `null !== $composer`
      * Composer2 and Composer1 differ in the return values slightly.
      *
-     * @psalm-suppress DocblockTypeContradiction
-     *
      * @throws RuntimeException
      */
     private function compat_getComposer(): Composer
     {
         try {
+            /** @var Composer|null $composer */
             $composer = $this->getComposer();
         } catch (\Exception $exception) {
             throw new RuntimeException('Composer does not exist', 0, $exception);
