@@ -62,10 +62,10 @@ jobs:
           --no-interaction
           --no-progress
           --no-suggest
-      - name: Run phpunit tests
+      - name: Run PHPUnit tests
         run: >
           php
-          ./vendor/bin/phpunit
+          ./vendor/phpunit/phpunit/phpunit
           --log-junit=${{ env.REPORTS_DIR }}/tests.${{ matrix.os }}_php${{ matrix.php }}_${{ matrix.stability }}.junit.xml
           --coverage-clover=${{ env.REPORTS_DIR }}/coverage.${{ matrix.os}}_php${{ matrix.php }}_${{ matrix.stability }}.clover.xml
           --no-interaction
