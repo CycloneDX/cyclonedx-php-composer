@@ -36,7 +36,7 @@ use Generator;
 trait SimpleDomTrait
 {
     /**
-     * @psalm-param iterable<string, mixed|null> $attributes
+     * @psalm-param iterable<string, scalar|null> $attributes
      */
     private function simpleDomSetAttributes(DOMElement $element, iterable $attributes): DOMElement
     {
@@ -82,9 +82,15 @@ trait SimpleDomTrait
     }
 
     /**
-     * @psalm-param iterable<scalar, mixed> $items
+     * @psalm-template TCallbackReturn
      *
-     * @psalm-return Generator<scalar, mixed>
+     * @psalm-template TIteratorKey as array-key
+     * @psalm-template TIteratorItem
+     *
+     * @psalm-param iterable<TIteratorKey, TIteratorItem> $items
+     * @psalm-param callable(DOMDocument, TIteratorItem, TIteratorKey=):TCallbackReturn $callback
+     *
+     * @psalm-return Generator<TIteratorKey, TCallbackReturn>
      */
     private function simpleDomDocumentMap(DOMDocument $document, callable $callback, iterable $items): Generator
     {
