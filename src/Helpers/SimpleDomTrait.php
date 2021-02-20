@@ -82,7 +82,7 @@ trait SimpleDomTrait
     /**
      * @psalm-param iterable<scalar, mixed> $items
      *
-     * @psalm-return Generator<mixed>
+     * @psalm-return Generator<scalar, mixed>
      */
     private function simpleDomDocumentMap(DOMDocument $document, callable $callback, iterable $items): Generator
     {
