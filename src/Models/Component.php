@@ -218,7 +218,7 @@ class Component
      */
     public function addLicense(License ...$licenses): self
     {
-        array_push($this->licenses, ...$licenses);
+        array_push($this->licenses, ...array_values($licenses));
 
         return $this;
     }
