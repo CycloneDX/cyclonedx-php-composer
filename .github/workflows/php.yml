@@ -112,7 +112,7 @@ jobs:
           --no-interaction
           --no-progress
           --no-suggest
-      - name: Run tests
+      - name: Run Psalm tests
         run: >
           php
           ./tools/psalm
@@ -142,7 +142,7 @@ jobs:
         with:
           php-version: "8.0"
           coverage: none
-      - name: run tests
+      - name: Run PHP-CS-Fixer tests
         run: >
           php
           ./tools/php-cs-fixer
