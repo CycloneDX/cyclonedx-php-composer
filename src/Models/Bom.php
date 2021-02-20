@@ -61,7 +61,7 @@ class Bom
     }
 
     /**
-     * @psalm-assert Component[] $components
+     * @psalm-param array<Component> $components
      *
      * @throws InvalidArgumentException if list contains element that is not instance of {@see \CycloneDX\Models\Component}
      *
@@ -70,10 +70,12 @@ class Bom
     public function setComponents(array $components): self
     {
         foreach ($components as $component) {
+            /** @psalm-suppress DocblockTypeContradiction */
             if (false === $component instanceof Component) {
                 throw new InvalidArgumentException('Not a Component: '.var_export($component, true));
             }
         }
+        $this->components = array_values($components);
 
         return $this;
     }
