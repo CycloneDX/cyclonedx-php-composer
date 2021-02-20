@@ -49,7 +49,7 @@ class BomGeneratorTest extends TestCase
         $this->bomGenerator = new BomGenerator($outputMock);
     }
 
-    private static function getComponentsNames(Component $component): string
+    private function getComponentsNames(Component $component): string
     {
         return $component->getName();
     }
@@ -77,7 +77,7 @@ class BomGeneratorTest extends TestCase
 
         $bom = $this->bomGenerator->generateBom($lockData, false, false);
 
-        $componentNames = array_map([self::class, 'getComponentsNames'], $bom->getComponents());
+        $componentNames = array_map([$this, 'getComponentsNames'], $bom->getComponents());
         self::assertEquals(['packageName', 'packageNameDev'], $componentNames);
     }
 
@@ -104,7 +104,7 @@ class BomGeneratorTest extends TestCase
 
         $bom = $this->bomGenerator->generateBom($lockData, true, false);
 
-        $componentNames = array_map([self::class, 'getComponentsNames'], $bom->getComponents());
+        $componentNames = array_map([$this, 'getComponentsNames'], $bom->getComponents());
         self::assertEquals(['packageName'], $componentNames);
     }
 
