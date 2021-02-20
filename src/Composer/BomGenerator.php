@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the CycloneDX PHP Composer Plugin.
  *
@@ -42,7 +44,7 @@ use UnexpectedValueException;
 class BomGenerator
 {
     /**
-     * @var OutputInterface
+     * @psalm-var OutputInterface
      */
     private $output;
 
@@ -52,14 +54,12 @@ class BomGenerator
     }
 
     /**
-     * @param array<string, mixed> $lockData
-     *
-     * @return array<string, mixed>
+     * @psalm-param mixed[] $lockData
+     * @psalm-return mixed[]
      */
     public function getPackagesFromLock(array $lockData, bool $excludeDev): array
     {
         $packages = $lockData['packages'] ?? [];
-        $packagesDev = $lockData['packages-dev'] ?? [];
 
         if ($excludeDev) {
             $this->output->writeln('<warning>Dev dependencies will be skipped</warning>');
@@ -67,13 +67,15 @@ class BomGenerator
             return $packages;
         }
 
+        $packagesDev = $lockData['packages-dev'] ?? [];
+
         return array_merge($packages, $packagesDev);
     }
 
     /**
-     * @param array<array<string, mixed>> $packages
+     * @psalm-param array<array<string, mixed>> $packages
      *
-     * @return Generator<array<string, mixed>>
+     * @psalm-return Generator<array<string, mixed>>
      */
     public function filterOutPlugins(array $packages): Generator
     {
@@ -87,11 +89,14 @@ class BomGenerator
     }
 
     /**
-     * @param array<string, mixed> $lockData       Composer's lockData to generate a BOM for
-     * @param bool                 $excludeDev     Exclude Dev dependencies
-     * @param bool                 $excludePlugins Exclude composer plugins
+     * @psalm-param mixed[] $lockData       Composer's lockData to generate a BOM for
+     * @psalm-param bool    $excludeDev     Exclude Dev dependencies
+     * @psalm-param bool    $excludePlugins Exclude composer plugins
      *
-     * @return Bom The resulting BOM
+     * @throws UnexpectedValueException if a package does not provide a name or version
+     * @throws \DomainException         if the bom structure had unexpected values
+     *
+     * @psalm-return Bom The resulting BOM
      */
     public function generateBom(array $lockData, bool $excludeDev, bool $excludePlugins): Bom
     {
@@ -102,15 +107,16 @@ class BomGenerator
         $components = array_map([$this, 'buildComponent'], $packages);
 
         return (new Bom())
-            ->setComponents($components);
+            ->addComponent(...$components);
     }
 
     /**
-     * @param array<string, mixed> $package The lockData's package data to build a component from
+     * @psalm-param mixed[] $package The lockData's package data to build a component from
      *
-     * @throws UnexpectedValueException When the given package does not provide a name or version
+     * @throws UnexpectedValueException if the given package does not provide a name or version
+     * @throws \DomainException         if the bom structure had unexpected values
      *
-     * @return Component The resulting component
+     * @psalm-return Component The resulting component
      */
     public function buildComponent(array $package): Component
     {
@@ -128,22 +134,22 @@ class BomGenerator
         $component = (new Component(Classification::LIBRARY, $name, $version))
             ->setGroup($vendor)
             ->setDescription($package['description'] ?? null)
-            ->setLicenses(array_map(
+            ->addLicense(...array_map(
                 static function (string $license): License { return new License($license); },
                 $this->splitLicenses($package['license'] ?? [])
             ));
 
         if (!empty($package['dist']['shasum'])) {
-            $component->setHashes([HashAlgorithm::SHA_1 => $package['dist']['shasum']]);
+            $component->setHash(HashAlgorithm::SHA_1, $package['dist']['shasum']);
         }
 
         return $component;
     }
 
     /**
-     * @param string $packageName package name
+     * @psalm-param string $packageName package name
      *
-     * @return array{string, ?string}
+     * @psalm-return array{string, ?string}
      */
     private function splitNameAndVendor(string $packageName): array
     {
@@ -168,9 +174,9 @@ class BomGenerator
      * See for example {@link https://ossindex.sonatype.org/component/pkg:composer/phpmailer/phpmailer@v6.0.7}
      * vs {@link https://ossindex.sonatype.org/component/pkg:composer/phpmailer/phpmailer@6.0.7}.
      *
-     * @param string $packageVersion The version to normalize
+     * @psalm-param string $packageVersion The version to normalize
      *
-     * @return string The normalized version
+     * @psalm-return string The normalized version
      *
      * @internal this functionality is pretty clumsy and might be reworked in the future
      */
@@ -187,9 +193,9 @@ class BomGenerator
      * @see https://getcomposer.org/doc/04-schema.md#license
      * @see https://spdx.dev/specifications/
      *
-     * @param string|string[] $licenseData
+     * @psalm-param string|string[] $licenseData
      *
-     * @return string[]
+     * @psalm-return string[]
      *
      * @internal this functionality is pretty clumsy and might be reworked in the future
      */

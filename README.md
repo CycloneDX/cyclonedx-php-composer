@@ -56,11 +56,11 @@ Help:
 
 Feel free to open pull requests.
 
-To start developing simply run `tools/composer run-script dev-setup` to install dev-dependencies and tools.
+To start developing simply run `php tools/composer install` to install dev-dependencies and tools.
 
 Make sure 
-* to run `tools/composer run-script cs-fix` to have your changes aligned with our coding standards.  
-* to run `tools/composer run-script test` and pass all tests.
+* to run `php tools/composer run-script cs-fix` to have your changes aligned with our coding standards.  
+* to run `php tools/composer run-script test` and pass all tests.
 
 # License
 

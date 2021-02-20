@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the CycloneDX PHP Composer Plugin.
  *
@@ -38,29 +40,35 @@ class JsonDeserializer extends AbstractSerialize implements DeserializerInterfac
     // region DeserializerInterface
 
     /**
-     * @throws InvalidArgumentException
-     * @throws JsonException
+     * @throws JsonException            if json is not loadable
+     * @throws \DomainException         if a component's type is unknown
+     * @throws \DomainException         if any of a component's hashes' keys is not in {@see HashAlgorithm}'s constants list
+     * @throws InvalidArgumentException if any of a component's hashes' values is not a string
      */
     public function deserialize(string $data): Bom
     {
         // @TODO validate schema?
         $json = json_decode($data, true, 512, JSON_THROW_ON_ERROR);
         if (false === is_array($json)) {
-            throw new InvalidArgumentException('does not deserialize to expected structure');
+            throw new JsonException('does not deserialize to expected structure');
         }
 
         return $this->bomFromJson($json);
     }
 
     /**
-     * @param array<string, mixed> $json
+     * @psalm-param array<string, mixed> $json
+     *
+     * @throws \DomainException         if a component's type is unknown
+     * @throws \DomainException         if any of a component's hashes' keys is not in {@see HashAlgorithm}'s constants list
+     * @throws InvalidArgumentException if any of a component's hashes' values is not a string
      */
     public function bomFromJson(array $json): Bom
     {
         return (new Bom())
             ->setVersion($json['version'] ?? 1)
-            ->setComponents(
-                array_map(
+            ->addComponent(
+                ...array_map(
                     [$this, 'componentFromJson'],
                     $json['components'] ?? []
                 )
@@ -68,21 +76,25 @@ class JsonDeserializer extends AbstractSerialize implements DeserializerInterfac
     }
 
     /**
-     * @param array<string, mixed> $json
+     * @psalm-param array<string, mixed> $json
+     *
+     * @throws \DomainException         if type is unknown
+     * @throws \DomainException         if any of component's hashes' keys is not in {@see HashAlgorithm}'s constants list
+     * @throws InvalidArgumentException if any of component's hashes' values is not a string
      */
     public function componentFromJson(array $json): Component
     {
         return (new Component($json['type'], $json['name'], $json['version']))
             ->setGroup($json['group'] ?? null)
             ->setDescription($json['description'] ?? null)
-            ->setLicenses(iterator_to_array($this->licensesFromJson($json['licenses'] ?? [])))
+            ->addLicense(...$this->licensesFromJson($json['licenses'] ?? []))
             ->setHashes(iterator_to_array($this->hashesFromJson($json['hashes'] ?? [])));
     }
 
     /**
-     * @param array<array<string, mixed>> $json
+     * @psalm-param array<array<string, mixed>> $json
      *
-     * @return Generator<License>
+     * @psalm-return Generator<License>
      */
     public function licensesFromJson(array $json): Generator
     {
@@ -97,7 +109,10 @@ class JsonDeserializer extends AbstractSerialize implements DeserializerInterfac
     }
 
     /**
-     * @param array<string, mixed> $json
+     * @psalm-param array<string, mixed> $json
+     *
+     * @throws InvalidArgumentException if URL is invalid
+     * @throws \RuntimeException        if loading known SPDX licenses failed
      */
     public function licenseFromJson(array $json): License
     {
@@ -106,9 +121,9 @@ class JsonDeserializer extends AbstractSerialize implements DeserializerInterfac
     }
 
     /**
-     * @param array<string, mixed> $json
+     * @psalm-param array<string, mixed> $json
      *
-     * @return Generator<string, string>
+     * @psalm-return Generator<string, string>
      */
     public function hashesFromJson(array $json): Generator
     {

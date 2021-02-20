@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the CycloneDX PHP Composer Plugin.
  *
@@ -42,7 +44,8 @@ class Component
      *
      * Examples: commons-lang3 and jquery
      *
-     * @var string
+     * @psalm-var string
+     * @psalm-suppress PropertyNotSetInConstructor
      */
     private $name;
 
@@ -56,7 +59,7 @@ class Component
      *
      * Examples include: apache, org.apache.commons, and apache.org.
      *
-     * @var string|null
+     * @psalm-var string|null
      */
     private $group;
 
@@ -70,7 +73,8 @@ class Component
      * Refer to the {@link https://cyclonedx.org/schema/bom/1.1 bom:classification documentation}
      * for information describing each one.
      *
-     * @var string
+     * @psalm-var Classification::*
+     * @psalm-suppress PropertyNotSetInConstructor
      */
     private $type;
 
@@ -79,14 +83,14 @@ class Component
      *
      * Specifies a description for the component.
      *
-     * @var string|null
+     * @psalm-var string|null
      */
     private $description;
 
     /**
      * Licences.
      *
-     * @var License[]
+     * @psalm-var License[]
      */
     private $licenses = [];
 
@@ -95,7 +99,7 @@ class Component
      *
      * Specifies the file hashes of the component.
      *
-     * @var array<string, string>
+     * @psalm-var array<HashAlgorithm::*, string>
      */
     private $hashes = [];
 
@@ -105,7 +109,8 @@ class Component
      * The component version. The version should ideally comply with semantic versioning
      * but is not enforced.
      *
-     * @var string
+     * @psalm-var string
+     * @psalm-suppress PropertyNotSetInConstructor
      */
     private $version;
 
@@ -115,7 +120,7 @@ class Component
     }
 
     /**
-     * @return $this
+     * @psalm-return $this
      */
     public function setName(string $name): self
     {
@@ -130,7 +135,7 @@ class Component
     }
 
     /**
-     * @return $this
+     * @psalm-return $this
      */
     public function setGroup(?string $group): self
     {
@@ -139,17 +144,22 @@ class Component
         return $this;
     }
 
+    /**
+     * @psalm-return Classification::*
+     */
     public function getType(): string
     {
         return $this->type;
     }
 
     /**
-     * @param string $type For a ist of Valid values see {@see Classification}
+     * @psalm-param Classification::*|string $type For a ist of Valid values see {@see Classification}
      *
      * @throws DomainException if value is unknown
      *
-     * @return $this
+     * @psalm-return $this
+     *
+     * @psalm-suppress PropertyTypeCoercion
      */
     public function setType(string $type): self
     {
@@ -168,7 +178,7 @@ class Component
     }
 
     /**
-     * @return $this
+     * @psalm-return $this
      */
     public function setDescription(?string $description): self
     {
@@ -178,7 +188,7 @@ class Component
     }
 
     /**
-     * @return License[]
+     * @psalm-return License[]
      */
     public function getLicenses(): array
     {
@@ -186,27 +196,37 @@ class Component
     }
 
     /**
-     * @param License[] $licenses
+     * @psalm-assert License[] $licenses
      *
      * @throws InvalidArgumentException if list contains element that is not instance of {@see \CycloneDX\Models\License}
      *
-     * @return $this
+     * @psalm-return $this
      */
     public function setLicenses(array $licenses): self
     {
         foreach ($licenses as $license) {
-            /* @phpstan-ignore-next-line */
             if (false === $license instanceof License) {
                 throw new InvalidArgumentException('Not a License: '.var_export($license, true));
             }
         }
+
         $this->licenses = array_values($licenses);
 
         return $this;
     }
 
     /**
-     * @return array<string, string>
+     * @psalm-return $this
+     */
+    public function addLicense(License ...$licenses): self
+    {
+        array_push($this->licenses, ...array_values($licenses));
+
+        return $this;
+    }
+
+    /**
+     * @psalm-return array<HashAlgorithm::*, string>
      */
     public function getHashes(): array
     {
@@ -214,26 +234,47 @@ class Component
     }
 
     /**
-     * @param array<string, string> $hashes array<$algorithm, $content>
+     * @psalm-assert array<HashAlgorithm::*, string> $hashes
      *
-     * @throws DomainException          if any of hashes' keys is not in {@see HashAlgorithm}
+     * @throws DomainException          if any of hashes' keys is not in {@see HashAlgorithm}'s constants list
      * @throws InvalidArgumentException if any of hashes' values is not a string
      *
-     * @return $this;
+     * @psalm-return $this
+     *
+     * @psalm-suppress PropertyTypeCoercion
      */
     public function setHashes(array $hashes): self
     {
         $algorithms = (new \ReflectionClass(HashAlgorithm::class))->getConstants();
-        foreach ($hashes as $alg => $content) {
-            if (false === in_array($alg, $algorithms, true)) {
-                throw new DomainException("Unknown hash algorithm: {$alg}");
+        foreach ($hashes as $algorithm => $content) {
+            if (false === in_array($algorithm, $algorithms, true)) {
+                throw new DomainException("Unknown hash algorithm: {$algorithm}");
             }
-            /* @phpstan-ignore-next-line */
             if (false === is_string($content)) {
-                throw new InvalidArgumentException("Hash content for '{$alg}' is not string.");
+                throw new InvalidArgumentException("Hash content for '{$algorithm}' is not string.");
             }
         }
         $this->hashes = $hashes;
+
+        return $this;
+    }
+
+    /**
+     * @psalm-param HashAlgorithm::*|string $algorithm
+     *
+     * @throws DomainException if $algorithm is not in {@see HashAlgorithm}'s constants list
+     *
+     * @psalm-return $this
+     *
+     * @psalm-suppress PropertyTypeCoercion
+     */
+    public function setHash(string $algorithm, string $content): self
+    {
+        $algorithms = (new \ReflectionClass(HashAlgorithm::class))->getConstants();
+        if (false === in_array($algorithm, $algorithms, true)) {
+            throw new DomainException("Unknown hash algorithm: {$algorithm}");
+        }
+        $this->hashes[$algorithm] = $content;
 
         return $this;
     }
@@ -244,7 +285,7 @@ class Component
     }
 
     /**
-     * @return $this
+     * @psalm-return $this
      */
     public function setVersion(string $version): self
     {
@@ -269,11 +310,13 @@ class Component
     }
 
     /**
-     * Component constructor.
-     *
      * @see \CycloneDX\Models\Component::setType()
      * @see \CycloneDX\Models\Component::setName()
      * @see \CycloneDX\Models\Component::setVersion()
+     *
+     * @psalm-param Classification::*|string $type
+     *
+     * @throws DomainException if type is unknown
      */
     public function __construct(string $type, string $name, string $version)
     {

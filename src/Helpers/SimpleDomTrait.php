@@ -1,5 +1,26 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * This file is part of the CycloneDX PHP Composer Plugin.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ * Copyright (c) Steve Springett. All Rights Reserved.
+ */
+
 namespace CycloneDX\Helpers;
 
 use DOMDocument;
@@ -15,7 +36,7 @@ use Generator;
 trait SimpleDomTrait
 {
     /**
-     * @param iterable<string, mixed|null> $attributes
+     * @psalm-param iterable<string, mixed|null> $attributes
      */
     private function simpleDomSetAttributes(DOMElement $element, iterable $attributes): DOMElement
     {
@@ -31,7 +52,7 @@ trait SimpleDomTrait
     }
 
     /**
-     * @param iterable<?DOMNode> $children
+     * @psalm-param iterable<?DOMNode> $children
      */
     private function simpleDomAppendChildren(DOMElement $element, iterable $children): DOMElement
     {
@@ -45,8 +66,8 @@ trait SimpleDomTrait
     }
 
     /**
-     * @param int|float|string|null $data
-     * @param bool                  $null whether to return null wgen `$data` is null
+     * @psalm-param int|float|string|null $data
+     * @psalm-param bool                  $null whether to return null wgen `$data` is null
      */
     private function simpleDomSaveTextElement(DOMDocument $document, string $name, $data, bool $null = true): ?DOMElement
     {
@@ -61,9 +82,9 @@ trait SimpleDomTrait
     }
 
     /**
-     * @param iterable<scalar, mixed> $items
+     * @psalm-param iterable<scalar, mixed> $items
      *
-     * @return Generator<mixed>
+     * @psalm-return Generator<scalar, mixed>
      */
     private function simpleDomDocumentMap(DOMDocument $document, callable $callback, iterable $items): Generator
     {
@@ -84,7 +105,7 @@ trait SimpleDomTrait
      *
      * Needed since `$element->getElementsByTagName()` would also find tags in nested children.
      *
-     * @return Generator<DOMElement>
+     * @psalm-return Generator<DOMElement>
      */
     private function simpleDomGetChildElements(DOMElement $element): Generator
     {

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the CycloneDX PHP Composer Plugin.
  *
@@ -28,6 +30,9 @@ namespace CycloneDX\Composer;
  */
 class CommandProvider implements \Composer\Plugin\Capability\CommandProvider
 {
+    /**
+     * @psalm-suppress MissingThrowsDocblock - Exceptions are handled by caller
+     */
     public function getCommands(): array
     {
         return [new BomCommand()];

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the CycloneDX PHP Composer Plugin.
  *
@@ -22,14 +24,17 @@
 namespace CycloneDX\Composer;
 
 use Composer\Command\BaseCommand;
+use Composer\Composer;
 use CycloneDX\Serialize\JsonSerializer;
 use CycloneDX\Serialize\XmlSerializer;
 use CycloneDX\Specs\Spec11;
 use CycloneDX\Specs\Spec12;
+use RuntimeException;
 use Symfony\Component\Console\Formatter\OutputFormatter;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use UnexpectedValueException;
 
 /**
  * The Plugin's makeBom command.
@@ -50,9 +55,11 @@ class BomCommand extends BaseCommand
     private const OUTPUT_FILE_DEFAULT_JSON = 'bom.json';
 
     private const EXIT_OK = 0;
-    private const EXIT_MISSING_COMPOSER = 1;
-    private const EXIT_MISSING_LOCK = 2;
+    private const EXIT_MISSING_LOCK = 1;
 
+    /**
+     * @psalm-suppress MissingThrowsDocblock - Exceptions are handled by caller
+     */
     protected function configure(): void
     {
         $this->setName('make-bom')
@@ -64,16 +71,34 @@ class BomCommand extends BaseCommand
         $this->addOption(self::OPTION_JSON, null, InputOption::VALUE_NONE, 'Produce the BOM in JSON format (preview support)');
     }
 
+    /**
+     * Needed to assert `null !== $composer`
+     * Composer2 and Composer1 differ in the return values slightly.
+     *
+     * @psalm-suppress DocblockTypeContradiction
+     *
+     * @throws RuntimeException
+     */
+    private function compat_getComposer(): Composer
+    {
+        try {
+            $composer = $this->getComposer();
+        } catch (\Exception $exception) {
+            throw new RuntimeException('Composer does not exist', 0, $exception);
+        }
+        if (null === $composer) {
+            throw new UnexpectedValueException('Composer is null');
+        }
+
+        return $composer;
+    }
+
+    /**
+     * @psalm-suppress MissingThrowsDocblock - Exceptions are handled by caller
+     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $composer = $this->getComposer();
-        if (null == $composer) {
-            // earlier versions of composer may return `null` instead of throwing an error.
-            $output->writeln('<error>Composer does not exist</error>');
-
-            return self::EXIT_MISSING_COMPOSER;
-        }
-        $locker = $composer->getLocker();
+        $locker = $this->compat_getComposer()->getLocker();
 
         if (false === $locker->isLocked()) {
             $output->writeln('<error>Lockfile does not exist</error>');
@@ -81,22 +106,27 @@ class BomCommand extends BaseCommand
             return self::EXIT_MISSING_LOCK;
         }
 
+        $lockData = $locker->getLockData();
+        if (false === is_array($lockData)) {
+            $output->writeln('<error>Lockfile is malformed</error>');
+
+            return self::EXIT_MISSING_LOCK;
+        }
+
         $output->writeln('<info>Generating BOM from lockfile</info>');
         $bomGenerator = new BomGenerator($output);
         $bom = $bomGenerator->generateBom(
-            $locker->getLockData(),
-            false !== $input->getOption($this::OPTION_EXCLUDE_DEV),
-            false !== $input->getOption($this::OPTION_EXCLUDE_PLUGINS)
+            $lockData,
+            false !== $input->getOption(self::OPTION_EXCLUDE_DEV),
+            false !== $input->getOption(self::OPTION_EXCLUDE_PLUGINS)
         );
 
-        /* @var string|null $outputFile */
-        $outputFile = $input->getOption($this::OPTION_OUTPUT_FILE);
+        $outputFile = $input->getOption(self::OPTION_OUTPUT_FILE);
         if (false === is_string($outputFile) || '' === $outputFile) {
             $outputFile = null;
         }
 
-        /* @var \CycloneDX\Serialize\AbstractSerialize $bomWriter */
-        if (false === $input->getOption($this::OPTION_JSON)) {
+        if (false === $input->getOption(self::OPTION_JSON)) {
             $outputFile = $outputFile ?? self::OUTPUT_FILE_DEFAULT_JSON;
             $bomWriter = new XmlSerializer(new Spec11());
         } else {
@@ -104,7 +134,6 @@ class BomCommand extends BaseCommand
             $bomWriter = new JsonSerializer(new Spec12());
         }
 
-        /* @var \CycloneDX\Serialize\SerializerInterface $bomWriter */
         $output->writeln('<info>Serializing BOM</info>');
         $bomContents = $bomWriter->serialize($bom, true);
 

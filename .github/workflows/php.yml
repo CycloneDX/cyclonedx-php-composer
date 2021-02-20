@@ -18,7 +18,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     env:
       REPORTS_DIR: CI_reports
-      REPORTS_ARTIFACT: test-reports
+      REPORTS_ARTIFACT: tests-reports
     strategy:
       fail-fast: false
       matrix:
@@ -27,12 +27,10 @@ jobs:
           - windows-latest
           - macos-latest
         php:
-          - "7.3"
+          - "7.3" # lowest supported
           - "7.4"
-          - "8.0"
-        stability:
-          - lowest
-          - stable
+          - "8.0" # highest supported
+        stability: ["lowest", "stable"]
     timeout-minutes: 30
     steps:
       - name: Checkout
@@ -64,43 +62,70 @@ jobs:
           --no-interaction
           --no-progress
           --no-suggest
-      - name: Install tool for static code analysis
+      - name: Run PHPUnit tests
         run: >
           php
-          ./tools/composer
-          install
-          -dtools/phpstan
-          --prefer-dist
-          --no-interaction
-          --no-progress
-          --no-suggest
-      - name: Run static code analysis
-        run: >
-          php
-          ./tools/phpstan/bin/phpstan
-          analyse
-          --verbose
-          --no-progress
-          --no-interaction
-      - name: Run phpunit tests
-        run: >
-          php
-          ./tools/composer
-          exec --
-          phpunit
+          ./vendor/phpunit/phpunit/phpunit
           --log-junit=${{ env.REPORTS_DIR }}/tests.${{ matrix.os }}_php${{ matrix.php }}_${{ matrix.stability }}.junit.xml
           --coverage-clover=${{ env.REPORTS_DIR }}/coverage.${{ matrix.os}}_php${{ matrix.php }}_${{ matrix.stability }}.clover.xml
           --no-interaction
           --do-not-cache-result
       - name: Artifact reports
-        if: ${{ ! cancelled() && ! matrix.no-reports }}
+        if: ${{ ! cancelled() }}
         # see https://github.com/actions/upload-artifact
         uses: actions/upload-artifact@v2
         with:
           name: ${{ env.REPORTS_ARTIFACT }}
           path: ${{ env.REPORTS_DIR }}
           if-no-files-found: error
-  style:
+  type-checker:
+    name: Code analysis (php${{ matrix.php }}, ${{ matrix.stability }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      REPORTS_DIR: CI_reports
+      REPORTS_ARTIFACT: types-reports
+    strategy:
+      fail-fast: false
+      matrix:
+        php: ["7.3", "8.0"] # highest and lowest supported
+        stability: ["lowest", "stable"]
+    steps:
+      - name: Checkout
+        # see https://github.com/actions/checkout
+        uses: actions/checkout@v2
+      - name: Setup PHP
+        # see https://github.com/shivammathur/setup-php
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          coverage: none
+      - name: Install dependencies
+        run: >
+          php
+          ./tools/composer
+          update
+          --prefer-${{ matrix.stability }}
+          --prefer-dist
+          --no-interaction
+          --no-progress
+          --no-suggest
+      - name: Run Psalm tests
+        run: >
+          php
+          ./tools/psalm
+          --no-diff
+          --long-progress
+          --report=${{ env.REPORTS_DIR }}/psalm.php${{ matrix.php }}_${{ matrix.stability }}.junit.xml
+      - name: Artifact reports
+        if: ${{ ! cancelled() }}
+        # see https://github.com/actions/upload-artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: ${{ env.REPORTS_ARTIFACT }}
+          path: ${{ env.REPORTS_DIR }}
+          if-no-files-found: error
+  style-checker:
     name: Coding Standards
     runs-on: ubuntu-latest
     timeout-minutes: 30
@@ -113,7 +138,8 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: "8.0"
-      - name: install dependencies
+          coverage: none
+      - name: Run PHP-CS-Fixer tests
         run: >
           php
           ./tools/php-cs-fixer
@@ -130,13 +156,13 @@ jobs:
       PLUGIN_DIR: plugin
       DEMO_DIR: demo
       REPORTS_DIR: CI_reports
-      REPORTS_ARTIFACT: demo-reports
+      REPORTS_ARTIFACT: demos-reports
     strategy:
       fail-fast: false
       matrix:
         composer:
-          - 1
-          - 2
+          - 1 # lowest supported
+          - 2 # highest supported
     timeout-minutes: 5
     steps:
       - name: Checkout
@@ -150,7 +176,7 @@ jobs:
         with:
           php-version: "8.0"
           # this time we dont use own composer but a switching system wide version.
-          tools: composer:v${{ matrix.compser }}
+          tools: composer:v${{ matrix.composer }}
           coverage: none
       - name: dir setup
         run: mkdir -p ${{ env.DEMO_DIR }}/${{ env.REPORTS_DIR }}
@@ -173,20 +199,20 @@ jobs:
         run: >
           composer
           make-bom -h
-          > ${{ env.REPORTS_DIR }}/help.txt
+          > ${{ env.REPORTS_DIR }}/help.composer${{ matrix.composer }}.txt
         working-directory: ${{ env.DEMO_DIR }}
       - name: Demo XML
         run: >
           composer
           make-bom
-          --output-file=${{ env.REPORTS_DIR }}/bom.xml
+          --output-file=${{ env.REPORTS_DIR }}/bom.composer${{ matrix.composer }}.xml
         working-directory: ${{ env.DEMO_DIR }}
       - name: Demo JSON
         run: >
           composer
           make-bom
           --json
-          --output-file=${{ env.REPORTS_DIR }}/bom.json
+          --output-file=${{ env.REPORTS_DIR }}/bom.composer${{ matrix.composer }}.json
         working-directory: ${{ env.DEMO_DIR }}
       - name: Artifact reports
         if: ${{ ! cancelled() }}

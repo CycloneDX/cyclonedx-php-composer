@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the CycloneDX PHP Composer Plugin.
  *
@@ -34,12 +36,13 @@ class License
     private const LICENSES_FILE = 'spdx-licenses.json';
 
     /**
-     * @var array<string, string>
+     * @psalm-var array<string, string>
+     * @psalm-suppress PropertyNotSetInConstructor
      */
     private $licenses;
 
     /**
-     * @return array<string, string>
+     * @psalm-return array<string, string>
      */
     public function getLicenses(): array
     {
@@ -52,7 +55,7 @@ class License
     }
 
     /**
-     * XmlLicense constructor.
+     * @throws RuntimeException if loading licenses failed
      */
     public function __construct()
     {
@@ -71,6 +74,7 @@ class License
 
     /**
      * @throws RuntimeException
+     * @psalm-suppress RedundantConditionGivenDocblockType
      */
     private function loadLicenses(): void
     {

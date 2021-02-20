@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the CycloneDX PHP Composer Plugin.
  *
@@ -42,7 +44,8 @@ class XmlDeserializer extends AbstractSerialize implements DeserializerInterface
     // region DeserializerInterface
 
     /**
-     * @throws InvalidArgumentException
+     * @throws \DOMException    if XML cannot be loaded
+     * @throws \DomainException if version <= 0
      */
     public function deserialize(string $data): Bom
     {
@@ -56,8 +59,8 @@ class XmlDeserializer extends AbstractSerialize implements DeserializerInterface
             $options |= LIBXML_PARSEHUGE;
         }
         $loaded = $dom->loadXML($data, $options);
-        if (false === $loaded || null === $dom->documentElement) {
-            throw new InvalidArgumentException('does not deserialize to expected structure');
+        if (false === $loaded) {
+            throw new \DOMException('does not deserialize to expected structure');
         }
 
         // @TODO normalize
@@ -65,13 +68,16 @@ class XmlDeserializer extends AbstractSerialize implements DeserializerInterface
         return $this->bomFromDom($dom->documentElement);
     }
 
+    /**
+     * @throws \DomainException if version <= 0
+     */
     public function bomFromDom(DOMElement $element): Bom
     {
         $bom = new Bom();
         $bom->setVersion((int) $this->simpleDomGetAttribute('version', $element, '1'));
         foreach ($this->simpleDomGetChildElements($element) as $childElement) {
             if ('components' === $childElement->tagName) {
-                $bom->setComponents(array_map(
+                $bom->addComponent(...array_map(
                     [$this, 'componentFromDom'],
                     iterator_to_array($this->simpleDomGetChildElements($childElement))
                 ));
@@ -81,10 +87,18 @@ class XmlDeserializer extends AbstractSerialize implements DeserializerInterface
         return $bom;
     }
 
+    /**
+     * @throws \DomainException         if any of component's hashes' keys is not in {@see HashAlgorithm}'s constants list
+     * @throws InvalidArgumentException if any of component's hashes' values is not a string
+     */
     public function componentFromDom(DOMElement $element): Component
     {
-        $name = $version = null; // essentials
-        $group = $description = $licenses = $hashes = null; // non-essentials
+        $name = null;
+        $version = null;
+        $group = null;
+        $description = null;
+        $hashes = null;
+        $licenses = [];
         foreach ($this->simpleDomGetChildElements($element) as $childElement) {
             switch ($childElement->nodeName) {
                 case 'name':
@@ -100,10 +114,10 @@ class XmlDeserializer extends AbstractSerialize implements DeserializerInterface
                     $description = $childElement->nodeValue;
                     break;
                 case 'licenses':
-                    $licenses = iterator_to_array($this->licensesFromDom($childElement));
+                    $licenses = $this->licensesFromDom($childElement);
                     break;
                 case 'hashes':
-                    $hashes = iterator_to_array($this->hashesFromDom($childElement));
+                    $hashes = $this->hashesFromDom($childElement);
                     break;
             }
         }
@@ -116,12 +130,12 @@ class XmlDeserializer extends AbstractSerialize implements DeserializerInterface
         return (new Component($type, $name, $version))
             ->setGroup($group)
             ->setDescription($description)
-            ->setLicenses($licenses ?? [])
-            ->setHashes($hashes ?? []);
+            ->addLicense(...$licenses)
+            ->setHashes(null === $hashes ? [] : iterator_to_array($hashes));
     }
 
     /**
-     * @return Generator<License>
+     * @psalm-return Generator<License>
      */
     public function licensesFromDom(DOMElement $element): Generator
     {
@@ -143,6 +157,10 @@ class XmlDeserializer extends AbstractSerialize implements DeserializerInterface
         }
     }
 
+    /**
+     * @throws InvalidArgumentException if URL is invalid
+     * @throws \RuntimeException        if loading known SPDX licenses failed
+     */
     public function licenseFromDom(DOMElement $element): License
     {
         $nameOrId = null; // essentials
@@ -167,7 +185,7 @@ class XmlDeserializer extends AbstractSerialize implements DeserializerInterface
     }
 
     /**
-     * @return Generator<string, string>
+     * @psalm-return Generator<string, string>
      */
     public function hashesFromDom(DOMElement $element): Generator
     {
@@ -177,7 +195,7 @@ class XmlDeserializer extends AbstractSerialize implements DeserializerInterface
     }
 
     /**
-     * @return Generator<string, string>
+     * @psalm-return Generator<string, string>
      */
     public function hashFromDom(DOMElement $element): Generator
     {

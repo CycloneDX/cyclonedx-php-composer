@@ -22,11 +22,11 @@
         "ext-filter": "*",
         "ext-json": "*",
         "ext-libxml": "*",
-        "composer-plugin-api": "^1.3 || ^2.0",
-        "symfony/console": "*"
+        "composer-plugin-api": "^1.1 || ^2.0",
+        "symfony/console": ">=2.8"
     },
     "require-dev": {
-        "composer/composer": "1.3 || ^2.0",
+        "composer/composer": "^1.3 || ^2.0",
         "phpunit/phpunit": "^9.5",
         "roave/security-advisories": "dev-latest",
         "swaggest/json-schema": "^0.12.31"
@@ -42,26 +42,21 @@
         }
     },
     "scripts": {
+        "test:psalm": "@php tools/psalm" ,
         "test:phpunit": "phpunit",
-        "test:phpstan": "@php tools/phpstan/bin/phpstan analyse" ,
         "test:cs-fixer": "@php tools/php-cs-fixer fix --dry-run --diff-format=udiff",
         "test": [
-            "@test:phpstan",
+            "@test:psalm",
             "@test:phpunit",
             "@test:cs-fixer"
         ],
-        "cs-fix": "@php tools/php-cs-fixer fix --diff-format=udiff",
-        "dev-setup": [
-            "@composer install",
-            "@composer -dtools/phpstan install"
-        ]
+        "cs-fix": "@php tools/php-cs-fixer fix --diff-format=udiff"
     },
     "scripts-descriptions": {
         "test": "Run all tests!",
+        "test:psalm": "Run static code analysis with Psalm.",
         "test:phpunit": "Run tests with PHPUnit.",
-        "test:phpstan": "Run static code analysis with PHPStan.",
         "test:cs-fixer": "Test coding standards with PHP-CS-fixer.",
-        "cs-fix": "Fix files according to coding standards.",
-        "dev-setup": "Setup this project for development."
+        "cs-fix": "Fix files according to coding standards."
     }
 }

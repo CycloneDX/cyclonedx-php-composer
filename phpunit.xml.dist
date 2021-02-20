@@ -26,7 +26,6 @@
     <coverage cacheDirectory=".phpunit.cache/code-coverage"
               processUncoveredFiles="true"
               includeUncoveredFiles="true"
-              pathCoverage="true"
     >
         <include>
             <directory suffix=".php">src</directory>

@@ -1,5 +1,26 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * This file is part of the CycloneDX PHP Composer Plugin.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ * Copyright (c) Steve Springett. All Rights Reserved.
+ */
+
 namespace CycloneDX\Tests\unit\Composer;
 
 use CycloneDX\Composer\BomGenerator;
@@ -15,13 +36,12 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class BomGeneratorTest extends TestCase
 {
-    /**
-     * @var BomGenerator
-     */
+    /** @psalm-var BomGenerator */
     private $bomGenerator;
 
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|OutputInterface
+     * @psalm-var \PHPUnit\Framework\MockObject\MockObject|OutputInterface
+     * @psalm-var \PHPUnit\Framework\MockObject\MockObject&OutputInterface
      */
     private $outputMock;
 
@@ -38,8 +58,8 @@ class BomGeneratorTest extends TestCase
     /**
      * @dataProvider LockProvider
      *
-     * @param array<string, mixed> $lock
-     * @param array<string, mixed> $expected
+     * @psalm-param array<string, mixed> $lock
+     * @psalm-param array<string, mixed> $expected
      */
     public function testGetPackagesFromLock(array $lock, bool $excludeDev, array $expected): void
     {
@@ -59,7 +79,7 @@ class BomGeneratorTest extends TestCase
     }
 
     /**
-     * @return Generator<array{array, bool, array}>
+     * @psalm-return Generator<array{array, bool, array}>
      */
     public function LockProvider(): Generator
     {
@@ -100,8 +120,8 @@ class BomGeneratorTest extends TestCase
     /**
      * @dataProvider packageProvider
      *
-     * @param array<string, mixed> $notPlugins
-     * @param array<string, mixed> $plugins
+     * @psalm-param array<string, mixed> $notPlugins
+     * @psalm-param array<string, mixed> $plugins
      */
     public function testFilterOutPlugins(array $notPlugins, array $plugins): void
     {
@@ -123,7 +143,7 @@ class BomGeneratorTest extends TestCase
     }
 
     /**
-     * @return Generator<array{array, array}>
+     * @psalm-return Generator<array{array, array}>
      */
     public function packageProvider(): Generator
     {
@@ -156,7 +176,7 @@ class BomGeneratorTest extends TestCase
     }
 
     /**
-     * @return Generator<array{string, string}>
+     * @psalm-return Generator<array{string, string}>
      */
     public function versionProvider(): Generator
     {
