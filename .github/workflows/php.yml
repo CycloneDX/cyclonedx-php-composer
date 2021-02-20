@@ -65,15 +65,13 @@ jobs:
       - name: Run phpunit tests
         run: >
           php
-          ./tools/composer
-          exec --
-          phpunit
+          ./vendor/bin/phpunit
           --log-junit=${{ env.REPORTS_DIR }}/tests.${{ matrix.os }}_php${{ matrix.php }}_${{ matrix.stability }}.junit.xml
           --coverage-clover=${{ env.REPORTS_DIR }}/coverage.${{ matrix.os}}_php${{ matrix.php }}_${{ matrix.stability }}.clover.xml
           --no-interaction
           --do-not-cache-result
       - name: Artifact reports
-        if: ${{ ! cancelled() && ! matrix.no-reports }}
+        if: ${{ ! cancelled() }}
         # see https://github.com/actions/upload-artifact
         uses: actions/upload-artifact@v2
         with:
