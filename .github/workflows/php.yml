@@ -18,7 +18,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     env:
       REPORTS_DIR: CI_reports
-      REPORTS_ARTIFACT: test-reports
+      REPORTS_ARTIFACT: tests-reports
     strategy:
       fail-fast: false
       matrix:
@@ -157,7 +157,7 @@ jobs:
       PLUGIN_DIR: plugin
       DEMO_DIR: demo
       REPORTS_DIR: CI_reports
-      REPORTS_ARTIFACT: demo-reports
+      REPORTS_ARTIFACT: demos-reports
     strategy:
       fail-fast: false
       matrix:
@@ -200,20 +200,20 @@ jobs:
         run: >
           composer
           make-bom -h
-          > ${{ env.REPORTS_DIR }}/help.txt
+          > ${{ env.REPORTS_DIR }}/help.composer${{ matrix.compser }}.txt
         working-directory: ${{ env.DEMO_DIR }}
       - name: Demo XML
         run: >
           composer
           make-bom
-          --output-file=${{ env.REPORTS_DIR }}/bom.xml
+          --output-file=${{ env.REPORTS_DIR }}/bom.composer${{ matrix.compser }}.xml
         working-directory: ${{ env.DEMO_DIR }}
       - name: Demo JSON
         run: >
           composer
           make-bom
           --json
-          --output-file=${{ env.REPORTS_DIR }}/bom.json
+          --output-file=${{ env.REPORTS_DIR }}/bom.composer${{ matrix.compser }}.json
         working-directory: ${{ env.DEMO_DIR }}
       - name: Artifact reports
         if: ${{ ! cancelled() }}
