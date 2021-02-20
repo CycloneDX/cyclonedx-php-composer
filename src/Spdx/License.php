@@ -89,6 +89,11 @@ class License
         }
 
         try {
+            /**
+             * list of strings, as asserted by an integration test: {@see \CycloneDX\Tests\integration\Spdx\ShippedLicensesTest::test()}.
+             *
+             * @var list<string> $licenses
+             */
             $licenses = json_decode($json, false, 2, JSON_THROW_ON_ERROR);
         } catch (JsonException $exception) {
             throw new RuntimeException("Malformed licenses file ${file}", 0, $exception);
