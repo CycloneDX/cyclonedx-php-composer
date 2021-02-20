@@ -90,8 +90,8 @@ class License
 
         try {
             $licenses = json_decode($json, false, 2, JSON_THROW_ON_ERROR);
-        } catch (JsonException $ex) {
-            throw new RuntimeException("Malformed licenses file ${file}", 0, $ex);
+        } catch (JsonException $exception) {
+            throw new RuntimeException("Malformed licenses file ${file}", 0, $exception);
         }
 
         $this->licenses = [];
