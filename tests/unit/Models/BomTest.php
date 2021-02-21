@@ -45,7 +45,7 @@ class BomTest extends TestCase
         $this->bom = new Bom();
     }
 
-    // region components setter/getter/modifiers
+    // region components setter&getter&modifiers
 
     /**
      * @dataProvider componentDataProvider()
@@ -91,9 +91,9 @@ class BomTest extends TestCase
         yield 'assoc' => [['foo' => $this->createMock(Component::class)]];
     }
 
-    // endregion components setter/getter/modifiers
+    // endregion components setter&getter&modifiers
 
-    // region version setter/getter
+    // region version setter&getter
 
     public function testVersionSetterGetter(): void
     {
@@ -109,6 +109,6 @@ class BomTest extends TestCase
         $this->bom->setVersion($version);
     }
 
-    // endregion version setter/getter
+    // endregion version setter&getter
 
 }

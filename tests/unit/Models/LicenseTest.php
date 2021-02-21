@@ -45,6 +45,8 @@ class LicenseTest extends TestCase
         $this->license = new License(random_bytes(255));
     }
 
+    // region name|id setters&getters
+
     public function testWithId(): void
     {
         $id = 'MIT';
@@ -60,4 +62,26 @@ class LicenseTest extends TestCase
         self::assertEquals($name, $this->license->getName());
         self::assertNull($this->license->getId());
     }
+
+    // endregion name|id setters&getters
+
+    // region url setter&getter
+
+    public function testWithUrlValid(): void
+    {
+        $url = 'http://example.com/'. bin2hex(random_bytes(32));
+        $this->license->setUrl($url);
+        self::assertEquals($url, $this->license->getUrl());
+    }
+
+    public function testWithUrlInvalid(): void
+    {
+        $url = 'example.com/'. bin2hex(random_bytes(32));
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessageMatches('/invalid url/i');
+        $this->license->setUrl($url);
+    }
+
+    // endregion url setter&getter
+
 }
