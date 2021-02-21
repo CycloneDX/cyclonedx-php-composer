@@ -61,12 +61,12 @@ class PackageUrl
         $subpath = $data->getSubpath();
 
         return self::SCHEME.
-            ':'.$type.
-            ($namespace ? '/'.$namespace : '').
-            '/'.$name.
-            ($version ? '@'.$version : '').
-            ($qualifiers ? '?'.$qualifiers : '').
-            ($subpath ? '#'.$subpath : '')
+            ':'. $type.
+            (null === $namespace ? '' : '/'. rawurlencode($namespace) ).
+            '/'.rawurlencode($name).
+            (null === $version ? '' : '@'. rawurlencode($version) ).
+            (null === $qualifiers ? '' : '?'. $qualifiers ).
+            (null === $subpath ? '' : '#'. $subpath )
             ;
     }
 
@@ -89,11 +89,20 @@ class PackageUrl
         if (false === isset($parts['path'])) {
             throw new DomainException('missing path');
         }
-        /** @psalm-var array{string, string|null} $partsPath */
-        $partsPath = explode('@', $parts['path'], 2);
-        [$typeNamespaceName, $version] = 2 === count($partsPath) ? $partsPath : [$partsPath[0], null];
+        $partsPath = explode('@', $parts['path']);
+        switch (count($partsPath))
+        {
+            case 1 :
+                [$typeNamespaceName, $version] = [$partsPath[0], null];
+                break;
+            case 2 :
+                [$typeNamespaceName, $version] = $partsPath;
+                break;
+            default:
+                throw new DomainException('malformed: type/?namespace/type@?version');
+        }
 
-        $partsTypeNamespaceName = explode('/', $typeNamespaceName, 3);
+        $partsTypeNamespaceName = explode('/', $typeNamespaceName);
         switch (count($partsTypeNamespaceName)) {
             case 2:
                 [$type, $namespace, $name] = [$partsTypeNamespaceName[0], null, $partsTypeNamespaceName[1]];
@@ -102,12 +111,12 @@ class PackageUrl
                 [$type, $namespace, $name] = $partsTypeNamespaceName;
                 break;
             default:
-                throw new DomainException('missing type or name');
+                throw new DomainException('malformed: type/namespace?/type');
         }
 
-        return (new PackageUrlModel($type, $name))
-            ->setNamespace($namespace)
-            ->setVersion($version)
+        return (new PackageUrlModel($type, rawurldecode($name)))
+            ->setNamespace(null === $namespace ? null : rawurldecode($namespace))
+            ->setVersion($version === null ? null : rawurldecode($version))
             ->setQualifiers($parts['query'] ?? null)
             ->setSubpath($parts['fragment'] ?? null)
         ;

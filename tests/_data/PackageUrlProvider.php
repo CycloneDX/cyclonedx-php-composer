@@ -61,11 +61,13 @@ abstract class PackageUrlProvider
                 ->setVersion('7.50.3-1')
                 ->setQualifiers('arch=i386&distro=jessie'),
 
-            'pkg:docker/cassandra@sha256:244fd47e07d1004f0aed9c' => (
+            /* modified as of https://github.com/package-url/purl-spec/pull/98 */
+            'pkg:docker/cassandra@sha256%3A244fd47e07d1004f0aed9c' => (
             new PackageUrl('docker', 'cassandra'))
                 ->setVersion('sha256:244fd47e07d1004f0aed9c'),
 
-            'pkg:docker/customer/dockerimage@sha256:244fd47e07d1004f0aed9c?repository_url=gcr.io' => (
+            /* modified as of https://github.com/package-url/purl-spec/pull/98 */
+            'pkg:docker/customer/dockerimage@sha256%3A244fd47e07d1004f0aed9c?repository_url=gcr.io' => (
             new PackageUrl('docker', 'dockerimage'))
                 ->setNamespace('customer')
                 ->setVersion('sha256:244fd47e07d1004f0aed9c')
