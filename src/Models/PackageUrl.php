@@ -26,6 +26,8 @@ namespace CycloneDX\Models;
 use DomainException;
 
 /**
+ * @psalm-type TQualifiers = array<non-empty-string, non-empty-string>
+ *
  * @author jkowalleck
  */
 class PackageUrl
@@ -53,7 +55,7 @@ class PackageUrl
     private $version;
 
     /**
-     * @psalm-var array<non-empty-string, non-empty-string>
+     * @psalm-var TQualifiers
      */
     private $qualifiers = [];
 
@@ -150,7 +152,7 @@ class PackageUrl
     }
 
     /**
-     * @psalm-return array<non-empty-string, non-empty-string>
+     * @psalm-return TQualifiers
      */
     public function getQualifiers(): array
     {
@@ -158,28 +160,41 @@ class PackageUrl
     }
 
     /**
-     * @psalm-param array<array-key, mixed> $qualifiers
+     * @psalm-param TQualifiers $qualifiers
      * @psalm-return $this
      */
     public function setQualifiers(array $qualifiers): self
     {
         foreach ($qualifiers as $key => $value) {
-            if (false === is_string($key) || '' === $key) {
-                throw new DomainException("PURL qualifiers key is invalid: {$key}");
-            }
-            if (false === is_string($value)) {
-                throw new DomainException("PURL qualifiers value for key '{$key}' is invalid: {$value}");
-            }
-            if ('' === $value) {
-                // as of rule: a `key=value` pair with an empty `value` is the same as no key/value at all for this key
+            if (false === $this->validateQualifier($key, $value)) {
                 unset($qualifiers[$key]);
             }
-            // @TODO not all rules were implemented, yet
         }
 
         $this->qualifiers = $qualifiers;
 
         return $this;
+    }
+
+    /**
+     * @psalm-param array-key $key
+     * @psalm-param mixed $value
+     *
+     * @throws DomainException
+     *
+     * @psalm-return bool
+     */
+    private function validateQualifier($key, $value): bool
+    {
+        if (false === is_string($key) || '' === $key) {
+            throw new DomainException("PURL qualifiers key is invalid: {$key}");
+        }
+        if (false === is_string($value)) {
+            throw new DomainException("PURL qualifiers value for key '{$key}' is invalid: {$value}");
+        }
+
+        // as of rule: a `key=value` pair with an empty `value` is the same as no key/value at all for this key
+        return '' !== $value;
     }
 
     /**

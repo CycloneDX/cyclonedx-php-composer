@@ -244,7 +244,7 @@ class Component
     }
 
     /**
-     * @psalm-assert array<HashAlgorithm::*, string> $hashes
+     * @psalm-param  array<HashAlgorithm::*|string, string> $hashes
      *
      * @throws DomainException          if any of hashes' keys is not in {@see HashAlgorithm}'s constants list
      * @throws InvalidArgumentException if any of hashes' values is not a string
@@ -252,6 +252,8 @@ class Component
      * @psalm-return $this
      *
      * @psalm-suppress PropertyTypeCoercion
+     * @psalm-suppress RedundantConditionGivenDocblockType
+     * @psalm-suppress DocblockTypeContradiction
      */
     public function setHashes(array $hashes): self
     {

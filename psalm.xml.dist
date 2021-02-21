@@ -5,6 +5,7 @@
        errorLevel="2"
        resolveFromConfigFile="true"
        checkForThrowsDocblock="true"
+       findUnusedPsalmSuppress="true"
        cacheDirectory=".psalm.cache"
 >
     <projectFiles>
