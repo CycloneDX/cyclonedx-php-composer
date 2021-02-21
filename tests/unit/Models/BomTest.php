@@ -45,6 +45,8 @@ class BomTest extends TestCase
         $this->bom = new Bom();
     }
 
+    // region components setter/getter/modifiers
+
     /**
      * @dataProvider componentDataProvider()
      */
@@ -53,6 +55,14 @@ class BomTest extends TestCase
         $expected = array_values($components);
         $this->bom->setComponents($components);
         self::assertEquals($expected, $this->bom->getComponents());
+    }
+
+    public function testComponentsSetterInvalid(): void
+    {
+        $components = [$this->createMock(\stdClass::class)];
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessageMatches('/not a component/i');
+        $this->bom->setComponents($components);
     }
 
     /**
@@ -81,6 +91,10 @@ class BomTest extends TestCase
         yield 'assoc' => [['foo' => $this->createMock(Component::class)]];
     }
 
+    // endregion components setter/getter/modifiers
+
+    // region version setter/getter
+
     public function testVersionSetterGetter(): void
     {
         $version = random_int(1, 255);
@@ -94,4 +108,7 @@ class BomTest extends TestCase
         $this->expectException(\DomainException::class);
         $this->bom->setVersion($version);
     }
+
+    // endregion version setter/getter
+
 }
