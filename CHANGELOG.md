@@ -15,6 +15,7 @@
 * CLI: Support for output to _STDOUT_. Use option `--output-file=-`.
 * Json deserializers for all known data models according to spec1.2.
 * XML deserializers for all known data models according to spec1.1.
+* Implementation of [PackageUrl](https://github.com/package-url).
 
 ### Removed 
 

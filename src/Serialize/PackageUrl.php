@@ -61,12 +61,12 @@ class PackageUrl
         $subpath = $data->getSubpath();
 
         return self::SCHEME.
-            ':'. $type.
-            (null === $namespace ? '' : '/'. rawurlencode($namespace) ).
+            ':'.$type.
+            (null === $namespace ? '' : '/'.rawurlencode($namespace)).
             '/'.rawurlencode($name).
-            (null === $version ? '' : '@'. rawurlencode($version) ).
-            (null === $qualifiers ? '' : '?'. $qualifiers ).
-            (null === $subpath ? '' : '#'. $subpath )
+            (null === $version ? '' : '@'.rawurlencode($version)).
+            (0 === count($qualifiers) ? '' : '?'.http_build_query($qualifiers)).
+            (null === $subpath ? '' : '#'.$subpath)
             ;
     }
 
@@ -90,12 +90,11 @@ class PackageUrl
             throw new DomainException('missing path');
         }
         $partsPath = explode('@', $parts['path']);
-        switch (count($partsPath))
-        {
-            case 1 :
+        switch (count($partsPath)) {
+            case 1:
                 [$typeNamespaceName, $version] = [$partsPath[0], null];
                 break;
-            case 2 :
+            case 2:
                 [$typeNamespaceName, $version] = $partsPath;
                 break;
             default:
@@ -114,10 +113,15 @@ class PackageUrl
                 throw new DomainException('malformed: type/namespace?/type');
         }
 
+        $qualifiers = [];
+        if (isset($parts['query'])) {
+            parse_str($parts['query'], $qualifiers);
+        }
+
         return (new PackageUrlModel($type, rawurldecode($name)))
             ->setNamespace(null === $namespace ? null : rawurldecode($namespace))
-            ->setVersion($version === null ? null : rawurldecode($version))
-            ->setQualifiers($parts['query'] ?? null)
+            ->setVersion(null === $version ? null : rawurldecode($version))
+            ->setQualifiers($qualifiers)
             ->setSubpath($parts['fragment'] ?? null)
         ;
     }

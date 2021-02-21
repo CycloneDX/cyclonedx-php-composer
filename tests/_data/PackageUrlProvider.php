@@ -41,7 +41,6 @@ abstract class PackageUrlProvider
      * examples taken from
      * {@link https://github.com/package-url/purl-spec/blob/master/README.rst#some-purl-examples}.
      *
-     *
      * @see https://github.com/package-url/purl-spec/blob/master/README.rst#purl
      * format: "scheme:type/namespace/name@version?qualifiers#subpath"
      *
@@ -59,7 +58,7 @@ abstract class PackageUrlProvider
             new PackageUrl('deb', 'curl'))
                 ->setNamespace('debian')
                 ->setVersion('7.50.3-1')
-                ->setQualifiers('arch=i386&distro=jessie'),
+                ->setQualifiers(['arch' => 'i386', 'distro' => 'jessie']),
 
             /* modified as of https://github.com/package-url/purl-spec/pull/98 */
             'pkg:docker/cassandra@sha256%3A244fd47e07d1004f0aed9c' => (
@@ -71,12 +70,12 @@ abstract class PackageUrlProvider
             new PackageUrl('docker', 'dockerimage'))
                 ->setNamespace('customer')
                 ->setVersion('sha256:244fd47e07d1004f0aed9c')
-                ->setQualifiers('repository_url=gcr.io'),
+                ->setQualifiers(['repository_url' => 'gcr.io']),
 
             'pkg:gem/jruby-launcher@1.1.2?platform=java' => (
             new PackageUrl('gem', 'jruby-launcher'))
                 ->setVersion('1.1.2')
-                ->setQualifiers('platform=java'),
+                ->setQualifiers(['platform' => 'java']),
 
             'pkg:gem/ruby-advisory-db-check@0.12.4' => (
             new PackageUrl('gem', 'ruby-advisory-db-check'))
@@ -95,13 +94,14 @@ abstract class PackageUrlProvider
             new PackageUrl('maven', 'batik-anim'))
                 ->setNamespace('org.apache.xmlgraphics')
                 ->setVersion('1.9.1')
-                ->setQualifiers('packaging=sources'),
+                ->setQualifiers(['packaging' => 'sources']),
 
-            'pkg:maven/org.apache.xmlgraphics/batik-anim@1.9.1?repository_url=repo.spring.io/release' => (
+            /* modified as of https://github.com/package-url/purl-spec/pull/99 */
+            'pkg:maven/org.apache.xmlgraphics/batik-anim@1.9.1?repository_url=repo.spring.io%2Frelease' => (
             new PackageUrl('maven', 'batik-anim'))
                 ->setNamespace('org.apache.xmlgraphics')
                 ->setVersion('1.9.1')
-                ->setQualifiers('repository_url=repo.spring.io/release'),
+                ->setQualifiers(['repository_url' => 'repo.spring.io/release']),
 
             'pkg:npm/%40angular/animation@12.3.1' => (
             new PackageUrl('npm', 'animation'))
@@ -124,13 +124,13 @@ abstract class PackageUrlProvider
             new PackageUrl('rpm', 'curl'))
                 ->setNamespace('fedora')
                 ->setVersion('7.50.3-1.fc25')
-                ->setQualifiers('arch=i386&distro=fedora-25'),
+                ->setQualifiers(['arch' => 'i386', 'distro' => 'fedora-25']),
 
             'pkg:rpm/opensuse/curl@7.56.1-1.1.?arch=i386&distro=opensuse-tumbleweed' => (
             new PackageUrl('rpm', 'curl'))
                 ->setNamespace('opensuse')
                 ->setVersion('7.56.1-1.1.')
-                ->setQualifiers('arch=i386&distro=opensuse-tumbleweed'),
+                ->setQualifiers(['arch' => 'i386', 'distro' => 'opensuse-tumbleweed']),
         ];
 
         foreach ($examples as $string => $object) {

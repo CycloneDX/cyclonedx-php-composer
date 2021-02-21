@@ -53,9 +53,9 @@ class PackageUrl
     private $version;
 
     /**
-     * @psalm-var non-empty-string|null
+     * @psalm-var array<non-empty-string, non-empty-string>
      */
-    private $qualifiers;
+    private $qualifiers = [];
 
     /**
      * @psalm-var non-empty-string|null
@@ -150,26 +150,40 @@ class PackageUrl
     }
 
     /**
-     * @psalm-return non-empty-string|null
+     * @psalm-return array<non-empty-string, non-empty-string>
      */
-    public function getQualifiers(): ?string
+    public function getQualifiers(): array
     {
         return $this->qualifiers;
     }
 
     /**
-     * @psalm-param string|null $qualifiers
+     * @psalm-param array<array-key, mixed> $qualifiers
      * @psalm-return $this
      */
-    public function setQualifiers(?string $qualifiers): self
+    public function setQualifiers(array $qualifiers): self
     {
-        $this->qualifiers = '' === $qualifiers ? null : $qualifiers;
+        foreach ($qualifiers as $key => $value) {
+            if (false === is_string($key) || '' === $key) {
+                throw new DomainException("PURL qualifiers key is invalid: {$key}");
+            }
+            if (false === is_string($value)) {
+                throw new DomainException("PURL qualifiers value for key '{$key}' is invalid: {$value}");
+            }
+            if ('' === $value) {
+                // as of rule: a `key=value` pair with an empty `value` is the same as no key/value at all for this key
+                unset($qualifiers[$key]);
+            }
+            // @TODO not all rules were implemented, yet
+        }
+
+        $this->qualifiers = $qualifiers;
 
         return $this;
     }
 
     /**
-     * @psalm-return non-empty-string|null
+     * @psalm-return string|null
      */
     public function getSubpath(): ?string
     {

@@ -104,11 +104,9 @@ class PackageUrlTest extends TestCase
 
     // region Qualifiers setter&getter
 
-    /**
-     * @dataProvider \CycloneDX\Tests\_data\GeneralDataProvider::stringRandomEmptyNull
-     */
-    public function testQualifiersSetterGetter(?string $qualifiers): void
+    public function testQualifiersSetterGetter(): void
     {
+        $qualifiers = ['value'.bin2hex(random_bytes(32)) => 'key'.bin2hex(random_bytes(32))];
         $this->pUrl->setQualifiers($qualifiers);
         self::assertEquals($qualifiers, $this->pUrl->getQualifiers());
     }
