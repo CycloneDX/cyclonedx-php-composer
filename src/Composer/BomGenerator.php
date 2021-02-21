@@ -28,6 +28,7 @@ use CycloneDX\Enums\HashAlgorithm;
 use CycloneDX\Models\Bom;
 use CycloneDX\Models\Component;
 use CycloneDX\Models\License;
+use CycloneDX\Models\PackageUrl;
 use Generator;
 use Symfony\Component\Console\Formatter\OutputFormatter;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -43,6 +44,8 @@ use UnexpectedValueException;
  */
 class BomGenerator
 {
+    public const PURL_TYPE = 'composer';
+
     /**
      * @psalm-var OutputInterface
      */
@@ -142,6 +145,12 @@ class BomGenerator
         if (!empty($package['dist']['shasum'])) {
             $component->setHash(HashAlgorithm::SHA_1, $package['dist']['shasum']);
         }
+
+        $component->setPackageUrl(
+            (new PackageUrl(self::PURL_TYPE, $component->getName()))
+                ->setNamespace($component->getGroup())
+                ->setVersion($component->getVersion())
+        );
 
         return $component;
     }

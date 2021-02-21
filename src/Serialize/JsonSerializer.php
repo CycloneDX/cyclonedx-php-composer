@@ -106,6 +106,8 @@ class JsonSerializer extends AbstractSerialize implements SerializerInterface
             throw new DomainException("Unsupported component type: {$type}");
         }
 
+        $purl = $component->getPackageUrl();
+
         return array_filter(
             [
                 'type' => $type,
@@ -115,7 +117,7 @@ class JsonSerializer extends AbstractSerialize implements SerializerInterface
                 'description' => $component->getDescription(),
                 'licenses' => iterator_to_array($this->licensesToJson($component->getLicenses())),
                 'hashes' => iterator_to_array($this->hashesToJson($component->getHashes())),
-                'purl' => $component->getPackageUrl(),
+                'purl' => $purl ? (new PackageUrl())->serialize($purl) : null,
             ],
             [$this, 'isNotNull']
         );

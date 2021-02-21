@@ -88,6 +88,15 @@ class Component
     private $description;
 
     /**
+     * Package-URL (PURL).
+     * The purl, if specified, must be valid and conform to the specification
+     * defined at: {@linnk https://github.com/package-url/purl-spec/blob/master/README.rst#purl}.
+     *
+     * @psalm-var PackageUrl|null
+     */
+    private $packageUrl;
+
+    /**
      * Licences.
      *
      * @psalm-var License[]
@@ -295,19 +304,16 @@ class Component
         return $this;
     }
 
-    /**
-     * Package URL.
-     *
-     * Specifies the package-url (PURL).
-     * The purl, if specified, must be valid and conform to the specification
-     * defined at: {@linnk https://github.com/package-url/purl-spec}
-     */
-    public function getPackageUrl(): string
+    public function getPackageUrl(): ?PackageUrl
     {
-        return 'pkg:composer/'.
-            ($this->group ? "{$this->group}/" : '').
-            "{$this->name}@{$this->version}"
-            ;
+        return $this->packageUrl;
+    }
+
+    public function setPackageUrl(?PackageUrl $purl): self
+    {
+        $this->packageUrl = $purl;
+
+        return $this;
     }
 
     /**

@@ -110,5 +110,4 @@ class BomTest extends TestCase
     }
 
     // endregion version setter&getter
-
 }

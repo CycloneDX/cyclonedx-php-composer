@@ -66,10 +66,10 @@ trait SimpleDomTrait
     }
 
     /**
-     * @psalm-param int|float|string|null $data
+     * @psalm-param mixed|null $data
      * @psalm-param bool                  $null whether to return null wgen `$data` is null
      */
-    private function simpleDomSaveTextElement(DOMDocument $document, string $name, $data, bool $null = true): ?DOMElement
+    private function simpleDomSafeTextElement(DOMDocument $document, string $name, $data, bool $null = true): ?DOMElement
     {
         $element = $document->createElement($name);
         if (null !== $data) {

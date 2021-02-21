@@ -25,6 +25,7 @@ namespace CycloneDX\Tests\uni\Models;
 
 use CycloneDX\Enums\Classification;
 use CycloneDX\Models\Component;
+use CycloneDX\Models\PackageUrl;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -44,38 +45,24 @@ class ComponentTest extends TestCase
         $this->component = new Component(Classification::LIBRARY, 'name', 'version');
     }
 
+    // region type getter&setter
+
     public function testSetTypeWithUnknownValue(): void
     {
         $this->expectException(\DomainException::class);
         $this->component->setType('something unknown');
     }
 
-    public function testPackageUrlWithGroup(): void
+    // endregion type getter&setter
+
+    // region purl setter&getter
+
+    public function testPackageUrlSetterGetter(): void
     {
-        $name = uniqid('name', false);
-        $group = uniqid('group', false);
-        $version = uniqid('1.0+', false);
-        $this->component
-            ->setName($name)
-            ->setGroup($group)
-            ->setVersion($version);
-        self::assertEquals(
-            "pkg:composer/{$group}/{$name}@{$version}",
-            $this->component->getPackageUrl()
-        );
+        $url = $this->createMock(PackageUrl::class);
+        $this->component->setPackageUrl($url);
+        self::assertEquals($url, $this->component->getPackageUrl());
     }
 
-    public function testPackageUrlWithoutGroup(): void
-    {
-        $name = uniqid('name', false);
-        $version = uniqid('1.0+', false);
-        $this->component
-            ->setName($name)
-            ->setGroup(null)
-            ->setVersion($version);
-        self::assertEquals(
-            "pkg:composer/{$name}@{$version}",
-            $this->component->getPackageUrl()
-        );
-    }
+    // endregion purl setter&getter
 }

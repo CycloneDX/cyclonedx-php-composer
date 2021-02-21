@@ -38,7 +38,9 @@ use Generator;
 use RuntimeException;
 
 /**
- * transform data models to XML.
+ * Transform data models to XML.
+ *
+ * @TODO see which parts need to be normalized!
  *
  * @author jkowalleck
  */
@@ -105,16 +107,18 @@ class XmlSerializer extends AbstractSerialize implements SerializerInterface
             throw new DomainException("Unsupported component type: {$type}");
         }
 
+        $purl = $component->getPackageUrl();
+
         $element = $document->createElement('component');
         $this->simpleDomSetAttributes($element, [
             'type' => $type,
         ]);
         $this->simpleDomAppendChildren($element, [
             // publisher
-            $this->simpleDomSaveTextElement($document, 'group', $component->getGroup()),
-            $this->simpleDomSaveTextElement($document, 'name', $component->getName()),
-            $this->simpleDomSaveTextElement($document, 'version', $component->getVersion()),
-            $this->simpleDomSaveTextElement($document, 'description', $component->getDescription()),
+            $this->simpleDomSafeTextElement($document, 'group', $component->getGroup()),
+            $this->simpleDomSafeTextElement($document, 'name', $component->getName()),
+            $this->simpleDomSafeTextElement($document, 'version', $component->getVersion()),
+            $this->simpleDomSafeTextElement($document, 'description', $component->getDescription()),
             // scope
             $this->simpleDomAppendChildren(
                 $document->createElement('hashes'),
@@ -126,7 +130,7 @@ class XmlSerializer extends AbstractSerialize implements SerializerInterface
             ),
             // copyright
             // cpe <-- DEPRECATED in latest spec
-            $this->simpleDomSaveTextElement($document, 'purl', $component->getPackageUrl()),
+            $this->simpleDomSafeTextElement($document, 'purl', $purl ? (new PackageUrl())->serialize($purl) : null),
             // modified
             // pedigree
             // externalReferences
@@ -165,7 +169,7 @@ class XmlSerializer extends AbstractSerialize implements SerializerInterface
             throw new DomainException('invalid content', 2);
         }
 
-        $element = $this->simpleDomSaveTextElement($document, 'hash', $content);
+        $element = $this->simpleDomSafeTextElement($document, 'hash', $content);
         assert(null !== $element);
         $this->simpleDomSetAttributes($element, [
             'alg' => $algorithm,
@@ -178,9 +182,9 @@ class XmlSerializer extends AbstractSerialize implements SerializerInterface
     {
         $element = $document->createElement('license');
         $this->simpleDomAppendChildren($element, [
-            $this->simpleDomSaveTextElement($document, 'id', $license->getId()),
-            $this->simpleDomSaveTextElement($document, 'name', $license->getName()),
-            $this->simpleDomSaveTextElement($document, 'url', $license->getUrl()),
+            $this->simpleDomSafeTextElement($document, 'id', $license->getId()),
+            $this->simpleDomSafeTextElement($document, 'name', $license->getName()),
+            $this->simpleDomSafeTextElement($document, 'url', $license->getUrl()),
         ]);
 
         return $element;

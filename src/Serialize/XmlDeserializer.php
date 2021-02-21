@@ -99,6 +99,7 @@ class XmlDeserializer extends AbstractSerialize implements DeserializerInterface
         $description = null;
         $hashes = null;
         $licenses = [];
+        $purl = null;
         foreach ($this->simpleDomGetChildElements($element) as $childElement) {
             switch ($childElement->nodeName) {
                 case 'name':
@@ -119,6 +120,9 @@ class XmlDeserializer extends AbstractSerialize implements DeserializerInterface
                 case 'hashes':
                     $hashes = $this->hashesFromDom($childElement);
                     break;
+                case 'purl':
+                    $purl = $childElement->nodeValue;
+                    break;
             }
         }
 
@@ -131,7 +135,8 @@ class XmlDeserializer extends AbstractSerialize implements DeserializerInterface
             ->setGroup($group)
             ->setDescription($description)
             ->addLicense(...$licenses)
-            ->setHashes(null === $hashes ? [] : iterator_to_array($hashes));
+            ->setHashes(null === $hashes ? [] : iterator_to_array($hashes))
+            ->setPackageUrl(null === $purl ? null : (new PackageUrl())->deserialize($purl));
     }
 
     /**

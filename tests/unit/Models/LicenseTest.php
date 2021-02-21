@@ -69,19 +69,18 @@ class LicenseTest extends TestCase
 
     public function testWithUrlValid(): void
     {
-        $url = 'http://example.com/'. bin2hex(random_bytes(32));
+        $url = 'http://example.com/'.bin2hex(random_bytes(32));
         $this->license->setUrl($url);
         self::assertEquals($url, $this->license->getUrl());
     }
 
     public function testWithUrlInvalid(): void
     {
-        $url = 'example.com/'. bin2hex(random_bytes(32));
+        $url = 'example.com/'.bin2hex(random_bytes(32));
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessageMatches('/invalid url/i');
         $this->license->setUrl($url);
     }
 
     // endregion url setter&getter
-
 }

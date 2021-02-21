@@ -88,7 +88,8 @@ class JsonDeserializer extends AbstractSerialize implements DeserializerInterfac
             ->setGroup($json['group'] ?? null)
             ->setDescription($json['description'] ?? null)
             ->addLicense(...$this->licensesFromJson($json['licenses'] ?? []))
-            ->setHashes(iterator_to_array($this->hashesFromJson($json['hashes'] ?? [])));
+            ->setHashes(iterator_to_array($this->hashesFromJson($json['hashes'] ?? [])))
+            ->setPackageUrl(null === $json['purl'] ? null : (new PackageUrl())->deserialize($json['purl']));
     }
 
     /**
