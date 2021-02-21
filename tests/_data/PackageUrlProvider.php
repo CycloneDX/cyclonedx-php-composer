@@ -38,8 +38,11 @@ abstract class PackageUrlProvider
     }
 
     /**
+     * examples taken from
+     * {@link https://github.com/package-url/purl-spec/blob/master/README.rst#some-purl-examples}.
+     *
+     *
      * @see https://github.com/package-url/purl-spec/blob/master/README.rst#purl
-     * @see https://github.com/package-url/purl-spec/blob/master/README.rst#some-purl-examples
      * format: "scheme:type/namespace/name@version?qualifiers#subpath"
      *
      * @psalm-return Generator<string, array{PackageUrl}>
@@ -72,29 +75,61 @@ abstract class PackageUrlProvider
             new PackageUrl('gem', 'jruby-launcher'))
                 ->setVersion('1.1.2')
                 ->setQualifiers('platform=java'),
+
+            'pkg:gem/ruby-advisory-db-check@0.12.4' => (
+            new PackageUrl('gem', 'ruby-advisory-db-check'))
+            ->setVersion('0.12.4'),
+
+            'pkg:github/package-url/purl-spec@244fd47e07d1004f0aed9c' => (
+            new PackageUrl('github', 'purl-spec'))
+                ->setNamespace('package-url')
+                ->setVersion('244fd47e07d1004f0aed9c'),
+
+            'pkg:golang/google.golang.org/genproto' => (
+            new PackageUrl('golang', 'genproto'))
+                ->setNamespace('google.golang.org'),
+
+            'pkg:maven/org.apache.xmlgraphics/batik-anim@1.9.1?packaging=sources' => (
+            new PackageUrl('maven', 'batik-anim'))
+                ->setNamespace('org.apache.xmlgraphics')
+                ->setVersion('1.9.1')
+                ->setQualifiers('packaging=sources'),
+
+            'pkg:maven/org.apache.xmlgraphics/batik-anim@1.9.1?repository_url=repo.spring.io/release' => (
+            new PackageUrl('maven', 'batik-anim'))
+                ->setNamespace('org.apache.xmlgraphics')
+                ->setVersion('1.9.1')
+                ->setQualifiers('repository_url=repo.spring.io/release'),
+
+            'pkg:npm/%40angular/animation@12.3.1' => (
+            new PackageUrl('npm', 'animation'))
+                ->setNamespace('@angular')
+                ->setVersion('12.3.1'),
+
+            'pkg:npm/foobar@12.3.1' => (
+            new PackageUrl('npm', 'foobar'))
+                ->setVersion('12.3.1'),
+
+            'pkg:nuget/EnterpriseLibrary.Common@6.0.1304' => (
+            new PackageUrl('nuget', 'EnterpriseLibrary.Common'))
+                ->setVersion('6.0.1304'),
+
+            'pkg:pypi/django@1.11.1' => (
+            new PackageUrl('pypi', 'django'))
+                ->setVersion('1.11.1'),
+
+            'pkg:rpm/fedora/curl@7.50.3-1.fc25?arch=i386&distro=fedora-25' => (
+            new PackageUrl('rpm', 'curl'))
+                ->setNamespace('fedora')
+                ->setVersion('7.50.3-1.fc25')
+                ->setQualifiers('arch=i386&distro=fedora-25'),
+
+            'pkg:rpm/opensuse/curl@7.56.1-1.1.?arch=i386&distro=opensuse-tumbleweed' => (
+            new PackageUrl('rpm', 'curl'))
+                ->setNamespace('opensuse')
+                ->setVersion('7.56.1-1.1.')
+                ->setQualifiers('arch=i386&distro=opensuse-tumbleweed'),
         ];
-        /* MORE EXAMPLES:
-
-pkg:gem/jruby-launcher@1.1.2?platform=java
-pkg:gem/ruby-advisory-db-check@0.12.4
-
-pkg:github/package-url/purl-spec@244fd47e07d1004f0aed9c
-
-pkg:golang/google.golang.org/genproto#googleapis/api/annotations
-
-pkg:maven/org.apache.xmlgraphics/batik-anim@1.9.1?packaging=sources
-pkg:maven/org.apache.xmlgraphics/batik-anim@1.9.1?repository_url=repo.spring.io/release
-
-pkg:npm/%40angular/animation@12.3.1
-pkg:npm/foobar@12.3.1
-
-pkg:nuget/EnterpriseLibrary.Common@6.0.1304
-
-pkg:pypi/django@1.11.1
-
-pkg:rpm/fedora/curl@7.50.3-1.fc25?arch=i386&distro=fedora-25
-pkg:rpm/opensuse/curl@7.56.1-1.1.?arch=i386&distro=opensuse-tumbleweed
-         */
 
         foreach ($examples as $string => $object) {
             yield $string => [$string, $object];
