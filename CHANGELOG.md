@@ -6,13 +6,15 @@
 
 * Now requires php `^7.3 || ^8.0`, was `^5.5 || ^7.0`. 
 * Complete rewrite/refactor.  
-  Expect library classes/methods/functions to be removed, renamed or incompatible to previous versions.  
+  Expect library classes/methods/functions to be removed, renamed or incompatible to previous versions - see the source for changes.  
   CLI via `composer make-bom` did not change.
 
 ### Added 
 
 * Support for `php>=8.0` was enabled.
 * CLI: Support for output to _STDOUT_. Use option `--output-file=-`.
+* Json deserializers for all known data models according to spec1.2.
+* XML deserializers for all known data models according to spec1.1.
 
 ### Removed 
 
@@ -25,9 +27,7 @@
 ### Misc
 
 * Added more tests during the build process.
-* Added some QA tools:
-  [PHPStan](https://phpstan.org/),
-  [PHP-CS-Fixer](https://cs.symfony.com/).
+* Added [Psalm](https://psalm.dev/) & [PHP-CS-Fixer](https://cs.symfony.com/) to the CI chain and fixed all findings accordingly:.
 * Added a demo run of the plugin to the CI chain.
 
 ## 1.2
