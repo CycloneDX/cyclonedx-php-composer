@@ -1,5 +1,17 @@
 # Changelog
 
+## 2.0
+
+### Breaking changes
+
+* Removed support for PHP < 7.1
+  (via [#17](https://github.com/CycloneDX/cyclonedx-php-composer/pull/17))
+
+### Added
+
+* Support for PHP 8
+  (via [#17](https://github.com/CycloneDX/cyclonedx-php-composer/pull/17))
+
 ## 1.2
 
 ### Added
