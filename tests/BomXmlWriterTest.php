@@ -18,7 +18,7 @@ class BomXmlWriterTest extends TestCase
      */
     private $bomXmlWriter;
 
-    protected function setUp()
+    protected function setUp() : void
     {
         parent::setUp();
 

@@ -19,7 +19,7 @@ class BomJsonWriterTest extends TestCase
      */
     private $bomJsonWriter;
 
-    protected function setUp() 
+    protected function setUp() : void
     {
         parent::setUp();
         
