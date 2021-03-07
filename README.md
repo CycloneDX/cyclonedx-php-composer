@@ -24,7 +24,7 @@ The plugin supports PHP 7.1 and later.
 
 After successful installation, the composer command `make-bom` is available.
 
-```sh
+```
 $ composer make-bom -h
 Usage:
   make-bom [options]
