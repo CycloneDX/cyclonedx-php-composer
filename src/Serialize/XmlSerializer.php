@@ -130,7 +130,7 @@ class XmlSerializer extends AbstractSerialize implements SerializerInterface
             ),
             // copyright
             // cpe <-- DEPRECATED in latest spec
-            $this->simpleDomSafeTextElement($document, 'purl', $purl ? (new PackageUrl())->serialize($purl) : null),
+            $this->simpleDomSafeTextElement($document, 'purl', $purl ? (string) $purl : null),
             // modified
             // pedigree
             // externalReferences

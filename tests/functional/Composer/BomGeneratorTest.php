@@ -27,7 +27,7 @@ use CycloneDX\Composer\BomGenerator;
 use CycloneDX\Enums\HashAlgorithm;
 use CycloneDX\Models\Component;
 use CycloneDX\Models\License;
-use CycloneDX\Models\PackageUrl;
+use PackageUrl\PackageUrl;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Output\OutputInterface;
 use UnexpectedValueException;
@@ -150,7 +150,13 @@ class BomGeneratorTest extends TestCase
         self::assertEquals('library', $component->getType());
         self::assertEquals([new License('MIT')], $component->getLicenses());
         self::assertEquals([HashAlgorithm::SHA_1 => '7e240de74fb1ed08fa08d38063f6a6a91462a815'], $component->getHashes());
-        self::assertEquals((new PackageUrl('composer', 'packageName'))->setNamespace('vendorName')->setVersion('6.6.6'), $component->getPackageUrl());
+        self::assertEquals(
+            (new PackageUrl('composer', 'packageName'))
+                ->setNamespace('vendorName')
+                ->setVersion('6.6.6')
+                ->setChecksums(['sha1:7e240de74fb1ed08fa08d38063f6a6a91462a815']),
+            $component->getPackageUrl()
+        );
     }
 
     public function testBuildComponentWithoutVendor(): void
@@ -168,7 +174,11 @@ class BomGeneratorTest extends TestCase
         self::assertNull($component->getDescription());
         self::assertEmpty($component->getLicenses());
         self::assertEmpty($component->getHashes());
-        self::assertEquals((new PackageUrl('composer', 'packageName'))->setVersion('1.0'), $component->getPackageUrl());
+        self::assertEquals(
+            (new PackageUrl('composer', 'packageName'))
+                ->setVersion('1.0'),
+            $component->getPackageUrl()
+        );
     }
 
     public function testBuildComponentWithoutName(): void

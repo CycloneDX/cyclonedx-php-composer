@@ -25,7 +25,7 @@ namespace CycloneDX\Tests\uni\Models;
 
 use CycloneDX\Enums\Classification;
 use CycloneDX\Models\Component;
-use CycloneDX\Models\PackageUrl;
+use PackageUrl\PackageUrl;
 use PHPUnit\Framework\TestCase;
 
 /**

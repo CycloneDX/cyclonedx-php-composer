@@ -16,6 +16,7 @@
         "preferred-install": "dist",
         "sort-packages": true
     },
+    "minimum-stability": "dev",
     "require": {
         "php": "^7.3 || ^8.0",
         "ext-dom": "*",
@@ -23,6 +24,7 @@
         "ext-json": "*",
         "ext-libxml": "*",
         "composer-plugin-api": "^1.1 || ^2.0",
+        "package-url/packageurl-php": "dev-main",
         "symfony/console": ">=2.8"
     },
     "require-dev": {

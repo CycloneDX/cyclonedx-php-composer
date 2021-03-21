@@ -31,6 +31,7 @@ use DOMDocument;
 use DOMElement;
 use Generator;
 use InvalidArgumentException;
+use PackageUrl\PackageUrl;
 
 /**
  * transform XML to data models.
@@ -136,7 +137,7 @@ class XmlDeserializer extends AbstractSerialize implements DeserializerInterface
             ->setDescription($description)
             ->addLicense(...$licenses)
             ->setHashes(null === $hashes ? [] : iterator_to_array($hashes))
-            ->setPackageUrl(null === $purl ? null : (new PackageUrl())->deserialize($purl));
+            ->setPackageUrl(PackageUrl::fromString($purl ?? ''));
     }
 
     /**

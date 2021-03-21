@@ -117,7 +117,7 @@ class JsonSerializer extends AbstractSerialize implements SerializerInterface
                 'description' => $component->getDescription(),
                 'licenses' => iterator_to_array($this->licensesToJson($component->getLicenses())),
                 'hashes' => iterator_to_array($this->hashesToJson($component->getHashes())),
-                'purl' => $purl ? (new PackageUrl())->serialize($purl) : null,
+                'purl' => $purl ? (string) $purl : null,
             ],
             [$this, 'isNotNull']
         );

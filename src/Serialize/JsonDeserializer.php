@@ -29,6 +29,7 @@ use CycloneDX\Models\License;
 use Generator;
 use InvalidArgumentException;
 use JsonException;
+use PackageUrl\PackageUrl;
 
 /**
  * transform JSON to data models.
@@ -89,7 +90,7 @@ class JsonDeserializer extends AbstractSerialize implements DeserializerInterfac
             ->setDescription($json['description'] ?? null)
             ->addLicense(...$this->licensesFromJson($json['licenses'] ?? []))
             ->setHashes(iterator_to_array($this->hashesFromJson($json['hashes'] ?? [])))
-            ->setPackageUrl(null === $json['purl'] ? null : (new PackageUrl())->deserialize($json['purl']));
+            ->setPackageUrl(PackageUrl::fromString($json['purl'] ?? ''));
     }
 
     /**

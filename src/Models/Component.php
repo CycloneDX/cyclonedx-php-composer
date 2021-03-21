@@ -27,6 +27,7 @@ use CycloneDX\Enums\Classification;
 use CycloneDX\Enums\HashAlgorithm;
 use DomainException;
 use InvalidArgumentException;
+use PackageUrl\PackageUrl;
 
 /**
  * Class Component.
