@@ -1,0 +1,5 @@
+*
+!/.gitignore
+!/composer.json
+# this is a project, so deps are locked
+!/composer.lock

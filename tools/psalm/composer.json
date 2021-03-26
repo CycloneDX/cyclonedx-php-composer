@@ -1,0 +1,14 @@
+{
+    "name": "tools/psalm",
+    "description": "psalm and plugins",
+    "type": "project",
+    "config": {
+        "preferred-install": "dist",
+        "sort-packages": true
+    },
+    "prefer-stable": true,
+    "require": {
+        "roave/security-advisories": "dev-latest",
+        "vimeo/psalm": "4.6.2"
+    }
+}

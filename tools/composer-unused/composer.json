@@ -1,0 +1,14 @@
+{
+    "name": "tools/composer-unused",
+    "description": "composer-unused",
+    "type": "project",
+    "config": {
+        "preferred-install": "dist",
+        "sort-packages": true
+    },
+    "prefer-stable": true,
+    "require": {
+        "icanhazstring/composer-unused": "^0.7.5",
+        "roave/security-advisories": "dev-latest"
+    }
+}
