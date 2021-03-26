@@ -1,0 +1,14 @@
+{
+    "name": "tools/php-cs-fixer",
+    "description": "php-cs-fixer",
+    "type": "project",
+    "config": {
+        "preferred-install": "dist",
+        "sort-packages": true
+    },
+    "prefer-stable": true,
+    "require": {
+        "friendsofphp/php-cs-fixer": "2.18.2",
+        "roave/security-advisories": "dev-latest"
+    }
+}

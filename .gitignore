@@ -1,6 +1,6 @@
 /vendor/
 
-# This is a plugin, not a project.
+# This is not a project.
 # Therefore we MUST NOT keep the lock file, so to support (CI-)tests on different setups/systems.
 # That is also the reason why we dont do exact dev-requirements pinning but use ranges.
 /composer.lock
