@@ -24,7 +24,9 @@ declare(strict_types=1);
 namespace CycloneDX\Tests\uni\Models;
 
 use CycloneDX\Enums\Classification;
+use CycloneDX\Enums\HashAlgorithm;
 use CycloneDX\Models\Component;
+use CycloneDX\Models\License;
 use PackageUrl\PackageUrl;
 use PHPUnit\Framework\TestCase;
 
@@ -42,10 +44,30 @@ class ComponentTest extends TestCase
     {
         parent::setUp();
 
-        $this->component = new Component(Classification::LIBRARY, 'name', 'version');
+        $this->component = $this->createPartialMock(Component::class, []);
+    }
+
+    public function testConstructor(): void
+    {
+        $type = Classification::LIBRARY;
+        $name = bin2hex(random_bytes(random_int(23, 255)));
+        $version = uniqid('v', true);
+
+        $component = new Component($type, $name, $version);
+
+        self::assertSame($type, $component->getType());
+        self::assertSame($name, $component->getName());
+        self::assertSame($version, $component->getVersion());
     }
 
     // region type getter&setter
+
+    public function testTypeSetterGetter(): void
+    {
+        $type = Classification::LIBRARY;
+        $this->component->setType($type);
+        self::assertSame($type, $this->component->getType());
+    }
 
     public function testSetTypeWithUnknownValue(): void
     {
@@ -55,14 +77,109 @@ class ComponentTest extends TestCase
 
     // endregion type getter&setter
 
-    // region purl setter&getter
+    // region version setter&getter
+
+    public function testVersionSetterGetter(): void
+    {
+        $version = uniqid('v', true);
+        $this->component->setVersion($version);
+        self::assertSame($version, $this->component->getVersion());
+    }
+
+    // endregion version setter&getter
+
+    // region licenses setter&getter
+
+    public function testLicensesSetterGetter(): void
+    {
+        $licenses = [$this->createMock(License::class)];
+        $this->component->setLicenses($licenses);
+        self::assertSame($licenses, $this->component->getLicenses());
+    }
+
+    public function testSetLicensesWithInvalidArgument(): void
+    {
+        $licenses = ['foo'];
+        $this->expectException(\InvalidArgumentException::class);
+        $this->component->setLicenses($licenses);
+    }
+
+    public function testAddLicense(): void
+    {
+        $license = $this->createMock(License::class);
+        $this->component->addLicense($license);
+        self::assertSame([$license], $this->component->getLicenses());
+    }
+
+    // endregion licenses setter&getter
+
+    // region hashes setter&getter
+
+    public function testHashesSetterGetter(): void
+    {
+        $algorithm = HashAlgorithm::MD5;
+        $content = bin2hex(random_bytes(32));
+        $hashes = [$algorithm => $content];
+        $this->component->setHashes($hashes);
+        self::assertSame($hashes, $this->component->getHashes());
+    }
+
+    /**
+     * @dataProvider dpSetHashesWithInvalidArgument
+     */
+    public function testSetHashesWithInvalidArgument(array $hashes, string $exceptionClass, string $exceptionRegEx): void
+    {
+        $this->expectException($exceptionClass);
+        $this->expectExceptionMessageMatches($exceptionRegEx);
+
+        $this->component->setHashes($hashes);
+    }
+
+    public function dpSetHashesWithInvalidArgument()
+    {
+        yield 'unknown algorithm' => [
+            [bin2hex(random_bytes(32)) => 'foo'],
+            \DomainException::class,
+            '/unknown hash algorithm/i',
+        ];
+        yield 'content is not string' => [
+            [HashAlgorithm::SHA_1 => 1234],
+            \InvalidArgumentException::class,
+            '/content .+ is not string/i',
+        ];
+    }
+
+    public function testHashSetterGetter(): void
+    {
+        $algorithm = HashAlgorithm::MD5;
+        $content = bin2hex(random_bytes(32));
+
+        $this->component->setHash($algorithm, $content);
+
+        self::assertSame([$algorithm => $content], $this->component->getHashes());
+    }
+
+    public function testSetHashWithUnknownAlgorithm(): void
+    {
+        $algorithm = bin2hex(random_bytes(32));
+        $content = bin2hex(random_bytes(32));
+
+        $this->expectException(\DomainException::class);
+        $this->expectExceptionMessageMatches('/unknown hash algorithm/i');
+
+        $this->component->setHash($algorithm, $content);
+    }
+
+    // endregion hashes setter&getter
+
+    // region packageUrl setter&getter
 
     public function testPackageUrlSetterGetter(): void
     {
         $url = $this->createMock(PackageUrl::class);
         $this->component->setPackageUrl($url);
-        self::assertEquals($url, $this->component->getPackageUrl());
+        self::assertSame($url, $this->component->getPackageUrl());
     }
 
-    // endregion purl setter&getter
+    // endregion packageUrl setter&getter
 }
