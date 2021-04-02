@@ -1,0 +1,34 @@
+root = true
+
+[*]
+end_of_line = lf
+insert_final_newline = true
+
+[*.php]
+charset = utf-8
+indent_style = space
+indent_size = 4
+trim_trailing_whitespace = true
+
+[*.md]
+# trailing white spaces are used for linebreaks in paragraphs.
+trim_trailing_whitespace = false
+
+[composer.{json,lock}]
+charset = utf-8
+indent_style = space
+indent_size = 4
+trim_trailing_whitespace = true
+
+[{.php_cs,.php_cs.dist}]
+# in fact its another php file
+charset = utf-8
+indent_style = space
+indent_size = 4
+trim_trailing_whitespace = true
+
+[*.{yml,yaml,neon,neon.dist}]
+charset = utf-8
+indent_style = space
+indent_size = 2
+trim_trailing_whitespace = true
