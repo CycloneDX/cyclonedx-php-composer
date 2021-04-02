@@ -27,7 +27,7 @@
         "ext-json": "*",
         "ext-libxml": "*",
         "composer-plugin-api": "^1.1 || ^2.0",
-        "package-url/packageurl-php": "dev-main",
+        "package-url/packageurl-php": "^1.0",
         "symfony/console": ">=2.8"
     },
     "require-dev": {
