@@ -1,31 +1,84 @@
 # For details of what checks are run for PRs please refer below
 name: PHP CI
 
-on: [pull_request, workflow_dispatch]
+on:
+  push:
+    branches: ["master"]
+  pull_request:
+  workflow_dispatch:
+  schedule:
+    # schedule weekly tests, since dependencies are not intended to be pinned
+    # this means: at 23:42 on Fridays
+    - cron: '42 23 * * 5'
 
 jobs:
-  build:
+  tests:
+    name: Tests (${{ matrix.os}}, ${{ matrix.php }}, ${{ matrix.stability }})
     runs-on: ${{ matrix.os }}
+    env:
+      REPORTS_DIR: CI_reports
+      REPORTS_ARTIFACT: tests-reports
     strategy:
+      fail-fast: false
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
-        php-versions: ["7.1", "7.2", "7.3", "7.4", "8.0"]
+        os:
+          - ubuntu-latest
+          - windows-latest
+          - macos-latest
+        php:
+          - "7.1" # lowest supported
+          - "7.2"
+          - "7.3"
+          - "7.4"
+          - "8.0" # highest supported
+        stability: [ "lowest", "stable" ]
     timeout-minutes: 30
 
-    name: PHP ${{ matrix.os}} ${{ matrix.php-versions }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v2.3.4
+        # see https://github.com/actions/checkout
+        uses: actions/checkout@v2
       - name: Setup PHP
-        uses: shivammathur/setup-php@master
+        # see https://github.com/shivammathur/setup-php
+        uses: shivammathur/setup-php@v2
         with:
-          php-version: ${{ matrix.php-versions }}
-          extension-csv: dom # Required by phpunit
+          php-version: ${{ matrix.php }}
+          extensions: dom,json,xmlwriter
+          tools: composer
+          coverage: pcov
+      - name: dir setup
+        run: mkdir ${{ env.REPORTS_DIR }}
       - name: Validate composer.json and composer.lock
-        run: composer validate
-
+        run: >
+          composer validate
+          --no-interaction
       - name: Install dependencies
-        run: composer install --prefer-dist --no-progress --no-suggest
-
-      - name: Run test suite
-        run: composer test
+        run: >
+          composer update
+          --prefer-${{ matrix.stability }}
+          --prefer-dist
+          --no-interaction
+          --no-progress
+          --no-suggest
+      - name: Run PHPUnit tests
+        run: >
+          php
+          -d zend.assertions=1
+          -d assert.exception=1
+          -d display_errors=On
+          -d error_reporting=-1
+          -d log_errors_max_len=0
+          -d memory_limit=-1
+          vendor/phpunit/phpunit/phpunit
+          --log-junit=${{ env.REPORTS_DIR }}/tests.${{ matrix.os }}_php${{ matrix.php }}_${{ matrix.stability }}.junit.xml
+          --coverage-clover=${{ env.REPORTS_DIR }}/coverage.${{ matrix.os}}_php${{ matrix.php }}_${{ matrix.stability }}.clover.xml
+          --no-interaction
+          --do-not-cache-result
+      - name: Artifact reports
+        if: ${{ ! cancelled() }}
+        # see https://github.com/actions/upload-artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: ${{ env.REPORTS_ARTIFACT }}
+          path: ${{ env.REPORTS_DIR }}
+          if-no-files-found: error
