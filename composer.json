@@ -24,8 +24,8 @@
     "prefer-stable": true,
     "require": {
         "php": "^7.1 || ^8.0",
-        "ext-xmlwriter": "*",
         "ext-json": "*",
+        "ext-xmlwriter": "*",
         "composer-plugin-api": "^1.0 || ^2.0"
     },
     "require-dev": {
@@ -41,7 +41,12 @@
     },
     "scripts": {
         "test": [
-            "phpunit --bootstrap vendor/autoload.php tests"
-        ]
+            "@test:phpunit"
+        ],
+        "test:phpunit" : "@php -d zend.assertions=1 -d assert.exception=1 -d display_errors=On -d error_reporting=-1 -d log_errors_max_len=0 -d memory_limit=-1 vendor/phpunit/phpunit/phpunit"
+    },
+    "scripts-descriptions": {
+        "test": "Run all tests!",
+        "test:phpunit": "Run tests with PHPUnit."
     }
 }
