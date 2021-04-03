@@ -1,10 +1,14 @@
 <?php
 
+/** @noinspection PhpUnhandledExceptionInspection */
 
 use CycloneDX\Spdx\XmlLicense;
 use PHPUnit\Framework\TestCase;
 
 
+/**
+ * @coversNothing
+ */
 class ShippedXmlSpdxLicensesTest extends TestCase
 {
     /**
@@ -20,16 +24,13 @@ class ShippedXmlSpdxLicensesTest extends TestCase
         $this->file = XmlLicense::getResourcesFile();
     }
 
-    /**
-     * @return void
-     */
-    public function test()
+    public function test(): void
     {
-        $this->assertFileExists($this->file);
+        self::assertFileExists($this->file);
 
 
         $json = file_get_contents($this->file);
-        $this->assertJson($json);
+        self::assertJson($json);
 
         $options = 0;
 
@@ -38,11 +39,11 @@ class ShippedXmlSpdxLicensesTest extends TestCase
         }
 
         $licenses = json_decode($json, false, 512, $options);
-        $this->assertIsArray($licenses);
-        $this->assertNotEmpty($licenses);
+        self::assertIsArray($licenses);
+        self::assertNotEmpty($licenses);
 
-        foreach ($licenses as &$license) {
-            $this->assertIsString($license);
+        foreach ($licenses as $license) {
+            self::assertIsString($license);
         }
     }
 }

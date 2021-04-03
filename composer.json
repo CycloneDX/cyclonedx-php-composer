@@ -24,15 +24,15 @@
     "prefer-stable": true,
     "require": {
         "php": "^7.1 || ^8.0",
-        "ext-xmlwriter": "*",
         "ext-json": "*",
-        "composer-plugin-api": "^1.0 || ^2.0"
+        "ext-xmlwriter": "*",
+        "composer-plugin-api": "^1.3 || ^2.0"
     },
     "require-dev": {
         "ext-dom": "*",
-        "phpunit/phpunit": ">=5.0",
-        "composer/composer": "^2.0",
-        "swaggest/json-schema": "^0.12.29"
+        "phpunit/phpunit": "^7.5.20 || ^8.0 || ^9.0",
+        "composer/composer": "^1.1 || ^2.0",
+        "swaggest/json-schema": "^v0.12.31"
     },
     "autoload": {
         "psr-4": {
@@ -41,7 +41,13 @@
     },
     "scripts": {
         "test": [
-            "phpunit --bootstrap vendor/autoload.php tests"
-        ]
+            "@composer validate",
+            "@test:phpunit"
+        ],
+        "test:phpunit" : "@php -d zend.assertions=1 -d assert.exception=1 -d display_errors=On -d error_reporting=-1 -d log_errors_max_len=0 -d memory_limit=-1 vendor/phpunit/phpunit/phpunit"
+    },
+    "scripts-descriptions": {
+        "test": "Run all tests!",
+        "test:phpunit": "Run tests with PHPUnit."
     }
 }

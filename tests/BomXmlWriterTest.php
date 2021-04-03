@@ -1,11 +1,17 @@
 <?php
 
+/** @noinspection PhpUnhandledExceptionInspection */
+
+
 use CycloneDX\BomXmlWriter;
 use CycloneDX\Model\Bom;
 use CycloneDX\Model\Component;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Output\OutputInterface;
 
+/**
+ * @coversNothing
+ */
 class BomXmlWriterTest extends TestCase
 {
     /**
@@ -26,7 +32,7 @@ class BomXmlWriterTest extends TestCase
         $this->bomXmlWriter = new BomXmlWriter($this->outputMock);
     }
 
-    public function testBomXmlWriter()
+    public function testBomXmlWriter(): void
     {
         $component = new Component;
         $component->setGroup("componentGroup");
@@ -42,14 +48,14 @@ class BomXmlWriterTest extends TestCase
 
         $domDocument = new DOMDocument("1.0", "UTF-8");
         $domDocument->loadXML($bomXml);
-        $this->assertTrue($domDocument->schemaValidate(__DIR__ . "/schema/bom-1.1.xsd"));
+        self::assertTrue($domDocument->schemaValidate(__DIR__ . "/schema/bom-1.1.xsd"));
     }
 
     /**
      * license is unknown to https://cyclonedx.org/schema/spdx
      * but BOM still valid output
      */
-    public function testUnknownSpdxLicense()
+    public function testUnknownSpdxLicense(): void
     {
         $component = new Component;
         $component->setGroup("componentGroup");
@@ -65,14 +71,14 @@ class BomXmlWriterTest extends TestCase
 
         $domDocument = new DOMDocument("1.0", "UTF-8");
         $domDocument->loadXML($bomXml);
-        $this->assertTrue($domDocument->schemaValidate(__DIR__ . "/schema/bom-1.1.xsd"));
+        self::assertTrue($domDocument->schemaValidate(__DIR__ . "/schema/bom-1.1.xsd"));
     }
 
     /**
      * license is unknown to https://cyclonedx.org/schema/spdx
      * but BOM still valid output
      */
-    public function testCaseMismatchSpdxLicense()
+    public function testCaseMismatchSpdxLicense(): void
     {
         $mismatch = array("mit", "aPACHE-2.0");
         $expected = array("MIT", "Apache-2.0");
@@ -91,13 +97,13 @@ class BomXmlWriterTest extends TestCase
 
         $domDocument = new DOMDocument("1.0", "UTF-8");
         $domDocument->loadXML($bomXml);
-        $this->assertTrue($domDocument->schemaValidate(__DIR__ . "/schema/bom-1.1.xsd"));
+        self::assertTrue($domDocument->schemaValidate(__DIR__ . "/schema/bom-1.1.xsd"));
 
         $domDocumentLicenses = array();
         foreach ($domDocument->getElementsByTagName('license') as $domDocumentLicense) {
             $domDocumentLicenses[] = $domDocumentLicense->getElementsByTagName('id')[0]->nodeValue;
         }
-        $this->assertSame($expected, $domDocumentLicenses);
+        self::assertSame($expected, $domDocumentLicenses);
     }
 
 }
