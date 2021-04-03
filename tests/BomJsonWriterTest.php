@@ -7,6 +7,9 @@ use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Output\OutputInterface;
 use Swaggest\JsonSchema\Schema;
 
+/**
+ * @coversNothing
+ */
 class BomJsonWriterTest extends TestCase
 {
     /**
@@ -22,12 +25,12 @@ class BomJsonWriterTest extends TestCase
     protected function setUp() : void
     {
         parent::setUp();
-        
+
         $this->outputMock = $this->createMock(OutputInterface::class);
         $this->bomJsonWriter = new BomJsonWriter($this->outputMock);
     }
 
-    public function testBomJsonWriter() 
+    public function testBomJsonWriter()
     {
         $schemaJson = file_get_contents(__DIR__ . "/schema/bom-1.2.schema-SNAPSHOT.json");
         $schema = Schema::import(json_decode($schemaJson));

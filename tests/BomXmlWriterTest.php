@@ -6,6 +6,9 @@ use CycloneDX\Model\Component;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Output\OutputInterface;
 
+/**
+ * @coversNothing
+ */
 class BomXmlWriterTest extends TestCase
 {
     /**

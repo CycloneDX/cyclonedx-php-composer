@@ -5,6 +5,9 @@ use CycloneDX\Spdx\XmlLicense;
 use PHPUnit\Framework\TestCase;
 
 
+/**
+ * @coversNothing
+ */
 class ShippedXmlSpdxLicensesTest extends TestCase
 {
     /**

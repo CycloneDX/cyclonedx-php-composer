@@ -4,6 +4,9 @@ use CycloneDX\BomGenerator;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Output\OutputInterface;
 
+/**
+ * @coversNothing
+ */
 class BomGeneratorTest extends TestCase
 {
     /**
@@ -24,7 +27,7 @@ class BomGeneratorTest extends TestCase
         $this->bomGenerator = new BomGenerator($this->outputMock);
     }
 
-    public function testGenerateBom() 
+    public function testGenerateBom()
     {
         $packages = array(
             array(
@@ -47,13 +50,13 @@ class BomGeneratorTest extends TestCase
 
         $bom = $this->bomGenerator->generateBom($lockData, false, false);
         $this->assertEquals(2, sizeof($bom->getComponents()));
-        
+
         $componentNames = array_map(function($component) { return $component->getName(); }, $bom->getComponents());
         $this->assertContains("packageName", $componentNames);
         $this->assertContains("packageNameDev", $componentNames);
     }
 
-    public function testGenerateBomExcludeDev() 
+    public function testGenerateBomExcludeDev()
     {
         $packages = array(
             array(
@@ -76,12 +79,12 @@ class BomGeneratorTest extends TestCase
 
         $bom = $this->bomGenerator->generateBom($lockData, true, false);
         $this->assertEquals(1, sizeof($bom->getComponents()));
-        
+
         $componentNames = array_map(function($component) { return $component->getName(); }, $bom->getComponents());
         $this->assertContains("packageName", $componentNames);
     }
 
-    public function testGenerateBomExcludePlugins() 
+    public function testGenerateBomExcludePlugins()
     {
         $packages = array(
             array(
@@ -125,7 +128,7 @@ class BomGeneratorTest extends TestCase
         $this->assertEquals("pkg:composer/vendorName/packageName@6.6.6", $component->getPackageUrl());
     }
 
-    public function testBuildComponentWithoutVendor() 
+    public function testBuildComponentWithoutVendor()
     {
         $packageData = array(
             "name" => "packageName",
@@ -143,7 +146,7 @@ class BomGeneratorTest extends TestCase
         $this->assertEquals("pkg:composer/packageName@1.0", $component->getPackageUrl());
     }
 
-    public function testBuildComponentWithoutName() 
+    public function testBuildComponentWithoutName()
     {
         $packageData = array("version" => "1.0");
 
@@ -153,7 +156,7 @@ class BomGeneratorTest extends TestCase
         $this->bomGenerator->buildComponent($packageData);
     }
 
-    public function testBuildComponentWithoutVersion() 
+    public function testBuildComponentWithoutVersion()
     {
         $packageData = array("name" => "vendorName/packageName");
 
@@ -163,14 +166,14 @@ class BomGeneratorTest extends TestCase
         $this->bomGenerator->buildComponent($packageData);
     }
 
-    public function testReadLicensesWithLicenseString() 
+    public function testReadLicensesWithLicenseString()
     {
         $licenses = $this->bomGenerator->readLicenses(array("license" => "MIT"));
         $this->assertEquals(1, sizeof($licenses));
         $this->assertContains("MIT", $licenses);
     }
 
-    public function testReadLicensesWithDisjunctiveLicenseString() 
+    public function testReadLicensesWithDisjunctiveLicenseString()
     {
         $licenses = $this->bomGenerator->readLicenses(array("license" => "(MIT or Apache-2.0)"));
         $this->assertEquals(2, sizeof($licenses));
@@ -178,7 +181,7 @@ class BomGeneratorTest extends TestCase
         $this->assertContains("Apache-2.0", $licenses);
     }
 
-    public function testReadLicensesWithConjunctiveLicenseString() 
+    public function testReadLicensesWithConjunctiveLicenseString()
     {
         $licenses = $this->bomGenerator->readLicenses(array("license" => "(MIT and Apache-2.0)"));
         $this->assertEquals(2, sizeof($licenses));
@@ -186,7 +189,7 @@ class BomGeneratorTest extends TestCase
         $this->assertContains("Apache-2.0", $licenses);
     }
 
-    public function testReadLicensesWithDisjunctiveLicenseArray() 
+    public function testReadLicensesWithDisjunctiveLicenseArray()
     {
         $licenses = $this->bomGenerator->readLicenses(array("license" => array("MIT", "Apache-2.0")));
         $this->assertEquals(2, sizeof($licenses));
