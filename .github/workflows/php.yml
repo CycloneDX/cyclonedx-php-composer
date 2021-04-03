@@ -45,7 +45,7 @@ jobs:
           php-version: ${{ matrix.php }}
           extensions: dom,json,xmlwriter
           tools: composer
-          coverage: pcov
+          coverage: pcov,xdebug
       - name: dir setup
         run: mkdir ${{ env.REPORTS_DIR }}
       - name: Validate composer.json and composer.lock
