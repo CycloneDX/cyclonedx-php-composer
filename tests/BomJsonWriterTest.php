@@ -1,5 +1,7 @@
 <?php
 
+/** @noinspection PhpUnhandledExceptionInspection */
+
 use CycloneDX\BomJsonWriter;
 use CycloneDX\Model\Bom;
 use CycloneDX\Model\Component;
@@ -30,10 +32,10 @@ class BomJsonWriterTest extends TestCase
         $this->bomJsonWriter = new BomJsonWriter($this->outputMock);
     }
 
-    public function testBomJsonWriter()
+    public function testBomJsonWriter(): void
     {
         $schemaJson = file_get_contents(__DIR__ . "/schema/bom-1.2.schema-SNAPSHOT.json");
-        $schema = Schema::import(json_decode($schemaJson));
+        $schema = Schema::import(json_decode($schemaJson, false));
         $component = new Component;
         $component->setGroup("componentGroup");
         $component->setName("componentName");
@@ -49,9 +51,9 @@ class BomJsonWriterTest extends TestCase
         $bomJson = $this->bomJsonWriter->writeBom($bom);
 
         // $schema->in() throws an exception if validation fails
-        $schema->in(json_decode($bomJson));
+        $schema->in(json_decode($bomJson, false));
         // this stops PHPUnit from flagging this as a risky test
-        $this->addToAssertionCount(1);
+        $this->expectNotToPerformAssertions();
     }
 
 }
