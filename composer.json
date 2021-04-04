@@ -40,14 +40,22 @@
         }
     },
     "scripts": {
+        "dev-setup": [
+            "@composer -dtools/psalm install",
+            "@composer install"
+        ],
         "test": [
             "@composer validate",
+            "@test:psalm",
             "@test:phpunit"
         ],
-        "test:phpunit" : "@php -d zend.assertions=1 -d assert.exception=1 -d display_errors=On -d error_reporting=-1 -d log_errors_max_len=0 -d memory_limit=-1 vendor/phpunit/phpunit/phpunit"
+        "test:phpunit" : "@php -d zend.assertions=1 -d assert.exception=1 -d display_errors=On -d error_reporting=-1 -d log_errors_max_len=0 -d memory_limit=-1 vendor/phpunit/phpunit/phpunit",
+        "test:psalm": "@php tools/psalm/vendor/vimeo/psalm/psalm"
     },
     "scripts-descriptions": {
+        "dev-setup": "Install dev-requirements and tools",
         "test": "Run all tests!",
-        "test:phpunit": "Run tests with PHPUnit."
+        "test:phpunit": "Run tests with PHPUnit.",
+        "test:psalm": "Run static code analysis with Psalm."
     }
 }

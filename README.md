@@ -52,6 +52,15 @@ Help:
   Generate a CycloneDX Bill of Materials
 ```
 
+## Contributing
+
+Feel free to open pull requests.
+
+To start developing simply run `composer run-script dev-setup` to install dev-dependencies and tools.
+
+Make sure
+* to run `composer run-script test` and pass all tests.
+
 ## License
 
 Permission to modify and redistribute is granted under the terms of the Apache 2.0 license.
