@@ -1,4 +1,5 @@
 # For details of what checks are run for PRs please refer below
+# docs: https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions
 name: PHP CI
 
 on:
@@ -90,8 +91,13 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php: [ "7.1", "8.0" ] # highest and lowest supported
-        stability: [ "lowest", "stable" ]
+        include:
+          - # lowest supported
+            php: "7.1"
+            stability: "lowest"
+          - # highest supported
+            php: "8.0"
+            stability: "stable"
     steps:
       - name: Checkout
         # see https://github.com/actions/checkout
@@ -122,6 +128,7 @@ jobs:
       - name: Run Psalm tests
         run: >
           php tools/psalm/vendor/vimeo/psalm/psalm
+          --use-baseline=.psalm/baseline-${{ matrix.stability }}.xml
           --no-diff
           --no-cache
           --long-progress

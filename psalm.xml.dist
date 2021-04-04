@@ -3,12 +3,12 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="https://getpsalm.org/schema/config tools/psalm/vendor/vimeo/psalm/config.xsd"
        errorLevel="1"
-       resolveFromConfigFile="true"
        checkForThrowsDocblock="true"
        findUnusedPsalmSuppress="true"
        cacheDirectory=".psalm.cache"
-       errorBaseline=".psalm/baseline.xml"
+       errorBaseline=".psalm/baseline-stable.xml"
 >
+    <!-- use with a proper baseline - see `.psalm/` /-->
     <projectFiles>
         <directory name="src"/>
     </projectFiles>
