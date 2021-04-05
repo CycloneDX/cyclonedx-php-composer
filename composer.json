@@ -35,8 +35,8 @@
     },
     "require-dev": {
         "ext-dom": "*",
-        "phpunit/phpunit": "^7.5.20 || ^8.0 || ^9.0",
-        "swaggest/json-schema": "^v0.12.31"
+        "phpunit/phpunit": "7.5.20 || 8.5.15 || 9.5.4",
+        "swaggest/json-schema": "0.12.31"
     },
     "autoload": {
         "psr-4": {
