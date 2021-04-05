@@ -22,17 +22,23 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os:
-          - ubuntu-latest
-          - windows-latest
-          - macos-latest
+        os: [ "ubuntu-latest" ]
         php:
-          - "7.1" # lowest supported
-          - "7.2"
-          - "7.3"
-          - "7.4"
           - "8.0" # highest supported
+          - "7.4"
+          - "7.3"
+          - "7.2"
+          - "7.1" # lowest supported
         stability: [ "lowest", "stable" ]
+        include:
+          - # windows cutting edge stable
+            os: windows-latest
+            php: "8.0"
+            stability: "stable"
+          - # macos cutting edge stable
+            os: macos-latest
+            php: "8.0"
+            stability: "stable"
     timeout-minutes: 30
 
     steps:
