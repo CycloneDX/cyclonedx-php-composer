@@ -1,5 +1,21 @@
 # Changelog
 
+## unreleased
+
+planned to be a maintenance release as of [M1](https://github.com/CycloneDX/cyclonedx-php-composer/milestone/1)
+
+* Added
+  * Support for slim dist-builds (via [#24])
+* Misc
+  * Pinned dev-requirements to exact versions to ensure reproducible tests (via [#37])
+  * Added (code) quality tests to the dev-process (see [#23])
+  * CI's unit-tests just run reasonable combinations OperatingSystem/PhpVersions/Stability (via [#34])
+
+[#23]: https://github.com/CycloneDX/cyclonedx-php-composer/issues/23
+[#24]: https://github.com/CycloneDX/cyclonedx-php-composer/pull/24
+[#34]: https://github.com/CycloneDX/cyclonedx-php-composer/pull/34
+[#37]: https://github.com/CycloneDX/cyclonedx-php-composer/pull/37
+
 ## 2.0
 
 * Breaking changes
