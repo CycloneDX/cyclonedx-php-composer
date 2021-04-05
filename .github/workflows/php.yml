@@ -82,7 +82,7 @@ jobs:
           path: ${{ env.REPORTS_DIR }}
           if-no-files-found: error
   code-checker:
-    name: Code analysis (php${{ matrix.php }}, ${{ matrix.stability }})
+    name: Code analysis (php${{ matrix.php }}, ${{ matrix.stability }}, composer${{ matrix.composer }})
     runs-on: ubuntu-latest
     timeout-minutes: 30
     env:
@@ -95,9 +95,11 @@ jobs:
           - # lowest supported
             php: "7.1"
             stability: "lowest"
+            composer: 1
           - # highest supported
             php: "8.0"
             stability: "stable"
+            composer: 2
     steps:
       - name: Checkout
         # see https://github.com/actions/checkout
@@ -107,7 +109,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php }}
-          tools: composer
+          tools: composer:v${{ matrix.composer }}
           coverage: none
       - name: Install psalm
         run: >
@@ -132,7 +134,7 @@ jobs:
           --no-diff
           --no-cache
           --long-progress
-          --report=${{ env.REPORTS_DIR }}/psalm.php${{ matrix.php }}_${{ matrix.stability }}.junit.xml
+          --report=${{ env.REPORTS_DIR }}/psalm.php${{ matrix.php }}_${{ matrix.stability }}_composer${{ matrix.composer }}.junit.xml
       - name: Artifact reports
         if: ${{ ! cancelled() }}
         # see https://github.com/actions/upload-artifact
