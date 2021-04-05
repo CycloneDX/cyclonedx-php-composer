@@ -53,6 +53,19 @@ jobs:
           extensions: dom,json,xmlwriter
           tools: composer
           coverage: pcov,xdebug
+      - name: Determine composer cache directory on Linux
+        if: ${{ matrix.os == 'ubuntu-latest' || matrix.os == 'macos-latest' }}
+        run: echo "COMPOSER_CACHE_DIR=$(composer config cache-dir)" >> $GITHUB_ENV
+      - name: Determine composer cache directory on Windows
+        if: ${{ matrix.os == 'windows-latest' }}
+        run: ECHO "COMPOSER_CACHE_DIR=~\AppData\Local\Composer" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+      - name: Cache dependencies installed with composer
+        # see https://github.com/actions/cache
+        uses: actions/cache@v2
+        with:
+          path: ${{ env.COMPOSER_CACHE_DIR }}
+          key:          php${{ matrix.php }}-composer-${{ matrix.dependencies }}-${{ hashFiles('**/composer.json') }}
+          restore-keys: php${{ matrix.php }}-composer-${{ matrix.dependencies }}-
       - name: dir setup
         run: mkdir ${{ env.REPORTS_DIR }}
       - name: Validate composer.json and composer.lock
