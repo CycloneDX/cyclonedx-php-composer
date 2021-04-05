@@ -36,7 +36,7 @@ class Bom
         $this->components = $components;
     }
 
-    public function getComponents() 
+    public function getComponents()
     {
         return $this->components;
     }

@@ -30,10 +30,10 @@ use XMLWriter;
 
 /**
  * Writes BOMs in XML format.
- * 
+ *
  * @author nscuro
  */
-class BomXmlWriter 
+class BomXmlWriter
 {
 
     /**
@@ -41,7 +41,7 @@ class BomXmlWriter
      */
     private $output;
 
-    function __construct(OutputInterface &$output) {
+    function __construct(OutputInterface $output) {
         $this->output = $output;
     }
 
@@ -49,7 +49,7 @@ class BomXmlWriter
      * @param Bom $bom The BOM to write
      * @return string The BOM as XML formatted string
      */
-    public function writeBom(Bom $bom) 
+    public function writeBom(Bom $bom)
     {
         $xmlWriter = new XMLWriter;
         $xmlWriter->openMemory();
@@ -60,7 +60,7 @@ class BomXmlWriter
         $xmlWriter->startElementNs(null, "bom", "http://cyclonedx.org/schema/bom/1.1");
 
         $xmlWriter->startElement("components");
-        foreach ($bom->getComponents() as &$component) {
+        foreach ($bom->getComponents() as $component) {
             $this->writeComponent($xmlWriter, $component);
         }
         $xmlWriter->endElement(); // components
@@ -74,7 +74,7 @@ class BomXmlWriter
      * @param XMLWriter $xmlWriter The XMLWriter instance to use
      * @param Component $component The component to write
      */
-    private function writeComponent(XMLWriter $xmlWriter, Component $component) 
+    private function writeComponent(XMLWriter $xmlWriter, Component $component)
     {
         $xmlWriter->startElement("component");
 
@@ -96,11 +96,11 @@ class BomXmlWriter
             $xmlWriter->startElement("hashes");
             foreach ($component->getHashes() as $hashType => $hashValue) {
                 $xmlWriter->startElement("hash");
-                
+
                 $xmlWriter->startAttribute("alg");
                 $xmlWriter->text($hashType);
                 $xmlWriter->endAttribute();
-                
+
                 $xmlWriter->text($hashValue);
                 $xmlWriter->endElement(); // hash
             }
@@ -131,7 +131,7 @@ class BomXmlWriter
     }
 
     /**
-     * @param XMLWriter $writer The XMLWriter instance to use
+     * @param XMLWriter $xmlWriter The XMLWriter instance to use
      * @param string $elementName Name of the element
      * @param string $elementText Text of the element
      */

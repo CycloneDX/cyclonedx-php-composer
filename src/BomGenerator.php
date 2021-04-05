@@ -28,10 +28,10 @@ use UnexpectedValueException;
 
 /**
  * Generates BOMs based on Composer's lockData.
- * 
+ *
  * @author nscuro
  */
-class BomGenerator 
+class BomGenerator
 {
 
     /**
@@ -39,7 +39,7 @@ class BomGenerator
      */
     private $output;
 
-    function __construct(OutputInterface &$output) 
+    function __construct(OutputInterface $output)
     {
         $this->output = $output;
     }
@@ -68,7 +68,7 @@ class BomGenerator
                 continue;
             }
 
-            array_push($components, $this->buildComponent($package));
+            $components[] = $this->buildComponent($package);
         }
 
         return new Bom($components);
@@ -95,7 +95,7 @@ class BomGenerator
                 $component->setName($splittedName[1]);
             } else {
                 $component->setName($splittedName[0]);
-            }   
+            }
         } else {
             throw new UnexpectedValueException("Encountered package without name: " . json_encode($package));
         }
@@ -109,7 +109,7 @@ class BomGenerator
         if (array_key_exists("description", $package) && $package["description"]) {
             $component->setDescription($package["description"]);
         }
-        
+
         // https://getcomposer.org/doc/04-schema.md#type
         $component->setType("library");
 
@@ -133,18 +133,19 @@ class BomGenerator
     /**
      * Versions of Composer packages may be prefixed with "v".
      * This prefix appears to be problematic for CPE and PURL matching and thus is removed here.
-     * 
+     *
      * See for example https://ossindex.sonatype.org/component/pkg:composer/phpmailer/phpmailer@v6.0.7
      * vs https://ossindex.sonatype.org/component/pkg:composer/phpmailer/phpmailer@6.0.7.
-     * 
-     * @param $packageVersion The version to normalize
-     * @return string The normalized version
+     *
+     * @param mixed $packageVersion The version to normalize
+     * @return null|string The normalized version
      */
-    private function normalizeVersion($packageVersion) 
+    private function normalizeVersion($packageVersion)
     {
         if (!$packageVersion) {
             return null;
-        } else if (substr_compare($packageVersion, "v", 0, 1) === 0) {
+        }
+        if (substr_compare($packageVersion, "v", 0, 1) === 0) {
             return substr($packageVersion, 1, strlen($packageVersion));
         }
         return $packageVersion;
@@ -152,7 +153,7 @@ class BomGenerator
 
     /**
      * See https://getcomposer.org/doc/04-schema.md#license
-     * 
+     *
      * @param array
      * @return array
      */
@@ -168,13 +169,15 @@ class BomGenerator
                 // Conjunctive or disjunctive license provided as string
                 $licenses = preg_split("/[\(\)]/", $licenseData, -1, PREG_SPLIT_NO_EMPTY);
                 return preg_split("/(\ or\ |\ and\ )/", $licenses[0], -1, PREG_SPLIT_NO_EMPTY);
-            } else {
-                // A single license provided as string
-                return array($licenseData);
             }
-        } else if (is_array($licenseData)) {
+                // A single license provided as string
+            return array($licenseData);
+
+        }
+        if (is_array($licenseData)) {
             // Disjunctive license provided as array
             return $licenseData;
         }
+        return [];
     }
 }

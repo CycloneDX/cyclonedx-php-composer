@@ -30,7 +30,7 @@ use RuntimeException;
  */
 class XmlLicense
 {
-    const LICENSES_FILE = 'xml-spdx-licenses.json';
+    public const LICENSES_FILE = 'xml-spdx-licenses.json';
 
     /**
      * @var string[]
