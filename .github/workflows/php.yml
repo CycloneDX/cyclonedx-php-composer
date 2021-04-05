@@ -141,3 +141,32 @@ jobs:
           name: ${{ env.REPORTS_ARTIFACT }}
           path: ${{ env.REPORTS_DIR }}
           if-no-files-found: error
+  composer-unused:
+    name: CompoerUnused
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        # see https://github.com/actions/checkout
+        uses: actions/checkout@v2
+      - name: Setup PHP
+        # see https://github.com/shivammathur/setup-php
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.0"
+          tools: composer
+          coverage: none
+      - name: Install composer-unused
+        run: >
+          composer install
+          -dtools/composer-unused
+          --prefer-dist
+          --no-interaction
+          --no-progress
+          --no-suggest
+      - name: Run composer-unused tests
+        run: >
+          php tools/composer-unused/vendor/icanhazstring/composer-unused/bin/composer-unused
+          --no-progress
+          --no-interaction
+          --excludeDir=tools
