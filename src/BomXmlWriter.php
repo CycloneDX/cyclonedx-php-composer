@@ -24,7 +24,6 @@ namespace CycloneDX;
 use CycloneDX\Model\Bom;
 use CycloneDX\Model\Component;
 use CycloneDX\Spdx\XmlLicense;
-
 use Symfony\Component\Console\Output\OutputInterface;
 use XMLWriter;
 
@@ -35,31 +34,32 @@ use XMLWriter;
  */
 class BomXmlWriter
 {
-
     /**
      * @var OutputInterface
      */
     private $output;
 
-    function __construct(OutputInterface $output) {
+    public function __construct(OutputInterface $output)
+    {
         $this->output = $output;
     }
 
     /**
      * @param Bom $bom The BOM to write
+     *
      * @return string The BOM as XML formatted string
      */
     public function writeBom(Bom $bom)
     {
-        $xmlWriter = new XMLWriter;
+        $xmlWriter = new XMLWriter();
         $xmlWriter->openMemory();
         $xmlWriter->setIndent(true);
-        $xmlWriter->setIndentString("    ");
+        $xmlWriter->setIndentString('    ');
 
-        $xmlWriter->startDocument("1.0", "utf-8");
-        $xmlWriter->startElementNs(null, "bom", "http://cyclonedx.org/schema/bom/1.1");
+        $xmlWriter->startDocument('1.0', 'utf-8');
+        $xmlWriter->startElementNs(null, 'bom', 'http://cyclonedx.org/schema/bom/1.1');
 
-        $xmlWriter->startElement("components");
+        $xmlWriter->startElement('components');
         foreach ($bom->getComponents() as $component) {
             $this->writeComponent($xmlWriter, $component);
         }
@@ -67,6 +67,7 @@ class BomXmlWriter
 
         $xmlWriter->endElement(); // bom
         $xmlWriter->endDocument();
+
         return $xmlWriter->outputMemory();
     }
 
@@ -76,28 +77,28 @@ class BomXmlWriter
      */
     private function writeComponent(XMLWriter $xmlWriter, Component $component)
     {
-        $xmlWriter->startElement("component");
+        $xmlWriter->startElement('component');
 
-        $xmlWriter->startAttribute("type");
+        $xmlWriter->startAttribute('type');
         $xmlWriter->text($component->getType());
         $xmlWriter->endAttribute();
 
         if ($component->getGroup()) {
-            $this->writeTextElement($xmlWriter, "group", $component->getGroup());
+            $this->writeTextElement($xmlWriter, 'group', $component->getGroup());
         }
-        $this->writeTextElement($xmlWriter, "name", $component->getName());
-        $this->writeTextElement($xmlWriter, "version", $component->getVersion());
+        $this->writeTextElement($xmlWriter, 'name', $component->getName());
+        $this->writeTextElement($xmlWriter, 'version', $component->getVersion());
 
         if ($component->getDescription()) {
-            $this->writeTextElement($xmlWriter, "description", $component->getDescription());
+            $this->writeTextElement($xmlWriter, 'description', $component->getDescription());
         }
 
         if ($component->getHashes()) {
-            $xmlWriter->startElement("hashes");
+            $xmlWriter->startElement('hashes');
             foreach ($component->getHashes() as $hashType => $hashValue) {
-                $xmlWriter->startElement("hash");
+                $xmlWriter->startElement('hash');
 
-                $xmlWriter->startAttribute("alg");
+                $xmlWriter->startAttribute('alg');
                 $xmlWriter->text($hashType);
                 $xmlWriter->endAttribute();
 
@@ -108,14 +109,14 @@ class BomXmlWriter
         }
 
         if ($component->getLicenses()) {
-            $xmlWriter->startElement("licenses");
+            $xmlWriter->startElement('licenses');
             $spdxLicense = new XmlLicense();
             foreach ($component->getLicenses() as &$license) {
-                $xmlWriter->startElement("license");
+                $xmlWriter->startElement('license');
                 if ($spdxLicense->validate($license)) {
-                    $this->writeTextElement($xmlWriter, "id", $spdxLicense->getLicense($license));
+                    $this->writeTextElement($xmlWriter, 'id', $spdxLicense->getLicense($license));
                 } else {
-                    $this->writeTextElement($xmlWriter, "name", $license);
+                    $this->writeTextElement($xmlWriter, 'name', $license);
                 }
                 $xmlWriter->endElement(); // license
             }
@@ -124,16 +125,16 @@ class BomXmlWriter
         }
 
         if ($component->getPackageUrl()) {
-            $this->writeTextElement($xmlWriter, "purl", $component->getPackageUrl());
+            $this->writeTextElement($xmlWriter, 'purl', $component->getPackageUrl());
         }
 
         $xmlWriter->endElement(); // component
     }
 
     /**
-     * @param XMLWriter $xmlWriter The XMLWriter instance to use
-     * @param string $elementName Name of the element
-     * @param string $elementText Text of the element
+     * @param XMLWriter $xmlWriter   The XMLWriter instance to use
+     * @param string    $elementName Name of the element
+     * @param string    $elementText Text of the element
      */
     private function writeTextElement(XMLWriter $xmlWriter, $elementName, $elementText)
     {
@@ -141,5 +142,4 @@ class BomXmlWriter
         $xmlWriter->text($elementText);
         $xmlWriter->endElement();
     }
-
 }

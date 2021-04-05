@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 /*
  * This file is part of the CycloneDX PHP Composer Plugin.
@@ -66,132 +66,150 @@ class Component implements \JsonSerializable
      */
     private $hashes;
 
-    public function getName() {
+    public function getName()
+    {
         return $this->name;
     }
 
     /**
      * @param string $name
      */
-    public function setName($name) {
+    public function setName($name)
+    {
         $this->name = $name;
     }
 
     /**
      * @return string
      */
-    public function getGroup() {
+    public function getGroup()
+    {
         return $this->group;
     }
 
     /**
      * @param string $group
      */
-    public function setGroup($group) {
+    public function setGroup($group)
+    {
         $this->group = $group;
     }
 
     /**
      * @return string
      */
-    public function getType() {
+    public function getType()
+    {
         return $this->type;
     }
 
     /**
      * @param string $type
      */
-    public function setType($type) {
+    public function setType($type)
+    {
         $this->type = $type;
     }
 
     /**
      * @return string
      */
-    public function getVersion() {
+    public function getVersion()
+    {
         return $this->version;
     }
 
     /**
      * @param string $version
      */
-    public function setVersion($version) {
+    public function setVersion($version)
+    {
         $this->version = $version;
     }
 
     /**
      * @return string
      */
-    public function getDescription() {
+    public function getDescription()
+    {
         return $this->description;
     }
 
     /**
      * @param string $description
      */
-    public function setDescription($description) {
+    public function setDescription($description)
+    {
         $this->description = $description;
     }
 
     /**
      * @return array
      */
-    public function getLicenses() {
+    public function getLicenses()
+    {
         return $this->licenses;
     }
 
     /**
      * @param array $licenses
      */
-    public function setLicenses($licenses) {
+    public function setLicenses($licenses)
+    {
         $this->licenses = $licenses;
     }
 
     /**
      * @return string
      */
-    public function getPackageUrl() {
+    public function getPackageUrl()
+    {
         return $this->packageUrl;
     }
 
     /**
      * @param string $packageUrl
      */
-    public function setPackageUrl($packageUrl) {
+    public function setPackageUrl($packageUrl)
+    {
         $this->packageUrl = $packageUrl;
     }
 
     /**
      * @return array
      */
-    public function getHashes() {
+    public function getHashes()
+    {
         return $this->hashes;
     }
 
     /**
      * @param array $hashes
      */
-    public function setHashes($hashes) {
+    public function setHashes($hashes)
+    {
         $this->hashes = $hashes;
     }
 
-    public function jsonSerialize() {
+    public function jsonSerialize()
+    {
         $licenses = [];
         foreach ($this->licenses as $license) {
             $licenses[] = [
-                "license" => [
-                    "id" => $license,
+                'license' => [
+                    'id' => $license,
                 ],
             ];
         }
+
         return [
-            "name" => $this->name,
-            "group" => $this->group,
-            "type" => $this->type,
-            "version" => $this->version,
-            "description" => $this->description,
-            "licenses" => $licenses,
-            "purl" => $this->packageUrl,
+            'name' => $this->name,
+            'group' => $this->group,
+            'type' => $this->type,
+            'version' => $this->version,
+            'description' => $this->description,
+            'licenses' => $licenses,
+            'purl' => $this->packageUrl,
         ];
     }
 }

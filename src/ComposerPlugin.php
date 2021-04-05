@@ -31,7 +31,7 @@ use Composer\Plugin\PluginInterface;
  */
 class ComposerPlugin implements PluginInterface, Capable
 {
-    public function activate(Composer $composer, IOInterface $io) 
+    public function activate(Composer $composer, IOInterface $io)
     {
         // Nothing to do
     }
@@ -48,8 +48,8 @@ class ComposerPlugin implements PluginInterface, Capable
 
     public function getCapabilities()
     {
-        return array(
+        return [
             'Composer\Plugin\Capability\CommandProvider' => 'CycloneDX\ComposerCommandProvider',
-        );
+        ];
     }
 }

@@ -22,7 +22,6 @@
 namespace CycloneDX;
 
 use CycloneDX\Model\Bom;
-
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
@@ -32,30 +31,30 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class BomJsonWriter
 {
-
     /**
      * @var OutputInterface
      */
     private $output;
 
-    function __construct(OutputInterface $output) {
+    public function __construct(OutputInterface $output)
+    {
         $this->output = $output;
     }
 
     /**
      * @param Bom $bom The BOM to write
+     *
      * @return string The BOM as JSON formatted string
      */
     public function writeBom(Bom $bom)
     {
         $jsonBom = [
-            "bomFormat" => "CycloneDX",
-            "specVersion" => "1.2",
-            "version" => 1,
-            "components" => $bom->getComponents(),
+            'bomFormat' => 'CycloneDX',
+            'specVersion' => '1.2',
+            'version' => 1,
+            'components' => $bom->getComponents(),
         ];
 
         return json_encode($jsonBom, JSON_PRETTY_PRINT);
     }
-
 }

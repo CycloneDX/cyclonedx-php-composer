@@ -21,8 +21,8 @@
 
 namespace CycloneDX;
 
-use Composer\Plugin\Capability\CommandProvider;
 use Composer\Command\BaseCommand;
+use Composer\Plugin\Capability\CommandProvider;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -34,32 +34,32 @@ class ComposerCommandProvider implements CommandProvider
 {
     public function getCommands()
     {
-        return array(new MakeBomCommand);
-    }   
+        return [new MakeBomCommand()];
+    }
 }
 
 /**
  * The Plugin's makeBom command.
- * 
+ *
  * @author nscuro
  */
 class MakeBomCommand extends BaseCommand
 {
-    const OPTION_OUTPUT_FILE = "output-file";
-    const OPTION_EXCLUDE_DEV = "exclude-dev";
-    const OPTION_EXCLUDE_PLUGINS = "exclude-plugins";
-    const OPTION_JSON = "json";
+    const OPTION_OUTPUT_FILE = 'output-file';
+    const OPTION_EXCLUDE_DEV = 'exclude-dev';
+    const OPTION_EXCLUDE_PLUGINS = 'exclude-plugins';
+    const OPTION_JSON = 'json';
 
     protected function configure()
     {
         $this
-            ->setName("make-bom")
-            ->setDescription("Generate a CycloneDX Bill of Materials");
+            ->setName('make-bom')
+            ->setDescription('Generate a CycloneDX Bill of Materials');
 
-        $this->addOption($this::OPTION_OUTPUT_FILE, null, InputOption::VALUE_REQUIRED, "Path to the output file (default is bom.xml or bom.json)");
-        $this->addOption($this::OPTION_EXCLUDE_DEV, null, InputOption::VALUE_NONE, "Exclude dev dependencies");
-        $this->addOption($this::OPTION_EXCLUDE_PLUGINS, null, InputOption::VALUE_NONE, "Exclude composer plugins");
-        $this->addOption($this::OPTION_JSON, null, InputOption::VALUE_NONE, "Produce the BOM in JSON format (preview support)");
+        $this->addOption($this::OPTION_OUTPUT_FILE, null, InputOption::VALUE_REQUIRED, 'Path to the output file (default is bom.xml or bom.json)');
+        $this->addOption($this::OPTION_EXCLUDE_DEV, null, InputOption::VALUE_NONE, 'Exclude dev dependencies');
+        $this->addOption($this::OPTION_EXCLUDE_PLUGINS, null, InputOption::VALUE_NONE, 'Exclude composer plugins');
+        $this->addOption($this::OPTION_JSON, null, InputOption::VALUE_NONE, 'Produce the BOM in JSON format (preview support)');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -67,31 +67,32 @@ class MakeBomCommand extends BaseCommand
         $locker = $this->getComposer()->getLocker();
 
         if (!$locker->isLocked()) {
-            $output->writeln("<error>Lockfile does not exist</error>");
+            $output->writeln('<error>Lockfile does not exist</error>');
+
             return;
         }
-        
-        $output->writeln("<info>Generating BOM from lockfile</info>");
+
+        $output->writeln('<info>Generating BOM from lockfile</info>');
         $bomGenerator = new BomGenerator($output);
         $bom = $bomGenerator->generateBom(
-            $locker->getLockData(), 
-            $input->getOption($this::OPTION_EXCLUDE_DEV) !== false, 
-            $input->getOption($this::OPTION_EXCLUDE_PLUGINS) !== false
+            $locker->getLockData(),
+            false !== $input->getOption($this::OPTION_EXCLUDE_DEV),
+            false !== $input->getOption($this::OPTION_EXCLUDE_PLUGINS)
         );
 
-        $output->writeln("<info>Writing BOM</info>");
+        $output->writeln('<info>Writing BOM</info>');
 
-        if ($input->getOption($this::OPTION_JSON) !== false) {
+        if (false !== $input->getOption($this::OPTION_JSON)) {
             $bomWriter = new BomJsonWriter($output);
-            $outputFile = $input->getOption($this::OPTION_OUTPUT_FILE) ? $input->getOption($this::OPTION_OUTPUT_FILE) : "bom.json";
+            $outputFile = $input->getOption($this::OPTION_OUTPUT_FILE) ? $input->getOption($this::OPTION_OUTPUT_FILE) : 'bom.json';
         } else {
             $bomWriter = new BomXmlWriter($output);
-            $outputFile = $input->getOption($this::OPTION_OUTPUT_FILE) ? $input->getOption($this::OPTION_OUTPUT_FILE) : "bom.xml";
+            $outputFile = $input->getOption($this::OPTION_OUTPUT_FILE) ? $input->getOption($this::OPTION_OUTPUT_FILE) : 'bom.xml';
         }
 
         $bomContents = $bomWriter->writeBom($bom);
 
-        $output->writeln("<info>Writing output to " . $outputFile . "</info>");
+        $output->writeln('<info>Writing output to '.$outputFile.'</info>');
         \file_put_contents($outputFile, $bomContents);
     }
 }

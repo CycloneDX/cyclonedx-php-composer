@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 $header = <<<'EOF'
 This file is part of the CycloneDX PHP Composer Plugin.
@@ -22,7 +24,6 @@ EOF;
 $finder = PhpCsFixer\Finder::create()
     ->in(__DIR__.'/src')
     ->in(__DIR__.'/tests')
-    ->append([__FILE__])
 ;
 
 $config = new PhpCsFixer\Config();
@@ -32,7 +33,7 @@ return $config
     ->setRules([
         '@PHP71Migration' => true,
         '@Symfony' => true,
-        # 'declare_strict_types' => true, # @TODO have this enabled via issue#39
+        // 'declare_strict_types' => true, // @TODO have this enabled via issue#39
         'phpdoc_order' => true,
         'header_comment' => ['header' => $header],
     ])

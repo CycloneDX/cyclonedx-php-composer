@@ -31,7 +31,7 @@ class Bom
      */
     private $components;
 
-    function __construct(array $components)
+    public function __construct(array $components)
     {
         $this->components = $components;
     }
@@ -40,5 +40,4 @@ class Bom
     {
         return $this->components;
     }
-
 }
