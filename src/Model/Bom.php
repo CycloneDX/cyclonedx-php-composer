@@ -31,14 +31,13 @@ class Bom
      */
     private $components;
 
-    function __construct(array $components)
+    public function __construct(array $components)
     {
         $this->components = $components;
     }
 
-    public function getComponents() 
+    public function getComponents()
     {
         return $this->components;
     }
-
 }

@@ -30,7 +30,7 @@ use RuntimeException;
  */
 class XmlLicense
 {
-    const LICENSES_FILE = 'xml-spdx-licenses.json';
+    public const LICENSES_FILE = 'xml-spdx-licenses.json';
 
     /**
      * @var string[]
@@ -42,13 +42,12 @@ class XmlLicense
         $this->loadLicenses();
     }
 
-
     /**
      * @return string
      */
     public static function getResourcesFile()
     {
-        return __DIR__ . '/../../res/' . self::LICENSES_FILE;
+        return __DIR__.'/../../res/'.self::LICENSES_FILE;
     }
 
     /**
@@ -63,10 +62,10 @@ class XmlLicense
         $file = self::getResourcesFile();
         $json = file_get_contents($file);
         if (false === $json) {
-            throw new RuntimeException('Missing license file in ' . $file);
+            throw new RuntimeException('Missing license file in '.$file);
         }
 
-        $this->licenses = array();
+        $this->licenses = [];
 
         $options = 0;
 
@@ -81,6 +80,7 @@ class XmlLicense
 
     /**
      * @param string
+     *
      * @return bool
      */
     public function validate($identifier)
@@ -90,15 +90,15 @@ class XmlLicense
 
     /**
      * @param string
-     * @return null|string
+     *
+     * @return string|null
      */
     public function getLicense($identifier)
     {
         $key = strtolower($identifier);
+
         return array_key_exists($key, $this->licenses)
             ? $this->licenses[$key]
             : null;
     }
-
-
 }

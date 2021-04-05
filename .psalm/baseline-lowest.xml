@@ -4,9 +4,8 @@
     <InvalidDocblock occurrences="1">
       <code>public function readLicenses($package)</code>
     </InvalidDocblock>
-    <MissingParamType occurrences="2">
+    <MissingParamType occurrences="1">
       <code>$package</code>
-      <code>$packageVersion</code>
     </MissingParamType>
     <MissingReturnType occurrences="1">
       <code>readLicenses</code>
@@ -19,17 +18,17 @@
       <code>$packageVersion</code>
       <code>$packageVersion</code>
       <code>$packageVersion</code>
-      <code>$package["description"]</code>
-      <code>$package["dist"]</code>
-      <code>$package["name"]</code>
+      <code>$package['description']</code>
+      <code>$package['dist']</code>
+      <code>$package['name']</code>
       <code>$packages</code>
       <code>$packagesDev</code>
       <code>$this-&gt;readLicenses($package)</code>
     </MixedArgument>
     <MixedArrayAccess occurrences="3">
-      <code>$package["license"]</code>
-      <code>$package["name"]</code>
-      <code>$package["type"]</code>
+      <code>$package['license']</code>
+      <code>$package['name']</code>
+      <code>$package['type']</code>
     </MixedArrayAccess>
     <MixedAssignment occurrences="4">
       <code>$licenseData</code>
@@ -38,18 +37,18 @@
       <code>$packagesDev</code>
     </MixedAssignment>
     <MixedInferredReturnType occurrences="1">
-      <code>string</code>
+      <code>string|null</code>
     </MixedInferredReturnType>
     <MixedOperand occurrences="2">
-      <code>$package["name"]</code>
-      <code>$package["name"]</code>
+      <code>$package['name']</code>
+      <code>$package['name']</code>
     </MixedOperand>
     <MixedReturnStatement occurrences="1">
       <code>$packageVersion</code>
     </MixedReturnStatement>
-    <NullableReturnStatement occurrences="1">
-      <code>null</code>
-    </NullableReturnStatement>
+    <PossiblyNullArgument occurrences="1">
+      <code>$this-&gt;normalizeVersion($package['version'])</code>
+    </PossiblyNullArgument>
   </file>
   <file src="src/BomXmlWriter.php">
     <MissingReturnType occurrences="2">
@@ -77,7 +76,7 @@
   </file>
   <file src="src/ComposerCommandProvider.php">
     <InvalidReturnStatement occurrences="1">
-      <code>array(new MakeBomCommand)</code>
+      <code>[new MakeBomCommand()]</code>
     </InvalidReturnStatement>
     <InvalidReturnType occurrences="2">
       <code>execute</code>
@@ -97,7 +96,7 @@
       <code>getOption</code>
       <code>getOption</code>
       <code>getOption</code>
-      <code>new MakeBomCommand</code>
+      <code>new MakeBomCommand()</code>
       <code>setName</code>
     </MissingThrowsDocblock>
     <MixedArgument occurrences="12">
@@ -176,7 +175,7 @@
       <code>validate</code>
     </MissingReturnType>
     <MissingThrowsDocblock occurrences="1">
-      <code>throw new RuntimeException('Missing license file in ' . $file);</code>
+      <code>throw new RuntimeException('Missing license file in '.$file);</code>
     </MissingThrowsDocblock>
     <MixedArgument occurrences="3">
       <code>$identifier</code>
