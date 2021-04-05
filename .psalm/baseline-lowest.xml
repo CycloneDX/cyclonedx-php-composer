@@ -11,9 +11,6 @@
     <MissingReturnType occurrences="1">
       <code>readLicenses</code>
     </MissingReturnType>
-    <MissingThrowsDocblock occurrences="1">
-      <code>writeln</code>
-    </MissingThrowsDocblock>
     <MixedArgument occurrences="13">
       <code>$component-&gt;getName()</code>
       <code>$component-&gt;getName()</code>
@@ -89,14 +86,22 @@
     <MissingReturnType occurrences="1">
       <code>configure</code>
     </MissingReturnType>
-    <MissingThrowsDocblock occurrences="3">
+    <MissingThrowsDocblock occurrences="12">
+      <code>addOption</code>
+      <code>addOption</code>
+      <code>addOption</code>
+      <code>addOption</code>
       <code>getComposer</code>
+      <code>getOption</code>
+      <code>getOption</code>
+      <code>getOption</code>
+      <code>getOption</code>
+      <code>getOption</code>
       <code>new MakeBomCommand</code>
       <code>setName</code>
     </MissingThrowsDocblock>
-    <MixedArgument occurrences="13">
+    <MixedArgument occurrences="12">
       <code>$locker-&gt;getLockData()</code>
-      <code>$outputFile</code>
       <code>$this::OPTION_EXCLUDE_DEV</code>
       <code>$this::OPTION_EXCLUDE_DEV</code>
       <code>$this::OPTION_EXCLUDE_PLUGINS</code>
@@ -109,13 +114,15 @@
       <code>$this::OPTION_OUTPUT_FILE</code>
       <code>$this::OPTION_OUTPUT_FILE</code>
     </MixedArgument>
-    <MixedAssignment occurrences="2">
+    <PossiblyInvalidArgument occurrences="1">
       <code>$outputFile</code>
+    </PossiblyInvalidArgument>
+    <PossiblyInvalidCast occurrences="1">
       <code>$outputFile</code>
-    </MixedAssignment>
-    <MixedOperand occurrences="1">
+    </PossiblyInvalidCast>
+    <PossiblyNullOperand occurrences="1">
       <code>$outputFile</code>
-    </MixedOperand>
+    </PossiblyNullOperand>
   </file>
   <file src="src/ComposerPlugin.php">
     <MissingReturnType occurrences="3">
