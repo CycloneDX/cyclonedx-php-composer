@@ -29,18 +29,18 @@ jobs:
           - "7.3"
           - "7.2"
           - "7.1" # lowest supported
-        dependencies: [ "lowest", "stable" ]
+        dependencies: [ "lowest", "highest" ]
         composer: [ 2 ]
         include:
-          - # windows cutting edge stable
+          - # windows cutting edge highest
             os: windows-latest
             php: "8.0"
-            dependencies: "stable"
+            dependencies: "highest"
             composer: 2
-          - # macos cutting edge stable
+          - # macos cutting edge highest
             os: macos-latest
             php: "8.0"
-            dependencies: "stable"
+            dependencies: "highest"
             composer: 2
     timeout-minutes: 30
 
@@ -75,13 +75,12 @@ jobs:
         run: >
           composer validate
           --no-interaction
-      - name: Install dependencies
-        run: >
-          composer update
-          --prefer-${{ matrix.dependencies }}
-          --prefer-dist
-          --no-interaction
-          --no-progress
+      - name: Install lowest dependencies
+        if: ${{ matrix.dependencies == 'lowest' }}
+        run: composer update --prefer-dist --no-interaction --no-progress --prefer-lowest
+      - name: Install highest dependencies
+        if: ${{ matrix.dependencies == 'highest' }}
+        run: composer update --prefer-dist --no-interaction --no-progress
       - name: Run PHPUnit tests
         run: >
           php
@@ -119,7 +118,7 @@ jobs:
             composer: 1
           - # highest supported
             php: "8.0"
-            dependencies: "stable"
+            dependencies: "highest"
             composer: 2
     steps:
       - name: Checkout
@@ -142,19 +141,13 @@ jobs:
           key:          php${{ matrix.php }}-composer${{ matrix.composer }}-${{ matrix.dependencies }}-${{ hashFiles('**/composer.json') }}
           restore-keys: php${{ matrix.php }}-composer${{ matrix.composer }}-${{ matrix.dependencies }}-
       - name: Install psalm
-        run: >
-          composer install
-          -dtools/psalm
-          --prefer-dist
-          --no-interaction
-          --no-progress
-      - name: Install dependencies
-        run: >
-          composer update
-          --prefer-${{ matrix.dependencies }}
-          --prefer-dist
-          --no-interaction
-          --no-progress
+        run: composer install -dtools/psalm --prefer-dist --no-interaction --no-progress
+      - name: Install lowest dependencies
+        if: ${{ matrix.dependencies == 'lowest' }}
+        run: composer update --prefer-dist --no-interaction --no-progress --prefer-lowest
+      - name: Install highest dependencies
+        if: ${{ matrix.dependencies == 'highest' }}
+        run: composer update --prefer-dist --no-interaction --no-progress
       - name: Run Psalm tests
         run: >
           php tools/psalm/vendor/vimeo/psalm/psalm
@@ -193,15 +186,10 @@ jobs:
         uses: actions/cache@v2
         with:
           path: ${{ env.COMPOSER_CACHE_DIR }}
-          key:          php8.0-composer2-stable-${{ hashFiles('**/composer.json') }}
-          restore-keys: php8.0-composer2-stable-
+          key:          php8.0-composer2-highest-${{ hashFiles('**/composer.json') }}
+          restore-keys: php8.0-composer2-highest-
       - name: Install composer-unused
-        run: >
-          composer install
-          -dtools/composer-unused
-          --prefer-dist
-          --no-interaction
-          --no-progress
+        run: composer install -dtools/composer-unused --prefer-dist --no-interaction --no-progress
       - name: Run composer-unused tests
         run: >
           php tools/composer-unused/vendor/icanhazstring/composer-unused/bin/composer-unused
@@ -230,23 +218,12 @@ jobs:
         uses: actions/cache@v2
         with:
           path: ${{ env.COMPOSER_CACHE_DIR }}
-          key:          php8.0-composer2-stable-${{ hashFiles('**/composer.json') }}
-          restore-keys: php8.0-composer2-stable-
+          key:          php8.0-composer2-highest-${{ hashFiles('**/composer.json') }}
+          restore-keys: php8.0-composer2-highest-
       - name: Install composer-require-checker
-        run: >
-          composer install
-          -dtools/composer-require-checker
-          --prefer-dist
-          --no-interaction
-          --no-progress
+        run: composer install -dtools/composer-require-checker --prefer-dist --no-interaction --no-progress
       - name: Install dependencies
-        run: >
-          composer update
-          --no-dev
-          --prefer-stable
-          --prefer-dist
-          --no-interaction
-          --no-progress
+        run: composer update --no-dev --prefer-dist --no-interaction --no-progress
       - name: Run composer-require-checker tests
         run: >
           php tools/composer-require-checker/vendor/maglnet/composer-require-checker/bin/composer-require-checker
@@ -273,15 +250,10 @@ jobs:
         uses: actions/cache@v2
         with:
           path: ${{ env.COMPOSER_CACHE_DIR }}
-          key:          php8.0-composer2-stable-${{ hashFiles('**/composer.json') }}
-          restore-keys: php8.0-composer2-stable-
+          key:          php8.0-composer2-highest-${{ hashFiles('**/composer.json') }}
+          restore-keys: php8.0-composer2-highest-
       - name: Install PHP-CS-Fixer
-        run: >
-          composer install
-          -dtools/php-cs-fixer
-          --prefer-dist
-          --no-interaction
-          --no-progress
+        run: composer install -dtools/php-cs-fixer --prefer-dist --no-interaction --no-progress
       - name: Run PHP-CS-Fixer tests
         run: >
           php tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/php-cs-fixer

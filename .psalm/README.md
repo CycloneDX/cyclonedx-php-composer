@@ -11,7 +11,7 @@ tools/psalm/vendor/bin/psalm --set-baseline=.psalm/baseline-<TYPE>.xml
   - the lowest dependencies (`composer update --prefer-lowest`)
   - with [composer1](https://getcomposer.org/composer-1.phar)
   - on a php7.1
-* [`baseline-stable`](baseline-stable.xml) was built using a current stable env:
-  - stable dependencies (`composer update --prefer-stable`)
+* [`baseline-highest`](baseline-highest.xml) was built using the latest supported env:
+  - the latest dependencies (`composer update`)
   - with [composer2](https://getcomposer.org/composer-2.phar)
-  - on a non-outdated php>=7.3
+  - on a non-outdated php>=7.3, preferably php8

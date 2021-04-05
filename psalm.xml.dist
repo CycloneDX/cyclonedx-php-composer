@@ -6,7 +6,7 @@
        checkForThrowsDocblock="true"
        findUnusedPsalmSuppress="true"
        cacheDirectory=".psalm.cache"
-       errorBaseline=".psalm/baseline-stable.xml"
+       errorBaseline=".psalm/baseline-highest.xml"
 >
     <!-- use with a proper baseline - see `.psalm/` /-->
     <projectFiles>
