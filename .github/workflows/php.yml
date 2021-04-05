@@ -14,7 +14,7 @@ on:
 
 jobs:
   tests:
-    name: Tests (${{ matrix.os}}, ${{ matrix.php }}, ${{ matrix.stability }})
+    name: Tests (${{ matrix.os}}, ${{ matrix.php }}, ${{ matrix.dependencies }})
     runs-on: ${{ matrix.os }}
     env:
       REPORTS_DIR: CI_reports
@@ -29,16 +29,19 @@ jobs:
           - "7.3"
           - "7.2"
           - "7.1" # lowest supported
-        stability: [ "lowest", "stable" ]
+        dependencies: [ "lowest", "stable" ]
+        composer: [ 2 ]
         include:
           - # windows cutting edge stable
             os: windows-latest
             php: "8.0"
-            stability: "stable"
+            dependencies: "stable"
+            composer: 2
           - # macos cutting edge stable
             os: macos-latest
             php: "8.0"
-            stability: "stable"
+            dependencies: "stable"
+            composer: 2
     timeout-minutes: 30
 
     steps:
@@ -51,8 +54,21 @@ jobs:
         with:
           php-version: ${{ matrix.php }}
           extensions: dom,json,xmlwriter
-          tools: composer
+          tools: composer:v${{ matrix.composer }}
           coverage: pcov,xdebug
+      - name: Determine composer cache directory on Linux/macOS
+        if: ${{ matrix.os == 'ubuntu-latest' || matrix.os == 'macos-latest' }}
+        run: echo "COMPOSER_CACHE_DIR=$(composer config cache-dir)" >> $GITHUB_ENV
+      - name: Determine composer cache directory on Windows
+        if: ${{ matrix.os == 'windows-latest' }}
+        run: ECHO "COMPOSER_CACHE_DIR=~\AppData\Local\Composer" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+      - name: Cache dependencies installed with composer
+        # see https://github.com/actions/cache
+        uses: actions/cache@v2
+        with:
+          path: ${{ env.COMPOSER_CACHE_DIR }}
+          key:          php${{ matrix.php }}-composerV${{ matrix.composer }}-${{ matrix.dependencies }}-${{ hashFiles('**/composer.json') }}
+          restore-keys: php${{ matrix.php }}-composerV${{ matrix.composer }}-${{ matrix.dependencies }}-
       - name: dir setup
         run: mkdir ${{ env.REPORTS_DIR }}
       - name: Validate composer.json and composer.lock
@@ -62,11 +78,10 @@ jobs:
       - name: Install dependencies
         run: >
           composer update
-          --prefer-${{ matrix.stability }}
+          --prefer-${{ matrix.dependencies }}
           --prefer-dist
           --no-interaction
           --no-progress
-          --no-suggest
       - name: Run PHPUnit tests
         run: >
           php
@@ -77,8 +92,8 @@ jobs:
           -d log_errors_max_len=0
           -d memory_limit=-1
           vendor/phpunit/phpunit/phpunit
-          --log-junit=${{ env.REPORTS_DIR }}/tests.${{ matrix.os }}_php${{ matrix.php }}_${{ matrix.stability }}.junit.xml
-          --coverage-clover=${{ env.REPORTS_DIR }}/coverage.${{ matrix.os}}_php${{ matrix.php }}_${{ matrix.stability }}.clover.xml
+          --log-junit=${{ env.REPORTS_DIR }}/tests.${{ matrix.os }}_php${{ matrix.php }}_${{ matrix.dependencies }}.junit.xml
+          --coverage-clover=${{ env.REPORTS_DIR }}/coverage.${{ matrix.os}}_php${{ matrix.php }}_${{ matrix.dependencies }}.clover.xml
       - name: Artifact reports
         if: ${{ ! cancelled() }}
         # see https://github.com/actions/upload-artifact
@@ -88,7 +103,7 @@ jobs:
           path: ${{ env.REPORTS_DIR }}
           if-no-files-found: error
   code-checker:
-    name: Code analysis (php${{ matrix.php }}, ${{ matrix.stability }}, composer${{ matrix.composer }})
+    name: Code analysis (php${{ matrix.php }}, ${{ matrix.dependencies }}, composer${{ matrix.composer }})
     runs-on: ubuntu-latest
     timeout-minutes: 30
     env:
@@ -100,11 +115,11 @@ jobs:
         include:
           - # lowest supported
             php: "7.1"
-            stability: "lowest"
+            dependencies: "lowest"
             composer: 1
           - # highest supported
             php: "8.0"
-            stability: "stable"
+            dependencies: "stable"
             composer: 2
     steps:
       - name: Checkout
@@ -117,6 +132,15 @@ jobs:
           php-version: ${{ matrix.php }}
           tools: composer:v${{ matrix.composer }}
           coverage: none
+      - name: Determine composer cache directory
+        run: echo "COMPOSER_CACHE_DIR=$(composer config cache-dir)" >> $GITHUB_ENV
+      - name: Cache dependencies installed with composer
+        # see https://github.com/actions/cache
+        uses: actions/cache@v2
+        with:
+          path: ${{ env.COMPOSER_CACHE_DIR }}
+          key:          php${{ matrix.php }}-composer${{ matrix.composer }}-${{ matrix.dependencies }}-${{ hashFiles('**/composer.json') }}
+          restore-keys: php${{ matrix.php }}-composer${{ matrix.composer }}-${{ matrix.dependencies }}-
       - name: Install psalm
         run: >
           composer install
@@ -124,23 +148,21 @@ jobs:
           --prefer-dist
           --no-interaction
           --no-progress
-          --no-suggest
       - name: Install dependencies
         run: >
           composer update
-          --prefer-${{ matrix.stability }}
+          --prefer-${{ matrix.dependencies }}
           --prefer-dist
           --no-interaction
           --no-progress
-          --no-suggest
       - name: Run Psalm tests
         run: >
           php tools/psalm/vendor/vimeo/psalm/psalm
-          --use-baseline=.psalm/baseline-${{ matrix.stability }}.xml
+          --use-baseline=.psalm/baseline-${{ matrix.dependencies }}.xml
           --no-diff
           --no-cache
           --long-progress
-          --report=${{ env.REPORTS_DIR }}/psalm.php${{ matrix.php }}_${{ matrix.stability }}_composer${{ matrix.composer }}.junit.xml
+          --report=${{ env.REPORTS_DIR }}/psalm.php${{ matrix.php }}_${{ matrix.dependencies }}_composer${{ matrix.composer }}.junit.xml
       - name: Artifact reports
         if: ${{ ! cancelled() }}
         # see https://github.com/actions/upload-artifact
@@ -162,8 +184,17 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: "8.0"
-          tools: composer
+          tools: composer:v2
           coverage: none
+      - name: Determine composer cache directory
+        run: echo "COMPOSER_CACHE_DIR=$(composer config cache-dir)" >> $GITHUB_ENV
+      - name: Cache dependencies installed with composer
+        # see https://github.com/actions/cache
+        uses: actions/cache@v2
+        with:
+          path: ${{ env.COMPOSER_CACHE_DIR }}
+          key:          php8.0-composer2-stable-${{ hashFiles('**/composer.json') }}
+          restore-keys: php8.0-composer2-stable-
       - name: Install composer-unused
         run: >
           composer install
@@ -171,7 +202,6 @@ jobs:
           --prefer-dist
           --no-interaction
           --no-progress
-          --no-suggest
       - name: Run composer-unused tests
         run: >
           php tools/composer-unused/vendor/icanhazstring/composer-unused/bin/composer-unused
@@ -191,8 +221,17 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: "8.0"
-          tools: composer
+          tools: composer:2
           coverage: none
+      - name: Determine composer cache directory
+        run: echo "COMPOSER_CACHE_DIR=$(composer config cache-dir)" >> $GITHUB_ENV
+      - name: Cache dependencies installed with composer
+        # see https://github.com/actions/cache
+        uses: actions/cache@v2
+        with:
+          path: ${{ env.COMPOSER_CACHE_DIR }}
+          key:          php8.0-composer2-stable-${{ hashFiles('**/composer.json') }}
+          restore-keys: php8.0-composer2-stable-
       - name: Install composer-require-checker
         run: >
           composer install
@@ -200,15 +239,14 @@ jobs:
           --prefer-dist
           --no-interaction
           --no-progress
-          --no-suggest
       - name: Install dependencies
         run: >
           composer update
           --no-dev
+          --prefer-stable
           --prefer-dist
           --no-interaction
           --no-progress
-          --no-suggest
       - name: Run composer-require-checker tests
         run: >
           php tools/composer-require-checker/vendor/maglnet/composer-require-checker/bin/composer-require-checker
@@ -226,8 +264,17 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: "8.0"
-          tools: composer
+          tools: composer:2
           coverage: none
+      - name: Determine composer cache directory
+        run: echo "COMPOSER_CACHE_DIR=$(composer config cache-dir)" >> $GITHUB_ENV
+      - name: Cache dependencies installed with composer
+        # see https://github.com/actions/cache
+        uses: actions/cache@v2
+        with:
+          path: ${{ env.COMPOSER_CACHE_DIR }}
+          key:          php8.0-composer2-stable-${{ hashFiles('**/composer.json') }}
+          restore-keys: php8.0-composer2-stable-
       - name: Install PHP-CS-Fixer
         run: >
           composer install
@@ -235,15 +282,6 @@ jobs:
           --prefer-dist
           --no-interaction
           --no-progress
-          --no-suggest
-      - name: Install dependencies
-        run: >
-          composer update
-          --no-dev
-          --prefer-dist
-          --no-interaction
-          --no-progress
-          --no-suggest
       - name: Run PHP-CS-Fixer tests
         run: >
           php tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/php-cs-fixer
