@@ -1,6 +1,6 @@
-[![Build Status](https://github.com/CycloneDX/cyclonedx-php-composer/workflows/PHP%20CI/badge.svg)](https://github.com/CycloneDX/cyclonedx-php-composer/actions?workflow=PHP+CI)
+[![Build Status](https://img.shields.io/github/workflow/status/CycloneDX/cyclonedx-php-composer/PHP%20CI/1.x?logo=GitHub&logoColor=white)](https://github.com/CycloneDX/cyclonedx-php-composer/actions/workflows/php.yml?query=branch%3A1.x)
 [![Packagist Version](https://img.shields.io/packagist/v/cyclonedx/cyclonedx-php-composer)](https://packagist.org/packages/cyclonedx/cyclonedx-php-composer)
-[![License](https://img.shields.io/badge/license-Apache%202.0-brightgreen.svg)][License]
+[![License](https://img.shields.io/badge/license-Apache%202.0-brightgreen.svg)][LICENSE]
 [![Website](https://img.shields.io/badge/https://-cyclonedx.org-blue.svg)](https://cyclonedx.org/)
 [![Slack Invite](https://img.shields.io/badge/Slack-Join-blue?logo=slack&labelColor=393939)](https://cyclonedx.org/slack/invite)
 [![Group Discussion](https://img.shields.io/badge/discussion-groups.io-blue.svg)](https://groups.io/g/CycloneDX)
@@ -24,7 +24,7 @@ The plugin supports PHP 5.5 and later.
 
 After successful installation, the composer command `make-bom` is available.
 
-```sh
+```
 $ composer make-bom -h
 Usage:
   make-bom [options]
@@ -54,4 +54,4 @@ Help:
 
 Permission to modify and redistribute is granted under the terms of the Apache 2.0 license. See the [LICENSE] file for the full license.
 
-[License]: https://github.com/CycloneDX/cyclonedx-php-composer/blob/master/LICENSE
+[LICENSE]: https://github.com/CycloneDX/cyclonedx-php-composer/blob/master/LICENSE
