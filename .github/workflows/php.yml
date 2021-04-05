@@ -66,7 +66,6 @@ jobs:
           --prefer-dist
           --no-interaction
           --no-progress
-          --no-suggest
       - name: Run PHPUnit tests
         run: >
           php
@@ -124,7 +123,6 @@ jobs:
           --prefer-dist
           --no-interaction
           --no-progress
-          --no-suggest
       - name: Install dependencies
         run: >
           composer update
@@ -132,7 +130,6 @@ jobs:
           --prefer-dist
           --no-interaction
           --no-progress
-          --no-suggest
       - name: Run Psalm tests
         run: >
           php tools/psalm/vendor/vimeo/psalm/psalm
@@ -171,7 +168,6 @@ jobs:
           --prefer-dist
           --no-interaction
           --no-progress
-          --no-suggest
       - name: Run composer-unused tests
         run: >
           php tools/composer-unused/vendor/icanhazstring/composer-unused/bin/composer-unused
@@ -200,7 +196,6 @@ jobs:
           --prefer-dist
           --no-interaction
           --no-progress
-          --no-suggest
       - name: Install dependencies
         run: >
           composer update
@@ -208,7 +203,6 @@ jobs:
           --prefer-dist
           --no-interaction
           --no-progress
-          --no-suggest
       - name: Run composer-require-checker tests
         run: >
           php tools/composer-require-checker/vendor/maglnet/composer-require-checker/bin/composer-require-checker
@@ -235,7 +229,6 @@ jobs:
           --prefer-dist
           --no-interaction
           --no-progress
-          --no-suggest
       - name: Install dependencies
         run: >
           composer update
@@ -243,7 +236,6 @@ jobs:
           --prefer-dist
           --no-interaction
           --no-progress
-          --no-suggest
       - name: Run PHP-CS-Fixer tests
         run: >
           php tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/php-cs-fixer
