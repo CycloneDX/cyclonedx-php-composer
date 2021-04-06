@@ -52,6 +52,10 @@ Help:
   Generate a CycloneDX Bill of Materials
 ```
 
+## Demo
+
+For a demo of _cyclonedx-php-composer_ see the [demo project][demo_readme].
+
 ## Contributing
 
 Feel free to open pull requests.
@@ -68,6 +72,7 @@ Permission to modify and redistribute is granted under the terms of the Apache 2
 See the [LICENSE][license_file] file for the full license.
 
 [license_file]: https://github.com/CycloneDX/cyclonedx-php-composer/blob/master/LICENSE
+[demo_readme]: https://github.com/CycloneDX/cyclonedx-php-composer/blob/master/demo/README.md
 
 [shield_gh-workflow-test]: https://img.shields.io/github/workflow/status/CycloneDX/cyclonedx-php-composer/PHP%20CI/master?logo=GitHub&logoColor=white "build"
 [shield_packagist-version]: https://img.shields.io/packagist/v/cyclonedx/cyclonedx-php-composer?logo=&logoColor=white "packagist"
