@@ -12,12 +12,15 @@ on:
     # this means: at 23:42 on Fridays
     - cron: '42 23 * * 5'
 
+env:
+  PHP_PROJECT_EXT: dom,json,xmlwriter
+  REPORTS_DIR: CI_reports
+
 jobs:
   tests:
-    name: Tests (${{ matrix.os}}, ${{ matrix.php }}, ${{ matrix.dependencies }})
+    name: Tests (${{ matrix.os}}, ${{ matrix.php }}, ${{ matrix.composer}}, ${{ matrix.dependencies }})
     runs-on: ${{ matrix.os }}
     env:
-      REPORTS_DIR: CI_reports
       REPORTS_ARTIFACT: tests-reports
     strategy:
       fail-fast: false
@@ -43,7 +46,6 @@ jobs:
             dependencies: "highest"
             composer: 2
     timeout-minutes: 30
-
     steps:
       - name: Checkout
         # see https://github.com/actions/checkout
@@ -53,7 +55,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php }}
-          extensions: dom,json,xmlwriter
+          extensions: ${{ env.PHP_PROJECT_EXT }}
           tools: composer:v${{ matrix.composer }}
           coverage: pcov,xdebug
       - name: Determine composer cache directory on Linux/macOS
@@ -91,8 +93,8 @@ jobs:
           -d log_errors_max_len=0
           -d memory_limit=-1
           vendor/phpunit/phpunit/phpunit
-          --log-junit=${{ env.REPORTS_DIR }}/tests.${{ matrix.os }}_php${{ matrix.php }}_${{ matrix.dependencies }}.junit.xml
-          --coverage-clover=${{ env.REPORTS_DIR }}/coverage.${{ matrix.os}}_php${{ matrix.php }}_${{ matrix.dependencies }}.clover.xml
+          --log-junit=${{ env.REPORTS_DIR }}/tests.${{ matrix.os }}_php${{ matrix.php }}_composer${{ matrix.composer }}_${{ matrix.dependencies }}.junit.xml
+          --coverage-clover=${{ env.REPORTS_DIR }}/coverage.${{ matrix.os}}_php${{ matrix.php }}_composer${{ matrix.composer }}_${{ matrix.dependencies }}.clover.xml
       - name: Artifact reports
         if: ${{ ! cancelled() }}
         # see https://github.com/actions/upload-artifact
@@ -102,11 +104,10 @@ jobs:
           path: ${{ env.REPORTS_DIR }}
           if-no-files-found: error
   code-checker:
-    name: Code analysis (php${{ matrix.php }}, ${{ matrix.dependencies }}, composer${{ matrix.composer }})
+    name: Code analysis (${{ matrix.php }}, ${{ matrix.composer }}, ${{ matrix.dependencies }})
     runs-on: ubuntu-latest
     timeout-minutes: 30
     env:
-      REPORTS_DIR: CI_reports
       REPORTS_ARTIFACT: types-reports
     strategy:
       fail-fast: false
@@ -114,12 +115,12 @@ jobs:
         include:
           - # lowest supported
             php: "7.1"
-            dependencies: "lowest"
             composer: 1
+            dependencies: "lowest"
           - # highest supported
             php: "8.0"
-            dependencies: "highest"
             composer: 2
+            dependencies: "highest"
     steps:
       - name: Checkout
         # see https://github.com/actions/checkout
@@ -129,6 +130,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php }}
+          extensions: ${{ env.PHP_PROJECT_EXT }}
           tools: composer:v${{ matrix.composer }}
           coverage: none
       - name: Determine composer cache directory
@@ -141,7 +143,8 @@ jobs:
           key:          php${{ matrix.php }}-composer${{ matrix.composer }}-${{ matrix.dependencies }}-${{ hashFiles('**/composer.json') }}
           restore-keys: php${{ matrix.php }}-composer${{ matrix.composer }}-${{ matrix.dependencies }}-
       - name: Install psalm
-        run: composer install -dtools/psalm --prefer-dist --no-interaction --no-progress
+        run: composer install --prefer-dist --no-interaction --no-progress
+        working-directory: tools/psalm
       - name: Install lowest dependencies
         if: ${{ matrix.dependencies == 'lowest' }}
         run: composer update --prefer-dist --no-interaction --no-progress --prefer-lowest
@@ -155,7 +158,7 @@ jobs:
           --no-diff
           --no-cache
           --long-progress
-          --report=${{ env.REPORTS_DIR }}/psalm.php${{ matrix.php }}_${{ matrix.dependencies }}_composer${{ matrix.composer }}.junit.xml
+          --report=${{ env.REPORTS_DIR }}/psalm.php${{ matrix.php }}_composer${{ matrix.composer }}_${{ matrix.dependencies }}.junit.xml
       - name: Artifact reports
         if: ${{ ! cancelled() }}
         # see https://github.com/actions/upload-artifact
@@ -177,6 +180,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: "8.0"
+          extensions: ${{ env.PHP_PROJECT_EXT }}
           tools: composer:v2
           coverage: none
       - name: Determine composer cache directory
@@ -189,7 +193,8 @@ jobs:
           key:          php8.0-composer2-highest-${{ hashFiles('**/composer.json') }}
           restore-keys: php8.0-composer2-highest-
       - name: Install composer-unused
-        run: composer install -dtools/composer-unused --prefer-dist --no-interaction --no-progress
+        run: composer install --prefer-dist --no-interaction --no-progress
+        working-directory: tools/composer-unused
       - name: Run composer-unused tests
         run: >
           php tools/composer-unused/vendor/icanhazstring/composer-unused/bin/composer-unused
@@ -209,6 +214,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: "8.0"
+          extensions: ${{ env.PHP_PROJECT_EXT }}
           tools: composer:2
           coverage: none
       - name: Determine composer cache directory
@@ -221,7 +227,8 @@ jobs:
           key:          php8.0-composer2-highest-${{ hashFiles('**/composer.json') }}
           restore-keys: php8.0-composer2-highest-
       - name: Install composer-require-checker
-        run: composer install -dtools/composer-require-checker --prefer-dist --no-interaction --no-progress
+        run: composer install --prefer-dist --no-interaction --no-progress
+        working-directory: tools/composer-require-checker
       - name: Install dependencies
         run: composer update --no-dev --prefer-dist --no-interaction --no-progress
       - name: Run composer-require-checker tests
@@ -241,6 +248,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: "8.0"
+          extensions: ${{ env.PHP_PROJECT_EXT }}
           tools: composer:2
           coverage: none
       - name: Determine composer cache directory
@@ -253,7 +261,8 @@ jobs:
           key:          php8.0-composer2-highest-${{ hashFiles('**/composer.json') }}
           restore-keys: php8.0-composer2-highest-
       - name: Install PHP-CS-Fixer
-        run: composer install -dtools/php-cs-fixer --prefer-dist --no-interaction --no-progress
+        run: composer install --prefer-dist --no-interaction --no-progress
+        working-directory: tools/php-cs-fixer
       - name: Run PHP-CS-Fixer tests
         run: >
           php tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/php-cs-fixer
@@ -263,3 +272,63 @@ jobs:
           --using-cache=no
           --show-progress=dots
           --no-interaction
+  demo:
+    name: Demo
+    env:
+      REPORTS_ARTIFACT: demo-output
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    defaults:
+      run:
+        working-directory: demo/project
+    steps:
+      - name: Checkout
+        # see https://github.com/actions/checkout
+        uses: actions/checkout@v2
+      - name: Setup PHP
+        # see https://github.com/shivammathur/setup-php
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.0"
+          extensions: ${{ env.PHP_PROJECT_EXT }}
+          tools: composer:v2
+          coverage: none
+      - name: Determine composer cache directory
+        run: echo "COMPOSER_CACHE_DIR=$(composer config cache-dir)" >> $GITHUB_ENV
+      - name: Cache dependencies installed with composer
+        # see https://github.com/actions/cache
+        uses: actions/cache@v2
+        with:
+          path: ${{ env.COMPOSER_CACHE_DIR }}
+          key:          php8.0-composer2-highest-${{ hashFiles('**/composer.json') }}
+          restore-keys: php8.0-composer2-highest-
+      - name: Install dependencies
+        run: composer update --prefer-dist --no-interaction --no-progress
+      - name: dir setup
+        run: mkdir ${{ env.REPORTS_DIR }}
+      - name: Show help
+        run: >
+          composer make-bom
+          --help
+          > ${{ env.REPORTS_DIR }}/help.txt
+      - name: Make XML SBOM
+        run: >
+          composer make-bom
+          -vvv
+          --exclude-dev
+          --output-file=${{ env.REPORTS_DIR }}/bom.xml
+      - name: Make JSON SBOM
+        run: >
+          composer make-bom
+          -vvv
+          --exclude-dev
+          --output-file=${{ env.REPORTS_DIR }}/bom.json
+          --json
+      - name: Artifact reports
+        if: ${{ ! cancelled() }}
+        # see https://github.com/actions/upload-artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: ${{ env.REPORTS_ARTIFACT }}
+          path: demo/project/${{ env.REPORTS_DIR }}
+          if-no-files-found: error
