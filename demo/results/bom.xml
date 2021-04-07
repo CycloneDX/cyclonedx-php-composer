@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bom xmlns="http://cyclonedx.org/schema/bom/1.1">
+    <components>
+        <component type="library">
+            <group>doctrine</group>
+            <name>annotations</name>
+            <version>1.12.1</version>
+            <description>Docblock Annotations Parser</description>
+            <licenses>
+                <license>
+                    <id>MIT</id>
+                </license>
+            </licenses>
+            <purl>pkg:composer/doctrine/annotations@1.12.1</purl>
+        </component>
+        <component type="library">
+            <group>doctrine</group>
+            <name>cache</name>
+            <version>1.10.2</version>
+            <description>PHP Doctrine Cache library is a popular cache implementation that supports many different drivers such as redis, memcache, apc, mongodb and others.</description>
+            <licenses>
+                <license>
+                    <id>MIT</id>
+                </license>
+            </licenses>
+            <purl>pkg:composer/doctrine/cache@1.10.2</purl>
+        </component>
+        <component type="library">
+            <group>doctrine</group>
+            <name>collections</name>
+            <version>1.6.7</version>
+            <description>PHP Doctrine Collections library that adds additional functionality on top of PHP arrays.</description>
+            <licenses>
+                <license>
+                    <id>MIT</id>
+                </license>
+            </licenses>
+            <purl>pkg:composer/doctrine/collections@1.6.7</purl>
+        </component>
+        <component type="library">
+            <group>doctrine</group>
+            <name>event-manager</name>
+            <version>1.1.1</version>
+            <description>The Doctrine Event Manager is a simple PHP event system that was built to be used with the various Doctrine projects.</description>
+            <licenses>
+                <license>
+                    <id>MIT</id>
+                </license>
+            </licenses>
+            <purl>pkg:composer/doctrine/event-manager@1.1.1</purl>
+        </component>
+        <component type="library">
+            <group>doctrine</group>
+            <name>lexer</name>
+            <version>1.2.1</version>
+            <description>PHP Doctrine Lexer parser library that can be used in Top-Down, Recursive Descent Parsers.</description>
+            <licenses>
+                <license>
+                    <id>MIT</id>
+                </license>
+            </licenses>
+            <purl>pkg:composer/doctrine/lexer@1.2.1</purl>
+        </component>
+        <component type="library">
+            <group>doctrine</group>
+            <name>persistence</name>
+            <version>2.1.0</version>
+            <description>The Doctrine Persistence project is a set of shared interfaces and functionality that the different Doctrine object mappers share.</description>
+            <licenses>
+                <license>
+                    <id>MIT</id>
+                </license>
+            </licenses>
+            <purl>pkg:composer/doctrine/persistence@2.1.0</purl>
+        </component>
+        <component type="library">
+            <group>friendsofphp</group>
+            <name>proxy-manager-lts</name>
+            <version>1.0.3</version>
+            <description>Adding support for a wider range of PHP versions to ocramius/proxy-manager</description>
+            <licenses>
+                <license>
+                    <id>MIT</id>
+                </license>
+            </licenses>
+            <purl>pkg:composer/friendsofphp/proxy-manager-lts@1.0.3</purl>
+        </component>
+        <component type="library">
+            <group>laminas</group>
+            <name>laminas-code</name>
+            <version>4.1.0</version>
+            <description>Extensions to the PHP Reflection API, static code scanning, and code generation</description>
+            <licenses>
+                <license>
+                    <id>BSD-3-Clause</id>
+                </license>
+            </licenses>
+            <purl>pkg:composer/laminas/laminas-code@4.1.0</purl>
+        </component>
+        <component type="library">
+            <group>laminas</group>
+            <name>laminas-eventmanager</name>
+            <version>3.3.1</version>
+            <description>Trigger and listen to events within a PHP application</description>
+            <licenses>
+                <license>
+                    <id>BSD-3-Clause</id>
+                </license>
+            </licenses>
+            <purl>pkg:composer/laminas/laminas-eventmanager@3.3.1</purl>
+        </component>
+        <component type="library">
+            <group>laminas</group>
+            <name>laminas-zendframework-bridge</name>
+            <version>1.2.0</version>
+            <description>Alias legacy ZF class names to Laminas Project equivalents.</description>
+            <licenses>
+                <license>
+                    <id>BSD-3-Clause</id>
+                </license>
+            </licenses>
+            <purl>pkg:composer/laminas/laminas-zendframework-bridge@1.2.0</purl>
+        </component>
+        <component type="library">
+            <group>psr</group>
+            <name>cache</name>
+            <version>1.0.1</version>
+            <description>Common interface for caching libraries</description>
+            <licenses>
+                <license>
+                    <id>MIT</id>
+                </license>
+            </licenses>
+            <purl>pkg:composer/psr/cache@1.0.1</purl>
+        </component>
+        <component type="library">
+            <group>psr</group>
+            <name>container</name>
+            <version>1.1.1</version>
+            <description>Common Container Interface (PHP FIG PSR-11)</description>
+            <licenses>
+                <license>
+                    <id>MIT</id>
+                </license>
+            </licenses>
+            <purl>pkg:composer/psr/container@1.1.1</purl>
+        </component>
+        <component type="library">
+            <group>psr</group>
+            <name>event-dispatcher</name>
+            <version>1.0.0</version>
+            <description>Standard interfaces for event handling.</description>
+            <licenses>
+                <license>
+                    <id>MIT</id>
+                </license>
+            </licenses>
+            <purl>pkg:composer/psr/event-dispatcher@1.0.0</purl>
+        </component>
+        <component type="library">
+            <group>psr</group>
+            <name>link</name>
+            <version>1.0.0</version>
+            <description>Common interfaces for HTTP links</description>
+            <licenses>
+                <license>
+                    <id>MIT</id>
+                </license>
+            </licenses>
+            <purl>pkg:composer/psr/link@1.0.0</purl>
+        </component>
+        <component type="library">
+            <group>psr</group>
+            <name>log</name>
+            <version>1.1.3</version>
+            <description>Common interface for logging libraries</description>
+            <licenses>
+                <license>
+                    <id>MIT</id>
+                </license>
+            </licenses>
+            <purl>pkg:composer/psr/log@1.1.3</purl>
+        </component>
+        <component type="library">
+            <group>symfony</group>
+            <name>contracts</name>
+            <version>2.3.1</version>
+            <description>A set of abstractions extracted out of the Symfony components</description>
+            <licenses>
+                <license>
+                    <id>MIT</id>
+                </license>
+            </licenses>
+            <purl>pkg:composer/symfony/contracts@2.3.1</purl>
+        </component>
+        <component type="library">
+            <group>symfony</group>
+            <name>polyfill-ctype</name>
+            <version>1.22.1</version>
+            <description>Symfony polyfill for ctype functions</description>
+            <licenses>
+                <license>
+                    <id>MIT</id>
+                </license>
+            </licenses>
+            <purl>pkg:composer/symfony/polyfill-ctype@1.22.1</purl>
+        </component>
+        <component type="library">
+            <group>symfony</group>
+            <name>polyfill-intl-grapheme</name>
+            <version>1.22.1</version>
+            <description>Symfony polyfill for intl's grapheme_* functions</description>
+            <licenses>
+                <license>
+                    <id>MIT</id>
+                </license>
+            </licenses>
+            <purl>pkg:composer/symfony/polyfill-intl-grapheme@1.22.1</purl>
+        </component>
+        <component type="library">
+            <group>symfony</group>
+            <name>polyfill-intl-icu</name>
+            <version>1.22.1</version>
+            <description>Symfony polyfill for intl's ICU-related data and classes</description>
+            <licenses>
+                <license>
+                    <id>MIT</id>
+                </license>
+            </licenses>
+            <purl>pkg:composer/symfony/polyfill-intl-icu@1.22.1</purl>
+        </component>
+        <component type="library">
+            <group>symfony</group>
+            <name>polyfill-intl-idn</name>
+            <version>1.22.1</version>
+            <description>Symfony polyfill for intl's idn_to_ascii and idn_to_utf8 functions</description>
+            <licenses>
+                <license>
+                    <id>MIT</id>
+                </license>
+            </licenses>
+            <purl>pkg:composer/symfony/polyfill-intl-idn@1.22.1</purl>
+        </component>
+        <component type="library">
+            <group>symfony</group>
+            <name>polyfill-intl-normalizer</name>
+            <version>1.22.1</version>
+            <description>Symfony polyfill for intl's Normalizer class and related functions</description>
+            <licenses>
+                <license>
+                    <id>MIT</id>
+                </license>
+            </licenses>
+            <purl>pkg:composer/symfony/polyfill-intl-normalizer@1.22.1</purl>
+        </component>
+        <component type="library">
+            <group>symfony</group>
+            <name>polyfill-mbstring</name>
+            <version>1.22.1</version>
+            <description>Symfony polyfill for the Mbstring extension</description>
+            <licenses>
+                <license>
+                    <id>MIT</id>
+                </license>
+            </licenses>
+            <purl>pkg:composer/symfony/polyfill-mbstring@1.22.1</purl>
+        </component>
+        <component type="library">
+            <group>symfony</group>
+            <name>polyfill-php72</name>
+            <version>1.22.1</version>
+            <description>Symfony polyfill backporting some PHP 7.2+ features to lower PHP versions</description>
+            <licenses>
+                <license>
+                    <id>MIT</id>
+                </license>
+            </licenses>
+            <purl>pkg:composer/symfony/polyfill-php72@1.22.1</purl>
+        </component>
+        <component type="library">
+            <group>symfony</group>
+            <name>polyfill-php73</name>
+            <version>1.22.1</version>
+            <description>Symfony polyfill backporting some PHP 7.3+ features to lower PHP versions</description>
+            <licenses>
+                <license>
+                    <id>MIT</id>
+                </license>
+            </licenses>
+            <purl>pkg:composer/symfony/polyfill-php73@1.22.1</purl>
+        </component>
+        <component type="library">
+            <group>symfony</group>
+            <name>polyfill-php80</name>
+            <version>1.22.1</version>
+            <description>Symfony polyfill backporting some PHP 8.0+ features to lower PHP versions</description>
+            <licenses>
+                <license>
+                    <id>MIT</id>
+                </license>
+            </licenses>
+            <purl>pkg:composer/symfony/polyfill-php80@1.22.1</purl>
+        </component>
+        <component type="library">
+            <group>symfony</group>
+            <name>polyfill-uuid</name>
+            <version>1.22.1</version>
+            <description>Symfony polyfill for uuid functions</description>
+            <licenses>
+                <license>
+                    <id>MIT</id>
+                </license>
+            </licenses>
+            <purl>pkg:composer/symfony/polyfill-uuid@1.22.1</purl>
+        </component>
+        <component type="library">
+            <group>symfony</group>
+            <name>symfony</name>
+            <version>5.2.6</version>
+            <description>The Symfony PHP framework</description>
+            <licenses>
+                <license>
+                    <id>MIT</id>
+                </license>
+            </licenses>
+            <purl>pkg:composer/symfony/symfony@5.2.6</purl>
+        </component>
+        <component type="library">
+            <group>twig</group>
+            <name>twig</name>
+            <version>3.3.0</version>
+            <description>Twig, the flexible, fast, and secure template language for PHP</description>
+            <licenses>
+                <license>
+                    <id>BSD-3-Clause</id>
+                </license>
+            </licenses>
+            <purl>pkg:composer/twig/twig@3.3.0</purl>
+        </component>
+    </components>
+</bom>
