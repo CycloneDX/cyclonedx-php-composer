@@ -9,7 +9,7 @@ planned to be a maintenance release as of [M1](https://github.com/CycloneDX/cycl
 * Misc
   * Pinned dev-requirements to exact versions to ensure reproducible tests. (via [#37])
   * Added (code) quality tests to the dev-process. (see [#23])
-  * CI's unit-tests just run reasonable combinations of OperatingSystem, PhpVersions, Stability. (via [#34])
+  * CI's unit-tests just run reasonable combinations of OperatingSystem, PhpVersions, dependencies. (via [#34], [#54])
   * applied coding standards to all php files. (via [#40])
 
 [#23]: https://github.com/CycloneDX/cyclonedx-php-composer/issues/23
@@ -17,6 +17,7 @@ planned to be a maintenance release as of [M1](https://github.com/CycloneDX/cycl
 [#34]: https://github.com/CycloneDX/cyclonedx-php-composer/pull/34
 [#37]: https://github.com/CycloneDX/cyclonedx-php-composer/pull/37
 [#40]: https://github.com/CycloneDX/cyclonedx-php-composer/pull/40
+[#54]: https://github.com/CycloneDX/cyclonedx-php-composer/pull/54
 
 ## 2.0
 
