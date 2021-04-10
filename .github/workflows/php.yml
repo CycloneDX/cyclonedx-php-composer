@@ -50,6 +50,8 @@ jobs:
       - name: Checkout
         # see https://github.com/actions/checkout
         uses: actions/checkout@v2
+      - name: dir setup
+        run: mkdir ${{ env.REPORTS_DIR }}
       - name: Setup PHP
         # see https://github.com/shivammathur/setup-php
         uses: shivammathur/setup-php@v2
@@ -60,19 +62,17 @@ jobs:
           coverage: pcov,xdebug
       - name: Determine composer cache directory on Linux/macOS
         if: ${{ matrix.os == 'ubuntu-latest' || matrix.os == 'macos-latest' }}
-        run: echo "COMPOSER_CACHE_DIR=$(composer config cache-dir)" >> $GITHUB_ENV
+        run: echo "COMPOSER_CACHE_DIR_PATH=$(composer config cache-dir)" >> $GITHUB_ENV
       - name: Determine composer cache directory on Windows
         if: ${{ matrix.os == 'windows-latest' }}
-        run: ECHO "COMPOSER_CACHE_DIR=~\AppData\Local\Composer" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+        run: ECHO "COMPOSER_CACHE_DIR_PATH=~\AppData\Local\Composer" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
       - name: Cache dependencies installed with composer
         # see https://github.com/actions/cache
         uses: actions/cache@v2.1.4
         with:
-          path: ${{ env.COMPOSER_CACHE_DIR }}
+          path: ${{ env.COMPOSER_CACHE_DIR_PATH }}
           key:          php${{ matrix.php }}-composerV${{ matrix.composer }}-${{ matrix.dependencies }}-${{ hashFiles('**/composer.json') }}
           restore-keys: php${{ matrix.php }}-composerV${{ matrix.composer }}-${{ matrix.dependencies }}-
-      - name: dir setup
-        run: mkdir ${{ env.REPORTS_DIR }}
       - name: Validate composer.json and composer.lock
         run: >
           composer validate
@@ -134,12 +134,12 @@ jobs:
           tools: composer:v${{ matrix.composer }}
           coverage: none
       - name: Determine composer cache directory
-        run: echo "COMPOSER_CACHE_DIR=$(composer config cache-dir)" >> $GITHUB_ENV
+        run: echo "COMPOSER_CACHE_DIR_PATH=$(composer config cache-dir)" >> $GITHUB_ENV
       - name: Cache dependencies installed with composer
         # see https://github.com/actions/cache
         uses: actions/cache@v2.1.4
         with:
-          path: ${{ env.COMPOSER_CACHE_DIR }}
+          path: ${{ env.COMPOSER_CACHE_DIR_PATH }}
           key:          php${{ matrix.php }}-composer${{ matrix.composer }}-${{ matrix.dependencies }}-${{ hashFiles('**/composer.json') }}
           restore-keys: php${{ matrix.php }}-composer${{ matrix.composer }}-${{ matrix.dependencies }}-
       - name: Install psalm
@@ -184,12 +184,12 @@ jobs:
           tools: composer:v2
           coverage: none
       - name: Determine composer cache directory
-        run: echo "COMPOSER_CACHE_DIR=$(composer config cache-dir)" >> $GITHUB_ENV
+        run: echo "COMPOSER_CACHE_DIR_PATH=$(composer config cache-dir)" >> $GITHUB_ENV
       - name: Cache dependencies installed with composer
         # see https://github.com/actions/cache
         uses: actions/cache@v2.1.4
         with:
-          path: ${{ env.COMPOSER_CACHE_DIR }}
+          path: ${{ env.COMPOSER_CACHE_DIR_PATH }}
           key:          php8.0-composer2-highest-${{ hashFiles('**/composer.json') }}
           restore-keys: php8.0-composer2-highest-
       - name: Install composer-unused
@@ -218,12 +218,12 @@ jobs:
           tools: composer:2
           coverage: none
       - name: Determine composer cache directory
-        run: echo "COMPOSER_CACHE_DIR=$(composer config cache-dir)" >> $GITHUB_ENV
+        run: echo "COMPOSER_CACHE_DIR_PATH=$(composer config cache-dir)" >> $GITHUB_ENV
       - name: Cache dependencies installed with composer
         # see https://github.com/actions/cache
         uses: actions/cache@v2.1.4
         with:
-          path: ${{ env.COMPOSER_CACHE_DIR }}
+          path: ${{ env.COMPOSER_CACHE_DIR_PATH }}
           key:          php8.0-composer2-highest-${{ hashFiles('**/composer.json') }}
           restore-keys: php8.0-composer2-highest-
       - name: Install composer-require-checker
@@ -252,12 +252,12 @@ jobs:
           tools: composer:2
           coverage: none
       - name: Determine composer cache directory
-        run: echo "COMPOSER_CACHE_DIR=$(composer config cache-dir)" >> $GITHUB_ENV
+        run: echo "COMPOSER_CACHE_DIR_PATH=$(composer config cache-dir)" >> $GITHUB_ENV
       - name: Cache dependencies installed with composer
         # see https://github.com/actions/cache
         uses: actions/cache@v2.1.4
         with:
-          path: ${{ env.COMPOSER_CACHE_DIR }}
+          path: ${{ env.COMPOSER_CACHE_DIR_PATH }}
           key:          php8.0-composer2-highest-${{ hashFiles('**/composer.json') }}
           restore-keys: php8.0-composer2-highest-
       - name: Install PHP-CS-Fixer
@@ -273,62 +273,78 @@ jobs:
           --show-progress=dots
           --no-interaction
   demo:
-    name: Demo
-    env:
-      REPORTS_ARTIFACT: demo-output
+    name: Demo (${{ matrix.php }}, ${{ matrix.composer }})
     runs-on: ubuntu-latest
     timeout-minutes: 30
-    defaults:
-      run:
-        working-directory: demo/project
+    env:
+      REPORTS_ARTIFACT: demo-output
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - # lowest supported
+            php: "7.1"
+            composer: 1
+          - # highest supported
+            php: "8.0"
+            composer: 2
     steps:
       - name: Checkout
         # see https://github.com/actions/checkout
         uses: actions/checkout@v2
+      - name: dir setup
+        run: |
+          REPORTS_DIR_PATH="$(pwd -P)/$REPORTS_DIR"
+          mkdir "$REPORTS_DIR_PATH"
+          echo "REPORTS_DIR_PATH=$REPORTS_DIR_PATH" >> $GITHUB_ENV
+      - name: Generate DEMO_TEMP_DIR_PATH
+        run: echo "DEMO_TEMP_DIR_PATH=$(demo/project/temp_setup-helper.sh)" >> $GITHUB_ENV
       - name: Setup PHP
         # see https://github.com/shivammathur/setup-php
         uses: shivammathur/setup-php@v2
         with:
-          php-version: "8.0"
+          php-version: ${{ matrix.php }}
           extensions: ${{ env.PHP_PROJECT_EXT }}
-          tools: composer:v2
+          tools: composer:v${{ matrix.composer }}
           coverage: none
       - name: Determine composer cache directory
-        run: echo "COMPOSER_CACHE_DIR=$(composer config cache-dir)" >> $GITHUB_ENV
+        run: echo "COMPOSER_CACHE_DIR_PATH=$(composer config cache-dir)" >> $GITHUB_ENV
       - name: Cache dependencies installed with composer
         # see https://github.com/actions/cache
         uses: actions/cache@v2.1.4
         with:
-          path: ${{ env.COMPOSER_CACHE_DIR }}
-          key:          php8.0-composer2-highest-${{ hashFiles('**/composer.json') }}
-          restore-keys: php8.0-composer2-highest-
+          path: ${{ env.COMPOSER_CACHE_DIR_PATH }}
+          key:          php${{ matrix.php }}-composer${{ matrix.composer }}-highest-${{ hashFiles('**/composer.json') }}
+          restore-keys: php${{ matrix.php }}-composer${{ matrix.composer }}-highest-
       - name: Install dependencies
         run: composer update --prefer-dist --no-interaction --no-progress
-      - name: dir setup
-        run: mkdir ${{ env.REPORTS_DIR }}
+        working-directory: ${{ env.DEMO_TEMP_DIR_PATH }}
       - name: Show help
         run: >
           composer make-bom
           --help
-          > ${{ env.REPORTS_DIR }}/help.txt
+          > ${{ env.REPORTS_DIR_PATH }}/help.php${{ matrix.php }}_composer${{ matrix.composer }}.txt
+        working-directory: ${{ env.DEMO_TEMP_DIR_PATH }}
       - name: Make XML SBOM
         run: >
           composer make-bom
           -vvv
           --exclude-dev
-          --output-file=${{ env.REPORTS_DIR }}/bom.xml
+          --output-file=${{ env.REPORTS_DIR_PATH }}/bom.php${{ matrix.php }}_composer${{ matrix.composer }}.xml
+        working-directory: ${{ env.DEMO_TEMP_DIR_PATH }}
       - name: Make JSON SBOM
         run: >
           composer make-bom
           -vvv
           --exclude-dev
-          --output-file=${{ env.REPORTS_DIR }}/bom.json
+          --output-file=${{ env.REPORTS_DIR_PATH }}/bom.php${{ matrix.php }}_composer${{ matrix.composer }}.json
           --json
+        working-directory: ${{ env.DEMO_TEMP_DIR_PATH }}
       - name: Artifact reports
         if: ${{ ! cancelled() }}
         # see https://github.com/actions/upload-artifact
         uses: actions/upload-artifact@v2
         with:
           name: ${{ env.REPORTS_ARTIFACT }}
-          path: demo/project/${{ env.REPORTS_DIR }}
+          path: ${{ env.REPORTS_DIR_PATH }}
           if-no-files-found: error
