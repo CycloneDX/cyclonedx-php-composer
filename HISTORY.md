@@ -1,8 +1,6 @@
 # Changelog
 
-## unreleased
-
-planned to be a maintenance release as of [M1](https://github.com/CycloneDX/cyclonedx-php-composer/milestone/1)
+## 2.0.1
 
 * Added
   * Support for slim dist-builds (via [#24])
