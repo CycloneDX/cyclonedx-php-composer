@@ -29,14 +29,14 @@
         "php": "^7.1 || ^8.0",
         "ext-json": "*",
         "ext-xmlwriter": "*",
-        "composer-plugin-api": "^1.1 || ^2.0",
-        "composer/composer": "^1.1 || ^2.0",
-        "symfony/console": "^3.4.35 || ^4.4 || ^5.0"
+        "composer-plugin-api": "^1.1 || ^2.0"
     },
     "require-dev": {
         "ext-dom": "*",
+        "composer/composer": "^1.1 || ^2.0",
         "phpunit/phpunit": "7.5.20 || 8.5.15 || 9.5.4",
-        "swaggest/json-schema": "0.12.31"
+        "swaggest/json-schema": "0.12.31",
+        "symfony/console": "^3.4.35 || ^4.4 || ^5.0"
     },
     "autoload": {
         "psr-4": {
@@ -45,11 +45,11 @@
     },
     "scripts": {
         "dev-setup": [
-            "@composer -dtools/composer-require-checker install",
-            "@composer -dtools/composer-unused install",
-            "@composer -dtools/php-cs-fixer install",
-            "@composer -dtools/psalm install",
-            "@composer install"
+            "@composer -dtools/composer-require-checker update",
+            "@composer -dtools/composer-unused update",
+            "@composer -dtools/php-cs-fixer update",
+            "@composer -dtools/psalm update",
+            "@composer update"
         ],
         "test": [
             "@composer validate",
@@ -63,7 +63,7 @@
         "test:psalm": "@php tools/psalm/vendor/vimeo/psalm/psalm",
         "test:cs-fixer": "@php tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/php-cs-fixer fix --dry-run --diff-format=udiff",
         "test:composer-unused": "@php tools/composer-unused/vendor/icanhazstring/composer-unused/bin/composer-unused --excludeDir=tools",
-        "test:composer-require-checker": "@php tools/composer-require-checker/vendor/maglnet/composer-require-checker/bin/composer-require-checker",
+        "test:composer-require-checker": "@php tools/composer-require-checker/vendor/maglnet/composer-require-checker/bin/composer-require-checker || :",
         "cs-fix": "@php tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/php-cs-fixer fix --diff-format=udiff"
     },
     "scripts-descriptions": {
