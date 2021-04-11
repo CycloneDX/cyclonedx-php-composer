@@ -148,7 +148,7 @@ jobs:
           key:          php${{ matrix.php }}-composer${{ matrix.composer }}-${{ matrix.dependencies }}-${{ hashFiles('**/composer.json') }}
           restore-keys: php${{ matrix.php }}-composer${{ matrix.composer }}-${{ matrix.dependencies }}-
       - name: Install psalm
-        run: composer install --prefer-dist --no-interaction --no-progress
+        run: composer update --prefer-dist --no-interaction --no-progress
         working-directory: tools/psalm
       - name: Install lowest dependencies
         if: ${{ matrix.dependencies == 'lowest' }}
@@ -198,7 +198,7 @@ jobs:
           key:          php8.0-composer2-highest-${{ hashFiles('**/composer.json') }}
           restore-keys: php8.0-composer2-highest-
       - name: Install composer-unused
-        run: composer install --prefer-dist --no-interaction --no-progress
+        run: composer update --prefer-dist --no-interaction --no-progress
         working-directory: tools/composer-unused
       - name: Run composer-unused tests
         run: >
@@ -232,7 +232,7 @@ jobs:
           key:          php8.0-composer2-highest-${{ hashFiles('**/composer.json') }}
           restore-keys: php8.0-composer2-highest-
       - name: Install composer-require-checker
-        run: composer install --prefer-dist --no-interaction --no-progress
+        run: composer update --prefer-dist --no-interaction --no-progress
         working-directory: tools/composer-require-checker
       - name: Install dependencies
         run: composer update --no-dev --prefer-dist --no-interaction --no-progress
@@ -240,6 +240,7 @@ jobs:
         run: >
           php tools/composer-require-checker/vendor/maglnet/composer-require-checker/bin/composer-require-checker
           --no-interaction
+          || :  # this report is optional
   coding-standards:
     name: Coding Standards
     runs-on: ubuntu-latest
@@ -266,7 +267,7 @@ jobs:
           key:          php8.0-composer2-highest-${{ hashFiles('**/composer.json') }}
           restore-keys: php8.0-composer2-highest-
       - name: Install PHP-CS-Fixer
-        run: composer install --prefer-dist --no-interaction --no-progress
+        run: composer update --prefer-dist --no-interaction --no-progress
         working-directory: tools/php-cs-fixer
       - name: Run PHP-CS-Fixer tests
         run: >
