@@ -14,3 +14,12 @@ There are multiple demo projects:
 
 Purpose is to demonstrate how _cyclonedx-php-composer_ integrates, can be used,
 and how the generated output will look like.
+
+## Maintenance 
+
+Fies in `**/project/**` are marked as `linguist-vendored` in the `.gitattributes`.  
+Therefore, the requirements/dependencies are 
+[not maintained by dependabot](https://docs.github.com/en/code-security/supply-chain-security/configuration-options-for-dependency-updates#vendor).
+
+Files in `**/example-results/**` are marked as `linguist-generated` in the `.gitattributes`.  
+Files in `**/results/**` are marked as `linguist-generated` in the `.gitattributes`.  

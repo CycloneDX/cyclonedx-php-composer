@@ -7,6 +7,9 @@ updates:
     schedule:
       interval: 'weekly'
       day: 'saturday'
+    # some sub-dirs of `demo/` are marked as vendored via `.gitattributes`.
+    # it is intended to maintain this dir manually.
+    vendor: false
     allow:
       - dependency-type: 'all'
     versioning-strategy: 'auto'
