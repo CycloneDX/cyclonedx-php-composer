@@ -317,8 +317,15 @@ jobs:
           REPORTS_DIR_PATH="$(pwd -P)/$REPORTS_DIR/${{ matrix.subject }}"
           mkdir -p "$REPORTS_DIR_PATH"
           echo "REPORTS_DIR_PATH=$REPORTS_DIR_PATH" >> $GITHUB_ENV
-      - name: Generate DEMO_TEMP_DIR_PATH
-        run: echo "DEMO_TEMP_DIR_PATH=$(demo/$DEMO_SUBJECT/project/temp_setup-helper.sh)" >> $GITHUB_ENV
+      - name: Generate temporary DEMO_RUN_DIR_PATH
+        if: ${{ 1 == matrix.composer }}
+        # composer1 cannot run self-depending installs within sub-directories
+        run: echo "DEMO_RUN_DIR_PATH=$(demo/$DEMO_SUBJECT/project/temp_setup-helper.sh)" >> $GITHUB_ENV
+        env:
+          DEMO_SUBJECT: ${{ matrix.subject }}
+      - name: Set DEMO_RUN_DIR_PATH
+        if: ${{ 1 != matrix.composer }}
+        run : echo "DEMO_RUN_DIR_PATH=$(pwd -P)/demo/$DEMO_SUBJECT/project" >> $GITHUB_ENV
         env:
           DEMO_SUBJECT: ${{ matrix.subject }}
       - name: Setup PHP
@@ -341,24 +348,24 @@ jobs:
       - name: Install dependencies (non-pinned)
         if: ${{ ! matrix.deps-pinned }}
         run: composer update --prefer-dist --no-interaction --no-progress
-        working-directory: ${{ env.DEMO_TEMP_DIR_PATH }}
+        working-directory: ${{ env.DEMO_RUN_DIR_PATH }}
       - name: Install dependencies (pinned)
         if: ${{ matrix.deps-pinned }}
         run: composer install --prefer-dist --no-interaction --no-progress
-        working-directory: ${{ env.DEMO_TEMP_DIR_PATH }}
+        working-directory: ${{ env.DEMO_RUN_DIR_PATH }}
       - name: Show help
         run: >
           composer make-bom
           --help
           > ${{ env.REPORTS_DIR_PATH }}/help.php${{ matrix.php }}_composer${{ matrix.composer }}.txt
-        working-directory: ${{ env.DEMO_TEMP_DIR_PATH }}
+        working-directory: ${{ env.DEMO_RUN_DIR_PATH }}
       - name: Make XML SBOM
         run: >
           composer make-bom
           -vvv
           --exclude-dev
           --output-file=${{ env.REPORTS_DIR_PATH }}/bom.php${{ matrix.php }}_composer${{ matrix.composer }}.xml
-        working-directory: ${{ env.DEMO_TEMP_DIR_PATH }}
+        working-directory: ${{ env.DEMO_RUN_DIR_PATH }}
       - name: Make JSON SBOM
         run: >
           composer make-bom
@@ -366,7 +373,7 @@ jobs:
           --exclude-dev
           --output-file=${{ env.REPORTS_DIR_PATH }}/bom.php${{ matrix.php }}_composer${{ matrix.composer }}.json
           --json
-        working-directory: ${{ env.DEMO_TEMP_DIR_PATH }}
+        working-directory: ${{ env.DEMO_RUN_DIR_PATH }}
       - name: Artifact reports
         if: ${{ ! cancelled() }}
         # see https://github.com/actions/upload-artifact
