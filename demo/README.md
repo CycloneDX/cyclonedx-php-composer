@@ -6,7 +6,8 @@ There are multiple demo projects:
   which composer-requires `symfony/symfony:@stable` in a fluid unlocked version.  
   The demo is intended to run  on every environment.  
   This also means, the output might not be reproducible on independent systems, 
-  due to the fact that version-locks are fluid, and the composer-lock file is not sipped as code.
+  due to the fact that version-locks are fluid, and the composer-lock file is not sipped as code.  
+  *ATTENTION*: this demo uses vulnerable dependencies for showcasing purposes.
 * [`laravel-7.12.0`](laravel-7.12.0/README.md) 
   which composer-requires `laravel/framework:7.12.0`"`.  
   The output is reproducible, due to the shipped composer-locked versions.
