@@ -11,7 +11,7 @@ There are multiple demo projects:
   which composer-requires `laravel/framework:7.12.0`.  
   The output is reproducible, due to the shipped composer-locked versions.
   Therefore, the demo requires a special php environment.  
-  *ATTENTION*: this demo uses vulnerable dependencies for showcasing purposes.
+  *ATTENTION*: this demo might use vulnerable dependencies for showcasing purposes.
 
 
 Purpose is to demonstrate how _cyclonedx-php-composer_ integrates, can be used,

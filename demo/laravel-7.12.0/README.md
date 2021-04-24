@@ -1,6 +1,6 @@
 # Demo: laravel 7.12.0
 
-*ATTENTION*: this demo uses known vulnerable dependencies for showcasing purposes.
+*ATTENTION*: this demo might use known vulnerable dependencies for showcasing purposes.
 
 The output is reproducible, due to the [shipped composer-locked](project/composer.lock) versions.  
 Therefore, the demo requires a special php environment, which is caused by the composer-requirements:
