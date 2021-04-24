@@ -5,7 +5,7 @@ updates:
   - package-ecosystem: 'composer'
     # some sub-dirs of `demo/` are marked as vendored via `.gitattributes`.
     # it is intended to maintain this dir manually.
-    vendor: false
+    # vendor: false ## adding this line back in causes issue#61
     directory: '/'
     schedule:
       interval: 'weekly'
