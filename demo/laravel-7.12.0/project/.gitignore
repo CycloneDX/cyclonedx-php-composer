@@ -1,0 +1,9 @@
+*
+!/.gitignore
+
+!/composer.json
+!/composer.lock
+
+!/composer.template.json
+!/composer.template.lock
+!/temp_setup-helper.sh

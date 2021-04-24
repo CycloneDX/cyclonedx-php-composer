@@ -4,7 +4,7 @@
 set -e
 
 THIS_DIR_PATH="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
-PROJECT_ROOT_PATH="$( dirname "$( dirname "$THIS_DIR_PATH" )" )"
+PROJECT_ROOT_PATH="$( dirname "$( dirname "$( dirname "$THIS_DIR_PATH" )" )" )"
 TEMP_DIR_PATH="$( mktemp -d --suffix='.cyclonedx-php-composer_demo' )"
 
 COMPOSER_JSON_TEMPLATE="$THIS_DIR_PATH/composer.template.json"

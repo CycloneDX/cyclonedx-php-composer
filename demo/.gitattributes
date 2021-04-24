@@ -1,4 +1,4 @@
-/project/**    linguist-vendored
-/result/**     linguist-generated
+**/project/**             linguist-vendored
 
-
+**/results/**             linguist-generated
+**/example-results/**     linguist-generated
