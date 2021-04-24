@@ -8,7 +8,7 @@ There are multiple demo projects:
   This also means, the output might not be reproducible on independent systems, 
   due to the fact that version-locks are fluid, and the composer-lock file is not sipped as code.
 * [`laravel-7.12.0`](laravel-7.12.0/README.md) 
-  which composer-requires `laravel/framework:7.12.0`"`.  
+  which composer-requires `laravel/framework:7.12.0`.  
   The output is reproducible, due to the shipped composer-locked versions.
   Therefore, the demo requires a special php environment.  
   *ATTENTION*: this demo uses vulnerable dependencies for showcasing purposes.
