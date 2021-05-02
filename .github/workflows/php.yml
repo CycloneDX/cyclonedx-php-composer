@@ -303,31 +303,39 @@ jobs:
             # highest supported by this demo
             php: "7.4"
             composer: 2
+            reproducible: # relative paths to reproducible SBOM files
+              xml: results/bom.xml
+              json: results/bom.json
           - subject: laravel-7.12.0
             deps-pinned: true
             # lowest supported by this demo
             php: "7.2"
             composer: 1
+            reproducible: # relative paths to reproducible SBOM files
+              xml: results/bom.xml
+              json: results/bom.json
     steps:
       - name: Checkout
         # see https://github.com/actions/checkout
         uses: actions/checkout@v2
-      - name: dir setup
+      - name: Setup paths and folders
         run: |
           REPORTS_DIR_PATH="$(pwd -P)/$REPORTS_DIR/${{ matrix.subject }}"
           mkdir -p "$REPORTS_DIR_PATH"
           echo "REPORTS_DIR_PATH=$REPORTS_DIR_PATH" >> $GITHUB_ENV
+
+          echo "OUT_FILE_HELP_PATH=$REPORTS_DIR_PATH/help.php${{ matrix.php }}_composer${{ matrix.composer }}.txt" >> $GITHUB_ENV
+          echo "OUT_FILE_XML_PATH=$REPORTS_DIR_PATH/bom.php${{ matrix.php }}_composer${{ matrix.composer }}.xml" >> $GITHUB_ENV
+          echo "OUT_FILE_JSON_PATH=$REPORTS_DIR_PATH/bom.php${{ matrix.php }}_composer${{ matrix.composer }}.json" >> $GITHUB_ENV
       - name: Generate temporary DEMO_RUN_DIR_PATH
         if: ${{ 1 == matrix.composer }}
         # composer1 cannot run self-depending installs within sub-directories
-        run: echo "DEMO_RUN_DIR_PATH=$(demo/$DEMO_SUBJECT/project/temp_setup-helper.sh)" >> $GITHUB_ENV
-        env:
-          DEMO_SUBJECT: ${{ matrix.subject }}
+        run: echo "DEMO_RUN_DIR_PATH=$(./temp_setup-helper.sh)" >> $GITHUB_ENV
+        working-directory: demo/${{ matrix.subject }}/project
       - name: Set DEMO_RUN_DIR_PATH
         if: ${{ 1 != matrix.composer }}
-        run : echo "DEMO_RUN_DIR_PATH=$(pwd -P)/demo/$DEMO_SUBJECT/project" >> $GITHUB_ENV
-        env:
-          DEMO_SUBJECT: ${{ matrix.subject }}
+        run : echo "DEMO_RUN_DIR_PATH=$(pwd -P)" >> $GITHUB_ENV
+        working-directory: demo/${{ matrix.subject }}/project
       - name: Setup PHP
         # see https://github.com/shivammathur/setup-php
         uses: shivammathur/setup-php@v2
@@ -357,21 +365,21 @@ jobs:
         run: >
           composer make-bom
           --help
-          > ${{ env.REPORTS_DIR_PATH }}/help.php${{ matrix.php }}_composer${{ matrix.composer }}.txt
+          > "$OUT_FILE_HELP_PATH"
         working-directory: ${{ env.DEMO_RUN_DIR_PATH }}
       - name: Make XML SBOM
         run: >
           composer make-bom
           -vvv
           --exclude-dev
-          --output-file=${{ env.REPORTS_DIR_PATH }}/bom.php${{ matrix.php }}_composer${{ matrix.composer }}.xml
+          --output-file="$OUT_FILE_XML_PATH"
         working-directory: ${{ env.DEMO_RUN_DIR_PATH }}
       - name: Make JSON SBOM
         run: >
           composer make-bom
           -vvv
           --exclude-dev
-          --output-file=${{ env.REPORTS_DIR_PATH }}/bom.php${{ matrix.php }}_composer${{ matrix.composer }}.json
+          --output-file="$OUT_FILE_JSON_PATH"
           --json
         working-directory: ${{ env.DEMO_RUN_DIR_PATH }}
       - name: Artifact reports
@@ -382,3 +390,17 @@ jobs:
           name: ${{ env.REPORTS_ARTIFACT }}
           path: ${{ env.REPORTS_DIR }}
           if-no-files-found: error
+      - name: Compare reproducible XML SBOM
+        if: ${{ matrix.reproducible.xml }}
+        run: >
+          diff
+          ${{ matrix.reproducible.xml }}
+          "$OUT_FILE_XML_PATH"
+        working-directory: demo/${{ matrix.subject }}
+      - name: Compare reproducible JSON SBOM
+        if: ${{ matrix.reproducible.json }}
+        run: >
+          diff
+          ${{ matrix.reproducible.json }}
+          "$OUT_FILE_JSON_PATH"
+        working-directory: demo/${{ matrix.subject }}
