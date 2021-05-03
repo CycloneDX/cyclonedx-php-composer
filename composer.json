@@ -27,11 +27,13 @@
     "prefer-stable": true,
     "require": {
         "php": "^7.3 || ^8.0",
+        "ext-dom": "*",
+        "ext-filter": "*",
         "ext-json": "*",
         "ext-libxml": "*",
         "composer-plugin-api": "^1.1 || ^2.0",
         "package-url/packageurl-php": "^1.0",
-        "symfony/console": ">=5.0"
+        "symfony/console": "^5.0"
     },
     "require-dev": {
         "composer/composer": "^1.10.22 || ^2.0.13",

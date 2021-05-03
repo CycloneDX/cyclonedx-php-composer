@@ -2,11 +2,10 @@
 <psalm xmlns="https://getpsalm.org/schema/config"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="https://getpsalm.org/schema/config tools/psalm/vendor/vimeo/psalm/config.xsd"
-       errorLevel="1"
+       errorLevel="2"
        checkForThrowsDocblock="true"
        findUnusedPsalmSuppress="true"
        cacheDirectory=".psalm.cache"
-       errorBaseline=".psalm/baseline-highest.xml"
 >
     <!-- use with a proper baseline - see `.psalm/` /-->
     <projectFiles>
