@@ -72,9 +72,6 @@ class BomCommand extends BaseCommand
     }
 
     /**
-     * Needed to assert `null !== $composer`
-     * Composer2 and Composer1 differ in the return values slightly.
-     *
      * @throws RuntimeException
      */
     private function compat_getComposer(): Composer

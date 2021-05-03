@@ -4675,14 +4675,13 @@
     "packages-dev": [
         {
             "name": "cyclonedx/cyclonedx-php-composer",
-            "version": "dev-php_ge_73-rebased-cleanup",
+            "version": "dev-master",
             "dist": {
                 "type": "path",
-                "url": "../../..",
-                "reference": "9e79853463a8c3e501f2609177d664e8018ea568"
+                "url": "../../.."
             },
             "require": {
-                "composer-plugin-api": "^1.1 || ^2.0",
+                "composer-plugin-api": "^2.0",
                 "ext-dom": "*",
                 "ext-filter": "*",
                 "ext-json": "*",
@@ -4692,7 +4691,7 @@
                 "symfony/console": "^5.0"
             },
             "require-dev": {
-                "composer/composer": "^1.10.22 || ^2.0.13",
+                "composer/composer": "^2.0.13",
                 "phpunit/phpunit": "9.5.4",
                 "roave/security-advisories": "dev-latest",
                 "swaggest/json-schema": "0.12.31"
