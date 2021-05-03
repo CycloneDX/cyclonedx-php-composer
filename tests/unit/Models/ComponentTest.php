@@ -182,4 +182,26 @@ class ComponentTest extends TestCase
     }
 
     // endregion packageUrl setter&getter
+
+    // region description setter&getter
+
+    public function testDescriptionSetterGetter(): void
+    {
+        $description = bin2hex(random_bytes(32));
+        $this->component->setDescription($description);
+        self::assertSame($description, $this->component->getDescription());
+    }
+
+    // endregion description setter&getter
+
+    // region group setter&getter
+
+    public function testGroupSetterGetter(): void
+    {
+        $group = bin2hex(random_bytes(32));
+        $this->component->setGroup($group);
+        self::assertSame($group, $this->component->getGroup());
+    }
+
+    // endregion group setter&getter
 }
