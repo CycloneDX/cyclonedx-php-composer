@@ -126,10 +126,10 @@ class BomCommand extends BaseCommand
         }
 
         if (false === $input->getOption(self::OPTION_JSON)) {
-            $outputFile = $outputFile ?? self::OUTPUT_FILE_DEFAULT_JSON;
+            $outputFile = $outputFile ?? self::OUTPUT_FILE_DEFAULT_XML;
             $bomWriter = new XmlSerializer(new Spec11());
         } else {
-            $outputFile = $outputFile ?? self::OUTPUT_FILE_DEFAULT_XML;
+            $outputFile = $outputFile ?? self::OUTPUT_FILE_DEFAULT_JSON;
             $bomWriter = new JsonSerializer(new Spec12());
         }
 
