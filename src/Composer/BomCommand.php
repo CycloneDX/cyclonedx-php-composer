@@ -63,12 +63,32 @@ class BomCommand extends BaseCommand
     protected function configure(): void
     {
         $this->setName('make-bom')
-             ->setDescription('Generate a CycloneDX Bill of Materials');
-
-        $this->addOption(self::OPTION_OUTPUT_FILE, null, InputOption::VALUE_REQUIRED, 'Path to the output file (default is '.self::OUTPUT_FILE_DEFAULT_XML.' or '.self::OUTPUT_FILE_DEFAULT_JSON.").\nSet to \"".self::OUTPUT_FILE_STDOUT.'" to write to STDOUT.');
-        $this->addOption(self::OPTION_EXCLUDE_DEV, null, InputOption::VALUE_NONE, 'Exclude dev dependencies');
-        $this->addOption(self::OPTION_EXCLUDE_PLUGINS, null, InputOption::VALUE_NONE, 'Exclude composer plugins');
-        $this->addOption(self::OPTION_JSON, null, InputOption::VALUE_NONE, 'Produce the BOM in JSON format (preview support)');
+            ->setDescription('Generate a CycloneDX Bill of Materials')
+            ->addOption(
+                self::OPTION_OUTPUT_FILE,
+                null,
+                InputOption::VALUE_REQUIRED,
+                'Path to the output file (default is '.self::OUTPUT_FILE_DEFAULT_XML.' or '.self::OUTPUT_FILE_DEFAULT_JSON.').'.
+                "\nSet to \"".self::OUTPUT_FILE_STDOUT.'" to write to STDOUT.'
+            )
+            ->addOption(
+                self::OPTION_EXCLUDE_DEV,
+                null,
+                InputOption::VALUE_NONE,
+                'Exclude dev dependencies'
+            )
+            ->addOption(
+                self::OPTION_EXCLUDE_PLUGINS,
+                null,
+                InputOption::VALUE_NONE,
+                'Exclude composer plugins'
+            )
+            ->addOption(
+                self::OPTION_JSON,
+                null,
+                InputOption::VALUE_NONE,
+                'Produce the BOM in JSON format (preview support)'
+            );
     }
 
     /**
