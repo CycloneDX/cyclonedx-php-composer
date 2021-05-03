@@ -157,7 +157,6 @@ jobs:
       - name: Run Psalm tests
         run: >
           php tools/psalm/vendor/vimeo/psalm/psalm
-          --use-baseline=.psalm/baseline-${{ matrix.dependencies }}.xml
           --no-diff
           --no-cache
           --long-progress

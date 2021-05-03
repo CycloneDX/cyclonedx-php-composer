@@ -1,5 +1,27 @@
 # Changelog
 
+## unreleased
+
+* Breaking Changes
+  * Now requires php `^7.3 || ^8.0`, was `^7.1 || ^8.0`.
+  * Complete rewrite/refactor.  
+    Expect library classes/methods/functions to be removed, renamed or incompatible to previous versions - see the source for changes.  
+    CLI via `composer make-bom` did not change.
+* Added
+  * CLI: Support for output to _STDOUT_. Use option `--output-file=-`.
+  * JSON deserializers for known data models according to spec1.2.
+  * XML deserializers for known data models according to spec1.1.
+* Removed
+  * This plugin no longer supports `php<7.3`.
+* Fixed
+  * Some cases when the JSON SBoM generator created schema-invalid data.
+* Misc
+  * Utilize [`package-url/packageurl-php`](https://packagist.org/packages/package-url/packageurl-php)
+    over own implementation.
+  * Added more tests during the build process.
+  * Added [Psalm](https://psalm.dev/) & [PHP-CS-Fixer](https://cs.symfony.com/) to the CI chain and fixed all findings accordingly:.
+  * Added a demo run of the plugin to the CI chain.
+
 ## 2.1.0
 
 * Added
