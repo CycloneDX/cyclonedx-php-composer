@@ -4,6 +4,7 @@
 
 * Breaking Changes
   * Now requires php `^7.3 || ^8.0`, was `^7.1 || ^8.0`.
+  * Now requires composer v2 - `composer-plugin-api:^2.0`, was `composer-plugin-api:^1.1||^2.0`. 
   * Complete rewrite/refactor.  
     Expect library classes/methods/functions to be removed, renamed or incompatible to previous versions - see the source for changes.  
     CLI via `composer make-bom` did not change.
@@ -13,6 +14,7 @@
   * XML deserializers for known data models according to spec1.1.
 * Removed
   * This plugin no longer supports `php<7.3`.
+  * This plugin no longer supports composer v1.
 * Fixed
   * Some cases when the JSON SBoM generator created schema-invalid data.
 * Misc

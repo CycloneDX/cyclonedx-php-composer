@@ -18,7 +18,7 @@ env:
 
 jobs:
   tests:
-    name: Tests (${{ matrix.os}}, ${{ matrix.php }}, ${{ matrix.composer}}, ${{ matrix.dependencies }})
+    name: Tests (${{ matrix.os}}, ${{ matrix.php }}, ${{ matrix.dependencies }})
     runs-on: ${{ matrix.os }}
     env:
       REPORTS_ARTIFACT: tests-reports
@@ -30,24 +30,16 @@ jobs:
           - "8.0" # highest supported
           - "7.4"
           - "7.3" # lowest supported
-        composer: [ 2 ]
         dependencies: [ "lowest", "highest" ]
         include:
           - # windows cutting edge highest
             os: windows-latest
             php: "8.0"
-            composer: 2
             dependencies: "highest"
           - # macos cutting edge highest
             os: macos-latest
             php: "8.0"
-            composer: 2
             dependencies: "highest"
-          - # lowest supported php/composer/deps
-            os: ubuntu-latest
-            php: "7.3"
-            composer: 1
-            dependencies: "lowest"
     timeout-minutes: 30
     steps:
       - name: Checkout
@@ -61,7 +53,7 @@ jobs:
         with:
           php-version: ${{ matrix.php }}
           extensions: ${{ env.PHP_PROJECT_EXT }}
-          tools: composer:v${{ matrix.composer }}
+          tools: composer:v2
           coverage: pcov,xdebug
       - name: Determine composer cache directory on Linux/macOS
         if: ${{ matrix.os == 'ubuntu-latest' || matrix.os == 'macos-latest' }}
@@ -74,8 +66,8 @@ jobs:
         uses: actions/cache@v2.1.6
         with:
           path: ${{ env.COMPOSER_CACHE_DIR_PATH }}
-          key:          php${{ matrix.php }}-composerV${{ matrix.composer }}-${{ matrix.dependencies }}-${{ hashFiles('**/composer.json') }}
-          restore-keys: php${{ matrix.php }}-composerV${{ matrix.composer }}-${{ matrix.dependencies }}-
+          key:          php${{ matrix.php }}-${{ matrix.dependencies }}-${{ hashFiles('**/composer.json') }}
+          restore-keys: php${{ matrix.php }}-${{ matrix.dependencies }}-
       - name: Validate composer.json and composer.lock
         run: >
           composer validate
@@ -96,8 +88,8 @@ jobs:
           -d log_errors_max_len=0
           -d memory_limit=-1
           vendor/phpunit/phpunit/phpunit
-          --log-junit=${{ env.REPORTS_DIR }}/tests.${{ matrix.os }}_php${{ matrix.php }}_composer${{ matrix.composer }}_${{ matrix.dependencies }}.junit.xml
-          --coverage-clover=${{ env.REPORTS_DIR }}/coverage.${{ matrix.os}}_php${{ matrix.php }}_composer${{ matrix.composer }}_${{ matrix.dependencies }}.clover.xml
+          --log-junit=${{ env.REPORTS_DIR }}/tests.${{ matrix.os }}_php${{ matrix.php }}_${{ matrix.dependencies }}.junit.xml
+          --coverage-clover=${{ env.REPORTS_DIR }}/coverage.${{ matrix.os}}_php${{ matrix.php }}_${{ matrix.dependencies }}.clover.xml
       - name: Artifact reports
         if: ${{ ! cancelled() }}
         # see https://github.com/actions/upload-artifact
@@ -107,7 +99,7 @@ jobs:
           path: ${{ env.REPORTS_DIR }}
           if-no-files-found: error
   code-checker:
-    name: Code analysis (${{ matrix.php }}, ${{ matrix.composer }}, ${{ matrix.dependencies }})
+    name: Code analysis (${{ matrix.php }}, ${{ matrix.dependencies }})
     runs-on: ubuntu-latest
     timeout-minutes: 30
     env:
@@ -118,11 +110,9 @@ jobs:
         include:
           - # highest supported
             php: "8.0"
-            composer: 2
             dependencies: "highest"
           - # lowest supported
             php: "7.3"
-            composer: 1
             dependencies: "lowest"
     steps:
       - name: Checkout
@@ -134,7 +124,7 @@ jobs:
         with:
           php-version: ${{ matrix.php }}
           extensions: ${{ env.PHP_PROJECT_EXT }}
-          tools: composer:v${{ matrix.composer }}
+          tools: composer:v2
           coverage: none
       - name: Determine composer cache directory
         run: echo "COMPOSER_CACHE_DIR_PATH=$(composer config cache-dir)" >> $GITHUB_ENV
@@ -143,8 +133,8 @@ jobs:
         uses: actions/cache@v2.1.6
         with:
           path: ${{ env.COMPOSER_CACHE_DIR_PATH }}
-          key:          php${{ matrix.php }}-composer${{ matrix.composer }}-${{ matrix.dependencies }}-${{ hashFiles('**/composer.json') }}
-          restore-keys: php${{ matrix.php }}-composer${{ matrix.composer }}-${{ matrix.dependencies }}-
+          key:          php${{ matrix.php }}-${{ matrix.dependencies }}-${{ hashFiles('**/composer.json') }}
+          restore-keys: php${{ matrix.php }}-${{ matrix.dependencies }}-
       - name: Install psalm
         run: composer update --prefer-dist --no-interaction --no-progress
         working-directory: tools/psalm
@@ -160,7 +150,7 @@ jobs:
           --no-diff
           --no-cache
           --long-progress
-          --report=${{ env.REPORTS_DIR }}/psalm.php${{ matrix.php }}_composer${{ matrix.composer }}_${{ matrix.dependencies }}.junit.xml
+          --report=${{ env.REPORTS_DIR }}/psalm.php${{ matrix.php }}_${{ matrix.dependencies }}.junit.xml
       - name: Artifact reports
         if: ${{ ! cancelled() }}
         # see https://github.com/actions/upload-artifact
@@ -192,8 +182,8 @@ jobs:
         uses: actions/cache@v2.1.6
         with:
           path: ${{ env.COMPOSER_CACHE_DIR_PATH }}
-          key:          php8.0-composer2-highest-${{ hashFiles('**/composer.json') }}
-          restore-keys: php8.0-composer2-highest-
+          key:          php8.0-highest-${{ hashFiles('**/composer.json') }}
+          restore-keys: php8.0-highest-
       - name: Install composer-unused
         run: composer update --prefer-dist --no-interaction --no-progress
         working-directory: tools/composer-unused
@@ -217,7 +207,7 @@ jobs:
         with:
           php-version: "8.0"
           extensions: ${{ env.PHP_PROJECT_EXT }}
-          tools: composer:2
+          tools: composer:v2
           coverage: none
       - name: Determine composer cache directory
         run: echo "COMPOSER_CACHE_DIR_PATH=$(composer config cache-dir)" >> $GITHUB_ENV
@@ -226,8 +216,8 @@ jobs:
         uses: actions/cache@v2.1.6
         with:
           path: ${{ env.COMPOSER_CACHE_DIR_PATH }}
-          key:          php8.0-composer2-highest-${{ hashFiles('**/composer.json') }}
-          restore-keys: php8.0-composer2-highest-
+          key:          php8.0-highest-${{ hashFiles('**/composer.json') }}
+          restore-keys: php8.0-highest-
       - name: Install composer-require-checker
         run: composer update --prefer-dist --no-interaction --no-progress
         working-directory: tools/composer-require-checker
@@ -252,7 +242,7 @@ jobs:
         with:
           php-version: "8.0"
           extensions: ${{ env.PHP_PROJECT_EXT }}
-          tools: composer:2
+          tools: composer:v2
           coverage: none
       - name: Determine composer cache directory
         run: echo "COMPOSER_CACHE_DIR_PATH=$(composer config cache-dir)" >> $GITHUB_ENV
@@ -261,8 +251,8 @@ jobs:
         uses: actions/cache@v2.1.6
         with:
           path: ${{ env.COMPOSER_CACHE_DIR_PATH }}
-          key:          php8.0-composer2-highest-${{ hashFiles('**/composer.json') }}
-          restore-keys: php8.0-composer2-highest-
+          key:          php8.0-highest-${{ hashFiles('**/composer.json') }}
+          restore-keys: php8.0-highest-
       - name: Install PHP-CS-Fixer
         run: composer update --prefer-dist --no-interaction --no-progress
         working-directory: tools/php-cs-fixer
@@ -276,7 +266,7 @@ jobs:
           --show-progress=dots
           --no-interaction
   demo:
-    name: Demo "${{ matrix.subject }}" (${{ matrix.php }}, ${{ matrix.composer }})
+    name: Demo "${{ matrix.subject }}" (${{ matrix.php }})
     runs-on: ubuntu-latest
     timeout-minutes: 30
     env:
@@ -289,17 +279,14 @@ jobs:
             deps-pinned: false
             # highest supported by the project
             php: "8.0"
-            composer: 2
           - subject: symfony
             deps-pinned: false
             # lowest supported by the project
             php: "7.3"
-            composer: 1
           - subject: laravel-7.12.0
             deps-pinned: true
             # highest supported by this demo
             php: "7.4"
-            composer: 2
             reproducible: # relative paths to reproducible SBOM files
               xml: results/bom.xml
               json: results/bom.json
@@ -307,7 +294,6 @@ jobs:
             deps-pinned: true
             # lowest supported by the project
             php: "7.3"
-            composer: 1
             reproducible: # relative paths to reproducible SBOM files
               xml: results/bom.xml
               json: results/bom.json
@@ -330,16 +316,10 @@ jobs:
           REPORTS_DIR_PATH="$(pwd -P)/$REPORTS_DIR/${{ matrix.subject }}"
           mkdir -p "$REPORTS_DIR_PATH"
           echo "REPORTS_DIR_PATH=$REPORTS_DIR_PATH" >> $GITHUB_ENV
-          echo "OUT_FILE_HELP_PATH=$REPORTS_DIR_PATH/help.php${{ matrix.php }}_composer${{ matrix.composer }}.txt" >> $GITHUB_ENV
-          echo "OUT_FILE_XML_PATH=$REPORTS_DIR_PATH/bom.php${{ matrix.php }}_composer${{ matrix.composer }}.xml" >> $GITHUB_ENV
-          echo "OUT_FILE_JSON_PATH=$REPORTS_DIR_PATH/bom.php${{ matrix.php }}_composer${{ matrix.composer }}.json" >> $GITHUB_ENV
-      - name: Generate temporary DEMO_RUN_DIR_PATH
-        if: ${{ 1 == matrix.composer }}
-        # composer1 cannot run self-depending installs within sub-directories
-        run: echo "DEMO_RUN_DIR_PATH=$(./temp_setup-helper.sh)" >> $GITHUB_ENV
-        working-directory: demo/${{ matrix.subject }}/project
+          echo "OUT_FILE_HELP_PATH=$REPORTS_DIR_PATH/help.php${{ matrix.php }}.txt" >> $GITHUB_ENV
+          echo "OUT_FILE_XML_PATH=$REPORTS_DIR_PATH/bom.php${{ matrix.php }}.xml" >> $GITHUB_ENV
+          echo "OUT_FILE_JSON_PATH=$REPORTS_DIR_PATH/bom.php${{ matrix.php }}.json" >> $GITHUB_ENV
       - name: Set DEMO_RUN_DIR_PATH
-        if: ${{ 1 != matrix.composer }}
         run : echo "DEMO_RUN_DIR_PATH=$(pwd -P)" >> $GITHUB_ENV
         working-directory: demo/${{ matrix.subject }}/project
       - name: Setup PHP
@@ -348,7 +328,7 @@ jobs:
         with:
           php-version: ${{ matrix.php }}
           extensions: ${{ env.PHP_PROJECT_EXT }}
-          tools: composer:v${{ matrix.composer }}
+          tools: composer:v2
           coverage: none
       - name: Determine composer cache directory
         run: echo "COMPOSER_CACHE_DIR_PATH=$(composer config cache-dir)" >> $GITHUB_ENV
@@ -357,8 +337,8 @@ jobs:
         uses: actions/cache@v2.1.6
         with:
           path: ${{ env.COMPOSER_CACHE_DIR_PATH }}
-          key:          php${{ matrix.php }}-composer${{ matrix.composer }}-highest-${{ hashFiles('**/composer.json') }}
-          restore-keys: php${{ matrix.php }}-composer${{ matrix.composer }}-highest-
+          key:          php${{ matrix.php }}-highest-${{ hashFiles('**/composer.json') }}
+          restore-keys: php${{ matrix.php }}-highest-
       - name: Install dependencies (non-pinned)
         if: ${{ ! matrix.deps-pinned }}
         run: composer update --prefer-dist --no-interaction --no-progress
