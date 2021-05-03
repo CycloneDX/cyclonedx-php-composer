@@ -4,7 +4,7 @@
 
 The output is reproducible, due to the [shipped composer-locked](project/composer.lock) versions.  
 Therefore, the demo requires a special php environment, which is caused by the composer-requirements:
-* php>=7.2.5, <8
+* php>=7.3, <8
 
 ## Reproducible results
 
