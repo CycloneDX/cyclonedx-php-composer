@@ -14,7 +14,15 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 -->
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning" xmlns:bom="http://cyclonedx.org/schema/bom/1.1" xmlns:spdx="http://cyclonedx.org/schema/spdx" elementFormDefault="qualified" targetNamespace="http://cyclonedx.org/schema/bom/1.1" vc:minVersion="1.0" vc:maxVersion="1.1" version="1.1">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning"
+           xmlns:bom="http://cyclonedx.org/schema/bom/1.1"
+           xmlns:spdx="http://cyclonedx.org/schema/spdx"
+           elementFormDefault="qualified"
+           targetNamespace="http://cyclonedx.org/schema/bom/1.1"
+           vc:minVersion="1.0"
+           vc:maxVersion="1.1"
+           version="1.1">
 
     <xs:import namespace="http://cyclonedx.org/schema/spdx" schemaLocation="http://cyclonedx.org/schema/spdx"/>
 
@@ -22,7 +30,8 @@ limitations under the License.
         <xs:documentation>
             <name>CycloneDX Software Bill-of-Material Specification</name>
             <url>https://cyclonedx.org/</url>
-            <license uri="http://www.apache.org/licenses/LICENSE-2.0" version="2.0">Apache License, Version 2.0</license>
+            <license uri="http://www.apache.org/licenses/LICENSE-2.0"
+                     version="2.0">Apache License, Version 2.0</license>
             <authors>
                 <author>Steve Springett</author>
             </authors>
@@ -158,7 +167,7 @@ limitations under the License.
                     <xs:documentation>
                         Specifies optional sub-components. This is not a dependency tree. It provides a way
                         to specify a hierarchical representation of component assemblies, similar to
-                        system -&gt; subsystem -&gt; parts assembly in physical supply chains.
+                        system -> subsystem -> parts assembly in physical supply chains.
                     </xs:documentation>
                 </xs:annotation>
                 <xs:complexType>
@@ -309,44 +318,44 @@ limitations under the License.
     <xs:simpleType name="classification">
         <xs:restriction base="xs:string">
             <xs:enumeration value="application">
-                    <xs:annotation>
-                        <xs:documentation>A software application. Refer to https://en.wikipedia.org/wiki/Application_software
+                <xs:annotation>
+                    <xs:documentation>A software application. Refer to https://en.wikipedia.org/wiki/Application_software
                         for information about applications.</xs:documentation>
-                    </xs:annotation>
+                </xs:annotation>
             </xs:enumeration>
             <xs:enumeration value="framework">
                 <xs:annotation>
                     <xs:documentation>A software framework. Refer to https://en.wikipedia.org/wiki/Software_framework
-                    for information on how frameworks vary slightly from libraries.</xs:documentation>
+                        for information on how frameworks vary slightly from libraries.</xs:documentation>
                 </xs:annotation>
             </xs:enumeration>
             <xs:enumeration value="library">
                 <xs:annotation>
                     <xs:documentation>A software library. Refer to https://en.wikipedia.org/wiki/Library_(computing)
-                    for information about libraries. All third-party and open source reusable components will likely
-                    be a library. If the library also has key features of a framework, then it should be classified
-                    as a framework. If not, or is unknown, then specifying library is recommended.</xs:documentation>
+                        for information about libraries. All third-party and open source reusable components will likely
+                        be a library. If the library also has key features of a framework, then it should be classified
+                        as a framework. If not, or is unknown, then specifying library is recommended.</xs:documentation>
                 </xs:annotation>
             </xs:enumeration>
             <xs:enumeration value="operating-system">
                 <xs:annotation>
                     <xs:documentation>A software operating system without regard to deployment model
-                    (i.e. installed on physical hardware, virtual machine, container image, etc) Refer to
-                    https://en.wikipedia.org/wiki/Operating_system</xs:documentation>
+                        (i.e. installed on physical hardware, virtual machine, container image, etc) Refer to
+                        https://en.wikipedia.org/wiki/Operating_system</xs:documentation>
                 </xs:annotation>
             </xs:enumeration>
             <xs:enumeration value="device">
                 <xs:annotation>
                     <xs:documentation>A hardware device such as a processor, or chip-set. A hardware device
-                    containing firmware should include a component for the physical hardware itself, and another
-                    component of type 'application' or 'operating-system' (whichever is relevant), describing
-                    information about the firmware.</xs:documentation>
+                        containing firmware should include a component for the physical hardware itself, and another
+                        component of type 'application' or 'operating-system' (whichever is relevant), describing
+                        information about the firmware.</xs:documentation>
                 </xs:annotation>
             </xs:enumeration>
             <xs:enumeration value="file">
                 <xs:annotation>
                     <xs:documentation>A computer file. Refer to https://en.wikipedia.org/wiki/Computer_file
-                    for information about files.</xs:documentation>
+                        for information about files.</xs:documentation>
                 </xs:annotation>
             </xs:enumeration>
         </xs:restriction>
