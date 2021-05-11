@@ -274,7 +274,7 @@ jobs:
           php tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/php-cs-fixer
           fix
           --dry-run
-          --diff-format=udiff
+          --diff
           --using-cache=no
           --show-progress=dots
           --no-interaction

@@ -45,10 +45,10 @@ class ComposerCommandProvider implements CommandProvider
  */
 class MakeBomCommand extends BaseCommand
 {
-    const OPTION_OUTPUT_FILE = 'output-file';
-    const OPTION_EXCLUDE_DEV = 'exclude-dev';
-    const OPTION_EXCLUDE_PLUGINS = 'exclude-plugins';
-    const OPTION_JSON = 'json';
+    public const OPTION_OUTPUT_FILE = 'output-file';
+    public const OPTION_EXCLUDE_DEV = 'exclude-dev';
+    public const OPTION_EXCLUDE_PLUGINS = 'exclude-plugins';
+    public const OPTION_JSON = 'json';
 
     protected function configure()
     {

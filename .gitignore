@@ -5,8 +5,8 @@
 # That is also the reason why we dont do exact dev-requirements pinning but use ranges.
 /composer.lock
 
-/.php_cs
-/.php_cs.cache
+/.php-cs-fixer.php
+/.php-cs-fixer.cache
 
 /phpunit.xml
 /.phpunit.cache/

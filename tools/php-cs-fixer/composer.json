@@ -8,7 +8,7 @@
     },
     "prefer-stable": true,
     "require": {
-        "friendsofphp/php-cs-fixer": "2.18.4"
+        "friendsofphp/php-cs-fixer": "3.0.0"
     },
     "require-dev": {
         "roave/security-advisories": "dev-latest"
