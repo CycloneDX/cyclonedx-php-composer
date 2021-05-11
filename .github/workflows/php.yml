@@ -314,6 +314,16 @@ jobs:
             reproducible: # relative paths to reproducible SBOM files
               xml: results/bom.xml
               json: results/bom.json
+          - subject: local
+            deps-pinned: false
+            # highest supported by the project
+            php: "8.0"
+            composer: 2
+          - subject: local
+            deps-pinned: false
+            # lowest supported by the project
+            php: "7.1"
+            composer: 1
     steps:
       - name: Checkout
         # see https://github.com/actions/checkout
@@ -323,7 +333,6 @@ jobs:
           REPORTS_DIR_PATH="$(pwd -P)/$REPORTS_DIR/${{ matrix.subject }}"
           mkdir -p "$REPORTS_DIR_PATH"
           echo "REPORTS_DIR_PATH=$REPORTS_DIR_PATH" >> $GITHUB_ENV
-
           echo "OUT_FILE_HELP_PATH=$REPORTS_DIR_PATH/help.php${{ matrix.php }}_composer${{ matrix.composer }}.txt" >> $GITHUB_ENV
           echo "OUT_FILE_XML_PATH=$REPORTS_DIR_PATH/bom.php${{ matrix.php }}_composer${{ matrix.composer }}.xml" >> $GITHUB_ENV
           echo "OUT_FILE_JSON_PATH=$REPORTS_DIR_PATH/bom.php${{ matrix.php }}_composer${{ matrix.composer }}.json" >> $GITHUB_ENV
