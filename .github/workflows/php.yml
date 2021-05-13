@@ -301,12 +301,10 @@ jobs:
             deps-pinned: false
             # highest supported by the project
             php: "8.0"
-            composer: 2
           - subject: local
             deps-pinned: false
             # lowest supported by the project
-            php: "7.1"
-            composer: 1
+            php: "7.3"
     steps:
       - name: Checkout
         # see https://github.com/actions/checkout
