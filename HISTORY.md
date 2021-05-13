@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.0.2
+
+* Misc
+  * Applied latest rules of `php-cs-fixer` to the code. (via [#78])
+
+[#78]: https://github.com/CycloneDX/cyclonedx-php-composer/pull/78
+
 ## 2.0.1
 
 * Added
