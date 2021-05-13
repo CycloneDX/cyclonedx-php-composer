@@ -14,16 +14,17 @@ composer.lock diff=json
 /demo/result/**     vendor-generated
 
 # files that are not bundled into the "dist" release are marked `export-ignore`
-.gitattributes      export-ignore
-.gitignore          export-ignore
-.editorconfig       export-ignore
-/.github            export-ignore
-/tests              export-ignore
-/tools              export-ignore
-/.php_cs.dist       export-ignore
-/phpunit.xml.dist   export-ignore
-/psalm.xml.dist     export-ignore
-/.psalm             export-ignore
-/HISTORY.md         export-ignore
-/CODEOWNERS         export-ignore
-/demo               export-ignore
+.gitattributes          export-ignore
+.gitignore              export-ignore
+.editorconfig           export-ignore
+/.github                export-ignore
+/tests                  export-ignore
+/tools                  export-ignore
+/.php_cs.dist           export-ignore
+/.php-cs-fixer.dist.php export-ignore
+/phpunit.xml.dist       export-ignore
+/psalm.xml.dist         export-ignore
+/.psalm                 export-ignore
+/HISTORY.md             export-ignore
+/CODEOWNERS             export-ignore
+/demo                   export-ignore
