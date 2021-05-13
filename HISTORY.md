@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.0.3
+
+* Misc
+  * Removed `php-cs-fixer` config from dist release.
+
 ## 2.0.2
 
 * Misc
