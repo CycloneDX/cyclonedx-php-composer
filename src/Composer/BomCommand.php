@@ -27,8 +27,7 @@ use Composer\Command\BaseCommand;
 use Composer\Composer;
 use CycloneDX\Serialize\JsonSerializer;
 use CycloneDX\Serialize\XmlSerializer;
-use CycloneDX\Specs\Spec11;
-use CycloneDX\Specs\Spec12;
+use CycloneDX\Specs\SpecFactory;
 use RuntimeException;
 use Symfony\Component\Console\Formatter\OutputFormatter;
 use Symfony\Component\Console\Input\InputInterface;
@@ -142,15 +141,18 @@ class BomCommand extends BaseCommand
             $outputFile = null;
         }
 
+        $specVersion = SpecFactory::VERSION_LATEST; // @TODO create a switch for this
+        $spec = (new SpecFactory())->make($specVersion);
+
         if (false === $input->getOption(self::OPTION_JSON)) {
             $outputFile = $outputFile ?? self::OUTPUT_FILE_DEFAULT_XML;
-            $bomWriter = new XmlSerializer(new Spec11());
+            $bomWriter = new XmlSerializer($spec);
         } else {
             $outputFile = $outputFile ?? self::OUTPUT_FILE_DEFAULT_JSON;
-            $bomWriter = new JsonSerializer(new Spec12());
+            $bomWriter = new JsonSerializer($spec);
         }
 
-        $output->writeln('<info>Serializing BOM</info>');
+        $output->writeln('<info>Serializing BOM with spec version '.OutputFormatter::escape($specVersion).'</info>');
         $bomContents = $bomWriter->serialize($bom, true);
 
         if (self::OUTPUT_FILE_STDOUT === $outputFile) {
