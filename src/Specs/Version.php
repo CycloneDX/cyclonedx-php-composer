@@ -23,36 +23,12 @@ declare(strict_types=1);
 
 namespace CycloneDX\Specs;
 
-use InvalidArgumentException;
-
 /**
- * @internal
+ * Spec version enum.
  */
-final class SpecFactory
+abstract class Version
 {
-    public const VERSION_LATEST = Version::V_1_2;
-
-    /**
-     * @psalm-var array<Version::V_*, class-string<SpecInterface>>
-     */
-    public const SPECS = [
-        Version::V_1_0 => Spec10::class,
-        Version::V_1_1 => Spec11::class,
-        Version::V_1_2 => Spec12::class,
-    ];
-
-    /**
-     * @psalm-param Version::V_* $version
-     *
-     * @throws InvalidArgumentException if version is unknown
-     */
-    public function make(string $version = self::VERSION_LATEST): SpecInterface
-    {
-        $class = self::SPECS[$version] ?? null;
-        if (null === $class) {
-            throw new InvalidArgumentException("Unexpected spec-version value: ${version}");
-        }
-
-        return new $class();
-    }
+    public const V_1_0 = '1.0';
+    public const V_1_1 = '1.1';
+    public const V_1_2 = '1.2';
 }

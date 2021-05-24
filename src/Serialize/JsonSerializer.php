@@ -26,7 +26,7 @@ namespace CycloneDX\Serialize;
 use CycloneDX\Models\Bom;
 use CycloneDX\Models\Component;
 use CycloneDX\Models\License;
-use CycloneDX\Specs\Spec12;
+use CycloneDX\Specs\Version;
 use DomainException;
 use Generator;
 use JsonException;
@@ -50,8 +50,8 @@ class JsonSerializer extends AbstractSerialize implements SerializerInterface
      */
     public function serialize(Bom $bom, bool $pretty = true): string
     {
-        if (false === $this->spec instanceof Spec12) {
-            throw new RuntimeException('unsupported spec version');
+        if (version_compare($this->spec->getVersion(), Version::V_1_2, '<')) {
+            throw new RuntimeException('Unsupported spec version. requires >= '.Version::V_1_2);
         }
 
         $options = JSON_THROW_ON_ERROR | JSON_PRESERVE_ZERO_FRACTION;

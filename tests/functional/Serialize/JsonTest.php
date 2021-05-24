@@ -49,7 +49,7 @@ class JsonTest extends TestCase
         $serializer = new JsonSerializer($spec);
 
         $this->expectException(RuntimeException::class);
-        $this->expectExceptionMessage('unsupported spec version');
+        $this->expectExceptionMessageMatches('/unsupported spec version./i');
 
         @$serializer->serialize(new Bom());
     }
@@ -67,7 +67,7 @@ class JsonTest extends TestCase
         $serializer = new JsonSerializer($spec);
 
         $this->expectException(RuntimeException::class);
-        $this->expectExceptionMessage('unsupported spec version');
+        $this->expectExceptionMessageMatches('/unsupported spec version./i');
 
         @$serializer->serialize(new Bom());
     }
