@@ -266,6 +266,7 @@ jobs:
           --show-progress=dots
           --no-interaction
   demo:
+    # test spec-versions 1.0 - 1.2
     name: Demo "${{ matrix.subject }}" (${{ matrix.php }})
     runs-on: ubuntu-latest
     timeout-minutes: 30
@@ -357,6 +358,8 @@ jobs:
           -vvv
           --exclude-dev
           --output-file="$OUT_FILE_XML_PATH"
+          --output-format=XML
+          --spec-version=1.1
         working-directory: ${{ env.DEMO_RUN_DIR_PATH }}
       - name: Make JSON SBOM
         run: >
@@ -364,7 +367,8 @@ jobs:
           -vvv
           --exclude-dev
           --output-file="$OUT_FILE_JSON_PATH"
-          --json
+          --output-format=JSON
+          --spec-version=1.2
         working-directory: ${{ env.DEMO_RUN_DIR_PATH }}
       - name: Artifact reports
         if: ${{ ! cancelled() }}
