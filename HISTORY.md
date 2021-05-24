@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 2.1.0
 
 * Added
   * CLI got an option `--output-format` to decide the output format. (via [#80])  
