@@ -36,7 +36,7 @@ trait SupportsTrait
     }
 
     /**
-     * @psalm-return list<\ CycloneDX\Enums\Classification::*>
+     * @psalm-return list<\CycloneDX\Enums\Classification::*>
      */
     public function getSupportedComponentTypes(): array
     {

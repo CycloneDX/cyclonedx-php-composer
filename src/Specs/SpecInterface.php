@@ -28,16 +28,25 @@ namespace CycloneDX\Specs;
  */
 interface SpecInterface
 {
+    /**
+     * @psalm-return Version::V_*
+     */
     public function getVersion(): string;
 
     // region Supports
 
     public function isSupportedComponentType(string $classification): bool;
 
+    /**
+     * @psalm-return list<\CycloneDX\Enums\Classification::*>
+     */
     public function getSupportedComponentTypes(): array;
 
     public function isSupportedHashAlgorithm(string $alg): bool;
 
+    /**
+     * @psalm-return list<\CycloneDX\Enums\HashAlgorithm::*>
+     */
     public function getSupportedHashAlgorithms(): array;
 
     public function isSupportedHashContent(string $content): bool;

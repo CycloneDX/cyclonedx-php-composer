@@ -33,25 +33,24 @@ Usage:
   make-bom [options]
 
 Options:
-      --output-format=OUTPUT-FORMAT  Which output format to use.
-                                     Values: "XML", "JSON" [default: "XML"]
-      --output-file=OUTPUT-FILE      Path to the output file (default is bom.xml or bom.json)
-                                     Set to "-" to write to STDOUT.
-      --exclude-dev                  Exclude dev dependencies
-      --exclude-plugins              Exclude composer plugins
-      --json                         Produce the BOM in JSON format (preview support)
-                                     DEPRECATED. USE "--output-format=JSON" instead
-  -h, --help                         Display this help message
-  -q, --quiet                        Do not output any message
-  -V, --version                      Display this application version
-      --ansi                         Force ANSI output
-      --no-ansi                      Disable ANSI output
-  -n, --no-interaction               Do not ask any interactive question
-      --profile                      Display timing and memory usage information
-      --no-plugins                   Whether to disable plugins.
-  -d, --working-dir=WORKING-DIR      If specified, use the given directory as working directory.
-      --no-cache                     Prevent use of the cache
-  -v|vv|vvv, --verbose               Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug
+      --output-file=OUTPUT-FILE    Path to the output file (default is bom.xml or bom.json).
+                                   Set to "-" to write to STDOUT.
+      --exclude-dev                Exclude dev dependencies
+      --exclude-plugins            Exclude composer plugins
+      --spec-version=SPEC-VERSION  Which version of CycloneDX spec to use.
+                                   Values: "1.0", "1.1", "1.2" [default: "1.2"]
+      --json                       Produce the BOM in JSON format (preview support)
+  -h, --help                       Display this help message
+  -q, --quiet                      Do not output any message
+  -V, --version                    Display this application version
+      --ansi                       Force ANSI output
+      --no-ansi                    Disable ANSI output
+  -n, --no-interaction             Do not ask any interactive question
+      --profile                    Display timing and memory usage information
+      --no-plugins                 Whether to disable plugins.
+  -d, --working-dir=WORKING-DIR    If specified, use the given directory as working directory.
+      --no-cache                   Prevent use of the cache
+  -v|vv|vvv, --verbose             Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug
 
 Help:
   Generate a CycloneDX Bill of Materials

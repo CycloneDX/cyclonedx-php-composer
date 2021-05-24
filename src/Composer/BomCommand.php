@@ -47,6 +47,7 @@ class BomCommand extends BaseCommand
     private const OPTION_OUTPUT_FILE = 'output-file';
     private const OPTION_EXCLUDE_DEV = 'exclude-dev';
     private const OPTION_EXCLUDE_PLUGINS = 'exclude-plugins';
+    private const OPTION_SPEC_VERSION = 'spec-version';
     private const OPTION_JSON = 'json';
 
     private const OUTPUT_FILE_STDOUT = '-';
@@ -81,6 +82,14 @@ class BomCommand extends BaseCommand
                 null,
                 InputOption::VALUE_NONE,
                 'Exclude composer plugins'
+            )
+            ->addOption(
+                self::OPTION_SPEC_VERSION,
+                null,
+                InputOption::VALUE_REQUIRED,
+                "Which version of CycloneDX spec to use.\n".
+                'Values: "'.implode('", "', array_keys(SpecFactory::SPECS)).'"',
+                SpecFactory::VERSION_LATEST
             )
             ->addOption(
                 self::OPTION_JSON,
@@ -141,7 +150,7 @@ class BomCommand extends BaseCommand
             $outputFile = null;
         }
 
-        $specVersion = SpecFactory::VERSION_LATEST; // @TODO create a switch for this
+        $specVersion = $input->getOption(self::OPTION_SPEC_VERSION);
         $spec = (new SpecFactory())->make($specVersion);
 
         if (false === $input->getOption(self::OPTION_JSON)) {

@@ -27,9 +27,6 @@ use CycloneDX\Helpers\SimpleDomTrait;
 use CycloneDX\Models\Bom;
 use CycloneDX\Models\Component;
 use CycloneDX\Models\License;
-use CycloneDX\Specs\Spec10;
-use CycloneDX\Specs\Spec11;
-use CycloneDX\Specs\Spec12;
 use DomainException;
 use DOMDocument;
 use DOMElement;
@@ -57,10 +54,6 @@ class XmlSerializer extends AbstractSerialize implements SerializerInterface
      */
     public function serialize(Bom $bom, bool $pretty = true): string
     {
-        if (false === ($this->spec instanceof Spec10 || $this->spec instanceof Spec11 || $this->spec instanceof Spec12)) {
-            throw new RuntimeException('unsupported spec version');
-        }
-
         $document = new DOMDocument('1.0', 'UTF-8');
         $document->appendChild($this->bomToDom($document, $bom));
 

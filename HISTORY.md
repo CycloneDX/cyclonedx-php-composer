@@ -7,9 +7,15 @@
   * Now requires composer v2 - `composer-plugin-api:^2.0`, was `composer-plugin-api:^1.1||^2.0`. 
   * Complete rewrite/refactor.  
     Expect library classes/methods/functions to be removed, renamed or incompatible to previous versions - see the source for changes.  
-    CLI via `composer make-bom` did not change.
+  * CLI via `composer make-bom`
+    * Now defaults to the latest supported version of CycloneDX spec: 1.2  
+      See option `--spec-version`.
 * Added
-  * CLI: Support for output to _STDOUT_. Use option `--output-file=-`.
+  * CLI
+    * Support for output to _STDOUT_. Use option `--output-file=-`.
+    * Added an optional option `--spec-version` for the CycloneDX spec version.  
+      Supported values: "1.0", "1.1", "1.2".  
+      Defaults to "1.2".
   * JSON deserializers for known data models according to spec1.2.
   * XML deserializers for known data models according to spec1.1.
 * Removed

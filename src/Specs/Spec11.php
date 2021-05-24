@@ -35,7 +35,7 @@ class Spec11 implements SpecInterface
 
     public function getVersion(): string
     {
-        return '1.1';
+        return Version::V_1_1;
     }
 
     // region SupportsTrait

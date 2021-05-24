@@ -35,7 +35,7 @@ class Spec12 implements SpecInterface
 
     public function getVersion(): string
     {
-        return '1.2';
+        return Version::V_1_2;
     }
 
     // region SupportsTrait
