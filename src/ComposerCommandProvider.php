@@ -45,23 +45,56 @@ class ComposerCommandProvider implements CommandProvider
  */
 class MakeBomCommand extends BaseCommand
 {
+    private const OPTION_OUTPUT_FORMAT = 'output-format';
     public const OPTION_OUTPUT_FILE = 'output-file';
     public const OPTION_EXCLUDE_DEV = 'exclude-dev';
     public const OPTION_EXCLUDE_PLUGINS = 'exclude-plugins';
     public const OPTION_JSON = 'json';
 
+    private const OUTPUT_FORMAT_XML = 'XML';
+    private const OUTPUT_FORMAT_JSON = 'JSON';
+
+    private const OUTPUT_FILE_DEFAULT = [
+        self::OUTPUT_FORMAT_XML => 'bom.xml',
+        self::OUTPUT_FORMAT_JSON => 'bom.json',
+    ];
+
+    private const EXIT_OK = 0;
+    private const EXIT_MISSING_LOCK = 1;
+    private const EXIT_UNSUPPORTED_OUTPUT_FORMAT = 2;
+
+    private const SERIALISERS = [
+        self::OUTPUT_FORMAT_XML => BomXmlWriter::class,
+        self::OUTPUT_FORMAT_JSON => BomJsonWriter::class,
+    ];
+
+    /**
+     * @psalm-suppress MissingThrowsDocblock
+     */
     protected function configure()
     {
         $this
             ->setName('make-bom')
             ->setDescription('Generate a CycloneDX Bill of Materials');
 
+        $this->addOption(
+            self::OPTION_OUTPUT_FORMAT,
+            null,
+            InputOption::VALUE_REQUIRED,
+            'Which output format to use.'.PHP_EOL.
+            'Values: "'.self::OUTPUT_FORMAT_XML.'", "'.self::OUTPUT_FORMAT_JSON.'"',
+            self::OUTPUT_FORMAT_XML
+        );
+
         $this->addOption($this::OPTION_OUTPUT_FILE, null, InputOption::VALUE_REQUIRED, 'Path to the output file (default is bom.xml or bom.json)');
         $this->addOption($this::OPTION_EXCLUDE_DEV, null, InputOption::VALUE_NONE, 'Exclude dev dependencies');
         $this->addOption($this::OPTION_EXCLUDE_PLUGINS, null, InputOption::VALUE_NONE, 'Exclude composer plugins');
-        $this->addOption($this::OPTION_JSON, null, InputOption::VALUE_NONE, 'Produce the BOM in JSON format (preview support)');
+        $this->addOption($this::OPTION_JSON, null, InputOption::VALUE_NONE, 'Produce the BOM in JSON format (preview support)'.PHP_EOL.'DEPRECATED. USE "--'.self::OPTION_OUTPUT_FORMAT.'='.self::OUTPUT_FORMAT_JSON.'" instead');
     }
 
+    /**
+     * @psalm-suppress MissingThrowsDocblock
+     */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $locker = $this->getComposer()->getLocker();
@@ -69,30 +102,43 @@ class MakeBomCommand extends BaseCommand
         if (!$locker->isLocked()) {
             $output->writeln('<error>Lockfile does not exist</error>');
 
-            return;
+            return self::EXIT_MISSING_LOCK;
         }
 
         $output->writeln('<info>Generating BOM from lockfile</info>');
         $bomGenerator = new BomGenerator($output);
         $bom = $bomGenerator->generateBom(
             $locker->getLockData(),
-            false !== $input->getOption($this::OPTION_EXCLUDE_DEV),
-            false !== $input->getOption($this::OPTION_EXCLUDE_PLUGINS)
+            false !== $input->getOption(self::OPTION_EXCLUDE_DEV),
+            false !== $input->getOption(self::OPTION_EXCLUDE_PLUGINS)
         );
 
-        $output->writeln('<info>Writing BOM</info>');
-
-        if (false !== $input->getOption($this::OPTION_JSON)) {
-            $bomWriter = new BomJsonWriter($output);
-            $outputFile = $input->getOption($this::OPTION_OUTPUT_FILE) ? $input->getOption($this::OPTION_OUTPUT_FILE) : 'bom.json';
-        } else {
-            $bomWriter = new BomXmlWriter($output);
-            $outputFile = $input->getOption($this::OPTION_OUTPUT_FILE) ? $input->getOption($this::OPTION_OUTPUT_FILE) : 'bom.xml';
+        if (false !== $input->getOption(self::OPTION_JSON)) {
+            // keep a deprecated CLI switch forwards-compatible
+            $output->writeln('<warning>DEPRICATED CLI usage: use --'.self::OPTION_OUTPUT_FORMAT.'='.self::OUTPUT_FORMAT_JSON.' instead of --'.self::OPTION_JSON.'.</warning>');
+            $input->setOption(self::OPTION_OUTPUT_FORMAT, self::OUTPUT_FORMAT_JSON);
         }
 
+        $outputFormat = $input->getOption(self::OPTION_OUTPUT_FORMAT);
+        assert(is_string($outputFormat));
+        $bomFormat = strtoupper($outputFormat);
+        unset($outputFormat);
+
+        $bomWriterClass = self::SERIALISERS[$bomFormat] ?? null;
+        if (null === $bomWriterClass) {
+            $output->writeln("<error>Unsupported output-format: ${bomFormat}<error>");
+
+            return self::EXIT_UNSUPPORTED_OUTPUT_FORMAT;
+        }
+        $bomWriter = new $bomWriterClass($output);
+
+        $output->writeln("<info>Writing BOM: ${bomFormat}</info>");
         $bomContents = $bomWriter->writeBom($bom);
 
-        $output->writeln('<info>Writing output to '.$outputFile.'</info>');
+        $outputFile = $input->getOption($this::OPTION_OUTPUT_FILE) ?: self::OUTPUT_FILE_DEFAULT[$bomFormat];
+        $output->writeln('<info>Writing output to: '.$outputFile.'</info>');
         \file_put_contents($outputFile, $bomContents);
+
+        return self::EXIT_OK;
     }
 }
