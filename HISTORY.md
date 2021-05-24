@@ -1,5 +1,18 @@
 # Changelog
 
+## Unreleased
+
+* Added
+  * CLI got an option `--output-format` to decide the output format. (via [#80])  
+    Supported values: "XML", "JSON".  
+    Defaults to "XML".  
+    The use of this new option replaces the switch `--json`.
+* Deprecated
+  * CLI switch `--json` was marked as deprecated. (via [#80])  
+    Use option `--output-format=JSON` instead.
+
+[#80]: https://github.com/CycloneDX/cyclonedx-php-composer/pull/80
+
 ## 2.0.3
 
 * Misc
