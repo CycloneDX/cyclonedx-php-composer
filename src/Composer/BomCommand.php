@@ -44,18 +44,29 @@ use UnexpectedValueException;
  */
 class BomCommand extends BaseCommand
 {
+    private const OPTION_OUTPUT_FORMAT = 'output-format';
     private const OPTION_OUTPUT_FILE = 'output-file';
     private const OPTION_EXCLUDE_DEV = 'exclude-dev';
     private const OPTION_EXCLUDE_PLUGINS = 'exclude-plugins';
     private const OPTION_SPEC_VERSION = 'spec-version';
-    private const OPTION_JSON = 'json';
+
+    private const OUTPUT_FORMAT_XML = 'XML';
+    private const OUTPUT_FORMAT_JSON = 'JSON';
 
     private const OUTPUT_FILE_STDOUT = '-';
-    private const OUTPUT_FILE_DEFAULT_XML = 'bom.xml';
-    private const OUTPUT_FILE_DEFAULT_JSON = 'bom.json';
+    private const OUTPUT_FILE_DEFAULT = [
+        self::OUTPUT_FORMAT_XML => 'bom.xml',
+        self::OUTPUT_FORMAT_JSON => 'bom.json',
+    ];
 
     private const EXIT_OK = 0;
     private const EXIT_MISSING_LOCK = 1;
+    private const EXIT_UNSUPPORTED_OUTPUT_FORMAT = 2;
+
+    private const SERIALISERS = [
+        self::OUTPUT_FORMAT_XML => XmlSerializer::class,
+        self::OUTPUT_FORMAT_JSON => JsonSerializer::class,
+    ];
 
     /**
      * @psalm-suppress MissingThrowsDocblock - Exceptions are handled by caller
@@ -65,11 +76,20 @@ class BomCommand extends BaseCommand
         $this->setName('make-bom')
             ->setDescription('Generate a CycloneDX Bill of Materials')
             ->addOption(
+                self::OPTION_OUTPUT_FORMAT,
+                null,
+                InputOption::VALUE_REQUIRED,
+                'Which output format to use.'.PHP_EOL.
+                'Values: "'.self::OUTPUT_FORMAT_XML.'", "'.self::OUTPUT_FORMAT_JSON.'"',
+                self::OUTPUT_FORMAT_XML
+            )
+            ->addOption(
                 self::OPTION_OUTPUT_FILE,
                 null,
                 InputOption::VALUE_REQUIRED,
-                'Path to the output file (default is '.self::OUTPUT_FILE_DEFAULT_XML.' or '.self::OUTPUT_FILE_DEFAULT_JSON.').'.
-                "\nSet to \"".self::OUTPUT_FILE_STDOUT.'" to write to STDOUT.'
+                'Path to the output file.'.PHP_EOL.
+                'Set to "'.self::OUTPUT_FILE_STDOUT.'" to write to STDOUT.'.PHP_EOL.
+                '(depending on the output-format, defaults to: "'.implode('" or "', array_values(self::OUTPUT_FILE_DEFAULT)).'")'
             )
             ->addOption(
                 self::OPTION_EXCLUDE_DEV,
@@ -87,15 +107,9 @@ class BomCommand extends BaseCommand
                 self::OPTION_SPEC_VERSION,
                 null,
                 InputOption::VALUE_REQUIRED,
-                "Which version of CycloneDX spec to use.\n".
+                'Which version of CycloneDX spec to use.'.PHP_EOL.
                 'Values: "'.implode('", "', array_keys(SpecFactory::SPECS)).'"',
                 SpecFactory::VERSION_LATEST
-            )
-            ->addOption(
-                self::OPTION_JSON,
-                null,
-                InputOption::VALUE_NONE,
-                'Produce the BOM in JSON format (preview support)'
             );
     }
 
@@ -145,23 +159,29 @@ class BomCommand extends BaseCommand
             false !== $input->getOption(self::OPTION_EXCLUDE_PLUGINS)
         );
 
-        $outputFile = $input->getOption(self::OPTION_OUTPUT_FILE);
-        if (false === is_string($outputFile) || '' === $outputFile) {
-            $outputFile = null;
-        }
-
+        /** @psalm-var \CycloneDX\Specs\Version::V_* $specVersion */
         $specVersion = $input->getOption(self::OPTION_SPEC_VERSION);
         $spec = (new SpecFactory())->make($specVersion);
 
-        if (false === $input->getOption(self::OPTION_JSON)) {
-            $outputFile = $outputFile ?? self::OUTPUT_FILE_DEFAULT_XML;
-            $bomWriter = new XmlSerializer($spec);
-        } else {
-            $outputFile = $outputFile ?? self::OUTPUT_FILE_DEFAULT_JSON;
-            $bomWriter = new JsonSerializer($spec);
+        $outputFormat = $input->getOption(self::OPTION_OUTPUT_FORMAT);
+        assert(is_string($outputFormat));
+        $bomFormat = strtoupper($outputFormat);
+        unset($outputFormat);
+
+        $bomWriterClass = self::SERIALISERS[$bomFormat] ?? null;
+        if (null === $bomWriterClass) {
+            $output->writeln('<error>Unsupported output-format: '.OutputFormatter::escape($bomFormat).'<error>');
+
+            return self::EXIT_UNSUPPORTED_OUTPUT_FORMAT;
         }
 
-        $output->writeln('<info>Serializing BOM with spec version '.OutputFormatter::escape($specVersion).'</info>');
+        $bomWriter = new $bomWriterClass($spec);
+        $outputFile = $input->getOption(self::OPTION_OUTPUT_FILE);
+        if (false === is_string($outputFile) || '' === $outputFile) {
+            $outputFile = self::OUTPUT_FILE_DEFAULT[$bomFormat];
+        }
+
+        $output->writeln('<info>Serializing BOM: '.OutputFormatter::escape($bomFormat).' '.OutputFormatter::escape($specVersion).'</info>');
         $bomContents = $bomWriter->serialize($bom, true);
 
         if (self::OUTPUT_FILE_STDOUT === $outputFile) {
@@ -171,7 +191,7 @@ class BomCommand extends BaseCommand
             // straighten up and add a linebreak. raw output might not have done it.
             $output->writeln('');
         } else {
-            $output->writeln('<info>Writing output to '.OutputFormatter::escape($outputFile).'</info>');
+            $output->writeln('<info>Writing output to: '.OutputFormatter::escape($outputFile).'</info>');
             \file_put_contents($outputFile, $bomContents);
         }
 

@@ -10,6 +10,8 @@
   * CLI via `composer make-bom`
     * Now defaults to the latest supported version of CycloneDX spec: 1.2  
       See option `--spec-version`.
+    * Deprecated switch `--json` was removed.  
+      Use option `--output-format=JSON` instead.
 * Added
   * CLI
     * Support for output to _STDOUT_. Use option `--output-file=-`.
@@ -21,6 +23,9 @@
 * Removed
   * This plugin no longer supports `php<7.3`.
   * This plugin no longer supports composer v1.
+  * CLI
+    * Deprecated switch `--json` was removed.  
+      Use option `--output-format=JSON` instead.
 * Fixed
   * Some cases when the JSON SBoM generator created schema-invalid data.
 * Misc
