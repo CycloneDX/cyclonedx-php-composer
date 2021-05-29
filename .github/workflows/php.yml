@@ -73,7 +73,7 @@ jobs:
         run: ECHO "COMPOSER_CACHE_DIR_PATH=~\AppData\Local\Composer" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
       - name: Cache dependencies installed with composer
         # see https://github.com/actions/cache
-        uses: actions/cache@v2.1.5
+        uses: actions/cache@v2.1.6
         with:
           path: ${{ env.COMPOSER_CACHE_DIR_PATH }}
           key:          php${{ matrix.php }}-composerV${{ matrix.composer }}-${{ matrix.dependencies }}-${{ hashFiles('**/composer.json') }}
@@ -142,7 +142,7 @@ jobs:
         run: echo "COMPOSER_CACHE_DIR_PATH=$(composer config cache-dir)" >> $GITHUB_ENV
       - name: Cache dependencies installed with composer
         # see https://github.com/actions/cache
-        uses: actions/cache@v2.1.5
+        uses: actions/cache@v2.1.6
         with:
           path: ${{ env.COMPOSER_CACHE_DIR_PATH }}
           key:          php${{ matrix.php }}-composer${{ matrix.composer }}-${{ matrix.dependencies }}-${{ hashFiles('**/composer.json') }}
@@ -192,7 +192,7 @@ jobs:
         run: echo "COMPOSER_CACHE_DIR_PATH=$(composer config cache-dir)" >> $GITHUB_ENV
       - name: Cache dependencies installed with composer
         # see https://github.com/actions/cache
-        uses: actions/cache@v2.1.5
+        uses: actions/cache@v2.1.6
         with:
           path: ${{ env.COMPOSER_CACHE_DIR_PATH }}
           key:          php8.0-composer2-highest-${{ hashFiles('**/composer.json') }}
@@ -226,7 +226,7 @@ jobs:
         run: echo "COMPOSER_CACHE_DIR_PATH=$(composer config cache-dir)" >> $GITHUB_ENV
       - name: Cache dependencies installed with composer
         # see https://github.com/actions/cache
-        uses: actions/cache@v2.1.5
+        uses: actions/cache@v2.1.6
         with:
           path: ${{ env.COMPOSER_CACHE_DIR_PATH }}
           key:          php8.0-composer2-highest-${{ hashFiles('**/composer.json') }}
@@ -261,7 +261,7 @@ jobs:
         run: echo "COMPOSER_CACHE_DIR_PATH=$(composer config cache-dir)" >> $GITHUB_ENV
       - name: Cache dependencies installed with composer
         # see https://github.com/actions/cache
-        uses: actions/cache@v2.1.5
+        uses: actions/cache@v2.1.6
         with:
           path: ${{ env.COMPOSER_CACHE_DIR_PATH }}
           key:          php8.0-composer2-highest-${{ hashFiles('**/composer.json') }}
@@ -357,7 +357,7 @@ jobs:
         run: echo "COMPOSER_CACHE_DIR_PATH=$(composer config cache-dir)" >> $GITHUB_ENV
       - name: Cache dependencies installed with composer
         # see https://github.com/actions/cache
-        uses: actions/cache@v2.1.5
+        uses: actions/cache@v2.1.6
         with:
           path: ${{ env.COMPOSER_CACHE_DIR_PATH }}
           key:          php${{ matrix.php }}-composer${{ matrix.composer }}-highest-${{ hashFiles('**/composer.json') }}
