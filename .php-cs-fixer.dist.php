@@ -3,13 +3,13 @@
 declare(strict_types=1);
 
 $header = <<<'EOF'
-This file is part of the CycloneDX PHP Composer Plugin.
+This file is part of CycloneDX PHP Composer Plugin.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+  http://www.apache.org/licenses/LICENSE-2.0
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
@@ -23,20 +23,20 @@ EOF;
 
 $finder = PhpCsFixer\Finder::create()
     ->in(__DIR__.'/src')
-    ->in(__DIR__.'/tests')
-;
+    ->in(__DIR__.'/tests');
 
-$config = new PhpCsFixer\Config();
-
-return $config
+return (new PhpCsFixer\Config())
     ->setUsingCache(true)
-    ->setRules([
-        '@PHP71Migration' => true,
-        '@Symfony' => true,
-        // 'declare_strict_types' => true, // @TODO have this enabled via issue#39
-        'phpdoc_order' => true,
-        'header_comment' => ['header' => $header],
-    ])
+    ->setRules(
+    // docs: https://github.com/FriendsOfPHP/PHP-CS-Fixer/blob/3.0/doc/rules/index.rst
+    // assistance via tool: https://mlocati.github.io/php-cs-fixer-configurator/
+        [
+            '@PHP71Migration' => true,
+            '@Symfony' => true,
+            // 'declare_strict_types' => true, // @TODO have this enabled via issue#39
+            'phpdoc_order' => true,
+            'header_comment' => ['header' => $header],
+        ]
+    )
     ->setRiskyAllowed(true)
-    ->setFinder($finder)
-;
+    ->setFinder($finder);
