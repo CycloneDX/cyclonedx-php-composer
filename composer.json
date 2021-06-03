@@ -12,6 +12,11 @@
             "name": "nscuro",
             "email": "nscuro@protonmail.com",
             "role": "Developer"
+        },
+        {
+            "name": "Jan Kowalleck",
+            "email": "jan.kowalleck@gmail.com",
+            "role": "Developer"
         }
     ],
     "extra": {
