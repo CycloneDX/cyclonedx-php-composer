@@ -32,12 +32,21 @@ use PHPUnit\Framework\TestCase;
  */
 class LicenseTest extends TestCase
 {
-    /** @var License */
+    /**
+     * @psalm-var License&\PHPUnit\Framework\MockObject\MockObject
+     */
     private $license;
+
+    private const LICENSES_FILE = __DIR__.'/../../_data/spdx-licenses.json';
 
     public function setUp(): void
     {
-        $this->license = new License();
+        $this->license = $this->createPartialMock(License::class, [
+            'getResourcesFile', /* @see License::getResourcesFile() */
+        ]);
+        $this->license->method('getResourcesFile')
+            ->willReturn(self::LICENSES_FILE);
+        $this->license->loadLicenses();
     }
 
     public function testGetLicensesNotEmpty(): void

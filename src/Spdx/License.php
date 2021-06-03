@@ -56,6 +56,8 @@ class License
 
     /**
      * @throws RuntimeException if loading licenses failed
+     *
+     * @codeCoverageIgnore
      */
     public function __construct()
     {
@@ -76,7 +78,7 @@ class License
      * @throws RuntimeException
      * @psalm-suppress RedundantConditionGivenDocblockType
      */
-    private function loadLicenses(): void
+    public function loadLicenses(): void
     {
         if (null !== $this->licenses) {
             // @codeCoverageIgnoreStart
