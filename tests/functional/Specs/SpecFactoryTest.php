@@ -26,11 +26,12 @@ namespace CycloneDX\Tests\functional\Specs;
 use CycloneDX\Specs\SpecFactory;
 use CycloneDX\Specs\SpecInterface;
 use Generator;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @coversNothing
  */
-class SpecFactoryTest extends \PHPUnit\Framework\TestCase
+class SpecFactoryTest extends TestCase
 {
     /**
      * @dataProvider versionsOfSPECS
