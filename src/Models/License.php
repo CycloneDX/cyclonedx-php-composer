@@ -90,7 +90,7 @@ class License
      */
     public function setUrl(?string $url): self
     {
-        if (null !== $url && false === filter_var($url, FILTER_VALIDATE_URL)) {
+        if (null !== $url && false === filter_var($url, \FILTER_VALIDATE_URL)) {
             throw new InvalidArgumentException("Invalid URL: ${url}");
         }
         $this->url = $url;

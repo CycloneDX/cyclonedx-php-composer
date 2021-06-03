@@ -79,7 +79,7 @@ class BomCommand extends BaseCommand
                 self::OPTION_OUTPUT_FORMAT,
                 null,
                 InputOption::VALUE_REQUIRED,
-                'Which output format to use.'.PHP_EOL.
+                'Which output format to use.'.\PHP_EOL.
                 'Values: "'.self::OUTPUT_FORMAT_XML.'", "'.self::OUTPUT_FORMAT_JSON.'"',
                 self::OUTPUT_FORMAT_XML
             )
@@ -87,8 +87,8 @@ class BomCommand extends BaseCommand
                 self::OPTION_OUTPUT_FILE,
                 null,
                 InputOption::VALUE_REQUIRED,
-                'Path to the output file.'.PHP_EOL.
-                'Set to "'.self::OUTPUT_FILE_STDOUT.'" to write to STDOUT.'.PHP_EOL.
+                'Path to the output file.'.\PHP_EOL.
+                'Set to "'.self::OUTPUT_FILE_STDOUT.'" to write to STDOUT.'.\PHP_EOL.
                 '(depending on the output-format, defaults to: "'.implode('" or "', array_values(self::OUTPUT_FILE_DEFAULT)).'")'
             )
             ->addOption(
@@ -107,7 +107,7 @@ class BomCommand extends BaseCommand
                 self::OPTION_SPEC_VERSION,
                 null,
                 InputOption::VALUE_REQUIRED,
-                'Which version of CycloneDX spec to use.'.PHP_EOL.
+                'Which version of CycloneDX spec to use.'.\PHP_EOL.
                 'Values: "'.implode('", "', array_keys(SpecFactory::SPECS)).'"',
                 SpecFactory::VERSION_LATEST
             );
@@ -145,7 +145,7 @@ class BomCommand extends BaseCommand
         }
 
         $lockData = $locker->getLockData();
-        if (false === is_array($lockData)) {
+        if (false === \is_array($lockData)) {
             $output->writeln('<error>Lockfile is malformed</error>');
 
             return self::EXIT_MISSING_LOCK;
@@ -164,7 +164,7 @@ class BomCommand extends BaseCommand
         $spec = (new SpecFactory())->make($specVersion);
 
         $outputFormat = $input->getOption(self::OPTION_OUTPUT_FORMAT);
-        assert(is_string($outputFormat));
+        \assert(\is_string($outputFormat));
         $bomFormat = strtoupper($outputFormat);
         unset($outputFormat);
 
@@ -177,7 +177,7 @@ class BomCommand extends BaseCommand
 
         $bomWriter = new $bomWriterClass($spec);
         $outputFile = $input->getOption(self::OPTION_OUTPUT_FILE);
-        if (false === is_string($outputFile) || '' === $outputFile) {
+        if (false === \is_string($outputFile) || '' === $outputFile) {
             $outputFile = self::OUTPUT_FILE_DEFAULT[$bomFormat];
         }
 
@@ -187,12 +187,12 @@ class BomCommand extends BaseCommand
         if (self::OUTPUT_FILE_STDOUT === $outputFile) {
             $output->writeln('<info>Writing output to STDOUT</info>');
             // don't use `$output->writeln()`, so to support `-q` cli param.
-            fwrite(STDOUT, $bomContents);
+            fwrite(\STDOUT, $bomContents);
             // straighten up and add a linebreak. raw output might not have done it.
             $output->writeln('');
         } else {
             $output->writeln('<info>Writing output to: '.OutputFormatter::escape($outputFile).'</info>');
-            \file_put_contents($outputFile, $bomContents);
+            file_put_contents($outputFile, $bomContents);
         }
 
         return self::EXIT_OK;

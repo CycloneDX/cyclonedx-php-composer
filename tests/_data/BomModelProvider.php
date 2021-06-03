@@ -183,7 +183,7 @@ abstract class BomModelProvider
      */
     public static function bomWithComponentHashAlgorithmsFromSpec(array $hashAlgorithms): Generator
     {
-        $hashAlgorithms = array_unique($hashAlgorithms, SORT_STRING);
+        $hashAlgorithms = array_unique($hashAlgorithms, \SORT_STRING);
         $label = implode(',', $hashAlgorithms);
         yield "hash algs: {{$label}}" => [(new Bom())->addComponent(
             (new Component(Classification::LIBRARY, 'name', '1.0'))
@@ -204,7 +204,7 @@ abstract class BomModelProvider
             'myComponent' => (new Component(Classification::LIBRARY, 'name', '1.0'))
                 ->setLicenses(['myLicense' => new License('some license')]),
         ])];
-        if (version_compare(PHP_VERSION, '8.0.0') >= 0) {
+        if (version_compare(\PHP_VERSION, '8.0.0') >= 0) {
             yield 'add every list from assoc' => [
                 (new Bom())->addComponent(
                     ...[

@@ -33,7 +33,7 @@ class Spec10Test extends TestCase
 {
     private $spec;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->spec = new Spec10();
     }

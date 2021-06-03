@@ -38,7 +38,7 @@ class BomTest extends TestCase
     /** @psalm-var Bom */
     private $bom;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -70,7 +70,7 @@ class BomTest extends TestCase
      */
     public function testComponentsAdd(array $components): void
     {
-        if ('assoc' === $this->dataName() && 0 > version_compare(PHP_VERSION, '8.0.0')) {
+        if ('assoc' === $this->dataName() && 0 > version_compare(\PHP_VERSION, '8.0.0')) {
             $this->expectNotToPerformAssertions();
 
             return;

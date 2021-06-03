@@ -39,7 +39,7 @@ class LicenseTest extends TestCase
 
     private const LICENSES_FILE = __DIR__.'/../../_data/spdx-licenses.json';
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->license = $this->createPartialMock(License::class, [
             'getResourcesFile', /* @see License::getResourcesFile() */

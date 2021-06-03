@@ -40,7 +40,7 @@ class ComponentTest extends TestCase
     /** @psalm-var Component */
     private $component;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 

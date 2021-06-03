@@ -96,12 +96,12 @@ class XmlTest extends TestCase
     private function loadDomFromXml(string $xml): DOMDocument
     {
         $doc = new DOMDocument();
-        $options = LIBXML_NONET;
-        if (defined('LIBXML_COMPACT')) {
-            $options |= LIBXML_COMPACT;
+        $options = \LIBXML_NONET;
+        if (\defined('LIBXML_COMPACT')) {
+            $options |= \LIBXML_COMPACT;
         }
-        if (defined('LIBXML_PARSEHUGE')) {
-            $options |= LIBXML_PARSEHUGE;
+        if (\defined('LIBXML_PARSEHUGE')) {
+            $options |= \LIBXML_PARSEHUGE;
         }
         $loaded = $doc->loadXML($xml, $options);
         if (false === $loaded) {

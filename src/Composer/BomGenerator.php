@@ -193,7 +193,7 @@ class BomGenerator
     private function normalizeVersion(string $packageVersion): string
     {
         if (0 === substr_compare($packageVersion, 'v', 0, 1)) {
-            return substr($packageVersion, 1, strlen($packageVersion));
+            return substr($packageVersion, 1, \strlen($packageVersion));
         }
 
         return $packageVersion;
@@ -211,16 +211,16 @@ class BomGenerator
      */
     public function splitLicenses($licenseData): array
     {
-        if (is_array($licenseData)) {
+        if (\is_array($licenseData)) {
             // Disjunctive license provided as array
             return $licenseData;
         }
 
         if (preg_match('/\((?:[\w.\-]+(?: or | and )?)+\)/', $licenseData)) {
             // Conjunctive or disjunctive license provided as string
-            $licenseDataSplit = preg_split('/[()]/', $licenseData, -1, PREG_SPLIT_NO_EMPTY);
+            $licenseDataSplit = preg_split('/[()]/', $licenseData, -1, \PREG_SPLIT_NO_EMPTY);
             if (false !== $licenseDataSplit) {
-                return preg_split('/ or | and /', $licenseDataSplit[0], -1, PREG_SPLIT_NO_EMPTY)
+                return preg_split('/ or | and /', $licenseDataSplit[0], -1, \PREG_SPLIT_NO_EMPTY)
                     ?: [$licenseData];
             }
         }

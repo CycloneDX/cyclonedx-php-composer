@@ -49,8 +49,8 @@ class JsonDeserializer extends AbstractSerialize implements DeserializerInterfac
     public function deserialize(string $data): Bom
     {
         // @TODO validate schema?
-        $json = json_decode($data, true, 512, JSON_THROW_ON_ERROR);
-        if (false === is_array($json)) {
+        $json = json_decode($data, true, 512, \JSON_THROW_ON_ERROR);
+        if (false === \is_array($json)) {
             throw new JsonException('does not deserialize to expected structure');
         }
 
