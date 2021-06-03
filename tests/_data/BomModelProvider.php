@@ -235,7 +235,7 @@ abstract class BomModelProvider
         )];
         yield 'description: random' => [(new Bom())->addComponent(
             (new Component(Classification::LIBRARY, 'name', '1.0'))
-                ->setDescription(bin2hex(random_bytes(255)))
+                ->setDescription(bin2hex(random_bytes(32)))
         )];
         yield 'description: spaces' => [(new Bom())->addComponent(
             (new Component(Classification::LIBRARY, 'name', '1.0'))
