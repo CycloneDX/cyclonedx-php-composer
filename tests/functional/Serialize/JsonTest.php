@@ -38,7 +38,18 @@ use Swaggest\JsonSchema;
  */
 class JsonTest extends TestCase
 {
-    // endregion Spec10
+    private $schemaContracts = [];
+
+    private function getSchemaContract(string $schema): JsonSchema\SchemaContract
+    {
+        if (false === \array_key_exists($schema, $this->schemaContracts)) {
+            $this->schemaContracts[$schema] = JsonSchema\Schema::import($schema);
+        }
+
+        return $this->schemaContracts[$schema];
+    }
+
+    // region Spec10
 
     /**
      * Schema 1.0 is not specified for JSON.
@@ -90,10 +101,10 @@ class JsonTest extends TestCase
     public function testSchema12(Bom $bom): void
     {
         $spec = new Spec12();
-        $schema = realpath(__DIR__.'/../../../res/bom-1.2.schema.json');
+        $schemaPath = realpath(__DIR__.'/../../../res/bom-1.2.schema.json');
 
-        self::assertIsString($schema);
-        self::assertFileExists($schema);
+        self::assertIsString($schemaPath);
+        self::assertFileExists($schemaPath);
 
         $serializer = new JsonSerializer($spec);
 
@@ -101,10 +112,10 @@ class JsonTest extends TestCase
         self::assertJson($json);
         $data = json_decode($json, false, 512, \JSON_THROW_ON_ERROR);
 
-        $schema = JsonSchema\Schema::import('file://'.$schema);
+        $schemaContracts = $this->getSchemaContract('file://'.$schemaPath);
         self::assertInstanceOf(
             JsonSchema\Structure\ObjectItem::class,
-            $schema->in($data) // throws on schema mismatch
+            $schemaContracts->in($data) // throws on schema mismatch
         );
     }
 
