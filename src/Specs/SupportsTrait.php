@@ -32,7 +32,7 @@ trait SupportsTrait
 {
     public function isSupportedComponentType(string $classification): bool
     {
-        return in_array($classification, self::COMPONENT_TYPES, true);
+        return \in_array($classification, self::COMPONENT_TYPES, true);
     }
 
     /**
@@ -45,7 +45,7 @@ trait SupportsTrait
 
     public function isSupportedHashAlgorithm(string $alg): bool
     {
-        return in_array($alg, self::HASH_ALGORITHMS, true);
+        return \in_array($alg, self::HASH_ALGORITHMS, true);
     }
 
     /**

@@ -101,7 +101,7 @@ class License
              *
              * @var list<string> $licenses
              */
-            $licenses = json_decode($json, false, 2, JSON_THROW_ON_ERROR);
+            $licenses = json_decode($json, false, 2, \JSON_THROW_ON_ERROR);
             // @codeCoverageIgnoreStart
         } catch (JsonException $exception) {
             throw new RuntimeException("Malformed licenses file ${file}", 0, $exception);

@@ -52,12 +52,12 @@ class XmlDeserializer extends AbstractSerialize implements DeserializerInterface
     {
         $dom = new DOMDocument();
         // @TODO add NOBLANKS ? see if all tests still pass
-        $options = LIBXML_NOCDATA | LIBXML_NOBLANKS | LIBXML_NONET;
-        if (defined('LIBXML_COMPACT')) {
-            $options |= LIBXML_COMPACT;
+        $options = \LIBXML_NOCDATA | \LIBXML_NOBLANKS | \LIBXML_NONET;
+        if (\defined('LIBXML_COMPACT')) {
+            $options |= \LIBXML_COMPACT;
         }
-        if (defined('LIBXML_PARSEHUGE')) {
-            $options |= LIBXML_PARSEHUGE;
+        if (\defined('LIBXML_PARSEHUGE')) {
+            $options |= \LIBXML_PARSEHUGE;
         }
         $loaded = $dom->loadXML($data, $options);
         if (false === $loaded) {
@@ -129,8 +129,8 @@ class XmlDeserializer extends AbstractSerialize implements DeserializerInterface
 
         // asserted by SCHEMA
         $type = $element->getAttribute('type');
-        assert(null !== $name);
-        assert(null !== $version);
+        \assert(null !== $name);
+        \assert(null !== $version);
 
         return (new Component($type, $name, $version))
             ->setGroup($group)
@@ -155,7 +155,7 @@ class XmlDeserializer extends AbstractSerialize implements DeserializerInterface
                         // @TOD implement a model for LicenseExpression
                         yield new License($element->nodeValue);
                     } else {
-                        trigger_error('Found unsupported LicenseExpression. Using License instead', E_USER_NOTICE);
+                        trigger_error('Found unsupported LicenseExpression. Using License instead', \E_USER_NOTICE);
                         yield new License($element->nodeValue);
                     }
                     break;
@@ -184,7 +184,7 @@ class XmlDeserializer extends AbstractSerialize implements DeserializerInterface
         }
 
         // asserted by SCHEMA
-        assert(null !== $nameOrId);
+        \assert(null !== $nameOrId);
 
         return (new License($nameOrId))
             ->setUrl($url);

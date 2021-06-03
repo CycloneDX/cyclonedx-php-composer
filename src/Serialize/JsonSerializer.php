@@ -54,9 +54,9 @@ class JsonSerializer extends AbstractSerialize implements SerializerInterface
             throw new RuntimeException('Unsupported spec version. requires >= '.Version::V_1_2);
         }
 
-        $options = JSON_THROW_ON_ERROR | JSON_PRESERVE_ZERO_FRACTION;
+        $options = \JSON_THROW_ON_ERROR | \JSON_PRESERVE_ZERO_FRACTION;
         if ($pretty) {
-            $options |= JSON_PRETTY_PRINT;
+            $options |= \JSON_PRETTY_PRINT;
         }
 
         $json = json_encode($this->bomToJson($bom), $options);
@@ -161,7 +161,7 @@ class JsonSerializer extends AbstractSerialize implements SerializerInterface
             try {
                 yield $this->hashToJson($algorithm, $content);
             } catch (DomainException $exception) {
-                trigger_error("skipped hash: {$exception->getMessage()} ({$algorithm}, {$content})", E_USER_WARNING);
+                trigger_error("skipped hash: {$exception->getMessage()} ({$algorithm}, {$content})", \E_USER_WARNING);
                 unset($exception);
             }
         }

@@ -99,7 +99,7 @@ class JsonTest extends TestCase
 
         $json = @$serializer->serialize($bom);
         self::assertJson($json);
-        $data = json_decode($json, false, 512, JSON_THROW_ON_ERROR);
+        $data = json_decode($json, false, 512, \JSON_THROW_ON_ERROR);
 
         $schema = JsonSchema\Schema::import('file://'.$schema);
         self::assertInstanceOf(

@@ -52,7 +52,7 @@ class ShippedLicensesTest extends TestCase
         self::assertIsString($json);
         self::assertJson($json);
 
-        $licenses = json_decode($json, false, 512, JSON_THROW_ON_ERROR);
+        $licenses = json_decode($json, false, 512, \JSON_THROW_ON_ERROR);
         self::assertIsArray($licenses);
         self::assertNotEmpty($licenses);
 

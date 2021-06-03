@@ -58,7 +58,7 @@ class XmlSerializer extends AbstractSerialize implements SerializerInterface
         $document->appendChild($this->bomToDom($document, $bom));
 
         $document->formatOutput = $pretty;
-        $xml = $document->saveXML(null, LIBXML_NOEMPTYTAG);
+        $xml = $document->saveXML(null, \LIBXML_NOEMPTYTAG);
         if (false === $xml) {
             throw new DOMException('Failed to serialize to XML.');
         }
@@ -144,7 +144,7 @@ class XmlSerializer extends AbstractSerialize implements SerializerInterface
             try {
                 yield $this->hashToDom($document, $algorithm, $content);
             } catch (DomainException $exception) {
-                trigger_error("skipped hash: {$exception->getMessage()} ({$algorithm}, {$content})", E_USER_WARNING);
+                trigger_error("skipped hash: {$exception->getMessage()} ({$algorithm}, {$content})", \E_USER_WARNING);
                 unset($exception);
             }
         }
@@ -163,7 +163,7 @@ class XmlSerializer extends AbstractSerialize implements SerializerInterface
         }
 
         $element = $this->simpleDomSafeTextElement($document, 'hash', $content);
-        assert(null !== $element);
+        \assert(null !== $element);
         $this->simpleDomSetAttributes($element, [
             'alg' => $algorithm,
         ]);
