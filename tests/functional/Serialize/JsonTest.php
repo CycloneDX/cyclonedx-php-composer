@@ -116,7 +116,7 @@ class JsonTest extends TestCase
     public function testSchema12(Bom $bom): void
     {
         $spec = new Spec12();
-        $schemaPath = realpath(__DIR__.'/../../_spec/bom-1.2.schema.SNAPSHOT.json');
+        $schemaPath = realpath(__DIR__.'/../../_spec/bom-1.2.SNAPSHOT.schema.json');
 
         self::assertIsString($schemaPath);
         self::assertFileExists($schemaPath);
