@@ -39,6 +39,70 @@ use PHPUnit\Framework\TestCase;
  */
 class JasonSerializeTest extends TestCase
 {
+    // region serialize
+
+    /**
+     * @dataProvider dpTestSerialize
+     */
+    public function testSerialize(bool $pretty, string $expectedJson): void
+    {
+        $bom = $this->createMock(Bom::class);
+        $spec = $this->createMock(SpecInterface::class);
+        $spec->method('getVersion')->willReturn('999');
+        $serializer = $this->createPartialMock(JsonSerializer::class, ['bomToJson']);
+        $serializer->setSpec($spec);
+        $serializer->expects(self::once())->method('bomToJson')
+            ->with($bom)
+            ->willReturn(['bomToJsonFake' => true]);
+
+        $json = $serializer->serialize($bom, $pretty);
+
+        self::assertSame($expectedJson, $json);
+    }
+
+    public static function dpTestSerialize(): Generator
+    {
+        yield 'pretty' => [
+            true,
+            <<<'JSON'
+                {
+                    "bomToJsonFake": true
+                }
+                JSON
+    ,
+        ];
+        yield 'not pretty' => [false, '{"bomToJsonFake":true}'];
+    }
+
+    /**
+     * @dataProvider dpUnsupportedSpecVersions
+     */
+    public function testSerializeThrowsOnLowVersion(string $version): void
+    {
+        $spec = $this->createMock(SpecInterface::class);
+        $spec->method('getVersion')->willReturn($version);
+        $serializer = new JsonSerializer($spec);
+
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessageMatches('/unsupported spec version/i');
+
+        $serializer->serialize($this->createMock(Bom::class));
+    }
+
+    public static function dpUnsupportedSpecVersions(): Generator
+    {
+        $versions = [
+            'myVersion',
+            '1.1',
+            '1.0',
+        ];
+        foreach ($versions as $version) {
+            yield $version => [$version];
+        }
+    }
+
+    // endregion serialize
+
     // region bomToJson
 
     public function testBomToJson(): void
@@ -48,40 +112,37 @@ class JasonSerializeTest extends TestCase
         $spec->method('isSupportedComponentType')
             ->with('myType')
             ->willReturn(true);
-        $serializer = new JsonSerializer($spec);
-        $bom = $this->createConfiguredMock(Bom::class, [
-            'getVersion' => 1337,
-            'getComponents' => [$this->createConfiguredMock(
-                Component::class,
-                [
-                    'getType' => 'myType',
-                    'getPackageUrl' => null,
-                    'getName' => 'myName',
-                    'getVersion' => 'myVersion',
-                    'getGroup' => null,
-                    'getDescription' => null,
-                    'getLicenses' => [],
-                    'getHashes' => [],
-                ]
-            )],
-        ]);
+
+        $fakeComponent = $this->createMock(Component::class);
+        $serializer = $this->createPartialMock(JsonSerializer::class, ['componentToJson']);
+        $serializer->setSpec($spec);
+        $bom = $this->createConfiguredMock(
+            Bom::class,
+            [
+                'getVersion' => 1337,
+                'getComponents' => [$fakeComponent],
+            ]
+        );
+
+        $serializer->expects(self::once())->method('componentToJson')
+            ->with($fakeComponent)
+            ->willReturn(['fakeComponent' => true]);
 
         $data = $serializer->bomToJson($bom);
 
-        self::assertSame([
-            'bomFormat' => 'CycloneDX',
-            'specVersion' => 'mySpecVersion',
-            'version' => 1337,
-            'components' => [
-                [
-                    'type' => 'myType',
-                    'name' => 'myName',
-                    'version' => 'myVersion',
-                    'licenses' => [],
-                    'hashes' => [],
+        self::assertSame(
+            [
+                'bomFormat' => 'CycloneDX',
+                'specVersion' => 'mySpecVersion',
+                'version' => 1337,
+                'components' => [
+                    [
+                        'fakeComponent' => true,
+                    ],
                 ],
             ],
-        ], $data);
+            $data
+        );
     }
 
     // endregion bomToJson
