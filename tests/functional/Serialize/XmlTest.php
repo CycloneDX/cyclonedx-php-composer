@@ -44,17 +44,13 @@ class XmlTest extends TestCase
      * This test might be slow.
      * This test might require online-connectivity.
      *
-     * @large
-     * @group online
-     * @group slow
-     *
      * @dataProvider \CycloneDX\Tests\_data\BomModelProvider::fullBomTestData
      * @dataProvider \CycloneDX\Tests\_data\BomModelProvider::bomWithComponentAllHashAlgorithms
      */
     public function testSchema11(Bom $bom): void
     {
         $spec = new Spec11();
-        $schema = realpath(__DIR__.'/../../../res/bom-1.1.xsd');
+        $schema = realpath(__DIR__.'/../../_spec/bom-1.1.SNAPSHOT.xsd');
 
         self::assertIsString($schema);
         self::assertFileExists($schema);
