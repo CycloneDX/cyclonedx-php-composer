@@ -61,7 +61,9 @@ class JsonSerializer extends AbstractSerialize implements SerializerInterface
 
         $json = json_encode($this->bomToJson($bom), $options);
         if (false === $json) {
+            // @codeCoverageIgnoreStart
             throw new JsonException('Failed to serialize to JSON.');
+            // @codeCoverageIgnoreEnd
         }
 
         return $json;
@@ -162,7 +164,7 @@ class JsonSerializer extends AbstractSerialize implements SerializerInterface
                 yield $this->hashToJson($algorithm, $content);
             } catch (DomainException $exception) {
                 trigger_error("skipped hash: {$exception->getMessage()} ({$algorithm}, {$content})", \E_USER_WARNING);
-                unset($exception);
+                unset($exception); // @codeCoverageIgnore
             }
         }
     }
