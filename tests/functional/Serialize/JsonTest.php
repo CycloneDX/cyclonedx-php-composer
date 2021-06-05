@@ -91,17 +91,13 @@ class JsonTest extends TestCase
      * This test might be slow.
      * This test might require online-connectivity.
      *
-     * @large
-     * @group online
-     * @group slow
-     *
      * @dataProvider \CycloneDX\Tests\_data\BomModelProvider::fullBomTestData
      * @dataProvider \CycloneDX\Tests\_data\BomModelProvider::bomWithComponentHashAlgorithmsSpec12()
      */
     public function testSchema12(Bom $bom): void
     {
         $spec = new Spec12();
-        $schemaPath = realpath(__DIR__.'/../../../res/bom-1.2.schema.json');
+        $schemaPath = realpath(__DIR__.'/../../_spec/bom-1.2.schema.SNAPSHOT.json');
 
         self::assertIsString($schemaPath);
         self::assertFileExists($schemaPath);
