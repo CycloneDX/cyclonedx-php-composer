@@ -32,11 +32,12 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @covers \CycloneDX\Serialize\JsonSerializer
- *
- * @uses \CycloneDX\Serialize\AbstractSerialize
+ * @covers \CycloneDX\Serialize\AbstractSerialize
  */
 class JasonSerializeTest extends TestCase
 {
+
+
     // region hashToJson
 
     public function testHashToJson(): void
@@ -125,6 +126,27 @@ class JasonSerializeTest extends TestCase
 
     // endregion licenseToJson
 
+    // region licensesToJson
+
+    public function testLicensesToJson(): void
+    {
+        $serializer = $this->createPartialMock(JsonSerializer::class, ['licenseToJson']);
+
+        $license = $this->createMock(License::class);
+        $licenseFake = ['dummy' => $this->getRandomString()];
+        $licenses = [$license];
+
+        $serializer->expects(self::once())->method('licenseToJson')
+            ->with($license)
+            ->willReturn($licenseFake);
+
+        $data = iterator_to_array($serializer->licensesToJson($licenses));
+
+        self::assertSame([['license' => $licenseFake]], $data);
+    }
+
+    // endregion licensesToJson
+
     // region hashesToJson
 
     public function testHashesToJson(): void
@@ -139,7 +161,7 @@ class JasonSerializeTest extends TestCase
         $hashToJsonFake = [$algorithm, $content];
         $expected = [$hashToJsonFake];
 
-        $serializer->method('hashToJson')
+        $serializer->expects(self::once())->method('hashToJson')
             ->with($algorithm, $content)
             ->willReturn($hashToJsonFake);
 
