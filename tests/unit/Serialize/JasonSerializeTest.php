@@ -23,6 +23,7 @@ declare(strict_types=1);
 
 namespace CycloneDX\Tests\unit\Serialize;
 
+use CycloneDX\Models\Bom;
 use CycloneDX\Models\Component;
 use CycloneDX\Models\License;
 use CycloneDX\Serialize\JsonSerializer;
@@ -38,6 +39,53 @@ use PHPUnit\Framework\TestCase;
  */
 class JasonSerializeTest extends TestCase
 {
+
+    // region bomToJson
+
+    public function testBomToJson (): void
+    {
+        $spec = $this->createMock(SpecInterface::class);
+        $spec->method('getVersion')->willReturn('mySpecVersion');
+        $spec->method('isSupportedComponentType')
+            ->with('myType')
+            ->willReturn(true);
+        $serializer = new JsonSerializer($spec);
+        $bom = $this->createConfiguredMock(Bom::class, [
+            'getVersion' => 1337,
+            'getComponents' => [$this->createConfiguredMock(
+                Component::class,
+                [
+                    'getType' => 'myType',
+                    'getPackageUrl' => null,
+                    'getName' => 'myName',
+                    'getVersion' => 'myVersion',
+                    'getGroup' => null,
+                    'getDescription' => null,
+                    'getLicenses' => [],
+                    'getHashes' => [],
+                ]
+            )],
+        ]);
+
+        $data = $serializer->bomToJson($bom);
+
+        self::assertSame([
+            'bomFormat' => 'CycloneDX',
+            'specVersion' => 'mySpecVersion',
+            'version' => 1337,
+            'components' => [
+                [
+                    'type' => 'myType',
+                    'name' => 'myName',
+                    'version' => 'myVersion',
+                    'licenses' => [],
+                    'hashes' => [],
+                ]
+            ],
+        ], $data);
+    }
+
+    // endregion bomToJson
 
     // region componentToJson
 
