@@ -64,12 +64,10 @@ class JasonSerializeTest extends TestCase
     {
         yield 'pretty' => [
             true,
-            <<<'JSON'
-                {
-                    "bomToJsonFake": true
-                }
-                JSON
-    ,
+            // dont use HEREDOC/NEWDOC - they would have strange line-ending behaviour
+            '{'."\n".
+            '    "bomToJsonFake": true'."\n".
+            '}',
         ];
         yield 'not pretty' => [false, '{"bomToJsonFake":true}'];
     }
