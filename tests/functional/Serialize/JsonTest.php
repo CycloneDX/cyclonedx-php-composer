@@ -40,7 +40,7 @@ class SnapshotRemoteRefProvider implements JsonSchema\RemoteRefProvider
         $path = parse_url($url, \PHP_URL_PATH);
         $file = basename($path);
         if (false !== preg_match('/\.SNAPSHOT\./', $file)) {
-            $url = 'file://'.realpath(__DIR__.'/../../_spec/'.$file);
+            $url = realpath(__DIR__.'/../../_spec/'.$file);
         }
 
         return json_decode(file_get_contents($url));
@@ -125,7 +125,7 @@ class JsonTest extends TestCase
         self::assertJson($json);
         $data = json_decode($json, false, 512, \JSON_THROW_ON_ERROR);
 
-        $schemaContracts = $this->getSchemaContract('file://'.$schemaPath);
+        $schemaContracts = $this->getSchemaContract($schemaPath);
         self::assertInstanceOf(
             JsonSchema\Structure\ObjectItem::class,
             $schemaContracts->in($data) // throws on schema mismatch
