@@ -33,6 +33,20 @@ use PHPUnit\Framework\TestCase;
 use RuntimeException;
 use Swaggest\JsonSchema;
 
+class SnapshotRemoteRefProvider implements JsonSchema\RemoteRefProvider
+{
+    public function getSchemaData($url)
+    {
+        $path = parse_url($url, \PHP_URL_PATH);
+        $file = basename($path);
+        if (false !== preg_match('/\.SNAPSHOT\./', $file)) {
+            $url = 'file://'.realpath(__DIR__.'/../../_spec/'.$file);
+        }
+
+        return json_decode(file_get_contents($url));
+    }
+}
+
 /**
  * @coversNothing
  */
@@ -43,7 +57,10 @@ class JsonTest extends TestCase
     private function getSchemaContract(string $schema): JsonSchema\SchemaContract
     {
         if (false === \array_key_exists($schema, $this->schemaContracts)) {
-            $this->schemaContracts[$schema] = JsonSchema\Schema::import($schema);
+            $this->schemaContracts[$schema] = JsonSchema\Schema::import(
+                $schema,
+                new JsonSchema\Context(new SnapshotRemoteRefProvider())
+            );
         }
 
         return $this->schemaContracts[$schema];

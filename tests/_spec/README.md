@@ -7,7 +7,7 @@
 | [`bom-1.2.SNAPSHOT.xsd`](bom-1.2.SNAPSHOT.xsd) | https://cyclonedx.org/schema/bom/1.2 | `http://cyclonedx.org/schema/spdx` was replaced with `spdx.SNAPSHOT.xsd` |
 | [`spdx.SNAPSHOT.xsd`](spdx.SNAPSHOT.xsd) | http://cyclonedx.org/schema/spdx | |
 | [`spdx.schema.SNAPSHOT.json`](spdx.schema.SNAPSHOT.json) | https://cyclonedx.org/schema/spdx.schema.json | |
-| [`bom-1.2.schema.SNAPSHOT.json`](bom-1.2.schema.SNAPSHOT.json) | https://cyclonedx.org/schema/bom-1.2.schema.json | `$id`'s URL prefix was removed to be relative. spdx.schema.json` was replaced with `spdx.schema.SNAPSHOT.json` |
+| [`bom-1.2.schema.SNAPSHOT.json`](bom-1.2.schema.SNAPSHOT.json) | https://cyclonedx.org/schema/bom-1.2.schema.json | `spdx.schema.json` was replaced with `spdx.schema.SNAPSHOT.json` |
 
 original sources are also available here:
 https://github.com/CycloneDX/specification/tree/master/schema
