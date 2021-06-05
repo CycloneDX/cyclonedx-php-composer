@@ -38,9 +38,11 @@ class SnapshotRemoteRefProvider implements JsonSchema\RemoteRefProvider
     public function getSchemaData($url)
     {
         $path = parse_url($url, \PHP_URL_PATH);
-        $file = basename($path);
-        if (false !== preg_match('/\.SNAPSHOT\./', $file)) {
-            $url = realpath(__DIR__.'/../../_spec/'.$file);
+        if (false !== $path) {
+            $file = basename($path);
+            if (false !== preg_match('/\.SNAPSHOT\./', $file)) {
+                $url = realpath(__DIR__.'/../../_spec/'.$file);
+            }
         }
 
         return json_decode(file_get_contents($url));
