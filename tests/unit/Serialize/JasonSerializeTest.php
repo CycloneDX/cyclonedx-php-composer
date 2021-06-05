@@ -23,11 +23,13 @@ declare(strict_types=1);
 
 namespace CycloneDX\Tests\unit\Serialize;
 
+use CycloneDX\Models\Component;
 use CycloneDX\Models\License;
 use CycloneDX\Serialize\JsonSerializer;
 use CycloneDX\Specs\SpecInterface;
 use DomainException;
 use Generator;
+use PackageUrl\PackageUrl;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -37,6 +39,123 @@ use PHPUnit\Framework\TestCase;
 class JasonSerializeTest extends TestCase
 {
 
+    // region componentToJson
+
+    public function testComponentToJsonThrowsOnFalseType(): void
+    {
+        $spec = $this->createMock(SpecInterface::class);
+        $serializer = new JsonSerializer($spec);
+        $component = $this->createMock(Component::class);
+        $component->method('getType')->willReturn('myType');
+
+        $spec->expects(self::once())->method('isSupportedComponentType')
+            ->with('myType')
+            ->willReturn(false);
+        $this->expectException(DomainException::class);
+        $this->expectExceptionMessageMatches('/unsupported component type/i');
+
+        $serializer->componentToJson($component);
+    }
+
+    public function testComponentToJson(): void
+    {
+        $spec = $this->createMock(SpecInterface::class);
+        $spec->expects(self::once())->method('isSupportedComponentType')
+            ->with('myType')
+            ->willReturn(true);
+        $spec->expects(self::once())->method('isSupportedHashAlgorithm')
+            ->with('myAlg')
+            ->willReturn(true);
+        $spec->expects(self::once())->method('isSupportedHashContent')
+            ->with('myHash')
+            ->willReturn(true);
+        $serializer = new JsonSerializer($spec);
+        $component = $this->createConfiguredMock(
+            Component::class,
+            [
+                'getType' => 'myType',
+                'getPackageUrl' => $this->createConfiguredMock(
+                    PackageUrl::class,
+                    ['toString' => 'myPURL', '__toString' => 'myPURL']
+                ),
+                'getName' => 'myName',
+                'getVersion' => 'myVersion',
+                'getGroup' => 'myGroup',
+                'getDescription' => 'myDescription',
+                'getLicenses' => [
+                    $this->createConfiguredMock(
+                        License::class,
+                        ['getId' => null, 'getName' => 'myLicense']
+                    ),
+                ],
+                'getHashes' => ['myAlg' => 'myHash'],
+            ]
+        );
+
+        $data = $serializer->componentToJson($component);
+
+        self::assertSame(
+            [
+                'type' => 'myType',
+                'name' => 'myName',
+                'version' => 'myVersion',
+                'group' => 'myGroup',
+                'description' => 'myDescription',
+                'licenses' => [
+                    [
+                        'license' => [
+                            'name' => 'myLicense',
+                        ],
+                    ],
+                ],
+                'hashes' => [
+                    [
+                        'alg' => 'myAlg',
+                        'content' => 'myHash',
+                    ],
+                ],
+                'purl' => 'myPURL',
+            ],
+            $data
+        );
+    }
+
+    public function testComponentToJsonEradicateNulls(): void
+    {
+        $spec = $this->createMock(SpecInterface::class);
+        $spec->expects(self::once())->method('isSupportedComponentType')
+            ->with('myType')
+            ->willReturn(true);
+        $serializer = new JsonSerializer($spec);
+        $component = $this->createConfiguredMock(
+            Component::class,
+            [
+                'getType' => 'myType',
+                'getPackageUrl' => null,
+                'getName' => 'myName',
+                'getVersion' => 'myVersion',
+                'getGroup' => null,
+                'getDescription' => null,
+                'getLicenses' => [],
+                'getHashes' => [],
+            ]
+        );
+
+        $data = $serializer->componentToJson($component);
+
+        self::assertSame(
+            [
+                'type' => 'myType',
+                'name' => 'myName',
+                'version' => 'myVersion',
+                'licenses' => [],
+                'hashes' => [],
+            ],
+            $data
+        );
+    }
+
+    // endregion componentToJson
 
     // region hashToJson
 
