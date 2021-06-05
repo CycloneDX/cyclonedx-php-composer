@@ -39,10 +39,9 @@ use PHPUnit\Framework\TestCase;
  */
 class JasonSerializeTest extends TestCase
 {
-
     // region bomToJson
 
-    public function testBomToJson (): void
+    public function testBomToJson(): void
     {
         $spec = $this->createMock(SpecInterface::class);
         $spec->method('getVersion')->willReturn('mySpecVersion');
@@ -80,7 +79,7 @@ class JasonSerializeTest extends TestCase
                     'version' => 'myVersion',
                     'licenses' => [],
                     'hashes' => [],
-                ]
+                ],
             ],
         ], $data);
     }
