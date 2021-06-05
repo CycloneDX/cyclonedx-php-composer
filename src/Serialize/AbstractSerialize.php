@@ -26,6 +26,8 @@ namespace CycloneDX\Serialize;
 use CycloneDX\Specs\SpecInterface;
 
 /**
+ * @internal
+ *
  * @author jkowalleck
  */
 abstract class AbstractSerialize

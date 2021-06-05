@@ -26,6 +26,8 @@ namespace CycloneDX\Serialize;
 use CycloneDX\Models\Bom;
 
 /**
+ * @internal
+ *
  * @author jkowalleck
  */
 interface SerializerInterface
