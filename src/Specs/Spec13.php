@@ -33,14 +33,11 @@ class Spec13 implements SpecInterface
 {
     use SupportsTrait;
 
-    public function getVersion(): string
-    {
-        return Version::V_1_3;
-    }
-
     // region SupportsTrait
 
-    public const COMPONENT_TYPES = [
+    private const VERSION = Version::V_1_3;
+
+    private const COMPONENT_TYPES = [
         Classification::APPLICATION,
         Classification::FRAMEWORK,
         Classification::LIBRARY,
@@ -51,7 +48,7 @@ class Spec13 implements SpecInterface
         Classification::FIRMWARE,
     ];
 
-    public const HASH_ALGORITHMS = [
+    private const HASH_ALGORITHMS = [
         HashAlgorithm::MD5,
         HashAlgorithm::SHA_1,
         HashAlgorithm::SHA_256,
@@ -65,7 +62,7 @@ class Spec13 implements SpecInterface
         HashAlgorithm::BLAKE3,
     ];
 
-    public const HASH_CONTENT_REGEX = '/^([a-fA-F0-9]{32}|[a-fA-F0-9]{40}|[a-fA-F0-9]{64}|[a-fA-F0-9]{96}|[a-fA-F0-9]{128})$/';
+    private const HASH_CONTENT_REGEX = '/^([a-fA-F0-9]{32}|[a-fA-F0-9]{40}|[a-fA-F0-9]{64}|[a-fA-F0-9]{96}|[a-fA-F0-9]{128})$/';
 
     // endregion SupportsTrait
 }
