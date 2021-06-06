@@ -33,7 +33,7 @@ use RuntimeException;
  */
 class License
 {
-    public const LICENSES_FILE = 'spdx-licenses.SNAPSHOT.json';
+    private const LICENSES_FILE = __DIR__.'/../../res/spdx-licenses.SNAPSHOT.json';
 
     /**
      * @psalm-var array<string, string>
@@ -51,7 +51,7 @@ class License
 
     public static function getResourcesFile(): string
     {
-        return __DIR__.'/../../res/'.self::LICENSES_FILE;
+        return realpath(self::LICENSES_FILE);
     }
 
     /**
