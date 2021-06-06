@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bom xmlns="http://cyclonedx.org/schema/bom/1.1">
-    <components>
-        <component type="library">
-            <group>cyclonedx</group>
-            <name>cyclonedx-php-composer-local-demo-dependency</name>
-            <version>dev-master</version>
-            <description>a package that is hosted locally and required in a local demo</description>
-            <purl>pkg:composer/cyclonedx/cyclonedx-php-composer-local-demo-dependency@dev-master</purl>
-        </component>
-    </components>
+<bom xmlns="http://cyclonedx.org/schema/bom/1.3" version="1">
+  <components>
+    <component type="library">
+      <group><![CDATA[cyclonedx]]></group>
+      <name><![CDATA[cyclonedx-php-composer-local-demo-dependency]]></name>
+      <version><![CDATA[dev-rework_refactor]]></version>
+      <description><![CDATA[a package that is hosted locally and required in a local demo]]></description>
+      <hashes></hashes>
+      <licenses></licenses>
+      <purl><![CDATA[pkg:composer/cyclonedx/cyclonedx-php-composer-local-demo-dependency@dev-rework_refactor]]></purl>
+    </component>
+  </components>
 </bom>
