@@ -36,7 +36,6 @@ final class SpecFactory
      * @psalm-var array<Version::V_*, class-string<SpecInterface>>
      */
     public const SPECS = [
-        Version::V_1_0 => Spec10::class,
         Version::V_1_1 => Spec11::class,
         Version::V_1_2 => Spec12::class,
         Version::V_1_3 => Spec13::class,

@@ -23,9 +23,9 @@ declare(strict_types=1);
 
 namespace CycloneDX\Tests\unit\Specs;
 
-use CycloneDX\Specs\Spec10;
 use CycloneDX\Specs\Spec11;
 use CycloneDX\Specs\Spec12;
+use CycloneDX\Specs\Spec13;
 use CycloneDX\Specs\SpecFactory;
 use Generator;
 use InvalidArgumentException;
@@ -56,9 +56,10 @@ class SpecFactoryTest extends TestCase
 
     public static function dpMakeExpected(): Generator
     {
-        yield '1.0' => ['1.0', Spec10::class];
+        // yield '1.0' => ['1.0', Spec10::class]; // not implemented
         yield '1.1' => ['1.1', Spec11::class];
         yield '1.2' => ['1.2', Spec12::class];
+        yield '1.3' => ['1.3', Spec13::class];
     }
 
     public function testMakeThrowsOnUnexpected(): void

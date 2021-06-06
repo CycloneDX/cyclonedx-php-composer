@@ -41,7 +41,7 @@ Options:
       --exclude-dev                  Exclude dev dependencies
       --exclude-plugins              Exclude composer plugins
       --spec-version=SPEC-VERSION    Which version of CycloneDX spec to use.
-                                     Values: "1.0", "1.1", "1.2", "1.3" [default: "1.3"]
+                                     Values: "1.1", "1.2", "1.3" [default: "1.3"]
   -h, --help                         Display this help message
   -q, --quiet                        Do not output any message
   -V, --version                      Display this application version

@@ -23,24 +23,24 @@ declare(strict_types=1);
 
 namespace CycloneDX\Tests\unit\Specs;
 
-use CycloneDX\Specs\Spec10;
+use CycloneDX\Specs\Spec13;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \CycloneDX\Specs\Spec10
+ * @covers \CycloneDX\Specs\Spec13
  */
-class Spec10Test extends TestCase
+class Spec13Test extends TestCase
 {
     private $spec;
 
     protected function setUp(): void
     {
-        $this->spec = new Spec10();
+        $this->spec = new Spec13();
     }
 
     public function testVersion(): void
     {
         $version = $this->spec->getVersion();
-        self::assertSame('1.0', $version);
+        self::assertSame('1.3', $version);
     }
 }

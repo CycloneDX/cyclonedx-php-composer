@@ -16,7 +16,7 @@
   * CLI
     * Support for output to _STDOUT_. Use option `--output-file=-`.
     * Added an optional option `--spec-version` for the CycloneDX spec version.  
-      Supported values: "1.0", "1.1", "1.2", "1.3".  
+      Supported values: "1.1", "1.2", "1.3".  
       Defaults to "1.3".
   * Support for JSON output format.  
     JSON support was a preview before and became a basic part of the plugin now.

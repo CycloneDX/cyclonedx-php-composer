@@ -32,12 +32,12 @@ jobs:
           - xml
           - json
         spec-version:
-          - "1.0"
+          # - "1.0" # not implemented
           - "1.1"
           - "1.2"
           - "1.3"
         exclude:
-          # exclude unsupported combinations
+          # exclude unsupported combinations: json is defined in spec >= 1.2
           - output-format: json
             spec-version: "1.0"
           - output-format: json
