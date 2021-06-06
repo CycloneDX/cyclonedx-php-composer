@@ -9,8 +9,6 @@
             "version": "dev-rework_refactor",
             "group": "cyclonedx",
             "description": "a package that is hosted locally and required in a local demo",
-            "licenses": [],
-            "hashes": [],
             "purl": "pkg:composer\/cyclonedx\/cyclonedx-php-composer-local-demo-dependency@dev-rework_refactor"
         }
     ]
