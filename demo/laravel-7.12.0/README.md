@@ -12,7 +12,6 @@ Generated example results are also available at
 [CycloneDX/sbom-examples](https://github.com/CycloneDX/sbom-examples/)
 as "laravel-7.12.0".
 
-* [`results/bom.1.0.xml`](results/bom.1.0.xml)
 * [`results/bom.1.1.xml`](results/bom.1.1.xml)
 * [`results/bom.1.2.xml`](results/bom.1.2.xml)
 * [`results/bom.1.3.xml`](results/bom.1.3.xml)

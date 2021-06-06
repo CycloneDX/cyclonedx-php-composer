@@ -36,9 +36,11 @@ use PHPUnit\Framework\TestCase;
  */
 class XmlTest extends TestCase
 {
-    // @TODO add Spec 10 tests
+    // region Spec 1.0
+    // Spec 1.0 is not implemented
+    // endregion Spec 1.0
 
-    // region Spec11
+    // region Spec 1.1
 
     /**
      * This test might be slow.
@@ -83,11 +85,15 @@ class XmlTest extends TestCase
         self::assertEquals($bom, $deserialized);
     }
 
-    // endregion Spec11
+    // endregion Spec 1.1
 
-    // @TODO add Spec 12 tests
+    // region Spec 1.2
+    // @TODO add Spec 1.2 tests
+    // endregion Spec 1.2
 
-    // @TODO add Spec 13 tests
+    // region Spec 1.3
+    // @TODO add Spec 1.3 tests
+    // endregion Spec 1.3
 
     // region helpers
 

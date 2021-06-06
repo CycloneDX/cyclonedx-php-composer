@@ -51,7 +51,7 @@ class SpecFactoryTest extends TestCase
         }
     }
 
-    public function testSpecsContainLatest()
+    public function testSpecsContainLatest(): void
     {
         self::assertArrayHasKey(SpecFactory::VERSION_LATEST, SpecFactory::SPECS);
     }

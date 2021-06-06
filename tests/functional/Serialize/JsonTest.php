@@ -26,7 +26,6 @@ namespace CycloneDX\Tests\functional\Serialize;
 use CycloneDX\Models\Bom;
 use CycloneDX\Serialize\JsonDeserializer;
 use CycloneDX\Serialize\JsonSerializer;
-use CycloneDX\Specs\Spec10;
 use CycloneDX\Specs\Spec11;
 use CycloneDX\Specs\Spec12;
 use CycloneDX\Specs\Spec13;
@@ -69,25 +68,11 @@ class JsonTest extends TestCase
         return $this->schemaContracts[$schema];
     }
 
-    // region Spec10
+    // region Spec 1.0
+    // Spec 1.0 is not implemented
+    // endregion Spec 1.0
 
-    /**
-     * Schema 1.0 is not specified for JSON.
-     */
-    public function testSerialization10(): void
-    {
-        $spec = new Spec10();
-        $serializer = new JsonSerializer($spec);
-
-        $this->expectException(RuntimeException::class);
-        $this->expectExceptionMessageMatches('/unsupported spec version./i');
-
-        @$serializer->serialize(new Bom());
-    }
-
-    // endregion Spec10
-
-    // region Spec11
+    // region Spec 1.1
 
     /**
      * Schema 1.1 is not specified for JSON.
@@ -103,9 +88,9 @@ class JsonTest extends TestCase
         @$serializer->serialize(new Bom());
     }
 
-    // endregion Spec11
+    // endregion Spec 1.1
 
-    // region Spec12
+    // region Spec 1.2
 
     /**
      * This test might be slow.
@@ -151,9 +136,9 @@ class JsonTest extends TestCase
         self::assertEquals($bom, $deserialized);
     }
 
-    // endregion Spec12
+    // endregion Spec 1.2
 
-    // region Spec13
+    // region Spec 1.3
 
     /**
      * This test might be slow.
@@ -199,5 +184,5 @@ class JsonTest extends TestCase
         self::assertEquals($bom, $deserialized);
     }
 
-    // endregion Spec13
+    // endregion Spec 1.3
 }
