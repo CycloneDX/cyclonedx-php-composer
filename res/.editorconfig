@@ -1,5 +1,5 @@
 
 # fix settings for files that are copied over, to keep them as is
-[spdx-licenses.json]
+[spdx-licenses.SNAPSHOT.json]
 indent_size = 4
 indent_style = space
