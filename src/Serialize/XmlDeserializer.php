@@ -36,6 +36,10 @@ use PackageUrl\PackageUrl;
 /**
  * transform XML to data models.
  *
+ * !! currently in beta status. not intended for public use.
+ *
+ * @internal
+ *
  * @author jkowalleck
  */
 class XmlDeserializer extends AbstractSerialize implements DeserializerInterface
