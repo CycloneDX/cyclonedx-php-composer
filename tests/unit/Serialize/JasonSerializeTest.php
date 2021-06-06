@@ -46,8 +46,8 @@ class JasonSerializeTest extends TestCase
      */
     public function testSerialize(bool $pretty, string $expectedJson): void
     {
-        $bom = $this->createMock(Bom::class);
-        $spec = $this->createMock(SpecInterface::class);
+        $bom = $this->createStub(Bom::class);
+        $spec = $this->createStub(SpecInterface::class);
         $spec->method('getVersion')->willReturn('999');
         $serializer = $this->createPartialMock(JsonSerializer::class, ['bomToJson']);
         $serializer->setSpec($spec);
@@ -77,14 +77,14 @@ class JasonSerializeTest extends TestCase
      */
     public function testSerializeThrowsOnLowVersion(string $version): void
     {
-        $spec = $this->createMock(SpecInterface::class);
+        $spec = $this->createStub(SpecInterface::class);
         $spec->method('getVersion')->willReturn($version);
         $serializer = new JsonSerializer($spec);
 
         $this->expectException(\RuntimeException::class);
         $this->expectExceptionMessageMatches('/unsupported spec version/i');
 
-        $serializer->serialize($this->createMock(Bom::class));
+        $serializer->serialize($this->createStub(Bom::class));
     }
 
     public static function dpUnsupportedSpecVersions(): Generator
@@ -105,13 +105,13 @@ class JasonSerializeTest extends TestCase
 
     public function testBomToJson(): void
     {
-        $spec = $this->createMock(SpecInterface::class);
+        $spec = $this->createStub(SpecInterface::class);
         $spec->method('getVersion')->willReturn('mySpecVersion');
         $spec->method('isSupportedComponentType')
             ->with('myType')
             ->willReturn(true);
 
-        $fakeComponent = $this->createMock(Component::class);
+        $fakeComponent = $this->createStub(Component::class);
         $serializer = $this->createPartialMock(JsonSerializer::class, ['componentToJson']);
         $serializer->setSpec($spec);
         $bom = $this->createConfiguredMock(
@@ -149,9 +149,9 @@ class JasonSerializeTest extends TestCase
 
     public function testComponentToJsonThrowsOnFalseType(): void
     {
-        $spec = $this->createMock(SpecInterface::class);
+        $spec = $this->createStub(SpecInterface::class);
         $serializer = new JsonSerializer($spec);
-        $component = $this->createMock(Component::class);
+        $component = $this->createStub(Component::class);
         $component->method('getType')->willReturn('myType');
 
         $spec->expects(self::once())->method('isSupportedComponentType')
@@ -165,7 +165,7 @@ class JasonSerializeTest extends TestCase
 
     public function testComponentToJson(): void
     {
-        $spec = $this->createMock(SpecInterface::class);
+        $spec = $this->createStub(SpecInterface::class);
         $spec->expects(self::once())->method('isSupportedComponentType')
             ->with('myType')
             ->willReturn(true);
@@ -228,7 +228,7 @@ class JasonSerializeTest extends TestCase
 
     public function testComponentToJsonEradicateNulls(): void
     {
-        $spec = $this->createMock(SpecInterface::class);
+        $spec = $this->createStub(SpecInterface::class);
         $spec->expects(self::once())->method('isSupportedComponentType')
             ->with('myType')
             ->willReturn(true);
@@ -269,7 +269,7 @@ class JasonSerializeTest extends TestCase
     {
         $hash = ['alg' => $this->getRandomString(), 'content' => $this->getRandomString()];
 
-        $spec = $this->createMock(SpecInterface::class);
+        $spec = $this->createStub(SpecInterface::class);
         $spec->method('isSupportedHashAlgorithm')->with($hash['alg'])->willReturn(true);
         $spec->method('isSupportedHashContent')->with($hash['content'])->willReturn(true);
         $serializer = new JsonSerializer($spec);
@@ -283,7 +283,7 @@ class JasonSerializeTest extends TestCase
     {
         $algorithm = $this->getRandomString();
 
-        $spec = $this->createMock(SpecInterface::class);
+        $spec = $this->createStub(SpecInterface::class);
         $spec->method('isSupportedHashAlgorithm')->with($algorithm)->willReturn(false);
         $spec->method('isSupportedHashContent')->willReturn(true);
         $serializer = new JsonSerializer($spec);
@@ -297,7 +297,7 @@ class JasonSerializeTest extends TestCase
     {
         $content = $this->getRandomString();
 
-        $spec = $this->createMock(SpecInterface::class);
+        $spec = $this->createStub(SpecInterface::class);
         $spec->method('isSupportedHashAlgorithm')->willReturn(true);
         $spec->method('isSupportedHashContent')->with($content)->willReturn(false);
         $serializer = new JsonSerializer($spec);
@@ -318,7 +318,7 @@ class JasonSerializeTest extends TestCase
      */
     public function testLicenseToJson(License $license, $expected): void
     {
-        $serializer = new JsonSerializer($this->createMock(SpecInterface::class));
+        $serializer = new JsonSerializer($this->createStub(SpecInterface::class));
         $data = $serializer->licenseToJson($license);
         self::assertEquals($expected, $data);
     }
@@ -357,7 +357,7 @@ class JasonSerializeTest extends TestCase
     {
         $serializer = $this->createPartialMock(JsonSerializer::class, ['licenseToJson']);
 
-        $license = $this->createMock(License::class);
+        $license = $this->createStub(License::class);
         $licenseFake = ['dummy' => $this->getRandomString()];
         $licenses = [$license];
 

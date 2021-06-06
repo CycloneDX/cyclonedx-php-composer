@@ -44,8 +44,9 @@ class XmlSerializeTest extends TestCase
      */
     public function testLicenseToDom(License $license, $expected): void
     {
-        $serializer = new XmlSerializer($this->createMock(SpecInterface::class));
-        $domElem = $serializer->licenseToDom(new DOMDocument(), $license);
+        $dom = new DOMDocument();
+        $serializer = new XmlSerializer($this->createStub(SpecInterface::class));
+        $domElem = $serializer->licenseToDom($dom, $license);
         self::assertDomNodeEqualsDomNode($expected, $domElem);
     }
 
@@ -57,16 +58,14 @@ class XmlSerializeTest extends TestCase
         $license = $this->createStub(License::class);
         $license->method('getName')->willReturn($name);
         $expected = $dom->createElement('license');
-        $expected->appendChild($dom->createElement('name'))
-            ->appendChild($dom->createTextNode($name));
+        $expected->appendChild($dom->createElement('name', $name));
         yield 'withName' => [$license, $expected];
 
         $id = $this->getRandomString();
         $license = $this->createStub(License::class);
         $license->method('getId')->willReturn($id);
         $expected = $dom->createElement('license');
-        $expected->appendChild($dom->createElement('id'))
-            ->appendChild($dom->createTextNode($id));
+        $expected->appendChild($dom->createElement('id', $id));
         yield 'withId' => [$license, $expected];
 
         $name = $this->getRandomString();
@@ -75,10 +74,8 @@ class XmlSerializeTest extends TestCase
         $license->method('getUrl')->willReturn($url);
         $license->method('getName')->willReturn($name);
         $expected = $dom->createElement('license');
-        $expected->appendChild($dom->createElement('name'))
-            ->appendChild($dom->createTextNode($name));
-        $expected->appendChild($dom->createElement('url'))
-            ->appendChild($dom->createTextNode($url));
+        $expected->appendChild($dom->createElement('name', $name));
+        $expected->appendChild($dom->createElement('url', $url));
         yield 'withUrl' => [$license, $expected];
     }
 
