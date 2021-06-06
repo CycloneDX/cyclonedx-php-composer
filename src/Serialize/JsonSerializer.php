@@ -163,8 +163,8 @@ class JsonSerializer extends AbstractSerialize implements SerializerInterface
             try {
                 yield $this->hashToJson($algorithm, $content);
             } catch (DomainException $exception) {
-                trigger_error("skipped hash: {$exception->getMessage()} ({$algorithm}, {$content})", \E_USER_WARNING);
-                unset($exception); // @codeCoverageIgnore
+                // skipped unsupported hash
+                unset($exception);
             }
         }
     }

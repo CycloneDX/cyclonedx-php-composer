@@ -146,7 +146,7 @@ class XmlSerializer extends AbstractSerialize implements SerializerInterface
             try {
                 $hashElems[] = $this->hashToDom($document, $algorithm, $content);
             } catch (DomainException $exception) {
-                trigger_error("Skipped hash: {$exception->getMessage()} ({$algorithm}, {$content})", \E_USER_WARNING);
+                // skipped unsupported hash
                 unset($exception);
             }
         }

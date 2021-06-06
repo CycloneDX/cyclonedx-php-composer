@@ -393,11 +393,10 @@ class JasonSerializeTest extends TestCase
         self::assertEquals($expected, $serialized);
     }
 
-    public function testHashesToJsonThrows(): void
+    public function testHashesToJsonSkipWhenThrows(): void
     {
         $serializer = $this->createPartialMock(JsonSerializer::class, ['hashToJson']);
 
-        $errorMessage = $this->getRandomString();
         $algorithm = $this->getRandomString();
         $content = $this->getRandomString();
         $hashes = [
@@ -406,13 +405,11 @@ class JasonSerializeTest extends TestCase
 
         $serializer->method('hashToJson')
             ->with($algorithm, $content)
-            ->willThrowException(new DomainException($errorMessage));
+            ->willThrowException(new DomainException($this->getRandomString()));
 
-        $this->expectWarning();
-        $this->expectWarningMessageMatches('/skipped hash/i');
-        $this->expectWarningMessageMatches('/'.preg_quote($errorMessage, '/').'/');
+        $got = iterator_to_array($serializer->hashesToJson($hashes));
 
-        iterator_to_array($serializer->hashesToJson($hashes));
+        self::assertCount(0, $got);
     }
 
     // endregion
