@@ -18,8 +18,8 @@
     * Added an optional option `--spec-version` for the CycloneDX spec version.  
       Supported values: "1.0", "1.1", "1.2", "1.3".  
       Defaults to "1.3".
-  * JSON deserializers for known data models according to spec1.2.
-  * XML deserializers for known data models according to spec1.1.
+  * Support for JSON output format.  
+    JSON support was a preview before and became a basic part of the plugin now.
 * Removed
   * This plugin no longer supports `php<7.3`.
   * This plugin no longer supports composer v1.

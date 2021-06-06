@@ -34,6 +34,10 @@ use PackageUrl\PackageUrl;
 /**
  * transform JSON to data models.
  *
+ * !! currently in beta status. not intended for public use.
+ *
+ * @internal
+ *
  * @author jkowalleck
  */
 class JsonDeserializer extends AbstractSerialize implements DeserializerInterface
