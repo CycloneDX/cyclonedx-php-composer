@@ -30,6 +30,14 @@ namespace CycloneDX\Specs;
  */
 trait SupportsTrait
 {
+    /**
+     * @psalm-return Version::V_*
+     */
+    public function getVersion(): string
+    {
+        return self::VERSION;
+    }
+
     public function isSupportedComponentType(string $classification): bool
     {
         return \in_array($classification, self::COMPONENT_TYPES, true);
