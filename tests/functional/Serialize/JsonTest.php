@@ -29,6 +29,7 @@ use CycloneDX\Serialize\JsonSerializer;
 use CycloneDX\Specs\Spec10;
 use CycloneDX\Specs\Spec11;
 use CycloneDX\Specs\Spec12;
+use CycloneDX\Specs\Spec13;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 use Swaggest\JsonSchema;
@@ -152,5 +153,51 @@ class JsonTest extends TestCase
 
     // endregion Spec12
 
-    // @TODO add Spec 13 tests
+    // region Spec13
+
+    /**
+     * This test might be slow.
+     * This test might require online-connectivity.
+     *
+     * @dataProvider \CycloneDX\Tests\_data\BomModelProvider::fullBomTestData
+     * @dataProvider \CycloneDX\Tests\_data\BomModelProvider::bomWithComponentHashAlgorithmsSpec13()
+     */
+    public function testSchema13(Bom $bom): void
+    {
+        $spec = new Spec13();
+        $schemaPath = realpath(__DIR__.'/../../_spec/bom-1.3.SNAPSHOT.schema.json');
+
+        self::assertIsString($schemaPath);
+        self::assertFileExists($schemaPath);
+
+        $serializer = new JsonSerializer($spec);
+
+        $json = @$serializer->serialize($bom);
+        self::assertJson($json);
+        $data = json_decode($json, false, 512, \JSON_THROW_ON_ERROR);
+
+        $schemaContracts = $this->getSchemaContract($schemaPath);
+        self::assertInstanceOf(
+            JsonSchema\Structure\ObjectItem::class,
+            $schemaContracts->in($data) // throws on schema mismatch
+        );
+    }
+
+    /**
+     * @dataProvider \CycloneDX\Tests\_data\BomModelProvider::fullBomTestData
+     * @dataProvider \CycloneDX\Tests\_data\BomModelProvider::bomWithComponentHashAlgorithmsSpec13()
+     */
+    public function testSerialization13(Bom $bom): void
+    {
+        $spec = new Spec13();
+        $serializer = new JsonSerializer($spec);
+        $deserializer = new JsonDeserializer($spec);
+
+        $serialized = @$serializer->serialize($bom);
+        $deserialized = @$deserializer->deserialize($serialized);
+
+        self::assertEquals($bom, $deserialized);
+    }
+
+    // endregion Spec13
 }

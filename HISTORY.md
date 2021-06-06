@@ -8,7 +8,7 @@
   * Complete rewrite/refactor.  
     Expect library classes/methods/functions to be removed, renamed or incompatible to previous versions - see the source for changes.  
   * CLI via `composer make-bom`
-    * Now defaults to the latest supported version of CycloneDX spec: 1.2  
+    * Now defaults to the latest supported version of CycloneDX spec: 1.3  
       See option `--spec-version`.
     * Deprecated switch `--json` was removed.  
       Use option `--output-format=JSON` instead.
@@ -16,8 +16,8 @@
   * CLI
     * Support for output to _STDOUT_. Use option `--output-file=-`.
     * Added an optional option `--spec-version` for the CycloneDX spec version.  
-      Supported values: "1.0", "1.1", "1.2".  
-      Defaults to "1.2".
+      Supported values: "1.0", "1.1", "1.2", "1.3".  
+      Defaults to "1.3".
   * JSON deserializers for known data models according to spec1.2.
   * XML deserializers for known data models according to spec1.1.
 * Removed

@@ -30,7 +30,7 @@ use InvalidArgumentException;
  */
 final class SpecFactory
 {
-    public const VERSION_LATEST = Version::V_1_2; // @TODO set Spec 13
+    public const VERSION_LATEST = Version::V_1_3;
 
     /**
      * @psalm-var array<Version::V_*, class-string<SpecInterface>>
@@ -39,7 +39,7 @@ final class SpecFactory
         Version::V_1_0 => Spec10::class,
         Version::V_1_1 => Spec11::class,
         Version::V_1_2 => Spec12::class,
-        // @TODO add Spec 13
+        Version::V_1_3 => Spec13::class,
     ];
 
     /**
