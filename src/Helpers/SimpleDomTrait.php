@@ -67,7 +67,7 @@ trait SimpleDomTrait
 
     /**
      * @psalm-param mixed|null $data
-     * @psalm-param bool                  $null whether to return null wgen `$data` is null
+     * @psalm-param bool       $null whether to return null when `$data` is null
      */
     private function simpleDomSafeTextElement(DOMDocument $document, string $name, $data, bool $null = true): ?DOMElement
     {

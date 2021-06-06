@@ -6,8 +6,6 @@
       <name><![CDATA[cyclonedx-php-composer-local-demo-dependency]]></name>
       <version><![CDATA[dev-rework_refactor]]></version>
       <description><![CDATA[a package that is hosted locally and required in a local demo]]></description>
-      <hashes></hashes>
-      <licenses></licenses>
       <purl><![CDATA[pkg:composer/cyclonedx/cyclonedx-php-composer-local-demo-dependency@dev-rework_refactor]]></purl>
     </component>
   </components>
