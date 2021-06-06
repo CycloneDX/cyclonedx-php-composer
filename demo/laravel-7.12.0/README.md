@@ -2,7 +2,7 @@
 
 *ATTENTION*: this demo might use known vulnerable dependencies for showcasing purposes.
 
-The output is reproducible, due to the [shipped composer-locked](project/composer.lock) versions.  
+The output is _reproducible_, due to the [shipped composer-locked](project/composer.lock) versions.  
 Therefore, the demo requires a special php environment, which is caused by the composer-requirements:
 * php>=7.3, <8
 
@@ -12,8 +12,8 @@ Generated example results are also available at
 [CycloneDX/sbom-examples](https://github.com/CycloneDX/sbom-examples/)
 as "laravel-7.12.0".
 
-* [`results/bom.xml`](results/bom.xml)
-* [`results/bom.json`](results/bom.json)
+* [`results/bom11.xml`](results/bom11.xml)
+* [`results/bom12.json`](results/bom12.json)
 
 
 ## Setup
@@ -41,9 +41,9 @@ Run one of these from the demo directory:
   ```
 * Make XML sbom:
   ```shell
-  composer -dproject make-bom --exclude-dev --output-file="$PWD/results/bom.xml"
+  composer -dproject make-bom --exclude-dev --spec-version=1.1 --output-format=XML --output-file="$PWD/results/bom11.xml"
   ```
 * Make JSON sbom:
   ```shell
-  composer -dproject make-bom --exclude-dev --json --output-file="$PWD/results/bom.json"
+  composer -dproject make-bom --exclude-dev --spec-version=1.2 --output-format=JSON --output-file="$PWD/results/bom12.json"
   ```

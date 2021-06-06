@@ -37,9 +37,9 @@ Run one of these from the demo directory:
   ```
 * Make XML sbom:
   ```shell
-  composer -dproject make-bom --exclude-dev --output-file="$PWD/example-results/bom.xml"
+  composer -dproject make-bom --exclude-dev --output-format=XML  --output-file="$PWD/example-results/bom.xml"
   ```
 * Make JSON sbom:
   ```shell
-  composer -dproject make-bom --exclude-dev --json --output-file="$PWD/example-results/bom.json"
+  composer -dproject make-bom --exclude-dev --output-format=JSON --output-file="$PWD/example-results/bom.json"
   ```

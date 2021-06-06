@@ -266,7 +266,7 @@ jobs:
           --show-progress=dots
           --no-interaction
   demo:
-    # test spec-versions 1.0 - 1.2
+    # test spec-versions 1.0 - 1.3
     name: Demo "${{ matrix.subject }}" (${{ matrix.php }})
     runs-on: ubuntu-latest
     timeout-minutes: 30
