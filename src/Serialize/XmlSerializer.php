@@ -171,7 +171,7 @@ class XmlSerializer extends AbstractSerialize implements SerializerInterface
         return $element;
     }
 
-    private function licenseToDom(DOMDocument $document, License $license): DOMElement
+    public function licenseToDom(DOMDocument $document, License $license): DOMElement
     {
         $element = $document->createElement('license');
         $this->simpleDomAppendChildren($element, [
