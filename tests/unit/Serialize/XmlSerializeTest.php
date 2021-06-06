@@ -69,19 +69,20 @@ class XmlSerializeTest extends TestCase
         self::assertNull($got);
     }
 
-    public function testHashesToDomTriggerWarningWhenThrown(): void
+    public function testHashesToDomSkipWhenThrown(): void
     {
+        $algorithm = $this->getRandomString();
+        $content = $this->getRandomString();
+        $dom = new DOMDocument();
+
         $serializer = $this->createPartialMock(XmlSerializer::class, ['hashToDom']);
         $serializer->expects(self::once())->method('hashToDom')
-            ->willThrowException(new DomainException('DummyError'));
+            ->with($dom, $algorithm, $content)
+            ->willThrowException(new DomainException($this->getRandomString()));
 
-        $this->expectWarning();
-        $this->expectWarningMessageMatches('/skipped hash/i');
-        $this->expectWarningMessageMatches('/DummyError/');
+        $got = $serializer->hashesToDom($dom, [$algorithm => $content]);
 
-        $got = $serializer->hashesToDom(new DOMDocument(), ['foo' => 'bar']);
-
-        self::assertNotNull($got);
+        self::assertNull($got);
     }
 
     // endregion hashesToDom

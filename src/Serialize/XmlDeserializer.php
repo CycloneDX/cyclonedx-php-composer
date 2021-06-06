@@ -160,7 +160,7 @@ class XmlDeserializer extends AbstractSerialize implements DeserializerInterface
                         // @TOD implement a model for LicenseExpression
                         yield new License($element->nodeValue);
                     } else {
-                        trigger_error('Found unsupported LicenseExpression. Using License instead', \E_USER_NOTICE);
+                        // Found unsupported LicenseExpression. Using License instead
                         yield new License($element->nodeValue);
                     }
                     break;
