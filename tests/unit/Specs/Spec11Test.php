@@ -24,23 +24,20 @@ declare(strict_types=1);
 namespace CycloneDX\Tests\unit\Specs;
 
 use CycloneDX\Specs\Spec11;
-use PHPUnit\Framework\TestCase;
+use CycloneDX\Specs\SpecInterface;
 
 /**
  * @covers \CycloneDX\Specs\Spec11
  */
-class Spec11Test extends TestCase
+class Spec11Test extends AbstractSpecTestCase
 {
-    private $spec;
-
-    protected function setUp(): void
+    protected function getSpec(): SpecInterface
     {
-        $this->spec = new Spec11();
+        return new Spec11();
     }
 
-    public function testVersion(): void
+    protected function getSpecVersion(): string
     {
-        $version = $this->spec->getVersion();
-        self::assertSame('1.1', $version);
+        return '1.1';
     }
 }

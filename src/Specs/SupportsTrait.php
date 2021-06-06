@@ -66,6 +66,6 @@ trait SupportsTrait
 
     public function isSupportedHashContent(string $content): bool
     {
-        return false !== preg_match(self::HASH_CONTENT_REGEX, $content);
+        return 1 === preg_match(self::HASH_CONTENT_REGEX, $content);
     }
 }

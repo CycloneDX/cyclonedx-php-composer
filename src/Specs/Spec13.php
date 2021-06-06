@@ -55,6 +55,7 @@ final class Spec13 implements SpecInterface
         HashAlgorithm::SHA_384,
         HashAlgorithm::SHA_512,
         HashAlgorithm::SHA3_256,
+        HashAlgorithm::SHA3_384,
         HashAlgorithm::SHA3_512,
         HashAlgorithm::BLAKE2B_256,
         HashAlgorithm::BLAKE2B_384,
@@ -62,7 +63,7 @@ final class Spec13 implements SpecInterface
         HashAlgorithm::BLAKE3,
     ];
 
-    private const HASH_CONTENT_REGEX = '/^([a-fA-F0-9]{32}|[a-fA-F0-9]{40}|[a-fA-F0-9]{64}|[a-fA-F0-9]{96}|[a-fA-F0-9]{128})$/';
+    private const HASH_CONTENT_REGEX = '/^(?:[a-fA-F0-9]{32}|[a-fA-F0-9]{40}|[a-fA-F0-9]{64}|[a-fA-F0-9]{96}|[a-fA-F0-9]{128})$/';
 
     // endregion SupportsTrait
 }
