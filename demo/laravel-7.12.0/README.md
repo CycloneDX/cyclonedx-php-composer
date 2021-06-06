@@ -12,8 +12,12 @@ Generated example results are also available at
 [CycloneDX/sbom-examples](https://github.com/CycloneDX/sbom-examples/)
 as "laravel-7.12.0".
 
-* [`results/bom11.xml`](results/bom11.xml)
-* [`results/bom12.json`](results/bom12.json)
+* [`results/bom.1.0.xml`](results/bom.1.0.xml)
+* [`results/bom.1.1.xml`](results/bom.1.1.xml)
+* [`results/bom.1.2.xml`](results/bom.1.2.xml)
+* [`results/bom.1.3.xml`](results/bom.1.3.xml)
+* [`results/bom.1.2.json`](results/bom.1.2.json)
+* [`results/bom.1.3.json`](results/bom.1.3.json)
 
 
 ## Setup
@@ -41,9 +45,13 @@ Run one of these from the demo directory:
   ```
 * Make XML sbom:
   ```shell
-  composer -dproject make-bom --exclude-dev --spec-version=1.1 --output-format=XML --output-file="$PWD/results/bom11.xml"
+  composer -dproject make-bom --exclude-dev --spec-version=1.0 --output-format=XML --output-file="$PWD/results/bom.1.0.xml"
+  composer -dproject make-bom --exclude-dev --spec-version=1.1 --output-format=XML --output-file="$PWD/results/bom.1.1.xml"
+  composer -dproject make-bom --exclude-dev --spec-version=1.2 --output-format=XML --output-file="$PWD/results/bom.1.2.xml"
+  composer -dproject make-bom --exclude-dev --spec-version=1.3 --output-format=XML --output-file="$PWD/results/bom.1.3.xml"
   ```
 * Make JSON sbom:
   ```shell
-  composer -dproject make-bom --exclude-dev --spec-version=1.2 --output-format=JSON --output-file="$PWD/results/bom12.json"
+  composer -dproject make-bom --exclude-dev --spec-version=1.2 --output-format=JSON --output-file="$PWD/results/bom.1.2.json"
+  composer -dproject make-bom --exclude-dev --spec-version=1.3 --output-format=JSON --output-file="$PWD/results/bom.1.3.json"
   ```

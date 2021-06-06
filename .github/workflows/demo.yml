@@ -1,0 +1,99 @@
+# For details of what checks are run for PRs please refer below
+# docs: https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions
+name: DEMO
+
+on:
+  push:
+    branches: ["master"]
+  pull_request:
+  workflow_dispatch:
+  schedule:
+    # schedule weekly tests, since dependencies are not intended to be pinned
+    # this means: at 23:42 on Fridays
+    - cron: '42 23 * * 5'
+
+env:
+  PHP_PROJECT_EXT: dom,json,xmlwriter
+  REPORTS_DIR: CI_reports
+
+jobs:
+  reproducible:
+    name: Reproducible "laravel-7.12.0" (${{ matrix.spec-version }} ${{ matrix.output-format }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      REPORTS_ARTIFACT: demo-reproducible
+      DEMO_RUN_DIR: demo/laravel-7.12.0
+    strategy:
+      fail-fast: false
+      matrix:
+        php: ["8.0"] # highest supported
+        output-format:
+          - xml
+          - json
+        spec-version:
+          - "1.0"
+          - "1.1"
+          - "1.2"
+          - "1.3"
+        exclude:
+          # exclude unsupported combinations
+          - output-format: json
+            spec-version: "1.0"
+          - output-format: json
+            spec-version: "1.1"
+    steps:
+      - name: Checkout
+        # see https://github.com/actions/checkout
+        uses: actions/checkout@v2
+      - name: Setup paths and folders
+        run: |
+          PWD="$(pwd -P)"
+          REPORTS_DIR_PATH="$PWD/$REPORTS_DIR"
+          mkdir -p "$REPORTS_DIR_PATH"
+          echo "REPORTS_DIR_PATH=$REPORTS_DIR_PATH" >> $GITHUB_ENV
+          echo "OUT_FILE_PATH=$REPORTS_DIR_PATH/bom.${{ matrix.spec-version }}.${{ matrix.output-format }}" >> $GITHUB_ENV
+          echo "COMPARE_FILE_PATH=$PWD/$DEMO_RUN_DIR/results/bom.${{ matrix.spec-version }}.${{ matrix.output-format }}" >> $GITHUB_ENV
+      - name: Setup PHP
+        # see https://github.com/shivammathur/setup-php
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: ${{ env.PHP_PROJECT_EXT }}
+          tools: composer:v2
+          coverage: none
+      - name: Determine composer cache directory
+        run: echo "COMPOSER_CACHE_DIR_PATH=$(composer config cache-dir)" >> $GITHUB_ENV
+      - name: Cache dependencies installed with composer
+        # see https://github.com/actions/cache
+        uses: actions/cache@v2.1.6
+        with:
+          path: ${{ env.COMPOSER_CACHE_DIR_PATH }}
+          key: rep_demo-php${{ matrix.php }}-${{ hashFiles('**/composer.json') }}
+          restore-keys: rep_demo-php${{ matrix.php }}-
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-interaction --no-progress
+        working-directory: ${{ env.DEMO_RUN_DIR }}/project
+      - name: Make SBOM
+        run: >
+          composer make-bom
+          -vvv
+          --exclude-dev
+          --spec-version=${{ matrix.spec-version }}
+          --output-format=${{ matrix.output-format }}
+          --output-file="$OUT_FILE_PATH"
+        working-directory: ${{ env.DEMO_RUN_DIR }}/project
+      - name: Artifact reports
+        if: ${{ ! cancelled() }}
+        # see https://github.com/actions/upload-artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: ${{ env.REPORTS_ARTIFACT }}
+          path: ${{ env.REPORTS_DIR }}
+          if-no-files-found: error
+      - name: Compare reproducible SBOM
+        if: ${{ ! cancelled() }}
+        run: >
+          diff -s
+          "$COMPARE_FILE_PATH"
+          "$OUT_FILE_PATH"
