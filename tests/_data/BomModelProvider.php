@@ -28,10 +28,6 @@ use CycloneDX\Enums\HashAlgorithm;
 use CycloneDX\Models\Bom;
 use CycloneDX\Models\Component;
 use CycloneDX\Models\License;
-use CycloneDX\Specs\Spec10;
-use CycloneDX\Specs\Spec11;
-use CycloneDX\Specs\Spec12;
-use CycloneDX\Specs\Spec13;
 use Generator;
 
 /**
@@ -146,43 +142,43 @@ abstract class BomModelProvider
     }
 
     /**
-     * BOMs with all hash algorithms available in Spec10.
+     * BOMs with all hash algorithms available in Spec 1.0.
      *
      * @psalm-return Generator<array{Bom}>
      */
     public static function bomWithComponentHashAlgorithmsSpec10(): Generator
     {
-        yield from self::bomWithComponentHashAlgorithmsFromSpec((new Spec10())->getSupportedHashAlgorithms());
+        yield from self::bomWithComponentHashAlgorithmsFromSpec(BomSpec::getHashAlgEnumForVersion('1.0'));
     }
 
     /**
-     * BOMs with all hash algorithms available in Spec11.
+     * BOMs with all hash algorithms available in Spec 1.1.
      *
      * @psalm-return Generator<array{Bom}>
      */
     public static function bomWithComponentHashAlgorithmsSpec11(): Generator
     {
-        yield from self::bomWithComponentHashAlgorithmsFromSpec((new Spec11())->getSupportedHashAlgorithms());
+        yield from self::bomWithComponentHashAlgorithmsFromSpec(BomSpec::getHashAlgEnumForVersion('1.1'));
     }
 
     /**
-     * BOMs with all hash algorithms available in Spec12.
+     * BOMs with all hash algorithms available in Spec 1.2.
      *
      * @psalm-return Generator<array{Bom}>
      */
     public static function bomWithComponentHashAlgorithmsSpec12(): Generator
     {
-        yield from self::bomWithComponentHashAlgorithmsFromSpec((new Spec12())->getSupportedHashAlgorithms());
+        yield from self::bomWithComponentHashAlgorithmsFromSpec(BomSpec::getHashAlgEnumForVersion('1.2'));
     }
 
     /**
-     * BOMs with all hash algorithms available in Spec13.
+     * BOMs with all hash algorithms available in Spec 1.3.
      *
      * @psalm-return Generator<array{Bom}>
      */
     public static function bomWithComponentHashAlgorithmsSpec13(): Generator
     {
-        yield from self::bomWithComponentHashAlgorithmsFromSpec((new Spec13())->getSupportedHashAlgorithms());
+        yield from self::bomWithComponentHashAlgorithmsFromSpec(BomSpec::getHashAlgEnumForVersion('1.3'));
     }
 
     /**
