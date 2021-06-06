@@ -31,6 +31,7 @@ use CycloneDX\Models\License;
 use CycloneDX\Specs\Spec10;
 use CycloneDX\Specs\Spec11;
 use CycloneDX\Specs\Spec12;
+use CycloneDX\Specs\Spec13;
 use Generator;
 
 /**
@@ -145,7 +146,7 @@ abstract class BomModelProvider
     }
 
     /**
-     * BOMs with all hash algorithms available. in Spec11.
+     * BOMs with all hash algorithms available in Spec10.
      *
      * @psalm-return Generator<array{Bom}>
      */
@@ -155,7 +156,7 @@ abstract class BomModelProvider
     }
 
     /**
-     * BOMs with all hash algorithms available. in Spec11.
+     * BOMs with all hash algorithms available in Spec11.
      *
      * @psalm-return Generator<array{Bom}>
      */
@@ -165,13 +166,23 @@ abstract class BomModelProvider
     }
 
     /**
-     * BOMs with all hash algorithms available. in Spec11.
+     * BOMs with all hash algorithms available in Spec12.
      *
      * @psalm-return Generator<array{Bom}>
      */
     public static function bomWithComponentHashAlgorithmsSpec12(): Generator
     {
         yield from self::bomWithComponentHashAlgorithmsFromSpec((new Spec12())->getSupportedHashAlgorithms());
+    }
+
+    /**
+     * BOMs with all hash algorithms available in Spec13.
+     *
+     * @psalm-return Generator<array{Bom}>
+     */
+    public static function bomWithComponentHashAlgorithmsSpec13(): Generator
+    {
+        yield from self::bomWithComponentHashAlgorithmsFromSpec((new Spec13())->getSupportedHashAlgorithms());
     }
 
     /**
