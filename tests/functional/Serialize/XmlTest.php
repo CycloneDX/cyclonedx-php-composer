@@ -27,6 +27,8 @@ use CycloneDX\Models\Bom;
 use CycloneDX\Serialize\XmlDeserializer;
 use CycloneDX\Serialize\XmlSerializer;
 use CycloneDX\Specs\Spec11;
+use CycloneDX\Specs\Spec12;
+use CycloneDX\Specs\Spec13;
 use DOMDocument;
 use DOMException;
 use PHPUnit\Framework\TestCase;
@@ -88,11 +90,97 @@ class XmlTest extends TestCase
     // endregion Spec 1.1
 
     // region Spec 1.2
-    // @TODO add Spec 1.2 tests
+
+    /**
+     * This test might be slow.
+     * This test might require online-connectivity.
+     *
+     * @dataProvider \CycloneDX\Tests\_data\BomModelProvider::fullBomTestData
+     * @dataProvider \CycloneDX\Tests\_data\BomModelProvider::bomWithComponentAllHashAlgorithms
+     */
+    public function testSchema12(Bom $bom): void
+    {
+        $spec = new Spec12();
+        $schema = realpath(__DIR__.'/../../_spec/bom-1.2.SNAPSHOT.xsd');
+
+        self::assertIsString($schema);
+        self::assertFileExists($schema);
+
+        $serializer = new XmlSerializer($spec);
+
+        $xml = @$serializer->serialize($bom);
+        $doc = $this->loadDomFromXml($xml); // throws on error
+
+        libxml_use_internal_errors(false); // send errors to PHPUnit
+        self::assertTrue(
+            $doc->schemaValidate($schema), // warns on schema mismatch. might be handled by PHPUnit as error.
+            $xml
+        );
+    }
+
+    /**
+     * @dataProvider \CycloneDX\Tests\_data\BomModelProvider::fullBomTestData
+     * @dataProvider \CycloneDX\Tests\_data\BomModelProvider::bomWithComponentHashAlgorithmsSpec12()
+     */
+    public function testSerializer12(Bom $bom): void
+    {
+        $spec = new Spec12();
+        $serializer = new XmlSerializer($spec);
+        $deserializer = new XmlDeserializer($spec);
+
+        $serialized = @$serializer->serialize($bom);
+        $deserialized = @$deserializer->deserialize($serialized);
+
+        self::assertEquals($bom, $deserialized);
+    }
+
     // endregion Spec 1.2
 
     // region Spec 1.3
-    // @TODO add Spec 1.3 tests
+
+    /**
+     * This test might be slow.
+     * This test might require online-connectivity.
+     *
+     * @dataProvider \CycloneDX\Tests\_data\BomModelProvider::fullBomTestData
+     * @dataProvider \CycloneDX\Tests\_data\BomModelProvider::bomWithComponentAllHashAlgorithms
+     */
+    public function testSchema13(Bom $bom): void
+    {
+        $spec = new Spec13();
+        $schema = realpath(__DIR__.'/../../_spec/bom-1.3.SNAPSHOT.xsd');
+
+        self::assertIsString($schema);
+        self::assertFileExists($schema);
+
+        $serializer = new XmlSerializer($spec);
+
+        $xml = @$serializer->serialize($bom);
+        $doc = $this->loadDomFromXml($xml); // throws on error
+
+        libxml_use_internal_errors(false); // send errors to PHPUnit
+        self::assertTrue(
+            $doc->schemaValidate($schema), // warns on schema mismatch. might be handled by PHPUnit as error.
+            $xml
+        );
+    }
+
+    /**
+     * @dataProvider \CycloneDX\Tests\_data\BomModelProvider::fullBomTestData
+     * @dataProvider \CycloneDX\Tests\_data\BomModelProvider::bomWithComponentHashAlgorithmsSpec13()
+     */
+    public function testSerializer13(Bom $bom): void
+    {
+        $spec = new Spec13();
+        $serializer = new XmlSerializer($spec);
+        $deserializer = new XmlDeserializer($spec);
+
+        $serialized = @$serializer->serialize($bom);
+        $deserialized = @$deserializer->deserialize($serialized);
+
+        self::assertEquals($bom, $deserialized);
+    }
+
     // endregion Spec 1.3
 
     // region helpers
