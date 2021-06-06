@@ -29,7 +29,7 @@ use CycloneDX\Enums\HashAlgorithm;
 /**
  * @author jkowalleck
  */
-class Spec11 implements SpecInterface
+final class Spec11 implements SpecInterface
 {
     use SupportsTrait;
 
