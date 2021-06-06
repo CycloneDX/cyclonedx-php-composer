@@ -31,13 +31,10 @@ use DomainException;
 use DOMDocument;
 use DOMElement;
 use DOMException;
-use Generator;
 use RuntimeException;
 
 /**
  * Transform data models to XML.
- *
- * @TODO see which parts need to be normalized!
  *
  * @author jkowalleck
  */
@@ -75,17 +72,23 @@ class XmlSerializer extends AbstractSerialize implements SerializerInterface
             'http://cyclonedx.org/schema/bom/'.$this->spec->getVersion(),
             'bom'
         );
-        $this->simpleDomSetAttributes($element, [
-            'version' => $bom->getVersion(),
-            // serialNumber
-        ]);
-        $this->simpleDomAppendChildren($element, [
-            $this->simpleDomAppendChildren(
-                $document->createElement('components'),
-                $this->simpleDomDocumentMap($document, [$this, 'componentToDom'], $bom->getComponents())
-            ),
-            // externalReferences
-        ]);
+        $this->simpleDomSetAttributes(
+            $element,
+            [
+                'version' => $bom->getVersion(),
+                // serialNumber
+            ]
+        );
+        $this->simpleDomAppendChildren(
+            $element,
+            [
+                $this->simpleDomAppendChildren(
+                    $document->createElement('components'),
+                    $this->simpleDomDocumentMap($document, [$this, 'componentToDom'], $bom->getComponents())
+                ),
+                // externalReferences
+            ]
+        );
 
         return $element;
     }
@@ -103,51 +106,54 @@ class XmlSerializer extends AbstractSerialize implements SerializerInterface
         $purl = $component->getPackageUrl();
 
         $element = $document->createElement('component');
-        $this->simpleDomSetAttributes($element, [
-            'type' => $type,
-        ]);
-        $this->simpleDomAppendChildren($element, [
-            // publisher
-            $this->simpleDomSafeTextElement($document, 'group', $component->getGroup()),
-            $this->simpleDomSafeTextElement($document, 'name', $component->getName()),
-            $this->simpleDomSafeTextElement($document, 'version', $component->getVersion()),
-            $this->simpleDomSafeTextElement($document, 'description', $component->getDescription()),
-            // scope
-            $this->simpleDomAppendChildren(
-                $document->createElement('hashes'),
-                $this->hashesToDom($document, $component->getHashes())
-            ),
-            $this->simpleDomAppendChildren(
-                $document->createElement('licenses'),
-                $this->simpleDomDocumentMap($document, [$this, 'licenseToDom'], $component->getLicenses())
-            ),
-            // copyright
-            // cpe <-- DEPRECATED in latest spec
-            $this->simpleDomSafeTextElement($document, 'purl', $purl ? (string) $purl : null),
-            // modified
-            // pedigree
-            // externalReferences
-            // components
-        ]);
+        $this->simpleDomSetAttributes(
+            $element,
+            [
+                'type' => $type,
+            ]
+        );
+        $this->simpleDomAppendChildren(
+            $element,
+            [
+                // publisher
+                $this->simpleDomSafeTextElement($document, 'group', $component->getGroup()),
+                $this->simpleDomSafeTextElement($document, 'name', $component->getName()),
+                $this->simpleDomSafeTextElement($document, 'version', $component->getVersion()),
+                $this->simpleDomSafeTextElement($document, 'description', $component->getDescription()),
+                // scope
+                $this->hashesToDom($document, $component->getHashes()),
+                $this->licensesToDom($document, $component->getLicenses()),
+                // copyright
+                // cpe <-- DEPRECATED in latest spec
+                $purl ? $this->simpleDomSafeTextElement($document, 'purl', (string) $purl) : null,
+                // modified
+                // pedigree
+                // externalReferences
+                // components
+            ]
+        );
 
         return $element;
     }
 
     /**
      * @psalm-param array<string, string> $hashes
-     *
-     * @psalm-return Generator<DOMElement>
      */
-    public function hashesToDom(DOMDocument $document, array $hashes): Generator
+    public function hashesToDom(DOMDocument $document, array $hashes): ?DOMElement
     {
+        $hashElems = [];
         foreach ($hashes as $algorithm => $content) {
             try {
-                yield $this->hashToDom($document, $algorithm, $content);
+                $hashElems[] = $this->hashToDom($document, $algorithm, $content);
             } catch (DomainException $exception) {
-                trigger_error("skipped hash: {$exception->getMessage()} ({$algorithm}, {$content})", \E_USER_WARNING);
+                trigger_error("Skipped hash: {$exception->getMessage()} ({$algorithm}, {$content})", \E_USER_WARNING);
                 unset($exception);
             }
         }
+
+        return 0 === \count($hashElems)
+            ? null
+            : $this->simpleDomAppendChildren($document->createElement('hashes'), $hashElems);
     }
 
     /**
@@ -164,21 +170,40 @@ class XmlSerializer extends AbstractSerialize implements SerializerInterface
 
         $element = $this->simpleDomSafeTextElement($document, 'hash', $content);
         \assert(null !== $element);
-        $this->simpleDomSetAttributes($element, [
-            'alg' => $algorithm,
-        ]);
+        $this->simpleDomSetAttributes(
+            $element,
+            [
+                'alg' => $algorithm,
+            ]
+        );
 
         return $element;
+    }
+
+    /**
+     * @psalm-param array<License> $licenses
+     */
+    public function licensesToDom(DOMDocument $document, array $licenses): ?DOMElement
+    {
+        return 0 === \count($licenses)
+            ? null
+            : $this->simpleDomAppendChildren(
+                $document->createElement('licenses'),
+                $this->simpleDomDocumentMap($document, [$this, 'licenseToDom'], $licenses)
+            );
     }
 
     public function licenseToDom(DOMDocument $document, License $license): DOMElement
     {
         $element = $document->createElement('license');
-        $this->simpleDomAppendChildren($element, [
-            $this->simpleDomSafeTextElement($document, 'id', $license->getId()),
-            $this->simpleDomSafeTextElement($document, 'name', $license->getName()),
-            $this->simpleDomSafeTextElement($document, 'url', $license->getUrl()),
-        ]);
+        $this->simpleDomAppendChildren(
+            $element,
+            [
+                $this->simpleDomSafeTextElement($document, 'id', $license->getId()),
+                $this->simpleDomSafeTextElement($document, 'name', $license->getName()),
+                $this->simpleDomSafeTextElement($document, 'url', $license->getUrl()),
+            ]
+        );
 
         return $element;
     }

@@ -6,7 +6,6 @@
       <name><![CDATA[annotations]]></name>
       <version><![CDATA[1.13.1]]></version>
       <description><![CDATA[Docblock Annotations Parser]]></description>
-      <hashes></hashes>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -19,7 +18,6 @@
       <name><![CDATA[cache]]></name>
       <version><![CDATA[2.0.3]]></version>
       <description><![CDATA[PHP Doctrine Cache library is a popular cache implementation that supports many different drivers such as redis, memcache, apc, mongodb and others.]]></description>
-      <hashes></hashes>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -32,7 +30,6 @@
       <name><![CDATA[collections]]></name>
       <version><![CDATA[1.6.7]]></version>
       <description><![CDATA[PHP Doctrine Collections library that adds additional functionality on top of PHP arrays.]]></description>
-      <hashes></hashes>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -45,7 +42,6 @@
       <name><![CDATA[deprecations]]></name>
       <version><![CDATA[0.5.3]]></version>
       <description><![CDATA[A small layer on top of trigger_error(E_USER_DEPRECATED) or PSR-3 logging with options to disable all deprecations or selectively for packages.]]></description>
-      <hashes></hashes>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -58,7 +54,6 @@
       <name><![CDATA[event-manager]]></name>
       <version><![CDATA[1.1.1]]></version>
       <description><![CDATA[The Doctrine Event Manager is a simple PHP event system that was built to be used with the various Doctrine projects.]]></description>
-      <hashes></hashes>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -71,7 +66,6 @@
       <name><![CDATA[lexer]]></name>
       <version><![CDATA[1.2.1]]></version>
       <description><![CDATA[PHP Doctrine Lexer parser library that can be used in Top-Down, Recursive Descent Parsers.]]></description>
-      <hashes></hashes>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -84,7 +78,6 @@
       <name><![CDATA[persistence]]></name>
       <version><![CDATA[2.2.1]]></version>
       <description><![CDATA[The Doctrine Persistence project is a set of shared interfaces and functionality that the different Doctrine object mappers share.]]></description>
-      <hashes></hashes>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -97,7 +90,6 @@
       <name><![CDATA[proxy-manager-lts]]></name>
       <version><![CDATA[1.0.5]]></version>
       <description><![CDATA[Adding support for a wider range of PHP versions to ocramius/proxy-manager]]></description>
-      <hashes></hashes>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -110,7 +102,6 @@
       <name><![CDATA[laminas-code]]></name>
       <version><![CDATA[4.3.0]]></version>
       <description><![CDATA[Extensions to the PHP Reflection API, static code scanning, and code generation]]></description>
-      <hashes></hashes>
       <licenses>
         <license>
           <id><![CDATA[BSD-3-Clause]]></id>
@@ -123,7 +114,6 @@
       <name><![CDATA[laminas-eventmanager]]></name>
       <version><![CDATA[3.3.1]]></version>
       <description><![CDATA[Trigger and listen to events within a PHP application]]></description>
-      <hashes></hashes>
       <licenses>
         <license>
           <id><![CDATA[BSD-3-Clause]]></id>
@@ -136,7 +126,6 @@
       <name><![CDATA[laminas-zendframework-bridge]]></name>
       <version><![CDATA[1.2.0]]></version>
       <description><![CDATA[Alias legacy ZF class names to Laminas Project equivalents.]]></description>
-      <hashes></hashes>
       <licenses>
         <license>
           <id><![CDATA[BSD-3-Clause]]></id>
@@ -149,7 +138,6 @@
       <name><![CDATA[cache]]></name>
       <version><![CDATA[1.0.1]]></version>
       <description><![CDATA[Common interface for caching libraries]]></description>
-      <hashes></hashes>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -162,7 +150,6 @@
       <name><![CDATA[container]]></name>
       <version><![CDATA[1.1.1]]></version>
       <description><![CDATA[Common Container Interface (PHP FIG PSR-11)]]></description>
-      <hashes></hashes>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -175,7 +162,6 @@
       <name><![CDATA[event-dispatcher]]></name>
       <version><![CDATA[1.0.0]]></version>
       <description><![CDATA[Standard interfaces for event handling.]]></description>
-      <hashes></hashes>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -188,7 +174,6 @@
       <name><![CDATA[link]]></name>
       <version><![CDATA[1.0.0]]></version>
       <description><![CDATA[Common interfaces for HTTP links]]></description>
-      <hashes></hashes>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -201,7 +186,6 @@
       <name><![CDATA[log]]></name>
       <version><![CDATA[1.1.4]]></version>
       <description><![CDATA[Common interface for logging libraries]]></description>
-      <hashes></hashes>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -214,7 +198,6 @@
       <name><![CDATA[contracts]]></name>
       <version><![CDATA[2.4.0]]></version>
       <description><![CDATA[A set of abstractions extracted out of the Symfony components]]></description>
-      <hashes></hashes>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -227,7 +210,6 @@
       <name><![CDATA[polyfill-ctype]]></name>
       <version><![CDATA[1.23.0]]></version>
       <description><![CDATA[Symfony polyfill for ctype functions]]></description>
-      <hashes></hashes>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -240,7 +222,6 @@
       <name><![CDATA[polyfill-intl-grapheme]]></name>
       <version><![CDATA[1.23.0]]></version>
       <description><![CDATA[Symfony polyfill for intl's grapheme_* functions]]></description>
-      <hashes></hashes>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -253,7 +234,6 @@
       <name><![CDATA[polyfill-intl-icu]]></name>
       <version><![CDATA[1.23.0]]></version>
       <description><![CDATA[Symfony polyfill for intl's ICU-related data and classes]]></description>
-      <hashes></hashes>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -266,7 +246,6 @@
       <name><![CDATA[polyfill-intl-idn]]></name>
       <version><![CDATA[1.23.0]]></version>
       <description><![CDATA[Symfony polyfill for intl's idn_to_ascii and idn_to_utf8 functions]]></description>
-      <hashes></hashes>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -279,7 +258,6 @@
       <name><![CDATA[polyfill-intl-normalizer]]></name>
       <version><![CDATA[1.23.0]]></version>
       <description><![CDATA[Symfony polyfill for intl's Normalizer class and related functions]]></description>
-      <hashes></hashes>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -292,7 +270,6 @@
       <name><![CDATA[polyfill-mbstring]]></name>
       <version><![CDATA[1.23.0]]></version>
       <description><![CDATA[Symfony polyfill for the Mbstring extension]]></description>
-      <hashes></hashes>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -305,7 +282,6 @@
       <name><![CDATA[polyfill-php72]]></name>
       <version><![CDATA[1.23.0]]></version>
       <description><![CDATA[Symfony polyfill backporting some PHP 7.2+ features to lower PHP versions]]></description>
-      <hashes></hashes>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -318,7 +294,6 @@
       <name><![CDATA[polyfill-php73]]></name>
       <version><![CDATA[1.23.0]]></version>
       <description><![CDATA[Symfony polyfill backporting some PHP 7.3+ features to lower PHP versions]]></description>
-      <hashes></hashes>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -331,7 +306,6 @@
       <name><![CDATA[polyfill-php80]]></name>
       <version><![CDATA[1.23.0]]></version>
       <description><![CDATA[Symfony polyfill backporting some PHP 8.0+ features to lower PHP versions]]></description>
-      <hashes></hashes>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -344,7 +318,6 @@
       <name><![CDATA[polyfill-php81]]></name>
       <version><![CDATA[1.23.0]]></version>
       <description><![CDATA[Symfony polyfill backporting some PHP 8.1+ features to lower PHP versions]]></description>
-      <hashes></hashes>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -357,7 +330,6 @@
       <name><![CDATA[polyfill-uuid]]></name>
       <version><![CDATA[1.23.0]]></version>
       <description><![CDATA[Symfony polyfill for uuid functions]]></description>
-      <hashes></hashes>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -370,7 +342,6 @@
       <name><![CDATA[runtime]]></name>
       <version><![CDATA[5.3.0]]></version>
       <description><![CDATA[Enables decoupling PHP applications from global state]]></description>
-      <hashes></hashes>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -383,7 +354,6 @@
       <name><![CDATA[symfony]]></name>
       <version><![CDATA[5.3.0]]></version>
       <description><![CDATA[The Symfony PHP framework]]></description>
-      <hashes></hashes>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -396,7 +366,6 @@
       <name><![CDATA[twig]]></name>
       <version><![CDATA[3.3.2]]></version>
       <description><![CDATA[Twig, the flexible, fast, and secure template language for PHP]]></description>
-      <hashes></hashes>
       <licenses>
         <license>
           <id><![CDATA[BSD-3-Clause]]></id>

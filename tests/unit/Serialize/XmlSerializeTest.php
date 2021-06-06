@@ -26,6 +26,7 @@ namespace CycloneDX\Tests\unit\Serialize;
 use CycloneDX\Models\License;
 use CycloneDX\Serialize\XmlSerializer;
 use CycloneDX\Specs\SpecInterface;
+use DomainException;
 use DOMDocument;
 use DOMNode;
 use Generator;
@@ -37,6 +38,134 @@ use PHPUnit\Framework\TestCase;
  */
 class XmlSerializeTest extends TestCase
 {
+    // region hashesToDom
+
+    public function testHashesToDom(): void
+    {
+        $algorithm = $this->getRandomString();
+        $content = $this->getRandomString();
+        $expectedDOM = new DOMDocument();
+        $expected = $expectedDOM->createElement('hashes');
+        $expected->appendChild($expectedDOM->createElement('hash', 'FakeHash'));
+
+        $dom = new DOMDocument();
+        $serializer = $this->createPartialMock(XmlSerializer::class, ['hashToDom']);
+        $serializer->expects(self::once())->method('hashToDom')
+            ->with($dom, $algorithm, $content)
+            ->willReturn($dom->createElement('hash', 'FakeHash'));
+
+        $got = $serializer->hashesToDom($dom, [$algorithm => $content]);
+
+        self::assertDomNodeEqualsDomNode($expected, $got);
+    }
+
+    public function testHashesToDomNullWhenEmpty(): void
+    {
+        $spec = $this->createStub(SpecInterface::class);
+        $serializer = new XmlSerializer($spec);
+
+        $got = $serializer->hashesToDom(new DOMDocument(), []);
+
+        self::assertNull($got);
+    }
+
+    public function testHashesToDomTriggerWarningWhenThrown(): void
+    {
+        $serializer = $this->createPartialMock(XmlSerializer::class, ['hashToDom']);
+        $serializer->expects(self::once())->method('hashToDom')
+            ->willThrowException(new DomainException('DummyError'));
+
+        $this->expectWarning();
+        $this->expectWarningMessageMatches('/skipped hash/i');
+        $this->expectWarningMessageMatches('/DummyError/');
+
+        $got = $serializer->hashesToDom(new DOMDocument(), ['foo' => 'bar']);
+
+        self::assertNotNull($got);
+    }
+
+    // endregion hashesToDom
+
+    // region hashToDom
+
+    public function testHashToDom(): void
+    {
+        $algorithm = $this->getRandomString();
+        $content = $this->getRandomString();
+        $expected = (new DOMDocument())->createElement('hash', $content);
+        $expected->setAttribute('alg', $algorithm);
+
+        $spec = $this->createStub(SpecInterface::class);
+        $spec->method('isSupportedHashAlgorithm')->willReturn(true);
+        $spec->method('isSupportedHashContent')->willReturn(true);
+        $serializer = new XmlSerializer($spec);
+
+        $got = $serializer->hashToDom(new DOMDocument(), $algorithm, $content);
+
+        self::assertDomNodeEqualsDomNode($expected, $got);
+    }
+
+    public function testHashToDomInvalidAlgorithm(): void
+    {
+        $algorithm = $this->getRandomString();
+
+        $spec = $this->createStub(SpecInterface::class);
+        $spec->method('isSupportedHashAlgorithm')->with($algorithm)->willReturn(false);
+        $spec->method('isSupportedHashContent')->willReturn(true);
+        $serializer = new XmlSerializer($spec);
+
+        $this->expectException(DomainException::class);
+        $this->expectExceptionMessageMatches('/invalid algorithm/i');
+        $serializer->hashToDom(new DOMDocument(), $algorithm, $this->getRandomString());
+    }
+
+    public function testHashToDomInvalidContent(): void
+    {
+        $content = $this->getRandomString();
+
+        $spec = $this->createStub(SpecInterface::class);
+        $spec->method('isSupportedHashAlgorithm')->willReturn(true);
+        $spec->method('isSupportedHashContent')->with($content)->willReturn(false);
+        $serializer = new XmlSerializer($spec);
+
+        $this->expectException(DomainException::class);
+        $this->expectExceptionMessageMatches('/invalid content/i');
+        $serializer->hashToDom(new DOMDocument(), $this->getRandomString(), $content);
+    }
+
+    // endregion hashToDom
+
+    // region licensesToDom
+
+    public function testLicenses(): void
+    {
+        $expectedDOM = new DOMDocument();
+        $expected = $expectedDOM->createElement('licenses');
+        $expected->appendChild($expectedDOM->createElement('license', 'FakeLicenseResult'));
+
+        $license = $this->createStub(License::class);
+        $dom = new DOMDocument();
+        $serializer = $this->createPartialMock(XmlSerializer::class, ['licenseToDom']);
+        $serializer->expects(self::once())->method('licenseToDom')
+            ->with($dom, $license)
+            ->willReturn($dom->createElement('license', 'FakeLicenseResult'));
+
+        $got = $serializer->licensesToDom($dom, [$license]);
+
+        self::assertDomNodeEqualsDomNode($expected, $got);
+    }
+
+    public function testLicensesToDomNullWhenEmpty(): void
+    {
+        $serializer = new XmlSerializer($this->createStub(SpecInterface::class));
+
+        $got = $serializer->licensesToDom(new DOMDocument(), []);
+
+        self::assertNull($got);
+    }
+
+    // endregion licensesToDom
+
     // region licenseToDom
 
     /**
@@ -44,9 +173,8 @@ class XmlSerializeTest extends TestCase
      */
     public function testLicenseToDom(License $license, $expected): void
     {
-        $dom = new DOMDocument();
         $serializer = new XmlSerializer($this->createStub(SpecInterface::class));
-        $domElem = $serializer->licenseToDom($dom, $license);
+        $domElem = $serializer->licenseToDom(new DOMDocument(), $license);
         self::assertDomNodeEqualsDomNode($expected, $domElem);
     }
 

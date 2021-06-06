@@ -44,7 +44,6 @@ Run one of these from the demo directory:
   ```
 * Make XML sbom:
   ```shell
-  composer -dproject make-bom --exclude-dev --spec-version=1.0 --output-format=XML --output-file="$PWD/results/bom.1.0.xml"
   composer -dproject make-bom --exclude-dev --spec-version=1.1 --output-format=XML --output-file="$PWD/results/bom.1.1.xml"
   composer -dproject make-bom --exclude-dev --spec-version=1.2 --output-format=XML --output-file="$PWD/results/bom.1.2.xml"
   composer -dproject make-bom --exclude-dev --spec-version=1.3 --output-format=XML --output-file="$PWD/results/bom.1.3.xml"
