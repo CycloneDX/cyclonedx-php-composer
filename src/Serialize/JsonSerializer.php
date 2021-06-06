@@ -60,11 +60,7 @@ class JsonSerializer extends AbstractSerialize implements SerializerInterface
         }
 
         $json = json_encode($this->bomToJson($bom), $options);
-        if (false === $json) {
-            // @codeCoverageIgnoreStart
-            throw new JsonException('Failed to serialize to JSON.');
-            // @codeCoverageIgnoreEnd
-        }
+        \assert(false !== $json); // as option JSON_THROW_ON_ERROR is set
 
         return $json;
     }
