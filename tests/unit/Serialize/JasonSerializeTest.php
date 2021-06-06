@@ -254,8 +254,6 @@ class JasonSerializeTest extends TestCase
                 'type' => 'myType',
                 'name' => 'myName',
                 'version' => 'myVersion',
-                'licenses' => [],
-                'hashes' => [],
             ],
             $data
         );

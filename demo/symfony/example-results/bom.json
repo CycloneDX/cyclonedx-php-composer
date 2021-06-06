@@ -16,7 +16,6 @@
                     }
                 }
             ],
-            "hashes": [],
             "purl": "pkg:composer\/doctrine\/annotations@1.13.1"
         },
         {
@@ -32,7 +31,6 @@
                     }
                 }
             ],
-            "hashes": [],
             "purl": "pkg:composer\/doctrine\/cache@2.0.3"
         },
         {
@@ -48,7 +46,6 @@
                     }
                 }
             ],
-            "hashes": [],
             "purl": "pkg:composer\/doctrine\/collections@1.6.7"
         },
         {
@@ -64,7 +61,6 @@
                     }
                 }
             ],
-            "hashes": [],
             "purl": "pkg:composer\/doctrine\/deprecations@0.5.3"
         },
         {
@@ -80,7 +76,6 @@
                     }
                 }
             ],
-            "hashes": [],
             "purl": "pkg:composer\/doctrine\/event-manager@1.1.1"
         },
         {
@@ -96,7 +91,6 @@
                     }
                 }
             ],
-            "hashes": [],
             "purl": "pkg:composer\/doctrine\/lexer@1.2.1"
         },
         {
@@ -112,7 +106,6 @@
                     }
                 }
             ],
-            "hashes": [],
             "purl": "pkg:composer\/doctrine\/persistence@2.2.1"
         },
         {
@@ -128,7 +121,6 @@
                     }
                 }
             ],
-            "hashes": [],
             "purl": "pkg:composer\/friendsofphp\/proxy-manager-lts@1.0.5"
         },
         {
@@ -144,7 +136,6 @@
                     }
                 }
             ],
-            "hashes": [],
             "purl": "pkg:composer\/laminas\/laminas-code@4.3.0"
         },
         {
@@ -160,7 +151,6 @@
                     }
                 }
             ],
-            "hashes": [],
             "purl": "pkg:composer\/laminas\/laminas-eventmanager@3.3.1"
         },
         {
@@ -176,7 +166,6 @@
                     }
                 }
             ],
-            "hashes": [],
             "purl": "pkg:composer\/laminas\/laminas-zendframework-bridge@1.2.0"
         },
         {
@@ -192,7 +181,6 @@
                     }
                 }
             ],
-            "hashes": [],
             "purl": "pkg:composer\/psr\/cache@1.0.1"
         },
         {
@@ -208,7 +196,6 @@
                     }
                 }
             ],
-            "hashes": [],
             "purl": "pkg:composer\/psr\/container@1.1.1"
         },
         {
@@ -224,7 +211,6 @@
                     }
                 }
             ],
-            "hashes": [],
             "purl": "pkg:composer\/psr\/event-dispatcher@1.0.0"
         },
         {
@@ -240,7 +226,6 @@
                     }
                 }
             ],
-            "hashes": [],
             "purl": "pkg:composer\/psr\/link@1.0.0"
         },
         {
@@ -256,7 +241,6 @@
                     }
                 }
             ],
-            "hashes": [],
             "purl": "pkg:composer\/psr\/log@1.1.4"
         },
         {
@@ -272,7 +256,6 @@
                     }
                 }
             ],
-            "hashes": [],
             "purl": "pkg:composer\/symfony\/contracts@2.4.0"
         },
         {
@@ -288,7 +271,6 @@
                     }
                 }
             ],
-            "hashes": [],
             "purl": "pkg:composer\/symfony\/polyfill-ctype@1.23.0"
         },
         {
@@ -304,7 +286,6 @@
                     }
                 }
             ],
-            "hashes": [],
             "purl": "pkg:composer\/symfony\/polyfill-intl-grapheme@1.23.0"
         },
         {
@@ -320,7 +301,6 @@
                     }
                 }
             ],
-            "hashes": [],
             "purl": "pkg:composer\/symfony\/polyfill-intl-icu@1.23.0"
         },
         {
@@ -336,7 +316,6 @@
                     }
                 }
             ],
-            "hashes": [],
             "purl": "pkg:composer\/symfony\/polyfill-intl-idn@1.23.0"
         },
         {
@@ -352,7 +331,6 @@
                     }
                 }
             ],
-            "hashes": [],
             "purl": "pkg:composer\/symfony\/polyfill-intl-normalizer@1.23.0"
         },
         {
@@ -368,7 +346,6 @@
                     }
                 }
             ],
-            "hashes": [],
             "purl": "pkg:composer\/symfony\/polyfill-mbstring@1.23.0"
         },
         {
@@ -384,7 +361,6 @@
                     }
                 }
             ],
-            "hashes": [],
             "purl": "pkg:composer\/symfony\/polyfill-php72@1.23.0"
         },
         {
@@ -400,7 +376,6 @@
                     }
                 }
             ],
-            "hashes": [],
             "purl": "pkg:composer\/symfony\/polyfill-php73@1.23.0"
         },
         {
@@ -416,7 +391,6 @@
                     }
                 }
             ],
-            "hashes": [],
             "purl": "pkg:composer\/symfony\/polyfill-php80@1.23.0"
         },
         {
@@ -432,7 +406,6 @@
                     }
                 }
             ],
-            "hashes": [],
             "purl": "pkg:composer\/symfony\/polyfill-php81@1.23.0"
         },
         {
@@ -448,7 +421,6 @@
                     }
                 }
             ],
-            "hashes": [],
             "purl": "pkg:composer\/symfony\/polyfill-uuid@1.23.0"
         },
         {
@@ -464,7 +436,6 @@
                     }
                 }
             ],
-            "hashes": [],
             "purl": "pkg:composer\/symfony\/runtime@5.3.0"
         },
         {
@@ -480,7 +451,6 @@
                     }
                 }
             ],
-            "hashes": [],
             "purl": "pkg:composer\/symfony\/symfony@5.3.0"
         },
         {
@@ -496,7 +466,6 @@
                     }
                 }
             ],
-            "hashes": [],
             "purl": "pkg:composer\/twig\/twig@3.3.2"
         }
     ]
