@@ -23,6 +23,7 @@ declare(strict_types=1);
 
 namespace CycloneDX\Tests\unit\Serialize;
 
+use CycloneDX\Models\Component;
 use CycloneDX\Models\License;
 use CycloneDX\Serialize\XmlSerializer;
 use CycloneDX\Specs\SpecInterface;
@@ -30,6 +31,7 @@ use DomainException;
 use DOMDocument;
 use DOMNode;
 use Generator;
+use PackageUrl\PackageUrl;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -38,6 +40,111 @@ use PHPUnit\Framework\TestCase;
  */
 class XmlSerializeTest extends TestCase
 {
+    // region componentToDom
+
+    public function testComponentToDom(): void
+    {
+        $spec = $this->createStub(SpecInterface::class);
+        $spec->expects(self::once())->method('isSupportedComponentType')
+            ->with('myType')
+            ->willReturn(true);
+        $spec->expects(self::once())->method('isSupportedHashAlgorithm')
+            ->with('myAlg')
+            ->willReturn(true);
+        $spec->expects(self::once())->method('isSupportedHashContent')
+            ->with('myHash')
+            ->willReturn(true);
+        $serializer = new XmlSerializer($spec);
+        $component = $this->createConfiguredMock(
+            Component::class,
+            [
+                'getType' => 'myType',
+                'getPackageUrl' => $this->createConfiguredMock(
+                    PackageUrl::class,
+                    ['toString' => 'myPURL', '__toString' => 'myPURL']
+                ),
+                'getName' => 'myName',
+                'getVersion' => 'myVersion',
+                'getGroup' => 'myGroup',
+                'getDescription' => 'myDescription',
+                'getLicenses' => [
+                    $this->createConfiguredMock(
+                        License::class,
+                        ['getId' => null, 'getName' => 'myLicense']
+                    ),
+                ],
+                'getHashes' => ['myAlg' => 'myHash'],
+            ]
+        );
+        $domExpected = new DOMDocument();
+        $expected = $domExpected->createElement('component');
+        $expected->setAttribute('type', 'myType');
+        $expected->appendChild($domExpected->createElement('group', 'myGroup'));
+        $expected->appendChild($domExpected->createElement('name', 'myName'));
+        $expected->appendChild($domExpected->createElement('version', 'myVersion'));
+        $expected->appendChild($domExpected->createElement('description', 'myDescription'));
+        $expected->appendChild($domExpected->createElement('hashes'))
+            ->appendChild($domExpected->createElement('hash', 'myHash'))
+            ->setAttribute('alg', 'myAlg');
+        $expected->appendChild($domExpected->createElement('licenses'))
+            ->appendChild($domExpected->createElement('license'))
+            ->appendChild($domExpected->createElement('name', 'myLicense'));
+        $expected->appendChild($domExpected->createElement('purl', 'myPURL'));
+
+        $data = $serializer->componentToDom(new DOMDocument(), $component);
+
+        self::assertDomNodeEqualsDomNode($expected, $data);
+    }
+
+    public function testComponentToJsonEradicateNulls(): void
+    {
+        $spec = $this->createStub(SpecInterface::class);
+        $spec->expects(self::once())->method('isSupportedComponentType')
+            ->with('myType')
+            ->willReturn(true);
+        $serializer = new XmlSerializer($spec);
+        $component = $this->createConfiguredMock(
+            Component::class,
+            [
+                'getType' => 'myType',
+                'getPackageUrl' => null,
+                'getName' => 'myName',
+                'getVersion' => 'myVersion',
+                'getGroup' => null,
+                'getDescription' => null,
+                'getLicenses' => [],
+                'getHashes' => [],
+            ]
+        );
+        $domExpected = new DOMDocument();
+        $expected = $domExpected->createElement('component');
+        $expected->setAttribute('type', 'myType');
+        $expected->appendChild($domExpected->createElement('name', 'myName'));
+        $expected->appendChild($domExpected->createElement('version', 'myVersion'));
+
+        $data = $serializer->componentToDom(new DOMDocument(), $component);
+
+        self::assertDomNodeEqualsDomNode($expected, $data);
+    }
+
+    public function testComponentToDomThrowsOnFalseType(): void
+    {
+        $spec = $this->createStub(SpecInterface::class);
+        $serializer = new XmlSerializer($spec);
+        $component = $this->createStub(Component::class);
+        $component->method('getType')->willReturn('myType');
+
+        $spec->expects(self::once())->method('isSupportedComponentType')
+            ->with('myType')
+            ->willReturn(false);
+        $this->expectException(DomainException::class);
+        $this->expectExceptionMessageMatches('/unsupported component type/i');
+
+        $serializer->componentToDom(new DOMDocument(), $component);
+    }
+
+    // endregion componentToDom
+
     // region hashesToDom
 
     public function testHashesToDom(): void
