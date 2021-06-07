@@ -84,7 +84,7 @@ class BomGenerator
     {
         foreach ($packages as $package) {
             if ('composer-plugin' === $package['type']) {
-                $this->output->writeln('<warning>Skipping plugin '.OutputFormatter::escape($package['name']).'</warning>');
+                $this->output->writeln('<warning>Skipping plugin: '.OutputFormatter::escape($package['name']).'</warning>');
                 continue;
             }
             yield $package;
