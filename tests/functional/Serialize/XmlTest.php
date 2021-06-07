@@ -61,7 +61,7 @@ class XmlTest extends TestCase
 
         $serializer = new XmlSerializer($spec);
 
-        $xml = @$serializer->serialize($bom);
+        $xml = $serializer->serialize($bom);
         $doc = $this->loadDomFromXml($xml); // throws on error
 
         libxml_use_internal_errors(false); // send errors to PHPUnit
@@ -81,7 +81,7 @@ class XmlTest extends TestCase
         $serializer = new XmlSerializer($spec);
         $deserializer = new XmlDeserializer($spec);
 
-        $serialized = @$serializer->serialize($bom);
+        $serialized = $serializer->serialize($bom);
         $deserialized = @$deserializer->deserialize($serialized);
 
         self::assertEquals($bom, $deserialized);
@@ -108,7 +108,7 @@ class XmlTest extends TestCase
 
         $serializer = new XmlSerializer($spec);
 
-        $xml = @$serializer->serialize($bom);
+        $xml = $serializer->serialize($bom);
         $doc = $this->loadDomFromXml($xml); // throws on error
 
         libxml_use_internal_errors(false); // send errors to PHPUnit
@@ -128,7 +128,7 @@ class XmlTest extends TestCase
         $serializer = new XmlSerializer($spec);
         $deserializer = new XmlDeserializer($spec);
 
-        $serialized = @$serializer->serialize($bom);
+        $serialized = $serializer->serialize($bom);
         $deserialized = @$deserializer->deserialize($serialized);
 
         self::assertEquals($bom, $deserialized);
@@ -155,7 +155,7 @@ class XmlTest extends TestCase
 
         $serializer = new XmlSerializer($spec);
 
-        $xml = @$serializer->serialize($bom);
+        $xml = $serializer->serialize($bom);
         $doc = $this->loadDomFromXml($xml); // throws on error
 
         libxml_use_internal_errors(false); // send errors to PHPUnit
@@ -175,7 +175,7 @@ class XmlTest extends TestCase
         $serializer = new XmlSerializer($spec);
         $deserializer = new XmlDeserializer($spec);
 
-        $serialized = @$serializer->serialize($bom);
+        $serialized = $serializer->serialize($bom);
         $deserialized = @$deserializer->deserialize($serialized);
 
         self::assertEquals($bom, $deserialized);

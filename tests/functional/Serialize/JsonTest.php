@@ -85,7 +85,7 @@ class JsonTest extends TestCase
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessageMatches('/unsupported spec version./i');
 
-        @$serializer->serialize(new Bom());
+        $serializer->serialize(new Bom());
     }
 
     // endregion Spec 1.1
@@ -97,7 +97,7 @@ class JsonTest extends TestCase
      * This test might require online-connectivity.
      *
      * @dataProvider \CycloneDX\Tests\_data\BomModelProvider::fullBomTestData
-     * @dataProvider \CycloneDX\Tests\_data\BomModelProvider::bomWithComponentHashAlgorithmsSpec12()
+     * @dataProvider \CycloneDX\Tests\_data\BomModelProvider::bomWithComponentAllHashAlgorithms
      */
     public function testSchema12(Bom $bom): void
     {
@@ -109,7 +109,7 @@ class JsonTest extends TestCase
 
         $serializer = new JsonSerializer($spec);
 
-        $json = @$serializer->serialize($bom);
+        $json = $serializer->serialize($bom);
         self::assertJson($json);
         $data = json_decode($json, false, 512, \JSON_THROW_ON_ERROR);
 
@@ -130,7 +130,7 @@ class JsonTest extends TestCase
         $serializer = new JsonSerializer($spec);
         $deserializer = new JsonDeserializer($spec);
 
-        $serialized = @$serializer->serialize($bom);
+        $serialized = $serializer->serialize($bom);
         $deserialized = @$deserializer->deserialize($serialized);
 
         self::assertEquals($bom, $deserialized);
@@ -145,7 +145,7 @@ class JsonTest extends TestCase
      * This test might require online-connectivity.
      *
      * @dataProvider \CycloneDX\Tests\_data\BomModelProvider::fullBomTestData
-     * @dataProvider \CycloneDX\Tests\_data\BomModelProvider::bomWithComponentHashAlgorithmsSpec13()
+     * @dataProvider \CycloneDX\Tests\_data\BomModelProvider::bomWithComponentAllHashAlgorithms
      */
     public function testSchema13(Bom $bom): void
     {
@@ -157,7 +157,7 @@ class JsonTest extends TestCase
 
         $serializer = new JsonSerializer($spec);
 
-        $json = @$serializer->serialize($bom);
+        $json = $serializer->serialize($bom);
         self::assertJson($json);
         $data = json_decode($json, false, 512, \JSON_THROW_ON_ERROR);
 
@@ -178,7 +178,7 @@ class JsonTest extends TestCase
         $serializer = new JsonSerializer($spec);
         $deserializer = new JsonDeserializer($spec);
 
-        $serialized = @$serializer->serialize($bom);
+        $serialized = $serializer->serialize($bom);
         $deserialized = @$deserializer->deserialize($serialized);
 
         self::assertEquals($bom, $deserialized);
