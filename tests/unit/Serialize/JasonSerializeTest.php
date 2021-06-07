@@ -69,7 +69,10 @@ class JasonSerializeTest extends TestCase
             '    "bomToJsonFake": true'."\n".
             '}',
         ];
-        yield 'not pretty' => [false, '{"bomToJsonFake":true}'];
+        yield 'not pretty' => [
+            false,
+            '{"bomToJsonFake":true}',
+        ];
     }
 
     /**
