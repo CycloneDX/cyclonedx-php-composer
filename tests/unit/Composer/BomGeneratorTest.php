@@ -135,7 +135,7 @@ class BomGeneratorTest extends TestCase
             $this->outputMock
                 ->expects(self::once())
                 ->method('writeln')
-                ->with(self::matchesRegularExpression('/Skipping plugin .*'.preg_quote($pluginName, '/').'/i'));
+                ->with(self::matchesRegularExpression('/skipping plugin: .*'.preg_quote($pluginName, '/').'/i'));
         }
 
         $filtered = iterator_to_array($filterOutPlugins->invoke($this->bomGenerator, $packages));
