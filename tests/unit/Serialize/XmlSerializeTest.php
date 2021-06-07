@@ -23,6 +23,7 @@ declare(strict_types=1);
 
 namespace CycloneDX\Tests\unit\Serialize;
 
+use CycloneDX\Models\Bom;
 use CycloneDX\Models\Component;
 use CycloneDX\Models\License;
 use CycloneDX\Serialize\XmlSerializer;
@@ -40,6 +41,88 @@ use PHPUnit\Framework\TestCase;
  */
 class XmlSerializeTest extends TestCase
 {
+    // region serialize
+
+    /**
+     * @dataProvider dpTestSerialize
+     */
+    public function testSerialize(bool $pretty, string $expectedXml): void
+    {
+        $bom = $this->createStub(Bom::class);
+        $spec = $this->createStub(SpecInterface::class);
+        $spec->method('getVersion')->willReturn('999');
+        $serializer = $this->createPartialMock(XmlSerializer::class, ['bomToDom']);
+        $serializer->setSpec($spec);
+        $serializer->expects(self::once())->method('bomToDom')
+            ->with()
+            ->willReturnCallback(function (DOMDocument $dom): \DOMElement {
+                $fake = $dom->createElement('FakeBom');
+                $fake->appendChild($dom->createElement('FormatTest'));
+
+                return $fake;
+            });
+
+        $xml = $serializer->serialize($bom, $pretty);
+
+        self::assertSame($expectedXml, $xml);
+    }
+
+    public static function dpTestSerialize(): Generator
+    {
+        yield 'pretty' => [
+            true,
+            // dont use HEREDOC/NEWDOC - they would have strange line-ending behaviour
+            '<?xml version="1.0" encoding="UTF-8"?>'."\n".
+            '<FakeBom>'."\n".
+            '  <FormatTest/>'."\n".
+            '</FakeBom>'."\n",
+        ];
+        yield 'not pretty' => [
+            false,
+            '<?xml version="1.0" encoding="UTF-8"?>'."\n".
+            '<FakeBom><FormatTest/></FakeBom>'."\n",
+            ];
+    }
+
+    // endregion serialize
+
+    // region bomToDom
+
+    public function testBomToBom(): void
+    {
+        $spec = $this->createStub(SpecInterface::class);
+        $spec->method('getVersion')->willReturn('mySpecVersion');
+        $spec->method('isSupportedComponentType')
+            ->with('myType')
+            ->willReturn(true);
+
+        $fakeComponent = $this->createStub(Component::class);
+        $serializer = $this->createPartialMock(XmlSerializer::class, ['componentToDom']);
+        $serializer->setSpec($spec);
+        $bom = $this->createConfiguredMock(
+            Bom::class,
+            [
+                'getVersion' => 1337,
+                'getComponents' => [$fakeComponent],
+            ]
+        );
+        $dom = new DOMDocument();
+        $serializer->expects(self::once())->method('componentToDom')
+            ->with($dom, $fakeComponent)
+            ->willReturn($dom->createElement('fakeComponent'));
+        $expectedDom = new DOMDocument();
+        $expected = $expectedDom->createElementNS('http://cyclonedx.org/schema/bom/mySpecVersion', 'bom');
+        $expected->setAttribute('version', '1337');
+        $expected->appendChild($expectedDom->createElement('components'))
+            ->appendChild($expectedDom->createElement('fakeComponent'));
+
+        $data = $serializer->bomToDom($dom, $bom);
+
+        self::assertDomNodeEqualsDomNode($expected, $data);
+    }
+
+    // endregion bomToDom
+
     // region componentToDom
 
     public function testComponentToDom(): void
@@ -96,7 +179,7 @@ class XmlSerializeTest extends TestCase
         self::assertDomNodeEqualsDomNode($expected, $data);
     }
 
-    public function testComponentToJsonEradicateNulls(): void
+    public function testComponentToDomEradicateNulls(): void
     {
         $spec = $this->createStub(SpecInterface::class);
         $spec->expects(self::once())->method('isSupportedComponentType')

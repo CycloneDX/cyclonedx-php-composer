@@ -55,10 +55,8 @@ class XmlSerializer extends AbstractSerialize implements SerializerInterface
         $document->appendChild($this->bomToDom($document, $bom));
 
         $document->formatOutput = $pretty;
-        $xml = $document->saveXML(null, \LIBXML_NOEMPTYTAG);
-        if (false === $xml) {
-            throw new DOMException('Failed to serialize to XML.');
-        }
+        $xml = $document->saveXML();
+        \assert(false !== $xml);
 
         return $xml;
     }
