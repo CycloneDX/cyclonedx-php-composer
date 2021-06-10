@@ -4,9 +4,9 @@
     <component type="library">
       <group><![CDATA[cyclonedx]]></group>
       <name><![CDATA[cyclonedx-php-composer-local-demo-dependency]]></name>
-      <version><![CDATA[dev-rework_refactor]]></version>
+      <version><![CDATA[dev-master]]></version>
       <description><![CDATA[a package that is hosted locally and required in a local demo]]></description>
-      <purl><![CDATA[pkg:composer/cyclonedx/cyclonedx-php-composer-local-demo-dependency@dev-rework_refactor]]></purl>
+      <purl><![CDATA[pkg:composer/cyclonedx/cyclonedx-php-composer-local-demo-dependency@dev-master]]></purl>
     </component>
   </components>
 </bom>
