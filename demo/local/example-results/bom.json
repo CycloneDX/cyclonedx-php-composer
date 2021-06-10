@@ -6,10 +6,10 @@
         {
             "type": "library",
             "name": "cyclonedx-php-composer-local-demo-dependency",
-            "version": "dev-rework_refactor",
+            "version": "dev-master",
             "group": "cyclonedx",
             "description": "a package that is hosted locally and required in a local demo",
-            "purl": "pkg:composer\/cyclonedx\/cyclonedx-php-composer-local-demo-dependency@dev-rework_refactor"
+            "purl": "pkg:composer\/cyclonedx\/cyclonedx-php-composer-local-demo-dependency@dev-master"
         }
     ]
 }
