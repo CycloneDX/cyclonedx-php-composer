@@ -32,10 +32,6 @@ composer -dproject install
 
 ## Usage examples
 
-### In place
-
-_Requires composer2_
-
 Run one of these from the demo directory:
 
 * See _cyclonedx-php-composer_ help page:
