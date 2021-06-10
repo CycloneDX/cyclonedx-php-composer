@@ -40,7 +40,6 @@ use UnexpectedValueException;
 /**
  * Generates BOMs based on Composer's lockData.
  *
- * @author nscuro
  * @author jkowalleck
  *
  * @internal
@@ -50,20 +49,13 @@ class BomGenerator
     public const PURL_TYPE = 'composer';
 
     /**
-     * @psalm-var OutputInterface
-     * @readonly
-     */
-    private $output;
-
-    /**
      * @var LockArrayRepository
      * @readonly
      */
     private $lockArrayRepository;
 
-    public function __construct(LockArrayRepository $lockArrayRepository, OutputInterface $output)
+    public function __construct(LockArrayRepository $lockArrayRepository)
     {
-        $this->output = $output;
         $this->lockArrayRepository = $lockArrayRepository;
     }
 
@@ -99,17 +91,17 @@ class BomGenerator
      */
     public function buildComponent(PackageInterface $package): Component
     {
-        $nameAndVendor = $package->getPrettyName();
-        if ('' === $nameAndVendor) {
-            throw new UnexpectedValueException('Encountered package without name: '.json_encode($package));
+        $rawName = $package->getPrettyName();
+        if (empty($rawName)) {
+            throw new UnexpectedValueException('Encountered package without name:'. PHP_EOL. print_r($package, true));
         }
 
         $version = $this->normalizeVersion($package->getPrettyVersion());
         if ('' === $version) {
-            throw new UnexpectedValueException("Encountered package without version: {$package['name']}");
+            throw new UnexpectedValueException("Encountered package without version: ${rawName}");
         }
 
-        [$name, $vendor] = $this->splitNameAndVendor($nameAndVendor);
+        [$name, $vendor] = $this->splitNameAndVendor($rawName);
 
         if ($package instanceof CompletePackageInterface) {
             $description = $package->getDescription();
@@ -119,7 +111,9 @@ class BomGenerator
             $licenses = [];
         }
 
-        $type = Classification::LIBRARY; // composer has no option to distinguish framework/library/application
+        // composer has no option to distinguish framework/library/application, yet
+        $type = Classification::LIBRARY;
+
         $component = (new Component($type, $name, $version))
             ->setGroup($vendor)
             ->setDescription($description)
@@ -130,7 +124,7 @@ class BomGenerator
             ->setVersion($component->getVersion());
         $component->setPackageUrl($purl);
 
-        $sha1sum = $package->getDistSha1Checksum() ?? ''; // happened to be null for local packages
+        $sha1sum = $package->getDistSha1Checksum() ?? ''; // happened to be `null` for local packages
         if ('' !== $sha1sum) {
             $component->setHash(HashAlgorithm::SHA_1, $sha1sum);
             $purl->setChecksums(["sha1:${sha1sum}"]);
@@ -141,6 +135,8 @@ class BomGenerator
 
     private function packageIsNotDev(PackageInterface $package): bool
     {
+        // @FIXME this determiens if a dev-version is installed or not ...
+        // so it is a wrong implementation
         return false === $package->isDev();
     }
 
@@ -154,17 +150,20 @@ class BomGenerator
      *
      * @psalm-return array{string, ?string}
      */
-    private function splitNameAndVendor(string $packageName): array
+    protected function splitNameAndVendor(string $packageName): array
     {
         // Composer requires published packages to be named like <vendor>/<packageName>.
         // Because this is a loose requirement that doesn't apply to "internal" packages,
         // we need to consider that the vendor name may be omitted.
         // See https://getcomposer.org/doc/04-schema.md#name
         if (false === strpos($packageName, '/')) {
-            return [$packageName, null];
+            $name = $packageName;
+            $vendor = null;
+        } else {
+            [$vendor, $name] = explode('/', $packageName, 2);
         }
 
-        return explode('/', $packageName, 2);
+        return [$name, $vendor];
     }
 
     /**
@@ -180,7 +179,7 @@ class BomGenerator
      *
      * @internal this functionality is pretty clumsy and might be reworked in the future
      */
-    private function normalizeVersion(string $packageVersion): string
+    protected function normalizeVersion(string $packageVersion): string
     {
         if (0 === substr_compare($packageVersion, 'v', 0, 1)) {
             return substr($packageVersion, 1, \strlen($packageVersion));
@@ -193,7 +192,7 @@ class BomGenerator
      * @psalm-param array<string> $rawLicenses
      * @psalm-return list<License>
      */
-    private function createLicenses(array $rawLicenses): array
+    protected function createLicenses(array $rawLicenses): array
     {
         $splitLicenses = [];
         foreach ($rawLicenses as $rawLicense) {

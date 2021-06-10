@@ -1,5 +1,5 @@
 {
-    "name": "cyclonedx/cyclonedx-php-composer-demo",
+    "name": "cyclonedx-demo/cyclonedx-php-composer-local",
     "description": "demo of cyclonedx/cyclonedx-php-composer with a local dependency",
     "type": "project",
     "config": {
@@ -21,7 +21,8 @@
         }
     ],
     "require": {
-        "cyclonedx/cyclonedx-php-composer-local-demo-dependency": "@dev"
+        "cyclonedx-demo/local-demo-dependency": "@dev",
+        "cyclonedx-demo/local-dependency-with-minimal-setup": "@dev"
     },
     "require-dev": {
         "cyclonedx/cyclonedx-php-composer": "@dev"

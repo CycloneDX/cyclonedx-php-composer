@@ -1,5 +1,5 @@
 {
-    "name": "cyclonedx/cyclonedx-php-composer-local-demo-dependency",
+    "name": "cyclonedx-demo/local-demo-dependency",
     "description": "a package that is hosted locally and required in a local demo",
     "type": "library"
 }

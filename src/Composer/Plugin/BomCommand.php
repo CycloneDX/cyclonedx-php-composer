@@ -21,10 +21,11 @@ declare(strict_types=1);
  * Copyright (c) Steve Springett. All Rights Reserved.
  */
 
-namespace CycloneDX\Composer;
+namespace CycloneDX\Composer\Plugin;
 
 use Composer\Command\BaseCommand;
 use Composer\Composer;
+use CycloneDX\Composer\BomGenerator;
 use CycloneDX\Serialize\JsonSerializer;
 use CycloneDX\Serialize\XmlSerializer;
 use CycloneDX\Specs\SpecFactory;
@@ -145,7 +146,7 @@ class BomCommand extends BaseCommand
         }
 
         $output->writeln('<info>Generating BOM from lockfile</info>');
-        $bomGenerator = new BomGenerator($locker->getLockedRepository(), $output);
+        $bomGenerator = new BomGenerator($locker->getLockedRepository());
         $bom = $bomGenerator->generateBom(
             false !== $input->getOption(self::OPTION_EXCLUDE_DEV),
             false !== $input->getOption(self::OPTION_EXCLUDE_PLUGINS)

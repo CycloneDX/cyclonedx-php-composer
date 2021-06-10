@@ -20,7 +20,7 @@
         }
     ],
     "extra": {
-        "class": "CycloneDX\\Composer\\Plugin",
+        "class": "CycloneDX\\Composer\\Plugin\\Plugin",
         "unused": [
             "composer-plugin-api"
         ]
