@@ -23,14 +23,17 @@ declare(strict_types=1);
 
 namespace CycloneDX\Composer;
 
+use Composer\Package\CompletePackage;
+use Composer\Package\CompletePackageInterface;
+use Composer\Package\Locker;
+use Composer\Package\PackageInterface;
+use Composer\Repository\LockArrayRepository;
 use CycloneDX\Enums\Classification;
 use CycloneDX\Enums\HashAlgorithm;
 use CycloneDX\Models\Bom;
 use CycloneDX\Models\Component;
 use CycloneDX\Models\License;
-use Generator;
 use PackageUrl\PackageUrl;
-use Symfony\Component\Console\Formatter\OutputFormatter;
 use Symfony\Component\Console\Output\OutputInterface;
 use UnexpectedValueException;
 
@@ -48,64 +51,39 @@ class BomGenerator
 
     /**
      * @psalm-var OutputInterface
+     * @readonly
      */
     private $output;
 
-    public function __construct(OutputInterface $output)
+    /**
+     * @var LockArrayRepository
+     * @readonly
+     */
+    private $lockArrayRepository;
+
+    public function __construct(LockArrayRepository $lockArrayRepository, OutputInterface $output)
     {
         $this->output = $output;
+        $this->lockArrayRepository = $lockArrayRepository;
     }
 
     /**
-     * @psalm-param mixed[] $lockData
-     * @psalm-return mixed[]
-     */
-    public function getPackagesFromLock(array $lockData, bool $excludeDev): array
-    {
-        $packages = $lockData['packages'] ?? [];
-
-        if ($excludeDev) {
-            $this->output->writeln('<warning>Dev dependencies will be skipped</warning>');
-
-            return $packages;
-        }
-
-        $packagesDev = $lockData['packages-dev'] ?? [];
-
-        return array_merge($packages, $packagesDev);
-    }
-
-    /**
-     * @psalm-param array<array<string, mixed>> $packages
-     *
-     * @psalm-return Generator<array<string, mixed>>
-     */
-    public function filterOutPlugins(array $packages): Generator
-    {
-        foreach ($packages as $package) {
-            if ('composer-plugin' === $package['type']) {
-                $this->output->writeln('<warning>Skipping plugin: '.OutputFormatter::escape($package['name']).'</warning>');
-                continue;
-            }
-            yield $package;
-        }
-    }
-
-    /**
-     * @psalm-param mixed[] $lockData       Composer's lockData to generate a BOM for
-     * @psalm-param bool    $excludeDev     Exclude Dev dependencies
-     * @psalm-param bool    $excludePlugins Exclude composer plugins
+     * @psalm-param bool $excludeDev Exclude Dev dependencies
+     * @psalm-param bool $excludePlugins Exclude composer plugins
      *
      * @throws UnexpectedValueException if a package does not provide a name or version
      * @throws \DomainException         if the bom structure had unexpected values
      *
      * @psalm-return Bom The resulting BOM
      */
-    public function generateBom(array $lockData, bool $excludeDev, bool $excludePlugins): Bom
+    public function generateBom(bool $excludeDev, bool $excludePlugins): Bom
     {
-        $packages = $this->getPackagesFromLock($lockData, $excludeDev);
+        $packages = $this->lockArrayRepository->getPackages() ?? [];
+        if ($excludeDev) {
+            $packages = array_filter($packages, [$this, 'packageIsNotDev']);
+        }
         if ($excludePlugins) {
-            $packages = iterator_to_array($this->filterOutPlugins($packages));
+            $packages = array_filter($packages, [$this, 'packageIsNotPlugin']);
         }
         $components = array_map([$this, 'buildComponent'], $packages);
 
@@ -114,46 +92,61 @@ class BomGenerator
     }
 
     /**
-     * @psalm-param mixed[] $package The lockData's package data to build a component from
-     *
      * @throws UnexpectedValueException if the given package does not provide a name or version
      * @throws \DomainException         if the bom structure had unexpected values
      *
      * @psalm-return Component The resulting component
      */
-    public function buildComponent(array $package): Component
+    public function buildComponent(PackageInterface $package): Component
     {
-        if (false === isset($package['name']) || '' === $package['name']) {
+        $nameAndVendor = $package->getPrettyName();
+        if ('' === $nameAndVendor) {
             throw new UnexpectedValueException('Encountered package without name: '.json_encode($package));
         }
 
-        if (false === isset($package['version']) || '' === $package['version']) {
+        $version = $this->normalizeVersion($package->getPrettyVersion());
+        if ('' === $version) {
             throw new UnexpectedValueException("Encountered package without version: {$package['name']}");
         }
 
-        [$name, $vendor] = $this->splitNameAndVendor($package['name']);
-        $version = $this->normalizeVersion($package['version']);
+        [$name, $vendor] = $this->splitNameAndVendor($nameAndVendor);
 
-        $component = (new Component(Classification::LIBRARY, $name, $version))
-            ->setGroup($vendor)
-            ->setDescription($package['description'] ?? null)
-            ->addLicense(...array_map(
-                static function (string $license): License { return new License($license); },
-                $this->splitLicenses($package['license'] ?? [])
-            ));
-
-        $purl = (new PackageUrl(self::PURL_TYPE, $component->getName()))
-                ->setNamespace($component->getGroup())
-                ->setVersion($component->getVersion());
-
-        if (!empty($package['dist']['shasum'])) {
-            $component->setHash(HashAlgorithm::SHA_1, $package['dist']['shasum']);
-            $purl->setChecksums(['sha1:'.$package['dist']['shasum']]);
+        if ($package instanceof CompletePackageInterface) {
+            $description = $package->getDescription();
+            $licenses = $this->createLicenses($package->getLicense());
+        } else {
+            $description = null;
+            $licenses = [];
         }
 
+        $type = Classification::LIBRARY; // composer has no option to distinguish framework/library/application
+        $component = (new Component($type, $name, $version))
+            ->setGroup($vendor)
+            ->setDescription($description)
+            ->addLicense(...$licenses);
+
+        $purl = (new PackageUrl(self::PURL_TYPE, $component->getName()))
+            ->setNamespace($component->getGroup())
+            ->setVersion($component->getVersion());
         $component->setPackageUrl($purl);
 
+        $sha1sum = $package->getDistSha1Checksum() ?? ''; // happened to be null for local packages
+        if ('' !== $sha1sum) {
+            $component->setHash(HashAlgorithm::SHA_1, $sha1sum);
+            $purl->setChecksums(["sha1:${sha1sum}"]);
+        }
+
         return $component;
+    }
+
+    private function packageIsNotDev(PackageInterface $package): bool
+    {
+        return false === $package->isDev();
+    }
+
+    private function packageIsNotPlugin(PackageInterface $package): bool
+    {
+        return 'composer-plugin' !== $package->getType();
     }
 
     /**
@@ -168,13 +161,10 @@ class BomGenerator
         // we need to consider that the vendor name may be omitted.
         // See https://getcomposer.org/doc/04-schema.md#name
         if (false === strpos($packageName, '/')) {
-            $name = $packageName;
-            $vendor = null;
-        } else {
-            [$vendor, $name] = explode('/', $packageName, 2);
+            return [$packageName, null];
         }
 
-        return [$name, $vendor];
+        return explode('/', $packageName, 2);
     }
 
     /**
@@ -200,12 +190,38 @@ class BomGenerator
     }
 
     /**
+     * @psalm-param array<string> $rawLicenses
+     * @psalm-return list<License>
+     */
+    private function createLicenses(array $rawLicenses): array
+    {
+        $splitLicenses = [];
+        foreach ($rawLicenses as $rawLicense) {
+            $splitLicenses[] = $this->splitLicenses($rawLicense);
+        }
+
+        return array_map(
+            [$this, 'createLicense'],
+            array_unique(array_merge(...$splitLicenses))
+        );
+    }
+
+    /**
+     * @psalm-pure
+     */
+    private function createLicense(string $nameOdId): License
+    {
+        return new License($nameOdId);
+    }
+
+
+    /**
      * @see https://getcomposer.org/doc/04-schema.md#license
      * @see https://spdx.dev/specifications/
      *
      * @psalm-param string|string[] $licenseData
      *
-     * @psalm-return string[]
+     * @psalm-return list<string>
      *
      * @internal this functionality is pretty clumsy and might be reworked in the future
      */
@@ -228,4 +244,5 @@ class BomGenerator
         // A single license provided as string
         return [$licenseData];
     }
+
 }
