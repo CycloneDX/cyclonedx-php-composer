@@ -97,6 +97,8 @@ class ComponentFactory
             $purl->setChecksums(["sha1:${sha1sum}"]);
         }
 
+        // #TODO add the package hash if package is inDev()
+
         return $component;
     }
 
@@ -107,10 +109,11 @@ class ComponentFactory
      */
     private function splitNameAndVendor(string $packageName): array
     {
-        // Composer requires published packages to be named like <vendor>/<packageName>.
-        // Because this is a loose requirement that doesn't apply to "internal" packages,
+        // Composer2 requires published packages to be named like <vendor>/<packageName>.
+        // Because this was a loose requirement in composer1 that doesn't apply to "internal" packages,
         // we need to consider that the vendor name may be omitted.
         // See https://getcomposer.org/doc/04-schema.md#name
+        // This is still done for backward compatibility reasons.
         if (false === strpos($packageName, '/')) {
             $name = $packageName;
             $vendor = null;
@@ -127,19 +130,16 @@ class ComponentFactory
      *
      * See for example {@link https://ossindex.sonatype.org/component/pkg:composer/phpmailer/phpmailer@v6.0.7}
      * vs {@link https://ossindex.sonatype.org/component/pkg:composer/phpmailer/phpmailer@6.0.7}.
-     *
-     * @psalm-param string $packageVersion The version to normalize
-     *
-     * @psalm-return string The normalized version
-     *
-     * @internal this functionality is pretty clumsy and might be reworked in the future
      */
-    private function normalizeVersion(string $packageVersion): string
+    private function normalizeVersion(string $version): string
     {
-        if (0 === substr_compare($packageVersion, 'v', 0, 1)) {
-            return substr($packageVersion, 1, \strlen($packageVersion));
+        // A _numeric_ version can be prefixed with 'v'.
+        // Strip leading 'v' must not be applied if the "version" is actually a branch name,
+        // which is totally fine in the composer ecosystem.
+        if (1 === preg_match('/^v\\d/', $version)) {
+            return substr($version, 1);
         }
 
-        return $packageVersion;
+        return $version;
     }
 }
