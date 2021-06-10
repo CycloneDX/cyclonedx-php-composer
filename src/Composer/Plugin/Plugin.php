@@ -21,7 +21,7 @@ declare(strict_types=1);
  * Copyright (c) Steve Springett. All Rights Reserved.
  */
 
-namespace CycloneDX\Composer;
+namespace CycloneDX\Composer\Plugin;
 
 use Composer\Composer;
 use Composer\IO\IOInterface;
