@@ -25,7 +25,8 @@ namespace CycloneDX\Composer\Plugin;
 
 use Composer\Command\BaseCommand;
 use Composer\Composer;
-use CycloneDX\Composer\BomGenerator;
+use CycloneDX\Composer\Factories\BomFactory;
+use CycloneDX\Composer\Locker;
 use CycloneDX\Serialize\JsonSerializer;
 use CycloneDX\Serialize\XmlSerializer;
 use CycloneDX\Specs\SpecFactory;
@@ -62,7 +63,7 @@ class BomCommand extends BaseCommand
 
     private const EXIT_OK = 0;
     private const EXIT_MISSING_LOCK = 1;
-    private const EXIT_UNSUPPORTED_OUTPUT_FORMAT = 2;
+    private const EXIT_UNKNOWN_VALUE = 2;
 
     private const SERIALISERS = [
         self::OUTPUT_FORMAT_XML => XmlSerializer::class,
@@ -81,7 +82,7 @@ class BomCommand extends BaseCommand
                 null,
                 InputOption::VALUE_REQUIRED,
                 'Which output format to use.'.\PHP_EOL.
-                'Values: "'.self::OUTPUT_FORMAT_XML.'", "'.self::OUTPUT_FORMAT_JSON.'"',
+                'Values: "'.implode('", "', array_keys(self::SERIALISERS)).'"',
                 self::OUTPUT_FORMAT_XML
             )
             ->addOption(
@@ -89,7 +90,7 @@ class BomCommand extends BaseCommand
                 null,
                 InputOption::VALUE_REQUIRED,
                 'Path to the output file.'.\PHP_EOL.
-                'Set to "'.self::OUTPUT_FILE_STDOUT.'" to write to STDOUT.'.\PHP_EOL.
+                'Set to "'.self::OUTPUT_FILE_STDOUT.'" to write to STDOUT, best used with flag -q.'.\PHP_EOL.
                 '(depending on the output-format, defaults to: "'.implode('" or "', array_values(self::OUTPUT_FILE_DEFAULT)).'")'
             )
             ->addOption(
@@ -137,6 +138,12 @@ class BomCommand extends BaseCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
+        /* @TODO split:
+         * - have an own method to get the lock
+         * - have a won method to gather the option results
+         * - have an own method to do the actual work
+         */
+
         $locker = $this->compat_getComposer()->getLocker();
 
         if (false === $locker->isLocked()) {
@@ -145,34 +152,39 @@ class BomCommand extends BaseCommand
             return self::EXIT_MISSING_LOCK;
         }
 
-        $output->writeln('<info>Generating BOM from lockfile</info>');
-        $bomGenerator = new BomGenerator($locker->getLockedRepository());
-        $bom = $bomGenerator->generateBom(
-            false !== $input->getOption(self::OPTION_EXCLUDE_DEV),
-            false !== $input->getOption(self::OPTION_EXCLUDE_PLUGINS)
-        );
-
-        /** @psalm-var \CycloneDX\Specs\Version::V_* $specVersion */
         $specVersion = $input->getOption(self::OPTION_SPEC_VERSION);
-        $spec = (new SpecFactory())->make($specVersion);
+        \assert(\is_string($specVersion));
+        if (false === \array_key_exists($specVersion, SpecFactory::SPECS)) {
+            $output->writeln('<error>Unknown value for option "'.self::OPTION_SPEC_VERSION.'. '.OutputFormatter::escape($specVersion).'</error>');
+
+            return self::EXIT_UNKNOWN_VALUE;
+        }
+
+        $excludeDev = false !== $input->getOption(self::OPTION_EXCLUDE_DEV);
+        $excludePlugins = false !== $input->getOption(self::OPTION_EXCLUDE_PLUGINS);
 
         $outputFormat = $input->getOption(self::OPTION_OUTPUT_FORMAT);
         \assert(\is_string($outputFormat));
         $bomFormat = strtoupper($outputFormat);
         unset($outputFormat);
 
-        $bomWriterClass = self::SERIALISERS[$bomFormat] ?? null;
-        if (null === $bomWriterClass) {
-            $output->writeln('<error>Unsupported output-format: '.OutputFormatter::escape($bomFormat).'<error>');
+        if (false === \array_key_exists($bomFormat, self::SERIALISERS)) {
+            $output->writeln('<error>Unknown value for option "'.self::OPTION_OUTPUT_FORMAT.'": '.OutputFormatter::escape($bomFormat).'<error>');
 
-            return self::EXIT_UNSUPPORTED_OUTPUT_FORMAT;
+            return self::EXIT_UNKNOWN_VALUE;
         }
+        $bomWriterClass = self::SERIALISERS[$bomFormat];
 
-        $bomWriter = new $bomWriterClass($spec);
         $outputFile = $input->getOption(self::OPTION_OUTPUT_FILE);
         if (false === \is_string($outputFile) || '' === $outputFile) {
             $outputFile = self::OUTPUT_FILE_DEFAULT[$bomFormat];
         }
+
+        $output->writeln('<info>Generating BOM from lockfile</info>');
+        $bom = (new BomFactory($excludeDev, $excludePlugins))->makeFromLocker(new Locker($locker));
+
+        $spec = (new SpecFactory())->make($specVersion);
+        $bomWriter = new $bomWriterClass($spec);
 
         $output->writeln('<info>Serializing BOM: '.OutputFormatter::escape($bomFormat).' '.OutputFormatter::escape($specVersion).'</info>');
         $bomContents = $bomWriter->serialize($bom, true);
