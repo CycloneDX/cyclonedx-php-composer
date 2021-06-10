@@ -4692,13 +4692,14 @@
             },
             "require-dev": {
                 "composer/composer": "^2.0.13",
+                "ext-simplexml": "*",
                 "phpunit/phpunit": "9.5.4",
                 "roave/security-advisories": "dev-latest",
                 "swaggest/json-schema": "0.12.31"
             },
             "type": "composer-plugin",
             "extra": {
-                "class": "CycloneDX\\Composer\\Plugin",
+                "class": "CycloneDX\\Composer\\Plugin\\Plugin",
                 "unused": [
                     "composer-plugin-api"
                 ]
@@ -4736,7 +4737,7 @@
                     "@php tools/psalm/vendor/vimeo/psalm/psalm"
                 ],
                 "test:cs-fixer": [
-                    "@php tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/php-cs-fixer fix --dry-run --diff-format=udiff"
+                    "@php tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/php-cs-fixer fix --dry-run --diff"
                 ],
                 "test:composer-unused": [
                     "@php tools/composer-unused/vendor/icanhazstring/composer-unused/bin/composer-unused --excludeDir=tools"
@@ -4745,7 +4746,7 @@
                     "@php tools/composer-require-checker/vendor/maglnet/composer-require-checker/bin/composer-require-checker || :"
                 ],
                 "cs-fix": [
-                    "@php tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/php-cs-fixer fix --diff-format=udiff"
+                    "@php tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/php-cs-fixer fix --diff"
                 ]
             },
             "license": [
@@ -4755,6 +4756,11 @@
                 {
                     "name": "nscuro",
                     "email": "nscuro@protonmail.com",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Jan Kowalleck",
+                    "email": "jan.kowalleck@gmail.com",
                     "role": "Developer"
                 }
             ],
