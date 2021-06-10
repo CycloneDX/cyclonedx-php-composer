@@ -116,7 +116,7 @@ class License
      */
     public function setNameOrId(string $nameOrId): self
     {
-        $spdx = new \CycloneDX\Spdx\License();
+        $spdx = new \CycloneDX\Spdx\License(); // @TODO rework to factory
         if ($spdx->validate($nameOrId)) {
             $this->id = $spdx->getLicense($nameOrId);
             $this->name = null;

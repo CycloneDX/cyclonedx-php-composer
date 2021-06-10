@@ -144,17 +144,9 @@ class BomCommand extends BaseCommand
             return self::EXIT_MISSING_LOCK;
         }
 
-        $lockData = $locker->getLockData();
-        if (false === \is_array($lockData)) {
-            $output->writeln('<error>Lockfile is malformed</error>');
-
-            return self::EXIT_MISSING_LOCK;
-        }
-
         $output->writeln('<info>Generating BOM from lockfile</info>');
-        $bomGenerator = new BomGenerator($output);
+        $bomGenerator = new BomGenerator($locker->getLockedRepository(), $output);
         $bom = $bomGenerator->generateBom(
-            $lockData,
             false !== $input->getOption(self::OPTION_EXCLUDE_DEV),
             false !== $input->getOption(self::OPTION_EXCLUDE_PLUGINS)
         );
