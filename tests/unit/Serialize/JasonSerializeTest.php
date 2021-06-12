@@ -290,7 +290,7 @@ class JasonSerializeTest extends TestCase
         $serializer = new JsonSerializer($spec);
 
         $this->expectException(DomainException::class);
-        $this->expectExceptionMessageMatches('/invalid algorithm/i');
+        $this->expectExceptionMessageMatches('/invalid hash algorithm/i');
         $serializer->hashToJson($algorithm, $this->getRandomString());
     }
 
@@ -304,7 +304,7 @@ class JasonSerializeTest extends TestCase
         $serializer = new JsonSerializer($spec);
 
         $this->expectException(DomainException::class);
-        $this->expectExceptionMessageMatches('/invalid content/i');
+        $this->expectExceptionMessageMatches('/invalid hash content/i');
         $serializer->hashToJson($this->getRandomString(), $content);
     }
 
