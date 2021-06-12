@@ -27,7 +27,7 @@ use CycloneDX\Enums\Classification;
 use CycloneDX\Enums\HashAlgorithm;
 use CycloneDX\Specs\SpecInterface;
 use CycloneDX\Specs\Version;
-use CycloneDX\Tests\_data\BomSpec;
+use CycloneDX\Tests\_data\BomSpecData;
 use Generator;
 use PHPUnit\Framework\TestCase;
 
@@ -48,7 +48,7 @@ abstract class AbstractSpecTestCase extends TestCase
 
     final public function testGetSupportedComponentTypes(): void
     {
-        $expected = BomSpec::getClassificationEnumForVersion($this->getSpecVersion());
+        $expected = BomSpecData::getClassificationEnumForVersion($this->getSpecVersion());
 
         $values = $this->getSpec()->getSupportedComponentTypes();
 
@@ -69,7 +69,7 @@ abstract class AbstractSpecTestCase extends TestCase
     final public function dpIsSupportedComponentType(): Generator
     {
         yield 'unknown' => [uniqid('Classification', false), false];
-        $known = BomSpec::getClassificationEnumForVersion($this->getSpecVersion());
+        $known = BomSpecData::getClassificationEnumForVersion($this->getSpecVersion());
         $values = (new \ReflectionClass(Classification::class))->getConstants();
         foreach ($values as $value) {
             yield $value => [$value, \in_array($value, $known, true)];
@@ -78,7 +78,7 @@ abstract class AbstractSpecTestCase extends TestCase
 
     final public function testGetSupportedHashAlgorithms(): void
     {
-        $expected = BomSpec::getHashAlgEnumForVersion($this->getSpecVersion());
+        $expected = BomSpecData::getHashAlgEnumForVersion($this->getSpecVersion());
 
         $values = $this->getSpec()->getSupportedHashAlgorithms();
 
@@ -99,7 +99,7 @@ abstract class AbstractSpecTestCase extends TestCase
     final public function dpIsSupportedHashAlgorithm(): Generator
     {
         yield 'unknown' => [uniqid('HashAlg', false), false];
-        $known = BomSpec::getHashAlgEnumForVersion($this->getSpecVersion());
+        $known = BomSpecData::getHashAlgEnumForVersion($this->getSpecVersion());
         $values = (new \ReflectionClass(HashAlgorithm::class))->getConstants();
         foreach ($values as $value) {
             yield $value => [$value, \in_array($value, $known, true)];
