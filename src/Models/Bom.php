@@ -27,22 +27,17 @@ use DomainException;
 use InvalidArgumentException;
 
 /**
- * Class Bom.
- *
  * @author nscuro
+ * @author jkowalleck
  */
 class Bom
 {
     /**
-     * Components.
-     *
      * @psalm-var Component[]
      */
     private $components = [];
 
     /**
-     * Version.
-     *
      * The version allows component publishers/authors to make changes to existing BOMs to update various aspects of the document such as description or licenses.
      * When a system is presented with multiple BOMs for the same component, the system should use the most recent version of the BOM.
      * The default version is '1' and should be incremented for each version of the BOM that is published.

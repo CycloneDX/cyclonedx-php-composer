@@ -28,6 +28,8 @@ use Composer\Repository\LockArrayRepository;
 
 /**
  * @internal
+ *
+ * @author jkowalleck
  */
 class Locker
 {

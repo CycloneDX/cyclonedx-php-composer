@@ -40,9 +40,9 @@ use UnexpectedValueException;
 /**
  * The Plugin's makeBom command.
  *
- * @author nscuro
- *
  * @internal
+ *
+ * @author nscuro
  */
 class BomCommand extends BaseCommand
 {

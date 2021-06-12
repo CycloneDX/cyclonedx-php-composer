@@ -30,16 +30,12 @@ use InvalidArgumentException;
 use PackageUrl\PackageUrl;
 
 /**
- * Class Component.
- *
  * @author nscuro
  * @author jkowalleck
  */
 class Component
 {
     /**
-     * Name.
-     *
      * The name of the component. This will often be a shortened, single name
      * of the component.
      *
@@ -51,8 +47,6 @@ class Component
     private $name;
 
     /**
-     * Group.
-     *
      * The grouping name or identifier. This will often be a shortened, single
      * name of the company or project that produced the component, or the source package or
      * domain name.
@@ -65,8 +59,6 @@ class Component
     private $group;
 
     /**
-     * Type.
-     *
      * Specifies the type of component. For software components, classify as application if no more
      * specific appropriate classification is available or cannot be determined for the component.
      * Valid choices are: application, framework, library, operating-system, device, or file.
@@ -80,8 +72,6 @@ class Component
     private $type;
 
     /**
-     * Description.
-     *
      * Specifies a description for the component.
      *
      * @psalm-var string|null
@@ -90,6 +80,7 @@ class Component
 
     /**
      * Package-URL (PURL).
+     *
      * The purl, if specified, must be valid and conform to the specification
      * defined at: {@linnk https://github.com/package-url/purl-spec/blob/master/README.rst#purl}.
      *
@@ -105,8 +96,6 @@ class Component
     private $licenses = [];
 
     /**
-     * Hashes.
-     *
      * Specifies the file hashes of the component.
      *
      * @psalm-var array<HashAlgorithm::*, string>
@@ -114,8 +103,6 @@ class Component
     private $hashes = [];
 
     /**
-     * Version.
-     *
      * The component version. The version should ideally comply with semantic versioning
      * but is not enforced.
      *

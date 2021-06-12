@@ -25,8 +25,6 @@ namespace CycloneDX\Specs;
 
 /**
  * @author jkowalleck
- *
- * @internal
  */
 interface SpecInterface
 {

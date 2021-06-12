@@ -24,9 +24,9 @@ declare(strict_types=1);
 namespace CycloneDX\Composer\Plugin;
 
 /**
- * @author nscuro
- *
  * @internal
+ *
+ * @author nscuro
  */
 class CommandProvider implements \Composer\Plugin\Capability\CommandProvider
 {

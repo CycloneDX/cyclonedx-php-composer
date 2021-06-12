@@ -29,9 +29,9 @@ use DOMNode;
 use Generator;
 
 /**
- * @author jkowalleck
- *
  * @internal
+ *
+ * @author jkowalleck
  */
 trait SimpleDomTrait
 {

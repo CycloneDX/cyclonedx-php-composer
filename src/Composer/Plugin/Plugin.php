@@ -29,9 +29,9 @@ use Composer\Plugin\Capable;
 use Composer\Plugin\PluginInterface;
 
 /**
- * @author nscuro
- *
  * @internal
+ *
+ * @author nscuro
  */
 class Plugin implements PluginInterface, Capable
 {

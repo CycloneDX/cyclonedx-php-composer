@@ -26,6 +26,11 @@ namespace CycloneDX\Composer\Factories;
 use Composer\Package\CompletePackageInterface;
 use CycloneDX\Models\License;
 
+/**
+ * @internal
+ *
+ * @author jkowalleck
+ */
 class LicenseFactory
 {
     /**
