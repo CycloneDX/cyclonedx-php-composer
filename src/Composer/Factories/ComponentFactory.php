@@ -38,10 +38,14 @@ use UnexpectedValueException;
  */
 class ComponentFactory
 {
+    /**
+     * purl type for composer packages,
+     * as defined in {@link https://github.com/package-url/purl-spec/blob/master/PURL-TYPES.rst the PURL specs}.
+     */
     public const PURL_TYPE = 'composer';
 
     /** @var LicenseFactory */
-    public $licenseFactory;
+    private $licenseFactory;
 
     public function __construct(?LicenseFactory $licenseFactory = null)
     {
@@ -60,7 +64,7 @@ class ComponentFactory
             throw new UnexpectedValueException('Encountered package without name:'.\PHP_EOL.print_r($package, true));
         }
 
-        $version = $this->normalizeVersion($package->getPrettyVersion());
+        $version = $this->getPackageVersion($package);
         if ('' === $version) {
             throw new UnexpectedValueException("Encountered package without version: ${rawName}");
         }
@@ -99,8 +103,6 @@ class ComponentFactory
             $purl->setChecksums(["sha1:${sha1sum}"]);
         }
 
-        // #TODO add the package hash if package is inDev()
-
         return $component;
     }
 
@@ -126,15 +128,21 @@ class ComponentFactory
         return [$name, $vendor];
     }
 
-    /**
-     * Versions of Composer packages may be prefixed with "v".
-     * This prefix appears to be problematic for CPE and PURL matching and thus is removed here.
-     *
-     * See for example {@link https://ossindex.sonatype.org/component/pkg:composer/phpmailer/phpmailer@v6.0.7}
-     * vs {@link https://ossindex.sonatype.org/component/pkg:composer/phpmailer/phpmailer@6.0.7}.
-     */
-    private function normalizeVersion(string $version): string
+    private function getPackageVersion(PackageInterface $package): string
     {
+        $version = $package->getPrettyVersion();
+        if ($package->isDev()) {
+            // package is installed in dev-mode
+            // so the version is a branch name
+            return $version;
+        }
+
+        // Versions of Composer packages may be prefixed with "v".
+        //     * This prefix appears to be problematic for CPE and PURL matching and thus is removed here.
+        //     *
+        //     * See for example {@link https://ossindex.sonatype.org/component/pkg:composer/phpmailer/phpmailer@v6.0.7}
+        //     * vs {@link https://ossindex.sonatype.org/component/pkg:composer/phpmailer/phpmailer@6.0.7}.
+        //
         // A _numeric_ version can be prefixed with 'v'.
         // Strip leading 'v' must not be applied if the "version" is actually a branch name,
         // which is totally fine in the composer ecosystem.
