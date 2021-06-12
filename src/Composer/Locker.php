@@ -33,6 +33,8 @@ use Composer\Repository\LockArrayRepository;
  */
 class Locker
 {
+    private const COMPOSER_PACKAGE_TYPE_PLUGIN = 'composer-plugin';
+
     /** @var ComposerPackageLocker */
     public $composerPackageLocker;
 
@@ -51,7 +53,7 @@ class Locker
 
         if ($excludePlugins) {
             foreach ($repo->getPackages() as $package) {
-                if ('composer-plugin' === $package->getType()) {
+                if (self::COMPOSER_PACKAGE_TYPE_PLUGIN === $package->getType()) {
                     $repo->removePackage($package);
                 }
             }

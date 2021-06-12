@@ -39,6 +39,8 @@ use RuntimeException;
  */
 class JsonSerializer extends AbstractSerialize implements SerializerInterface
 {
+    private const BOM_FORMAT = 'CycloneDX';
+
     // region SerializerInterface
 
     /**
@@ -82,7 +84,7 @@ class JsonSerializer extends AbstractSerialize implements SerializerInterface
     public function bomToJson(Bom $bom): array
     {
         return [
-            'bomFormat' => 'CycloneDX',
+            'bomFormat' => self::BOM_FORMAT,
             'specVersion' => $this->spec->getVersion(),
             'version' => $bom->getVersion(),
             'components' => array_map(
@@ -173,10 +175,10 @@ class JsonSerializer extends AbstractSerialize implements SerializerInterface
     public function hashToJson(string $algorithm, string $content): array
     {
         if (false === $this->spec->isSupportedHashAlgorithm($algorithm)) {
-            throw new DomainException('invalid algorithm', 1);
+            throw new DomainException("invalid hash algorithm: ${algorithm}", 1);
         }
         if (false === $this->spec->isSupportedHashContent($content)) {
-            throw new DomainException('invalid content', 2);
+            throw new DomainException("invalid hash content: ${content}", 2);
         }
 
         return [

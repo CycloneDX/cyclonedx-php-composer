@@ -306,7 +306,7 @@ class XmlSerializeTest extends TestCase
         $serializer = new XmlSerializer($spec);
 
         $this->expectException(DomainException::class);
-        $this->expectExceptionMessageMatches('/invalid algorithm/i');
+        $this->expectExceptionMessageMatches('/invalid hash algorithm/i');
         $serializer->hashToDom(new DOMDocument(), $algorithm, $this->getRandomString());
     }
 
@@ -320,7 +320,7 @@ class XmlSerializeTest extends TestCase
         $serializer = new XmlSerializer($spec);
 
         $this->expectException(DomainException::class);
-        $this->expectExceptionMessageMatches('/invalid content/i');
+        $this->expectExceptionMessageMatches('/invalid hash content/i');
         $serializer->hashToDom(new DOMDocument(), $this->getRandomString(), $content);
     }
 

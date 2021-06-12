@@ -42,6 +42,11 @@ class XmlSerializer extends AbstractSerialize implements SerializerInterface
 {
     use SimpleDomTrait;
 
+    private const XML_VERSION = '1.0';
+    private const XML_ENCODING = 'UTF-8';
+
+    private const DOC_NAMESPACE_PATH = 'http://cyclonedx.org/schema/bom/';
+
     // region SerializerInterface
 
     /**
@@ -51,7 +56,7 @@ class XmlSerializer extends AbstractSerialize implements SerializerInterface
      */
     public function serialize(Bom $bom, bool $pretty = true): string
     {
-        $document = new DOMDocument('1.0', 'UTF-8');
+        $document = new DOMDocument(self::XML_VERSION, self::XML_ENCODING);
         $document->appendChild($this->bomToDom($document, $bom));
 
         $document->formatOutput = $pretty;
@@ -67,7 +72,7 @@ class XmlSerializer extends AbstractSerialize implements SerializerInterface
     public function bomToDom(DOMDocument $document, Bom $bom): DOMElement
     {
         $element = $document->createElementNS(
-            'http://cyclonedx.org/schema/bom/'.$this->spec->getVersion(),
+            self::DOC_NAMESPACE_PATH.$this->spec->getVersion(),
             'bom'
         );
         $this->simpleDomSetAttributes(
@@ -160,10 +165,10 @@ class XmlSerializer extends AbstractSerialize implements SerializerInterface
     public function hashToDom(DOMDocument $document, string $algorithm, string $content): DOMElement
     {
         if (false === $this->spec->isSupportedHashAlgorithm($algorithm)) {
-            throw new DomainException('invalid algorithm', 1);
+            throw new DomainException("invalid hash algorithm: ${algorithm}", 1);
         }
         if (false === $this->spec->isSupportedHashContent($content)) {
-            throw new DomainException('invalid content', 2);
+            throw new DomainException("invalid hash content: ${content}", 2);
         }
 
         $element = $this->simpleDomSafeTextElement($document, 'hash', $content);
