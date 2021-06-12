@@ -45,10 +45,12 @@ class LicenseFactory
             $package->getLicense()
         );
 
+        $licenses = array_unique(array_merge(...$splitLicenses));
+
         return array_values(
             array_map(
                 [$this, 'makeFromString'],
-                array_unique(array_merge(...$splitLicenses))
+                $licenses
         ));
     }
 
