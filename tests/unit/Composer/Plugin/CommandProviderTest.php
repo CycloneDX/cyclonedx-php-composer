@@ -21,22 +21,25 @@ declare(strict_types=1);
  * Copyright (c) Steve Springett. All Rights Reserved.
  */
 
-namespace CycloneDX\Composer\Plugin;
+namespace CycloneDX\Tests\unit\Composer\Plugin;
 
-use Composer\Plugin\Capability\CommandProvider as CommandProviderCapability;
+use CycloneDX\Composer\Plugin\BomCommand;
+use CycloneDX\Composer\Plugin\CommandProvider;
+use PHPUnit\Framework\TestCase;
 
 /**
- * @internal
- *
- * @author nscuro
+ * @covers \CycloneDX\Composer\Plugin\CommandProvider
  */
-class CommandProvider implements CommandProviderCapability
+class CommandProviderTest extends TestCase
 {
     /**
-     * @psalm-suppress MissingThrowsDocblock - Exceptions are handled by caller
+     * @uses \CycloneDX\Composer\Plugin\BomCommand
      */
-    public function getCommands(): array
+    public function testBomCommandIsRegistered(): void
     {
-        return [new BomCommand()];
+        $commandProvider = new CommandProvider();
+        $commands = $commandProvider->getCommands();
+        $bomCommands = array_filter($commands, static function ($command) { return $command instanceof BomCommand; });
+        self::assertCount(1, $bomCommands, 'BomCommand not found exactly once');
     }
 }
