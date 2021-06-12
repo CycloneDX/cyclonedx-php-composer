@@ -94,4 +94,23 @@ class LicenseTest extends TestCase
             yield $license => [$license];
         }
     }
+
+    public function testShippedLicensesFile(): void
+    {
+        $file = License::getResourcesFile();
+
+        self::assertFileExists($file);
+
+        $json = file_get_contents($file);
+        self::assertIsString($json);
+        self::assertJson($json);
+
+        $licenses = json_decode($json, false, 512, \JSON_THROW_ON_ERROR);
+        self::assertIsArray($licenses);
+        self::assertNotEmpty($licenses);
+
+        foreach ($licenses as $license) {
+            self::assertIsString($license);
+        }
+    }
 }
