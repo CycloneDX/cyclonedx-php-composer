@@ -33,10 +33,13 @@ use Composer\Repository\LockArrayRepository;
  */
 class Locker
 {
-    private const COMPOSER_PACKAGE_TYPE_PLUGIN = 'composer-plugin';
-
     /** @var ComposerPackageLocker */
     public $composerPackageLocker;
+
+    public function getComposerPackageLocker(): ComposerPackageLocker
+    {
+        return $this->composerPackageLocker;
+    }
 
     public function __construct(ComposerPackageLocker $composerPackageLocker)
     {
@@ -52,13 +55,18 @@ class Locker
             ->getLockedRepository(false === $excludeDev);
 
         if ($excludePlugins) {
-            foreach ($repo->getPackages() as $package) {
-                if (self::COMPOSER_PACKAGE_TYPE_PLUGIN === $package->getType()) {
-                    $repo->removePackage($package);
-                }
-            }
+            $this->removePluginsFromRepo($repo);
         }
 
         return $repo;
+    }
+
+    private function removePluginsFromRepo(LockArrayRepository $repo): void
+    {
+        foreach ($repo->getPackages() as $package) {
+            if ('composer-plugin' === $package->getType()) {
+                $repo->removePackage($package);
+            }
+        }
     }
 }

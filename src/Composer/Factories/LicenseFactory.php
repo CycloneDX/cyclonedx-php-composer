@@ -55,7 +55,7 @@ class LicenseFactory
     /**
      * @throws \RuntimeException if loading known SPDX licenses failed
      */
-    private function makeFromString(string $nameOdId): License
+    public function makeFromString(string $nameOdId): License
     {
         return new License($nameOdId);
     }
@@ -64,7 +64,7 @@ class LicenseFactory
      * @see https://getcomposer.org/doc/04-schema.md#license
      * @see https://spdx.dev/specifications/
      *
-     * @psalm-param string|string[] $licenseData
+     * @psalm-param string|array<string> $licenseData
      *
      * @psalm-return list<string>
      *
@@ -74,7 +74,7 @@ class LicenseFactory
     {
         if (\is_array($licenseData)) {
             // Disjunctive license provided as array
-            return $licenseData;
+            return array_values($licenseData);
         }
 
         if (preg_match('/\((?:[\w.\-]+(?: or | and )?)+\)/', $licenseData)) {
