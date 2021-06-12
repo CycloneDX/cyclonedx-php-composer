@@ -24,10 +24,12 @@ declare(strict_types=1);
 namespace CycloneDX\Enums;
 
 /**
- * See {@link https://cyclonedx.org/schema/bom/1.0 Schema} for `classification`.
- * See {@link https://cyclonedx.org/schema/bom/1.1 Schema} for `classification`.
- * See {@link https://cyclonedx.org/schema/bom/1.2 Schema} for `classification`.
- * See {@link https://cyclonedx.org/schema/bom/1.3 Schema} for `classification`.
+ * See {@link https://cyclonedx.org/schema/bom/1.0 Schema 1.0} for `classification`.
+ * See {@link https://cyclonedx.org/schema/bom/1.1 Schema 1.1} for `classification`.
+ * See {@link https://cyclonedx.org/schema/bom/1.2 Schema 1.2} for `classification`.
+ * See {@link https://cyclonedx.org/schema/bom/1.3 Schema 1.3} for `classification`.
+ *
+ * @author jkowalleck
  */
 abstract class Classification
 {

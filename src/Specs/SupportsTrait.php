@@ -24,9 +24,9 @@ declare(strict_types=1);
 namespace CycloneDX\Specs;
 
 /**
- * @author jkowalleck
- *
  * @internal
+ *
+ * @author jkowalleck
  */
 trait SupportsTrait
 {

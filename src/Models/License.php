@@ -26,15 +26,11 @@ namespace CycloneDX\Models;
 use InvalidArgumentException;
 
 /**
- * Work with known SPDX licences.
- *
  * @author jkowalleck
  */
 class License
 {
     /**
-     * ID.
-     *
      * A valid SPDX license ID.
      *
      * @see \CycloneDX\Spdx\License::validate()
@@ -44,8 +40,6 @@ class License
     private $id;
 
     /**
-     * Name.
-     *
      * If SPDX does not define the license used, this field may be used to provide the license name.
      *
      * @psalm-var string|null
@@ -53,8 +47,6 @@ class License
     private $name;
 
     /**
-     * Url.
-     *
      * The URL to the license file.
      * If specified, a 'license' externalReference should also be specified for completeness.
      *

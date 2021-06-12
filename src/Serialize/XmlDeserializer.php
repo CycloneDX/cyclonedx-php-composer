@@ -36,9 +36,7 @@ use PackageUrl\PackageUrl;
 /**
  * transform XML to data models.
  *
- * !! currently in experimental status. not intended for public use.
- *
- * @internal
+ * @internal !! currently in experimental status. not intended for public use.
  * @codeCoverageIgnore since it is currently in experimental state
  *
  * @author jkowalleck

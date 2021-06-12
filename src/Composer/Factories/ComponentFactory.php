@@ -33,6 +33,8 @@ use UnexpectedValueException;
 
 /**
  * @internal
+ *
+ * @author jkowalleck
  */
 class ComponentFactory
 {

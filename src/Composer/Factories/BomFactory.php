@@ -28,9 +28,9 @@ use CycloneDX\Models\Bom;
 use UnexpectedValueException;
 
 /**
- * @author jkowalleck
- *
  * @internal
+ *
+ * @author jkowalleck
  */
 class BomFactory
 {
