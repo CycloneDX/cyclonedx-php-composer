@@ -28,7 +28,7 @@ use function PHPUnit\Framework\assertFileExists;
 use function PHPUnit\Framework\assertNotCount;
 use SimpleXMLElement;
 
-abstract class BomSpec
+abstract class BomSpecData
 {
     public static function getSpecFilePath(string $version): string
     {

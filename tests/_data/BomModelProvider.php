@@ -148,7 +148,7 @@ abstract class BomModelProvider
      */
     public static function bomWithComponentHashAlgorithmsSpec10(): Generator
     {
-        yield from self::bomWithComponentHashAlgorithmsFromSpec(BomSpec::getHashAlgEnumForVersion('1.0'));
+        yield from self::bomWithComponentHashAlgorithmsFromSpec(BomSpecData::getHashAlgEnumForVersion('1.0'));
     }
 
     /**
@@ -158,7 +158,7 @@ abstract class BomModelProvider
      */
     public static function bomWithComponentHashAlgorithmsSpec11(): Generator
     {
-        yield from self::bomWithComponentHashAlgorithmsFromSpec(BomSpec::getHashAlgEnumForVersion('1.1'));
+        yield from self::bomWithComponentHashAlgorithmsFromSpec(BomSpecData::getHashAlgEnumForVersion('1.1'));
     }
 
     /**
@@ -168,7 +168,7 @@ abstract class BomModelProvider
      */
     public static function bomWithComponentHashAlgorithmsSpec12(): Generator
     {
-        yield from self::bomWithComponentHashAlgorithmsFromSpec(BomSpec::getHashAlgEnumForVersion('1.2'));
+        yield from self::bomWithComponentHashAlgorithmsFromSpec(BomSpecData::getHashAlgEnumForVersion('1.2'));
     }
 
     /**
@@ -178,7 +178,7 @@ abstract class BomModelProvider
      */
     public static function bomWithComponentHashAlgorithmsSpec13(): Generator
     {
-        yield from self::bomWithComponentHashAlgorithmsFromSpec(BomSpec::getHashAlgEnumForVersion('1.3'));
+        yield from self::bomWithComponentHashAlgorithmsFromSpec(BomSpecData::getHashAlgEnumForVersion('1.3'));
     }
 
     /**
