@@ -35,13 +35,13 @@ use UnexpectedValueException;
 class BomFactory
 {
     /** @var bool */
-    public $excludeDev;
+    private $excludeDev;
 
     /** @var bool */
-    public $excludePlugins;
+    private $excludePlugins;
 
     /** @var ComponentFactory */
-    public $componentFactory;
+    private $componentFactory;
 
     public function __construct(bool $excludeDev, bool $excludePlugins, ?ComponentFactory $componentFactory = null)
     {
