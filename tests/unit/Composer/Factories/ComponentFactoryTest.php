@@ -87,6 +87,8 @@ class ComponentFactoryTest extends TestCase
         $got = $factory->makeFromPackage($package);
 
         self::assertEquals($expected, $got);
+        self::assertSame($expected->getLicenses(), $got->getLicenses());
+        self::assertSame($expected->getHashes(), $got->getHashes());
     }
 
     public function dpMakeFromPackage(): \Generator
