@@ -49,15 +49,13 @@ class License
         return $this->licenses;
     }
 
-    public static function getResourcesFile(): string
+    public function getResourcesFile(): string
     {
         return realpath(self::LICENSES_FILE);
     }
 
     /**
      * @throws RuntimeException if loading licenses failed
-     *
-     * @codeCoverageIgnore
      */
     public function __construct()
     {
@@ -86,27 +84,23 @@ class License
             // @codeCoverageIgnoreEnd
         }
 
-        $file = self::getResourcesFile();
-        $json = file_get_contents($file);
+        $file = $this->getResourcesFile();
+        $json = file_exists($file) ? file_get_contents($file) : false;
         if (false === $json) {
-            // @codeCoverageIgnoreStart
             throw new RuntimeException("Missing licenses file: ${file}");
-            // @codeCoverageIgnoreEnd
         }
 
         try {
             /**
              * list of strings, as asserted by an integration test:
-             * {@see \CycloneDX\Tests\integration\Spdx\ShippedLicensesTest::test()}.
+             * {@see \CycloneDX\Tests\unit\Spdx\LicenseTest::testShippedLicensesFile()}.
              *
              * @var list<string> $licenses
              */
             $licenses = json_decode($json, false, 2, \JSON_THROW_ON_ERROR);
-            // @codeCoverageIgnoreStart
         } catch (JsonException $exception) {
-            throw new RuntimeException("Malformed licenses file ${file}", 0, $exception);
+            throw new RuntimeException("Malformed licenses file: ${file}", 0, $exception);
         }
-        // @codeCoverageIgnoreEnd
 
         $this->licenses = [];
         foreach ($licenses as $license) {

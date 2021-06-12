@@ -37,22 +37,30 @@ class LicenseTest extends TestCase
      */
     private $license;
 
-    private const LICENSES_FILE = __DIR__.'/../../_data/spdx-licenses.json';
+    private const LICENSES_FILE_CONTENT = <<<'JSON'
+        [
+            "FooBaR"
+        ]
+        JSON;
 
     protected function setUp(): void
     {
-        $this->license = $this->createPartialMock(License::class, [
-            'getResourcesFile', /* @see License::getResourcesFile() */
-        ]);
-        $this->license->method('getResourcesFile')
-            ->willReturn(self::LICENSES_FILE);
+        $tempFilePath = tempnam(sys_get_temp_dir(), __CLASS__);
+        file_put_contents($tempFilePath, self::LICENSES_FILE_CONTENT);
+
+        $this->license = $this->createPartialMock(License::class, ['getResourcesFile']);
+        $this->license->method('getResourcesFile')->willReturn($tempFilePath);
         $this->license->loadLicenses();
+
+        @unlink($tempFilePath);
     }
 
-    public function testGetLicensesNotEmpty(): void
+    public function testGetLicensesAsExpected(): void
     {
+        $expected = json_decode(self::LICENSES_FILE_CONTENT, true, 2, \JSON_THROW_ON_ERROR);
         $licenses = $this->license->getLicenses();
-        self::assertNotEmpty($licenses);
+        self::assertIsArray($expected);
+        self::assertSame($expected, array_values($licenses));
     }
 
     /**
@@ -89,15 +97,14 @@ class LicenseTest extends TestCase
 
     public static function validLicense(): Generator
     {
-        $licenses = ['MIT', 'mit', 'Mit'];
-        foreach ($licenses as $license) {
-            yield $license => [$license];
-        }
+        yield 'UPPERCASE' => ['FOOBAR'];
+        yield 'lowercase' => ['foobar'];
+        yield 'PascalCase' => ['FooBar'];
     }
 
     public function testShippedLicensesFile(): void
     {
-        $file = License::getResourcesFile();
+        $file = (new License())->getResourcesFile();
 
         self::assertFileExists($file);
 
@@ -112,5 +119,32 @@ class LicenseTest extends TestCase
         foreach ($licenses as $license) {
             self::assertIsString($license);
         }
+    }
+
+    public function testWithMalformedLicenseFile(): void
+    {
+        $tempFilePath = tempnam(sys_get_temp_dir(), __METHOD__);
+        file_put_contents($tempFilePath, '["foo');
+        $license = $this->createPartialMock(License::class, ['getResourcesFile']);
+        $license->method('getResourcesFile')->willReturn($tempFilePath);
+
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessageMatches('/malformed licenses file/i');
+
+        $license->loadLicenses();
+    }
+
+    public function testWithMissingLicenseFile(): void
+    {
+        $tempFilePath = tempnam(sys_get_temp_dir(), __METHOD__);
+        unlink($tempFilePath);
+
+        $license = $this->createPartialMock(License::class, ['getResourcesFile']);
+        $license->method('getResourcesFile')->willReturn($tempFilePath);
+
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessageMatches('/missing licenses file/i');
+
+        $license->loadLicenses();
     }
 }
