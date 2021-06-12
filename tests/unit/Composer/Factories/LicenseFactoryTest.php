@@ -55,11 +55,11 @@ class LicenseFactoryTest extends TestCase
         $license4 = $this->createStub(License::class);
         $license5 = $this->createStub(License::class);
         $expected = [$license1, $license2, $license3, $license4, $license5];
-        $licenses = ['license1','(license2 or license3)', ['license4', 'license5']];
+        $licenses = ['license1', '(license2 or license3)', ['license4', 'license5']];
         $package = $this->createConfiguredMock(CompletePackageInterface::class, ['getLicense' => $licenses]);
         $factory = $this->createPartialMock(LicenseFactory::class, ['makeFromString']);
 
-        $factory->expects(self::exactly(count($expected)))->method('makeFromString')
+        $factory->expects(self::exactly(\count($expected)))->method('makeFromString')
             ->withConsecutive(['license1'], ['license2'], ['license3'], ['license4'], ['license5'])
             ->willReturnMap([
                 ['license1', $license1],
