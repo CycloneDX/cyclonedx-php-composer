@@ -43,9 +43,9 @@ class ComponentFactory
     /** @var LicenseFactory */
     public $licenseFactory;
 
-    public function __construct()
+    public function __construct(?LicenseFactory $licenseFactory = null)
     {
-        $this->licenseFactory = new LicenseFactory();
+        $this->licenseFactory = $licenseFactory ?? new LicenseFactory();
     }
 
     /**
