@@ -71,6 +71,6 @@ class LicenseFactoryTest extends TestCase
 
         $got = $factory->makeFromPackage($package);
 
-        self::assertSame($expected, $got);
+        self::assertEquals($expected, $got);
     }
 }
