@@ -43,6 +43,7 @@ use UnexpectedValueException;
  * @internal
  *
  * @author nscuro
+ * @author jkowalleck
  */
 class BomCommand extends BaseCommand
 {
