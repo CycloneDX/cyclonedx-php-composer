@@ -21,7 +21,7 @@ declare(strict_types=1);
  * Copyright (c) Steve Springett. All Rights Reserved.
  */
 
-namespace CycloneDX\Tests\functional\Composer\Factory;
+namespace CycloneDX\Tests\functional\Composer\Factories;
 
 use CycloneDX\Composer\Factories\SpecFactory;
 use CycloneDX\Spec\SpecInterface;
