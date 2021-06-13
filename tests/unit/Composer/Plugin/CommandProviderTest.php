@@ -23,8 +23,8 @@ declare(strict_types=1);
 
 namespace CycloneDX\Tests\unit\Composer\Plugin;
 
-use CycloneDX\Composer\Plugin\BomCommand;
 use CycloneDX\Composer\Plugin\CommandProvider;
+use CycloneDX\Composer\Plugin\MakeBomCommand;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -33,13 +33,14 @@ use PHPUnit\Framework\TestCase;
 class CommandProviderTest extends TestCase
 {
     /**
-     * @uses \CycloneDX\Composer\Plugin\BomCommand
+     * @uses \CycloneDX\Composer\Plugin\MakeBomCommand
+     * @uses \CycloneDX\Composer\Plugin\MakeBomCommandOptions
      */
     public function testBomCommandIsRegistered(): void
     {
         $commandProvider = new CommandProvider();
         $commands = $commandProvider->getCommands();
-        $bomCommands = array_filter($commands, static function ($command) { return $command instanceof BomCommand; });
-        self::assertCount(1, $bomCommands, 'BomCommand not found exactly once');
+        $bomCommands = array_filter($commands, static function ($command) { return $command instanceof MakeBomCommand; });
+        self::assertCount(1, $bomCommands, 'MakeBomCommand not found exactly once');
     }
 }
