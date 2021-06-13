@@ -29,8 +29,6 @@ use CycloneDX\Composer\Factories\BomFactory;
 use CycloneDX\Composer\Factories\SpecFactory;
 use CycloneDX\Composer\Locker;
 use CycloneDX\Composer\Plugin\Exceptions\ValueError;
-use CycloneDX\Serialize\AbstractSerialize;
-use CycloneDX\Serialize\SerializerInterface;
 use RuntimeException;
 use Symfony\Component\Console\Formatter\OutputFormatter;
 use Symfony\Component\Console\Input\InputInterface;
@@ -63,7 +61,6 @@ class MakeBomCommand extends BaseCommand
     private function compat_getComposer(): Composer
     {
         try {
-            /** @var Composer|null $composer */
             $composer = $this->getComposer();
         } catch (\Exception $exception) {
             throw new RuntimeException('Composer does not exist', 0, $exception);
@@ -111,7 +108,6 @@ class MakeBomCommand extends BaseCommand
         $bom = (new BomFactory($options->excludeDev, $options->excludePlugins))->makeFromLocker($locker);
 
         $spec = (new SpecFactory())->make($options->specVersion);
-        /** @psalm-var AbstractSerialize&SerializerInterface $bomWriter */
         $bomWriter = new $options->bomWriterClass($spec);
 
         $isVerbose && $output->writeln('<info>Serializing BOM: '.OutputFormatter::escape($options->bomFormat).' '.OutputFormatter::escape($options->specVersion).'</info>');
