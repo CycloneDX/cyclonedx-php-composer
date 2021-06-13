@@ -88,7 +88,7 @@ class MakeBomCommandOptionsTest extends TestCase
             ['--spec-version=1.3', 'specVersion', Version::V_1_3],
         ];
 
-        $command = MakeBomCommandOptions::configureCommand(new Command());
+        $command = MakeBomCommandOptions::configureCommand(new Command('dummy'));
 
         foreach ($data as $title => [$inputString, $property, $expected]) {
             $input = new StringInput($inputString);
