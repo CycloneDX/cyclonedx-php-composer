@@ -21,9 +21,9 @@ declare(strict_types=1);
  * Copyright (c) Steve Springett. All Rights Reserved.
  */
 
-namespace CycloneDX\Tests\functional\Specs;
+namespace CycloneDX\Tests\functional\Composer\Factory;
 
-use CycloneDX\Specs\SpecFactory;
+use CycloneDX\Composer\Factories\SpecFactory;
 use CycloneDX\Specs\SpecInterface;
 use Generator;
 use PHPUnit\Framework\TestCase;

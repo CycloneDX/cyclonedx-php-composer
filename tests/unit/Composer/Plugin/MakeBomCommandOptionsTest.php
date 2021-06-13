@@ -23,11 +23,11 @@ declare(strict_types=1);
 
 namespace CycloneDX\Tests\unit\Composer\Plugin;
 
+use CycloneDX\Composer\Factories\SpecFactory;
 use CycloneDX\Composer\Plugin\Exceptions\ValueError;
 use CycloneDX\Composer\Plugin\MakeBomCommandOptions;
 use CycloneDX\Serialize\JsonSerializer;
 use CycloneDX\Serialize\XmlSerializer;
-use CycloneDX\Specs\SpecFactory;
 use CycloneDX\Specs\Version;
 use PHPUnit\Framework\MockObject\Stub\ReturnSelf;
 use PHPUnit\Framework\TestCase;

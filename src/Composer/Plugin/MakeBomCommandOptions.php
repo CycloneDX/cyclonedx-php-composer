@@ -23,12 +23,12 @@ declare(strict_types=1);
 
 namespace CycloneDX\Composer\Plugin;
 
+use CycloneDX\Composer\Factories\SpecFactory;
 use CycloneDX\Composer\Plugin\Exceptions\ValueError;
 use CycloneDX\Serialize\AbstractSerialize;
 use CycloneDX\Serialize\JsonSerializer;
 use CycloneDX\Serialize\SerializerInterface;
 use CycloneDX\Serialize\XmlSerializer;
-use CycloneDX\Specs\SpecFactory;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;

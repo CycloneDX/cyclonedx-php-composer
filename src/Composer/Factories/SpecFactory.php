@@ -21,12 +21,19 @@ declare(strict_types=1);
  * Copyright (c) Steve Springett. All Rights Reserved.
  */
 
-namespace CycloneDX\Specs;
+namespace CycloneDX\Composer\Factories;
 
+use CycloneDX\Specs\Spec11;
+use CycloneDX\Specs\Spec12;
+use CycloneDX\Specs\Spec13;
+use CycloneDX\Specs\SpecInterface;
+use CycloneDX\Specs\Version;
 use InvalidArgumentException;
 
 /**
  * @internal
+ *
+ * @author jkowalleck
  */
 final class SpecFactory
 {

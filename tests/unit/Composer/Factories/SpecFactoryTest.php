@@ -21,18 +21,18 @@ declare(strict_types=1);
  * Copyright (c) Steve Springett. All Rights Reserved.
  */
 
-namespace CycloneDX\Tests\unit\Specs;
+namespace CycloneDX\Tests\unit\Composer\Factories;
 
+use CycloneDX\Composer\Factories\SpecFactory;
 use CycloneDX\Specs\Spec11;
 use CycloneDX\Specs\Spec12;
 use CycloneDX\Specs\Spec13;
-use CycloneDX\Specs\SpecFactory;
 use Generator;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \CycloneDX\Specs\SpecFactory
+ * @covers \CycloneDX\Composer\Factories\SpecFactory
  */
 class SpecFactoryTest extends TestCase
 {
@@ -47,6 +47,10 @@ class SpecFactoryTest extends TestCase
      * @psalm-param class-string $expectedClassName
      *
      * @dataProvider dpMakeExpected
+     *
+     * @uses \CycloneDX\Spec\Spec11
+     * @uses \CycloneDX\Spec\Spec12
+     * @uses \CycloneDX\Spec\Spec13
      */
     public function testMakeExpected(string $version, string $expectedClassName): void
     {
