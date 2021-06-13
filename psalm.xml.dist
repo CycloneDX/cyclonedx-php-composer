@@ -2,7 +2,7 @@
 <psalm xmlns="https://getpsalm.org/schema/config"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="https://getpsalm.org/schema/config tools/psalm/vendor/vimeo/psalm/config.xsd"
-       errorLevel="2"
+       errorLevel="1"
        checkForThrowsDocblock="true"
        findUnusedPsalmSuppress="true"
        cacheDirectory=".psalm.cache"
@@ -10,5 +10,13 @@
     <!-- use with a proper baseline - see `.psalm/` /-->
     <projectFiles>
         <directory name="src"/>
+        <ignoreFiles>
+            <!-- deserializers are in experimental state-->
+            <file name="src/Serialize/JsonDeserializer.php"/>
+            <file name="src/Serialize/XmlDeserializer.php"/>
+        </ignoreFiles>
     </projectFiles>
+    <extraFiles>
+
+    </extraFiles>
 </psalm>
