@@ -95,35 +95,40 @@ class MakeBomCommand extends BaseCommand
             return self::INVALID;
         }
 
-        $this->makeAndWrite(new Locker($locker), $options, $output);
-
-        return self::SUCCESS;
+        return $this->makeAndWrite(new Locker($locker), $options, $output)
+            ? self::SUCCESS
+            : self::FAILURE;
     }
 
     /**
      * @psalm-suppress MissingThrowsDocblock - Exceptions are handled by caller
      */
-    private function makeAndWrite(Locker $locker, MakeBomCommandOptions $options, OutputInterface $output): void
+    private function makeAndWrite(Locker $locker, MakeBomCommandOptions $options, OutputInterface $output): bool
     {
-        $output->writeln('<info>Generating BOM from lockfile</info>');
+        $isVerbose = OutputInterface::VERBOSITY_VERBOSE & $output->getVerbosity();
+
+        $isVerbose && $output->writeln('<info>Generating BOM from lockfile</info>');
         $bom = (new BomFactory($options->excludeDev, $options->excludePlugins))->makeFromLocker($locker);
 
         $spec = (new SpecFactory())->make($options->specVersion);
         /** @psalm-var AbstractSerialize&SerializerInterface $bomWriter */
         $bomWriter = new $options->bomWriterClass($spec);
 
-        $output->writeln('<info>Serializing BOM: '.OutputFormatter::escape($options->bomFormat).' '.OutputFormatter::escape($options->specVersion).'</info>');
+        $isVerbose && $output->writeln('<info>Serializing BOM: '.OutputFormatter::escape($options->bomFormat).' '.OutputFormatter::escape($options->specVersion).'</info>');
         $bomContents = $bomWriter->serialize($bom, true);
 
         if (MakeBomCommandOptions::OUTPUT_FILE_STDOUT === $options->outputFile) {
-            $output->writeln('<info>Writing output to STDOUT</info>');
+            $isVerbose && $output->writeln('<info>Writing output to STDOUT</info>');
             // don't use `$output->writeln()`, so to support `-q` cli param.
-            fwrite(\STDOUT, $bomContents);
+            $written = fwrite(\STDOUT, $bomContents);
             // straighten up and add a linebreak. raw output might not have done it.
             $output->writeln('');
         } else {
-            $output->writeln('<info>Writing output to: '.OutputFormatter::escape($options->outputFile).'</info>');
-            file_put_contents($options->outputFile, $bomContents);
+            $isVerbose && $output->writeln('<info>Writing output to: '.OutputFormatter::escape($options->outputFile).'</info>');
+            $written = file_put_contents($options->outputFile, $bomContents);
+            $output->writeln('<info>Wrote '.OutputFormatter::escape($options->bomFormat).' '.OutputFormatter::escape($options->specVersion).' to: '.OutputFormatter::escape($options->outputFile).'</info>');
         }
+
+        return false !== $written;
     }
 }

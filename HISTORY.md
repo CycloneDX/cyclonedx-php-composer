@@ -14,6 +14,7 @@
       Use option `--output-format=JSON` instead.
 * Added
   * CLI
+    * Output is less verbose per default. Can be increased via `-v`, `-vv`, `-vvv`.
     * Support for output to _STDOUT_. Use option `--output-file=-`.
     * Added an optional option `--spec-version` for the CycloneDX spec version.  
       Supported values: "1.1", "1.2", "1.3".  
