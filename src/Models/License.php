@@ -104,7 +104,7 @@ class License
      *
      * @throws \RuntimeException if loading known SPDX licenses failed
      *
-     * @salm-return $this
+     * @psalm-return $this
      */
     public function setNameOrId(string $nameOrId): self
     {
