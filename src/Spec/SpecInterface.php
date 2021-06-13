@@ -21,23 +21,35 @@ declare(strict_types=1);
  * Copyright (c) Steve Springett. All Rights Reserved.
  */
 
-namespace CycloneDX\Tests\unit\Specs;
-
-use CycloneDX\Specs\Spec12;
-use CycloneDX\Specs\SpecInterface;
+namespace CycloneDX\Spec;
 
 /**
- * @covers \CycloneDX\Specs\Spec12
+ * @author jkowalleck
  */
-class Spec12Test extends AbstractSpecTestCase
+interface SpecInterface
 {
-    protected function getSpec(): SpecInterface
-    {
-        return new Spec12();
-    }
+    /**
+     * @psalm-return Version::V_*
+     */
+    public function getVersion(): string;
 
-    protected function getSpecVersion(): string
-    {
-        return '1.2';
-    }
+    // region Supports
+
+    public function isSupportedComponentType(string $classification): bool;
+
+    /**
+     * @psalm-return list<\CycloneDX\Enums\Classification::*>
+     */
+    public function getSupportedComponentTypes(): array;
+
+    public function isSupportedHashAlgorithm(string $alg): bool;
+
+    /**
+     * @psalm-return list<\CycloneDX\Enums\HashAlgorithm::*>
+     */
+    public function getSupportedHashAlgorithms(): array;
+
+    public function isSupportedHashContent(string $content): bool;
+
+    // endregion Supports
 }

@@ -21,13 +21,13 @@ declare(strict_types=1);
  * Copyright (c) Steve Springett. All Rights Reserved.
  */
 
-namespace CycloneDX\Tests\unit\Specs;
+namespace CycloneDX\Tests\unit\Spec;
 
-use CycloneDX\Specs\Spec13;
-use CycloneDX\Specs\SpecInterface;
+use CycloneDX\Spec\Spec13;
+use CycloneDX\Spec\SpecInterface;
 
 /**
- * @covers \CycloneDX\Specs\Spec13
+ * @covers \CycloneDX\Spec\Spec13
  */
 class Spec13Test extends AbstractSpecTestCase
 {

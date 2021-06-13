@@ -24,9 +24,9 @@ declare(strict_types=1);
 namespace CycloneDX\Tests\unit\Composer\Factories;
 
 use CycloneDX\Composer\Factories\SpecFactory;
-use CycloneDX\Specs\Spec11;
-use CycloneDX\Specs\Spec12;
-use CycloneDX\Specs\Spec13;
+use CycloneDX\Spec\Spec11;
+use CycloneDX\Spec\Spec12;
+use CycloneDX\Spec\Spec13;
 use Generator;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;

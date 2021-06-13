@@ -26,7 +26,7 @@ namespace CycloneDX\Serialize;
 use CycloneDX\Models\Bom;
 use CycloneDX\Models\Component;
 use CycloneDX\Models\License;
-use CycloneDX\Specs\Version;
+use CycloneDX\Spec\Version;
 use DomainException;
 use Generator;
 use JsonException;

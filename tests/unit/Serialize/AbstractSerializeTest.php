@@ -24,7 +24,7 @@ declare(strict_types=1);
 namespace CycloneDX\Tests\unit\Serialize;
 
 use CycloneDX\Serialize\AbstractSerialize;
-use CycloneDX\Specs\SpecInterface;
+use CycloneDX\Spec\SpecInterface;
 use PHPUnit\Framework\TestCase;
 
 /**

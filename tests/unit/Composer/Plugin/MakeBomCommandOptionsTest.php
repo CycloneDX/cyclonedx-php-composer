@@ -28,7 +28,7 @@ use CycloneDX\Composer\Plugin\Exceptions\ValueError;
 use CycloneDX\Composer\Plugin\MakeBomCommandOptions;
 use CycloneDX\Serialize\JsonSerializer;
 use CycloneDX\Serialize\XmlSerializer;
-use CycloneDX\Specs\Version;
+use CycloneDX\Spec\Version;
 use PHPUnit\Framework\MockObject\Stub\ReturnSelf;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Command\Command;

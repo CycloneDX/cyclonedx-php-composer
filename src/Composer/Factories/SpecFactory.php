@@ -23,11 +23,11 @@ declare(strict_types=1);
 
 namespace CycloneDX\Composer\Factories;
 
-use CycloneDX\Specs\Spec11;
-use CycloneDX\Specs\Spec12;
-use CycloneDX\Specs\Spec13;
-use CycloneDX\Specs\SpecInterface;
-use CycloneDX\Specs\Version;
+use CycloneDX\Spec\Spec11;
+use CycloneDX\Spec\Spec12;
+use CycloneDX\Spec\Spec13;
+use CycloneDX\Spec\SpecInterface;
+use CycloneDX\Spec\Version;
 use InvalidArgumentException;
 
 /**
