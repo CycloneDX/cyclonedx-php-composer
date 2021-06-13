@@ -28,6 +28,8 @@ use CycloneDX\Specs\SpecInterface;
 /**
  * @internal
  *
+ * @psalm-consistent-constructor
+ *
  * @author jkowalleck
  */
 abstract class AbstractSerialize
