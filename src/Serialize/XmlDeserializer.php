@@ -38,6 +38,7 @@ use PackageUrl\PackageUrl;
  *
  * @internal !! currently in experimental status. not intended for public use.
  * @codeCoverageIgnore since it is currently in experimental state
+ * @psalm-note this file is excluded via psalm-config
  *
  * @author jkowalleck
  */
