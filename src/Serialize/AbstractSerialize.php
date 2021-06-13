@@ -23,7 +23,7 @@ declare(strict_types=1);
 
 namespace CycloneDX\Serialize;
 
-use CycloneDX\Specs\SpecInterface;
+use CycloneDX\Spec\SpecInterface;
 
 /**
  * @internal

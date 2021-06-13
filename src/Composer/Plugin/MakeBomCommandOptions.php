@@ -110,7 +110,7 @@ class MakeBomCommandOptions
     }
 
     /**
-     * @psalm-var \CycloneDX\Specs\Version::*
+     * @psalm-var \CycloneDX\Spec\Version::*
      * @readonly
      * @psalm-allow-private-mutation
      */

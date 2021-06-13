@@ -24,7 +24,7 @@ declare(strict_types=1);
 namespace CycloneDX\Tests\functional\Composer\Factory;
 
 use CycloneDX\Composer\Factories\SpecFactory;
-use CycloneDX\Specs\SpecInterface;
+use CycloneDX\Spec\SpecInterface;
 use Generator;
 use PHPUnit\Framework\TestCase;
 

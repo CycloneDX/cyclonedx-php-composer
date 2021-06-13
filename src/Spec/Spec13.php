@@ -21,7 +21,7 @@ declare(strict_types=1);
  * Copyright (c) Steve Springett. All Rights Reserved.
  */
 
-namespace CycloneDX\Specs;
+namespace CycloneDX\Spec;
 
 use CycloneDX\Enums\Classification;
 use CycloneDX\Enums\HashAlgorithm;

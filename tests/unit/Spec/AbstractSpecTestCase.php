@@ -21,12 +21,12 @@ declare(strict_types=1);
  * Copyright (c) Steve Springett. All Rights Reserved.
  */
 
-namespace CycloneDX\Tests\unit\Specs;
+namespace CycloneDX\Tests\unit\Spec;
 
 use CycloneDX\Enums\Classification;
 use CycloneDX\Enums\HashAlgorithm;
-use CycloneDX\Specs\SpecInterface;
-use CycloneDX\Specs\Version;
+use CycloneDX\Spec\SpecInterface;
+use CycloneDX\Spec\Version;
 use CycloneDX\Tests\_data\BomSpecData;
 use Generator;
 use PHPUnit\Framework\TestCase;

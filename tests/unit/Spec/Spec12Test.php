@@ -21,23 +21,23 @@ declare(strict_types=1);
  * Copyright (c) Steve Springett. All Rights Reserved.
  */
 
-namespace CycloneDX\Tests\unit\Specs;
+namespace CycloneDX\Tests\unit\Spec;
 
-use CycloneDX\Specs\Spec11;
-use CycloneDX\Specs\SpecInterface;
+use CycloneDX\Spec\Spec12;
+use CycloneDX\Spec\SpecInterface;
 
 /**
- * @covers \CycloneDX\Specs\Spec11
+ * @covers \CycloneDX\Spec\Spec12
  */
-class Spec11Test extends AbstractSpecTestCase
+class Spec12Test extends AbstractSpecTestCase
 {
     protected function getSpec(): SpecInterface
     {
-        return new Spec11();
+        return new Spec12();
     }
 
     protected function getSpecVersion(): string
     {
-        return '1.1';
+        return '1.2';
     }
 }

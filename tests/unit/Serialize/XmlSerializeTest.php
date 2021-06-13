@@ -27,7 +27,7 @@ use CycloneDX\Models\Bom;
 use CycloneDX\Models\Component;
 use CycloneDX\Models\License;
 use CycloneDX\Serialize\XmlSerializer;
-use CycloneDX\Specs\SpecInterface;
+use CycloneDX\Spec\SpecInterface;
 use DomainException;
 use DOMDocument;
 use DOMNode;
