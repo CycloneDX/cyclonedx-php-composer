@@ -4687,15 +4687,14 @@
                 "ext-json": "*",
                 "ext-libxml": "*",
                 "package-url/packageurl-php": "^1.0",
-                "php": "^7.3 || ^8.0",
-                "symfony/console": "^5.0"
+                "php": "^7.3 || ^8.0"
             },
             "require-dev": {
                 "composer/composer": "^2.0.13",
                 "ext-simplexml": "*",
-                "phpunit/phpunit": "9.5.4",
+                "phpunit/phpunit": "9.5.5",
                 "roave/security-advisories": "dev-latest",
-                "swaggest/json-schema": "0.12.31"
+                "swaggest/json-schema": "0.12.33"
             },
             "type": "composer-plugin",
             "extra": {
