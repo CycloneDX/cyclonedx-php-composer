@@ -85,7 +85,7 @@ abstract class BomModelProvider
         $license = 'MIT';
         yield "license: ${license}" => [(new Bom())->addComponent(
             (new Component(Classification::LIBRARY, 'name', 'version'))
-                ->addLicense(new License($license))
+                ->addLicense(License::createFromNameOrId($license, SpdxLicenseValidatorSingleton::getInstance()))
         )];
     }
 
@@ -98,7 +98,10 @@ abstract class BomModelProvider
     {
         yield 'license: random' => [(new Bom())->addComponent(
             (new Component(Classification::LIBRARY, 'name', 'version'))
-                ->addLicense(new License('random '.bin2hex(random_bytes(32))))
+                ->addLicense(License::createFromNameOrId(
+                    'random '.bin2hex(random_bytes(32)),
+                    SpdxLicenseValidatorSingleton::getInstance()
+                ))
         )];
     }
 
@@ -110,7 +113,7 @@ abstract class BomModelProvider
         yield 'License with URL' => [(new Bom())->addComponent(
             (new Component(Classification::LIBRARY, 'name', 'version'))
                 ->addLicense(
-                    (new License('some text'))
+                    License::createFromNameOrId('some text', SpdxLicenseValidatorSingleton::getInstance())
                         ->setUrl('https://example.com/license'),
                 )
         )];
@@ -209,7 +212,7 @@ abstract class BomModelProvider
     {
         yield 'set every list from assoc' => [(new Bom())->setComponents([
             'myComponent' => (new Component(Classification::LIBRARY, 'name', '1.0'))
-                ->setLicenses(['myLicense' => new License('some license')]),
+                ->setLicenses(['myLicense' => License::createFromNameOrId('some license', SpdxLicenseValidatorSingleton::getInstance())]),
         ])];
         if (version_compare(\PHP_VERSION, '8.0.0') >= 0) {
             yield 'add every list from assoc' => [
@@ -217,7 +220,7 @@ abstract class BomModelProvider
                     ...[
                     'myComponent' => (new Component(Classification::LIBRARY, 'name', '1.0'))
                         ->addLicense(...[
-                            'myLicense' => new License('some license'),
+                            'myLicense' => License::createFromNameOrId('some license', SpdxLicenseValidatorSingleton::getInstance()),
                         ]),
                 ]
                 ),

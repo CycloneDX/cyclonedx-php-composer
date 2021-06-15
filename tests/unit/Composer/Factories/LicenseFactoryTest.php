@@ -26,21 +26,37 @@ namespace CycloneDX\Tests\unit\Composer\Factories;
 use Composer\Package\CompletePackageInterface;
 use CycloneDX\Composer\Factories\LicenseFactory;
 use CycloneDX\Models\License;
+use CycloneDX\Spdx\License as SpdxLicenseValidator;
+use CycloneDX\Tests\_data\SpdxLicenseValidatorSingleton;
 use PHPUnit\Framework\TestCase;
 
 /**
  * @covers \CycloneDX\Composer\Factories\LicenseFactory
- *
- * @uses \CycloneDX\Models\License
- * @uses \CycloneDX\Spdx\License
  */
 class LicenseFactoryTest extends TestCase
 {
-    public function testMakeFromString(): void
+    public function testSpdxLicenseValidatorGetterSetter(): void
     {
+        $spdxValidator1 = $this->createStub(SpdxLicenseValidator::class);
+        $spdxValidator2 = $this->createStub(SpdxLicenseValidator::class);
+
+        $factory = new LicenseFactory($spdxValidator1);
+        self::assertSame($spdxValidator1, $factory->getSpdxLicenseValidator());
+
+        $factory->setSpdxLicenseValidator($spdxValidator2);
+        self::assertSame($spdxValidator2, $factory->getSpdxLicenseValidator());
+    }
+
+    /**
+     * @uses \CycloneDX\Models\License
+     * @uses \CycloneDX\Spdx\License
+     */
+    public function testMakeFromStringReturnsExpected(): void
+    {
+        $spdxValidator = SpdxLicenseValidatorSingleton::getInstance();
         $randomString = bin2hex(random_bytes(32));
-        $expected = new License($randomString);
-        $factory = new LicenseFactory();
+        $expected = License::createFromNameOrId($randomString, $spdxValidator);
+        $factory = new LicenseFactory($spdxValidator);
 
         $got = $factory->makeFromString($randomString);
 

@@ -23,9 +23,12 @@ declare(strict_types=1);
 
 namespace CycloneDX\Serialize;
 
+use CycloneDX\Helpers\HasSpecTrait;
 use CycloneDX\Models\Bom;
 use CycloneDX\Models\Component;
 use CycloneDX\Models\License;
+use CycloneDX\Spdx\License as SpdxLicenseValidator;
+use CycloneDX\Spec\SpecInterface;
 use Generator;
 use InvalidArgumentException;
 use JsonException;
@@ -40,8 +43,34 @@ use PackageUrl\PackageUrl;
  *
  * @author jkowalleck
  */
-class JsonDeserializer extends AbstractSerialize implements DeserializerInterface
+class JsonDeserializer implements DeserializerInterface
 {
+    use HasSpecTrait;
+
+    public function __construct(SpecInterface $spec, SpdxLicenseValidator $spdxLicenseValidator)
+    {
+        $this->spec = $spec;
+        $this->spdxLicenseValidator = $spdxLicenseValidator;
+    }
+
+    /** @var SpdxLicenseValidator */
+    private $spdxLicenseValidator;
+
+    public function getSpdxLicenseValidator(SpdxLicenseValidator $spdxLicenseValidator): SpdxLicenseValidator
+    {
+        return $this->spdxLicenseValidator;
+    }
+
+    /**
+     * @return $this
+     */
+    public function setSpdxLicenseValidator(SpdxLicenseValidator $spdxLicenseValidator): self
+    {
+        $this->spdxLicenseValidator = $spdxLicenseValidator;
+
+        return $this;
+    }
+
     // region DeserializerInterface
 
     /**
@@ -108,8 +137,8 @@ class JsonDeserializer extends AbstractSerialize implements DeserializerInterfac
             if (isset($license['license'])) {
                 yield $this->licenseFromJson($license['license']);
             } elseif (isset($license['expression'])) {
-                // @TOD implement a model for LicenseExpression
-                yield $this->licenseFromJson($license['expression']);
+                // @TODO implement a model for LicenseExpression
+                yield License::createFromNameOrId($license['expression'], $this->spdxLicenseValidator);
             }
         }
     }
@@ -122,7 +151,7 @@ class JsonDeserializer extends AbstractSerialize implements DeserializerInterfac
      */
     public function licenseFromJson(array $json): License
     {
-        return (new License($json['name'] ?? $json['id']))
+        return License::createFromNameOrId($json['name'] ?? $json['id'], $this->spdxLicenseValidator)
             ->setUrl($json['url'] ?? null);
     }
 

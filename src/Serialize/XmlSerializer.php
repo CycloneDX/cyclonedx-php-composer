@@ -23,10 +23,12 @@ declare(strict_types=1);
 
 namespace CycloneDX\Serialize;
 
+use CycloneDX\Helpers\HasSpecTrait;
 use CycloneDX\Helpers\SimpleDomTrait;
 use CycloneDX\Models\Bom;
 use CycloneDX\Models\Component;
 use CycloneDX\Models\License;
+use CycloneDX\Spec\SpecInterface;
 use DomainException;
 use DOMDocument;
 use DOMElement;
@@ -38,14 +40,20 @@ use RuntimeException;
  *
  * @author jkowalleck
  */
-class XmlSerializer extends AbstractSerialize implements SerializerInterface
+class XmlSerializer implements SerializerInterface
 {
+    use HasSpecTrait;
     use SimpleDomTrait;
 
     private const XML_VERSION = '1.0';
     private const XML_ENCODING = 'UTF-8';
 
     private const DOC_NAMESPACE_PATH = 'http://cyclonedx.org/schema/bom/';
+
+    public function __construct(SpecInterface $spec)
+    {
+        $this->spec = $spec;
+    }
 
     // region SerializerInterface
 

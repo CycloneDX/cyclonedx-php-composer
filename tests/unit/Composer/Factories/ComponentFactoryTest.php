@@ -39,6 +39,18 @@ use PHPUnit\Framework\TestCase;
  */
 class ComponentFactoryTest extends TestCase
 {
+    public function testLicenseFactoryGetterSetter(): void
+    {
+        $licenseFactory1 = $this->createStub(LicenseFactory::class);
+        $licenseFactory2 = $this->createStub(LicenseFactory::class);
+
+        $factory = new ComponentFactory($licenseFactory1);
+        self::assertSame($licenseFactory1, $factory->getLicenseFactory());
+
+        $factory->setLicenseFactory($licenseFactory2);
+        self::assertSame($licenseFactory2, $factory->getLicenseFactory());
+    }
+
     public function testMakeFromPackageThrowsOnEmptyName(): void
     {
         $licenseFactory = $this->createStub(LicenseFactory::class);

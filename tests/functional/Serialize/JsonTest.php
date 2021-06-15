@@ -29,6 +29,7 @@ use CycloneDX\Serialize\JsonSerializer;
 use CycloneDX\Spec\Spec11;
 use CycloneDX\Spec\Spec12;
 use CycloneDX\Spec\Spec13;
+use CycloneDX\Tests\_data\SpdxLicenseValidatorSingleton;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 use Swaggest\JsonSchema;
@@ -128,7 +129,7 @@ class JsonTest extends TestCase
     {
         $spec = new Spec12();
         $serializer = new JsonSerializer($spec);
-        $deserializer = new JsonDeserializer($spec);
+        $deserializer = new JsonDeserializer($spec, SpdxLicenseValidatorSingleton::getInstance());
 
         $serialized = $serializer->serialize($bom);
         $deserialized = @$deserializer->deserialize($serialized);
@@ -176,7 +177,7 @@ class JsonTest extends TestCase
     {
         $spec = new Spec13();
         $serializer = new JsonSerializer($spec);
-        $deserializer = new JsonDeserializer($spec);
+        $deserializer = new JsonDeserializer($spec, SpdxLicenseValidatorSingleton::getInstance());
 
         $serialized = $serializer->serialize($bom);
         $deserialized = @$deserializer->deserialize($serialized);

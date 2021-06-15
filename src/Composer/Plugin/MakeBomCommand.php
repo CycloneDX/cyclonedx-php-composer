@@ -26,9 +26,12 @@ namespace CycloneDX\Composer\Plugin;
 use Composer\Command\BaseCommand;
 use Composer\Composer;
 use CycloneDX\Composer\Factories\BomFactory;
+use CycloneDX\Composer\Factories\ComponentFactory;
+use CycloneDX\Composer\Factories\LicenseFactory;
 use CycloneDX\Composer\Factories\SpecFactory;
 use CycloneDX\Composer\Locker;
 use CycloneDX\Composer\Plugin\Exceptions\ValueError;
+use CycloneDX\Spdx\License as SpdxLicenseValidator;
 use RuntimeException;
 use Symfony\Component\Console\Formatter\OutputFormatter;
 use Symfony\Component\Console\Input\InputInterface;
@@ -105,12 +108,23 @@ class MakeBomCommand extends BaseCommand
         $isVerbose = OutputInterface::VERBOSITY_VERBOSE & $output->getVerbosity();
 
         $isVerbose && $output->writeln('<info>Generating BOM from lockfile</info>');
-        $bom = (new BomFactory($options->excludeDev, $options->excludePlugins))->makeFromLocker($locker);
+        $bom = (new BomFactory(
+            $options->excludeDev, $options->excludePlugins,
+            new ComponentFactory(
+                new LicenseFactory(
+                    new SpdxLicenseValidator()
+                )
+            )
+        ))->makeFromLocker($locker);
 
         $spec = (new SpecFactory())->make($options->specVersion);
         $bomWriter = new $options->bomWriterClass($spec);
 
-        $isVerbose && $output->writeln('<info>Serializing BOM: '.OutputFormatter::escape($options->bomFormat).' '.OutputFormatter::escape($options->specVersion).'</info>');
+        $isVerbose && $output->writeln(
+            '<info>Serializing BOM: '.OutputFormatter::escape($options->bomFormat).' '.OutputFormatter::escape(
+                $options->specVersion
+            ).'</info>'
+        );
         $bomContents = $bomWriter->serialize($bom, true);
 
         if (MakeBomCommandOptions::OUTPUT_FILE_STDOUT === $options->outputFile) {
@@ -120,9 +134,15 @@ class MakeBomCommand extends BaseCommand
             // straighten up and add a linebreak. raw output might not have done it.
             $output->writeln('');
         } else {
-            $isVerbose && $output->writeln('<info>Writing output to: '.OutputFormatter::escape($options->outputFile).'</info>');
+            $isVerbose && $output->writeln(
+                '<info>Writing output to: '.OutputFormatter::escape($options->outputFile).'</info>'
+            );
             $written = file_put_contents($options->outputFile, $bomContents);
-            $output->writeln('<info>Wrote '.OutputFormatter::escape($options->bomFormat).' '.OutputFormatter::escape($options->specVersion).' to: '.OutputFormatter::escape($options->outputFile).'</info>');
+            $output->writeln(
+                '<info>Wrote '.OutputFormatter::escape($options->bomFormat).' '.OutputFormatter::escape(
+                    $options->specVersion
+                ).' to: '.OutputFormatter::escape($options->outputFile).'</info>'
+            );
         }
 
         return false !== $written;

@@ -29,6 +29,7 @@ use CycloneDX\Serialize\XmlSerializer;
 use CycloneDX\Spec\Spec11;
 use CycloneDX\Spec\Spec12;
 use CycloneDX\Spec\Spec13;
+use CycloneDX\Tests\_data\SpdxLicenseValidatorSingleton;
 use DOMDocument;
 use DOMException;
 use PHPUnit\Framework\TestCase;
@@ -79,7 +80,7 @@ class XmlTest extends TestCase
     {
         $spec = new Spec11();
         $serializer = new XmlSerializer($spec);
-        $deserializer = new XmlDeserializer($spec);
+        $deserializer = new XmlDeserializer($spec, SpdxLicenseValidatorSingleton::getInstance());
 
         $serialized = $serializer->serialize($bom);
         $deserialized = @$deserializer->deserialize($serialized);
@@ -126,7 +127,7 @@ class XmlTest extends TestCase
     {
         $spec = new Spec12();
         $serializer = new XmlSerializer($spec);
-        $deserializer = new XmlDeserializer($spec);
+        $deserializer = new XmlDeserializer($spec, SpdxLicenseValidatorSingleton::getInstance());
 
         $serialized = $serializer->serialize($bom);
         $deserialized = @$deserializer->deserialize($serialized);
@@ -173,7 +174,7 @@ class XmlTest extends TestCase
     {
         $spec = new Spec13();
         $serializer = new XmlSerializer($spec);
-        $deserializer = new XmlDeserializer($spec);
+        $deserializer = new XmlDeserializer($spec, SpdxLicenseValidatorSingleton::getInstance());
 
         $serialized = $serializer->serialize($bom);
         $deserialized = @$deserializer->deserialize($serialized);

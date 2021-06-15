@@ -37,7 +37,6 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @covers \CycloneDX\Serialize\XmlSerializer
- * @covers \CycloneDX\Serialize\AbstractSerialize
  */
 class XmlSerializeTest extends TestCase
 {

@@ -25,6 +25,7 @@ namespace CycloneDX\Composer\Factories;
 
 use Composer\Package\CompletePackageInterface;
 use CycloneDX\Models\License;
+use CycloneDX\Spdx\License as SpdxLicenseValidator;
 
 /**
  * @internal
@@ -33,6 +34,26 @@ use CycloneDX\Models\License;
  */
 class LicenseFactory
 {
+    /** @var SpdxLicenseValidator */
+    private $spdxLicenseValidator;
+
+    public function __construct(SpdxLicenseValidator $spdxLicenseValidator)
+    {
+        $this->spdxLicenseValidator = $spdxLicenseValidator;
+    }
+
+    public function getSpdxLicenseValidator(): SpdxLicenseValidator
+    {
+        return $this->spdxLicenseValidator;
+    }
+
+    public function setSpdxLicenseValidator(SpdxLicenseValidator $spdxLicenseValidator): self
+    {
+        $this->spdxLicenseValidator = $spdxLicenseValidator;
+
+        return $this;
+    }
+
     /**
      * @psalm-return list<License>
      *
@@ -59,7 +80,7 @@ class LicenseFactory
      */
     public function makeFromString(string $nameOdId): License
     {
-        return new License($nameOdId);
+        return License::createFromNameOrId($nameOdId, $this->spdxLicenseValidator);
     }
 
     /**

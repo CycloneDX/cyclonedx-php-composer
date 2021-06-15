@@ -23,10 +23,13 @@ declare(strict_types=1);
 
 namespace CycloneDX\Serialize;
 
+use CycloneDX\Helpers\HasSpecTrait;
 use CycloneDX\Helpers\SimpleDomTrait;
 use CycloneDX\Models\Bom;
 use CycloneDX\Models\Component;
 use CycloneDX\Models\License;
+use CycloneDX\Spdx\License as SpdxLicenseValidator;
+use CycloneDX\Spec\SpecInterface;
 use DOMDocument;
 use DOMElement;
 use Generator;
@@ -42,9 +45,34 @@ use PackageUrl\PackageUrl;
  *
  * @author jkowalleck
  */
-class XmlDeserializer extends AbstractSerialize implements DeserializerInterface
+class XmlDeserializer implements DeserializerInterface
 {
+    use HasSpecTrait;
     use SimpleDomTrait;
+
+    /** @var SpdxLicenseValidator */
+    private $spdxLicenseValidator;
+
+    public function getSpdxLicenseValidator(SpdxLicenseValidator $spdxLicenseValidator): SpdxLicenseValidator
+    {
+        return $this->spdxLicenseValidator;
+    }
+
+    /**
+     * @return $this
+     */
+    public function setSpdxLicenseValidator(SpdxLicenseValidator $spdxLicenseValidator): self
+    {
+        $this->spdxLicenseValidator = $spdxLicenseValidator;
+
+        return $this;
+    }
+
+    public function __construct(SpecInterface $spec, SpdxLicenseValidator $spdxLicenseValidator)
+    {
+        $this->spec = $spec;
+        $this->spdxLicenseValidator = $spdxLicenseValidator;
+    }
 
     // region DeserializerInterface
 
@@ -155,13 +183,8 @@ class XmlDeserializer extends AbstractSerialize implements DeserializerInterface
                     yield $this->licenseFromDom($childElement);
                     break;
                 case 'expression':
-                    if ($this->spec->getVersion() >= '1.2') {
-                        // @TOD implement a model for LicenseExpression
-                        yield new License($element->nodeValue);
-                    } else {
-                        // Found unsupported LicenseExpression. Using License instead
-                        yield new License($element->nodeValue);
-                    }
+                    // Found unsupported LicenseExpression. Using License instead
+                    yield License::createFromNameOrId($element->nodeValue, $this->spdxLicenseValidator);
                     break;
             }
         }
@@ -190,7 +213,7 @@ class XmlDeserializer extends AbstractSerialize implements DeserializerInterface
         // asserted by SCHEMA
         \assert(null !== $nameOrId);
 
-        return (new License($nameOrId))
+        return License::createFromNameOrId($nameOrId, $this->spdxLicenseValidator)
             ->setUrl($url);
     }
 
