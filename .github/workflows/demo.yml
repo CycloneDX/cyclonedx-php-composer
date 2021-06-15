@@ -18,7 +18,7 @@ env:
 
 jobs:
   reproducible:
-    name: Reproducible "laravel-7.12.0" (${{ matrix.spec-version }} ${{ matrix.output-format }})
+    name: Reproducible "laravel-7.12.0" (${{ matrix.spec-version }} ${{ matrix.output-format }}, composer${{ matrix.composer }} php${{ matrix.php }})
     runs-on: ubuntu-latest
     timeout-minutes: 30
     env:
@@ -28,14 +28,18 @@ jobs:
       fail-fast: false
       matrix:
         php: ["8.0"] # highest supported
+        composer:
+        - "2" # latest supported
+        - "2.0.13" # lowest supported without any security issues
         output-format:
+          # lowercase the format, since it is also used as a file extension when searching the original file
           - xml
           - json
         spec-version:
-          # - "1.0" # not implemented
-          - "1.1"
-          - "1.2"
           - "1.3"
+          - "1.2"
+          - "1.1"
+          # - "1.0" # not implemented
         exclude:
           # exclude unsupported combinations: json is defined in spec >= 1.2
           - output-format: json
@@ -60,7 +64,7 @@ jobs:
         with:
           php-version: ${{ matrix.php }}
           extensions: ${{ env.PHP_PROJECT_EXT }}
-          tools: composer:v2
+          tools: composer:v${{ matrix.composer }}
           coverage: none
       - name: Determine composer cache directory
         run: echo "COMPOSER_CACHE_DIR_PATH=$(composer config cache-dir)" >> $GITHUB_ENV
