@@ -162,7 +162,7 @@ class Component
     {
         $types = (new \ReflectionClass(Classification::class))->getConstants();
         if (false === \in_array($type, $types, true)) {
-            throw new DomainException("Invalid type: ${type}");
+            throw new DomainException("Invalid type: $type");
         }
         $this->type = $type;
 
@@ -248,10 +248,10 @@ class Component
         $algorithms = (new \ReflectionClass(HashAlgorithm::class))->getConstants();
         foreach ($hashes as $algorithm => $content) {
             if (false === \in_array($algorithm, $algorithms, true)) {
-                throw new DomainException("Unknown hash algorithm: ${algorithm}");
+                throw new DomainException("Unknown hash algorithm: $algorithm");
             }
             if (false === \is_string($content)) {
-                throw new InvalidArgumentException("Hash content for '${algorithm}' is not string.");
+                throw new InvalidArgumentException("Hash content for '$algorithm' is not string.");
             }
         }
         $this->hashes = $hashes;

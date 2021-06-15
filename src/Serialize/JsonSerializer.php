@@ -184,10 +184,10 @@ class JsonSerializer implements SerializerInterface
     public function hashToJson(string $algorithm, string $content): array
     {
         if (false === $this->spec->isSupportedHashAlgorithm($algorithm)) {
-            throw new DomainException("invalid hash algorithm: ${algorithm}", 1);
+            throw new DomainException("invalid hash algorithm: $algorithm", 1);
         }
         if (false === $this->spec->isSupportedHashContent($content)) {
-            throw new DomainException("invalid hash content: ${content}", 2);
+            throw new DomainException("invalid hash content: $content", 2);
         }
 
         return [

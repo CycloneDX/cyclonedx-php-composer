@@ -83,7 +83,7 @@ abstract class BomModelProvider
     public static function bomWithComponentLicenseId(): Generator
     {
         $license = 'MIT';
-        yield "license: ${license}" => [(new Bom())->addComponent(
+        yield "license: $license" => [(new Bom())->addComponent(
             (new Component(Classification::LIBRARY, 'name', 'version'))
                 ->addLicense(License::createFromNameOrId($license, SpdxLicenseValidatorSingleton::getInstance()))
         )];

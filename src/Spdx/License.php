@@ -87,7 +87,7 @@ class License
         $file = $this->getResourcesFile();
         $json = file_exists($file) ? file_get_contents($file) : false;
         if (false === $json) {
-            throw new RuntimeException("Missing licenses file: ${file}");
+            throw new RuntimeException("Missing licenses file: $file");
         }
 
         try {
@@ -99,7 +99,7 @@ class License
              */
             $licenses = json_decode($json, false, 2, \JSON_THROW_ON_ERROR);
         } catch (JsonException $exception) {
-            throw new RuntimeException("Malformed licenses file: ${file}", 0, $exception);
+            throw new RuntimeException("Malformed licenses file: $file", 0, $exception);
         }
 
         $this->licenses = [];
