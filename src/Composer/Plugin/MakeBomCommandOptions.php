@@ -25,7 +25,6 @@ namespace CycloneDX\Composer\Plugin;
 
 use CycloneDX\Composer\Factories\SpecFactory;
 use CycloneDX\Composer\Plugin\Exceptions\ValueError;
-use CycloneDX\Serialize\AbstractSerialize;
 use CycloneDX\Serialize\JsonSerializer;
 use CycloneDX\Serialize\SerializerInterface;
 use CycloneDX\Serialize\XmlSerializer;
@@ -50,11 +49,14 @@ class MakeBomCommandOptions
     private const OUTPUT_FORMAT_JSON = 'JSON';
 
     public const OUTPUT_FILE_STDOUT = '-';
+
+    /** @psalm-var array<MakeBomCommandOptions::OUTPUT_FORMAT_*, string> */
     private const OUTPUT_FILE_DEFAULT = [
         self::OUTPUT_FORMAT_XML => 'bom.xml',
         self::OUTPUT_FORMAT_JSON => 'bom.json',
     ];
 
+    /** @psalm-var array<MakeBomCommandOptions::OUTPUT_FORMAT_*, class-string<SerializerInterface>> */
     private const SERIALISERS = [
         self::OUTPUT_FORMAT_XML => XmlSerializer::class,
         self::OUTPUT_FORMAT_JSON => JsonSerializer::class,
@@ -138,7 +140,7 @@ class MakeBomCommandOptions
     public $bomFormat = self::OUTPUT_FORMAT_XML;
 
     /**
-     * @psalm-var class-string<AbstractSerialize&SerializerInterface>
+     * @psalm-var class-string<SerializerInterface>
      * @readonly
      * @psalm-allow-private-mutation
      */

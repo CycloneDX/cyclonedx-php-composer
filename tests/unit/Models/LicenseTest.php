@@ -24,61 +24,74 @@ declare(strict_types=1);
 namespace CycloneDX\Tests\unit\Models;
 
 use CycloneDX\Models\License;
+use CycloneDX\Spdx\License as SpdxLicenseValidator;
 use PHPUnit\Framework\TestCase;
 
 /**
  * Class LicenseTest.
  *
  * @covers \CycloneDX\Models\License
- *
- * @uses \CycloneDX\Spdx\License
  */
 class LicenseTest extends TestCase
 {
-    /** @psalm-var License */
+    /** @var License */
     private $license;
 
     protected function setUp(): void
     {
-        parent::setUp();
+        $spdxLicenseValidator = $this->createStub(SpdxLicenseValidator::class);
+        $spdxLicenseValidator->method('validate')->willReturn(true);
+        $spdxLicenseValidator->method('getLicense')->willReturnArgument(0);
 
-        $this->license = new License(random_bytes(255));
+        $this->license = License::createFromNameOrId(uniqid('DUMMY'), $spdxLicenseValidator);
     }
 
-    // region name|id setters&getters
+    // region name|id createFromNameOrId & getters
 
-    public function testWithId(): void
+    public function testCreateFromNameOrIdWithId(): void
     {
-        $id = 'MIT';
-        $this->license->setNameOrId($id);
-        self::assertEquals($id, $this->license->getId());
-        self::assertNull($this->license->getName());
+        $spdxLicenseValidator = $this->createStub(SpdxLicenseValidator::class);
+        $spdxLicenseValidator->method('validate')->with('someID')->willReturn(true);
+        $spdxLicenseValidator->method('getLicense')->with('someID')->willReturn('realID');
+
+        $license = License::createFromNameOrId('someID', $spdxLicenseValidator);
+
+        self::assertEquals('realID', $license->getId());
+        self::assertNull($license->getName());
     }
 
-    public function testWithName(): void
+    public function testCreateFromNameOrIdWithName(): void
     {
-        $name = 'some non-SPDX license name';
-        $this->license->setNameOrId($name);
-        self::assertEquals($name, $this->license->getName());
-        self::assertNull($this->license->getId());
+        $spdxLicenseValidator = $this->createStub(SpdxLicenseValidator::class);
+        $spdxLicenseValidator->method('validate')->with('someName')->willReturn(false);
+        $spdxLicenseValidator->method('getLicense')->with('someName')->willReturn(null);
+
+        $license = License::createFromNameOrId('someName', $spdxLicenseValidator);
+
+        self::assertEquals('someName', $license->getName());
+        self::assertNull($license->getId());
     }
 
-    // endregion name|id setters&getters
+    // endregion name|id createFromNameOrId & getters
 
     // region url setter&getter
 
     public function testWithUrlValid(): void
     {
         $url = 'http://example.com/'.bin2hex(random_bytes(32));
+
         $this->license->setUrl($url);
+
         self::assertEquals($url, $this->license->getUrl());
     }
 
     public function testWithUrlInvalid(): void
     {
         $url = 'example.com/'.bin2hex(random_bytes(32));
+
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessageMatches('/invalid url/i');
+
         $this->license->setUrl($url);
     }
 

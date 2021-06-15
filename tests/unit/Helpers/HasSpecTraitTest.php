@@ -21,24 +21,25 @@ declare(strict_types=1);
  * Copyright (c) Steve Springett. All Rights Reserved.
  */
 
-namespace CycloneDX\Serialize;
+namespace CycloneDX\Tests\unit\Helpers;
 
-use CycloneDX\Models\Bom;
-use CycloneDX\Spdx\License as SpdxLicenseValidator;
+use CycloneDX\Helpers\HasSpecTrait;
 use CycloneDX\Spec\SpecInterface;
+use PHPUnit\Framework\TestCase;
 
 /**
- * @author jkowalleck
+ * @covers \CycloneDX\Helpers\HasSpecTrait
  */
-interface DeserializerInterface
+class HasSpecTraitTest extends TestCase
 {
-    /**
-     * Deserialize a Bom to a string.
-     *
-     * May throw {@see \RuntimeException} if spec version is not supported.
-     * May throw additional implementation-dependent Exceptions.
-     */
-    public function deserialize(string $data): Bom;
+    public function testGetSetSpec(): void
+    {
+        $spec = $this->createStub(SpecInterface::class);
+        $serializer = $this->getMockForTrait(HasSpecTrait::class);
 
-    public function __construct(SpecInterface $spec, SpdxLicenseValidator $spdxLicenseValidator);
+        $serializer->setSpec($spec);
+        $got = $serializer->getSpec();
+
+        self::assertSame($spec, $got);
+    }
 }

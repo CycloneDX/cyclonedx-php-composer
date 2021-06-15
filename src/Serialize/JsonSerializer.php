@@ -23,9 +23,11 @@ declare(strict_types=1);
 
 namespace CycloneDX\Serialize;
 
+use CycloneDX\Helpers\HasSpecTrait;
 use CycloneDX\Models\Bom;
 use CycloneDX\Models\Component;
 use CycloneDX\Models\License;
+use CycloneDX\Spec\SpecInterface;
 use CycloneDX\Spec\Version;
 use DomainException;
 use Generator;
@@ -37,9 +39,16 @@ use RuntimeException;
  *
  * @author jkowalleck
  */
-class JsonSerializer extends AbstractSerialize implements SerializerInterface
+class JsonSerializer implements SerializerInterface
 {
+    use HasSpecTrait;
+
     private const BOM_FORMAT = 'CycloneDX';
+
+    public function __construct(SpecInterface $spec)
+    {
+        $this->spec = $spec;
+    }
 
     // region SerializerInterface
 

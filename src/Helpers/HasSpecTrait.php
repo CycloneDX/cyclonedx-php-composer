@@ -21,25 +21,21 @@ declare(strict_types=1);
  * Copyright (c) Steve Springett. All Rights Reserved.
  */
 
-namespace CycloneDX\Serialize;
+namespace CycloneDX\Helpers;
 
 use CycloneDX\Spec\SpecInterface;
 
 /**
  * @internal
  *
- * @psalm-consistent-constructor
- *
  * @author jkowalleck
  */
-abstract class AbstractSerialize
+trait HasSpecTrait
 {
-    // region spec
-
     /**
-     * @psalm-var SpecInterface
+     * @var SpecInterface
      */
-    protected $spec;
+    private $spec;
 
     public function getSpec(): SpecInterface
     {
@@ -47,7 +43,7 @@ abstract class AbstractSerialize
     }
 
     /**
-     * @psalm-return $this
+     * @return $this
      */
     public function setSpec(SpecInterface $spec): self
     {
@@ -55,11 +51,4 @@ abstract class AbstractSerialize
 
         return $this;
     }
-
-    public function __construct(SpecInterface $spec)
-    {
-        $this->spec = $spec;
-    }
-
-    // endregion spec
 }

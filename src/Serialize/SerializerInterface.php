@@ -24,10 +24,9 @@ declare(strict_types=1);
 namespace CycloneDX\Serialize;
 
 use CycloneDX\Models\Bom;
+use CycloneDX\Spec\SpecInterface;
 
 /**
- * @internal
- *
  * @author jkowalleck
  */
 interface SerializerInterface
@@ -42,4 +41,6 @@ interface SerializerInterface
      * @psalm-param bool $pretty pretty print
      */
     public function serialize(Bom $bom, bool $pretty = false): string;
+
+    public function __construct(SpecInterface $spec);
 }

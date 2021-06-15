@@ -21,26 +21,21 @@ declare(strict_types=1);
  * Copyright (c) Steve Springett. All Rights Reserved.
  */
 
-namespace CycloneDX\Tests\unit\Serialize;
+namespace CycloneDX\Tests\_data;
 
-use CycloneDX\Serialize\AbstractSerialize;
-use CycloneDX\Spec\SpecInterface;
-use PHPUnit\Framework\TestCase;
+use CycloneDX\Spdx\License as SpdxLicenseValidator;
 
-/**
- * @covers \CycloneDX\Serialize\AbstractSerialize
- */
-class AbstractSerializeTest extends TestCase
+abstract class SpdxLicenseValidatorSingleton
 {
-    public function testGetSetSpec(): void
+    /** @var SpdxLicenseValidator|null */
+    private static $instance;
+
+    public static function getInstance(): SpdxLicenseValidator
     {
-        $spec1 = $this->createMock(SpecInterface::class);
-        $spec2 = $this->createMock(SpecInterface::class);
+        if (null === self::$instance) {
+            self::$instance = new SpdxLicenseValidator();
+        }
 
-        $serializer = $this->getMockForAbstractClass(AbstractSerialize::class, [$spec1]);
-        $serializer->setSpec($spec2);
-        $got = $serializer->getSpec();
-
-        self::assertSame($spec2, $got);
+        return self::$instance;
     }
 }

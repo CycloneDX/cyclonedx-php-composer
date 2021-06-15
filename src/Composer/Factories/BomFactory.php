@@ -43,11 +43,11 @@ class BomFactory
     /** @var ComponentFactory */
     private $componentFactory;
 
-    public function __construct(bool $excludeDev, bool $excludePlugins, ?ComponentFactory $componentFactory = null)
+    public function __construct(bool $excludeDev, bool $excludePlugins, ComponentFactory $componentFactory)
     {
         $this->excludeDev = $excludeDev;
         $this->excludePlugins = $excludePlugins;
-        $this->componentFactory = $componentFactory ?? new ComponentFactory();
+        $this->componentFactory = $componentFactory;
     }
 
     /**

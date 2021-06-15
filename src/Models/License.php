@@ -91,7 +91,7 @@ class License
     }
 
     /**
-     * Set Name or ID.
+     * create an instance with either Name or ID.
      *
      * If the value is a known SPDX license:
      * the {@see getId()} returns a string and the {@see getName{}} returns `null`.
@@ -100,35 +100,34 @@ class License
      * @see \CycloneDX\Spdx\License::validate()
      * @see \CycloneDX\Spdx\License::getLicense()
      *
-     * @psalm-param string $nameOrId name or ID of a license
-     *
-     * @throws \RuntimeException if loading known SPDX licenses failed
-     *
-     * @psalm-return $this
+     * @psalm-param string $nameOrId name or SPDX-ID of a license
      */
-    public function setNameOrId(string $nameOrId): self
+    public static function createFromNameOrId(string $nameOrId, \CycloneDX\Spdx\License $spdxLicenseValidator): self
     {
-        $spdx = new \CycloneDX\Spdx\License(); // @TODO rework to factory
-        if ($spdx->validate($nameOrId)) {
-            $this->id = $spdx->getLicense($nameOrId);
-            $this->name = null;
-        } else {
-            $this->name = $nameOrId;
-            $this->id = null;
-        }
+        $id = $spdxLicenseValidator->getLicense($nameOrId);
+        $name = null === $id ? $nameOrId : null;
 
-        return $this;
+        /**
+         * the instance is not instantly returned nut stored, to trick the php-cs-fixer in not removing this doc=block.
+         *
+         * @psalm-suppress MissingThrowsDocblock since it is asserted to not be thrown
+         */
+        $instance = new self($id, $name);
+
+        return $instance;
     }
 
     /**
-     * License constructor.
+     * Private! Use {@see createFromNameOrId()} to create an object.
      *
-     * @see \CycloneDX\Models\License::setNameOrVersion()
-     *
-     * @throws \RuntimeException if loading known SPDX licenses failed
+     * @throws InvalidArgumentException if not exactly one argument must be null: $id or $name
      */
-    public function __construct(string $nameOrId)
+    final private function __construct(?string $id, ?string $name)
     {
-        $this->setNameOrId($nameOrId);
+        if (false === (null === $id xor null === $name)) {
+            throw new InvalidArgumentException('Exactly one argument must be null: $id or $name');
+        }
+        $this->id = $id;
+        $this->name = $name;
     }
 }

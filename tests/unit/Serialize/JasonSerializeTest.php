@@ -35,7 +35,6 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @covers \CycloneDX\Serialize\JsonSerializer
- * @covers \CycloneDX\Serialize\AbstractSerialize
  */
 class JasonSerializeTest extends TestCase
 {

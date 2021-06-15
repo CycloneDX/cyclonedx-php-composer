@@ -47,9 +47,24 @@ class ComponentFactory
     /** @var LicenseFactory */
     private $licenseFactory;
 
-    public function __construct(?LicenseFactory $licenseFactory = null)
+    public function __construct(LicenseFactory $licenseFactory)
     {
-        $this->licenseFactory = $licenseFactory ?? new LicenseFactory();
+        $this->licenseFactory = $licenseFactory;
+    }
+
+    public function getLicenseFactory(): LicenseFactory
+    {
+        return $this->licenseFactory;
+    }
+
+    /**
+     * @return $this
+     */
+    public function setLicenseFactory(LicenseFactory $licenseFactory): self
+    {
+        $this->licenseFactory = $licenseFactory;
+
+        return $this;
     }
 
     /**
