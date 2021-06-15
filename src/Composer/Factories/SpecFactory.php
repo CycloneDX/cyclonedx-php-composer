@@ -57,7 +57,7 @@ final class SpecFactory
     {
         $class = self::SPECS[$version] ?? null;
         if (null === $class) {
-            throw new InvalidArgumentException("Unexpected spec-version: ${version}");
+            throw new InvalidArgumentException("Unexpected spec-version: $version");
         }
 
         return new $class();

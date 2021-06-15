@@ -173,10 +173,10 @@ class XmlSerializer implements SerializerInterface
     public function hashToDom(DOMDocument $document, string $algorithm, string $content): DOMElement
     {
         if (false === $this->spec->isSupportedHashAlgorithm($algorithm)) {
-            throw new DomainException("invalid hash algorithm: ${algorithm}", 1);
+            throw new DomainException("invalid hash algorithm: $algorithm", 1);
         }
         if (false === $this->spec->isSupportedHashContent($content)) {
-            throw new DomainException("invalid hash content: ${content}", 2);
+            throw new DomainException("invalid hash content: $content", 2);
         }
 
         $element = $this->simpleDomSafeTextElement($document, 'hash', $content);

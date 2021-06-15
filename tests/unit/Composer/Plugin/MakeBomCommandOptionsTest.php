@@ -56,7 +56,7 @@ class MakeBomCommandOptionsTest extends TestCase
     {
         $options = MakeBomCommandOptions::makeFromInput($input);
         $value = $options->{$property};
-        self::assertSame($expected, $value, "property: ${property}");
+        self::assertSame($expected, $value, "property: $property");
     }
 
     public static function dpMakeFromInput(): \Generator
@@ -96,7 +96,7 @@ class MakeBomCommandOptionsTest extends TestCase
             $input->bind($command->getDefinition());
             yield (
             \is_int($title)
-                ? "${inputString} -> ${property}=".var_export($expected, true)
+                ? "$inputString -> $property=".var_export($expected, true)
                 : $title
             ) => [$input, $property, $expected];
         }

@@ -81,7 +81,7 @@ class ComponentFactory
 
         $version = $this->getPackageVersion($package);
         if ('' === $version) {
-            throw new UnexpectedValueException("Encountered package without version: ${rawName}");
+            throw new UnexpectedValueException("Encountered package without version: $rawName");
         }
 
         [$name, $vendor] = $this->splitNameAndVendor($rawName);
@@ -115,7 +115,7 @@ class ComponentFactory
 
         if ('' !== $sha1sum) {
             $component->setHash(HashAlgorithm::SHA_1, $sha1sum);
-            $purl->setChecksums(["sha1:${sha1sum}"]);
+            $purl->setChecksums(["sha1:$sha1sum"]);
         }
 
         return $component;

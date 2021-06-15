@@ -32,7 +32,7 @@ abstract class BomSpecData
 {
     public static function getSpecFilePath(string $version): string
     {
-        $file = realpath(__DIR__."/../_spec/bom-${version}.SNAPSHOT.xsd");
+        $file = realpath(__DIR__."/../_spec/bom-$version.SNAPSHOT.xsd");
         assertFileExists($file);
 
         return $file;
@@ -81,7 +81,7 @@ abstract class BomSpecData
     {
         $specXml = self::getSpecFilePath($version);
         $xml = new SimpleXMLElement($specXml, 0, true);
-        $xmlEnumElems = $xml->xpath("xs:simpleType[@name='${name}']/xs:restriction/xs:enumeration/@value");
+        $xmlEnumElems = $xml->xpath("xs:simpleType[@name='$name']/xs:restriction/xs:enumeration/@value");
         /** @var SimpleXMLElement $xmlEnumElem */
         foreach ($xmlEnumElems as $xmlEnumElem) {
             yield (string) $xmlEnumElem;
