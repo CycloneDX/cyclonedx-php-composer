@@ -87,7 +87,7 @@ class LicenseFactory
      * @see https://getcomposer.org/doc/04-schema.md#license
      * @see https://spdx.dev/specifications/
      *
-     * @psalm-param string|array<string> $licenseData
+     * @param string|string[] $licenseData
      *
      * @psalm-return list<string>
      *

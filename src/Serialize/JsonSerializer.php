@@ -77,7 +77,7 @@ class JsonSerializer implements SerializerInterface
     }
 
     /**
-     * @psalm-param mixed|null $value
+     * @param mixed|null $value
      * @psalm-assert-if-true !null $value
      */
     private function isNotNull($value): bool

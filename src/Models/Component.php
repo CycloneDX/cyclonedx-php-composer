@@ -41,7 +41,7 @@ class Component
      *
      * Examples: commons-lang3 and jquery
      *
-     * @psalm-var string
+     * @var string
      * @psalm-suppress PropertyNotSetInConstructor
      */
     private $name;
@@ -54,7 +54,7 @@ class Component
      *
      * Examples include: apache, org.apache.commons, and apache.org.
      *
-     * @psalm-var string|null
+     * @var string|null
      */
     private $group;
 
@@ -74,7 +74,7 @@ class Component
     /**
      * Specifies a description for the component.
      *
-     * @psalm-var string|null
+     * @var string|null
      */
     private $description;
 
@@ -84,14 +84,14 @@ class Component
      * The purl, if specified, must be valid and conform to the specification
      * defined at: {@linnk https://github.com/package-url/purl-spec/blob/master/README.rst#purl}.
      *
-     * @psalm-var PackageUrl|null
+     * @var PackageUrl|null
      */
     private $packageUrl;
 
     /**
-     * Licences.
+     * List of licences.
      *
-     * @psalm-var License[]
+     * @psalm-var list<License>
      */
     private $licenses = [];
 
@@ -106,7 +106,7 @@ class Component
      * The component version. The version should ideally comply with semantic versioning
      * but is not enforced.
      *
-     * @psalm-var string
+     * @var string
      * @psalm-suppress PropertyNotSetInConstructor
      */
     private $version;
@@ -117,7 +117,7 @@ class Component
     }
 
     /**
-     * @psalm-return $this
+     * @return $this
      */
     public function setName(string $name): self
     {
@@ -132,7 +132,7 @@ class Component
     }
 
     /**
-     * @psalm-return $this
+     * @return $this
      */
     public function setGroup(?string $group): self
     {
@@ -154,7 +154,7 @@ class Component
      *
      * @throws DomainException if value is unknown
      *
-     * @psalm-return $this
+     * @return $this
      *
      * @psalm-suppress PropertyTypeCoercion
      */
@@ -175,7 +175,7 @@ class Component
     }
 
     /**
-     * @psalm-return $this
+     * @return $this
      */
     public function setDescription(?string $description): self
     {
@@ -185,7 +185,7 @@ class Component
     }
 
     /**
-     * @psalm-return License[]
+     * @psalm-return list<License>
      */
     public function getLicenses(): array
     {
@@ -193,11 +193,11 @@ class Component
     }
 
     /**
-     * @psalm-param array<License> $licenses
+     * @param License[] $licenses
      *
      * @throws InvalidArgumentException if list contains element that is not instance of {@see \CycloneDX\Models\License}
      *
-     * @psalm-return $this
+     * @return $this
      *
      * @psalm-suppress DocblockTypeContradiction
      */
@@ -214,7 +214,7 @@ class Component
     }
 
     /**
-     * @psalm-return $this
+     * @return $this
      */
     public function addLicense(License ...$licenses): self
     {
@@ -237,7 +237,7 @@ class Component
      * @throws DomainException          if any of hashes' keys is not in {@see HashAlgorithm}'s constants list
      * @throws InvalidArgumentException if any of hashes' values is not a string
      *
-     * @psalm-return $this
+     * @return $this
      *
      * @psalm-suppress PropertyTypeCoercion
      * @psalm-suppress RedundantConditionGivenDocblockType
@@ -264,7 +264,7 @@ class Component
      *
      * @throws DomainException if $algorithm is not in {@see HashAlgorithm}'s constants list
      *
-     * @psalm-return $this
+     * @return $this
      *
      * @psalm-suppress PropertyTypeCoercion
      */
@@ -285,7 +285,7 @@ class Component
     }
 
     /**
-     * @psalm-return $this
+     * @return $this
      */
     public function setVersion(string $version): self
     {
