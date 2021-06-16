@@ -11,19 +11,20 @@
          failOnRisky="true"
          failOnWarning="true"
          verbose="true"
+         defaultTestSuite="default"
 >
     <testsuites>
+        <testsuite name="default">
+            <directory>tests</directory>
+        </testsuite>
         <testsuite name="unit">
-            <directory suffix="Test.php">tests/unit</directory>
+            <directory>tests/unit</directory>
         </testsuite>
         <testsuite name="functional">
-            <directory suffix="Test.php">tests/functional</directory>
+            <directory>tests/functional</directory>
         </testsuite>
     </testsuites>
-    <coverage cacheDirectory=".phpunit.cache/code-coverage"
-              includeUncoveredFiles="true"
-              processUncoveredFiles="false"
-    >
+    <coverage cacheDirectory=".phpunit.cache/code-coverage">
         <include>
             <directory suffix=".php">src</directory>
         </include>
