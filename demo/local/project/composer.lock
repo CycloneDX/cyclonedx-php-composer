@@ -1,0 +1,204 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "e4059accfb938a17e57b4259d858c76f",
+    "packages": [
+        {
+            "name": "cyclonedx-demo/local-demo-dependency",
+            "version": "1.33.7",
+            "dist": {
+                "type": "path",
+                "url": "packages/local-demo-dependency",
+                "reference": ""
+            },
+            "type": "library",
+            "description": "a package that is hosted locally and required in a local demo",
+            "transport-options": {
+                "relative": true
+            }
+        },
+        {
+            "name": "cyclonedx-demo/local-dependency-with-minimal-setup",
+            "version": "dev-master",
+            "dist": {
+                "type": "path",
+                "url": "packages/local-dependency-with-minimal-setup",
+                "reference": ""
+            },
+            "type": "library",
+            "transport-options": {
+                "relative": true
+            }
+        }
+    ],
+    "packages-dev": [
+        {
+            "name": "cyclonedx/cyclonedx-php-composer",
+            "version": "dev-master",
+            "dist": {
+                "type": "path",
+                "url": "../../..",
+                "reference": ""
+            },
+            "require": {
+                "composer-plugin-api": "^2.0",
+                "ext-dom": "*",
+                "ext-filter": "*",
+                "ext-json": "*",
+                "ext-libxml": "*",
+                "package-url/packageurl-php": "^1.0",
+                "php": "^7.3 || ^8.0"
+            },
+            "require-dev": {
+                "composer/composer": "^2.0.13",
+                "ext-simplexml": "*",
+                "phpunit/phpunit": "9.5.5",
+                "roave/security-advisories": "dev-latest",
+                "swaggest/json-schema": "0.12.33"
+            },
+            "type": "composer-plugin",
+            "extra": {
+                "class": "CycloneDX\\Composer\\Plugin\\Plugin",
+                "unused": [
+                    "composer-plugin-api"
+                ]
+            },
+            "autoload": {
+                "psr-4": {
+                    "CycloneDX\\": "src"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "CycloneDX\\Tests\\": "tests"
+                }
+            },
+            "scripts": {
+                "dev-setup": [
+                    "@composer -dtools/composer-require-checker update",
+                    "@composer -dtools/composer-unused update",
+                    "@composer -dtools/php-cs-fixer update",
+                    "@composer -dtools/psalm update",
+                    "@composer update"
+                ],
+                "test": [
+                    "@composer validate",
+                    "@test:psalm",
+                    "@test:phpunit",
+                    "@test:cs-fixer",
+                    "@test:composer-unused",
+                    "@test:composer-require-checker"
+                ],
+                "test:phpunit": [
+                    "@php -d zend.assertions=1 -d assert.exception=1 -d display_errors=On -d error_reporting=-1 -d log_errors_max_len=0 -d memory_limit=-1 vendor/phpunit/phpunit/phpunit"
+                ],
+                "test:psalm": [
+                    "@php tools/psalm/vendor/vimeo/psalm/psalm"
+                ],
+                "test:cs-fixer": [
+                    "@php tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/php-cs-fixer fix --dry-run --diff"
+                ],
+                "test:composer-unused": [
+                    "@php tools/composer-unused/vendor/icanhazstring/composer-unused/bin/composer-unused --excludeDir=tools"
+                ],
+                "test:composer-require-checker": [
+                    "@php tools/composer-require-checker/vendor/maglnet/composer-require-checker/bin/composer-require-checker || :"
+                ],
+                "cs-fix": [
+                    "@php tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/php-cs-fixer fix --diff"
+                ]
+            },
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "nscuro",
+                    "email": "nscuro@protonmail.com",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Jan Kowalleck",
+                    "email": "jan.kowalleck@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Creates CycloneDX Software Bill-of-Materials (SBOM) from PHP Composer projects",
+            "homepage": "https://github.com/CycloneDX/cyclonedx-php-composer/",
+            "support": {
+                "issues": "https://github.com/CycloneDX/cyclonedx-php-composer/issues"
+            },
+            "transport-options": {
+                "relative": true
+            }
+        },
+        {
+            "name": "package-url/packageurl-php",
+            "version": "1.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/package-url/packageurl-php.git",
+                "reference": "3d593b87966d3dff60d6cc02fd0a83fccb0a01f4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/package-url/packageurl-php/zipball/3d593b87966d3dff60d6cc02fd0a83fccb0a01f4",
+                "reference": "3d593b87966d3dff60d6cc02fd0a83fccb0a01f4",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.3 || ^8.0"
+            },
+            "require-dev": {
+                "ext-json": "*",
+                "phpunit/phpunit": "9.5.4",
+                "roave/security-advisories": "dev-latest"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "PackageUrl\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jan Kowalleck",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A parser and builder based on the package url spec.",
+            "homepage": "https://github.com/package-url/packageurl-php",
+            "keywords": [
+                "package",
+                "package-url",
+                "packageurl",
+                "purl",
+                "url"
+            ],
+            "support": {
+                "issues": "https://github.com/package-url/packageurl-php/issues",
+                "source": "https://github.com/package-url/packageurl-php/tree/1.0.3"
+            },
+            "time": "2021-05-13T17:29:18+00:00"
+        }
+    ],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": {
+        "cyclonedx-demo/local-demo-dependency": 20,
+        "cyclonedx-demo/local-dependency-with-minimal-setup": 20,
+        "cyclonedx/cyclonedx-php-composer": 20
+    },
+    "prefer-stable": true,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": [],
+    "plugin-api-version": "2.0.0"
+}
