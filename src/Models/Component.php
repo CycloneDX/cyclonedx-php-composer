@@ -150,7 +150,7 @@ class Component
     }
 
     /**
-     * @psalm-param Classification::*|string $type For a ist of Valid values see {@see Classification}
+     * @psalm-param Classification::*|string $type For a ist of Valid values see {@see \CycloneDX\Enums\Classification}
      *
      * @throws DomainException if value is unknown
      *
@@ -234,7 +234,7 @@ class Component
     /**
      * @psalm-param  array<HashAlgorithm::*|string, string> $hashes
      *
-     * @throws DomainException          if any of hashes' keys is not in {@see HashAlgorithm}'s constants list
+     * @throws DomainException          if any of hashes' keys is not in {@see \CycloneDX\Enums\HashAlgorithm}'s constants list
      * @throws InvalidArgumentException if any of hashes' values is not a string
      *
      * @return $this
@@ -262,7 +262,7 @@ class Component
     /**
      * @psalm-param HashAlgorithm::*|string $algorithm
      *
-     * @throws DomainException if $algorithm is not in {@see HashAlgorithm}'s constants list
+     * @throws DomainException if $algorithm is not in {@see \CycloneDX\Enums\HashAlgorithm}'s constants list
      *
      * @return $this
      *
@@ -307,10 +307,6 @@ class Component
     }
 
     /**
-     * @see \CycloneDX\Models\Component::setType()
-     * @see \CycloneDX\Models\Component::setName()
-     * @see \CycloneDX\Models\Component::setVersion()
-     *
      * @psalm-param Classification::*|string $type
      *
      * @throws DomainException if type is unknown

@@ -107,7 +107,7 @@ trait SimpleDomTrait
     }
 
     /**
-     * An iterator that ignores everything but {@see DOMElement}s.
+     * An iterator that ignores everything but {@see \DOMElement}s.
      *
      * Needed since `$element->getElementsByTagName()` would also find tags in nested children.
      *

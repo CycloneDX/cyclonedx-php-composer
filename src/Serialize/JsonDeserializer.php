@@ -76,7 +76,7 @@ class JsonDeserializer implements DeserializerInterface
     /**
      * @throws JsonException            if json is not loadable
      * @throws \DomainException         if a component's type is unknown
-     * @throws \DomainException         if any of a component's hashes' keys is not in {@see HashAlgorithm}'s constants list
+     * @throws \DomainException         if any of a component's hashes' keys is not in {@see \CycloneDX\Enums\HashAlgorithm}'s constants list
      * @throws InvalidArgumentException if any of a component's hashes' values is not a string
      */
     public function deserialize(string $data): Bom
@@ -94,7 +94,7 @@ class JsonDeserializer implements DeserializerInterface
      * @psalm-param array<string, mixed> $json
      *
      * @throws \DomainException         if a component's type is unknown
-     * @throws \DomainException         if any of a component's hashes' keys is not in {@see HashAlgorithm}'s constants list
+     * @throws \DomainException         if any of a component's hashes' keys is not in {@see \CycloneDX\Enums\HashAlgorithm}'s constants list
      * @throws InvalidArgumentException if any of a component's hashes' values is not a string
      */
     public function bomFromJson(array $json): Bom
@@ -113,7 +113,7 @@ class JsonDeserializer implements DeserializerInterface
      * @psalm-param array<string, mixed> $json
      *
      * @throws \DomainException         if type is unknown
-     * @throws \DomainException         if any of component's hashes' keys is not in {@see HashAlgorithm}'s constants list
+     * @throws \DomainException         if any of component's hashes' keys is not in {@see \CycloneDX\Enums\HashAlgorithm}'s constants list
      * @throws InvalidArgumentException if any of component's hashes' values is not a string
      */
     public function componentFromJson(array $json): Component

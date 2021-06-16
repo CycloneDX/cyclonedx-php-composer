@@ -65,7 +65,7 @@ class MakeBomCommandOptions
     /**
      * @return Command the command that was put in
      *
-     * @psalm-suppress MissingThrowsDocblock since {@see Command::addOption()} is intended to work this way
+     * @psalm-suppress MissingThrowsDocblock since {@see \Symfony\Component\Console\Command\Command::addOption()} is intended to work this way
      */
     public static function configureCommand(Command $command): Command
     {
@@ -156,7 +156,7 @@ class MakeBomCommandOptions
     /**
      * @throws ValueError
      *
-     * @psalm-suppress MissingThrowsDocblock since {@see InputInterface::getOption()} is intended to work this way
+     * @psalm-suppress MissingThrowsDocblock since {@see \Symfony\Component\Console\Input\InputInterface::getOption()} is intended to work this way
      */
     public static function makeFromInput(InputInterface $input): self
     {

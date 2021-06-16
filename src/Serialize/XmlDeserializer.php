@@ -121,7 +121,7 @@ class XmlDeserializer implements DeserializerInterface
     }
 
     /**
-     * @throws \DomainException         if any of component's hashes' keys is not in {@see HashAlgorithm}'s constants list
+     * @throws \DomainException         if any of component's hashes' keys is not in {@see \CycloneDX\Enums\HashAlgorithm}'s constants list
      * @throws InvalidArgumentException if any of component's hashes' values is not a string
      */
     public function componentFromDom(DOMElement $element): Component
