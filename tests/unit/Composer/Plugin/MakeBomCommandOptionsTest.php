@@ -62,26 +62,26 @@ class MakeBomCommandOptionsTest extends TestCase
     public static function dpMakeFromInput(): \Generator
     {
         $data = [
-            /* @see MakeBomCommandOptions::bomFormat */
+            /* @see \CycloneDX\Composer\Plugin\MakeBomCommandOptions::bomFormat */
             'bomFormat default XML' => ['', 'bomFormat', 'XML'],
             ['--output-format=XML', 'bomFormat', 'XML'],
             ['--output-format=JSON', 'bomFormat', 'JSON'],
-            /* @see MakeBomCommandOptions::bomWriterClass */
+            /* @see \CycloneDX\Composer\Plugin\MakeBomCommandOptions::bomWriterClass */
             'bomWriterClass default XML' => ['', 'bomWriterClass', XmlSerializer::class],
             ['--output-format=XML', 'bomWriterClass', XmlSerializer::class],
             ['--output-format=JSON', 'bomWriterClass', JsonSerializer::class],
-            /* @see MakeBomCommandOptions::outputFile */
+            /* @see \CycloneDX\Composer\Plugin\MakeBomCommandOptions::outputFile */
             'outputFile default XML' => ['', 'outputFile', 'bom.xml'],
             ['--output-format=XML', 'outputFile', 'bom.xml'],
             ['--output-format=JSON', 'outputFile', 'bom.json'],
             ['--output-file=fooBar', 'outputFile', 'fooBar'],
-            /* @see MakeBomCommandOptions::excludeDev */
+            /* @see \CycloneDX\Composer\Plugin\MakeBomCommandOptions::excludeDev */
             'excludeDev default disabled' => ['', 'excludeDev', false],
             ['--exclude-dev', 'excludeDev', true],
-            /* @see MakeBomCommandOptions::excludePlugins */
+            /* @see \CycloneDX\Composer\Plugin\MakeBomCommandOptions::excludePlugins */
             'excludePlugins default disabled' => ['', 'excludePlugins', false],
             ['--exclude-plugins', 'excludePlugins', true],
-            /* @see MakeBomCommandOptions::specVersion */
+            /* @see \CycloneDX\Composer\Plugin\MakeBomCommandOptions::specVersion */
             'specVersion default latest' => ['', 'specVersion', SpecFactory::VERSION_LATEST],
             ['--spec-version=1.1', 'specVersion', Version::V_1_1],
             ['--spec-version=1.2', 'specVersion', Version::V_1_2],
