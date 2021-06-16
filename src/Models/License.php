@@ -35,14 +35,14 @@ class License
      *
      * @see \CycloneDX\Spdx\License::validate()
      *
-     * @psalm-var string|null
+     * @var string|null
      */
     private $id;
 
     /**
      * If SPDX does not define the license used, this field may be used to provide the license name.
      *
-     * @psalm-var string|null
+     * @var string|null
      */
     private $name;
 
@@ -50,7 +50,7 @@ class License
      * The URL to the license file.
      * If specified, a 'license' externalReference should also be specified for completeness.
      *
-     * @psalm-var string|null
+     * @var string|null
      */
     private $url;
 
@@ -78,7 +78,7 @@ class License
     /**
      * @throws InvalidArgumentException if value is an invalid URL
      *
-     * @psalm-return $this
+     * @return $this
      */
     public function setUrl(?string $url): self
     {
@@ -100,7 +100,7 @@ class License
      * @see \CycloneDX\Spdx\License::validate()
      * @see \CycloneDX\Spdx\License::getLicense()
      *
-     * @psalm-param string $nameOrId name or SPDX-ID of a license
+     * @param string $nameOrId name or SPDX-ID of a license
      */
     public static function createFromNameOrId(string $nameOrId, \CycloneDX\Spdx\License $spdxLicenseValidator): self
     {

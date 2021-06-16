@@ -32,13 +32,12 @@ use CycloneDX\Spec\SpecInterface;
 interface SerializerInterface
 {
     /**
-     * Serialize a Bom to a string.
+     * Serialize a {@see \CycloneDX\Models\Bom} to a string.
      *
      * May throw {@see \RuntimeException} if spec version is not supported.
      * May throw additional implementation-dependent Exceptions.
      *
-     * @psalm-param Bom  $bom    The BOM to serialize
-     * @psalm-param bool $pretty pretty print
+     * @psalm-param bool $pretty pretty print the output
      */
     public function serialize(Bom $bom, bool $pretty = false): string;
 

@@ -33,7 +33,7 @@ use InvalidArgumentException;
 class Bom
 {
     /**
-     * @psalm-var Component[]
+     * @psalm-var list<Component>
      */
     private $components = [];
 
@@ -48,7 +48,7 @@ class Bom
     private $version = 1;
 
     /**
-     * @psalm-return Component[]
+     * @psalm-return list<Component>
      */
     public function getComponents(): array
     {
@@ -56,11 +56,11 @@ class Bom
     }
 
     /**
-     * @psalm-param array<Component> $components
+     * @param Component[] $components
      *
      * @throws InvalidArgumentException if list contains element that is not instance of {@see \CycloneDX\Models\Component}
      *
-     * @psalm-return $this
+     * @return $this
      *
      * @psalm-suppress DocblockTypeContradiction
      */
@@ -77,7 +77,7 @@ class Bom
     }
 
     /**
-     * @psalm-return $this
+     * @return $this
      */
     public function addComponent(Component ...$components): self
     {
@@ -99,7 +99,7 @@ class Bom
      *
      * @throws DomainException if version <= 0
      *
-     * @psalm-return $this
+     * @return $this
      *
      * @psalm-suppress PropertyTypeCoercion
      */

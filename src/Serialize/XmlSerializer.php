@@ -192,7 +192,7 @@ class XmlSerializer implements SerializerInterface
     }
 
     /**
-     * @psalm-param array<License> $licenses
+     * @param License[] $licenses
      */
     public function licensesToDom(DOMDocument $document, array $licenses): ?DOMElement
     {

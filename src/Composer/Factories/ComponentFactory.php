@@ -122,8 +122,6 @@ class ComponentFactory
     }
 
     /**
-     * @psalm-param string $packageName package name
-     *
      * @psalm-return array{string, ?string}
      */
     private function splitNameAndVendor(string $packageName): array
