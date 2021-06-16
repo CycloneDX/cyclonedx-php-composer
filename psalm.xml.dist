@@ -5,6 +5,9 @@
        errorLevel="1"
        checkForThrowsDocblock="true"
        findUnusedPsalmSuppress="true"
+       ensureArrayStringOffsetsExist="true"
+       ensureArrayIntOffsetsExist="true"
+       runTaintAnalysis="true"
        cacheDirectory=".psalm.cache"
 >
     <!-- use with a proper baseline - see `.psalm/` /-->
