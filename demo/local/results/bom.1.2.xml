@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bom xmlns="http://cyclonedx.org/schema/bom/1.2" version="1">
+  <components>
+    <component type="library">
+      <group><![CDATA[cyclonedx-demo]]></group>
+      <name><![CDATA[local-demo-dependency]]></name>
+      <version><![CDATA[1.33.7]]></version>
+      <description><![CDATA[a package that is hosted locally and required in a local demo]]></description>
+      <purl><![CDATA[pkg:composer/cyclonedx-demo/local-demo-dependency@1.33.7]]></purl>
+    </component>
+    <component type="library">
+      <group><![CDATA[cyclonedx-demo]]></group>
+      <name><![CDATA[local-dependency-with-minimal-setup]]></name>
+      <version><![CDATA[dev-master]]></version>
+      <purl><![CDATA[pkg:composer/cyclonedx-demo/local-dependency-with-minimal-setup@dev-master]]></purl>
+    </component>
+  </components>
+</bom>
