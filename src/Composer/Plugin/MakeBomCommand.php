@@ -105,9 +105,7 @@ class MakeBomCommand extends BaseCommand
      */
     private function makeAndWrite(Locker $locker, MakeBomCommandOptions $options, OutputInterface $output): bool
     {
-        $isVerbose = OutputInterface::VERBOSITY_VERBOSE & $output->getVerbosity();
-
-        $isVerbose && $output->writeln('<info>Generating BOM from lockfile</info>');
+        $output->writeln('<info>Generating BOM from lockfile</info>', OutputInterface::VERBOSITY_VERBOSE);
         $bom = (new BomFactory(
             $options->excludeDev, $options->excludePlugins,
             new ComponentFactory(
@@ -120,31 +118,33 @@ class MakeBomCommand extends BaseCommand
         $spec = (new SpecFactory())->make($options->specVersion);
         $bomWriter = new $options->bomWriterClass($spec);
 
-        $isVerbose && $output->writeln(
+        $output->writeln(
             '<info>Serializing BOM: '.OutputFormatter::escape($options->bomFormat).' '.OutputFormatter::escape(
                 $options->specVersion
-            ).'</info>'
+            ).'</info>',
+            OutputInterface::VERBOSITY_VERBOSE
         );
         $bomContents = $bomWriter->serialize($bom, true);
 
         if (MakeBomCommandOptions::OUTPUT_FILE_STDOUT === $options->outputFile) {
-            $isVerbose && $output->writeln('<info>Writing output to STDOUT</info>');
-            // don't use `$output->writeln()`, so to support `-q` cli param.
-            $written = fwrite(\STDOUT, $bomContents);
-            // straighten up and add a linebreak. raw output might not have done it.
-            $output->writeln('');
-        } else {
-            $isVerbose && $output->writeln(
-                '<info>Writing output to: '.OutputFormatter::escape($options->outputFile).'</info>'
-            );
-            $written = file_put_contents($options->outputFile, $bomContents);
-            $output->writeln(
-                '<info>Wrote '.OutputFormatter::escape($options->bomFormat).' '.OutputFormatter::escape(
-                    $options->specVersion
-                ).' to: '.OutputFormatter::escape($options->outputFile).'</info>'
-            );
+            $output->writeln('<info>Writing output to STDOUT</info>', OutputInterface::VERBOSITY_VERBOSE);
+            // don't use `$output->writeln()`, so to support `-q` cli param and still have the desired output.
+            return false !== fwrite(\STDOUT, $bomContents);
         }
 
-        return false !== $written;
+        $output->writeln('<info>Writing output to: '.OutputFormatter::escape($options->outputFile).'</info>', OutputInterface::VERBOSITY_VERBOSE);
+        $written = file_put_contents($options->outputFile, $bomContents);
+        if (false === $written) {
+            $output->writeln('<error>Failed writing to file: '.OutputFormatter::escape($options->outputFile).'</error>');
+
+            return false;
+        }
+        $output->writeln(
+            '<info>Wrote '.OutputFormatter::escape($options->bomFormat).' '.OutputFormatter::escape(
+                $options->specVersion
+            ).' to: '.OutputFormatter::escape($options->outputFile).'</info>'
+        );
+
+        return true;
     }
 }

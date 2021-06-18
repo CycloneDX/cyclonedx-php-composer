@@ -122,7 +122,7 @@ class License
      *
      * @throws InvalidArgumentException if not exactly one argument must be null: $id or $name
      */
-    final private function __construct(?string $id, ?string $name)
+    private function __construct(?string $id, ?string $name)
     {
         if (false === (null === $id xor null === $name)) {
             throw new InvalidArgumentException('Exactly one argument must be null: $id or $name');

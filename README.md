@@ -37,7 +37,7 @@ Options:
                                      Values: "XML", "JSON" [default: "XML"]
       --output-file=OUTPUT-FILE      Path to the output file.
                                      Set to "-" to write to STDOUT.
-                                     (depending on the output-format, defaults to: "bom.xml" or "bom.json")
+                                     Depending on the output-format, default is one of: "bom.xml", "bom.json"
       --exclude-dev                  Exclude dev dependencies
       --exclude-plugins              Exclude composer plugins
       --spec-version=SPEC-VERSION    Which version of CycloneDX spec to use.

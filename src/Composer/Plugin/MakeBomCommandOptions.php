@@ -83,11 +83,11 @@ class MakeBomCommandOptions
                 null,
                 InputOption::VALUE_REQUIRED,
                 'Path to the output file.'.\PHP_EOL.
-                'Set to "'.self::OUTPUT_FILE_STDOUT.'" to write to STDOUT, best used with flag -q.'.\PHP_EOL.
-                '(depending on the output-format, defaults to: "'.implode(
-                    '" or "',
+                'Set to "'.self::OUTPUT_FILE_STDOUT.'" to write to STDOUT.'.\PHP_EOL.
+                'Depending on the output-format, default is one of: "'.implode(
+                    '", "',
                     array_values(self::OUTPUT_FILE_DEFAULT)
-                ).'")'
+                ).'"'
             )
             ->addOption(
                 self::OPTION_EXCLUDE_DEV,
