@@ -18,7 +18,7 @@ env:
 
 jobs:
   reproducible:
-    name: Reproducible "${{ matrix.subject }}" (${{ matrix.spec-version }} ${{ matrix.output-format }}, composer${{ matrix.composer }} php${{ matrix.php }})
+    name: Reproducible "${{ matrix.subject }}" (${{ matrix.spec-version }} ${{ matrix.output-format }}, composer${{ matrix.composer }} php${{ matrix.php }}, stdout:${{ matrix.stdout }})
     runs-on: ubuntu-latest
     timeout-minutes: 30
     env:
@@ -42,12 +42,21 @@ jobs:
           - "1.2"
           - "1.1"
           # - "1.0" # not implemented
+        stdout: [false]
         exclude:
           # exclude unsupported combinations: json is defined in spec >= 1.2
           - output-format: json
             spec-version: "1.0"
           - output-format: json
             spec-version: "1.1"
+        include:
+          - # test if stdout receives no data except the SBOM
+            subject: laravel-7.12.0
+            php: "8.0"
+            composer: 2
+            output-format: xml
+            spec-version: "1.2"
+            stdout: true
     steps:
       - name: Checkout
         # see https://github.com/actions/checkout
@@ -84,7 +93,8 @@ jobs:
       - name: Install dependencies
         run: composer install --prefer-dist --no-interaction --no-progress
         working-directory: ${{ env.DEMO_RUN_DIR }}/project
-      - name: Make SBOM
+      - name: Make SBOM to file
+        if: ${{ ! matrix.stdout }}
         run: >
           composer make-bom
           -vvv
@@ -92,6 +102,16 @@ jobs:
           --spec-version=${{ matrix.spec-version }}
           --output-format=${{ matrix.output-format }}
           --output-file="$OUT_FILE_PATH"
+        working-directory: ${{ env.DEMO_RUN_DIR }}/project
+      - name: Make SBOM to STDOUT
+        if: ${{ matrix.stdout }}
+        run: >
+          composer make-bom
+          --exclude-dev
+          --spec-version=${{ matrix.spec-version }}
+          --output-format=${{ matrix.output-format }}
+          --output-file=-
+          > "$OUT_FILE_PATH"
         working-directory: ${{ env.DEMO_RUN_DIR }}/project
       - name: Compare reproducible SBOM
         run: >
