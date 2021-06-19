@@ -104,6 +104,8 @@ class LicenseFactory
             // Conjunctive or disjunctive license provided as string
             $licenseDataSplit = preg_split('/[()]/', $licenseData, -1, \PREG_SPLIT_NO_EMPTY);
             if (false !== $licenseDataSplit) {
+                \assert(\count($licenseDataSplit) > 0);
+
                 return preg_split('/ or | and /', $licenseDataSplit[0], -1, \PREG_SPLIT_NO_EMPTY)
                     ?: [$licenseData];
             }
