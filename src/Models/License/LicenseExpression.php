@@ -21,26 +21,38 @@ declare(strict_types=1);
  * Copyright (c) Steve Springett. All Rights Reserved.
  */
 
-namespace CycloneDX\Composer\Factories;
-
-use Composer\Package\CompletePackageInterface;
-use CycloneDX\Models\License;
-use CycloneDX\Models\License\DisjunctiveLicense;
-use CycloneDX\Models\License\LicenseExpression;
-use CycloneDX\Spdx\License as SpdxLicenseValidator;
+namespace CycloneDX\Models\License;
 
 /**
- * @internal
- *
  * @author jkowalleck
  */
-class LicenseFactory extends \CycloneDX\Factories\LicenseFactory
-{
+class LicenseExpression {
+
+    /** @var string */
+    private $expression;
+
     /**
-     * @psalm-return list<DisjunctiveLicense|LicenseExpression>
+     * @return string
      */
-    public function makeFromPackage(CompletePackageInterface $package): array
+    public function getExpression(): string
     {
-        return $this->makeFromStrings($package->getLicense());
+        return $this->expression;
     }
+
+    /**
+     * @return $this
+     */
+    public function setExpression(string $expression): LicenseExpression
+    {
+        $this->expression = $expression;
+
+        return $this;
+    }
+
+    public function __construct(string $expression)
+    {
+        $this->setExpression($expression);
+    }
+
+
 }

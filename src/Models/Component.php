@@ -25,6 +25,8 @@ namespace CycloneDX\Models;
 
 use CycloneDX\Enums\Classification;
 use CycloneDX\Enums\HashAlgorithm;
+use CycloneDX\Repositories\HashRepository;
+use CycloneDX\Repositories\LicenseRepository;
 use DomainException;
 use InvalidArgumentException;
 use PackageUrl\PackageUrl;
@@ -91,16 +93,16 @@ class Component
     /**
      * List of licences.
      *
-     * @psalm-var list<License>
+     * @var LicenseRepository
      */
-    private $licenses = [];
+    private $licenses;
 
     /**
      * Specifies the file hashes of the component.
      *
-     * @psalm-var array<HashAlgorithm::*, string>
+     * @var HashRepository
      */
-    private $hashes = [];
+    private $hashes;
 
     /**
      * The component version. The version should ideally comply with semantic versioning
@@ -184,97 +186,31 @@ class Component
         return $this;
     }
 
-    /**
-     * @psalm-return list<License>
-     */
-    public function getLicenses(): array
+    public function getLicenses(): int
     {
         return $this->licenses;
     }
 
     /**
-     * @param License[] $licenses
-     *
-     * @throws InvalidArgumentException if list contains element that is not instance of {@see \CycloneDX\Models\License}
-     *
      * @return $this
-     *
-     * @psalm-suppress DocblockTypeContradiction
      */
-    public function setLicenses(array $licenses): self
+    public function setLicenses(LicenseRepository $licenses): self
     {
-        foreach ($licenses as $license) {
-            if (false === $license instanceof License) {
-                throw new InvalidArgumentException('Not a License: '.var_export($license, true));
-            }
-        }
-        $this->licenses = array_values($licenses);
-
+        $this->licenses = $licenses;
         return $this;
     }
 
-    /**
-     * @return $this
-     */
-    public function addLicense(License ...$licenses): self
-    {
-        array_push($this->licenses, ...array_values($licenses));
-
-        return $this;
-    }
-
-    /**
-     * @psalm-return array<HashAlgorithm::*, string>
-     */
-    public function getHashes(): array
+    public function getHashes(): HashRepository
     {
         return $this->hashes;
     }
 
     /**
-     * @psalm-param  array<HashAlgorithm::*|string, string> $hashes
-     *
-     * @throws DomainException          if any of hashes' keys is not in {@see \CycloneDX\Enums\HashAlgorithm}'s constants list
-     * @throws InvalidArgumentException if any of hashes' values is not a string
-     *
      * @return $this
-     *
-     * @psalm-suppress PropertyTypeCoercion
-     * @psalm-suppress RedundantConditionGivenDocblockType
-     * @psalm-suppress DocblockTypeContradiction
      */
-    public function setHashes(array $hashes): self
+    public function setHashes(HashRepository $hashes): self
     {
-        $algorithms = (new \ReflectionClass(HashAlgorithm::class))->getConstants();
-        foreach ($hashes as $algorithm => $content) {
-            if (false === \in_array($algorithm, $algorithms, true)) {
-                throw new DomainException("Unknown hash algorithm: $algorithm");
-            }
-            if (false === \is_string($content)) {
-                throw new InvalidArgumentException("Hash content for '$algorithm' is not string.");
-            }
-        }
         $this->hashes = $hashes;
-
-        return $this;
-    }
-
-    /**
-     * @psalm-param HashAlgorithm::*|string $algorithm
-     *
-     * @throws DomainException if $algorithm is not in {@see \CycloneDX\Enums\HashAlgorithm}'s constants list
-     *
-     * @return $this
-     *
-     * @psalm-suppress PropertyTypeCoercion
-     */
-    public function setHash(string $algorithm, string $content): self
-    {
-        $algorithms = (new \ReflectionClass(HashAlgorithm::class))->getConstants();
-        if (false === \in_array($algorithm, $algorithms, true)) {
-            throw new DomainException("Unknown hash algorithm: {$algorithm}");
-        }
-        $this->hashes[$algorithm] = $content;
 
         return $this;
     }
@@ -316,5 +252,6 @@ class Component
         $this->setType($type);
         $this->setName($name);
         $this->setVersion($version);
+        $this->licenses = new LicenseRepository();
     }
 }

@@ -23,6 +23,7 @@ declare(strict_types=1);
 
 namespace CycloneDX\Models;
 
+use CycloneDX\Repositories\ComponentRepository;
 use DomainException;
 use InvalidArgumentException;
 
@@ -32,10 +33,8 @@ use InvalidArgumentException;
  */
 class Bom
 {
-    /**
-     * @psalm-var list<Component>
-     */
-    private $components = [];
+    /** @var ComponentRepository */
+    private $components;
 
     /**
      * The version allows component publishers/authors to make changes to existing BOMs to update various aspects of the document such as description or licenses.
@@ -47,41 +46,17 @@ class Bom
      */
     private $version = 1;
 
-    /**
-     * @psalm-return list<Component>
-     */
-    public function getComponents(): array
+    public function getComponents(): ComponentRepository
     {
         return $this->components;
     }
 
     /**
-     * @param Component[] $components
-     *
-     * @throws InvalidArgumentException if list contains element that is not instance of {@see \CycloneDX\Models\Component}
-     *
-     * @return $this
-     *
-     * @psalm-suppress DocblockTypeContradiction
-     */
-    public function setComponents(array $components): self
-    {
-        foreach ($components as $component) {
-            if (false === $component instanceof Component) {
-                throw new InvalidArgumentException('Not a Component: '.var_export($component, true));
-            }
-        }
-        $this->components = array_values($components);
-
-        return $this;
-    }
-
-    /**
      * @return $this
      */
-    public function addComponent(Component ...$components): self
+    public function setComponents(ComponentRepository $components): self
     {
-        array_push($this->components, ...array_values($components));
+        $this->components = $components;
 
         return $this;
     }

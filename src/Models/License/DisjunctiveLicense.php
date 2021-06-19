@@ -21,14 +21,14 @@ declare(strict_types=1);
  * Copyright (c) Steve Springett. All Rights Reserved.
  */
 
-namespace CycloneDX\Models;
+namespace CycloneDX\Models\License;
 
 use InvalidArgumentException;
 
 /**
  * @author jkowalleck
  */
-class License
+class DisjunctiveLicense
 {
     /**
      * A valid SPDX license ID.
@@ -108,7 +108,8 @@ class License
         $name = null === $id ? $nameOrId : null;
 
         /**
-         * the instance is not instantly returned nut stored, to trick the php-cs-fixer in not removing this doc=block.
+         * The instance is not instantly returned but stored, to trick the php-cs-fixer in not removing this doc-block.
+         * This way the constructor's throw can be psalm-ignored.
          *
          * @psalm-suppress MissingThrowsDocblock since it is asserted to not be thrown
          */
@@ -119,6 +120,8 @@ class License
 
     /**
      * Private! Use {@see createFromNameOrId()} to create an object.
+     *
+     * @TODO see if a psalm-assert can be done
      *
      * @throws InvalidArgumentException if not exactly one argument must be null: $id or $name
      */
