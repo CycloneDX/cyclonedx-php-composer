@@ -41,6 +41,7 @@ class Bom
      * The default version is '1' and should be incremented for each version of the BOM that is published.
      * Each version of a component should have a unique BOM and if no changes are made to the BOMs, then each BOM will have a version of '1'.
      *
+     * @var int
      * @psalm-var positive-int
      */
     private $version = 1;

@@ -28,12 +28,14 @@ use CycloneDX\Models\Component;
 /**
  * @author jkowalleck
  *
- * @psalm-type Components = list<Component>
  */
 class ComponentRepository implements \Countable
 {
-    /** @psalm-var Components */
-    private $component = [];
+    /**
+     * @var Component[]
+     * @psalm-var list<Component>
+     */
+    private $components = [];
 
     /**
      * @no-named-arguments
@@ -50,19 +52,33 @@ class ComponentRepository implements \Countable
      */
     public function addComponent(Component ...$components): self
     {
-        array_push($this->component, ...$components);
+        array_push($this->components, ...$components);
 
         return $this;
     }
 
-    /** @psalm-return Components */
+    /**
+     * @return Component[]
+     * @psalm-return list<Component>
+     */
     public function getComponents(): array
     {
-        return $this->component;
+        return $this->components;
+    }
+
+    public function getComponent(string $name, ?string $group): ?Component
+    {
+        foreach ($this->components as $component) {
+            if ($component->getName() === $name && $component->getGroup() === $group) {
+                return $component;
+            }
+        }
+
+        return null;
     }
 
     public function count(): int
     {
-        return \count($this->component);
+        return \count($this->components);
     }
 }

@@ -60,15 +60,14 @@ class BomFactory
      */
     public function makeFromLocker(Locker $locker): Bom
     {
-        $components = array_map(
-            [$this->componentFactory, 'makeFromPackage'],
-            array_values($locker->getLockedRepository(
+        $components = $this->componentFactory->makeFromPackages(
+            $locker->getLockedRepository(
                 $this->excludeDev,
                 $this->excludePlugins
-            )->getPackages())
+            )->getPackages()
         );
 
         return (new Bom())
-            ->setComponentRepository(new ComponentRepository(...$components));
+            ->setComponentRepository($components);
     }
 }
