@@ -26,6 +26,7 @@ namespace CycloneDX\Tests\unit\Serialize;
 use CycloneDX\Models\Bom;
 use CycloneDX\Models\Component;
 use CycloneDX\Models\License;
+use CycloneDX\Repositories\ComponentRepository;
 use CycloneDX\Serialize\XmlSerializer;
 use CycloneDX\Spec\SpecInterface;
 use DomainException;
@@ -87,33 +88,27 @@ class XmlSerializeTest extends TestCase
 
     // region bomToDom
 
-    public function testBomToBom(): void
+    public function testBomToDom(): void
     {
+        $components = $this->createStub(ComponentRepository::class);
+        $bom = $this->createConfiguredMock(Bom::class, [
+            'getVersion' => 1337,
+            'getComponentRepository' => $components,
+        ]);
+
         $spec = $this->createStub(SpecInterface::class);
         $spec->method('getVersion')->willReturn('mySpecVersion');
-        $spec->method('isSupportedComponentType')
-            ->with('myType')
-            ->willReturn(true);
-
-        $fakeComponent = $this->createStub(Component::class);
-        $serializer = $this->createPartialMock(XmlSerializer::class, ['componentToDom']);
-        $serializer->setSpec($spec);
-        $bom = $this->createConfiguredMock(
-            Bom::class,
-            [
-                'getVersion' => 1337,
-                'getComponents' => [$fakeComponent],
-            ]
-        );
         $dom = new DOMDocument();
-        $serializer->expects(self::once())->method('componentToDom')
-            ->with($dom, $fakeComponent)
-            ->willReturn($dom->createElement('fakeComponent'));
+        $serializer = $this->createPartialMock(XmlSerializer::class, ['componentsToDom']);
+        $serializer->setSpec($spec);
+        $serializer->expects(self::once())->method('componentsToDom')
+            ->with($dom, $components)
+            ->willReturn($dom->createElement('fakeComponents'));
+
         $expectedDom = new DOMDocument();
         $expected = $expectedDom->createElementNS('http://cyclonedx.org/schema/bom/mySpecVersion', 'bom');
         $expected->setAttribute('version', '1337');
-        $expected->appendChild($expectedDom->createElement('components'))
-            ->appendChild($expectedDom->createElement('fakeComponent'));
+        $expected->appendChild($expectedDom->createElement('fakeComponents'));
 
         $data = $serializer->bomToDom($dom, $bom);
 
@@ -136,7 +131,8 @@ class XmlSerializeTest extends TestCase
         $spec->expects(self::once())->method('isSupportedHashContent')
             ->with('myHash')
             ->willReturn(true);
-        $serializer = new XmlSerializer($spec);
+        $serializer = $this->createConfiguredMock(XmlSerializer::class, ['licenseToDom', 'hashesToDom']);
+        $serializer->setSpec($spec);
         $component = $this->createConfiguredMock(
             Component::class,
             [
@@ -149,12 +145,7 @@ class XmlSerializeTest extends TestCase
                 'getVersion' => 'myVersion',
                 'getGroup' => 'myGroup',
                 'getDescription' => 'myDescription',
-                'getLicenses' => [
-                    $this->createConfiguredMock(
-                        License::class,
-                        ['getId' => null, 'getName' => 'myLicense']
-                    ),
-                ],
+                'getLicense' => $license = $this->createStub(License\LicenseExpression::class),
                 'getHashes' => ['myAlg' => 'myHash'],
             ]
         );

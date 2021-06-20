@@ -34,6 +34,11 @@ use PHPUnit\Framework\TestCase;
 use RuntimeException;
 use Swaggest\JsonSchema;
 
+/**
+ * @coversNothing
+ *
+ * @TODO write the deserializer and enable this test
+ */
 class SnapshotRemoteRefProvider implements JsonSchema\RemoteRefProvider
 {
     public function getSchemaData($url)
