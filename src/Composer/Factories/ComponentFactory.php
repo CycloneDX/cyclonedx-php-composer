@@ -77,8 +77,7 @@ class ComponentFactory
      */
     public function makeFromPackages(array $packages): ?ComponentRepository
     {
-        if (count($packages) === 0)
-        {
+        if (0 === \count($packages)) {
             return null;
         }
 
@@ -141,10 +140,8 @@ class ComponentFactory
         }
 
         if ('' !== $sha1sum) {
-            /** @psalm-suppress MissingThrowsDocblock */
-            $component->setHashRepository((new HashRepository())->setHash(HashAlgorithm::SHA_1, $sha1sum));
-            if ( null !== $purl )
-            {
+            $component->setHashRepository(new HashRepository([HashAlgorithm::SHA_1 => $sha1sum]));
+            if (null !== $purl) {
                 $purl->setChecksums(["sha1:$sha1sum"]);
             }
         }

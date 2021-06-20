@@ -28,17 +28,46 @@ use DomainException;
 
 /**
  * @author jkowalleck
- *
- * @psalm-type Hashes = array<HashAlgorithm::*, string>
  */
 class HashRepository implements \Countable
 {
     /**
-     * Specifies the file hashes of the component.
-     *
-     * @psalm-var Hashes
+     * @var string[] dictionary of hashes
+     * @psalm-var  array<HashAlgorithm::*, string>
      */
-    private $hashes = [];
+    private $hashDict = [];
+
+    /**
+     * @param string[] $hashes dictionary of hashes
+     * @psalm-param array<string,string> $hashes
+     */
+    public function __construct(array $hashes)
+    {
+        $this->setHashes($hashes);
+    }
+
+    /**
+     * Set the hashes.
+     *
+     * Ignores unknown hash algorithms.
+     *
+     * @param string[] $hashes dictionary of hashes
+     * @psalm-param array<string,string> $hashes
+     *
+     * @return $this
+     */
+    public function setHashes(array $hashes): self
+    {
+        foreach ($hashes as $algorithm => $content) {
+            try {
+                $this->setHash($algorithm, $content);
+            } catch (DomainException $exception) {
+                unset($exception);
+            }
+        }
+
+        return $this;
+    }
 
     /**
      * @psalm-assert HashAlgorithm::* $algorithm
@@ -49,48 +78,25 @@ class HashRepository implements \Countable
      */
     public function setHash(string $algorithm, string $content): self
     {
-        if (false === $this->isValidAlgorithm($algorithm)) {
+        if (false === HashAlgorithm::isValidValue($algorithm)) {
             throw new DomainException("Unknown hash algorithm: $algorithm");
         }
-        $this->hashes[$algorithm] = $content;
+        $this->hashDict[$algorithm] = $content;
 
         return $this;
     }
 
     /**
-     * @return $this
+     * @return string[] dictionary of hashes
+     * @psalm-return array<HashAlgorithm::*, string>
      */
-    public function unsetHash(string $algorithm): self
-    {
-        unset($this->hashes[$algorithm]);
-
-        return $this;
-    }
-
-    public function getHash(string $algorithm): ?string
-    {
-        return $this->hashes[$algorithm] ?? null;
-    }
-
-    /** @psalm-return Hashes */
     public function getHashes(): array
     {
-        return $this->hashes;
-    }
-
-    /**
-     * @psalm-assert-if-true HashAlgorithm::* $algorithm
-     */
-    private function isValidAlgorithm(string $algorithm): bool
-    {
-        /** @psalm-var  list<HashAlgorithm::*> */
-        $algorithms = (new \ReflectionClass(HashAlgorithm::class))->getConstants();
-
-        return \in_array($algorithm, $algorithms, true);
+        return $this->hashDict;
     }
 
     public function count(): int
     {
-        return \count($this->hashes);
+        return \count($this->hashDict);
     }
 }

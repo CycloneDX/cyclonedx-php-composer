@@ -25,7 +25,6 @@ namespace CycloneDX\Composer\Factories;
 
 use CycloneDX\Composer\Locker;
 use CycloneDX\Models\Bom;
-use CycloneDX\Repositories\ComponentRepository;
 use UnexpectedValueException;
 
 /**

@@ -27,12 +27,13 @@ use CycloneDX\Models\License\DisjunctiveLicense;
 
 /**
  * @author jkowalleck
- *
- * @psalm-type Licenses = list<DisjunctiveLicense>
  */
 class DisjunctiveLicenseRepository implements \Countable
 {
-    /** @psalm-var Licenses */
+    /**
+     * @var DisjunctiveLicense[]
+     * @psalm-var list<DisjunctiveLicense>
+     */
     private $licenses = [];
 
     /**
@@ -56,7 +57,8 @@ class DisjunctiveLicenseRepository implements \Countable
     }
 
     /**
-     * @psalm-return Licenses
+     * @return DisjunctiveLicense[]
+     * @psalm-return list<DisjunctiveLicense>
      */
     public function getLicenses(): array
     {

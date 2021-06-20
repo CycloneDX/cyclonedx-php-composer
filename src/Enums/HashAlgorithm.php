@@ -45,4 +45,14 @@ abstract class HashAlgorithm
     public const BLAKE2B_384 = 'BLAKE2b-384';
     public const BLAKE2B_512 = 'BLAKE2b-512';
     public const BLAKE3 = 'BLAKE3';
+
+    /**
+     * @psalm-assert-if-true self::* $value
+     */
+    public static function isValidValue(string $value): bool
+    {
+        $values = (new \ReflectionClass(self::class))->getConstants();
+
+        return \in_array($value, $values, true);
+    }
 }

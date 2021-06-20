@@ -163,22 +163,12 @@ class Component
      */
     public function setType(string $type): self
     {
-        if (false === $this->isValidType($type)) {
+        if (false === Classification::isValidValue($type)) {
             throw new DomainException("Invalid type: $type");
         }
         $this->type = $type;
 
         return $this;
-    }
-
-    /**
-     * @psalm-assert-if-true Classification::* $type
-     */
-    private function isValidType(string $type): bool
-    {
-        $types = (new \ReflectionClass(Classification::class))->getConstants();
-
-        return \in_array($type, $types, true);
     }
 
     public function getDescription(): ?string

@@ -27,7 +27,6 @@ use CycloneDX\Models\Component;
 
 /**
  * @author jkowalleck
- *
  */
 class ComponentRepository implements \Countable
 {
@@ -64,17 +63,6 @@ class ComponentRepository implements \Countable
     public function getComponents(): array
     {
         return $this->components;
-    }
-
-    public function getComponent(string $name, ?string $group): ?Component
-    {
-        foreach ($this->components as $component) {
-            if ($component->getName() === $name && $component->getGroup() === $group) {
-                return $component;
-            }
-        }
-
-        return null;
     }
 
     public function count(): int

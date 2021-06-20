@@ -41,4 +41,14 @@ abstract class Classification
     public const FILE = 'file';
     public const CONTAINER = 'container';
     public const FIRMWARE = 'firmware';
+
+    /**
+     * @psalm-assert-if-true self::* $type
+     */
+    public static function isValidValue(string $value): bool
+    {
+        $values = (new \ReflectionClass(self::class))->getConstants();
+
+        return \in_array($value, $values, true);
+    }
 }
