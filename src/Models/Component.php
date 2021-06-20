@@ -153,9 +153,8 @@ class Component
     }
 
     /**
-     * @psalm-assert  Classification::* $type
-     *
      * @param string $type A valid {@see \CycloneDX\Enums\Classification}
+     * @psalm-assert Classification::* $type
      *
      * @throws DomainException if value is unknown
      *
@@ -196,7 +195,7 @@ class Component
 
     /**
      * @param mixed|LicenseExpression|DisjunctiveLicenseRepository|null $license
-     * @psalm-assert null|LicenseExpression|DisjunctiveLicenseRepository $license
+     * @psalm-assert LicenseExpression|DisjunctiveLicenseRepository|null $license
      *
      * @throws UnexpectedValueException
      *

@@ -70,8 +70,8 @@ class Bom
     }
 
     /**
-     * @psalm-param int $version a value >= 1
-     * @psalm-assert  positive-int $version
+     * @param int $version a value >= 1
+     * @psalm-assert positive-int $version
      *
      * @throws DomainException if version <= 0
      *

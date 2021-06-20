@@ -38,7 +38,9 @@ class HashRepository implements \Countable
     private $hashDict = [];
 
     /**
-     * @param string[] $hashes dictionary of hashes
+     * Ignores unknown hash algorithms.
+     *
+     * @param string[] $hashes dictionary of hashes. Valid keys are {@see \CycloneDX\Enums\HashAlgorithm}
      * @psalm-param array<string,string> $hashes
      */
     public function __construct(array $hashes)
@@ -48,10 +50,9 @@ class HashRepository implements \Countable
 
     /**
      * Set the hashes.
-     *
      * Ignores unknown hash algorithms.
      *
-     * @param string[] $hashes dictionary of hashes
+     * @param string[] $hashes dictionary of hashes. Valid keys are {@see \CycloneDX\Enums\HashAlgorithm}
      * @psalm-param array<string,string> $hashes
      *
      * @return $this

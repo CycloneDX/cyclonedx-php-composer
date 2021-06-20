@@ -121,8 +121,6 @@ class DisjunctiveLicense
     /**
      * Private! Use {@see createFromNameOrId()} to create an object.
      *
-     * @TODO see if a psalm-assert can be done
-     *
      * @throws InvalidArgumentException if not exactly one argument must be null: $id or $name
      */
     private function __construct(?string $id, ?string $name)
