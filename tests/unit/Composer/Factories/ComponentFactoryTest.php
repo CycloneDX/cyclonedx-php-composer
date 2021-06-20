@@ -99,8 +99,8 @@ class ComponentFactoryTest extends TestCase
         $got = $factory->makeFromPackage($package);
 
         self::assertEquals($expected, $got);
-        self::assertSame($expected->getLicenses(), $got->getLicenses());
-        self::assertSame($expected->getHashes(), $got->getHashes());
+        self::assertSame($expected->getLicense(), $got->getLicense());
+        self::assertSame($expected->getHashRepository(), $got->getHashRepository());
     }
 
     public function dpMakeFromPackage(): \Generator
@@ -148,8 +148,8 @@ class ComponentFactoryTest extends TestCase
         $expected = (new Component('library', 'some-package', '1.2.3'))
             ->setGroup('SomeVendor')
             ->setDescription('some description')
-            ->setLicenses($licenses)
-            ->setHashes(['SHA-1' => '1234567890'])
+            ->setLicense($licenses)
+            ->setHashRepository(['SHA-1' => '1234567890'])
             ->setPackageUrl(
                 (new PackageUrl('composer', 'some-package'))
                     ->setNamespace('SomeVendor')

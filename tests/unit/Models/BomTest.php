@@ -53,8 +53,8 @@ class BomTest extends TestCase
     public function testComponentsSetterGetter(array $components): void
     {
         $expected = array_values($components);
-        $this->bom->setComponents($components);
-        self::assertEquals($expected, $this->bom->getComponents());
+        $this->bom->setComponentRepository($components);
+        self::assertEquals($expected, $this->bom->getComponentRepository());
     }
 
     public function testComponentsSetterInvalid(): void
@@ -62,7 +62,7 @@ class BomTest extends TestCase
         $components = [$this->createMock(\stdClass::class)];
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessageMatches('/not a component/i');
-        $this->bom->setComponents($components);
+        $this->bom->setComponentRepository($components);
     }
 
     /**
@@ -78,7 +78,7 @@ class BomTest extends TestCase
 
         $expected = array_values($components);
         $this->bom->addComponent(...$components);
-        self::assertEquals($expected, $this->bom->getComponents());
+        self::assertEquals($expected, $this->bom->getComponentRepository());
     }
 
     /**

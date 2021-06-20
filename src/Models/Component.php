@@ -24,12 +24,13 @@ declare(strict_types=1);
 namespace CycloneDX\Models;
 
 use CycloneDX\Enums\Classification;
-use CycloneDX\Enums\HashAlgorithm;
+use CycloneDX\Models\License\DisjunctiveLicense;
+use CycloneDX\Models\License\LicenseExpression;
+use CycloneDX\Repositories\DisjunctiveLicenseRepository;
 use CycloneDX\Repositories\HashRepository;
-use CycloneDX\Repositories\LicenseRepository;
 use DomainException;
-use InvalidArgumentException;
 use PackageUrl\PackageUrl;
+use UnexpectedValueException;
 
 /**
  * @author nscuro
@@ -68,6 +69,7 @@ class Component
      * Refer to the {@link https://cyclonedx.org/schema/bom/1.1 bom:classification documentation}
      * for information describing each one.
      *
+     * @var string
      * @psalm-var Classification::*
      * @psalm-suppress PropertyNotSetInConstructor
      */
@@ -91,18 +93,18 @@ class Component
     private $packageUrl;
 
     /**
-     * List of licences.
+     * licence(s).
      *
-     * @var LicenseRepository
+     * @var null|LicenseExpression|DisjunctiveLicenseRepository
      */
-    private $licenses;
+    private $license;
 
     /**
      * Specifies the file hashes of the component.
      *
-     * @var HashRepository
+     * @var null|HashRepository
      */
-    private $hashes;
+    private $hashRepository;
 
     /**
      * The component version. The version should ideally comply with semantic versioning
@@ -152,23 +154,32 @@ class Component
     }
 
     /**
-     * @psalm-param Classification::*|string $type For a ist of Valid values see {@see \CycloneDX\Enums\Classification}
+     * @psalm-assert  Classification::* $type
+     *
+     * @param string $type A valid {@see \CycloneDX\Enums\Classification}
      *
      * @throws DomainException if value is unknown
      *
      * @return $this
-     *
-     * @psalm-suppress PropertyTypeCoercion
      */
     public function setType(string $type): self
     {
-        $types = (new \ReflectionClass(Classification::class))->getConstants();
-        if (false === \in_array($type, $types, true)) {
+        if (false === $this->isValidType($type)) {
             throw new DomainException("Invalid type: $type");
         }
         $this->type = $type;
 
         return $this;
+    }
+
+    /**
+     * @psalm-assert-if-true Classification::* $type
+     */
+    private function isValidType(string $type): bool
+    {
+        $types = (new \ReflectionClass(Classification::class))->getConstants();
+
+        return \in_array($type, $types, true);
     }
 
     public function getDescription(): ?string
@@ -186,31 +197,55 @@ class Component
         return $this;
     }
 
-    public function getLicenses(): int
+    /**
+     * @return null|LicenseExpression|DisjunctiveLicenseRepository
+     */
+    public function getLicense()
     {
-        return $this->licenses;
+        return $this->license;
     }
 
     /**
+     * @param mixed|null|LicenseExpression|DisjunctiveLicenseRepository $license
+     * @psalm-assert null|LicenseExpression|DisjunctiveLicenseRepository $license
+     *
+     * @throws UnexpectedValueException
+     *
      * @return $this
      */
-    public function setLicenses(LicenseRepository $licenses): self
+    public function setLicense($license): self
     {
-        $this->licenses = $licenses;
+        if (false === $this->isValidLicense($license)) {
+            throw new UnexpectedValueException("Invalid license type");
+        }
+
+        $this->license = $license;
+
         return $this;
     }
 
-    public function getHashes(): HashRepository
+    /**
+     * @param mixed $license
+     * @psalm-assert-if-true  null|LicenseExpression|DisjunctiveLicenseRepository $license
+     */
+    private function isValidLicense($license) : bool
     {
-        return $this->hashes;
+        return null === $license
+            || $license instanceof LicenseExpression
+            || $license instanceof DisjunctiveLicenseRepository;
+    }
+
+    public function getHashRepository(): ?HashRepository
+    {
+        return $this->hashRepository;
     }
 
     /**
      * @return $this
      */
-    public function setHashes(HashRepository $hashes): self
+    public function setHashRepository(?HashRepository $hashRepository): self
     {
-        $this->hashes = $hashes;
+        $this->hashRepository = $hashRepository;
 
         return $this;
     }
@@ -252,6 +287,5 @@ class Component
         $this->setType($type);
         $this->setName($name);
         $this->setVersion($version);
-        $this->licenses = new LicenseRepository();
     }
 }

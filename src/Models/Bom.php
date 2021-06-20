@@ -25,7 +25,6 @@ namespace CycloneDX\Models;
 
 use CycloneDX\Repositories\ComponentRepository;
 use DomainException;
-use InvalidArgumentException;
 
 /**
  * @author nscuro
@@ -33,8 +32,8 @@ use InvalidArgumentException;
  */
 class Bom
 {
-    /** @var ComponentRepository */
-    private $components;
+    /** @var null|ComponentRepository */
+    private $componentRepository;
 
     /**
      * The version allows component publishers/authors to make changes to existing BOMs to update various aspects of the document such as description or licenses.
@@ -46,17 +45,17 @@ class Bom
      */
     private $version = 1;
 
-    public function getComponents(): ComponentRepository
+    public function getComponentRepository(): ?ComponentRepository
     {
-        return $this->components;
+        return $this->componentRepository;
     }
 
     /**
      * @return $this
      */
-    public function setComponents(ComponentRepository $components): self
+    public function setComponentRepository(?ComponentRepository $componentRepository): self
     {
-        $this->components = $components;
+        $this->componentRepository = $componentRepository;
 
         return $this;
     }
@@ -71,20 +70,27 @@ class Bom
 
     /**
      * @psalm-param int $version a value >= 1
+     * @psalm-assert  positive-int $version
      *
      * @throws DomainException if version <= 0
      *
      * @return $this
-     *
-     * @psalm-suppress PropertyTypeCoercion
      */
     public function setVersion(int $version): self
     {
-        if ($version <= 0) {
-            throw new DomainException("Invalid value: {$version}");
+        if (false === $this->isValidVersion($version)) {
+            throw new DomainException("Invalid value: $version");
         }
         $this->version = $version;
 
         return $this;
+    }
+
+    /**
+     * @psalm-assert-if-true positive-int $version
+     */
+    private function isValidVersion(int $version): bool
+    {
+        return $version > 0;
     }
 }

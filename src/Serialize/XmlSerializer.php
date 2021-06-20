@@ -27,12 +27,15 @@ use CycloneDX\Helpers\HasSpecTrait;
 use CycloneDX\Helpers\SimpleDomTrait;
 use CycloneDX\Models\Bom;
 use CycloneDX\Models\Component;
-use CycloneDX\Models\License;
+use CycloneDX\Models\License\DisjunctiveLicense;
+use CycloneDX\Models\License\LicenseExpression;
+use CycloneDX\Repositories\ComponentRepository;
+use CycloneDX\Repositories\DisjunctiveLicenseRepository;
+use CycloneDX\Repositories\HashRepository;
 use CycloneDX\Spec\SpecInterface;
 use DomainException;
 use DOMDocument;
 use DOMElement;
-use DOMException;
 use RuntimeException;
 
 /**
@@ -58,7 +61,6 @@ class XmlSerializer implements SerializerInterface
     // region SerializerInterface
 
     /**
-     * @throws DOMException
      * @throws DomainException  if a component's type is unsupported
      * @throws RuntimeException if spec version is not supported
      */
@@ -93,15 +95,24 @@ class XmlSerializer implements SerializerInterface
         $this->simpleDomAppendChildren(
             $element,
             [
-                $this->simpleDomAppendChildren(
-                    $document->createElement('components'),
-                    $this->simpleDomDocumentMap($document, [$this, 'componentToDom'], $bom->getComponents())
-                ),
+                $this->componentsToDom($document, $bom->getComponentRepository()),
                 // externalReferences
             ]
         );
 
         return $element;
+    }
+
+    public function componentsToDom(DOMDocument $document, ?ComponentRepository $components): DOMElement
+    {
+        $element = $document->createElement('components');
+
+        return null === $components
+            ? $element
+            : $this->simpleDomAppendChildren(
+                $document->createElement('components'),
+                $this->simpleDomDocumentMap($document, [$this, 'componentToDom'], $components->getComponents())
+            );
     }
 
     /**
@@ -111,7 +122,7 @@ class XmlSerializer implements SerializerInterface
     {
         $type = $component->getType();
         if (false === $this->spec->isSupportedComponentType($type)) {
-            throw new DomainException("Unsupported component type: {$type}");
+            throw new DomainException("Unsupported component type: $type");
         }
 
         $purl = $component->getPackageUrl();
@@ -132,11 +143,11 @@ class XmlSerializer implements SerializerInterface
                 $this->simpleDomSafeTextElement($document, 'version', $component->getVersion()),
                 $this->simpleDomSafeTextElement($document, 'description', $component->getDescription()),
                 // scope
-                $this->hashesToDom($document, $component->getHashes()),
-                $this->licensesToDom($document, $component->getLicenses()),
+                $this->hashesToDom($document, $component->getHashRepository()),
+                $this->licenseToDom($document, $component->getLicense()),
                 // copyright
                 // cpe <-- DEPRECATED in latest spec
-                $purl ? $this->simpleDomSafeTextElement($document, 'purl', (string) $purl) : null,
+                $purl ? $this->simpleDomSafeTextElement($document, 'purl', (string)$purl) : null,
                 // modified
                 // pedigree
                 // externalReferences
@@ -147,13 +158,14 @@ class XmlSerializer implements SerializerInterface
         return $element;
     }
 
-    /**
-     * @psalm-param array<string, string> $hashes
-     */
-    public function hashesToDom(DOMDocument $document, array $hashes): ?DOMElement
+    public function hashesToDom(DOMDocument $document, ?HashRepository $hashes): ?DOMElement
     {
+        if (null === $hashes) {
+            return null;
+        }
+
         $hashElems = [];
-        foreach ($hashes as $algorithm => $content) {
+        foreach ($hashes->getHashes() as $algorithm => $content) {
             try {
                 $hashElems[] = $this->hashToDom($document, $algorithm, $content);
             } catch (DomainException $exception) {
@@ -181,30 +193,46 @@ class XmlSerializer implements SerializerInterface
 
         $element = $this->simpleDomSafeTextElement($document, 'hash', $content);
         \assert(null !== $element);
-        $this->simpleDomSetAttributes(
-            $element,
-            [
-                'alg' => $algorithm,
-            ]
-        );
+        $this->simpleDomSetAttributes($element, ['alg' => $algorithm]);
 
         return $element;
     }
 
     /**
-     * @param License[] $licenses
+     * @psalm-param null|LicenseExpression|DisjunctiveLicenseRepository $license
      */
-    public function licensesToDom(DOMDocument $document, array $licenses): ?DOMElement
+    public function licenseToDom(DOMDocument $document, $license): ?DOMElement
     {
-        return 0 === \count($licenses)
-            ? null
-            : $this->simpleDomAppendChildren(
-                $document->createElement('licenses'),
-                $this->simpleDomDocumentMap($document, [$this, 'licenseToDom'], $licenses)
+        if (null === $license) {
+            return null;
+        }
+
+        $element = $document->createElement('licenses');
+        if ($license instanceof LicenseExpression) {
+            $element->appendChild($this->licenseExpressionToDom($document, $license));
+
+            return $element;
+        }
+
+        if (0 === count($license)) {
+            $this->simpleDomAppendChildren(
+                $element,
+                $this->simpleDomDocumentMap($document, [$this, 'disjunctiveLicenseToDom'], $license->getLicenses())
             );
+        }
+
+        return $element;
     }
 
-    public function licenseToDom(DOMDocument $document, License $license): DOMElement
+    public function licenseExpressionToDom(DOMDocument $document, LicenseExpression $license): DOMElement
+    {
+        $element = $this->simpleDomSafeTextElement($document, 'expression', $license->getExpression());
+        assert(null !== $element);
+
+        return $element;
+    }
+
+    public function disjunctiveLicenseToDom(DOMDocument $document, DisjunctiveLicense $license): DOMElement
     {
         $element = $document->createElement('license');
         $this->simpleDomAppendChildren(

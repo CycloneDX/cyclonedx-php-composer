@@ -197,7 +197,7 @@ abstract class BomModelProvider
         $label = implode(',', $hashAlgorithms);
         yield "hash algs: {{$label}}" => [(new Bom())->addComponent(
             (new Component(Classification::LIBRARY, 'name', '1.0'))
-                ->setHashes(array_fill_keys($hashAlgorithms, '12345678901234567890123456789012'))
+                ->setHashRepository(array_fill_keys($hashAlgorithms, '12345678901234567890123456789012'))
         )];
     }
 
@@ -210,9 +210,9 @@ abstract class BomModelProvider
      */
     public static function bomFromAssocLists(): Generator
     {
-        yield 'set every list from assoc' => [(new Bom())->setComponents([
+        yield 'set every list from assoc' => [(new Bom())->setComponentRepository([
             'myComponent' => (new Component(Classification::LIBRARY, 'name', '1.0'))
-                ->setLicenses(['myLicense' => License::createFromNameOrId('some license', SpdxLicenseValidatorSingleton::getInstance())]),
+                ->setLicense(['myLicense' => License::createFromNameOrId('some license', SpdxLicenseValidatorSingleton::getInstance())]),
         ])];
         if (version_compare(\PHP_VERSION, '8.0.0') >= 0) {
             yield 'add every list from assoc' => [

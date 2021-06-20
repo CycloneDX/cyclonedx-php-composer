@@ -43,7 +43,7 @@ class BomFactoryTest extends TestCase
     {
         $expectedComponent1 = $this->createStub(Component::class);
         $expectedComponent2 = $this->createStub(Component::class);
-        $expected = (new Bom())->setComponents([$expectedComponent1, $expectedComponent2]);
+        $expected = (new Bom())->setComponentRepository([$expectedComponent1, $expectedComponent2]);
         $package1 = $this->createStub(Package::class);
         $package2 = $this->createStub(Package::class);
         $lockArrayRepository = $this->createConfiguredMock(
@@ -61,6 +61,6 @@ class BomFactoryTest extends TestCase
         $got = $factory->makeFromLocker($locker);
 
         self::assertEquals($expected, $got);
-        self::assertSame($expected->getComponents(), $got->getComponents());
+        self::assertSame($expected->getComponentRepository(), $got->getComponentRepository());
     }
 }

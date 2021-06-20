@@ -93,22 +93,22 @@ class ComponentTest extends TestCase
     public function testLicensesSetterGetter(): void
     {
         $licenses = [$this->createMock(License::class)];
-        $this->component->setLicenses($licenses);
-        self::assertSame($licenses, $this->component->getLicenses());
+        $this->component->setLicense($licenses);
+        self::assertSame($licenses, $this->component->getLicense());
     }
 
     public function testSetLicensesWithInvalidArgument(): void
     {
         $licenses = ['foo'];
         $this->expectException(\InvalidArgumentException::class);
-        $this->component->setLicenses($licenses);
+        $this->component->setLicense($licenses);
     }
 
     public function testAddLicense(): void
     {
         $license = $this->createMock(License::class);
         $this->component->addLicense($license);
-        self::assertSame([$license], $this->component->getLicenses());
+        self::assertSame([$license], $this->component->getLicense());
     }
 
     // endregion licenses setter&getter
@@ -120,8 +120,8 @@ class ComponentTest extends TestCase
         $algorithm = HashAlgorithm::MD5;
         $content = bin2hex(random_bytes(32));
         $hashes = [$algorithm => $content];
-        $this->component->setHashes($hashes);
-        self::assertSame($hashes, $this->component->getHashes());
+        $this->component->setHashRepository($hashes);
+        self::assertSame($hashes, $this->component->getHashRepository());
     }
 
     /**
@@ -132,7 +132,7 @@ class ComponentTest extends TestCase
         $this->expectException($exceptionClass);
         $this->expectExceptionMessageMatches($exceptionRegEx);
 
-        $this->component->setHashes($hashes);
+        $this->component->setHashRepository($hashes);
     }
 
     public function dpSetHashesWithInvalidArgument()
@@ -156,7 +156,7 @@ class ComponentTest extends TestCase
 
         $this->component->setHash($algorithm, $content);
 
-        self::assertSame([$algorithm => $content], $this->component->getHashes());
+        self::assertSame([$algorithm => $content], $this->component->getHashRepository());
     }
 
     public function testSetHashWithUnknownAlgorithm(): void

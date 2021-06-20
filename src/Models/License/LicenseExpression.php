@@ -26,14 +26,11 @@ namespace CycloneDX\Models\License;
 /**
  * @author jkowalleck
  */
-class LicenseExpression {
-
+class LicenseExpression
+{
     /** @var string */
     private $expression;
 
-    /**
-     * @return string
-     */
     public function getExpression(): string
     {
         return $this->expression;
@@ -42,7 +39,7 @@ class LicenseExpression {
     /**
      * @return $this
      */
-    public function setExpression(string $expression): LicenseExpression
+    public function setExpression(string $expression): self
     {
         $this->expression = $expression;
 
@@ -53,6 +50,4 @@ class LicenseExpression {
     {
         $this->setExpression($expression);
     }
-
-
 }

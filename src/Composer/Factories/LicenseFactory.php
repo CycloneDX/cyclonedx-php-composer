@@ -24,10 +24,8 @@ declare(strict_types=1);
 namespace CycloneDX\Composer\Factories;
 
 use Composer\Package\CompletePackageInterface;
-use CycloneDX\Models\License;
 use CycloneDX\Models\License\DisjunctiveLicense;
 use CycloneDX\Models\License\LicenseExpression;
-use CycloneDX\Spdx\License as SpdxLicenseValidator;
 
 /**
  * @internal
