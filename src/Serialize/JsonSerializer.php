@@ -35,7 +35,6 @@ use CycloneDX\Spec\SpecInterface;
 use CycloneDX\Spec\Version;
 use DomainException;
 use Generator;
-use JsonException;
 use RuntimeException;
 
 /**
@@ -136,7 +135,7 @@ class JsonSerializer implements SerializerInterface
                 'description' => $component->getDescription(),
                 'licenses' => $this->licenseToJson($component->getLicense()),
                 'hashes' => iterator_to_array($this->hashesToJson($component->getHashRepository())) ?: null,
-                'purl' => $purl ? (string)$purl : null,
+                'purl' => $purl ? (string) $purl : null,
             ],
             [$this, 'isNotNull']
         );
@@ -144,18 +143,20 @@ class JsonSerializer implements SerializerInterface
 
     /**
      * @psalm-param null|LicenseExpression|DisjunctiveLicenseRepository $license
-     *
      */
     public function licenseToJson($license): ?array
     {
-        if (null === $license) { return null; }
+        if (null === $license) {
+            return null;
+        }
 
-        if ($license instanceof LicenseExpression)
-        {
+        if ($license instanceof LicenseExpression) {
             return [$this->licenseExpressionToJson($license)];
         }
 
-        return array_map([$this, 'disjunctiveLicenseToJson'], $license->getLicenses());
+        return 0 === \count($license)
+            ? null
+            : array_map([$this, 'disjunctiveLicenseToJson'], $license->getLicenses());
     }
 
     /**
@@ -171,7 +172,7 @@ class JsonSerializer implements SerializerInterface
      */
     public function disjunctiveLicenseToJson(DisjunctiveLicense $license): array
     {
-        return [ 'license' => array_filter(
+        return ['license' => array_filter(
             [
                 'id' => $license->getId(),
                 'name' => $license->getName(),
@@ -186,8 +187,7 @@ class JsonSerializer implements SerializerInterface
      */
     public function hashesToJson(?HashRepository $hashes): Generator
     {
-        if (null === $hashes)
-        {
+        if (null === $hashes) {
             return;
         }
 

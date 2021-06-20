@@ -28,6 +28,8 @@ use Composer\Package\PackageInterface;
 use CycloneDX\Enums\Classification;
 use CycloneDX\Enums\HashAlgorithm;
 use CycloneDX\Models\Component;
+use CycloneDX\Repositories\HashRepository;
+use DomainException;
 use PackageUrl\PackageUrl;
 use UnexpectedValueException;
 
@@ -69,8 +71,7 @@ class ComponentFactory
 
     /**
      * @throws UnexpectedValueException if the given package does not provide a name or version
-     * @throws \DomainException         if the bom structure had unexpected values
-     * @throws \RuntimeException        if loading known SPDX licenses failed
+     * @throws DomainException          if the bom structure had unexpected values
      */
     public function makeFromPackage(PackageInterface $package): Component
     {
@@ -88,10 +89,10 @@ class ComponentFactory
 
         if ($package instanceof CompletePackageInterface) {
             $description = $package->getDescription();
-            $licenses = $this->licenseFactory->makeFromPackage($package);
+            $license = $this->licenseFactory->makeFromPackage($package);
         } else {
             $description = null;
-            $licenses = [];
+            $license = null;
         }
 
         // composer has no option to distinguish framework/library/application, yet
@@ -106,7 +107,7 @@ class ComponentFactory
         $component = (new Component($type, $name, $version))
             ->setGroup($vendor)
             ->setDescription($description)
-            ->addLicense(...$licenses);
+            ->setLicense($license);
 
         $purl = (new PackageUrl(self::PURL_TYPE, $component->getName()))
             ->setNamespace($component->getGroup())
@@ -114,7 +115,7 @@ class ComponentFactory
         $component->setPackageUrl($purl);
 
         if ('' !== $sha1sum) {
-            $component->setHash(HashAlgorithm::SHA_1, $sha1sum);
+            $component->setHashRepository((new HashRepository())->setHash(HashAlgorithm::SHA_1, $sha1sum));
             $purl->setChecksums(["sha1:$sha1sum"]);
         }
 

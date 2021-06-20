@@ -32,7 +32,7 @@ use DomainException;
  */
 class Bom
 {
-    /** @var null|ComponentRepository */
+    /** @var ComponentRepository|null */
     private $componentRepository;
 
     /**

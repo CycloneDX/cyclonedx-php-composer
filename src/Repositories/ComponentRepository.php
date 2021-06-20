@@ -37,6 +37,14 @@ class ComponentRepository implements \Countable
 
     /**
      * @no-named-arguments
+     */
+    public function __construct(Component ...$components)
+    {
+        $this->addComponent(...$components);
+    }
+
+    /**
+     * @no-named-arguments
      *
      * @return $this
      */

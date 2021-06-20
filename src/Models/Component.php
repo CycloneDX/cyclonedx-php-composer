@@ -24,7 +24,6 @@ declare(strict_types=1);
 namespace CycloneDX\Models;
 
 use CycloneDX\Enums\Classification;
-use CycloneDX\Models\License\DisjunctiveLicense;
 use CycloneDX\Models\License\LicenseExpression;
 use CycloneDX\Repositories\DisjunctiveLicenseRepository;
 use CycloneDX\Repositories\HashRepository;
@@ -95,14 +94,14 @@ class Component
     /**
      * licence(s).
      *
-     * @var null|LicenseExpression|DisjunctiveLicenseRepository
+     * @var LicenseExpression|DisjunctiveLicenseRepository|null
      */
     private $license;
 
     /**
      * Specifies the file hashes of the component.
      *
-     * @var null|HashRepository
+     * @var HashRepository|null
      */
     private $hashRepository;
 
@@ -198,7 +197,7 @@ class Component
     }
 
     /**
-     * @return null|LicenseExpression|DisjunctiveLicenseRepository
+     * @return LicenseExpression|DisjunctiveLicenseRepository|null
      */
     public function getLicense()
     {
@@ -206,7 +205,7 @@ class Component
     }
 
     /**
-     * @param mixed|null|LicenseExpression|DisjunctiveLicenseRepository $license
+     * @param mixed|LicenseExpression|DisjunctiveLicenseRepository|null $license
      * @psalm-assert null|LicenseExpression|DisjunctiveLicenseRepository $license
      *
      * @throws UnexpectedValueException
@@ -216,7 +215,7 @@ class Component
     public function setLicense($license): self
     {
         if (false === $this->isValidLicense($license)) {
-            throw new UnexpectedValueException("Invalid license type");
+            throw new UnexpectedValueException('Invalid license type');
         }
 
         $this->license = $license;
@@ -228,7 +227,7 @@ class Component
      * @param mixed $license
      * @psalm-assert-if-true  null|LicenseExpression|DisjunctiveLicenseRepository $license
      */
-    private function isValidLicense($license) : bool
+    private function isValidLicense($license): bool
     {
         return null === $license
             || $license instanceof LicenseExpression

@@ -26,6 +26,7 @@ namespace CycloneDX\Factories;
 use CycloneDX\Models\License\DisjunctiveLicense;
 use CycloneDX\Models\License\LicenseExpression;
 use CycloneDX\Spdx\License as SpdxLicenseValidator;
+use DomainException;
 
 class LicenseFactory
 {
@@ -54,16 +55,23 @@ class LicenseFactory
      */
     public function makeFromString(string $license)
     {
-        return $this->isExpression($license)
-            ? new LicenseExpression($license)
-            : DisjunctiveLicense::createFromNameOrId($license, $this->spdxLicenseValidator);
+        try {
+            return $this->makeExpression($license);
+        } catch (DomainException $exception) {
+            return $this->makeDisjunctive($license);
+        }
     }
 
-    private function isExpression(string $license): bool
+    /**
+     * @throws DomainException if the expression was invalid
+     */
+    protected function makeExpression(string $license): LicenseExpression
     {
-        // smallest known: (A or B)
-        return \strlen($license) >= 8
-            && '(' === $license[0]
-            && ')' === $license[-1];
+        return new LicenseExpression($license);
+    }
+
+    protected function makeDisjunctive(string $license): DisjunctiveLicense
+    {
+        return DisjunctiveLicense::createFromNameOrId($license, $this->spdxLicenseValidator);
     }
 }

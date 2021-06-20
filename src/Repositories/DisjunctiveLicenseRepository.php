@@ -37,6 +37,14 @@ class DisjunctiveLicenseRepository implements \Countable
 
     /**
      * @no-named-arguments
+     */
+    public function __construct(DisjunctiveLicense ...$licenses)
+    {
+        $this->addLicense(...$licenses);
+    }
+
+    /**
+     * @no-named-arguments
      *
      * @return $this
      */

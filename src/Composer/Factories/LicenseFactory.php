@@ -24,8 +24,8 @@ declare(strict_types=1);
 namespace CycloneDX\Composer\Factories;
 
 use Composer\Package\CompletePackageInterface;
-use CycloneDX\Models\License\DisjunctiveLicense;
 use CycloneDX\Models\License\LicenseExpression;
+use CycloneDX\Repositories\DisjunctiveLicenseRepository;
 
 /**
  * @internal
@@ -35,10 +35,20 @@ use CycloneDX\Models\License\LicenseExpression;
 class LicenseFactory extends \CycloneDX\Factories\LicenseFactory
 {
     /**
-     * @psalm-return list<DisjunctiveLicense|LicenseExpression>
+     * @psalm-return LicenseExpression|DisjunctiveLicenseRepository
      */
-    public function makeFromPackage(CompletePackageInterface $package): array
+    public function makeFromPackage(CompletePackageInterface $package)
     {
-        return $this->makeFromStrings($package->getLicense());
+        $licenses = array_values($package->getLicense());
+        if (1 === \count($licenses)) {
+            // exactly one license - this COULD be an expression
+            try {
+                return $this->makeExpression($licenses[0]);
+            } catch (\DomainException $exception) {
+                unset($exception);
+            }
+        }
+
+        return new DisjunctiveLicenseRepository(...array_map([$this, 'makeDisjunctive'], $licenses));
     }
 }

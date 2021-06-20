@@ -147,7 +147,7 @@ class XmlSerializer implements SerializerInterface
                 $this->licenseToDom($document, $component->getLicense()),
                 // copyright
                 // cpe <-- DEPRECATED in latest spec
-                $purl ? $this->simpleDomSafeTextElement($document, 'purl', (string)$purl) : null,
+                $purl ? $this->simpleDomSafeTextElement($document, 'purl', (string) $purl) : null,
                 // modified
                 // pedigree
                 // externalReferences
@@ -214,20 +214,18 @@ class XmlSerializer implements SerializerInterface
             return $element;
         }
 
-        if (0 === count($license)) {
-            $this->simpleDomAppendChildren(
+        return 0 === \count($license)
+            ? null
+            : $this->simpleDomAppendChildren(
                 $element,
                 $this->simpleDomDocumentMap($document, [$this, 'disjunctiveLicenseToDom'], $license->getLicenses())
             );
-        }
-
-        return $element;
     }
 
     public function licenseExpressionToDom(DOMDocument $document, LicenseExpression $license): DOMElement
     {
         $element = $this->simpleDomSafeTextElement($document, 'expression', $license->getExpression());
-        assert(null !== $element);
+        \assert(null !== $element);
 
         return $element;
     }

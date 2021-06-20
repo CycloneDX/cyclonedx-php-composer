@@ -23,12 +23,17 @@ declare(strict_types=1);
 
 namespace CycloneDX\Models\License;
 
+use DomainException;
+
 /**
  * @author jkowalleck
  */
 class LicenseExpression
 {
-    /** @var string */
+    /**
+     * @var string
+     * @psalm-suppress PropertyNotSetInConstructor
+     */
     private $expression;
 
     public function getExpression(): string
@@ -37,17 +42,33 @@ class LicenseExpression
     }
 
     /**
+     * @throws DomainException if the expression was invalid
+     *
      * @return $this
      */
     public function setExpression(string $expression): self
     {
+        if (false === self::isValid($expression)) {
+            throw new DomainException("Invalid expression: $expression");
+        }
         $this->expression = $expression;
 
         return $this;
     }
 
+    /**
+     * @throws DomainException if the expression was invalid
+     */
     public function __construct(string $expression)
     {
         $this->setExpression($expression);
+    }
+
+    public static function isValid(string $expression): bool
+    {
+        // smallest known: (A or B)
+        return \strlen($expression) >= 8
+            && '(' === $expression[0]
+            && ')' === $expression[-1];
     }
 }

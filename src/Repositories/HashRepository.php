@@ -49,7 +49,7 @@ class HashRepository implements \Countable
      */
     public function setHash(string $algorithm, string $content): self
     {
-        if (false === $this->isAlgorithm($algorithm)) {
+        if (false === $this->isValidAlgorithm($algorithm)) {
             throw new DomainException("Unknown hash algorithm: $algorithm");
         }
         $this->hashes[$algorithm] = $content;
@@ -81,7 +81,7 @@ class HashRepository implements \Countable
     /**
      * @psalm-assert-if-true HashAlgorithm::* $algorithm
      */
-    private function isAlgorithm(string $algorithm): bool
+    private function isValidAlgorithm(string $algorithm): bool
     {
         /** @psalm-var  list<HashAlgorithm::*> */
         $algorithms = (new \ReflectionClass(HashAlgorithm::class))->getConstants();
