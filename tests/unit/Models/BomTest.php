@@ -25,6 +25,9 @@ namespace CycloneDX\Tests\unit\Models;
 
 use CycloneDX\Models\Bom;
 use CycloneDX\Models\Component;
+use CycloneDX\Models\License\LicenseExpression;
+use CycloneDX\Repositories\ComponentRepository;
+use CycloneDX\Repositories\DisjunctiveLicenseRepository;
 use Generator;
 use PHPUnit\Framework\TestCase;
 
@@ -50,35 +53,10 @@ class BomTest extends TestCase
     /**
      * @dataProvider componentDataProvider()
      */
-    public function testComponentsSetterGetter(array $components): void
+    public function testComponentsSetterGetter($components): void
     {
-        $expected = array_values($components);
         $this->bom->setComponentRepository($components);
-        self::assertEquals($expected, $this->bom->getComponentRepository());
-    }
-
-    public function testComponentsSetterInvalid(): void
-    {
-        $components = [$this->createMock(\stdClass::class)];
-        $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessageMatches('/not a component/i');
-        $this->bom->setComponentRepository($components);
-    }
-
-    /**
-     * @dataProvider componentDataProvider()
-     */
-    public function testComponentsAdd(array $components): void
-    {
-        if ('assoc' === $this->dataName() && 0 > version_compare(\PHP_VERSION, '8.0.0')) {
-            $this->expectNotToPerformAssertions();
-
-            return;
-        }
-
-        $expected = array_values($components);
-        $this->bom->addComponent(...$components);
-        self::assertEquals($expected, $this->bom->getComponentRepository());
+        self::assertSame($components, $this->bom->getComponentRepository());
     }
 
     /**
@@ -86,9 +64,8 @@ class BomTest extends TestCase
      */
     public function componentDataProvider(): Generator
     {
-        yield 'empty' => [[]];
-        yield 'some' => [[$this->createMock(Component::class), $this->createMock(Component::class)]];
-        yield 'assoc' => [['foo' => $this->createMock(Component::class)]];
+        yield 'null' => [null];
+        yield 'repo' => [$this->createStub(ComponentRepository::class)];
     }
 
     // endregion components setter&getter&modifiers

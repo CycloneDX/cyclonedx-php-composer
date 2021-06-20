@@ -26,7 +26,10 @@ namespace CycloneDX\Tests\unit\Models;
 use CycloneDX\Enums\Classification;
 use CycloneDX\Enums\HashAlgorithm;
 use CycloneDX\Models\Component;
-use CycloneDX\Models\License;
+use CycloneDX\Models\License\DisjunctiveLicense;
+use CycloneDX\Models\License\LicenseExpression;
+use CycloneDX\Repositories\DisjunctiveLicenseRepository;
+use CycloneDX\Repositories\HashRepository;
 use PackageUrl\PackageUrl;
 use PHPUnit\Framework\TestCase;
 
@@ -37,7 +40,6 @@ use PHPUnit\Framework\TestCase;
  */
 class ComponentTest extends TestCase
 {
-    /** @psalm-var Component */
     private $component;
 
     protected function setUp(): void
@@ -47,6 +49,7 @@ class ComponentTest extends TestCase
         $this->component = $this->createPartialMock(Component::class, []);
     }
 
+    /** @uses \CycloneDX\Enums\Classification::isValidValue */
     public function testConstructor(): void
     {
         $type = Classification::LIBRARY;
@@ -62,6 +65,9 @@ class ComponentTest extends TestCase
 
     // region type getter&setter
 
+    /**
+     * @uses \CycloneDX\Enums\Classification::isValidValue()
+     */
     public function testTypeSetterGetter(): void
     {
         $type = Classification::LIBRARY;
@@ -69,6 +75,9 @@ class ComponentTest extends TestCase
         self::assertSame($type, $this->component->getType());
     }
 
+    /**
+     * @uses \CycloneDX\Enums\Classification::isValidValue()
+     */
     public function testSetTypeWithUnknownValue(): void
     {
         $this->expectException(\DomainException::class);
@@ -90,84 +99,47 @@ class ComponentTest extends TestCase
 
     // region licenses setter&getter
 
-    public function testLicensesSetterGetter(): void
+    /**
+     * @dataProvider dpLicensesSetterGetter
+     */
+    public function testLicensesSetterGetter($license): void
     {
-        $licenses = [$this->createMock(License::class)];
-        $this->component->setLicense($licenses);
-        self::assertSame($licenses, $this->component->getLicense());
+        $this->component->setLicense($license);
+        self::assertSame($license, $this->component->getLicense());
     }
 
-    public function testSetLicensesWithInvalidArgument(): void
+    public function dpLicensesSetterGetter(): \Generator
     {
-        $licenses = ['foo'];
-        $this->expectException(\InvalidArgumentException::class);
-        $this->component->setLicense($licenses);
+        yield 'null' => [null];
+        yield 'repo' => [$this->createStub(DisjunctiveLicenseRepository::class)];
+        yield 'expression' => [$this->createStub(LicenseExpression::class)];
     }
 
-    public function testAddLicense(): void
+    public function testLicensesSetterGetterThrowsOnInvalidArgument(): void
     {
-        $license = $this->createMock(License::class);
-        $this->component->addLicense($license);
-        self::assertSame([$license], $this->component->getLicense());
+        $this->expectException(\UnexpectedValueException::class);
+        $this->expectExceptionMessageMatches('/invalid license type/i');
+
+        $this->component->setLicense(new \stdClass());
     }
 
     // endregion licenses setter&getter
 
     // region hashes setter&getter
 
-    public function testHashesSetterGetter(): void
+    /**
+     * @dataProvider dpHashesSetterGetter
+     */
+    public function testHashesSetterGetter($hashes): void
     {
-        $algorithm = HashAlgorithm::MD5;
-        $content = bin2hex(random_bytes(32));
-        $hashes = [$algorithm => $content];
         $this->component->setHashRepository($hashes);
         self::assertSame($hashes, $this->component->getHashRepository());
     }
 
-    /**
-     * @dataProvider dpSetHashesWithInvalidArgument
-     */
-    public function testSetHashesWithInvalidArgument(array $hashes, string $exceptionClass, string $exceptionRegEx): void
+    public function dpHashesSetterGetter(): \Generator
     {
-        $this->expectException($exceptionClass);
-        $this->expectExceptionMessageMatches($exceptionRegEx);
-
-        $this->component->setHashRepository($hashes);
-    }
-
-    public function dpSetHashesWithInvalidArgument()
-    {
-        yield 'unknown algorithm' => [
-            [bin2hex(random_bytes(32)) => 'foo'],
-            \DomainException::class,
-            '/unknown hash algorithm/i',
-        ];
-        yield 'content is not string' => [
-            [HashAlgorithm::SHA_1 => 1234],
-            \InvalidArgumentException::class,
-            '/content .+ is not string/i',
-        ];
-    }
-
-    public function testHashSetterGetter(): void
-    {
-        $algorithm = HashAlgorithm::MD5;
-        $content = bin2hex(random_bytes(32));
-
-        $this->component->setHash($algorithm, $content);
-
-        self::assertSame([$algorithm => $content], $this->component->getHashRepository());
-    }
-
-    public function testSetHashWithUnknownAlgorithm(): void
-    {
-        $algorithm = bin2hex(random_bytes(32));
-        $content = bin2hex(random_bytes(32));
-
-        $this->expectException(\DomainException::class);
-        $this->expectExceptionMessageMatches('/unknown hash algorithm/i');
-
-        $this->component->setHash($algorithm, $content);
+        yield 'null' => [null];
+        yield 'repo' => [$this->createStub(HashRepository::class)];
     }
 
     // endregion hashes setter&getter
