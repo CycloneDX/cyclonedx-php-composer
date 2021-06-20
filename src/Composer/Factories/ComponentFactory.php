@@ -140,10 +140,13 @@ class ComponentFactory
             $purl = null;
         }
 
-        if (null !== $purl && '' !== $sha1sum) {
+        if ('' !== $sha1sum) {
             /** @psalm-suppress MissingThrowsDocblock */
             $component->setHashRepository((new HashRepository())->setHash(HashAlgorithm::SHA_1, $sha1sum));
-            $purl->setChecksums(["sha1:$sha1sum"]);
+            if ( null !== $purl )
+            {
+                $purl->setChecksums(["sha1:$sha1sum"]);
+            }
         }
 
         return $component;
