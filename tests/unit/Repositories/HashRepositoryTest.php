@@ -87,7 +87,7 @@ class HashRepositoryTest extends TestCase
         $got = $hashes->getHashes();
 
         self::assertCount(2, $got);
-        self::assertSame( 'barbar', $got[HashAlgorithm::SHA_256 ]);
-        self::assertSame( 'foobar', $got[HashAlgorithm::MD5 ]);
+        self::assertSame('barbar', $got[HashAlgorithm::SHA_256]);
+        self::assertSame('foobar', $got[HashAlgorithm::MD5]);
     }
 }
