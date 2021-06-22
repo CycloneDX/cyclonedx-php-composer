@@ -43,7 +43,7 @@ class HashRepository implements \Countable
      * @param string[] $hashes dictionary of hashes. Valid keys are {@see \CycloneDX\Enums\HashAlgorithm}
      * @psalm-param array<string,string> $hashes
      */
-    public function __construct(array $hashes)
+    public function __construct(array $hashes = [])
     {
         $this->setHashes($hashes);
     }
@@ -71,29 +71,38 @@ class HashRepository implements \Countable
     }
 
     /**
-     * @psalm-assert HashAlgorithm::* $algorithm
-     *
-     * @throws DomainException if $algorithm is not in {@see \CycloneDX\Enums\HashAlgorithm}'s constants list
-     *
-     * @return $this
-     */
-    public function setHash(string $algorithm, string $content): self
-    {
-        if (false === HashAlgorithm::isValidValue($algorithm)) {
-            throw new DomainException("Unknown hash algorithm: $algorithm");
-        }
-        $this->hashDict[$algorithm] = $content;
-
-        return $this;
-    }
-
-    /**
      * @return string[] dictionary of hashes
      * @psalm-return array<HashAlgorithm::*, string>
      */
     public function getHashes(): array
     {
         return $this->hashDict;
+    }
+
+    /**
+     * @psalm-assert HashAlgorithm::* $algorithm
+     *
+     * @throws DomainException if $algorithm is not in {@see \CycloneDX\Enums\HashAlgorithm}'s constants list
+     *
+     * @return $this
+     */
+    public function setHash(string $algorithm, ?string $content): self
+    {
+        if (false === HashAlgorithm::isValidValue($algorithm)) {
+            throw new DomainException("Unknown hash algorithm: $algorithm");
+        }
+        if (null === $content) {
+            unset($this->hashDict[$algorithm]);
+        } else {
+            $this->hashDict[$algorithm] = $content;
+        }
+
+        return $this;
+    }
+
+    public function getHash(string $algorithm): ?string
+    {
+        return $this->hashDict[$algorithm] ?? null;
     }
 
     public function count(): int
