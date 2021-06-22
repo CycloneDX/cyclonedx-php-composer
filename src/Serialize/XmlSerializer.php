@@ -103,14 +103,14 @@ class XmlSerializer implements SerializerInterface
         return $element;
     }
 
-    public function componentsToDom(DOMDocument $document, ?ComponentRepository $components): DOMElement
+    public function componentsToDom(DOMDocument $document, ComponentRepository $components): DOMElement
     {
         $element = $document->createElement('components');
 
-        return null === $components
+        return 0 === \count($components)
             ? $element
             : $this->simpleDomAppendChildren(
-                $document->createElement('components'),
+                $element,
                 $this->simpleDomDocumentMap($document, [$this, 'componentToDom'], $components->getComponents())
             );
     }

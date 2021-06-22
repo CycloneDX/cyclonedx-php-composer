@@ -66,7 +66,6 @@ class BomFactory
             )->getPackages()
         );
 
-        return (new Bom())
-            ->setComponentRepository($components);
+        return new Bom($components);
     }
 }

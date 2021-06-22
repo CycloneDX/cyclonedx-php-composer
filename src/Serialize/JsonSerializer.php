@@ -102,9 +102,9 @@ class JsonSerializer implements SerializerInterface
         ];
     }
 
-    public function componentsToJson(?ComponentRepository $components): array
+    public function componentsToJson(ComponentRepository $components): array
     {
-        return null === $components
+        return 0 === \count($components)
             ? []
             : array_map(
                 [$this, 'componentToJson'],

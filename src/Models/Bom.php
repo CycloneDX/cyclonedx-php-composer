@@ -32,7 +32,10 @@ use DomainException;
  */
 class Bom
 {
-    /** @var ComponentRepository|null */
+    /**
+     * @var ComponentRepository
+     * @psalm-suppress PropertyNotSetInConstructor
+     */
     private $componentRepository;
 
     /**
@@ -46,7 +49,12 @@ class Bom
      */
     private $version = 1;
 
-    public function getComponentRepository(): ?ComponentRepository
+    public function __construct(?ComponentRepository $componentRepository = null)
+    {
+        $this->setComponentRepository($componentRepository ?? new ComponentRepository());
+    }
+
+    public function getComponentRepository(): ComponentRepository
     {
         return $this->componentRepository;
     }
@@ -54,7 +62,7 @@ class Bom
     /**
      * @return $this
      */
-    public function setComponentRepository(?ComponentRepository $componentRepository): self
+    public function setComponentRepository(ComponentRepository $componentRepository): self
     {
         $this->componentRepository = $componentRepository;
 

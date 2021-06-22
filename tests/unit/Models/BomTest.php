@@ -24,9 +24,7 @@ declare(strict_types=1);
 namespace CycloneDX\Tests\unit\Models;
 
 use CycloneDX\Models\Bom;
-use CycloneDX\Models\Component;
 use CycloneDX\Repositories\ComponentRepository;
-use Generator;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -43,27 +41,16 @@ class BomTest extends TestCase
     {
         parent::setUp();
 
-        $this->bom = new Bom();
+        $this->bom = new Bom($this->createStub(ComponentRepository::class));
     }
 
     // region components setter&getter&modifiers
 
-    /**
-     * @dataProvider componentDataProvider()
-     */
-    public function testComponentsSetterGetter($components): void
+    public function testComponentsSetterGetter(): void
     {
+        $components = $this->createStub(ComponentRepository::class);
         $this->bom->setComponentRepository($components);
         self::assertSame($components, $this->bom->getComponentRepository());
-    }
-
-    /**
-     * @psalm-return Generator<array{array<Component>}>
-     */
-    public function componentDataProvider(): Generator
-    {
-        yield 'null' => [null];
-        yield 'repo' => [$this->createStub(ComponentRepository::class)];
     }
 
     // endregion components setter&getter&modifiers
