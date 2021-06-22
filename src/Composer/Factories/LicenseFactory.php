@@ -39,16 +39,29 @@ class LicenseFactory extends \CycloneDX\Factories\LicenseFactory
      */
     public function makeFromPackage(CompletePackageInterface $package)
     {
-        $licenses = array_values($package->getLicense());
+        $licenses = $package->getLicense();
         if (1 === \count($licenses)) {
             // exactly one license - this COULD be an expression
             try {
-                return $this->makeExpression($licenses[0]);
+                return $this->makeExpression(reset($licenses));
             } catch (\DomainException $exception) {
                 unset($exception);
             }
         }
 
-        return new DisjunctiveLicenseRepository(...array_map([$this, 'makeDisjunctive'], $licenses));
+        return $this->makeDisjunctiveLicenseRepository(...array_values($licenses));
+    }
+
+    /**
+     * @no-named-arguments
+     */
+    protected function makeDisjunctiveLicenseRepository(string ...$licenses): DisjunctiveLicenseRepository
+    {
+        $disjunctiveLicenses = array_map(
+            [$this, 'makeDisjunctive'],
+            $licenses
+        );
+
+        return new DisjunctiveLicenseRepository(...$disjunctiveLicenses);
     }
 }
