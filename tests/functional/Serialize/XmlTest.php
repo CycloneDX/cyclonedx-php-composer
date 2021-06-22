@@ -36,10 +36,8 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @coversNothing
- *
- * @TODO write the deserializer and enable this test
  */
-class XmlTestTODO extends TestCase
+class XmlTest extends TestCase
 {
     // region Spec 1.0
     // Spec 1.0 is not implemented
@@ -75,10 +73,11 @@ class XmlTestTODO extends TestCase
     }
 
     /**
+     * @TODO write the deserializer and enable this test
      * @dataProvider \CycloneDX\Tests\_data\BomModelProvider::fullBomTestData
      * @dataProvider \CycloneDX\Tests\_data\BomModelProvider::bomWithComponentHashAlgorithmsSpec11()
      */
-    public function testSerializer11(Bom $bom): void
+    public function todo_testSerializer11(Bom $bom): void
     {
         $spec = new Spec11();
         $serializer = new XmlSerializer($spec);
@@ -122,10 +121,11 @@ class XmlTestTODO extends TestCase
     }
 
     /**
+     * @TODO write the deserializer and enable this test
      * @dataProvider \CycloneDX\Tests\_data\BomModelProvider::fullBomTestData
      * @dataProvider \CycloneDX\Tests\_data\BomModelProvider::bomWithComponentHashAlgorithmsSpec12()
      */
-    public function testSerializer12(Bom $bom): void
+    public function todo_testSerializer12(Bom $bom): void
     {
         $spec = new Spec12();
         $serializer = new XmlSerializer($spec);
@@ -169,10 +169,11 @@ class XmlTestTODO extends TestCase
     }
 
     /**
+     * @TODO write the deserializer and enable this test
      * @dataProvider \CycloneDX\Tests\_data\BomModelProvider::fullBomTestData
      * @dataProvider \CycloneDX\Tests\_data\BomModelProvider::bomWithComponentHashAlgorithmsSpec13()
      */
-    public function testSerializer13(Bom $bom): void
+    public function todo_testSerializer13(Bom $bom): void
     {
         $spec = new Spec13();
         $serializer = new XmlSerializer($spec);

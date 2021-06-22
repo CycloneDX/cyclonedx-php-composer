@@ -25,7 +25,10 @@ namespace CycloneDX\Tests\unit\Serialize;
 
 use CycloneDX\Models\Bom;
 use CycloneDX\Models\Component;
-use CycloneDX\Models\License;
+use CycloneDX\Models\License\DisjunctiveLicense;
+use CycloneDX\Repositories\ComponentRepository;
+use CycloneDX\Repositories\DisjunctiveLicenseRepository;
+use CycloneDX\Repositories\HashRepository;
 use CycloneDX\Serialize\JsonSerializer;
 use CycloneDX\Spec\SpecInterface;
 use DomainException;
@@ -120,7 +123,13 @@ class JasonSerializeTest extends TestCase
             Bom::class,
             [
                 'getVersion' => 1337,
-                'getComponents' => [$fakeComponent],
+                'getComponentRepository' => $this->createConfiguredMock(
+                    ComponentRepository::class,
+                    [
+                        'getComponents' => [$fakeComponent],
+                        'count' => 1,
+                    ]
+                ),
             ]
         );
 
@@ -190,13 +199,25 @@ class JasonSerializeTest extends TestCase
                 'getVersion' => 'myVersion',
                 'getGroup' => 'myGroup',
                 'getDescription' => 'myDescription',
-                'getLicenses' => [
-                    $this->createConfiguredMock(
-                        License::class,
-                        ['getId' => null, 'getName' => 'myLicense']
+                'getLicense' => $this->createConfiguredMock(
+                        DisjunctiveLicenseRepository::class,
+                        [
+                            'getLicenses' => [
+                                $this->createConfiguredMock(
+                                    DisjunctiveLicense::class,
+                                    ['getId' => null, 'getName' => 'myLicense']
+                                ),
+                            ],
+                            'count' => 1,
+                        ]
                     ),
-                ],
-                'getHashes' => ['myAlg' => 'myHash'],
+                'getHashRepository' => $this->createConfiguredMock(
+                    HashRepository::class,
+                    [
+                        'getHashes' => ['myAlg' => 'myHash'],
+                        'count' => 2,
+                    ]
+                ),
             ]
         );
 
@@ -244,8 +265,8 @@ class JasonSerializeTest extends TestCase
                 'getVersion' => 'myVersion',
                 'getGroup' => null,
                 'getDescription' => null,
-                'getLicenses' => [],
-                'getHashes' => [],
+                'getLicense' => null,
+                'getHashRepository' => null,
             ]
         );
 
@@ -308,113 +329,6 @@ class JasonSerializeTest extends TestCase
     }
 
     // endregion hashToJson
-
-    // region licenseToJson
-
-    /**
-     * @dataProvider licenseDataProvider
-     *
-     * @psalm-param mixed $expected
-     */
-    public function testLicenseToJson(License $license, $expected): void
-    {
-        $serializer = new JsonSerializer($this->createStub(SpecInterface::class));
-        $data = $serializer->licenseToJson($license);
-        self::assertEquals($expected, $data);
-    }
-
-    /**
-     * @psalm-return Generator<string, array{0:License, 1:array}>
-     */
-    public function licenseDataProvider(): Generator
-    {
-        $name = $this->getRandomString();
-        $license = $this->createStub(License::class);
-        $license->method('getName')->willReturn($name);
-        $expected = ['name' => $name];
-        yield 'withName' => [$license, $expected];
-
-        $id = $this->getRandomString();
-        $license = $this->createStub(License::class);
-        $license->method('getId')->willReturn($id);
-        $expected = ['id' => $id];
-        yield 'withId' => [$license, $expected];
-
-        $name = $this->getRandomString();
-        $url = 'https://example.com/license/'.$this->getRandomString();
-        $license = $this->createStub(License::class);
-        $license->method('getUrl')->willReturn($url);
-        $license->method('getName')->willReturn($name);
-        $expected = ['name' => $name, 'url' => $url];
-        yield 'withUrl' => [$license, $expected];
-    }
-
-    // endregion licenseToJson
-
-    // region licensesToJson
-
-    public function testLicensesToJson(): void
-    {
-        $serializer = $this->createPartialMock(JsonSerializer::class, ['licenseToJson']);
-
-        $license = $this->createStub(License::class);
-        $licenseFake = ['dummy' => $this->getRandomString()];
-        $licenses = [$license];
-
-        $serializer->expects(self::once())->method('licenseToJson')
-            ->with($license)
-            ->willReturn($licenseFake);
-
-        $data = iterator_to_array($serializer->licensesToJson($licenses));
-
-        self::assertSame([['license' => $licenseFake]], $data);
-    }
-
-    // endregion licensesToJson
-
-    // region hashesToJson
-
-    public function testHashesToJson(): void
-    {
-        $serializer = $this->createPartialMock(JsonSerializer::class, ['hashToJson']);
-
-        $algorithm = $this->getRandomString();
-        $content = $this->getRandomString();
-        $hashes = [
-            $algorithm => $content,
-        ];
-        $hashToJsonFake = [$algorithm, $content];
-        $expected = [$hashToJsonFake];
-
-        $serializer->expects(self::once())->method('hashToJson')
-            ->with($algorithm, $content)
-            ->willReturn($hashToJsonFake);
-
-        $serialized = iterator_to_array($serializer->hashesToJson($hashes));
-
-        self::assertEquals($expected, $serialized);
-    }
-
-    public function testHashesToJsonSkipWhenThrows(): void
-    {
-        $serializer = $this->createPartialMock(JsonSerializer::class, ['hashToJson']);
-
-        $algorithm = $this->getRandomString();
-        $content = $this->getRandomString();
-        $hashes = [
-            $algorithm => $content,
-        ];
-
-        $serializer->method('hashToJson')
-            ->with($algorithm, $content)
-            ->willThrowException(new DomainException($this->getRandomString()));
-
-        $got = iterator_to_array($serializer->hashesToJson($hashes));
-
-        self::assertCount(0, $got);
-    }
-
-    // endregion
 
     // region helpers
 

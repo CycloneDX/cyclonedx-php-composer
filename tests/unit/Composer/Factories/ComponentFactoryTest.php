@@ -23,15 +23,10 @@ declare(strict_types=1);
 
 namespace CycloneDX\Tests\unit\Composer\Factories;
 
-use Composer\Package\CompletePackageInterface;
 use Composer\Package\PackageInterface;
 use CycloneDX\Composer\Factories\ComponentFactory;
 use CycloneDX\Composer\Factories\LicenseFactory;
 use CycloneDX\Models\Component;
-use CycloneDX\Models\License;
-use CycloneDX\Models\License\DisjunctiveLicense;
-use CycloneDX\Repositories\DisjunctiveLicenseRepository;
-use CycloneDX\Repositories\HashRepository;
 use PackageUrl\PackageUrl;
 use PHPUnit\Framework\TestCase;
 

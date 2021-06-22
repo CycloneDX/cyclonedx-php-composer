@@ -28,7 +28,6 @@ use Composer\Repository\LockArrayRepository;
 use CycloneDX\Composer\Factories\BomFactory;
 use CycloneDX\Composer\Factories\ComponentFactory;
 use CycloneDX\Composer\Locker;
-use CycloneDX\Models\Component;
 use CycloneDX\Repositories\ComponentRepository;
 use PHPUnit\Framework\TestCase;
 

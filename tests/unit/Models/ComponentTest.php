@@ -24,9 +24,7 @@ declare(strict_types=1);
 namespace CycloneDX\Tests\unit\Models;
 
 use CycloneDX\Enums\Classification;
-use CycloneDX\Enums\HashAlgorithm;
 use CycloneDX\Models\Component;
-use CycloneDX\Models\License\DisjunctiveLicense;
 use CycloneDX\Models\License\LicenseExpression;
 use CycloneDX\Repositories\DisjunctiveLicenseRepository;
 use CycloneDX\Repositories\HashRepository;

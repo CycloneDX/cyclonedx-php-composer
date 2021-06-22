@@ -25,9 +25,7 @@ namespace CycloneDX\Tests\unit\Models;
 
 use CycloneDX\Models\Bom;
 use CycloneDX\Models\Component;
-use CycloneDX\Models\License\LicenseExpression;
 use CycloneDX\Repositories\ComponentRepository;
-use CycloneDX\Repositories\DisjunctiveLicenseRepository;
 use Generator;
 use PHPUnit\Framework\TestCase;
 
