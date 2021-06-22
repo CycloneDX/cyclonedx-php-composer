@@ -126,7 +126,9 @@ class DisjunctiveLicense
     private function __construct(?string $id, ?string $name)
     {
         if (false === (null === $id xor null === $name)) {
+            // @codeCoverageIgnoreStart
             throw new InvalidArgumentException('Exactly one argument must be null: $id or $name');
+            // @codeCoverageIgnoreEnd
         }
         $this->id = $id;
         $this->name = $name;
