@@ -34,7 +34,7 @@ use PHPUnit\Framework\TestCase;
  */
 class HashRepositoryTest extends TestCase
 {
-    public function testConstructorGetHash(): void
+    public function testConstructorAndGetHash(): void
     {
         $hashes = new HashRepository([HashAlgorithm::MD5 => 'foobar']);
         self::assertSame([HashAlgorithm::MD5 => 'foobar'], $hashes->getHashes());
@@ -42,11 +42,11 @@ class HashRepositoryTest extends TestCase
 
     public function testCount(): void
     {
-        $hashes = new HashRepository([HashAlgorithm::MD5 => 'foobar']);
-        self::assertSame(1, $hashes->count());
+        $hashes = new HashRepository([HashAlgorithm::MD5 => 'foobar', HashAlgorithm::SHA_1 => 'barfoo']);
+        self::assertSame(2, $hashes->count());
     }
 
-    public function testSetGetHash(): void
+    public function testSetAndGetHash(): void
     {
         $hashes = new HashRepository();
         $hashes->setHash(HashAlgorithm::MD5, 'foobar');
@@ -81,8 +81,13 @@ class HashRepositoryTest extends TestCase
 
     public function testSetGetHashes(): void
     {
-        $hashes = new HashRepository();
+        $hashes = new HashRepository([HashAlgorithm::SHA_256 => 'barbar']);
+
         $hashes->setHashes([HashAlgorithm::MD5 => 'foobar', 'unknownAlgorithm' => 'foobar']);
-        self::assertSame([HashAlgorithm::MD5 => 'foobar'], $hashes->getHashes());
+        $got = $hashes->getHashes();
+
+        self::assertCount(2, $got);
+        self::assertSame( 'barbar', $got[HashAlgorithm::SHA_256 ]);
+        self::assertSame( 'foobar', $got[HashAlgorithm::MD5 ]);
     }
 }
