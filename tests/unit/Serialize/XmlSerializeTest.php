@@ -274,6 +274,26 @@ class XmlSerializeTest extends TestCase
 
     // endregion componentToDom
 
+    // region hashesToJson
+
+    public function testHashesToDomSkipsThrow()
+    {
+        $serializer = $this->createPartialMock(XmlSerializer::class, ['hashToDom']);
+        $hashes = $this->createConfiguredMock(HashRepository::class, [
+            'count' => 1,
+            'getHashes' => ['MD5' => '123456'],
+        ]);
+        $dom = new DOMDocument();
+
+        $serializer->expects(self::once())->method('hashToDom')
+            ->with($dom, 'MD5', '123456')
+            ->willThrowException(new \DomainException());
+
+        self::assertNull($serializer->hashesToDom($dom, $hashes));
+    }
+
+    // endregion hashesToJson
+
     // region hashToDom
 
     public function testHashToDom(): void
@@ -368,6 +388,19 @@ class XmlSerializeTest extends TestCase
         ]));
 
         self::assertDomNodeEqualsDomNode($expected, $got);
+    }
+
+    public function testLicenseToDomWithDisjunctiveLicenseEmpty(): void
+    {
+        $spec = $this->createStub(SpecInterface::class);
+        $serializer = new XmlSerializer($spec);
+
+        $got = $serializer->licenseToDom(new DOMDocument(), $this->createConfiguredMock(DisjunctiveLicenseRepository::class, [
+            'count' => 0,
+            'getLicenses' => [],
+        ]));
+
+        self::assertNull($got);
     }
 
     // endregion licenseToDom

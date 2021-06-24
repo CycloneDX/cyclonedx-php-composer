@@ -314,6 +314,25 @@ class JasonSerializeTest extends TestCase
 
     // endregion componentToJson
 
+    // region hashesToJson
+
+    public function testHashesToDomSkipsThrow()
+    {
+        $serializer = $this->createPartialMock(JsonSerializer::class, ['hashToJson']);
+        $hashes = $this->createConfiguredMock(HashRepository::class, [
+            'count' => 1,
+            'getHashes' => ['MD5' => '123456'],
+        ]);
+
+        $serializer->expects(self::once())->method('hashToJson')
+            ->with('MD5', '123456')
+            ->willThrowException(new \DomainException());
+
+        self::assertNull($serializer->hashesToJson($hashes));
+    }
+
+    // endregion hashesToJson
+
     // region hashToJson
 
     public function testHashToJson(): void
@@ -401,6 +420,19 @@ class JasonSerializeTest extends TestCase
         self::assertSame([['license' => [
             'name' => 'myLicense',
         ]]], $got);
+    }
+
+    public function testLicenseToDomWithDisjunctiveLicenseEmpty(): void
+    {
+        $spec = $this->createStub(SpecInterface::class);
+        $serializer = new JsonSerializer($spec);
+
+        $got = $serializer->licenseToJson($this->createConfiguredMock(DisjunctiveLicenseRepository::class, [
+            'count' => 0,
+            'getLicenses' => [],
+        ]));
+
+        self::assertNull($got);
     }
 
     // endregion licenseToJson

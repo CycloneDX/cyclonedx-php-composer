@@ -34,7 +34,6 @@ use CycloneDX\Repositories\HashRepository;
 use CycloneDX\Spec\SpecInterface;
 use CycloneDX\Spec\Version;
 use DomainException;
-use Generator;
 use RuntimeException;
 
 /**
@@ -134,7 +133,7 @@ class JsonSerializer implements SerializerInterface
                 'group' => $component->getGroup(),
                 'description' => $component->getDescription(),
                 'licenses' => $this->licenseToJson($component->getLicense()),
-                'hashes' => iterator_to_array($this->hashesToJson($component->getHashRepository())) ?: null,
+                'hashes' => $this->hashesToJson($component->getHashRepository()),
                 'purl' => $purl ? (string) $purl : null,
             ],
             [$this, 'isNotNull']
@@ -183,22 +182,27 @@ class JsonSerializer implements SerializerInterface
     }
 
     /**
-     * @psalm-return Generator<array{alg: string, content: string}>
+     * @psalm-return list<array{alg: string, content: string}>
      */
-    public function hashesToJson(?HashRepository $hashes): Generator
+    public function hashesToJson(?HashRepository $hashes): ?array
     {
         if (null === $hashes) {
-            return;
+            return null;
         }
 
+        $list = [];
         foreach ($hashes->getHashes() as $algorithm => $content) {
             try {
-                yield $this->hashToJson($algorithm, $content);
+                $list[] = $this->hashToJson($algorithm, $content);
             } catch (DomainException $exception) {
                 // skipped unsupported hash
                 unset($exception);
             }
         }
+
+        return 0 === \count($list)
+            ? null
+            : $list;
     }
 
     /**
