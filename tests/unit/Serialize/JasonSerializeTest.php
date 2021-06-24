@@ -25,11 +25,15 @@ namespace CycloneDX\Tests\unit\Serialize;
 
 use CycloneDX\Models\Bom;
 use CycloneDX\Models\Component;
+use CycloneDX\Models\License\DisjunctiveLicense;
+use CycloneDX\Models\License\LicenseExpression;
 use CycloneDX\Repositories\ComponentRepository;
+use CycloneDX\Repositories\HashRepository;
 use CycloneDX\Serialize\JsonSerializer;
 use CycloneDX\Spec\SpecInterface;
 use DomainException;
 use Generator;
+use PackageUrl\PackageUrl;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -152,25 +156,9 @@ class JasonSerializeTest extends TestCase
 
     // endregion bomToJson
 
-    // region componentToJson
+    // region componentsToJson
 
-    public function testComponentToJsonThrowsOnFalseType(): void
-    {
-        $spec = $this->createStub(SpecInterface::class);
-        $serializer = new JsonSerializer($spec);
-        $component = $this->createStub(Component::class);
-        $component->method('getType')->willReturn('myType');
-
-        $spec->expects(self::once())->method('isSupportedComponentType')
-            ->with('myType')
-            ->willReturn(false);
-        $this->expectException(DomainException::class);
-        $this->expectExceptionMessageMatches('/unsupported component type/i');
-
-        $serializer->componentToJson($component);
-    }
-
-    public function testComponentToJson(): void
+    public function testComponentsToJson(): void
     {
         $component1 = $this->createStub(Component::class);
         $component2 = $this->createStub(Component::class);
@@ -190,7 +178,7 @@ class JasonSerializeTest extends TestCase
         self::assertSame([['Component!Fake'], ['Component!Fake']], $got);
     }
 
-    public function testComponentToJsonWithEmpty(): void
+    public function testComponentsToJsonWithEmpty(): void
     {
         $spec = $this->createStub(SpecInterface::class);
         $serializer = $this->createPartialMock(JsonSerializer::class, ['componentToJson']);
@@ -204,6 +192,90 @@ class JasonSerializeTest extends TestCase
         $got = $serializer->componentsToJson($components);
 
         self::assertSame([], $got);
+    }
+
+    // endregion componentsToJson
+
+    // region componentToJson
+
+    public function testComponentToJsonThrowsOnFalseType(): void
+    {
+        $spec = $this->createStub(SpecInterface::class);
+        $serializer = new JsonSerializer($spec);
+        $component = $this->createStub(Component::class);
+        $component->method('getType')->willReturn('myType');
+
+        $spec->expects(self::once())->method('isSupportedComponentType')
+            ->with('myType')
+            ->willReturn(false);
+        $this->expectException(DomainException::class);
+        $this->expectExceptionMessageMatches('/unsupported component type/i');
+
+        $serializer->componentToJson($component);
+    }
+
+    public function testComponentWithFullValues(): void
+    {
+        $spec = $this->createStub(SpecInterface::class);
+        $spec->expects(self::once())->method('isSupportedComponentType')
+            ->with('myType')
+            ->willReturn(true);
+        $spec->expects(self::once())->method('isSupportedHashAlgorithm')
+            ->with('MD5')
+            ->willReturn(true);
+        $spec->expects(self::once())->method('isSupportedHashContent')
+            ->with('1234567890')
+            ->willReturn(true);
+        $purl = $this->createConfiguredMock(PackageUrl::class, [
+            'toString' => 'myPURL',
+            '__toString' => 'myPURL',
+        ]);
+        $license = $this->createConfiguredMock(LicenseExpression::class, [
+            'getExpression' => '(Some or License)',
+        ]);
+        $hashes = $this->createConfiguredMock(HashRepository::class, [
+                'getHashes' => ['MD5' => '1234567890'],
+            ]
+        );
+        $serializer = new JsonSerializer($spec);
+        $component = $this->createConfiguredMock(
+            Component::class,
+            [
+                'getType' => 'myType',
+                'getPackageUrl' => $purl,
+                'getName' => 'myName',
+                'getVersion' => 'myVersion',
+                'getGroup' => 'myGroup',
+                'getDescription' => 'my description',
+                'getLicense' => $license,
+                'getHashRepository' => $hashes,
+            ]
+        );
+
+        $data = $serializer->componentToJson($component);
+
+        self::assertSame(
+            [
+                'type' => 'myType',
+                'name' => 'myName',
+                'version' => 'myVersion',
+                'group' => 'myGroup',
+                'description' => 'my description',
+                'licenses' => [
+                    [
+                        'expression' => '(Some or License)',
+                    ],
+                ],
+                'hashes' => [
+                    [
+                        'alg' => 'MD5',
+                        'content' => '1234567890',
+                    ],
+                ],
+                'purl' => 'myPURL',
+            ],
+            $data
+        );
     }
 
     public function testComponentToJsonEradicateNulls(): void
@@ -286,6 +358,45 @@ class JasonSerializeTest extends TestCase
     }
 
     // endregion hashToJson
+
+    // region disjunctiveLicenseToJson
+
+    public function testDisjunctiveLicenseToJsonWithId(): void
+    {
+        $spec = $this->createStub(SpecInterface::class);
+        $serializer = new JsonSerializer($spec);
+        $license = $this->createConfiguredMock(DisjunctiveLicense::class, [
+            'getId' => 'MIT',
+            'getName' => null,
+            'getUrl' => 'https://url.to/license',
+        ]);
+
+        $got = $serializer->disjunctiveLicenseToJson($license);
+
+        self::assertSame(['license' => [
+            'id' => 'MIT',
+            'url' => 'https://url.to/license',
+        ]], $got);
+    }
+
+    public function testDisjunctiveLicenseToJsonWithName(): void
+    {
+        $spec = $this->createStub(SpecInterface::class);
+        $serializer = new JsonSerializer($spec);
+        $license = $this->createConfiguredMock(DisjunctiveLicense::class, [
+            'getId' => null,
+            'getName' => 'myLicense',
+            'getUrl' => null,
+        ]);
+
+        $got = $serializer->disjunctiveLicenseToJson($license);
+
+        self::assertSame(['license' => [
+            'name' => 'myLicense',
+        ]], $got);
+    }
+
+    // endregion disjunctiveLicenseToJson
 
     // region helpers
 
