@@ -36,22 +36,17 @@ class ComponentRepository implements \Countable
      */
     private $components = [];
 
-    /**
-     * @no-named-arguments
-     */
     public function __construct(Component ...$components)
     {
         $this->addComponent(...$components);
     }
 
     /**
-     * @no-named-arguments
-     *
      * @return $this
      */
     public function addComponent(Component ...$components): self
     {
-        array_push($this->components, ...$components);
+        array_push($this->components, ...array_values($components));
 
         return $this;
     }

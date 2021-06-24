@@ -52,9 +52,6 @@ class LicenseFactory extends \CycloneDX\Factories\LicenseFactory
         return $this->makeDisjunctiveLicenseRepository(...array_values($licenses));
     }
 
-    /**
-     * @no-named-arguments
-     */
     protected function makeDisjunctiveLicenseRepository(string ...$licenses): DisjunctiveLicenseRepository
     {
         $disjunctiveLicenses = array_map(
