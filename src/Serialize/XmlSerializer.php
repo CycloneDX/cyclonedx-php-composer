@@ -222,7 +222,7 @@ class XmlSerializer implements SerializerInterface
             );
     }
 
-    public function licenseExpressionToDom(DOMDocument $document, LicenseExpression $license): DOMElement
+    private function licenseExpressionToDom(DOMDocument $document, LicenseExpression $license): DOMElement
     {
         $element = $this->simpleDomSafeTextElement($document, 'expression', $license->getExpression());
         \assert(null !== $element);
@@ -230,7 +230,7 @@ class XmlSerializer implements SerializerInterface
         return $element;
     }
 
-    public function disjunctiveLicenseToDom(DOMDocument $document, DisjunctiveLicense $license): DOMElement
+    private function disjunctiveLicenseToDom(DOMDocument $document, DisjunctiveLicense $license): DOMElement
     {
         $element = $document->createElement('license');
         $this->simpleDomAppendChildren(

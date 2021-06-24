@@ -28,6 +28,7 @@ use CycloneDX\Models\Component;
 use CycloneDX\Models\License\DisjunctiveLicense;
 use CycloneDX\Models\License\LicenseExpression;
 use CycloneDX\Repositories\ComponentRepository;
+use CycloneDX\Repositories\DisjunctiveLicenseRepository;
 use CycloneDX\Repositories\HashRepository;
 use CycloneDX\Serialize\JsonSerializer;
 use CycloneDX\Spec\SpecInterface;
@@ -359,9 +360,9 @@ class JasonSerializeTest extends TestCase
 
     // endregion hashToJson
 
-    // region disjunctiveLicenseToJson
+    // region licenseToJson
 
-    public function testDisjunctiveLicenseToJsonWithId(): void
+    public function testLicenseToJsonWithDisjunctiveLicenseWithId(): void
     {
         $spec = $this->createStub(SpecInterface::class);
         $serializer = new JsonSerializer($spec);
@@ -371,15 +372,18 @@ class JasonSerializeTest extends TestCase
             'getUrl' => 'https://url.to/license',
         ]);
 
-        $got = $serializer->disjunctiveLicenseToJson($license);
+        $got = $serializer->licenseToJson($this->createConfiguredMock(DisjunctiveLicenseRepository::class, [
+            'count' => 1,
+            'getLicenses' => [$license],
+        ]));
 
-        self::assertSame(['license' => [
+        self::assertSame([['license' => [
             'id' => 'MIT',
             'url' => 'https://url.to/license',
-        ]], $got);
+        ]]], $got);
     }
 
-    public function testDisjunctiveLicenseToJsonWithName(): void
+    public function testLicenseToJsonWithDisjunctiveLicenseWithName(): void
     {
         $spec = $this->createStub(SpecInterface::class);
         $serializer = new JsonSerializer($spec);
@@ -389,14 +393,17 @@ class JasonSerializeTest extends TestCase
             'getUrl' => null,
         ]);
 
-        $got = $serializer->disjunctiveLicenseToJson($license);
+        $got = $serializer->licenseToJson($this->createConfiguredMock(DisjunctiveLicenseRepository::class, [
+            'count' => 1,
+            'getLicenses' => [$license],
+        ]));
 
-        self::assertSame(['license' => [
+        self::assertSame([['license' => [
             'name' => 'myLicense',
-        ]], $got);
+        ]]], $got);
     }
 
-    // endregion disjunctiveLicenseToJson
+    // endregion licenseToJson
 
     // region helpers
 

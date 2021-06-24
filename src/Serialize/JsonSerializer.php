@@ -162,7 +162,7 @@ class JsonSerializer implements SerializerInterface
     /**
      * @psalm-return array{'expression': string}
      */
-    public function licenseExpressionToJson(LicenseExpression $license): array
+    private function licenseExpressionToJson(LicenseExpression $license): array
     {
         return ['expression' => $license->getExpression()];
     }
@@ -170,7 +170,7 @@ class JsonSerializer implements SerializerInterface
     /**
      * @psalm-return array{'license': array<string, mixed>}
      */
-    public function disjunctiveLicenseToJson(DisjunctiveLicense $license): array
+    private function disjunctiveLicenseToJson(DisjunctiveLicense $license): array
     {
         return ['license' => array_filter(
             [
