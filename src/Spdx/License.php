@@ -33,7 +33,7 @@ use RuntimeException;
  */
 class License
 {
-    private const LICENSES_FILE = __DIR__.'/../../res/spdx-licenses.SNAPSHOT.json';
+    private const LICENSES_FILE = __DIR__.'/../../res/spdx.SNAPSHOT.schema.json';
 
     /**
      * @psalm-var array<string, string>
@@ -95,9 +95,9 @@ class License
              * list of strings, as asserted by an integration test:
              * {@see \CycloneDX\Tests\unit\Spdx\LicenseTest::testShippedLicensesFile()}.
              *
-             * @var list<string> $licenses
+             * @var array{enum:list<string>} $licenses
              */
-            $licenses = json_decode($json, false, 2, \JSON_THROW_ON_ERROR);
+            ['enum' => $licenses] = json_decode($json, true, 3, \JSON_THROW_ON_ERROR);
         } catch (JsonException $exception) {
             throw new RuntimeException("Malformed licenses file: $file", 0, $exception);
         }

@@ -1,5 +1,11 @@
 
 # fix settings for files that are copied over, to keep them as is
-[spdx-licenses.SNAPSHOT.json]
+[bom-*.xsd]
 indent_size = 4
 indent_style = space
+trim_trailing_whitespace = false
+[bom-*.schema.json]
+indent_size = 2
+indent_style = space
+trim_trailing_whitespace = false
+

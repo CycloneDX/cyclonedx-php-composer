@@ -32,7 +32,7 @@ abstract class BomSpecData
 {
     public static function getSpecFilePath(string $version): string
     {
-        $file = realpath(__DIR__."/../_spec/bom-$version.SNAPSHOT.xsd");
+        $file = realpath(__DIR__."/../../res/bom-$version.SNAPSHOT.xsd");
         assertFileExists($file);
 
         return $file;

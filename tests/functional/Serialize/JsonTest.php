@@ -40,7 +40,7 @@ class SnapshotRemoteRefProvider implements JsonSchema\RemoteRefProvider
         if (false !== $path) {
             $file = basename($path);
             if (false !== preg_match('/\.SNAPSHOT\./', $file)) {
-                $url = realpath(__DIR__.'/../../_spec/'.$file);
+                $url = realpath(__DIR__.'/../../../res/'.$file);
             }
         }
 
@@ -101,7 +101,7 @@ class JsonTest extends TestCase
     public function testSchema12(Bom $bom): void
     {
         $spec = new Spec12();
-        $schemaPath = realpath(__DIR__.'/../../_spec/bom-1.2.SNAPSHOT.schema.json');
+        $schemaPath = realpath(__DIR__.'/../../../res/bom-1.2.SNAPSHOT.schema.json');
 
         self::assertIsString($schemaPath);
         self::assertFileExists($schemaPath);
@@ -133,7 +133,7 @@ class JsonTest extends TestCase
     public function testSchema13(Bom $bom): void
     {
         $spec = new Spec13();
-        $schemaPath = realpath(__DIR__.'/../../_spec/bom-1.3.SNAPSHOT.schema.json');
+        $schemaPath = realpath(__DIR__.'/../../../res/bom-1.3.SNAPSHOT.schema.json');
 
         self::assertIsString($schemaPath);
         self::assertFileExists($schemaPath);

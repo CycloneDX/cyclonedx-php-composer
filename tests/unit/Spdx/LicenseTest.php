@@ -38,9 +38,11 @@ class LicenseTest extends TestCase
     private $license;
 
     private const LICENSES_FILE_CONTENT = <<<'JSON'
-        [
-            "FooBaR"
-        ]
+        {
+           "enum": [
+                "FooBaR"
+           ]
+        }
         JSON;
 
     protected function setUp(): void
@@ -57,7 +59,7 @@ class LicenseTest extends TestCase
 
     public function testGetLicensesAsExpected(): void
     {
-        $expected = json_decode(self::LICENSES_FILE_CONTENT, true, 2, \JSON_THROW_ON_ERROR);
+        ['enum' => $expected] = json_decode(self::LICENSES_FILE_CONTENT, true, 3, \JSON_THROW_ON_ERROR);
         $licenses = $this->license->getLicenses();
         self::assertIsArray($expected);
         self::assertSame($expected, array_values($licenses));
@@ -102,6 +104,7 @@ class LicenseTest extends TestCase
         yield 'PascalCase' => ['FooBar'];
     }
 
+    // @TODO this is an integration test
     public function testShippedLicensesFile(): void
     {
         $file = (new License())->getResourcesFile();
@@ -112,7 +115,7 @@ class LicenseTest extends TestCase
         self::assertIsString($json);
         self::assertJson($json);
 
-        $licenses = json_decode($json, false, 512, \JSON_THROW_ON_ERROR);
+        ['enum' => $licenses] = json_decode($json, true, 3, \JSON_THROW_ON_ERROR);
         self::assertIsArray($licenses);
         self::assertNotEmpty($licenses);
 

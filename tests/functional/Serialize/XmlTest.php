@@ -53,7 +53,7 @@ class XmlTest extends TestCase
     public function testSchema11(Bom $bom): void
     {
         $spec = new Spec11();
-        $schema = realpath(__DIR__.'/../../_spec/bom-1.1.SNAPSHOT.xsd');
+        $schema = realpath(__DIR__.'/../../../res/bom-1.1.SNAPSHOT.xsd');
 
         self::assertIsString($schema);
         self::assertFileExists($schema);
@@ -84,7 +84,7 @@ class XmlTest extends TestCase
     public function testSchema12(Bom $bom): void
     {
         $spec = new Spec12();
-        $schema = realpath(__DIR__.'/../../_spec/bom-1.2.SNAPSHOT.xsd');
+        $schema = realpath(__DIR__.'/../../../res/bom-1.2.SNAPSHOT.xsd');
 
         self::assertIsString($schema);
         self::assertFileExists($schema);
@@ -115,7 +115,7 @@ class XmlTest extends TestCase
     public function testSchema13(Bom $bom): void
     {
         $spec = new Spec13();
-        $schema = realpath(__DIR__.'/../../_spec/bom-1.3.SNAPSHOT.xsd');
+        $schema = realpath(__DIR__.'/../../../res/bom-1.3.SNAPSHOT.xsd');
 
         self::assertIsString($schema);
         self::assertFileExists($schema);
