@@ -25,7 +25,6 @@ namespace CycloneDX\Composer\Factories;
 
 use CycloneDX\Composer\Locker;
 use CycloneDX\Models\Bom;
-use UnexpectedValueException;
 
 /**
  * @internal
@@ -53,8 +52,8 @@ class BomFactory
     /**
      * Generates BOMs based on Composer's lockData.
      *
-     * @throws UnexpectedValueException if a package does not provide a name or version
-     * @throws \DomainException         if the bom structure had unexpected values
+     * @throws \UnexpectedValueException if a package does not provide a name or version
+     * @throws \DomainException          if the bom structure had unexpected values
      * @throws \RuntimeException
      */
     public function makeFromLocker(Locker $locker): Bom

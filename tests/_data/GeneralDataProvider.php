@@ -34,6 +34,6 @@ abstract class GeneralDataProvider
     {
         yield 'null' => [null];
         yield 'empty string' => [''];
-        yield 'random string' => [bin2hex(random_bytes(rand(1, 255)))];
+        yield 'random string' => [bin2hex(random_bytes(random_int(1, 255)))];
     }
 }

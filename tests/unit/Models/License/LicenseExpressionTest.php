@@ -31,7 +31,7 @@ use PHPUnit\Framework\TestCase;
  */
 class LicenseExpressionTest extends TestCase
 {
-    public function testConstructAndGet()
+    public function testConstructAndGet(): void
     {
         $expression = $this->dpValidLicenseExpressions()[0];
 
@@ -41,7 +41,7 @@ class LicenseExpressionTest extends TestCase
         self::assertSame($expression, $got);
     }
 
-    public function testConstructThrowsOnUnknownExpression()
+    public function testConstructThrowsOnUnknownExpression(): void
     {
         $expression = $this->dpInvalidLicenseExpressions()[0];
 
@@ -51,7 +51,7 @@ class LicenseExpressionTest extends TestCase
         new LicenseExpression("$expression");
     }
 
-    public function testSetAndGetExpression()
+    public function testSetAndGetExpression(): void
     {
         $expression = $this->dpValidLicenseExpressions()[0];
         $license = $this->createPartialMock(LicenseExpression::class, []);
@@ -62,7 +62,7 @@ class LicenseExpressionTest extends TestCase
         self::assertSame($expression, $got);
     }
 
-    public function testSetThrowsOnUnknownExpression()
+    public function testSetThrowsOnUnknownExpression(): void
     {
         $expression = $this->dpInvalidLicenseExpressions()[0];
         $license = $this->createPartialMock(LicenseExpression::class, []);

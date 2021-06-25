@@ -316,7 +316,7 @@ class JasonSerializeTest extends TestCase
 
     // region hashesToJson
 
-    public function testHashesToDomSkipsThrow()
+    public function testHashesToDomSkipsThrow(): void
     {
         $serializer = $this->createPartialMock(JsonSerializer::class, ['hashToJson']);
         $hashes = $this->createConfiguredMock(HashRepository::class, [

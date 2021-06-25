@@ -276,7 +276,7 @@ class XmlSerializeTest extends TestCase
 
     // region hashesToJson
 
-    public function testHashesToDomSkipsThrow()
+    public function testHashesToDomSkipsThrow(): void
     {
         $serializer = $this->createPartialMock(XmlSerializer::class, ['hashToDom']);
         $hashes = $this->createConfiguredMock(HashRepository::class, [

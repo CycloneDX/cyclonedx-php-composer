@@ -31,7 +31,7 @@ use PHPUnit\Framework\TestCase;
  */
 class DisjunctiveLicenseTest extends TestCase
 {
-    public function testCreateWithIdAndGetId()
+    public function testCreateWithIdAndGetId(): void
     {
         $spdxLicenseValidator = $this->createStub(\CycloneDX\Spdx\License::class);
         $spdxLicenseValidator->method('validate')->willReturn(true);
@@ -42,7 +42,7 @@ class DisjunctiveLicenseTest extends TestCase
         self::assertNull($license->getName());
     }
 
-    public function testCreateWithnameAndGetName()
+    public function testCreateWithnameAndGetName(): void
     {
         $spdxLicenseValidator = $this->createStub(\CycloneDX\Spdx\License::class);
         $spdxLicenseValidator->method('validate')->willReturn(false);
@@ -53,7 +53,7 @@ class DisjunctiveLicenseTest extends TestCase
         self::assertNull($license->getId());
     }
 
-    public function testSetAndGetUrl()
+    public function testSetAndGetUrl(): void
     {
         $spdxLicenseValidator = $this->createStub(\CycloneDX\Spdx\License::class);
         $spdxLicenseValidator->method('validate')->willReturn(false);
@@ -64,7 +64,7 @@ class DisjunctiveLicenseTest extends TestCase
         self::assertSame('http://foo.bar/baz', $license->getUrl());
     }
 
-    public function testSetUrlThrowsOnWrongFormat()
+    public function testSetUrlThrowsOnWrongFormat(): void
     {
         $spdxLicenseValidator = $this->createStub(\CycloneDX\Spdx\License::class);
         $spdxLicenseValidator->method('validate')->willReturn(false);
