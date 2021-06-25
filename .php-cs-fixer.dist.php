@@ -31,6 +31,7 @@ return (new PhpCsFixer\Config())
     // docs: https://github.com/FriendsOfPHP/PHP-CS-Fixer/blob/3.0/doc/rules/index.rst
     // assistance via tool: https://mlocati.github.io/php-cs-fixer-configurator/
         [
+            '@PHP71Migration:risky' => true,
             '@PHP73Migration' => true,
             '@Symfony' => true,
             '@Symfony:risky' => true,

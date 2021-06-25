@@ -26,12 +26,14 @@ namespace CycloneDX\Serialize;
 use CycloneDX\Helpers\HasSpecTrait;
 use CycloneDX\Models\Bom;
 use CycloneDX\Models\Component;
-use CycloneDX\Models\License;
+use CycloneDX\Models\License\DisjunctiveLicense;
+use CycloneDX\Models\License\LicenseExpression;
+use CycloneDX\Repositories\ComponentRepository;
+use CycloneDX\Repositories\DisjunctiveLicenseRepository;
+use CycloneDX\Repositories\HashRepository;
 use CycloneDX\Spec\SpecInterface;
 use CycloneDX\Spec\Version;
 use DomainException;
-use Generator;
-use JsonException;
 use RuntimeException;
 
 /**
@@ -55,7 +57,6 @@ class JsonSerializer implements SerializerInterface
     /**
      * Serialize a Bom to JSON.
      *
-     * @throws JsonException
      * @throws DomainException  if a component's type is unsupported
      * @throws RuntimeException if spec version is not supported
      */
@@ -96,11 +97,18 @@ class JsonSerializer implements SerializerInterface
             'bomFormat' => self::BOM_FORMAT,
             'specVersion' => $this->spec->getVersion(),
             'version' => $bom->getVersion(),
-            'components' => array_map(
-                [$this, 'componentToJson'],
-                $bom->getComponents()
-            ),
+            'components' => $this->componentsToJson($bom->getComponentRepository()),
         ];
+    }
+
+    public function componentsToJson(ComponentRepository $components): array
+    {
+        return 0 === \count($components)
+            ? []
+            : array_map(
+                [$this, 'componentToJson'],
+                $components->getComponents()
+            );
     }
 
     /**
@@ -112,7 +120,7 @@ class JsonSerializer implements SerializerInterface
     {
         $type = $component->getType();
         if (false === $this->spec->isSupportedComponentType($type)) {
-            throw new DomainException("Unsupported component type: {$type}");
+            throw new DomainException("Unsupported component type: $type");
         }
 
         $purl = $component->getPackageUrl();
@@ -124,8 +132,8 @@ class JsonSerializer implements SerializerInterface
                 'version' => $component->getVersion(),
                 'group' => $component->getGroup(),
                 'description' => $component->getDescription(),
-                'licenses' => iterator_to_array($this->licensesToJson($component->getLicenses())) ?: null,
-                'hashes' => iterator_to_array($this->hashesToJson($component->getHashes())) ?: null,
+                'licenses' => $this->licenseToJson($component->getLicense()),
+                'hashes' => $this->hashesToJson($component->getHashRepository()),
                 'purl' => $purl ? (string) $purl : null,
             ],
             [$this, 'isNotNull']
@@ -133,47 +141,68 @@ class JsonSerializer implements SerializerInterface
     }
 
     /**
-     * @psalm-param License[] $licenses
-     *
-     * @psalm-return Generator<array{license: array<string, mixed>}>
+     * @psalm-param null|LicenseExpression|DisjunctiveLicenseRepository $license
      */
-    public function licensesToJson(array $licenses): Generator
+    public function licenseToJson($license): ?array
     {
-        foreach ($licenses as $license) {
-            yield ['license' => $this->licenseToJson($license)];
+        if (null === $license) {
+            return null;
         }
+
+        if ($license instanceof LicenseExpression) {
+            return [$this->licenseExpressionToJson($license)];
+        }
+
+        return 0 === \count($license)
+            ? null
+            : array_map([$this, 'disjunctiveLicenseToJson'], $license->getLicenses());
     }
 
     /**
-     * @psalm-return array<string, mixed>
+     * @psalm-return array{'expression': string}
      */
-    public function licenseToJson(License $license): array
+    private function licenseExpressionToJson(LicenseExpression $license): array
     {
-        return array_filter(
+        return ['expression' => $license->getExpression()];
+    }
+
+    /**
+     * @psalm-return array{'license': array<string, mixed>}
+     */
+    private function disjunctiveLicenseToJson(DisjunctiveLicense $license): array
+    {
+        return ['license' => array_filter(
             [
                 'id' => $license->getId(),
                 'name' => $license->getName(),
                 'url' => $license->getUrl(),
             ],
             [$this, 'isNotNull']
-        );
+        )];
     }
 
     /**
-     * @psalm-param array<string, string> $hashes
-     *
-     * @psalm-return Generator<array{alg: string, content: string}>
+     * @psalm-return list<array{alg: string, content: string}>
      */
-    public function hashesToJson(array $hashes): Generator
+    public function hashesToJson(?HashRepository $hashes): ?array
     {
-        foreach ($hashes as $algorithm => $content) {
+        if (null === $hashes) {
+            return null;
+        }
+
+        $list = [];
+        foreach ($hashes->getHashes() as $algorithm => $content) {
             try {
-                yield $this->hashToJson($algorithm, $content);
+                $list[] = $this->hashToJson($algorithm, $content);
             } catch (DomainException $exception) {
                 // skipped unsupported hash
                 unset($exception);
             }
         }
+
+        return 0 === \count($list)
+            ? null
+            : $list;
     }
 
     /**

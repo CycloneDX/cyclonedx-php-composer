@@ -9,7 +9,6 @@
        ensureArrayIntOffsetsExist="true"
        cacheDirectory=".psalm.cache"
 >
-    <!-- use with a proper baseline - see `.psalm/` /-->
     <projectFiles>
         <directory name="src"/>
         <ignoreFiles>

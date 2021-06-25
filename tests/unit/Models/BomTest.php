@@ -24,8 +24,7 @@ declare(strict_types=1);
 namespace CycloneDX\Tests\unit\Models;
 
 use CycloneDX\Models\Bom;
-use CycloneDX\Models\Component;
-use Generator;
+use CycloneDX\Repositories\ComponentRepository;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -42,53 +41,16 @@ class BomTest extends TestCase
     {
         parent::setUp();
 
-        $this->bom = new Bom();
+        $this->bom = new Bom($this->createStub(ComponentRepository::class));
     }
 
     // region components setter&getter&modifiers
 
-    /**
-     * @dataProvider componentDataProvider()
-     */
-    public function testComponentsSetterGetter(array $components): void
+    public function testComponentsSetterGetter(): void
     {
-        $expected = array_values($components);
-        $this->bom->setComponents($components);
-        self::assertEquals($expected, $this->bom->getComponents());
-    }
-
-    public function testComponentsSetterInvalid(): void
-    {
-        $components = [$this->createMock(\stdClass::class)];
-        $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessageMatches('/not a component/i');
-        $this->bom->setComponents($components);
-    }
-
-    /**
-     * @dataProvider componentDataProvider()
-     */
-    public function testComponentsAdd(array $components): void
-    {
-        if ('assoc' === $this->dataName() && 0 > version_compare(\PHP_VERSION, '8.0.0')) {
-            $this->expectNotToPerformAssertions();
-
-            return;
-        }
-
-        $expected = array_values($components);
-        $this->bom->addComponent(...$components);
-        self::assertEquals($expected, $this->bom->getComponents());
-    }
-
-    /**
-     * @psalm-return Generator<array{array<Component>}>
-     */
-    public function componentDataProvider(): Generator
-    {
-        yield 'empty' => [[]];
-        yield 'some' => [[$this->createMock(Component::class), $this->createMock(Component::class)]];
-        yield 'assoc' => [['foo' => $this->createMock(Component::class)]];
+        $components = $this->createStub(ComponentRepository::class);
+        $this->bom->setComponentRepository($components);
+        self::assertSame($components, $this->bom->getComponentRepository());
     }
 
     // endregion components setter&getter&modifiers

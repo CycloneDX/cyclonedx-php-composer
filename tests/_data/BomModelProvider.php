@@ -27,7 +27,11 @@ use CycloneDX\Enums\Classification;
 use CycloneDX\Enums\HashAlgorithm;
 use CycloneDX\Models\Bom;
 use CycloneDX\Models\Component;
-use CycloneDX\Models\License;
+use CycloneDX\Models\License\DisjunctiveLicense;
+use CycloneDX\Models\License\LicenseExpression;
+use CycloneDX\Repositories\ComponentRepository;
+use CycloneDX\Repositories\DisjunctiveLicenseRepository;
+use CycloneDX\Repositories\HashRepository;
 use Generator;
 
 /**
@@ -48,8 +52,8 @@ abstract class BomModelProvider
         yield from self::bomWithComponentDescription();
         yield from self::bomWithComponentLicenseId();
         yield from self::bomWithComponentLicenseName();
+        yield from self::bomWithComponentLicenseExpression();
         yield from self::bomWithComponentLicenseUrl();
-        yield from self::bomFromAssocLists();
     }
 
     /**
@@ -70,9 +74,9 @@ abstract class BomModelProvider
      */
     public static function bomWithComponentPlain(): Generator
     {
-        yield 'component: plain' => [(new Bom())->addComponent(
+        yield 'component: plain' => [(new Bom())->setComponentRepository(new ComponentRepository(
             new Component(Classification::LIBRARY, 'name', 'version')
-        )];
+        ))];
     }
 
     /**
@@ -83,10 +87,11 @@ abstract class BomModelProvider
     public static function bomWithComponentLicenseId(): Generator
     {
         $license = 'MIT';
-        yield "license: $license" => [(new Bom())->addComponent(
+        yield "license: $license" => [(new Bom())->setComponentRepository(new ComponentRepository(
             (new Component(Classification::LIBRARY, 'name', 'version'))
-                ->addLicense(License::createFromNameOrId($license, SpdxLicenseValidatorSingleton::getInstance()))
-        )];
+                ->setLicense(new DisjunctiveLicenseRepository(
+                    DisjunctiveLicense::createFromNameOrId($license, SpdxLicenseValidatorSingleton::getInstance()))
+        )))];
     }
 
     /**
@@ -96,13 +101,30 @@ abstract class BomModelProvider
      */
     public static function bomWithComponentLicenseName(): Generator
     {
-        yield 'license: random' => [(new Bom())->addComponent(
+        $license = 'random '.bin2hex(random_bytes(32));
+        yield 'license: random' => [
+            (new Bom())->setComponentRepository(
+                new ComponentRepository(
+                    (new Component(Classification::LIBRARY, 'name', 'version'))
+                        ->setLicense(
+                            new DisjunctiveLicenseRepository(
+                                DisjunctiveLicense::createFromNameOrId(
+                                    $license,
+                                    SpdxLicenseValidatorSingleton::getInstance()
+                                )
+                            )
+                        )
+                )
+            ),
+        ];
+    }
+
+    public static function bomWithComponentLicenseExpression(): Generator
+    {
+        yield 'license expression' => [(new Bom())->setComponentRepository(new ComponentRepository(
             (new Component(Classification::LIBRARY, 'name', 'version'))
-                ->addLicense(License::createFromNameOrId(
-                    'random '.bin2hex(random_bytes(32)),
-                    SpdxLicenseValidatorSingleton::getInstance()
-                ))
-        )];
+                ->setLicense(new LicenseExpression('(Foo or Bar)')
+                )))];
     }
 
     /**
@@ -110,13 +132,13 @@ abstract class BomModelProvider
      */
     public static function bomWithComponentLicenseUrl(): Generator
     {
-        yield 'License with URL' => [(new Bom())->addComponent(
+        yield 'License with URL' => [(new Bom())->setComponentRepository(new ComponentRepository(
             (new Component(Classification::LIBRARY, 'name', 'version'))
-                ->addLicense(
-                    License::createFromNameOrId('some text', SpdxLicenseValidatorSingleton::getInstance())
+                ->setLicense(new DisjunctiveLicenseRepository(
+                    DisjunctiveLicense::createFromNameOrId('some text', SpdxLicenseValidatorSingleton::getInstance())
                         ->setUrl('https://example.com/license'),
-                )
-        )];
+                ))
+        ))];
     }
 
     /**
@@ -128,9 +150,9 @@ abstract class BomModelProvider
     {
         $versions = ['1.0', 'dev-master'];
         foreach ($versions as $version) {
-            yield "version: {$version}" => [(new Bom())->addComponent(
+            yield "version: {$version}" => [(new Bom())->setComponentRepository(new ComponentRepository(
                 new Component(Classification::LIBRARY, 'name', $version),
-            )];
+            ))];
         }
     }
 
@@ -195,37 +217,10 @@ abstract class BomModelProvider
     {
         $hashAlgorithms = array_unique($hashAlgorithms, \SORT_STRING);
         $label = implode(',', $hashAlgorithms);
-        yield "hash algs: {{$label}}" => [(new Bom())->addComponent(
+        yield "hash algs: {{$label}}" => [(new Bom())->setComponentRepository(new ComponentRepository(
             (new Component(Classification::LIBRARY, 'name', '1.0'))
-                ->setHashes(array_fill_keys($hashAlgorithms, '12345678901234567890123456789012'))
-        )];
-    }
-
-    /**
-     * BOMs with every list possible as set from assoc array.
-     *
-     * assoc lists might cause json encoder produce schema-invalid data if implemented wrong.
-     *
-     * @psalm-return Generator<array{Bom}>
-     */
-    public static function bomFromAssocLists(): Generator
-    {
-        yield 'set every list from assoc' => [(new Bom())->setComponents([
-            'myComponent' => (new Component(Classification::LIBRARY, 'name', '1.0'))
-                ->setLicenses(['myLicense' => License::createFromNameOrId('some license', SpdxLicenseValidatorSingleton::getInstance())]),
-        ])];
-        if (version_compare(\PHP_VERSION, '8.0.0') >= 0) {
-            yield 'add every list from assoc' => [
-                (new Bom())->addComponent(
-                    ...[
-                    'myComponent' => (new Component(Classification::LIBRARY, 'name', '1.0'))
-                        ->addLicense(...[
-                            'myLicense' => License::createFromNameOrId('some license', SpdxLicenseValidatorSingleton::getInstance()),
-                        ]),
-                ]
-                ),
-            ];
-        }
+                ->setHashRepository(new HashRepository(array_fill_keys($hashAlgorithms, '12345678901234567890123456789012'))
+        )))];
     }
 
     /**
@@ -235,29 +230,29 @@ abstract class BomModelProvider
      */
     public static function bomWithComponentDescription(): Generator
     {
-        yield 'description: none' => [(new Bom())->addComponent(
+        yield 'description: none' => [(new Bom())->setComponentRepository(new ComponentRepository(
             (new Component(Classification::LIBRARY, 'name', '1.0'))
                 ->setDescription(null)
-        )];
-        yield 'description: empty' => [(new Bom())->addComponent(
+        ))];
+        yield 'description: empty' => [(new Bom())->setComponentRepository(new ComponentRepository(
             (new Component(Classification::LIBRARY, 'name', '1.0'))
                 ->setDescription('')
-        )];
-        yield 'description: random' => [(new Bom())->addComponent(
+        ))];
+        yield 'description: random' => [(new Bom())->setComponentRepository(new ComponentRepository(
             (new Component(Classification::LIBRARY, 'name', '1.0'))
                 ->setDescription(bin2hex(random_bytes(32)))
-        )];
-        yield 'description: spaces' => [(new Bom())->addComponent(
+        ))];
+        yield 'description: spaces' => [(new Bom())->setComponentRepository(new ComponentRepository((
             (new Component(Classification::LIBRARY, 'name', '1.0'))
                 ->setDescription("\ta  test   ")
-        )];
-        yield 'description: XML special chars' => [(new Bom())->addComponent(
+        )))];
+        yield 'description: XML special chars' => [(new Bom())->setComponentRepository(new ComponentRepository(
             (new Component(Classification::LIBRARY, 'name', '1.0'))
                 ->setDescription(
                     'thisa&that'. // an & that is not a XML entity
                     '<strong>html<strong>'. // things that might cause schema-invalid XML
                     'bar ]]><[CDATA[baz]]> foo' // unexpected CDATA end
                 )
-        )];
+        ))];
     }
 }

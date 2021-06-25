@@ -23,8 +23,8 @@ declare(strict_types=1);
 
 namespace CycloneDX\Models;
 
+use CycloneDX\Repositories\ComponentRepository;
 use DomainException;
-use InvalidArgumentException;
 
 /**
  * @author nscuro
@@ -33,9 +33,10 @@ use InvalidArgumentException;
 class Bom
 {
     /**
-     * @psalm-var list<Component>
+     * @var ComponentRepository
+     * @psalm-suppress PropertyNotSetInConstructor
      */
-    private $components = [];
+    private $componentRepository;
 
     /**
      * The version allows component publishers/authors to make changes to existing BOMs to update various aspects of the document such as description or licenses.
@@ -43,45 +44,27 @@ class Bom
      * The default version is '1' and should be incremented for each version of the BOM that is published.
      * Each version of a component should have a unique BOM and if no changes are made to the BOMs, then each BOM will have a version of '1'.
      *
+     * @var int
      * @psalm-var positive-int
      */
     private $version = 1;
 
-    /**
-     * @psalm-return list<Component>
-     */
-    public function getComponents(): array
+    public function __construct(?ComponentRepository $componentRepository = null)
     {
-        return $this->components;
+        $this->setComponentRepository($componentRepository ?? new ComponentRepository());
     }
 
-    /**
-     * @param Component[] $components
-     *
-     * @throws InvalidArgumentException if list contains element that is not instance of {@see \CycloneDX\Models\Component}
-     *
-     * @return $this
-     *
-     * @psalm-suppress DocblockTypeContradiction
-     */
-    public function setComponents(array $components): self
+    public function getComponentRepository(): ComponentRepository
     {
-        foreach ($components as $component) {
-            if (false === $component instanceof Component) {
-                throw new InvalidArgumentException('Not a Component: '.var_export($component, true));
-            }
-        }
-        $this->components = array_values($components);
-
-        return $this;
+        return $this->componentRepository;
     }
 
     /**
      * @return $this
      */
-    public function addComponent(Component ...$components): self
+    public function setComponentRepository(ComponentRepository $componentRepository): self
     {
-        array_push($this->components, ...array_values($components));
+        $this->componentRepository = $componentRepository;
 
         return $this;
     }
@@ -95,21 +78,28 @@ class Bom
     }
 
     /**
-     * @psalm-param int $version a value >= 1
+     * @param int $version a value >= 1
+     * @psalm-assert positive-int $version
      *
      * @throws DomainException if version <= 0
      *
      * @return $this
-     *
-     * @psalm-suppress PropertyTypeCoercion
      */
     public function setVersion(int $version): self
     {
-        if ($version <= 0) {
-            throw new DomainException("Invalid value: {$version}");
+        if (false === $this->isValidVersion($version)) {
+            throw new DomainException("Invalid value: $version");
         }
         $this->version = $version;
 
         return $this;
+    }
+
+    /**
+     * @psalm-assert-if-true positive-int $version
+     */
+    private function isValidVersion(int $version): bool
+    {
+        return $version > 0;
     }
 }

@@ -25,9 +25,9 @@ namespace CycloneDX\Tests\unit\Composer\Factories;
 
 use Composer\Package\CompletePackageInterface;
 use CycloneDX\Composer\Factories\LicenseFactory;
-use CycloneDX\Models\License;
-use CycloneDX\Spdx\License as SpdxLicenseValidator;
-use CycloneDX\Tests\_data\SpdxLicenseValidatorSingleton;
+use CycloneDX\Models\License\DisjunctiveLicense;
+use CycloneDX\Models\License\LicenseExpression;
+use CycloneDX\Repositories\DisjunctiveLicenseRepository;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -35,57 +35,102 @@ use PHPUnit\Framework\TestCase;
  */
 class LicenseFactoryTest extends TestCase
 {
-    public function testSpdxLicenseValidatorGetterSetter(): void
+    public function testMakeFromPackageWithExpression(): void
     {
-        $spdxValidator1 = $this->createStub(SpdxLicenseValidator::class);
-        $spdxValidator2 = $this->createStub(SpdxLicenseValidator::class);
+        $expected = $this->createStub(LicenseExpression::class);
+        $factory = $this->createPartialMock(
+            LicenseFactory::class,
+            ['makeExpression', 'makeDisjunctive', 'makeDisjunctiveLicenseRepository']
+        );
+        $package = $this->createMock(CompletePackageInterface::class);
 
-        $factory = new LicenseFactory($spdxValidator1);
-        self::assertSame($spdxValidator1, $factory->getSpdxLicenseValidator());
+        $package->expects(self::once())->method('getLicense')
+            ->willReturn(['(LGPL-2.1-only or GPL-3.0-or-later)']);
+        $factory->expects(self::once())->method('makeExpression')
+            ->with('(LGPL-2.1-only or GPL-3.0-or-later)')
+            ->willReturn($expected);
 
-        $factory->setSpdxLicenseValidator($spdxValidator2);
-        self::assertSame($spdxValidator2, $factory->getSpdxLicenseValidator());
+        $got = $factory->makeFromPackage($package);
+
+        self::assertSame($expected, $got);
+    }
+
+    public function testMakeFromPackageWithDisjunctiveFallback(): void
+    {
+        $expected = $this->createStub(DisjunctiveLicenseRepository::class);
+        $factory = $this->createPartialMock(
+            LicenseFactory::class,
+            ['makeExpression', 'makeDisjunctive', 'makeDisjunctiveLicenseRepository']
+        );
+        $package = $this->createMock(CompletePackageInterface::class);
+
+        $package->expects(self::once())->method('getLicense')
+            ->willReturn(['MIT']);
+
+        $factory->method('makeExpression')->willThrowException(new \DomainException());
+        $factory->expects(self::once())->method('makeDisjunctiveLicenseRepository')
+            ->with('MIT')
+            ->willReturn($expected);
+
+        $got = $factory->makeFromPackage($package);
+
+        self::assertSame($expected, $got);
+    }
+
+    public function testMakeFromPackageWithDisjunctive(): void
+    {
+        $expected = $this->createStub(DisjunctiveLicenseRepository::class);
+        $factory = $this->createPartialMock(
+            LicenseFactory::class,
+            ['makeExpression', 'makeDisjunctive', 'makeDisjunctiveLicenseRepository']
+        );
+        $package = $this->createMock(CompletePackageInterface::class);
+
+        $package->expects(self::once())->method('getLicense')
+            ->willReturn(['(LGPL-2.1-only or GPL-3.0-or-later)', 'MIT']);
+
+        $factory->expects(self::once())->method('makeDisjunctiveLicenseRepository')
+            ->with('(LGPL-2.1-only or GPL-3.0-or-later)', 'MIT')
+            ->willReturn($expected);
+
+        $got = $factory->makeFromPackage($package);
+
+        self::assertSame($expected, $got);
     }
 
     /**
-     * @uses \CycloneDX\Models\License
-     * @uses \CycloneDX\Spdx\License
+     * @uses \CycloneDX\Repositories\DisjunctiveLicenseRepository
      */
-    public function testMakeFromStringReturnsExpected(): void
+    public function testMakeDisjunctiveLicenseRepository(): void
     {
-        $spdxValidator = SpdxLicenseValidatorSingleton::getInstance();
-        $randomString = bin2hex(random_bytes(32));
-        $expected = License::createFromNameOrId($randomString, $spdxValidator);
-        $factory = new LicenseFactory($spdxValidator);
+        $makeDisjunctiveLicenseRepository = new \ReflectionMethod(
+            LicenseFactory::class,
+            'makeDisjunctiveLicenseRepository'
+        );
+        $makeDisjunctiveLicenseRepository->setAccessible(true);
 
-        $got = $factory->makeFromString($randomString);
+        $disjunctiveLicense1 = $this->createStub(DisjunctiveLicense::class);
+        $disjunctiveLicense2 = $this->createStub(DisjunctiveLicense::class);
+        $expected = new DisjunctiveLicenseRepository($disjunctiveLicense1, $disjunctiveLicense2);
+        $factory = $this->createPartialMock(
+            LicenseFactory::class,
+            ['makeExpression', 'makeDisjunctive', 'makeDisjunctiveLicenseRepository']
+        );
+        $factory->expects(self::exactly(2))->method('makeDisjunctive')
+            ->withConsecutive(['Foo'], ['Bar'])
+            ->willReturnMap(
+                [
+                    ['Foo', $disjunctiveLicense1],
+                    ['Bar', $disjunctiveLicense2],
+                ]
+            );
 
-        self::assertEquals($expected, $got);
-    }
-
-    public function testMakeFromPackage(): void
-    {
-        $license1 = $this->createStub(License::class);
-        $license2 = $this->createStub(License::class);
-        $license3 = $this->createStub(License::class);
-        $license4 = $this->createStub(License::class);
-        $license5 = $this->createStub(License::class);
-        $expected = [$license1, $license2, $license3, $license4, $license5];
-        $licenses = ['license1', '(license2 or license3)', ['license4', 'license5']];
-        $package = $this->createConfiguredMock(CompletePackageInterface::class, ['getLicense' => $licenses]);
-        $factory = $this->createPartialMock(LicenseFactory::class, ['makeFromString']);
-
-        $factory->expects(self::exactly(\count($expected)))->method('makeFromString')
-            ->withConsecutive(['license1'], ['license2'], ['license3'], ['license4'], ['license5'])
-            ->willReturnMap([
-                ['license1', $license1],
-                ['license2', $license2],
-                ['license3', $license3],
-                ['license4', $license4],
-                ['license5', $license5],
-            ]);
-
-        $got = $factory->makeFromPackage($package);
+        /** @var DisjunctiveLicenseRepository $got */
+        $got = $makeDisjunctiveLicenseRepository->invoke(
+            $factory,
+            'Foo',
+            'Bar'
+        );
 
         self::assertEquals($expected, $got);
     }

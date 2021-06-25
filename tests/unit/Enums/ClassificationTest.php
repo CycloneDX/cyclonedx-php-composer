@@ -21,19 +21,35 @@ declare(strict_types=1);
  * Copyright (c) Steve Springett. All Rights Reserved.
  */
 
-namespace CycloneDX\Tests\_data;
+namespace CycloneDX\Tests\unit\Enums;
 
-use Generator;
+use CycloneDX\Enums\Classification;
+use PHPUnit\Framework\TestCase;
 
-abstract class GeneralDataProvider
+/**
+ * @covers \CycloneDX\Enums\Classification
+ */
+class ClassificationTest extends TestCase
 {
     /**
-     * @return Generator<string, array{string|null}>
+     * @dataProvider dpKnownValues
+     * @dataProvider dpUnknownValue
      */
-    public static function stringRandomEmptyNull(): Generator
+    public function testIsValidValue(string $value, bool $expected): void
     {
-        yield 'null' => [null];
-        yield 'empty string' => [''];
-        yield 'random string' => [bin2hex(random_bytes(random_int(1, 255)))];
+        self::assertSame($expected, Classification::isValidValue($value));
+    }
+
+    public function dpKnownValues(): \Generator
+    {
+        $allValues = (new \ReflectionClass(Classification::class))->getConstants();
+        foreach ($allValues as $value) {
+            yield $value => [$value, true];
+        }
+    }
+
+    public function dpUnknownValue(): \Generator
+    {
+        yield 'invalid' => ['UnknownClassification', false];
     }
 }

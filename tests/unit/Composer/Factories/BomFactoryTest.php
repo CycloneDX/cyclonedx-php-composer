@@ -28,39 +28,38 @@ use Composer\Repository\LockArrayRepository;
 use CycloneDX\Composer\Factories\BomFactory;
 use CycloneDX\Composer\Factories\ComponentFactory;
 use CycloneDX\Composer\Locker;
-use CycloneDX\Models\Bom;
-use CycloneDX\Models\Component;
+use CycloneDX\Repositories\ComponentRepository;
 use PHPUnit\Framework\TestCase;
 
 /**
  * @covers \CycloneDX\Composer\Factories\BomFactory
- *
- * @uses   \CycloneDX\Models\Bom
  */
 class BomFactoryTest extends TestCase
 {
+    /**
+     * @uses \CycloneDX\Models\Bom
+     */
     public function testMakeFromLocker(): void
     {
-        $expectedComponent1 = $this->createStub(Component::class);
-        $expectedComponent2 = $this->createStub(Component::class);
-        $expected = (new Bom())->setComponents([$expectedComponent1, $expectedComponent2]);
+        $expectedComponents = $this->createStub(ComponentRepository::class);
         $package1 = $this->createStub(Package::class);
         $package2 = $this->createStub(Package::class);
-        $lockArrayRepository = $this->createConfiguredMock(
-            LockArrayRepository::class,
-            ['getPackages' => [$package1, $package2]]
-        );
-        $locker = $this->createConfiguredMock(Locker::class, ['getLockedRepository' => $lockArrayRepository]);
+        $locker = $this->createMock(Locker::class);
+        $lockedRepository = $this->createConfiguredMock(LockArrayRepository::class, ['getPackages' => [$package1, $package2]]);
         $componentFactory = $this->createMock(ComponentFactory::class);
         $factory = new BomFactory(false, true, $componentFactory);
 
-        $componentFactory->expects(self::exactly(2))->method('makeFromPackage')
-            ->withConsecutive([$package1], [$package2])
-            ->willReturnOnConsecutiveCalls($expectedComponent1, $expectedComponent2);
+        $locker->expects(self::once())->method('getLockedRepository')
+            ->with(false, true)
+            ->willReturn($lockedRepository);
+        $componentFactory->expects(self::once())->method('makeFromPackages')
+            ->with([$package1, $package2])
+            ->willReturn($expectedComponents);
 
         $got = $factory->makeFromLocker($locker);
+        $gotComponents = $got->getComponentRepository();
 
-        self::assertEquals($expected, $got);
-        self::assertSame($expected->getComponents(), $got->getComponents());
+        self::assertInstanceOf(ComponentRepository::class, $gotComponents);
+        self::assertSame($expectedComponents, $gotComponents);
     }
 }

@@ -122,10 +122,11 @@ class JsonTest extends TestCase
     }
 
     /**
+     * @TODO write the deserializer and enable this test
      * @dataProvider \CycloneDX\Tests\_data\BomModelProvider::fullBomTestData
      * @dataProvider \CycloneDX\Tests\_data\BomModelProvider::bomWithComponentHashAlgorithmsSpec12()
      */
-    public function testSerialization12(Bom $bom): void
+    public function todo_testSerialization12(Bom $bom): void
     {
         $spec = new Spec12();
         $serializer = new JsonSerializer($spec);
@@ -170,10 +171,11 @@ class JsonTest extends TestCase
     }
 
     /**
+     * @TODO write the deserializer and enable this test
      * @dataProvider \CycloneDX\Tests\_data\BomModelProvider::fullBomTestData
      * @dataProvider \CycloneDX\Tests\_data\BomModelProvider::bomWithComponentHashAlgorithmsSpec13()
      */
-    public function testSerialization13(Bom $bom): void
+    public function todo_testSerialization13(Bom $bom): void
     {
         $spec = new Spec13();
         $serializer = new JsonSerializer($spec);

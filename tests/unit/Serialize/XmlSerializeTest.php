@@ -25,7 +25,11 @@ namespace CycloneDX\Tests\unit\Serialize;
 
 use CycloneDX\Models\Bom;
 use CycloneDX\Models\Component;
-use CycloneDX\Models\License;
+use CycloneDX\Models\License\DisjunctiveLicense;
+use CycloneDX\Models\License\LicenseExpression;
+use CycloneDX\Repositories\ComponentRepository;
+use CycloneDX\Repositories\DisjunctiveLicenseRepository;
+use CycloneDX\Repositories\HashRepository;
 use CycloneDX\Serialize\XmlSerializer;
 use CycloneDX\Spec\SpecInterface;
 use DomainException;
@@ -87,33 +91,27 @@ class XmlSerializeTest extends TestCase
 
     // region bomToDom
 
-    public function testBomToBom(): void
+    public function testBomToDom(): void
     {
+        $components = $this->createStub(ComponentRepository::class);
+        $bom = $this->createConfiguredMock(Bom::class, [
+            'getVersion' => 1337,
+            'getComponentRepository' => $components,
+        ]);
+
         $spec = $this->createStub(SpecInterface::class);
         $spec->method('getVersion')->willReturn('mySpecVersion');
-        $spec->method('isSupportedComponentType')
-            ->with('myType')
-            ->willReturn(true);
-
-        $fakeComponent = $this->createStub(Component::class);
-        $serializer = $this->createPartialMock(XmlSerializer::class, ['componentToDom']);
-        $serializer->setSpec($spec);
-        $bom = $this->createConfiguredMock(
-            Bom::class,
-            [
-                'getVersion' => 1337,
-                'getComponents' => [$fakeComponent],
-            ]
-        );
         $dom = new DOMDocument();
-        $serializer->expects(self::once())->method('componentToDom')
-            ->with($dom, $fakeComponent)
-            ->willReturn($dom->createElement('fakeComponent'));
+        $serializer = $this->createPartialMock(XmlSerializer::class, ['componentsToDom']);
+        $serializer->setSpec($spec);
+        $serializer->expects(self::once())->method('componentsToDom')
+            ->with($dom, $components)
+            ->willReturn($dom->createElement('fakeComponents'));
+
         $expectedDom = new DOMDocument();
         $expected = $expectedDom->createElementNS('http://cyclonedx.org/schema/bom/mySpecVersion', 'bom');
         $expected->setAttribute('version', '1337');
-        $expected->appendChild($expectedDom->createElement('components'))
-            ->appendChild($expectedDom->createElement('fakeComponent'));
+        $expected->appendChild($expectedDom->createElement('fakeComponents'));
 
         $data = $serializer->bomToDom($dom, $bom);
 
@@ -121,6 +119,51 @@ class XmlSerializeTest extends TestCase
     }
 
     // endregion bomToDom
+
+    // region componentsToJson
+
+    public function testComponentsToJson(): void
+    {
+        $component1 = $this->createStub(Component::class);
+        $component2 = $this->createStub(Component::class);
+        $spec = $this->createStub(SpecInterface::class);
+        $serializer = $this->createPartialMock(XmlSerializer::class, ['componentToDom']);
+        $serializer->setSpec($spec);
+        $components = $this->createStub(ComponentRepository::class);
+        $components->method('count')->willReturn(2);
+        $components->method('getComponents')->willReturn([$component1, $component2]);
+        $expectedDom = new DOMDocument();
+        $expected = $expectedDom->createElement('components');
+        $expected->appendChild($expectedDom->createElement('Component1Fake'));
+        $expected->appendChild($expectedDom->createElement('Component2Fake'));
+        $dom = new DOMDocument();
+
+        $serializer->expects(self::exactly(2))->method('componentToDom')
+            ->withConsecutive([$dom, $component1], [$dom, $component2])
+            ->willReturnOnConsecutiveCalls($dom->createElement('Component1Fake'), $dom->createElement('Component2Fake'));
+
+        $got = $serializer->componentsToDom($dom, $components);
+
+        self::assertDomNodeEqualsDomNode($expected, $got);
+    }
+
+    public function testComponentsToJsonWithEmpty(): void
+    {
+        $spec = $this->createStub(SpecInterface::class);
+        $serializer = $this->createPartialMock(XmlSerializer::class, ['componentToDom']);
+        $serializer->setSpec($spec);
+        $components = $this->createStub(ComponentRepository::class);
+        $components->method('count')->willReturn(0);
+        $components->method('getComponents')->willReturn([]);
+
+        $serializer->expects(self::never())->method('componentToDom');
+
+        $got = $serializer->componentsToDom(new DOMDocument(), $components);
+
+        self::assertDomNodeEqualsDomNode((new DOMDocument())->createElement('components'), $got);
+    }
+
+    // endregion componentsToJson
 
     // region componentToDom
 
@@ -149,15 +192,20 @@ class XmlSerializeTest extends TestCase
                 'getVersion' => 'myVersion',
                 'getGroup' => 'myGroup',
                 'getDescription' => 'myDescription',
-                'getLicenses' => [
-                    $this->createConfiguredMock(
-                        License::class,
-                        ['getId' => null, 'getName' => 'myLicense']
-                    ),
-                ],
-                'getHashes' => ['myAlg' => 'myHash'],
+                'getLicense' => $this->createConfiguredMock(
+                    LicenseExpression::class,
+                    ['getExpression' => '(Foo and Bar)']
+                ),
+                'getHashRepository' => $this->createConfiguredMock(
+                    HashRepository::class,
+                    [
+                        'getHashes' => ['myAlg' => 'myHash'],
+                        'count' => 2,
+                    ]
+                ),
             ]
         );
+
         $domExpected = new DOMDocument();
         $expected = $domExpected->createElement('component');
         $expected->setAttribute('type', 'myType');
@@ -169,8 +217,7 @@ class XmlSerializeTest extends TestCase
             ->appendChild($domExpected->createElement('hash', 'myHash'))
             ->setAttribute('alg', 'myAlg');
         $expected->appendChild($domExpected->createElement('licenses'))
-            ->appendChild($domExpected->createElement('license'))
-            ->appendChild($domExpected->createElement('name', 'myLicense'));
+            ->appendChild($domExpected->createElement('expression', '(Foo and Bar)'));
         $expected->appendChild($domExpected->createElement('purl', 'myPURL'));
 
         $data = $serializer->componentToDom(new DOMDocument(), $component);
@@ -194,8 +241,8 @@ class XmlSerializeTest extends TestCase
                 'getVersion' => 'myVersion',
                 'getGroup' => null,
                 'getDescription' => null,
-                'getLicenses' => [],
-                'getHashes' => [],
+                'getLicense' => null,
+                'getHashRepository' => null,
             ]
         );
         $domExpected = new DOMDocument();
@@ -227,54 +274,25 @@ class XmlSerializeTest extends TestCase
 
     // endregion componentToDom
 
-    // region hashesToDom
+    // region hashesToJson
 
-    public function testHashesToDom(): void
+    public function testHashesToDomSkipsThrow(): void
     {
-        $algorithm = $this->getRandomString();
-        $content = $this->getRandomString();
-        $expectedDOM = new DOMDocument();
-        $expected = $expectedDOM->createElement('hashes');
-        $expected->appendChild($expectedDOM->createElement('hash', 'FakeHash'));
-
-        $dom = new DOMDocument();
         $serializer = $this->createPartialMock(XmlSerializer::class, ['hashToDom']);
-        $serializer->expects(self::once())->method('hashToDom')
-            ->with($dom, $algorithm, $content)
-            ->willReturn($dom->createElement('hash', 'FakeHash'));
-
-        $got = $serializer->hashesToDom($dom, [$algorithm => $content]);
-
-        self::assertDomNodeEqualsDomNode($expected, $got);
-    }
-
-    public function testHashesToDomNullWhenEmpty(): void
-    {
-        $spec = $this->createStub(SpecInterface::class);
-        $serializer = new XmlSerializer($spec);
-
-        $got = $serializer->hashesToDom(new DOMDocument(), []);
-
-        self::assertNull($got);
-    }
-
-    public function testHashesToDomSkipWhenThrown(): void
-    {
-        $algorithm = $this->getRandomString();
-        $content = $this->getRandomString();
+        $hashes = $this->createConfiguredMock(HashRepository::class, [
+            'count' => 1,
+            'getHashes' => ['MD5' => '123456'],
+        ]);
         $dom = new DOMDocument();
 
-        $serializer = $this->createPartialMock(XmlSerializer::class, ['hashToDom']);
         $serializer->expects(self::once())->method('hashToDom')
-            ->with($dom, $algorithm, $content)
-            ->willThrowException(new DomainException($this->getRandomString()));
+            ->with($dom, 'MD5', '123456')
+            ->willThrowException(new \DomainException());
 
-        $got = $serializer->hashesToDom($dom, [$algorithm => $content]);
-
-        self::assertNull($got);
+        self::assertNull($serializer->hashesToDom($dom, $hashes));
     }
 
-    // endregion hashesToDom
+    // endregion hashesToJson
 
     // region hashToDom
 
@@ -325,76 +343,64 @@ class XmlSerializeTest extends TestCase
 
     // endregion hashToDom
 
-    // region licensesToDom
+    // region licenseToDom
 
-    public function testLicenses(): void
+    public function testLicenseToDomWithDisjunctiveLicenseWithId(): void
     {
-        $expectedDOM = new DOMDocument();
-        $expected = $expectedDOM->createElement('licenses');
-        $expected->appendChild($expectedDOM->createElement('license', 'FakeLicenseResult'));
+        $spec = $this->createStub(SpecInterface::class);
+        $serializer = new XmlSerializer($spec);
+        $license = $this->createConfiguredMock(DisjunctiveLicense::class, [
+            'getId' => 'MIT',
+            'getName' => null,
+            'getUrl' => 'https://url.to/license',
+        ]);
+        $domExpected = new DOMDocument();
+        $expected = $domExpected->createElement('licenses');
+        $expectedLicense = $expected->appendChild($domExpected->createElement('license'));
+        $expectedLicense->appendChild($domExpected->createElement('id', 'MIT'));
+        $expectedLicense->appendChild($domExpected->createElement('url', 'https://url.to/license'));
 
-        $license = $this->createStub(License::class);
-        $dom = new DOMDocument();
-        $serializer = $this->createPartialMock(XmlSerializer::class, ['licenseToDom']);
-        $serializer->expects(self::once())->method('licenseToDom')
-            ->with($dom, $license)
-            ->willReturn($dom->createElement('license', 'FakeLicenseResult'));
-
-        $got = $serializer->licensesToDom($dom, [$license]);
+        $got = $serializer->licenseToDom(new DOMDocument(), $this->createConfiguredMock(DisjunctiveLicenseRepository::class, [
+            'count' => 1,
+            'getLicenses' => [$license],
+        ]));
 
         self::assertDomNodeEqualsDomNode($expected, $got);
     }
 
-    public function testLicensesToDomNullWhenEmpty(): void
+    public function testLicenseToDomWithDisjunctiveLicenseWithName(): void
     {
-        $serializer = new XmlSerializer($this->createStub(SpecInterface::class));
+        $spec = $this->createStub(SpecInterface::class);
+        $serializer = new XmlSerializer($spec);
+        $license = $this->createConfiguredMock(DisjunctiveLicense::class, [
+            'getId' => null,
+            'getName' => 'myLicense',
+            'getUrl' => null,
+        ]);
+        $domExpected = new DOMDocument();
+        $expected = $domExpected->createElement('licenses');
+        $expected->appendChild($domExpected->createElement('license'))
+                 ->appendChild($domExpected->createElement('name', 'myLicense'));
 
-        $got = $serializer->licensesToDom(new DOMDocument(), []);
+        $got = $serializer->licenseToDom(new DOMDocument(), $this->createConfiguredMock(DisjunctiveLicenseRepository::class, [
+            'count' => 1,
+            'getLicenses' => [$license],
+        ]));
+
+        self::assertDomNodeEqualsDomNode($expected, $got);
+    }
+
+    public function testLicenseToDomWithDisjunctiveLicenseEmpty(): void
+    {
+        $spec = $this->createStub(SpecInterface::class);
+        $serializer = new XmlSerializer($spec);
+
+        $got = $serializer->licenseToDom(new DOMDocument(), $this->createConfiguredMock(DisjunctiveLicenseRepository::class, [
+            'count' => 0,
+            'getLicenses' => [],
+        ]));
 
         self::assertNull($got);
-    }
-
-    // endregion licensesToDom
-
-    // region licenseToDom
-
-    /**
-     * @dataProvider dpLicenseToDom
-     */
-    public function testLicenseToDom(License $license, $expected): void
-    {
-        $serializer = new XmlSerializer($this->createStub(SpecInterface::class));
-        $domElem = $serializer->licenseToDom(new DOMDocument(), $license);
-        self::assertDomNodeEqualsDomNode($expected, $domElem);
-    }
-
-    public function dpLicenseToDom(): Generator
-    {
-        $dom = new DOMDocument();
-
-        $name = $this->getRandomString();
-        $license = $this->createStub(License::class);
-        $license->method('getName')->willReturn($name);
-        $expected = $dom->createElement('license');
-        $expected->appendChild($dom->createElement('name', $name));
-        yield 'withName' => [$license, $expected];
-
-        $id = $this->getRandomString();
-        $license = $this->createStub(License::class);
-        $license->method('getId')->willReturn($id);
-        $expected = $dom->createElement('license');
-        $expected->appendChild($dom->createElement('id', $id));
-        yield 'withId' => [$license, $expected];
-
-        $name = $this->getRandomString();
-        $url = 'https://example.com/license/'.$this->getRandomString();
-        $license = $this->createStub(License::class);
-        $license->method('getUrl')->willReturn($url);
-        $license->method('getName')->willReturn($name);
-        $expected = $dom->createElement('license');
-        $expected->appendChild($dom->createElement('name', $name));
-        $expected->appendChild($dom->createElement('url', $url));
-        yield 'withUrl' => [$license, $expected];
     }
 
     // endregion licenseToDom

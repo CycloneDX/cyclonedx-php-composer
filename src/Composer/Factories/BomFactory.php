@@ -25,7 +25,6 @@ namespace CycloneDX\Composer\Factories;
 
 use CycloneDX\Composer\Locker;
 use CycloneDX\Models\Bom;
-use UnexpectedValueException;
 
 /**
  * @internal
@@ -53,21 +52,19 @@ class BomFactory
     /**
      * Generates BOMs based on Composer's lockData.
      *
-     * @throws UnexpectedValueException if a package does not provide a name or version
-     * @throws \DomainException         if the bom structure had unexpected values
-     * @throws \RuntimeException        if loading known SPDX licenses failed
+     * @throws \UnexpectedValueException if a package does not provide a name or version
+     * @throws \DomainException          if the bom structure had unexpected values
+     * @throws \RuntimeException
      */
     public function makeFromLocker(Locker $locker): Bom
     {
-        $components = array_map(
-            [$this->componentFactory, 'makeFromPackage'],
+        $components = $this->componentFactory->makeFromPackages(
             $locker->getLockedRepository(
                 $this->excludeDev,
                 $this->excludePlugins
             )->getPackages()
         );
 
-        return (new Bom())
-            ->addComponent(...$components);
+        return new Bom($components);
     }
 }

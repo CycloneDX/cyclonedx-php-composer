@@ -24,94 +24,41 @@ declare(strict_types=1);
 namespace CycloneDX\Composer\Factories;
 
 use Composer\Package\CompletePackageInterface;
-use CycloneDX\Models\License;
-use CycloneDX\Spdx\License as SpdxLicenseValidator;
+use CycloneDX\Models\License\LicenseExpression;
+use CycloneDX\Repositories\DisjunctiveLicenseRepository;
 
 /**
  * @internal
  *
  * @author jkowalleck
  */
-class LicenseFactory
+class LicenseFactory extends \CycloneDX\Factories\LicenseFactory
 {
-    /** @var SpdxLicenseValidator */
-    private $spdxLicenseValidator;
-
-    public function __construct(SpdxLicenseValidator $spdxLicenseValidator)
-    {
-        $this->spdxLicenseValidator = $spdxLicenseValidator;
-    }
-
-    public function getSpdxLicenseValidator(): SpdxLicenseValidator
-    {
-        return $this->spdxLicenseValidator;
-    }
-
-    public function setSpdxLicenseValidator(SpdxLicenseValidator $spdxLicenseValidator): self
-    {
-        $this->spdxLicenseValidator = $spdxLicenseValidator;
-
-        return $this;
-    }
-
     /**
-     * @psalm-return list<License>
-     *
-     * @throws \RuntimeException if loading known SPDX licenses failed
+     * @psalm-return LicenseExpression|DisjunctiveLicenseRepository
      */
-    public function makeFromPackage(CompletePackageInterface $package): array
+    public function makeFromPackage(CompletePackageInterface $package)
     {
-        $splitLicenses = array_map(
-            [$this, 'splitLicenses'],
-            $package->getLicense()
-        );
-
-        $licenses = array_unique(array_merge(...$splitLicenses));
-
-        return array_values(
-            array_map(
-                [$this, 'makeFromString'],
-                $licenses
-        ));
-    }
-
-    /**
-     * @throws \RuntimeException if loading known SPDX licenses failed
-     */
-    public function makeFromString(string $nameOdId): License
-    {
-        return License::createFromNameOrId($nameOdId, $this->spdxLicenseValidator);
-    }
-
-    /**
-     * @see https://getcomposer.org/doc/04-schema.md#license
-     * @see https://spdx.dev/specifications/
-     *
-     * @param string|string[] $licenseData
-     *
-     * @psalm-return list<string>
-     *
-     * @internal this functionality is pretty clumsy and might be reworked in the future
-     */
-    private function splitLicenses($licenseData): array
-    {
-        if (\is_array($licenseData)) {
-            // Disjunctive license provided as array
-            return array_values($licenseData);
-        }
-
-        if (preg_match('/\((?:[\w.\-]+(?: or | and )?)+\)/', $licenseData)) {
-            // Conjunctive or disjunctive license provided as string
-            $licenseDataSplit = preg_split('/[()]/', $licenseData, -1, \PREG_SPLIT_NO_EMPTY);
-            if (false !== $licenseDataSplit) {
-                \assert(\count($licenseDataSplit) > 0);
-
-                return preg_split('/ or | and /', $licenseDataSplit[0], -1, \PREG_SPLIT_NO_EMPTY)
-                    ?: [$licenseData];
+        $licenses = $package->getLicense();
+        if (1 === \count($licenses)) {
+            // exactly one license - this COULD be an expression
+            try {
+                return $this->makeExpression(reset($licenses));
+            } catch (\DomainException $exception) {
+                unset($exception);
             }
         }
 
-        // A single license provided as string
-        return [$licenseData];
+        return $this->makeDisjunctiveLicenseRepository(...array_values($licenses));
+    }
+
+    protected function makeDisjunctiveLicenseRepository(string ...$licenses): DisjunctiveLicenseRepository
+    {
+        $disjunctiveLicenses = array_map(
+            [$this, 'makeDisjunctive'],
+            $licenses
+        );
+
+        return new DisjunctiveLicenseRepository(...$disjunctiveLicenses);
     }
 }

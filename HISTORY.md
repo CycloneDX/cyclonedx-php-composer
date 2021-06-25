@@ -5,13 +5,15 @@
 * Breaking Changes
   * Now requires php `^7.3 || ^8.0`, was `^7.1 || ^8.0`.
   * Now requires composer v2 - `composer-plugin-api:^2.0`, was `composer-plugin-api:^1.1||^2.0`. 
-  * Complete rewrite/refactor.  
-    Expect library classes/methods/functions to be removed, renamed or incompatible to previous versions - see the source for changes.  
   * CLI via `composer make-bom`
     * Now defaults to the latest supported version of CycloneDX spec: 1.3  
       See option `--spec-version`.
     * Deprecated switch `--json` was removed.  
       Use option `--output-format=JSON` instead.
+  * Components' license in SpdxLicenseExpression format are no longer split into disjunctive licenses.
+    They are still used properly in the resulting output file.
+  * Complete rewrite/refactor.  
+    Expect library classes/methods/functions to be removed, renamed or incompatible to previous versions - see the source for changes.
 * Added
   * CLI
     * Output is less verbose per default. Can be increased via `-v`, `-vv`, `-vvv`.

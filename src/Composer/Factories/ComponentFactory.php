@@ -28,6 +28,9 @@ use Composer\Package\PackageInterface;
 use CycloneDX\Enums\Classification;
 use CycloneDX\Enums\HashAlgorithm;
 use CycloneDX\Models\Component;
+use CycloneDX\Repositories\ComponentRepository;
+use CycloneDX\Repositories\HashRepository;
+use DomainException;
 use PackageUrl\PackageUrl;
 use UnexpectedValueException;
 
@@ -68,9 +71,26 @@ class ComponentFactory
     }
 
     /**
+     * @param PackageInterface[] $packages
+     *
      * @throws UnexpectedValueException if the given package does not provide a name or version
-     * @throws \DomainException         if the bom structure had unexpected values
-     * @throws \RuntimeException        if loading known SPDX licenses failed
+     */
+    public function makeFromPackages(array $packages): ?ComponentRepository
+    {
+        if (0 === \count($packages)) {
+            return null;
+        }
+
+        $components = array_map(
+            [$this, 'makeFromPackage'],
+            array_values($packages)
+        );
+
+        return new ComponentRepository(...$components);
+    }
+
+    /**
+     * @throws UnexpectedValueException if the given package does not provide a name or version
      */
     public function makeFromPackage(PackageInterface $package): Component
     {
@@ -88,10 +108,10 @@ class ComponentFactory
 
         if ($package instanceof CompletePackageInterface) {
             $description = $package->getDescription();
-            $licenses = $this->licenseFactory->makeFromPackage($package);
+            $license = $this->licenseFactory->makeFromPackage($package);
         } else {
             $description = null;
-            $licenses = [];
+            $license = null;
         }
 
         // composer has no option to distinguish framework/library/application, yet
@@ -103,19 +123,27 @@ class ComponentFactory
          */
         $sha1sum = $package->getDistSha1Checksum() ?? '';
 
+        /** @psalm-suppress MissingThrowsDocblock */
         $component = (new Component($type, $name, $version))
             ->setGroup($vendor)
             ->setDescription($description)
-            ->addLicense(...$licenses);
+            ->setLicense($license);
 
-        $purl = (new PackageUrl(self::PURL_TYPE, $component->getName()))
-            ->setNamespace($component->getGroup())
-            ->setVersion($component->getVersion());
-        $component->setPackageUrl($purl);
+        try {
+            $purl = (new PackageUrl(self::PURL_TYPE, $component->getName()))
+                ->setNamespace($component->getGroup())
+                ->setVersion($component->getVersion());
+            $component->setPackageUrl($purl);
+        } catch (DomainException $exception) {
+            unset($exception);
+            $purl = null;
+        }
 
         if ('' !== $sha1sum) {
-            $component->setHash(HashAlgorithm::SHA_1, $sha1sum);
-            $purl->setChecksums(["sha1:$sha1sum"]);
+            $component->setHashRepository(new HashRepository([HashAlgorithm::SHA_1 => $sha1sum]));
+            if (null !== $purl) {
+                $purl->setChecksums(["sha1:$sha1sum"]);
+            }
         }
 
         return $component;

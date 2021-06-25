@@ -24,10 +24,12 @@ declare(strict_types=1);
 namespace CycloneDX\Models;
 
 use CycloneDX\Enums\Classification;
-use CycloneDX\Enums\HashAlgorithm;
+use CycloneDX\Models\License\LicenseExpression;
+use CycloneDX\Repositories\DisjunctiveLicenseRepository;
+use CycloneDX\Repositories\HashRepository;
 use DomainException;
-use InvalidArgumentException;
 use PackageUrl\PackageUrl;
+use UnexpectedValueException;
 
 /**
  * @author nscuro
@@ -66,6 +68,7 @@ class Component
      * Refer to the {@link https://cyclonedx.org/schema/bom/1.1 bom:classification documentation}
      * for information describing each one.
      *
+     * @var string
      * @psalm-var Classification::*
      * @psalm-suppress PropertyNotSetInConstructor
      */
@@ -89,18 +92,18 @@ class Component
     private $packageUrl;
 
     /**
-     * List of licences.
+     * licence(s).
      *
-     * @psalm-var list<License>
+     * @var LicenseExpression|DisjunctiveLicenseRepository|null
      */
-    private $licenses = [];
+    private $license;
 
     /**
      * Specifies the file hashes of the component.
      *
-     * @psalm-var array<HashAlgorithm::*, string>
+     * @var HashRepository|null
      */
-    private $hashes = [];
+    private $hashRepository;
 
     /**
      * The component version. The version should ideally comply with semantic versioning
@@ -150,18 +153,16 @@ class Component
     }
 
     /**
-     * @psalm-param Classification::*|string $type For a ist of Valid values see {@see \CycloneDX\Enums\Classification}
+     * @param string $type A valid {@see \CycloneDX\Enums\Classification}
+     * @psalm-assert Classification::* $type
      *
      * @throws DomainException if value is unknown
      *
      * @return $this
-     *
-     * @psalm-suppress PropertyTypeCoercion
      */
     public function setType(string $type): self
     {
-        $types = (new \ReflectionClass(Classification::class))->getConstants();
-        if (false === \in_array($type, $types, true)) {
+        if (false === Classification::isValidValue($type)) {
             throw new DomainException("Invalid type: $type");
         }
         $this->type = $type;
@@ -185,96 +186,54 @@ class Component
     }
 
     /**
-     * @psalm-return list<License>
+     * @return LicenseExpression|DisjunctiveLicenseRepository|null
      */
-    public function getLicenses(): array
+    public function getLicense()
     {
-        return $this->licenses;
+        return $this->license;
     }
 
     /**
-     * @param License[] $licenses
+     * @param mixed|LicenseExpression|DisjunctiveLicenseRepository|null $license
+     * @psalm-assert LicenseExpression|DisjunctiveLicenseRepository|null $license
      *
-     * @throws InvalidArgumentException if list contains element that is not instance of {@see \CycloneDX\Models\License}
+     * @throws UnexpectedValueException
      *
      * @return $this
-     *
-     * @psalm-suppress DocblockTypeContradiction
      */
-    public function setLicenses(array $licenses): self
+    public function setLicense($license): self
     {
-        foreach ($licenses as $license) {
-            if (false === $license instanceof License) {
-                throw new InvalidArgumentException('Not a License: '.var_export($license, true));
-            }
+        if (false === $this->isValidLicense($license)) {
+            throw new UnexpectedValueException('Invalid license type');
         }
-        $this->licenses = array_values($licenses);
+
+        $this->license = $license;
 
         return $this;
     }
 
     /**
-     * @return $this
+     * @param mixed $license
+     * @psalm-assert-if-true  null|LicenseExpression|DisjunctiveLicenseRepository $license
      */
-    public function addLicense(License ...$licenses): self
+    private function isValidLicense($license): bool
     {
-        array_push($this->licenses, ...array_values($licenses));
+        return null === $license
+            || $license instanceof LicenseExpression
+            || $license instanceof DisjunctiveLicenseRepository;
+    }
 
-        return $this;
+    public function getHashRepository(): ?HashRepository
+    {
+        return $this->hashRepository;
     }
 
     /**
-     * @psalm-return array<HashAlgorithm::*, string>
-     */
-    public function getHashes(): array
-    {
-        return $this->hashes;
-    }
-
-    /**
-     * @psalm-param  array<HashAlgorithm::*|string, string> $hashes
-     *
-     * @throws DomainException          if any of hashes' keys is not in {@see \CycloneDX\Enums\HashAlgorithm}'s constants list
-     * @throws InvalidArgumentException if any of hashes' values is not a string
-     *
      * @return $this
-     *
-     * @psalm-suppress PropertyTypeCoercion
-     * @psalm-suppress RedundantConditionGivenDocblockType
-     * @psalm-suppress DocblockTypeContradiction
      */
-    public function setHashes(array $hashes): self
+    public function setHashRepository(?HashRepository $hashRepository): self
     {
-        $algorithms = (new \ReflectionClass(HashAlgorithm::class))->getConstants();
-        foreach ($hashes as $algorithm => $content) {
-            if (false === \in_array($algorithm, $algorithms, true)) {
-                throw new DomainException("Unknown hash algorithm: $algorithm");
-            }
-            if (false === \is_string($content)) {
-                throw new InvalidArgumentException("Hash content for '$algorithm' is not string.");
-            }
-        }
-        $this->hashes = $hashes;
-
-        return $this;
-    }
-
-    /**
-     * @psalm-param HashAlgorithm::*|string $algorithm
-     *
-     * @throws DomainException if $algorithm is not in {@see \CycloneDX\Enums\HashAlgorithm}'s constants list
-     *
-     * @return $this
-     *
-     * @psalm-suppress PropertyTypeCoercion
-     */
-    public function setHash(string $algorithm, string $content): self
-    {
-        $algorithms = (new \ReflectionClass(HashAlgorithm::class))->getConstants();
-        if (false === \in_array($algorithm, $algorithms, true)) {
-            throw new DomainException("Unknown hash algorithm: {$algorithm}");
-        }
-        $this->hashes[$algorithm] = $content;
+        $this->hashRepository = $hashRepository;
 
         return $this;
     }
