@@ -24,12 +24,10 @@ declare(strict_types=1);
 namespace CycloneDX\Tests\functional\Serialize;
 
 use CycloneDX\Models\Bom;
-use CycloneDX\Serialize\XmlDeserializer;
 use CycloneDX\Serialize\XmlSerializer;
 use CycloneDX\Spec\Spec11;
 use CycloneDX\Spec\Spec12;
 use CycloneDX\Spec\Spec13;
-use CycloneDX\Tests\_data\SpdxLicenseValidatorSingleton;
 use DOMDocument;
 use DOMException;
 use PHPUnit\Framework\TestCase;
@@ -72,23 +70,6 @@ class XmlTest extends TestCase
         );
     }
 
-    /**
-     * @TODO write the deserializer and enable this test
-     * @dataProvider \CycloneDX\Tests\_data\BomModelProvider::fullBomTestData
-     * @dataProvider \CycloneDX\Tests\_data\BomModelProvider::bomWithComponentHashAlgorithmsSpec11()
-     */
-    public function todo_testSerializer11(Bom $bom): void
-    {
-        $spec = new Spec11();
-        $serializer = new XmlSerializer($spec);
-        $deserializer = new XmlDeserializer($spec, SpdxLicenseValidatorSingleton::getInstance());
-
-        $serialized = $serializer->serialize($bom);
-        $deserialized = @$deserializer->deserialize($serialized);
-
-        self::assertEquals($bom, $deserialized);
-    }
-
     // endregion Spec 1.1
 
     // region Spec 1.2
@@ -120,23 +101,6 @@ class XmlTest extends TestCase
         );
     }
 
-    /**
-     * @TODO write the deserializer and enable this test
-     * @dataProvider \CycloneDX\Tests\_data\BomModelProvider::fullBomTestData
-     * @dataProvider \CycloneDX\Tests\_data\BomModelProvider::bomWithComponentHashAlgorithmsSpec12()
-     */
-    public function todo_testSerializer12(Bom $bom): void
-    {
-        $spec = new Spec12();
-        $serializer = new XmlSerializer($spec);
-        $deserializer = new XmlDeserializer($spec, SpdxLicenseValidatorSingleton::getInstance());
-
-        $serialized = $serializer->serialize($bom);
-        $deserialized = @$deserializer->deserialize($serialized);
-
-        self::assertEquals($bom, $deserialized);
-    }
-
     // endregion Spec 1.2
 
     // region Spec 1.3
@@ -166,23 +130,6 @@ class XmlTest extends TestCase
             $doc->schemaValidate($schema), // warns on schema mismatch. might be handled by PHPUnit as error.
             $xml
         );
-    }
-
-    /**
-     * @TODO write the deserializer and enable this test
-     * @dataProvider \CycloneDX\Tests\_data\BomModelProvider::fullBomTestData
-     * @dataProvider \CycloneDX\Tests\_data\BomModelProvider::bomWithComponentHashAlgorithmsSpec13()
-     */
-    public function todo_testSerializer13(Bom $bom): void
-    {
-        $spec = new Spec13();
-        $serializer = new XmlSerializer($spec);
-        $deserializer = new XmlDeserializer($spec, SpdxLicenseValidatorSingleton::getInstance());
-
-        $serialized = $serializer->serialize($bom);
-        $deserialized = @$deserializer->deserialize($serialized);
-
-        self::assertEquals($bom, $deserialized);
     }
 
     // endregion Spec 1.3

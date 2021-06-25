@@ -24,12 +24,10 @@ declare(strict_types=1);
 namespace CycloneDX\Tests\functional\Serialize;
 
 use CycloneDX\Models\Bom;
-use CycloneDX\Serialize\JsonDeserializer;
 use CycloneDX\Serialize\JsonSerializer;
 use CycloneDX\Spec\Spec11;
 use CycloneDX\Spec\Spec12;
 use CycloneDX\Spec\Spec13;
-use CycloneDX\Tests\_data\SpdxLicenseValidatorSingleton;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 use Swaggest\JsonSchema;
@@ -121,23 +119,6 @@ class JsonTest extends TestCase
         );
     }
 
-    /**
-     * @TODO write the deserializer and enable this test
-     * @dataProvider \CycloneDX\Tests\_data\BomModelProvider::fullBomTestData
-     * @dataProvider \CycloneDX\Tests\_data\BomModelProvider::bomWithComponentHashAlgorithmsSpec12()
-     */
-    public function todo_testSerialization12(Bom $bom): void
-    {
-        $spec = new Spec12();
-        $serializer = new JsonSerializer($spec);
-        $deserializer = new JsonDeserializer($spec, SpdxLicenseValidatorSingleton::getInstance());
-
-        $serialized = $serializer->serialize($bom);
-        $deserialized = @$deserializer->deserialize($serialized);
-
-        self::assertEquals($bom, $deserialized);
-    }
-
     // endregion Spec 1.2
 
     // region Spec 1.3
@@ -168,23 +149,6 @@ class JsonTest extends TestCase
             JsonSchema\Structure\ObjectItem::class,
             $schemaContracts->in($data) // throws on schema mismatch
         );
-    }
-
-    /**
-     * @TODO write the deserializer and enable this test
-     * @dataProvider \CycloneDX\Tests\_data\BomModelProvider::fullBomTestData
-     * @dataProvider \CycloneDX\Tests\_data\BomModelProvider::bomWithComponentHashAlgorithmsSpec13()
-     */
-    public function todo_testSerialization13(Bom $bom): void
-    {
-        $spec = new Spec13();
-        $serializer = new JsonSerializer($spec);
-        $deserializer = new JsonDeserializer($spec, SpdxLicenseValidatorSingleton::getInstance());
-
-        $serialized = $serializer->serialize($bom);
-        $deserialized = @$deserializer->deserialize($serialized);
-
-        self::assertEquals($bom, $deserialized);
     }
 
     // endregion Spec 1.3
