@@ -48,7 +48,8 @@ class XmlTest extends TestCase
      * This test might require online-connectivity.
      *
      * @dataProvider \CycloneDX\Tests\_data\BomModelProvider::fullBomTestData
-     * @dataProvider \CycloneDX\Tests\_data\BomModelProvider::bomWithComponentAllHashAlgorithms
+     * @dataProvider \CycloneDX\Tests\_data\BomModelProvider::bomWithComponentHashAlgorithmsSpec11()
+     * @dataProvider \CycloneDX\Tests\_data\BomModelProvider::bomWithComponentTypeSpec11()
      */
     public function testSchema11(Bom $bom): void
     {
@@ -79,7 +80,8 @@ class XmlTest extends TestCase
      * This test might require online-connectivity.
      *
      * @dataProvider \CycloneDX\Tests\_data\BomModelProvider::fullBomTestData
-     * @dataProvider \CycloneDX\Tests\_data\BomModelProvider::bomWithComponentAllHashAlgorithms
+     * @dataProvider \CycloneDX\Tests\_data\BomModelProvider::bomWithComponentHashAlgorithmsSpec12()
+     * @dataProvider \CycloneDX\Tests\_data\BomModelProvider::bomWithComponentTypeSpec12()
      */
     public function testSchema12(Bom $bom): void
     {
@@ -110,7 +112,8 @@ class XmlTest extends TestCase
      * This test might require online-connectivity.
      *
      * @dataProvider \CycloneDX\Tests\_data\BomModelProvider::fullBomTestData
-     * @dataProvider \CycloneDX\Tests\_data\BomModelProvider::bomWithComponentAllHashAlgorithms
+     * @dataProvider \CycloneDX\Tests\_data\BomModelProvider::bomWithComponentHashAlgorithmsSpec13()
+     * @dataProvider \CycloneDX\Tests\_data\BomModelProvider::bomWithComponentTypeSpec13()
      */
     public function testSchema13(Bom $bom): void
     {

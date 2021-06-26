@@ -67,19 +67,6 @@ class HashRepositoryTransformerTest extends TestCase
     /**
      * @depends testConstructor
      */
-    public function testTransformEmptyToNull(HashRepositoryTransformer $transformer): void
-    {
-        $repo = $this->createStub(HashRepository::class);
-        $repo->method('getHashes')->willReturn([]);
-
-        $transformed = $transformer->transform($repo);
-
-        self::assertNull($transformed);
-    }
-
-    /**
-     * @depends testConstructor
-     */
     public function testTransformThrowOnThrow(): void
     {
         $hashTransformer = $this->createMock(HashTransformer::class);
