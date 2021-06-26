@@ -17,24 +17,28 @@
         <testsuite name="default">
             <directory>tests</directory>
         </testsuite>
-        <testsuite name="unit">
-            <directory>tests/unit</directory>
+        <testsuite name="Core">
+            <directory>tests/Core</directory>
         </testsuite>
-        <testsuite name="functional">
-            <directory>tests/functional</directory>
+        <testsuite name="Composer">
+            <directory>tests/Composer</directory>
         </testsuite>
     </testsuites>
     <coverage cacheDirectory=".phpunit.cache/code-coverage">
         <include>
             <directory suffix=".php">src</directory>
         </include>
-        <!-- report>
+        <!--
+        <report>
             <clover outputFile="reports/coverage.clover.xml"/>
             <html outputDirectory="reports/coverage.html"/>
-        </report -->
+        </report>
+         /-->
     </coverage>
-    <!-- logging>
+    <!--
+    <logging>
         <junit outputFile="reports/phpunits.junit.xml"/>
         <testdoxText outputFile="reports/phpunits.txt"/>
-    </logging -->
+    </logging>
+    /-->
 </phpunit>
