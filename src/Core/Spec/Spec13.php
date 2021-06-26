@@ -31,11 +31,14 @@ use CycloneDX\Core\Enums\HashAlgorithm;
  */
 final class Spec13 implements SpecInterface
 {
-    use SupportsTrait;
-
-    // region SupportsTrait
+    use SpecTrait;
 
     private const VERSION = Version::V_1_3;
+
+    private const FORMATS = [
+        Format::XML,
+        Format::JSON,
+    ];
 
     private const COMPONENT_TYPES = [
         Classification::APPLICATION,
@@ -64,6 +67,4 @@ final class Spec13 implements SpecInterface
     ];
 
     private const HASH_CONTENT_REGEX = '/^(?:[a-fA-F0-9]{32}|[a-fA-F0-9]{40}|[a-fA-F0-9]{64}|[a-fA-F0-9]{96}|[a-fA-F0-9]{128})$/';
-
-    // endregion SupportsTrait
 }

@@ -31,7 +31,7 @@ use CycloneDX\Core\Enums\HashAlgorithm;
  *
  * @author jkowalleck
  */
-trait SupportsTrait
+trait SpecTrait
 {
     /**
      * @psalm-return Version::V_*
@@ -39,6 +39,20 @@ trait SupportsTrait
     public function getVersion(): string
     {
         return self::VERSION;
+    }
+
+    /**
+     * @return string[]
+     * @psalm-return list<Format::*>
+     */
+    public function getSupportedFormats(): array
+    {
+        return self::FORMATS;
+    }
+
+    public function supportsFormat(string $format): bool
+    {
+        return \in_array($format, self::FORMATS, true);
     }
 
     public function isSupportedComponentType(string $classification): bool

@@ -32,11 +32,11 @@ use CycloneDX\Core\Models\License\LicenseExpression;
 use CycloneDX\Core\Repositories\ComponentRepository;
 use CycloneDX\Core\Repositories\DisjunctiveLicenseRepository;
 use CycloneDX\Core\Repositories\HashRepository;
+use CycloneDX\Core\Spec\Format;
 use CycloneDX\Core\Spec\SpecInterface;
 use DomainException;
 use DOMDocument;
 use DOMElement;
-use RuntimeException;
 
 /**
  * Transform data models to XML.
@@ -47,6 +47,8 @@ class XmlSerializer implements SerializerInterface
 {
     use HasSpecTrait;
     use SimpleDomTrait;
+
+    private const FORMAT = Format::XML;
 
     private const XML_VERSION = '1.0';
     private const XML_ENCODING = 'UTF-8';
@@ -61,11 +63,14 @@ class XmlSerializer implements SerializerInterface
     // region SerializerInterface
 
     /**
-     * @throws DomainException  if a component's type is unsupported
-     * @throws RuntimeException if spec version is not supported
+     * @throws DomainException if something was not supported
      */
     public function serialize(Bom $bom, bool $pretty = true): string
     {
+        if (false === $this->spec->supportsFormat(self::FORMAT)) {
+            throw new DomainException('Unsupported format "'.self::FORMAT.'" for spec '.$this->spec->getVersion());
+        }
+
         $document = new DOMDocument(self::XML_VERSION, self::XML_ENCODING);
         $document->appendChild($this->bomToDom($document, $bom));
 

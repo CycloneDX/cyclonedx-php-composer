@@ -54,6 +54,7 @@ class XmlSerializeTest extends TestCase
         $bom = $this->createStub(Bom::class);
         $spec = $this->createStub(SpecInterface::class);
         $spec->method('getVersion')->willReturn('999');
+        $spec->method('supportsFormat')->willReturn(true);
         $serializer = $this->createPartialMock(XmlSerializer::class, ['bomToDom']);
         $serializer->setSpec($spec);
         $serializer->expects(self::once())->method('bomToDom')

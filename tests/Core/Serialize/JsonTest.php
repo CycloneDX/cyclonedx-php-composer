@@ -28,8 +28,8 @@ use CycloneDX\Core\Serialize\JsonSerializer;
 use CycloneDX\Core\Spec\Spec11;
 use CycloneDX\Core\Spec\Spec12;
 use CycloneDX\Core\Spec\Spec13;
+use DomainException;
 use PHPUnit\Framework\TestCase;
-use RuntimeException;
 use Swaggest\JsonSchema;
 
 class SnapshotRemoteRefProvider implements JsonSchema\RemoteRefProvider
@@ -81,8 +81,8 @@ class JsonTest extends TestCase
         $spec = new Spec11();
         $serializer = new JsonSerializer($spec);
 
-        $this->expectException(RuntimeException::class);
-        $this->expectExceptionMessageMatches('/unsupported spec version./i');
+        $this->expectException(DomainException::class);
+        $this->expectExceptionMessageMatches('/unsupported format/i');
 
         $serializer->serialize(new Bom());
     }

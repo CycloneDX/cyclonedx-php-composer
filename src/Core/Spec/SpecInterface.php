@@ -23,6 +23,9 @@ declare(strict_types=1);
 
 namespace CycloneDX\Core\Spec;
 
+use CycloneDX\Core\Enums\Classification;
+use CycloneDX\Core\Enums\HashAlgorithm;
+
 /**
  * @author jkowalleck
  */
@@ -33,23 +36,29 @@ interface SpecInterface
      */
     public function getVersion(): string;
 
-    // region Supports
+    /**
+     * @return string[]
+     * @psalm-return list<Format::*>
+     */
+    public function getSupportedFormats(): array;
+
+    public function supportsFormat(string $format): bool;
 
     public function isSupportedComponentType(string $classification): bool;
 
     /**
-     * @psalm-return list<\CycloneDX\Core\Enums\Classification::*>
+     * @return string[]
+     * @psalm-return list<Classification::*>
      */
     public function getSupportedComponentTypes(): array;
 
     public function isSupportedHashAlgorithm(string $alg): bool;
 
     /**
-     * @psalm-return list<\CycloneDX\Core\Enums\HashAlgorithm::*>
+     * @return string[]
+     * @psalm-return list<HashAlgorithm::*>
      */
     public function getSupportedHashAlgorithms(): array;
 
     public function isSupportedHashContent(string $content): bool;
-
-    // endregion Supports
 }
