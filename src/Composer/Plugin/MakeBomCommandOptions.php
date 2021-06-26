@@ -25,9 +25,9 @@ namespace CycloneDX\Composer\Plugin;
 
 use CycloneDX\Composer\Factories\SpecFactory;
 use CycloneDX\Composer\Plugin\Exceptions\ValueError;
-use CycloneDX\Serialize\JsonSerializer;
-use CycloneDX\Serialize\SerializerInterface;
-use CycloneDX\Serialize\XmlSerializer;
+use CycloneDX\Core\Serialize\JsonSerializer;
+use CycloneDX\Core\Serialize\SerializerInterface;
+use CycloneDX\Core\Serialize\XmlSerializer;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -112,7 +112,8 @@ class MakeBomCommandOptions
     }
 
     /**
-     * @psalm-var \CycloneDX\Spec\Version::*
+     * @var string
+     * @psalm-var \CycloneDX\Core\Spec\Version::*
      * @readonly
      * @psalm-allow-private-mutation
      */

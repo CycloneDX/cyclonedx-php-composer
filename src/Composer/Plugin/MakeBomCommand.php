@@ -31,7 +31,7 @@ use CycloneDX\Composer\Factories\LicenseFactory;
 use CycloneDX\Composer\Factories\SpecFactory;
 use CycloneDX\Composer\Locker;
 use CycloneDX\Composer\Plugin\Exceptions\ValueError;
-use CycloneDX\Spdx\License as SpdxLicenseValidator;
+use CycloneDX\Core\Spdx\License as SpdxLicenseValidator;
 use RuntimeException;
 use Symfony\Component\Console\Formatter\OutputFormatter;
 use Symfony\Component\Console\Input\InputInterface;

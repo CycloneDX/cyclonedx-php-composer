@@ -23,15 +23,15 @@ declare(strict_types=1);
 
 namespace CycloneDX\Tests\_data;
 
-use CycloneDX\Enums\Classification;
-use CycloneDX\Enums\HashAlgorithm;
-use CycloneDX\Models\Bom;
-use CycloneDX\Models\Component;
-use CycloneDX\Models\License\DisjunctiveLicense;
-use CycloneDX\Models\License\LicenseExpression;
-use CycloneDX\Repositories\ComponentRepository;
-use CycloneDX\Repositories\DisjunctiveLicenseRepository;
-use CycloneDX\Repositories\HashRepository;
+use CycloneDX\Core\Enums\Classification;
+use CycloneDX\Core\Enums\HashAlgorithm;
+use CycloneDX\Core\Models\Bom;
+use CycloneDX\Core\Models\Component;
+use CycloneDX\Core\Models\License\DisjunctiveLicense;
+use CycloneDX\Core\Models\License\LicenseExpression;
+use CycloneDX\Core\Repositories\ComponentRepository;
+use CycloneDX\Core\Repositories\DisjunctiveLicenseRepository;
+use CycloneDX\Core\Repositories\HashRepository;
 use Generator;
 
 /**

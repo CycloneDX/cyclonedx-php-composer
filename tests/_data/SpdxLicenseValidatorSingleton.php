@@ -23,7 +23,7 @@ declare(strict_types=1);
 
 namespace CycloneDX\Tests\_data;
 
-use CycloneDX\Spdx\License as SpdxLicenseValidator;
+use CycloneDX\Core\Spdx\License as SpdxLicenseValidator;
 
 abstract class SpdxLicenseValidatorSingleton
 {

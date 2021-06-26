@@ -26,14 +26,14 @@ namespace CycloneDX\Tests\unit\Composer\Factories;
 use Composer\Package\PackageInterface;
 use CycloneDX\Composer\Factories\ComponentFactory;
 use CycloneDX\Composer\Factories\LicenseFactory;
-use CycloneDX\Models\Component;
+use CycloneDX\Core\Models\Component;
 use PackageUrl\PackageUrl;
 use PHPUnit\Framework\TestCase;
 
 /**
  * @covers \CycloneDX\Composer\Factories\ComponentFactory
  *
- * @uses   \CycloneDX\Models\Component
+ * @uses   \CycloneDX\Core\Models\Component
  */
 class ComponentFactoryTest extends TestCase
 {
@@ -87,7 +87,7 @@ class ComponentFactoryTest extends TestCase
     /**
      * @dataProvider dpMakeFromPackage
      *
-     * @uses \CycloneDX\Enums\Classification::isValidValue
+     * @uses \CycloneDX\Core\Enums\Classification::isValidValue
      */
     public function testMakeFromPackage(
         PackageInterface $package,

@@ -24,9 +24,9 @@ declare(strict_types=1);
 namespace CycloneDX\Tests\unit\Composer\Factories;
 
 use CycloneDX\Composer\Factories\SpecFactory;
-use CycloneDX\Spec\Spec11;
-use CycloneDX\Spec\Spec12;
-use CycloneDX\Spec\Spec13;
+use CycloneDX\Core\Spec\Spec11;
+use CycloneDX\Core\Spec\Spec12;
+use CycloneDX\Core\Spec\Spec13;
 use Generator;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
@@ -48,9 +48,9 @@ class SpecFactoryTest extends TestCase
      *
      * @dataProvider dpMakeExpected
      *
-     * @uses \CycloneDX\Spec\Spec11
-     * @uses \CycloneDX\Spec\Spec12
-     * @uses \CycloneDX\Spec\Spec13
+     * @uses \CycloneDX\Core\Spec\Spec11
+     * @uses \CycloneDX\Core\Spec\Spec12
+     * @uses \CycloneDX\Core\Spec\Spec13
      */
     public function testMakeExpected(string $version, string $expectedClassName): void
     {

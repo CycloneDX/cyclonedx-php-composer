@@ -25,11 +25,11 @@ namespace CycloneDX\Composer\Factories;
 
 use Composer\Package\CompletePackageInterface;
 use Composer\Package\PackageInterface;
-use CycloneDX\Enums\Classification;
-use CycloneDX\Enums\HashAlgorithm;
-use CycloneDX\Models\Component;
-use CycloneDX\Repositories\ComponentRepository;
-use CycloneDX\Repositories\HashRepository;
+use CycloneDX\Core\Enums\Classification;
+use CycloneDX\Core\Enums\HashAlgorithm;
+use CycloneDX\Core\Models\Component;
+use CycloneDX\Core\Repositories\ComponentRepository;
+use CycloneDX\Core\Repositories\HashRepository;
 use DomainException;
 use PackageUrl\PackageUrl;
 use UnexpectedValueException;

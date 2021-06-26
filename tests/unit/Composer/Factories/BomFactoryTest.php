@@ -28,7 +28,7 @@ use Composer\Repository\LockArrayRepository;
 use CycloneDX\Composer\Factories\BomFactory;
 use CycloneDX\Composer\Factories\ComponentFactory;
 use CycloneDX\Composer\Locker;
-use CycloneDX\Repositories\ComponentRepository;
+use CycloneDX\Core\Repositories\ComponentRepository;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -37,7 +37,7 @@ use PHPUnit\Framework\TestCase;
 class BomFactoryTest extends TestCase
 {
     /**
-     * @uses \CycloneDX\Models\Bom
+     * @uses \CycloneDX\Core\Models\Bom
      */
     public function testMakeFromLocker(): void
     {

@@ -25,9 +25,9 @@ namespace CycloneDX\Tests\unit\Composer\Factories;
 
 use Composer\Package\CompletePackageInterface;
 use CycloneDX\Composer\Factories\LicenseFactory;
-use CycloneDX\Models\License\DisjunctiveLicense;
-use CycloneDX\Models\License\LicenseExpression;
-use CycloneDX\Repositories\DisjunctiveLicenseRepository;
+use CycloneDX\Core\Models\License\DisjunctiveLicense;
+use CycloneDX\Core\Models\License\LicenseExpression;
+use CycloneDX\Core\Repositories\DisjunctiveLicenseRepository;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -99,7 +99,7 @@ class LicenseFactoryTest extends TestCase
     }
 
     /**
-     * @uses \CycloneDX\Repositories\DisjunctiveLicenseRepository
+     * @uses \CycloneDX\Core\Repositories\DisjunctiveLicenseRepository
      */
     public function testMakeDisjunctiveLicenseRepository(): void
     {

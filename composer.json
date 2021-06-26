@@ -48,7 +48,8 @@
     },
     "autoload": {
         "psr-4": {
-            "CycloneDX\\": "src"
+            "CycloneDX\\Composer\\": "src/Composer",
+            "CycloneDX\\Core\\": "src/Core"
         }
     },
     "autoload-dev": {

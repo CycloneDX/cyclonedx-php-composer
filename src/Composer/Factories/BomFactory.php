@@ -24,7 +24,7 @@ declare(strict_types=1);
 namespace CycloneDX\Composer\Factories;
 
 use CycloneDX\Composer\Locker;
-use CycloneDX\Models\Bom;
+use CycloneDX\Core\Models\Bom;
 
 /**
  * @internal

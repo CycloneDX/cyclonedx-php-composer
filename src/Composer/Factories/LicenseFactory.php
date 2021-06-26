@@ -24,18 +24,18 @@ declare(strict_types=1);
 namespace CycloneDX\Composer\Factories;
 
 use Composer\Package\CompletePackageInterface;
-use CycloneDX\Models\License\LicenseExpression;
-use CycloneDX\Repositories\DisjunctiveLicenseRepository;
+use CycloneDX\Core\Models\License\LicenseExpression;
+use CycloneDX\Core\Repositories\DisjunctiveLicenseRepository;
 
 /**
  * @internal
  *
  * @author jkowalleck
  */
-class LicenseFactory extends \CycloneDX\Factories\LicenseFactory
+class LicenseFactory extends \CycloneDX\Core\Factories\LicenseFactory
 {
     /**
-     * @psalm-return LicenseExpression|DisjunctiveLicenseRepository
+     * @return LicenseExpression|DisjunctiveLicenseRepository
      */
     public function makeFromPackage(CompletePackageInterface $package)
     {
