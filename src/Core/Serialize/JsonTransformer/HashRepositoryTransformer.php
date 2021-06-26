@@ -34,17 +34,14 @@ class HashRepositoryTransformer extends AbstractTransformer
     /**
      * @throws DomainException
      */
-    public function transform(HashRepository $repo): ?array
+    public function transform(HashRepository $repo): array
     {
         $hashes = $repo->getHashes();
-        $list = array_map(
+
+        return array_map(
             [$this->getFactory()->makeForHash(), 'transform'],
             array_keys($hashes),
             array_values($hashes)
         );
-
-        return 0 === \count($list)
-            ? null
-            : $list;
     }
 }

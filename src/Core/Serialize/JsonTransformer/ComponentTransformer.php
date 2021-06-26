@@ -75,11 +75,14 @@ class ComponentTransformer extends AbstractTransformer
      */
     private function transformLicense($license): ?array
     {
-        if ($license instanceof DisjunctiveLicenseRepository) {
-            return $this->getFactory()->makeForDisjunctiveLicenseRepository()->transform($license);
-        }
         if ($license instanceof LicenseExpression) {
             return [$this->getFactory()->makeForLicenseExpression()->transform($license)];
+        }
+
+        if ($license instanceof DisjunctiveLicenseRepository) {
+            return 0 === \count($license)
+                ? null
+                : $this->getFactory()->makeForDisjunctiveLicenseRepository()->transform($license);
         }
 
         return null;
@@ -87,7 +90,7 @@ class ComponentTransformer extends AbstractTransformer
 
     public function transformHashes(?HashRepository $hashes): ?array
     {
-        return null === $hashes
+        return null === $hashes || 0 === \count($hashes)
             ? null
             : $this->getFactory()->makeForHashRepository()->transform($hashes);
     }
