@@ -25,6 +25,9 @@ namespace CycloneDX\Core\Serialize\JsonTransformer;
 
 use CycloneDX\Core\Models\License\LicenseExpression;
 
+/**
+ * @author jkowalleck
+ */
 class LicenseExpressionTransformer extends AbstractTransformer
 {
     /**

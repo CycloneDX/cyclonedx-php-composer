@@ -21,25 +21,21 @@ declare(strict_types=1);
  * Copyright (c) Steve Springett. All Rights Reserved.
  */
 
-namespace CycloneDX\Core\Serialize\JsonTransformer;
+namespace CycloneDX\Core\Helpers;
 
 /**
- * @internal
- *
  * @author jkowalleck
+ *
+ * @internal
  */
-abstract class AbstractTransformer
+trait NullAssertionTrait
 {
-    /** @var Factory */
-    private $factory;
-
-    public function __construct(Factory $factory)
+    /**
+     * @param mixed|null $value
+     * @psalm-assert-if-true !null $value
+     */
+    private function isNotNull($value): bool
     {
-        $this->factory = $factory;
-    }
-
-    public function getFactory(): Factory
-    {
-        return $this->factory;
+        return null !== $value;
     }
 }

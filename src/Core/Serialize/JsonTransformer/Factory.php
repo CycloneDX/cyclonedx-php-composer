@@ -27,6 +27,9 @@ use CycloneDX\Core\Spec\Format;
 use CycloneDX\Core\Spec\SpecInterface;
 use DomainException;
 
+/**
+ * @author jkowalleck
+ */
 class Factory
 {
     public const FORMAT = Format::JSON;
@@ -98,5 +101,10 @@ class Factory
     public function makeForHashRepository(): HashRepositoryTransformer
     {
         return new HashRepositoryTransformer($this);
+    }
+
+    public function makeForHash(): HashTransformer
+    {
+        return new HashTransformer($this);
     }
 }

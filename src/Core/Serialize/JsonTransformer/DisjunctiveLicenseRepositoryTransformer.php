@@ -25,6 +25,9 @@ namespace CycloneDX\Core\Serialize\JsonTransformer;
 
 use CycloneDX\Core\Repositories\DisjunctiveLicenseRepository;
 
+/**
+ * @author jkowalleck
+ */
 final class DisjunctiveLicenseRepositoryTransformer extends AbstractTransformer
 {
     public function transform(DisjunctiveLicenseRepository $repo): array

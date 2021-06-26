@@ -23,10 +23,16 @@ declare(strict_types=1);
 
 namespace CycloneDX\Core\Serialize\JsonTransformer;
 
+use CycloneDX\Core\Helpers\NullAssertionTrait;
 use CycloneDX\Core\Models\License\DisjunctiveLicense;
 
+/**
+ * @author jkowalleck
+ */
 class DisjunctiveLicenseTransformer extends AbstractTransformer
 {
+    use NullAssertionTrait;
+
     /**
      * @psalm-return array{'license': array<string, mixed>}
      */

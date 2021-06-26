@@ -26,6 +26,9 @@ namespace CycloneDX\Core\Serialize\JsonTransformer;
 use CycloneDX\Core\Repositories\HashRepository;
 use DomainException;
 
+/**
+ * @author jkowalleck
+ */
 class HashRepositoryTransformer extends AbstractTransformer
 {
     /**
@@ -34,29 +37,14 @@ class HashRepositoryTransformer extends AbstractTransformer
     public function transform(HashRepository $repo): ?array
     {
         $hashes = $repo->getHashes();
-        $list = array_map([$this, 'transformAC'], array_keys($hashes), array_values($hashes));
+        $list = array_map(
+            [$this->getFactory()->makeForHash(), 'transform'],
+            array_keys($hashes),
+            array_values($hashes)
+        );
 
         return 0 === \count($list)
             ? null
             : $list;
-    }
-
-    /**
-     * @throws DomainException
-     */
-    private function transformAC(string $algorithm, string $content): array
-    {
-        $spec = $this->getFactory()->getSpec();
-        if (false === $spec->isSupportedHashAlgorithm($algorithm)) {
-            throw new DomainException("invalid hash algorithm: $algorithm", 1);
-        }
-        if (false === $spec->isSupportedHashContent($content)) {
-            throw new DomainException("invalid hash content: $content", 2);
-        }
-
-        return [
-            'alg' => $algorithm,
-            'content' => $content,
-        ];
     }
 }

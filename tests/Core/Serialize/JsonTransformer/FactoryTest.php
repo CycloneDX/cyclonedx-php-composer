@@ -30,6 +30,7 @@ use CycloneDX\Core\Serialize\JsonTransformer\DisjunctiveLicenseRepositoryTransfo
 use CycloneDX\Core\Serialize\JsonTransformer\DisjunctiveLicenseTransformer;
 use CycloneDX\Core\Serialize\JsonTransformer\Factory;
 use CycloneDX\Core\Serialize\JsonTransformer\HashRepositoryTransformer;
+use CycloneDX\Core\Serialize\JsonTransformer\HashTransformer;
 use CycloneDX\Core\Serialize\JsonTransformer\LicenseExpressionTransformer;
 use CycloneDX\Core\Spec\SpecInterface;
 use DomainException;
@@ -37,6 +38,8 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @covers \CycloneDX\Core\Serialize\JsonTransformer\Factory
+ *
+ * @uses \CycloneDX\Core\Serialize\JsonTransformer\AbstractTransformer
  */
 class FactoryTest extends TestCase
 {
@@ -107,8 +110,6 @@ class FactoryTest extends TestCase
 
     /**
      * @depends testConstructor
-     *
-     * @uses \CycloneDX\Core\Serialize\JsonTransformer\AbstractTransformer
      */
     public function testMakeForComponentRepository(Factory $factory): void
     {
@@ -119,8 +120,6 @@ class FactoryTest extends TestCase
 
     /**
      * @depends testConstructor
-     *
-     * @uses \CycloneDX\Core\Serialize\JsonTransformer\AbstractTransformer
      */
     public function testMakeForBom(Factory $factory): void
     {
@@ -131,8 +130,6 @@ class FactoryTest extends TestCase
 
     /**
      * @depends testConstructor
-     *
-     * @uses \CycloneDX\Core\Serialize\JsonTransformer\AbstractTransformer
      */
     public function testMakeForDisjunctiveLicense(Factory $factory): void
     {
@@ -143,8 +140,6 @@ class FactoryTest extends TestCase
 
     /**
      * @depends testConstructor
-     *
-     * @uses \CycloneDX\Core\Serialize\JsonTransformer\AbstractTransformer
      */
     public function testMakeForHashRepository(Factory $factory): void
     {
@@ -155,8 +150,6 @@ class FactoryTest extends TestCase
 
     /**
      * @depends testConstructor
-     *
-     * @uses \CycloneDX\Core\Serialize\JsonTransformer\AbstractTransformer
      */
     public function testMakeForComponent(Factory $factory): void
     {
@@ -167,8 +160,6 @@ class FactoryTest extends TestCase
 
     /**
      * @depends testConstructor
-     *
-     * @uses \CycloneDX\Core\Serialize\JsonTransformer\AbstractTransformer
      */
     public function testMakeForDisjunctiveLicenseRepository(Factory $factory): void
     {
@@ -179,13 +170,21 @@ class FactoryTest extends TestCase
 
     /**
      * @depends testConstructor
-     *
-     * @uses \CycloneDX\Core\Serialize\JsonTransformer\AbstractTransformer
      */
     public function testMakeForLicenseExpression(Factory $factory): void
     {
         $got = $factory->makeForLicenseExpression();
         self::assertInstanceOf(LicenseExpressionTransformer::class, $got);
+        self::assertSame($factory, $got->getFactory());
+    }
+
+    /**
+     * @depends testConstructor
+     */
+    public function testMakeForHash(Factory $factory): void
+    {
+        $got = $factory->makeForHash();
+        self::assertInstanceOf(HashTransformer::class, $got);
         self::assertSame($factory, $got->getFactory());
     }
 }

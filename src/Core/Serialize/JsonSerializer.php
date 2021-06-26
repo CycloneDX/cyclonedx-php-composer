@@ -30,7 +30,7 @@ use CycloneDX\Core\Spec\SpecInterface;
 use DomainException;
 
 /**
- * transform data models to Json.
+ * transform data models to JSON.
  *
  * @author jkowalleck
  */

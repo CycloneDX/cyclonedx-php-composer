@@ -25,6 +25,9 @@ namespace CycloneDX\Core\Serialize\JsonTransformer;
 
 use CycloneDX\Core\Models\Bom;
 
+/**
+ * @author jkowalleck
+ */
 class BomTransformer extends AbstractTransformer
 {
     private const BOM_FORMAT = 'CycloneDX';

@@ -25,6 +25,9 @@ namespace CycloneDX\Core\Serialize\JsonTransformer;
 
 use CycloneDX\Core\Repositories\ComponentRepository;
 
+/**
+ * @author jkowalleck
+ */
 class ComponentRepositoryTransformer extends AbstractTransformer
 {
     /**

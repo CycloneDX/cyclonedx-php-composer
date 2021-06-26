@@ -23,6 +23,7 @@ declare(strict_types=1);
 
 namespace CycloneDX\Core\Serialize\JsonTransformer;
 
+use CycloneDX\Core\Helpers\NullAssertionTrait;
 use CycloneDX\Core\Models\Component;
 use CycloneDX\Core\Models\License\LicenseExpression;
 use CycloneDX\Core\Repositories\DisjunctiveLicenseRepository;
@@ -30,8 +31,13 @@ use CycloneDX\Core\Repositories\HashRepository;
 use DomainException;
 use PackageUrl\PackageUrl;
 
+/**
+ * @author jkowalleck
+ */
 class ComponentTransformer extends AbstractTransformer
 {
+    use NullAssertionTrait;
+
     /**
      * @throws DomainException
      *

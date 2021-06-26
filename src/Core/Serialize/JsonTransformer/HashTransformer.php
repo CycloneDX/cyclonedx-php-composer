@@ -23,23 +23,29 @@ declare(strict_types=1);
 
 namespace CycloneDX\Core\Serialize\JsonTransformer;
 
+use DomainException;
+
 /**
- * @internal
- *
  * @author jkowalleck
  */
-abstract class AbstractTransformer
+class HashTransformer extends AbstractTransformer
 {
-    /** @var Factory */
-    private $factory;
-
-    public function __construct(Factory $factory)
+    /**
+     * @throws DomainException
+     */
+    public function transform(string $algorithm, string $content): array
     {
-        $this->factory = $factory;
-    }
+        $spec = $this->getFactory()->getSpec();
+        if (false === $spec->isSupportedHashAlgorithm($algorithm)) {
+            throw new DomainException("Invalid hash algorithm: $algorithm", 1);
+        }
+        if (false === $spec->isSupportedHashContent($content)) {
+            throw new DomainException("Invalid hash content: $content", 2);
+        }
 
-    public function getFactory(): Factory
-    {
-        return $this->factory;
+        return [
+            'alg' => $algorithm,
+            'content' => $content,
+        ];
     }
 }
