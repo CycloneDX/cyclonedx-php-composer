@@ -35,15 +35,11 @@ use PHPUnit\Framework\TestCase;
  */
 class HashTransformerTest extends TestCase
 {
-    public function testConstructor(): HashTransformer
+    public function testConstructor(): void
     {
         $factory = $this->createMock(Factory::class);
-
         $transformer = new HashTransformer($factory);
-
         self::assertSame($factory, $transformer->getFactory());
-
-        return $transformer;
     }
 
     public function testTransform(): void

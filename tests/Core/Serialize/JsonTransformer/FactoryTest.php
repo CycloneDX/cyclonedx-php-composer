@@ -39,18 +39,20 @@ use PHPUnit\Framework\TestCase;
 /**
  * @covers \CycloneDX\Core\Serialize\JsonTransformer\Factory
  *
- * @uses \CycloneDX\Core\Serialize\JsonTransformer\AbstractTransformer
+ * @uses   \CycloneDX\Core\Serialize\JsonTransformer\AbstractTransformer
  */
 class FactoryTest extends TestCase
 {
     public function testConstructor(): Factory
     {
-        $spec = $this->createConfiguredMock(SpecInterface::class,
+        $spec = $this->createConfiguredMock(
+            SpecInterface::class,
             [
                 'supportsFormat' => true,
                 'getSupportedFormats' => ['JSON'],
             ]
         );
+
         $factory = new Factory($spec);
         self::assertSame($spec, $factory->getSpec());
 
@@ -59,7 +61,8 @@ class FactoryTest extends TestCase
 
     public function testConstructThrowsWhenUnsupported(): void
     {
-        $spec = $this->createConfiguredMock(SpecInterface::class,
+        $spec = $this->createConfiguredMock(
+            SpecInterface::class,
             [
                 'supportsFormat' => false,
                 'getSupportedFormats' => [],
@@ -77,7 +80,8 @@ class FactoryTest extends TestCase
      */
     public function testSetSpec(Factory $factory): void
     {
-        $spec = $this->createConfiguredMock(SpecInterface::class,
+        $spec = $this->createConfiguredMock(
+            SpecInterface::class,
             [
                 'supportsFormat' => true,
                 'getSupportedFormats' => ['JSON'],
@@ -95,7 +99,8 @@ class FactoryTest extends TestCase
      */
     public function testSetSpecThrowsWhenUnsupported(Factory $factory): void
     {
-        $spec = $this->createConfiguredMock(SpecInterface::class,
+        $spec = $this->createConfiguredMock(
+            SpecInterface::class,
             [
                 'supportsFormat' => false,
                 'getSupportedFormats' => [],

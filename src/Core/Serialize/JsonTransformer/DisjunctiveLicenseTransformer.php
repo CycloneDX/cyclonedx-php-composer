@@ -24,7 +24,10 @@ declare(strict_types=1);
 namespace CycloneDX\Core\Serialize\JsonTransformer;
 
 use CycloneDX\Core\Helpers\NullAssertionTrait;
-use CycloneDX\Core\Models\License\DisjunctiveLicense;
+use CycloneDX\Core\Models\License\AbstractDisjunctiveLicense;
+use CycloneDX\Core\Models\License\DisjunctiveLicenseWithId;
+use CycloneDX\Core\Models\License\DisjunctiveLicenseWithName;
+use DomainException;
 
 /**
  * @author jkowalleck
@@ -34,14 +37,26 @@ class DisjunctiveLicenseTransformer extends AbstractTransformer
     use NullAssertionTrait;
 
     /**
+     * @throws DomainException
+     *
      * @psalm-return array{'license': array<string, mixed>}
      */
-    public function transform(DisjunctiveLicense $license): array
+    public function transform(AbstractDisjunctiveLicense $license): array
     {
+        if ($license instanceof DisjunctiveLicenseWithId) {
+            $id = $license->getId();
+            $name = null;
+        } elseif ($license instanceof DisjunctiveLicenseWithName) {
+            $id = null;
+            $name = $license->getName();
+        } else {
+            throw new DomainException('Missing id and name for license');
+        }
+
         return ['license' => array_filter(
             [
-                'id' => $license->getId(),
-                'name' => $license->getName(),
+                'id' => $id,
+                'name' => $name,
                 'url' => $license->getUrl(),
             ],
             [$this, 'isNotNull']

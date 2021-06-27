@@ -24,7 +24,10 @@ declare(strict_types=1);
 namespace CycloneDX\Core\Serialize\DomTransformer;
 
 use CycloneDX\Core\Helpers\SimpleDomTrait;
-use CycloneDX\Core\Models\License\DisjunctiveLicense;
+use CycloneDX\Core\Models\License\AbstractDisjunctiveLicense;
+use CycloneDX\Core\Models\License\DisjunctiveLicenseWithId;
+use CycloneDX\Core\Models\License\DisjunctiveLicenseWithName;
+use DomainException;
 use DOMElement;
 
 /**
@@ -34,15 +37,28 @@ class DisjunctiveLicenseTransformer extends AbstractTransformer
 {
     use SimpleDomTrait;
 
-    public function transform(DisjunctiveLicense $license): DOMElement
+    /**
+     * @throws DomainException
+     */
+    public function transform(AbstractDisjunctiveLicense $license): DOMElement
     {
+        if ($license instanceof DisjunctiveLicenseWithId) {
+            $id = $license->getId();
+            $name = null;
+        } elseif ($license instanceof DisjunctiveLicenseWithName) {
+            $id = null;
+            $name = $license->getName();
+        } else {
+            throw new DomainException('Missing id and name for license');
+        }
+
         $document = $this->getFactory()->getDocument();
 
         return $this->simpleDomAppendChildren(
             $document->createElement('license'),
             [
-                $this->simpleDomSafeTextElement($document, 'id', $license->getId()),
-                $this->simpleDomSafeTextElement($document, 'name', $license->getName()),
+                $this->simpleDomSafeTextElement($document, 'id', $id),
+                $this->simpleDomSafeTextElement($document, 'name', $name),
                 $this->simpleDomSafeTextElement($document, 'url', $license->getUrl()),
             ]
         );

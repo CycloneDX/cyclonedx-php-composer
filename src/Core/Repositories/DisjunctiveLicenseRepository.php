@@ -23,7 +23,7 @@ declare(strict_types=1);
 
 namespace CycloneDX\Core\Repositories;
 
-use CycloneDX\Core\Models\License\DisjunctiveLicense;
+use CycloneDX\Core\Models\License\AbstractDisjunctiveLicense;
 
 /**
  * @author jkowalleck
@@ -31,12 +31,12 @@ use CycloneDX\Core\Models\License\DisjunctiveLicense;
 class DisjunctiveLicenseRepository implements \Countable
 {
     /**
-     * @var DisjunctiveLicense[]
-     * @psalm-var list<DisjunctiveLicense>
+     * @var AbstractDisjunctiveLicense[]
+     * @psalm-var list<AbstractDisjunctiveLicense>
      */
     private $licenses = [];
 
-    public function __construct(DisjunctiveLicense ...$licenses)
+    public function __construct(AbstractDisjunctiveLicense ...$licenses)
     {
         $this->addLicense(...$licenses);
     }
@@ -44,7 +44,7 @@ class DisjunctiveLicenseRepository implements \Countable
     /**
      * @return $this
      */
-    public function addLicense(DisjunctiveLicense ...$licenses): self
+    public function addLicense(AbstractDisjunctiveLicense ...$licenses): self
     {
         array_push($this->licenses, ...array_values($licenses));
 
@@ -52,8 +52,8 @@ class DisjunctiveLicenseRepository implements \Countable
     }
 
     /**
-     * @return DisjunctiveLicense[]
-     * @psalm-return list<DisjunctiveLicense>
+     * @return AbstractDisjunctiveLicense[]
+     * @psalm-return list<AbstractDisjunctiveLicense>
      */
     public function getLicenses(): array
     {

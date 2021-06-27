@@ -24,12 +24,16 @@ declare(strict_types=1);
 namespace CycloneDX\Core\Serialize\JsonTransformer;
 
 use CycloneDX\Core\Repositories\DisjunctiveLicenseRepository;
+use DomainException;
 
 /**
  * @author jkowalleck
  */
 final class DisjunctiveLicenseRepositoryTransformer extends AbstractTransformer
 {
+    /**
+     * @throws DomainException
+     */
     public function transform(DisjunctiveLicenseRepository $repo): array
     {
         return array_map(

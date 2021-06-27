@@ -23,7 +23,8 @@ declare(strict_types=1);
 
 namespace CycloneDX\Tests\Core\Repositories;
 
-use CycloneDX\Core\Models\License\DisjunctiveLicense;
+use CycloneDX\Core\Models\License\DisjunctiveLicenseWithId;
+use CycloneDX\Core\Models\License\DisjunctiveLicenseWithName;
 use CycloneDX\Core\Repositories\DisjunctiveLicenseRepository;
 use PHPUnit\Framework\TestCase;
 
@@ -34,9 +35,9 @@ class DisjunctiveLicenseRepositoryTest extends TestCase
 {
     public function testAddAndGetLicense(): void
     {
-        $license1 = $this->createStub(DisjunctiveLicense::class);
-        $license2 = $this->createStub(DisjunctiveLicense::class);
-        $license3 = $this->createStub(DisjunctiveLicense::class);
+        $license1 = $this->createStub(DisjunctiveLicenseWithName::class);
+        $license2 = $this->createStub(DisjunctiveLicenseWithId::class);
+        $license3 = $this->createStub(DisjunctiveLicenseWithName::class);
         $repo = new DisjunctiveLicenseRepository($license1);
 
         $repo->addLicense($license2, $license3);
@@ -51,8 +52,8 @@ class DisjunctiveLicenseRepositoryTest extends TestCase
 
     public function testConstructAndGet(): void
     {
-        $license1 = $this->createStub(DisjunctiveLicense::class);
-        $license2 = $this->createStub(DisjunctiveLicense::class);
+        $license1 = $this->createStub(DisjunctiveLicenseWithId::class);
+        $license2 = $this->createStub(DisjunctiveLicenseWithName::class);
         $repo = new DisjunctiveLicenseRepository($license1, $license2);
         $got = $repo->getLicenses();
 
@@ -63,8 +64,8 @@ class DisjunctiveLicenseRepositoryTest extends TestCase
 
     public function testCount(): void
     {
-        $license1 = $this->createStub(DisjunctiveLicense::class);
-        $license2 = $this->createStub(DisjunctiveLicense::class);
+        $license1 = $this->createStub(DisjunctiveLicenseWithId::class);
+        $license2 = $this->createStub(DisjunctiveLicenseWithName::class);
         $repo = new DisjunctiveLicenseRepository($license1);
         $repo->addLicense($license2);
 

@@ -39,7 +39,6 @@ class LicenseExpressionTransformerTest extends TestCase
         $factory = $this->createStub(Factory::class);
 
         $transformer = new LicenseExpressionTransformer($factory);
-
         self::assertSame($factory, $transformer->getFactory());
 
         return $transformer;

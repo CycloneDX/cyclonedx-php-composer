@@ -27,7 +27,8 @@ use CycloneDX\Core\Enums\Classification;
 use CycloneDX\Core\Enums\HashAlgorithm;
 use CycloneDX\Core\Models\Bom;
 use CycloneDX\Core\Models\Component;
-use CycloneDX\Core\Models\License\DisjunctiveLicense;
+use CycloneDX\Core\Models\License\DisjunctiveLicenseWithId;
+use CycloneDX\Core\Models\License\DisjunctiveLicenseWithName;
 use CycloneDX\Core\Models\License\LicenseExpression;
 use CycloneDX\Core\Repositories\ComponentRepository;
 use CycloneDX\Core\Repositories\DisjunctiveLicenseRepository;
@@ -155,7 +156,7 @@ abstract class BomModelProvider
                     (new Component(Classification::LIBRARY, 'name', 'version'))
                         ->setLicense(
                             new DisjunctiveLicenseRepository(
-                                DisjunctiveLicense::createFromNameOrId(
+                                DisjunctiveLicenseWithId::makeValidated(
                                     $license,
                                     SpdxLicenseValidatorSingleton::getInstance()
                                 )
@@ -180,10 +181,7 @@ abstract class BomModelProvider
                     (new Component(Classification::LIBRARY, 'name', 'version'))
                         ->setLicense(
                             new DisjunctiveLicenseRepository(
-                                DisjunctiveLicense::createFromNameOrId(
-                                    $license,
-                                    SpdxLicenseValidatorSingleton::getInstance()
-                                )
+                                new DisjunctiveLicenseWithName($license)
                             )
                         )
                 )
@@ -216,10 +214,7 @@ abstract class BomModelProvider
                     (new Component(Classification::LIBRARY, 'name', 'version'))
                         ->setLicense(
                             new DisjunctiveLicenseRepository(
-                                DisjunctiveLicense::createFromNameOrId(
-                                    'some text',
-                                    SpdxLicenseValidatorSingleton::getInstance()
-                                )
+                                (new DisjunctiveLicenseWithName('some text'))
                                     ->setUrl('https://example.com/license'),
                             )
                         )

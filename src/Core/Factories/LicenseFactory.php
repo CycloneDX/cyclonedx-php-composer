@@ -23,7 +23,8 @@ declare(strict_types=1);
 
 namespace CycloneDX\Core\Factories;
 
-use CycloneDX\Core\Models\License\DisjunctiveLicense;
+use CycloneDX\Core\Models\License\DisjunctiveLicenseWithId;
+use CycloneDX\Core\Models\License\DisjunctiveLicenseWithName;
 use CycloneDX\Core\Models\License\LicenseExpression;
 use CycloneDX\Core\Spdx\License as SpdxLicenseValidator;
 use DomainException;
@@ -51,7 +52,7 @@ class LicenseFactory
     }
 
     /**
-     * @return DisjunctiveLicense|LicenseExpression
+     * @return DisjunctiveLicenseWithName|DisjunctiveLicenseWithId|LicenseExpression
      */
     public function makeFromString(string $license)
     {
@@ -70,8 +71,28 @@ class LicenseFactory
         return new LicenseExpression($license);
     }
 
-    protected function makeDisjunctive(string $license): DisjunctiveLicense
+    /**
+     * @return DisjunctiveLicenseWithId|DisjunctiveLicenseWithName
+     */
+    protected function makeDisjunctive(string $license)
     {
-        return DisjunctiveLicense::createFromNameOrId($license, $this->spdxLicenseValidator);
+        try {
+            return $this->makeDisjunctiveLicenseWithId($license);
+        } catch (DomainException $exception) {
+            return $this->makeDisjunctiveLicenseWithName($license);
+        }
+    }
+
+    /**
+     * @throws DomainException when the SPDX license is invalid
+     */
+    protected function makeDisjunctiveLicenseWithId(string $license): DisjunctiveLicenseWithId
+    {
+        return DisjunctiveLicenseWithId::makeValidated($license, $this->spdxLicenseValidator);
+    }
+
+    protected function makeDisjunctiveLicenseWithName(string $license): DisjunctiveLicenseWithName
+    {
+        return new DisjunctiveLicenseWithName($license);
     }
 }

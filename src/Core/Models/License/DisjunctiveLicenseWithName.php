@@ -21,31 +21,34 @@ declare(strict_types=1);
  * Copyright (c) Steve Springett. All Rights Reserved.
  */
 
-namespace CycloneDX\Core\Serialize\DomTransformer;
-
-use CycloneDX\Core\Helpers\SimpleDomTrait;
-use CycloneDX\Core\Repositories\DisjunctiveLicenseRepository;
-use DomainException;
-use DOMElement;
+namespace CycloneDX\Core\Models\License;
 
 /**
  * @author jkowalleck
  */
-final class DisjunctiveLicenseRepositoryTransformer extends AbstractTransformer
+class DisjunctiveLicenseWithName extends AbstractDisjunctiveLicense
 {
-    use SimpleDomTrait;
-
     /**
-     * @throws DomainException
+     * If SPDX does not define the license used, this field may be used to provide the license name.
      *
-     * @return DOMElement[]
-     * @psalm-return list<DOMElement>
+     * @var string|null
      */
-    public function transform(DisjunctiveLicenseRepository $repo): array
+    private $name;
+
+    public function getName(): ?string
     {
-        return array_map(
-            [$this->getFactory()->makeForDisjunctiveLicense(), 'transform'],
-            $repo->getLicenses()
-        );
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    public function __construct(string $name)
+    {
+        $this->setName($name);
     }
 }

@@ -21,31 +21,30 @@ declare(strict_types=1);
  * Copyright (c) Steve Springett. All Rights Reserved.
  */
 
-namespace CycloneDX\Core\Serialize\DomTransformer;
+namespace CycloneDX\Tests\Core\Models\License;
 
-use CycloneDX\Core\Helpers\SimpleDomTrait;
-use CycloneDX\Core\Repositories\DisjunctiveLicenseRepository;
-use DomainException;
-use DOMElement;
+use CycloneDX\Core\Models\License\DisjunctiveLicenseWithName;
 
 /**
- * @author jkowalleck
+ * @covers \CycloneDX\Core\Models\License\DisjunctiveLicenseWithName
+ * @covers \CycloneDX\Core\Models\License\AbstractDisjunctiveLicense
  */
-final class DisjunctiveLicenseRepositoryTransformer extends AbstractTransformer
+class DisjunctiveLicenseWithNameTest extends AbstractDisjunctiveLicenseTestCase
 {
-    use SimpleDomTrait;
+    public function testConstruct(): DisjunctiveLicenseWithName
+    {
+        $license = new DisjunctiveLicenseWithName('foo');
+        self::assertSame('foo', $license->getName());
+
+        return $license;
+    }
 
     /**
-     * @throws DomainException
-     *
-     * @return DOMElement[]
-     * @psalm-return list<DOMElement>
+     * @depends testConstruct
      */
-    public function transform(DisjunctiveLicenseRepository $repo): array
+    public function testSetName(DisjunctiveLicenseWithName $license): void
     {
-        return array_map(
-            [$this->getFactory()->makeForDisjunctiveLicense(), 'transform'],
-            $repo->getLicenses()
-        );
+        $license->setName('bar');
+        self::assertSame('bar', $license->getName());
     }
 }

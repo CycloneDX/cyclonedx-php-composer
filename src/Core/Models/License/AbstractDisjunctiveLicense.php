@@ -21,31 +21,40 @@ declare(strict_types=1);
  * Copyright (c) Steve Springett. All Rights Reserved.
  */
 
-namespace CycloneDX\Core\Serialize\DomTransformer;
+namespace CycloneDX\Core\Models\License;
 
-use CycloneDX\Core\Helpers\SimpleDomTrait;
-use CycloneDX\Core\Repositories\DisjunctiveLicenseRepository;
-use DomainException;
-use DOMElement;
+use InvalidArgumentException;
 
 /**
  * @author jkowalleck
  */
-final class DisjunctiveLicenseRepositoryTransformer extends AbstractTransformer
+abstract class AbstractDisjunctiveLicense
 {
-    use SimpleDomTrait;
+    /**
+     * The URL to the license file.
+     * If specified, a 'license' externalReference should also be specified for completeness.
+     *
+     * @var string|null
+     */
+    private $url;
+
+    public function getUrl(): ?string
+    {
+        return $this->url;
+    }
 
     /**
-     * @throws DomainException
+     * @throws InvalidArgumentException if value is an invalid URL
      *
-     * @return DOMElement[]
-     * @psalm-return list<DOMElement>
+     * @return $this
      */
-    public function transform(DisjunctiveLicenseRepository $repo): array
+    public function setUrl(?string $url): self
     {
-        return array_map(
-            [$this->getFactory()->makeForDisjunctiveLicense(), 'transform'],
-            $repo->getLicenses()
-        );
+        if (null !== $url && false === filter_var($url, \FILTER_VALIDATE_URL)) {
+            throw new InvalidArgumentException("Invalid URL: $url");
+        }
+        $this->url = $url;
+
+        return $this;
     }
 }

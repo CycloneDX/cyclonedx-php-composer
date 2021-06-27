@@ -25,7 +25,8 @@ namespace CycloneDX\Tests\Composer\Factories;
 
 use Composer\Package\CompletePackageInterface;
 use CycloneDX\Composer\Factories\LicenseFactory;
-use CycloneDX\Core\Models\License\DisjunctiveLicense;
+use CycloneDX\Core\Models\License\DisjunctiveLicenseWithId;
+use CycloneDX\Core\Models\License\DisjunctiveLicenseWithName;
 use CycloneDX\Core\Models\License\LicenseExpression;
 use CycloneDX\Core\Repositories\DisjunctiveLicenseRepository;
 use PHPUnit\Framework\TestCase;
@@ -109,8 +110,8 @@ class LicenseFactoryTest extends TestCase
         );
         $makeDisjunctiveLicenseRepository->setAccessible(true);
 
-        $disjunctiveLicense1 = $this->createStub(DisjunctiveLicense::class);
-        $disjunctiveLicense2 = $this->createStub(DisjunctiveLicense::class);
+        $disjunctiveLicense1 = $this->createStub(DisjunctiveLicenseWithName::class);
+        $disjunctiveLicense2 = $this->createStub(DisjunctiveLicenseWithId::class);
         $expected = new DisjunctiveLicenseRepository($disjunctiveLicense1, $disjunctiveLicense2);
         $factory = $this->createPartialMock(
             LicenseFactory::class,
