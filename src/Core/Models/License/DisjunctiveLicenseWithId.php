@@ -40,9 +40,6 @@ class DisjunctiveLicenseWithId extends AbstractDisjunctiveLicense
      */
     private $id;
 
-    /**
-     * Set via {@see setNameOrId()].
-     */
     public function getId(): string
     {
         return $this->id;
