@@ -115,6 +115,8 @@ class FactoryTest extends TestCase
 
     /**
      * @depends testConstructor
+     *
+     * @uses \CycloneDX\Core\Serialize\JsonTransformer\ComponentRepositoryTransformer
      */
     public function testMakeForComponentRepository(Factory $factory): void
     {
@@ -125,6 +127,8 @@ class FactoryTest extends TestCase
 
     /**
      * @depends testConstructor
+     *
+     * @uses \CycloneDX\Core\Serialize\JsonTransformer\BomTransformer
      */
     public function testMakeForBom(Factory $factory): void
     {
@@ -135,6 +139,8 @@ class FactoryTest extends TestCase
 
     /**
      * @depends testConstructor
+     *
+     * @uses \CycloneDX\Core\Serialize\JsonTransformer\DisjunctiveLicenseTransformer
      */
     public function testMakeForDisjunctiveLicense(Factory $factory): void
     {
@@ -145,6 +151,8 @@ class FactoryTest extends TestCase
 
     /**
      * @depends testConstructor
+     *
+     * @uses \CycloneDX\Core\Serialize\JsonTransformer\HashRepositoryTransformer
      */
     public function testMakeForHashRepository(Factory $factory): void
     {
@@ -155,6 +163,8 @@ class FactoryTest extends TestCase
 
     /**
      * @depends testConstructor
+     *
+     * @uses \CycloneDX\Core\Serialize\JsonTransformer\ComponentTransformer
      */
     public function testMakeForComponent(Factory $factory): void
     {
@@ -165,6 +175,8 @@ class FactoryTest extends TestCase
 
     /**
      * @depends testConstructor
+     *
+     * @uses \CycloneDX\Core\Serialize\JsonTransformer\DisjunctiveLicenseRepositoryTransformer
      */
     public function testMakeForDisjunctiveLicenseRepository(Factory $factory): void
     {
@@ -175,6 +187,8 @@ class FactoryTest extends TestCase
 
     /**
      * @depends testConstructor
+     *
+     * @uses \CycloneDX\Core\Serialize\JsonTransformer\LicenseExpressionTransformer
      */
     public function testMakeForLicenseExpression(Factory $factory): void
     {
@@ -185,6 +199,8 @@ class FactoryTest extends TestCase
 
     /**
      * @depends testConstructor
+     *
+     * @uses \CycloneDX\Core\Serialize\JsonTransformer\HashTransformer
      */
     public function testMakeForHash(Factory $factory): void
     {
