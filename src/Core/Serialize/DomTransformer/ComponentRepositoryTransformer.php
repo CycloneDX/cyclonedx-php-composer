@@ -32,6 +32,7 @@ use DOMElement;
 class ComponentRepositoryTransformer extends AbstractTransformer
 {
     /**
+     * @return DOMElement[]
      * @psalm-return list<DOMElement>
      */
     public function transform(ComponentRepository $components): array

@@ -134,6 +134,7 @@ class MakeBomCommandOptions
     public $excludePlugins = false;
 
     /**
+     * @var string
      * @psalm-var MakeBomCommandOptions::OUTPUT_FORMAT_*
      * @readonly
      * @psalm-allow-private-mutation
@@ -141,6 +142,7 @@ class MakeBomCommandOptions
     public $bomFormat = self::OUTPUT_FORMAT_XML;
 
     /**
+     * @var string
      * @psalm-var class-string<SerializerInterface>
      * @readonly
      * @psalm-allow-private-mutation

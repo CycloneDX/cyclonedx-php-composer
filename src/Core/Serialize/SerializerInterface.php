@@ -37,7 +37,7 @@ interface SerializerInterface
      * May throw {@see \RuntimeException} if spec version is not supported.
      * May throw additional implementation-dependent Exceptions.
      *
-     * @psalm-param bool $pretty pretty print the output
+     * @param bool $pretty pretty print the output
      */
     public function serialize(Bom $bom, bool $pretty = false): string;
 
