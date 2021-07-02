@@ -42,7 +42,7 @@ interface SpecInterface
      */
     public function getSupportedFormats(): array;
 
-    public function supportsFormat(string $format): bool;
+    public function isSupportedFormat(string $format): bool;
 
     public function isSupportedComponentType(string $classification): bool;
 

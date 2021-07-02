@@ -23,8 +23,8 @@ declare(strict_types=1);
 
 namespace CycloneDX\Tests\Core\Serialize\JsonTransformer;
 
-use CycloneDX\Core\Serialize\JsonTransformer\Factory;
 use CycloneDX\Core\Serialize\JsonTransformer\HashTransformer;
+use CycloneDX\Core\Serialize\JsonTransformer\TransformerFactory;
 use CycloneDX\Core\Spec\SpecInterface;
 use DomainException;
 use PHPUnit\Framework\TestCase;
@@ -37,14 +37,14 @@ class HashTransformerTest extends TestCase
 {
     public function testConstructor(): void
     {
-        $factory = $this->createMock(Factory::class);
+        $factory = $this->createMock(TransformerFactory::class);
         $transformer = new HashTransformer($factory);
-        self::assertSame($factory, $transformer->getFactory());
+        self::assertSame($factory, $transformer->getTransformerFactory());
     }
 
     public function testTransform(): void
     {
-        $factory = $this->createMock(Factory::class);
+        $factory = $this->createMock(TransformerFactory::class);
         $transformer = new HashTransformer($factory);
         $factory->method('getSpec')->willReturn(
             $this->createConfiguredMock(
@@ -64,7 +64,7 @@ class HashTransformerTest extends TestCase
 
     public function testTransformThrowOnUnsupportedAlgorithm(): void
     {
-        $factory = $this->createMock(Factory::class);
+        $factory = $this->createMock(TransformerFactory::class);
         $transformer = new HashTransformer($factory);
         $factory->method('getSpec')->willReturn(
             $this->createConfiguredMock(
@@ -85,7 +85,7 @@ class HashTransformerTest extends TestCase
 
     public function testTransformThrowOnUnsupportedContent(): void
     {
-        $factory = $this->createMock(Factory::class);
+        $factory = $this->createMock(TransformerFactory::class);
         $transformer = new HashTransformer($factory);
         $factory->method('getSpec')->willReturn(
             $this->createConfiguredMock(

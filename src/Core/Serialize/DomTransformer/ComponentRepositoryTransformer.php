@@ -40,7 +40,7 @@ class ComponentRepositoryTransformer extends AbstractTransformer
         return 0 === \count($components)
             ? []
             : array_map(
-                [$this->getFactory()->makeForComponent(), 'transform'],
+                [$this->getTransformerFactory()->makeForComponent(), 'transform'],
                 $components->getComponents()
             );
     }

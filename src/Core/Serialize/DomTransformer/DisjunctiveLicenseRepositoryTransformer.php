@@ -27,6 +27,7 @@ use CycloneDX\Core\Helpers\SimpleDomTrait;
 use CycloneDX\Core\Repositories\DisjunctiveLicenseRepository;
 use DomainException;
 use DOMElement;
+use InvalidArgumentException;
 
 /**
  * @author jkowalleck
@@ -43,9 +44,12 @@ final class DisjunctiveLicenseRepositoryTransformer extends AbstractTransformer
      */
     public function transform(DisjunctiveLicenseRepository $repo): array
     {
-        return array_map(
-            [$this->getFactory()->makeForDisjunctiveLicense(), 'transform'],
-            $repo->getLicenses()
-        );
+        $transformer = $this->getTransformerFactory()->makeForDisjunctiveLicense();
+        $licenses = $repo->getLicenses();
+        try {
+            return array_map([$transformer, 'transform'], $licenses);
+        } catch (InvalidArgumentException $exception) {
+            throw new DomainException('Unsupported license detected', 0, $exception);
+        }
     }
 }

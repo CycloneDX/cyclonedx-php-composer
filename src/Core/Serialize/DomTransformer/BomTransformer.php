@@ -39,10 +39,10 @@ class BomTransformer extends AbstractTransformer
 
     public function transform(Bom $bom): DOMElement
     {
-        $document = $this->getFactory()->getDocument();
+        $document = $this->getTransformerFactory()->getDocument();
 
         $element = $document->createElementNS(
-            sprintf(self::XML_NAMESPACE_PATTERN, $this->getFactory()->getSpec()->getVersion()),
+            sprintf(self::XML_NAMESPACE_PATTERN, $this->getTransformerFactory()->getSpec()->getVersion()),
             'bom' // no namespace = default NS - so children w/o NS fall under this NS
         );
         $this->simpleDomSetAttributes(
@@ -65,7 +65,7 @@ class BomTransformer extends AbstractTransformer
 
     private function transformComponents(ComponentRepository $components): DOMElement
     {
-        $factory = $this->getFactory();
+        $factory = $this->getTransformerFactory();
 
         return $this->simpleDomAppendChildren(
             $factory->getDocument()->createElement('components'),

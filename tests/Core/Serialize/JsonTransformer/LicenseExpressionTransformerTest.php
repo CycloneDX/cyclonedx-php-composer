@@ -24,8 +24,8 @@ declare(strict_types=1);
 namespace CycloneDX\Tests\Core\Serialize\JsonTransformer;
 
 use CycloneDX\Core\Models\License\LicenseExpression;
-use CycloneDX\Core\Serialize\JsonTransformer\Factory;
 use CycloneDX\Core\Serialize\JsonTransformer\LicenseExpressionTransformer;
+use CycloneDX\Core\Serialize\JsonTransformer\TransformerFactory;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -36,10 +36,10 @@ class LicenseExpressionTransformerTest extends TestCase
 {
     public function testConstructor(): LicenseExpressionTransformer
     {
-        $factory = $this->createStub(Factory::class);
+        $factory = $this->createStub(TransformerFactory::class);
 
         $transformer = new LicenseExpressionTransformer($factory);
-        self::assertSame($factory, $transformer->getFactory());
+        self::assertSame($factory, $transformer->getTransformerFactory());
 
         return $transformer;
     }

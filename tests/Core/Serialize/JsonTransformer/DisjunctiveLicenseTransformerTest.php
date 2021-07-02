@@ -27,7 +27,7 @@ use CycloneDX\Core\Models\License\AbstractDisjunctiveLicense;
 use CycloneDX\Core\Models\License\DisjunctiveLicenseWithId;
 use CycloneDX\Core\Models\License\DisjunctiveLicenseWithName;
 use CycloneDX\Core\Serialize\JsonTransformer\DisjunctiveLicenseTransformer;
-use CycloneDX\Core\Serialize\JsonTransformer\Factory;
+use CycloneDX\Core\Serialize\JsonTransformer\TransformerFactory;
 use Generator;
 use PHPUnit\Framework\TestCase;
 
@@ -39,9 +39,9 @@ class DisjunctiveLicenseTransformerTest extends TestCase
 {
     public function testConstructor(): void
     {
-        $factory = $this->createMock(Factory::class);
+        $factory = $this->createMock(TransformerFactory::class);
         $transformer = new DisjunctiveLicenseTransformer($factory);
-        self::assertSame($factory, $transformer->getFactory());
+        self::assertSame($factory, $transformer->getTransformerFactory());
     }
 
     /**
@@ -49,7 +49,7 @@ class DisjunctiveLicenseTransformerTest extends TestCase
      */
     public function testTransform(AbstractDisjunctiveLicense $license, array $expected): void
     {
-        $factory = $this->createMock(Factory::class);
+        $factory = $this->createMock(TransformerFactory::class);
         $transformer = new DisjunctiveLicenseTransformer($factory);
         self::assertSame($expected, $transformer->transform($license));
     }
@@ -84,5 +84,17 @@ class DisjunctiveLicenseTransformerTest extends TestCase
                 'url' => 'http://foo.bar',
             ]],
         ];
+    }
+
+    public function testTransformThrowsOnUnknown(): void
+    {
+        $license = $this->createStub(AbstractDisjunctiveLicense::class);
+        $factory = $this->createMock(TransformerFactory::class);
+        $transformer = new DisjunctiveLicenseTransformer($factory);
+
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessageMatches('/unsupported license class/i');
+
+        $transformer->transform($license);
     }
 }

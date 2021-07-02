@@ -27,7 +27,7 @@ use CycloneDX\Core\Helpers\NullAssertionTrait;
 use CycloneDX\Core\Models\License\AbstractDisjunctiveLicense;
 use CycloneDX\Core\Models\License\DisjunctiveLicenseWithId;
 use CycloneDX\Core\Models\License\DisjunctiveLicenseWithName;
-use DomainException;
+use InvalidArgumentException;
 
 /**
  * @author jkowalleck
@@ -37,7 +37,9 @@ class DisjunctiveLicenseTransformer extends AbstractTransformer
     use NullAssertionTrait;
 
     /**
-     * @throws DomainException
+     * @psalm-assert DisjunctiveLicenseWithId|DisjunctiveLicenseWithName $license
+     *
+     * @throws InvalidArgumentException
      *
      * @psalm-return array{'license': array<string, mixed>}
      */
@@ -50,7 +52,7 @@ class DisjunctiveLicenseTransformer extends AbstractTransformer
             $id = null;
             $name = $license->getName();
         } else {
-            throw new DomainException('Missing id and name for license');
+            throw new InvalidArgumentException('Unsupported license class: '.\get_class($license));
         }
 
         return ['license' => array_filter(

@@ -23,6 +23,7 @@ declare(strict_types=1);
 
 namespace CycloneDX\Tests\Core\Spec;
 
+use CycloneDX\Core\Spec\Format;
 use CycloneDX\Core\Spec\Spec11;
 use CycloneDX\Core\Spec\SpecInterface;
 
@@ -39,5 +40,10 @@ class Spec11Test extends AbstractSpecTestCase
     protected function getSpecVersion(): string
     {
         return '1.1';
+    }
+
+    protected function shouldSupportFormats(): array
+    {
+        return [Format::XML];
     }
 }

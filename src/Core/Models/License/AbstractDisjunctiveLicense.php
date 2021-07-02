@@ -27,6 +27,8 @@ use InvalidArgumentException;
 
 /**
  * @author jkowalleck
+ *
+ * @internal
  */
 abstract class AbstractDisjunctiveLicense
 {

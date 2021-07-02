@@ -46,6 +46,44 @@ abstract class AbstractSpecTestCase extends TestCase
         self::assertSame($this->getSpecVersion(), $version);
     }
 
+    abstract protected function shouldSupportFormats(): array;
+
+    final public function testKnownFormats(): array
+    {
+        $formats = $this->shouldSupportFormats();
+
+        self::assertIsArray($formats);
+        self::assertNotEmpty($formats);
+
+        return $formats;
+    }
+
+    /**
+     * @depends testKnownFormats
+     */
+    public function testGetSupportedFormats(array $knownFormats): void
+    {
+        $formats = $this->getSpec()->getSupportedFormats();
+        self::assertEquals($knownFormats, $formats);
+    }
+
+    /**
+     * @dataProvider dpIsSupportsFormat
+     */
+    final public function testIsSupportsFormat(string $format, bool $expected): void
+    {
+        $isSupported = $this->getSpec()->isSupportedFormat($format);
+        self::assertSame($expected, $isSupported);
+    }
+
+    final public function dpIsSupportsFormat(): Generator
+    {
+        yield 'unknown' => [uniqid('Format', false), false];
+        foreach ($this->shouldSupportFormats() as $format) {
+            yield $format => [$format, true];
+        }
+    }
+
     final public function testGetSupportedComponentTypes(): void
     {
         $expected = BomSpecData::getClassificationEnumForVersion($this->getSpecVersion());

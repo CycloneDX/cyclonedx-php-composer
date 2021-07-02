@@ -27,8 +27,8 @@ use CycloneDX\Core\Helpers\SimpleDomTrait;
 use CycloneDX\Core\Models\License\AbstractDisjunctiveLicense;
 use CycloneDX\Core\Models\License\DisjunctiveLicenseWithId;
 use CycloneDX\Core\Models\License\DisjunctiveLicenseWithName;
-use DomainException;
 use DOMElement;
+use InvalidArgumentException;
 
 /**
  * @author jkowalleck
@@ -38,7 +38,9 @@ class DisjunctiveLicenseTransformer extends AbstractTransformer
     use SimpleDomTrait;
 
     /**
-     * @throws DomainException
+     * @psalm-assert DisjunctiveLicenseWithId|DisjunctiveLicenseWithName $license
+     *
+     * @throws InvalidArgumentException
      */
     public function transform(AbstractDisjunctiveLicense $license): DOMElement
     {
@@ -49,10 +51,10 @@ class DisjunctiveLicenseTransformer extends AbstractTransformer
             $id = null;
             $name = $license->getName();
         } else {
-            throw new DomainException('Missing id and name for license');
+            throw new InvalidArgumentException('Unsupported license class: '.\get_class($license));
         }
 
-        $document = $this->getFactory()->getDocument();
+        $document = $this->getTransformerFactory()->getDocument();
 
         return $this->simpleDomAppendChildren(
             $document->createElement('license'),

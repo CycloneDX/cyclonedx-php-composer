@@ -25,7 +25,7 @@ namespace CycloneDX\Core\Serialize;
 
 use CycloneDX\Core\Helpers\HasSpecTrait;
 use CycloneDX\Core\Models\Bom;
-use CycloneDX\Core\Serialize\JsonTransformer\Factory;
+use CycloneDX\Core\Serialize\JsonTransformer\TransformerFactory;
 use CycloneDX\Core\Spec\SpecInterface;
 use DomainException;
 
@@ -60,7 +60,7 @@ class JsonSerializer implements SerializerInterface
         }
 
         $json = json_encode(
-            (new Factory($this->spec))
+            (new TransformerFactory($this->spec))
                 ->makeForBom()
                 ->transform($bom),
             $options

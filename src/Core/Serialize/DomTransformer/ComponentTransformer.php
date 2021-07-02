@@ -49,12 +49,12 @@ class ComponentTransformer extends AbstractTransformer
         $version = $component->getVersion();
 
         $type = $component->getType();
-        if (false === $this->getFactory()->getSpec()->isSupportedComponentType($type)) {
+        if (false === $this->getTransformerFactory()->getSpec()->isSupportedComponentType($type)) {
             $reportFQN = "$group/$name@$version";
             throw new DomainException("Component '$reportFQN' has unsupported type: $type");
         }
 
-        $document = $this->getFactory()->getDocument();
+        $document = $this->getTransformerFactory()->getDocument();
 
         $element = $document->createElement('component');
         $this->simpleDomSetAttributes($element, ['type' => $type]);
@@ -88,8 +88,8 @@ class ComponentTransformer extends AbstractTransformer
     {
         if ($license instanceof LicenseExpression) {
             return $this->simpleDomAppendChildren(
-                $this->getFactory()->getDocument()->createElement('licenses'),
-                [$this->getFactory()->makeForLicenseExpression()->transform($license)]
+                $this->getTransformerFactory()->getDocument()->createElement('licenses'),
+                [$this->getTransformerFactory()->makeForLicenseExpression()->transform($license)]
             );
         }
 
@@ -97,8 +97,8 @@ class ComponentTransformer extends AbstractTransformer
             return 0 === \count($license)
                 ? null
                 : $this->simpleDomAppendChildren(
-                    $this->getFactory()->getDocument()->createElement('licenses'),
-                    $this->getFactory()->makeForDisjunctiveLicenseRepository()->transform($license)
+                    $this->getTransformerFactory()->getDocument()->createElement('licenses'),
+                    $this->getTransformerFactory()->makeForDisjunctiveLicenseRepository()->transform($license)
                 );
         }
 
@@ -110,8 +110,8 @@ class ComponentTransformer extends AbstractTransformer
         return null === $hashes || 0 === \count($hashes)
             ? null
             : $this->simpleDomAppendChildren(
-                $this->getFactory()->getDocument()->createElement('hashes'),
-                $this->getFactory()->makeForHashRepository()->transform($hashes)
+                $this->getTransformerFactory()->getDocument()->createElement('hashes'),
+                $this->getTransformerFactory()->makeForHashRepository()->transform($hashes)
             );
     }
 
@@ -119,6 +119,6 @@ class ComponentTransformer extends AbstractTransformer
     {
         return null === $purl
             ? null
-            : $this->simpleDomSafeTextElement($this->getFactory()->getDocument(), 'purl', (string) $purl);
+            : $this->simpleDomSafeTextElement($this->getTransformerFactory()->getDocument(), 'purl', (string) $purl);
     }
 }

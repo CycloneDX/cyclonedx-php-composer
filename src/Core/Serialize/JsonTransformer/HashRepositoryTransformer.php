@@ -39,7 +39,7 @@ class HashRepositoryTransformer extends AbstractTransformer
         $hashes = $repo->getHashes();
 
         return array_map(
-            [$this->getFactory()->makeForHash(), 'transform'],
+            [$this->getTransformerFactory()->makeForHash(), 'transform'],
             array_keys($hashes),
             array_values($hashes)
         );

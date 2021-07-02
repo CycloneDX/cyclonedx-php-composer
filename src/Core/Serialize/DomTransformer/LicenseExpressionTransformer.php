@@ -36,7 +36,7 @@ class LicenseExpressionTransformer extends AbstractTransformer
 
     public function transform(LicenseExpression $license): DOMElement
     {
-        $element = $this->simpleDomSafeTextElement($this->getFactory()->getDocument(), 'expression', $license->getExpression());
+        $element = $this->simpleDomSafeTextElement($this->getTransformerFactory()->getDocument(), 'expression', $license->getExpression());
         \assert(null !== $element);
 
         return $element;

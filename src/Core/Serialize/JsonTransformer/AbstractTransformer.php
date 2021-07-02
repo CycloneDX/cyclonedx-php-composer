@@ -30,16 +30,16 @@ namespace CycloneDX\Core\Serialize\JsonTransformer;
  */
 abstract class AbstractTransformer
 {
-    /** @var Factory */
-    private $factory;
+    /** @var TransformerFactory */
+    private $transformerFactory;
 
-    public function __construct(Factory $factory)
+    public function __construct(TransformerFactory $transformerFactory)
     {
-        $this->factory = $factory;
+        $this->transformerFactory = $transformerFactory;
     }
 
-    public function getFactory(): Factory
+    public function getTransformerFactory(): TransformerFactory
     {
-        return $this->factory;
+        return $this->transformerFactory;
     }
 }

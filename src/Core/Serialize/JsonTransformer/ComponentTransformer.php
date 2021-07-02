@@ -50,7 +50,7 @@ class ComponentTransformer extends AbstractTransformer
         $version = $component->getVersion();
 
         $type = $component->getType();
-        if (false === $this->getFactory()->getSpec()->isSupportedComponentType($type)) {
+        if (false === $this->getTransformerFactory()->getSpec()->isSupportedComponentType($type)) {
             $reportFQN = "$group/$name@$version";
             throw new DomainException("Component '$reportFQN' has unsupported type: $type");
         }
@@ -76,13 +76,13 @@ class ComponentTransformer extends AbstractTransformer
     private function transformLicense($license): ?array
     {
         if ($license instanceof LicenseExpression) {
-            return [$this->getFactory()->makeForLicenseExpression()->transform($license)];
+            return [$this->getTransformerFactory()->makeForLicenseExpression()->transform($license)];
         }
 
         if ($license instanceof DisjunctiveLicenseRepository) {
             return 0 === \count($license)
                 ? null
-                : $this->getFactory()->makeForDisjunctiveLicenseRepository()->transform($license);
+                : $this->getTransformerFactory()->makeForDisjunctiveLicenseRepository()->transform($license);
         }
 
         return null;
@@ -92,7 +92,7 @@ class ComponentTransformer extends AbstractTransformer
     {
         return null === $hashes || 0 === \count($hashes)
             ? null
-            : $this->getFactory()->makeForHashRepository()->transform($hashes);
+            : $this->getTransformerFactory()->makeForHashRepository()->transform($hashes);
     }
 
     private function transformPurl(?PackageUrl $purl): ?string

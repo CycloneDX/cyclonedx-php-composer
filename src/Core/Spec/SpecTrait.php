@@ -50,7 +50,7 @@ trait SpecTrait
         return self::FORMATS;
     }
 
-    public function supportsFormat(string $format): bool
+    public function isSupportedFormat(string $format): bool
     {
         return \in_array($format, self::FORMATS, true);
     }

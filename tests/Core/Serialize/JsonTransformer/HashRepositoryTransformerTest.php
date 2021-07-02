@@ -24,9 +24,9 @@ declare(strict_types=1);
 namespace CycloneDX\Tests\Core\Serialize\JsonTransformer;
 
 use CycloneDX\Core\Repositories\HashRepository;
-use CycloneDX\Core\Serialize\JsonTransformer\Factory;
 use CycloneDX\Core\Serialize\JsonTransformer\HashRepositoryTransformer;
 use CycloneDX\Core\Serialize\JsonTransformer\HashTransformer;
+use CycloneDX\Core\Serialize\JsonTransformer\TransformerFactory;
 use DomainException;
 use PHPUnit\Framework\TestCase;
 
@@ -38,15 +38,15 @@ class HashRepositoryTransformerTest extends TestCase
 {
     public function testConstructor(): void
     {
-        $factory = $this->createMock(Factory::class);
+        $factory = $this->createMock(TransformerFactory::class);
         $transformer = new HashRepositoryTransformer($factory);
-        self::assertSame($factory, $transformer->getFactory());
+        self::assertSame($factory, $transformer->getTransformerFactory());
     }
 
     public function testTransform(): void
     {
         $hashTransformer = $this->createMock(HashTransformer::class);
-        $factory = $this->createConfiguredMock(Factory::class, ['makeForHash' => $hashTransformer]);
+        $factory = $this->createConfiguredMock(TransformerFactory::class, ['makeForHash' => $hashTransformer]);
         $transformer = new HashRepositoryTransformer($factory);
         $repo = $this->createStub(HashRepository::class);
         $repo->method('getHashes')->willReturn(['alg1' => 'content1', 'alg2' => 'content2']);
@@ -66,7 +66,7 @@ class HashRepositoryTransformerTest extends TestCase
     public function testTransformThrowOnThrow(): void
     {
         $hashTransformer = $this->createMock(HashTransformer::class);
-        $factory = $this->createConfiguredMock(Factory::class, ['makeForHash' => $hashTransformer]);
+        $factory = $this->createConfiguredMock(TransformerFactory::class, ['makeForHash' => $hashTransformer]);
         $transformer = new HashRepositoryTransformer($factory);
 
         $repo = $this->createConfiguredMock(HashRepository::class, [

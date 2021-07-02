@@ -39,7 +39,7 @@ class HashTransformer extends AbstractTransformer
      */
     public function transform(string $algorithm, string $content): DOMElement
     {
-        $spec = $this->getFactory()->getSpec();
+        $spec = $this->getTransformerFactory()->getSpec();
         if (false === $spec->isSupportedHashAlgorithm($algorithm)) {
             throw new DomainException("Invalid hash algorithm: $algorithm", 1);
         }
@@ -47,7 +47,7 @@ class HashTransformer extends AbstractTransformer
             throw new DomainException("Invalid hash content: $content", 2);
         }
 
-        $element = $this->simpleDomSafeTextElement($this->getFactory()->getDocument(), 'hash', $content);
+        $element = $this->simpleDomSafeTextElement($this->getTransformerFactory()->getDocument(), 'hash', $content);
         \assert(null !== $element);
         $this->simpleDomSetAttributes($element, ['alg' => $algorithm]);
 

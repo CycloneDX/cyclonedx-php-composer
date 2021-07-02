@@ -36,9 +36,9 @@ class BomTransformer extends AbstractTransformer
     {
         return [
             'bomFormat' => self::BOM_FORMAT,
-            'specVersion' => $this->getFactory()->getSpec()->getVersion(),
+            'specVersion' => $this->getTransformerFactory()->getSpec()->getVersion(),
             'version' => $bom->getVersion(),
-            'components' => $this->getFactory()->makeForComponentRepository()->transform($bom->getComponentRepository()),
+            'components' => $this->getTransformerFactory()->makeForComponentRepository()->transform($bom->getComponentRepository()),
         ];
     }
 }

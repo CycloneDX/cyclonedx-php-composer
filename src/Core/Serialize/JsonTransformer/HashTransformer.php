@@ -35,7 +35,7 @@ class HashTransformer extends AbstractTransformer
      */
     public function transform(string $algorithm, string $content): array
     {
-        $spec = $this->getFactory()->getSpec();
+        $spec = $this->getTransformerFactory()->getSpec();
         if (false === $spec->isSupportedHashAlgorithm($algorithm)) {
             throw new DomainException("Invalid hash algorithm: $algorithm", 1);
         }

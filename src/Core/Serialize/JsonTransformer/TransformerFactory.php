@@ -30,7 +30,7 @@ use DomainException;
 /**
  * @author jkowalleck
  */
-class Factory
+class TransformerFactory
 {
     public const FORMAT = Format::JSON;
 
@@ -60,7 +60,7 @@ class Factory
      */
     public function setSpec(SpecInterface $spec): self
     {
-        if (false === $spec->supportsFormat(self::FORMAT)) {
+        if (false === $spec->isSupportedFormat(self::FORMAT)) {
             throw new DomainException('Unsupported format "'.self::FORMAT.'" for spec '.$spec->getVersion());
         }
         $this->spec = $spec;
