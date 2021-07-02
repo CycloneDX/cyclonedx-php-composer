@@ -21,31 +21,31 @@ declare(strict_types=1);
  * Copyright (c) Steve Springett. All Rights Reserved.
  */
 
-namespace CycloneDX\Tests\Core\Serialize\JsonTransformer;
+namespace CycloneDX\Tests\Core\Serialize\JSON\Normalizers;
 
-use CycloneDX\Core\Serialize\JsonTransformer\HashTransformer;
-use CycloneDX\Core\Serialize\JsonTransformer\TransformerFactory;
+use CycloneDX\Core\Serialize\JSON\NormalizerFactory;
+use CycloneDX\Core\Serialize\JSON\Normalizers\HashNormalizer;
 use CycloneDX\Core\Spec\SpecInterface;
 use DomainException;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \CycloneDX\Core\Serialize\JsonTransformer\HashTransformer
- * @covers \CycloneDX\Core\Serialize\JsonTransformer\AbstractTransformer
+ * @covers \CycloneDX\Core\Serialize\JSON\Normalizers\HashNormalizer
+ * @covers \CycloneDX\Core\Serialize\JSON\AbstractNormalizer
  */
-class HashTransformerTest extends TestCase
+class HashNormalizerTest extends TestCase
 {
     public function testConstructor(): void
     {
-        $factory = $this->createMock(TransformerFactory::class);
-        $transformer = new HashTransformer($factory);
-        self::assertSame($factory, $transformer->getTransformerFactory());
+        $factory = $this->createMock(NormalizerFactory::class);
+        $normalizer = new HashNormalizer($factory);
+        self::assertSame($factory, $normalizer->getNormalizerFactory());
     }
 
-    public function testTransform(): void
+    public function testNormalize(): void
     {
-        $factory = $this->createMock(TransformerFactory::class);
-        $transformer = new HashTransformer($factory);
+        $factory = $this->createMock(NormalizerFactory::class);
+        $normalizer = new HashNormalizer($factory);
         $factory->method('getSpec')->willReturn(
             $this->createConfiguredMock(
                 SpecInterface::class,
@@ -57,15 +57,15 @@ class HashTransformerTest extends TestCase
             )
         );
 
-        $transformed = $transformer->transform('foo', 'bar');
+        $normalizeed = $normalizer->normalize('foo', 'bar');
 
-        self::assertSame(['alg' => 'foo', 'content' => 'bar'], $transformed);
+        self::assertSame(['alg' => 'foo', 'content' => 'bar'], $normalizeed);
     }
 
-    public function testTransformThrowOnUnsupportedAlgorithm(): void
+    public function testNormalizeThrowOnUnsupportedAlgorithm(): void
     {
-        $factory = $this->createMock(TransformerFactory::class);
-        $transformer = new HashTransformer($factory);
+        $factory = $this->createMock(NormalizerFactory::class);
+        $normalizer = new HashNormalizer($factory);
         $factory->method('getSpec')->willReturn(
             $this->createConfiguredMock(
                 SpecInterface::class,
@@ -80,13 +80,13 @@ class HashTransformerTest extends TestCase
         $this->expectException(DomainException::class);
         $this->expectExceptionMessageMatches('/invalid hash algorithm/i');
 
-        $transformer->transform('foo', 'bar');
+        $normalizer->normalize('foo', 'bar');
     }
 
-    public function testTransformThrowOnUnsupportedContent(): void
+    public function testNormalizeThrowOnUnsupportedContent(): void
     {
-        $factory = $this->createMock(TransformerFactory::class);
-        $transformer = new HashTransformer($factory);
+        $factory = $this->createMock(NormalizerFactory::class);
+        $normalizer = new HashNormalizer($factory);
         $factory->method('getSpec')->willReturn(
             $this->createConfiguredMock(
                 SpecInterface::class,
@@ -101,6 +101,6 @@ class HashTransformerTest extends TestCase
         $this->expectException(DomainException::class);
         $this->expectExceptionMessageMatches('/invalid hash content/i');
 
-        $transformer->transform('foo', 'bar');
+        $normalizer->normalize('foo', 'bar');
     }
 }

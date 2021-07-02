@@ -21,20 +21,21 @@ declare(strict_types=1);
  * Copyright (c) Steve Springett. All Rights Reserved.
  */
 
-namespace CycloneDX\Core\Serialize\JsonTransformer;
+namespace CycloneDX\Core\Serialize\JSON\Normalizers;
 
 use CycloneDX\Core\Helpers\NullAssertionTrait;
 use CycloneDX\Core\Models\Component;
 use CycloneDX\Core\Models\License\LicenseExpression;
 use CycloneDX\Core\Repositories\DisjunctiveLicenseRepository;
 use CycloneDX\Core\Repositories\HashRepository;
+use CycloneDX\Core\Serialize\JSON\AbstractNormalizer;
 use DomainException;
 use PackageUrl\PackageUrl;
 
 /**
  * @author jkowalleck
  */
-class ComponentTransformer extends AbstractTransformer
+class ComponentNormalizer extends AbstractNormalizer
 {
     use NullAssertionTrait;
 
@@ -43,14 +44,14 @@ class ComponentTransformer extends AbstractTransformer
      *
      * @psalm-return array<string, mixed>
      */
-    public function transform(Component $component): array
+    public function normalize(Component $component): array
     {
         $name = $component->getName();
         $group = $component->getGroup();
         $version = $component->getVersion();
 
         $type = $component->getType();
-        if (false === $this->getTransformerFactory()->getSpec()->isSupportedComponentType($type)) {
+        if (false === $this->getNormalizerFactory()->getSpec()->isSupportedComponentType($type)) {
             $reportFQN = "$group/$name@$version";
             throw new DomainException("Component '$reportFQN' has unsupported type: $type");
         }
@@ -62,9 +63,9 @@ class ComponentTransformer extends AbstractTransformer
                 'version' => $version,
                 'group' => $group,
                 'description' => $component->getDescription(),
-                'licenses' => $this->transformLicense($component->getLicense()),
-                'hashes' => $this->transformHashes($component->getHashRepository()),
-                'purl' => $this->transformPurl($component->getPackageUrl()),
+                'licenses' => $this->normalizeLicense($component->getLicense()),
+                'hashes' => $this->normalizeHashes($component->getHashRepository()),
+                'purl' => $this->normalizePurl($component->getPackageUrl()),
             ],
             [$this, 'isNotNull']
         );
@@ -73,29 +74,29 @@ class ComponentTransformer extends AbstractTransformer
     /**
      * @param LicenseExpression|DisjunctiveLicenseRepository|null $license
      */
-    private function transformLicense($license): ?array
+    private function normalizeLicense($license): ?array
     {
         if ($license instanceof LicenseExpression) {
-            return [$this->getTransformerFactory()->makeForLicenseExpression()->transform($license)];
+            return [$this->getNormalizerFactory()->makeForLicenseExpression()->normalize($license)];
         }
 
         if ($license instanceof DisjunctiveLicenseRepository) {
             return 0 === \count($license)
                 ? null
-                : $this->getTransformerFactory()->makeForDisjunctiveLicenseRepository()->transform($license);
+                : $this->getNormalizerFactory()->makeForDisjunctiveLicenseRepository()->normalize($license);
         }
 
         return null;
     }
 
-    public function transformHashes(?HashRepository $hashes): ?array
+    public function normalizeHashes(?HashRepository $hashes): ?array
     {
         return null === $hashes || 0 === \count($hashes)
             ? null
-            : $this->getTransformerFactory()->makeForHashRepository()->transform($hashes);
+            : $this->getNormalizerFactory()->makeForHashRepository()->normalize($hashes);
     }
 
-    private function transformPurl(?PackageUrl $purl): ?string
+    private function normalizePurl(?PackageUrl $purl): ?string
     {
         return null === $purl
             ? null

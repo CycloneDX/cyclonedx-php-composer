@@ -21,65 +21,65 @@ declare(strict_types=1);
  * Copyright (c) Steve Springett. All Rights Reserved.
  */
 
-namespace CycloneDX\Tests\Core\Serialize\JsonTransformer;
+namespace CycloneDX\Tests\Core\Serialize\JSON\Normalizers;
 
 use CycloneDX\Core\Repositories\HashRepository;
-use CycloneDX\Core\Serialize\JsonTransformer\HashRepositoryTransformer;
-use CycloneDX\Core\Serialize\JsonTransformer\HashTransformer;
-use CycloneDX\Core\Serialize\JsonTransformer\TransformerFactory;
+use CycloneDX\Core\Serialize\JSON\NormalizerFactory;
+use CycloneDX\Core\Serialize\JSON\Normalizers\HashNormalizer;
+use CycloneDX\Core\Serialize\JSON\Normalizers\HashRepositoryNormalizer;
 use DomainException;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \CycloneDX\Core\Serialize\JsonTransformer\HashRepositoryTransformer
- * @covers \CycloneDX\Core\Serialize\JsonTransformer\AbstractTransformer
+ * @covers \CycloneDX\Core\Serialize\JSON\Normalizers\HashRepositoryNormalizer
+ * @covers \CycloneDX\Core\Serialize\JSON\AbstractNormalizer
  */
-class HashRepositoryTransformerTest extends TestCase
+class HashRepositoryNormalizerTest extends TestCase
 {
     public function testConstructor(): void
     {
-        $factory = $this->createMock(TransformerFactory::class);
-        $transformer = new HashRepositoryTransformer($factory);
-        self::assertSame($factory, $transformer->getTransformerFactory());
+        $factory = $this->createMock(NormalizerFactory::class);
+        $normalizer = new HashRepositoryNormalizer($factory);
+        self::assertSame($factory, $normalizer->getNormalizerFactory());
     }
 
-    public function testTransform(): void
+    public function testNormalize(): void
     {
-        $hashTransformer = $this->createMock(HashTransformer::class);
-        $factory = $this->createConfiguredMock(TransformerFactory::class, ['makeForHash' => $hashTransformer]);
-        $transformer = new HashRepositoryTransformer($factory);
+        $hashNormalizer = $this->createMock(HashNormalizer::class);
+        $factory = $this->createConfiguredMock(NormalizerFactory::class, ['makeForHash' => $hashNormalizer]);
+        $normalizer = new HashRepositoryNormalizer($factory);
         $repo = $this->createStub(HashRepository::class);
         $repo->method('getHashes')->willReturn(['alg1' => 'content1', 'alg2' => 'content2']);
 
-        $hashTransformer->expects(self::exactly(2))->method('transform')
+        $hashNormalizer->expects(self::exactly(2))->method('normalize')
             ->withConsecutive(['alg1', 'content1'], ['alg2', 'content2'])
             ->willReturnOnConsecutiveCalls(['dummy1'], ['dummy2']);
 
-        $transformed = $transformer->transform($repo);
+        $normalizeed = $normalizer->normalize($repo);
 
-        self::assertSame([['dummy1'], ['dummy2']], $transformed);
+        self::assertSame([['dummy1'], ['dummy2']], $normalizeed);
     }
 
     /**
      * @depends testConstructor
      */
-    public function testTransformThrowOnThrow(): void
+    public function testNormalizeThrowOnThrow(): void
     {
-        $hashTransformer = $this->createMock(HashTransformer::class);
-        $factory = $this->createConfiguredMock(TransformerFactory::class, ['makeForHash' => $hashTransformer]);
-        $transformer = new HashRepositoryTransformer($factory);
+        $hashNormalizer = $this->createMock(HashNormalizer::class);
+        $factory = $this->createConfiguredMock(NormalizerFactory::class, ['makeForHash' => $hashNormalizer]);
+        $normalizer = new HashRepositoryNormalizer($factory);
 
         $repo = $this->createConfiguredMock(HashRepository::class, [
             'getHashes' => ['alg1' => 'cont1', 'alg2', 'cont2'],
         ]);
 
         $exception = new DomainException();
-        $hashTransformer->expects(self::once())->method('transform')
+        $hashNormalizer->expects(self::once())->method('normalize')
             ->with('alg1', 'cont1')
             ->willThrowException($exception);
 
         $this->expectExceptionObject($exception);
 
-        $transformer->transform($repo);
+        $normalizer->normalize($repo);
     }
 }

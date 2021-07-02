@@ -21,31 +21,26 @@ declare(strict_types=1);
  * Copyright (c) Steve Springett. All Rights Reserved.
  */
 
-namespace CycloneDX\Core\Serialize\JsonTransformer;
+namespace CycloneDX\Core\Serialize\JSON\Normalizers;
 
-use DomainException;
+use CycloneDX\Core\Repositories\ComponentRepository;
+use CycloneDX\Core\Serialize\JSON\AbstractNormalizer;
 
 /**
  * @author jkowalleck
  */
-class HashTransformer extends AbstractTransformer
+class ComponentRepositoryNormalizer extends AbstractNormalizer
 {
     /**
-     * @throws DomainException
+     * @psalm-return list<mixed>
      */
-    public function transform(string $algorithm, string $content): array
+    public function normalize(ComponentRepository $components): array
     {
-        $spec = $this->getTransformerFactory()->getSpec();
-        if (false === $spec->isSupportedHashAlgorithm($algorithm)) {
-            throw new DomainException("Invalid hash algorithm: $algorithm", 1);
-        }
-        if (false === $spec->isSupportedHashContent($content)) {
-            throw new DomainException("Invalid hash content: $content", 2);
-        }
-
-        return [
-            'alg' => $algorithm,
-            'content' => $content,
-        ];
+        return 0 === \count($components)
+            ? []
+            : array_map(
+                [$this->getNormalizerFactory()->makeForComponent(), 'normalize'],
+                $components->getComponents()
+            );
     }
 }

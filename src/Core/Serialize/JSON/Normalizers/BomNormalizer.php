@@ -21,20 +21,25 @@ declare(strict_types=1);
  * Copyright (c) Steve Springett. All Rights Reserved.
  */
 
-namespace CycloneDX\Core\Serialize\JsonTransformer;
+namespace CycloneDX\Core\Serialize\JSON\Normalizers;
 
-use CycloneDX\Core\Models\License\LicenseExpression;
+use CycloneDX\Core\Models\Bom;
+use CycloneDX\Core\Serialize\JSON\AbstractNormalizer;
 
 /**
  * @author jkowalleck
  */
-class LicenseExpressionTransformer extends AbstractTransformer
+class BomNormalizer extends AbstractNormalizer
 {
-    /**
-     * @psalm-return array{'expression': string}
-     */
-    public function transform(LicenseExpression $license): array
+    private const BOM_FORMAT = 'CycloneDX';
+
+    public function normalize(Bom $bom): array
     {
-        return ['expression' => $license->getExpression()];
+        return [
+            'bomFormat' => self::BOM_FORMAT,
+            'specVersion' => $this->getNormalizerFactory()->getSpec()->getVersion(),
+            'version' => $bom->getVersion(),
+            'components' => $this->getNormalizerFactory()->makeForComponentRepository()->normalize($bom->getComponentRepository()),
+        ];
     }
 }

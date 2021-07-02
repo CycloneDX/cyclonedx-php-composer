@@ -21,29 +21,29 @@ declare(strict_types=1);
  * Copyright (c) Steve Springett. All Rights Reserved.
  */
 
-namespace CycloneDX\Core\Serialize\JsonTransformer;
+namespace CycloneDX\Core\Serialize\DOM\Normalizers;
 
-use CycloneDX\Core\Helpers\NullAssertionTrait;
+use CycloneDX\Core\Helpers\SimpleDomTrait;
 use CycloneDX\Core\Models\License\AbstractDisjunctiveLicense;
 use CycloneDX\Core\Models\License\DisjunctiveLicenseWithId;
 use CycloneDX\Core\Models\License\DisjunctiveLicenseWithName;
+use CycloneDX\Core\Serialize\DOM\AbstractNormalizer;
+use DOMElement;
 use InvalidArgumentException;
 
 /**
  * @author jkowalleck
  */
-class DisjunctiveLicenseTransformer extends AbstractTransformer
+class DisjunctiveLicenseNormalizer extends AbstractNormalizer
 {
-    use NullAssertionTrait;
+    use SimpleDomTrait;
 
     /**
      * @psalm-assert DisjunctiveLicenseWithId|DisjunctiveLicenseWithName $license
      *
      * @throws InvalidArgumentException
-     *
-     * @psalm-return array{'license': array<string, mixed>}
      */
-    public function transform(AbstractDisjunctiveLicense $license): array
+    public function normalize(AbstractDisjunctiveLicense $license): DOMElement
     {
         if ($license instanceof DisjunctiveLicenseWithId) {
             $id = $license->getId();
@@ -55,13 +55,15 @@ class DisjunctiveLicenseTransformer extends AbstractTransformer
             throw new InvalidArgumentException('Unsupported license class: '.\get_class($license));
         }
 
-        return ['license' => array_filter(
+        $document = $this->getNormalizerFactory()->getDocument();
+
+        return $this->simpleDomAppendChildren(
+            $document->createElement('license'),
             [
-                'id' => $id,
-                'name' => $name,
-                'url' => $license->getUrl(),
-            ],
-            [$this, 'isNotNull']
-        )];
+                $this->simpleDomSafeTextElement($document, 'id', $id),
+                $this->simpleDomSafeTextElement($document, 'name', $name),
+                $this->simpleDomSafeTextElement($document, 'url', $license->getUrl()),
+            ]
+        );
     }
 }

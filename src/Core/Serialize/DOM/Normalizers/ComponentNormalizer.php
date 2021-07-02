@@ -21,13 +21,14 @@ declare(strict_types=1);
  * Copyright (c) Steve Springett. All Rights Reserved.
  */
 
-namespace CycloneDX\Core\Serialize\DomTransformer;
+namespace CycloneDX\Core\Serialize\DOM\Normalizers;
 
 use CycloneDX\Core\Helpers\SimpleDomTrait;
 use CycloneDX\Core\Models\Component;
 use CycloneDX\Core\Models\License\LicenseExpression;
 use CycloneDX\Core\Repositories\DisjunctiveLicenseRepository;
 use CycloneDX\Core\Repositories\HashRepository;
+use CycloneDX\Core\Serialize\DOM\AbstractNormalizer;
 use DomainException;
 use DOMElement;
 use PackageUrl\PackageUrl;
@@ -35,26 +36,26 @@ use PackageUrl\PackageUrl;
 /**
  * @author jkowalleck
  */
-class ComponentTransformer extends AbstractTransformer
+class ComponentNormalizer extends AbstractNormalizer
 {
     use SimpleDomTrait;
 
     /**
      * @throws DomainException
      */
-    public function transform(Component $component): DOMElement
+    public function normalize(Component $component): DOMElement
     {
         $name = $component->getName();
         $group = $component->getGroup();
         $version = $component->getVersion();
 
         $type = $component->getType();
-        if (false === $this->getTransformerFactory()->getSpec()->isSupportedComponentType($type)) {
+        if (false === $this->getNormalizerFactory()->getSpec()->isSupportedComponentType($type)) {
             $reportFQN = "$group/$name@$version";
             throw new DomainException("Component '$reportFQN' has unsupported type: $type");
         }
 
-        $document = $this->getTransformerFactory()->getDocument();
+        $document = $this->getNormalizerFactory()->getDocument();
 
         $element = $document->createElement('component');
         $this->simpleDomSetAttributes($element, ['type' => $type]);
@@ -68,11 +69,11 @@ class ComponentTransformer extends AbstractTransformer
                 $this->simpleDomSafeTextElement($document, 'version', $version),
                 $this->simpleDomSafeTextElement($document, 'description', $component->getDescription()),
                 // scope
-                $this->transformHashes($component->getHashRepository()),
-                $this->transformLicense($component->getLicense()),
+                $this->normalizeHashes($component->getHashRepository()),
+                $this->normalizeformLicense($component->getLicense()),
                 // copyright
                 // cpe <-- DEPRECATED in latest spec
-                $this->transformPurl($component->getPackageUrl()),
+                $this->normalizePurl($component->getPackageUrl()),
                 // modified
                 // pedigree
                 // externalReferences
@@ -84,12 +85,12 @@ class ComponentTransformer extends AbstractTransformer
     /**
      * @param LicenseExpression|DisjunctiveLicenseRepository|null $license
      */
-    private function transformLicense($license): ?DOMElement
+    private function normalizeformLicense($license): ?DOMElement
     {
         if ($license instanceof LicenseExpression) {
             return $this->simpleDomAppendChildren(
-                $this->getTransformerFactory()->getDocument()->createElement('licenses'),
-                [$this->getTransformerFactory()->makeForLicenseExpression()->transform($license)]
+                $this->getNormalizerFactory()->getDocument()->createElement('licenses'),
+                [$this->getNormalizerFactory()->makeForLicenseExpression()->normalize($license)]
             );
         }
 
@@ -97,28 +98,28 @@ class ComponentTransformer extends AbstractTransformer
             return 0 === \count($license)
                 ? null
                 : $this->simpleDomAppendChildren(
-                    $this->getTransformerFactory()->getDocument()->createElement('licenses'),
-                    $this->getTransformerFactory()->makeForDisjunctiveLicenseRepository()->transform($license)
+                    $this->getNormalizerFactory()->getDocument()->createElement('licenses'),
+                    $this->getNormalizerFactory()->makeForDisjunctiveLicenseRepository()->normalize($license)
                 );
         }
 
         return null;
     }
 
-    public function transformHashes(?HashRepository $hashes): ?DOMElement
+    public function normalizeHashes(?HashRepository $hashes): ?DOMElement
     {
         return null === $hashes || 0 === \count($hashes)
             ? null
             : $this->simpleDomAppendChildren(
-                $this->getTransformerFactory()->getDocument()->createElement('hashes'),
-                $this->getTransformerFactory()->makeForHashRepository()->transform($hashes)
+                $this->getNormalizerFactory()->getDocument()->createElement('hashes'),
+                $this->getNormalizerFactory()->makeForHashRepository()->normalize($hashes)
             );
     }
 
-    private function transformPurl(?PackageUrl $purl): ?DOMElement
+    private function normalizePurl(?PackageUrl $purl): ?DOMElement
     {
         return null === $purl
             ? null
-            : $this->simpleDomSafeTextElement($this->getTransformerFactory()->getDocument(), 'purl', (string) $purl);
+            : $this->simpleDomSafeTextElement($this->getNormalizerFactory()->getDocument(), 'purl', (string) $purl);
     }
 }

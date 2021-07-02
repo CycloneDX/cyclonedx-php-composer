@@ -21,27 +21,32 @@ declare(strict_types=1);
  * Copyright (c) Steve Springett. All Rights Reserved.
  */
 
-namespace CycloneDX\Core\Serialize\JsonTransformer;
+namespace CycloneDX\Core\Serialize\JSON\Normalizers;
 
-use CycloneDX\Core\Repositories\HashRepository;
+use CycloneDX\Core\Serialize\JSON\AbstractNormalizer;
 use DomainException;
 
 /**
  * @author jkowalleck
  */
-class HashRepositoryTransformer extends AbstractTransformer
+class HashNormalizer extends AbstractNormalizer
 {
     /**
      * @throws DomainException
      */
-    public function transform(HashRepository $repo): array
+    public function normalize(string $algorithm, string $content): array
     {
-        $hashes = $repo->getHashes();
+        $spec = $this->getNormalizerFactory()->getSpec();
+        if (false === $spec->isSupportedHashAlgorithm($algorithm)) {
+            throw new DomainException("Invalid hash algorithm: $algorithm", 1);
+        }
+        if (false === $spec->isSupportedHashContent($content)) {
+            throw new DomainException("Invalid hash content: $content", 2);
+        }
 
-        return array_map(
-            [$this->getTransformerFactory()->makeForHash(), 'transform'],
-            array_keys($hashes),
-            array_values($hashes)
-        );
+        return [
+            'alg' => $algorithm,
+            'content' => $content,
+        ];
     }
 }

@@ -26,7 +26,7 @@ namespace CycloneDX\Core\Serialize;
 use CycloneDX\Core\Helpers\HasSpecTrait;
 use CycloneDX\Core\Helpers\SimpleDomTrait;
 use CycloneDX\Core\Models\Bom;
-use CycloneDX\Core\Serialize\DomTransformer\TransformerFactory;
+use CycloneDX\Core\Serialize\DOM\NormalizerFactory;
 use CycloneDX\Core\Spec\Format;
 use CycloneDX\Core\Spec\SpecInterface;
 use DomainException;
@@ -60,9 +60,9 @@ class XmlSerializer implements SerializerInterface
         $document = new DOMDocument(self::XML_VERSION, self::XML_ENCODING);
         $document->appendChild(
             $document->importNode(
-                (new TransformerFactory($this->spec))
+                (new NormalizerFactory($this->spec))
                     ->makeForBom()
-                    ->transform($bom),
+                    ->normalize($bom),
                 true
             )
         );

@@ -21,40 +21,40 @@ declare(strict_types=1);
  * Copyright (c) Steve Springett. All Rights Reserved.
  */
 
-namespace CycloneDX\Tests\Core\Serialize\JsonTransformer;
+namespace CycloneDX\Tests\Core\Serialize\JSON\Normalizers;
 
 use CycloneDX\Core\Models\License\AbstractDisjunctiveLicense;
 use CycloneDX\Core\Models\License\DisjunctiveLicenseWithId;
 use CycloneDX\Core\Models\License\DisjunctiveLicenseWithName;
-use CycloneDX\Core\Serialize\JsonTransformer\DisjunctiveLicenseTransformer;
-use CycloneDX\Core\Serialize\JsonTransformer\TransformerFactory;
+use CycloneDX\Core\Serialize\JSON\NormalizerFactory;
+use CycloneDX\Core\Serialize\JSON\Normalizers\DisjunctiveLicenseNormalizer;
 use Generator;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \CycloneDX\Core\Serialize\JsonTransformer\DisjunctiveLicenseTransformer
- * @covers \CycloneDX\Core\Serialize\JsonTransformer\AbstractTransformer
+ * @covers \CycloneDX\Core\Serialize\JSON\Normalizers\DisjunctiveLicenseNormalizer
+ * @covers \CycloneDX\Core\Serialize\JSON\AbstractNormalizer
  */
-class DisjunctiveLicenseTransformerTest extends TestCase
+class DisjunctiveLicenseNormalizerTest extends TestCase
 {
     public function testConstructor(): void
     {
-        $factory = $this->createMock(TransformerFactory::class);
-        $transformer = new DisjunctiveLicenseTransformer($factory);
-        self::assertSame($factory, $transformer->getTransformerFactory());
+        $factory = $this->createMock(NormalizerFactory::class);
+        $normalizer = new DisjunctiveLicenseNormalizer($factory);
+        self::assertSame($factory, $normalizer->getNormalizerFactory());
     }
 
     /**
-     * @dataProvider dpTransform
+     * @dataProvider dpNormalize
      */
-    public function testTransform(AbstractDisjunctiveLicense $license, array $expected): void
+    public function testNormalize(AbstractDisjunctiveLicense $license, array $expected): void
     {
-        $factory = $this->createMock(TransformerFactory::class);
-        $transformer = new DisjunctiveLicenseTransformer($factory);
-        self::assertSame($expected, $transformer->transform($license));
+        $factory = $this->createMock(NormalizerFactory::class);
+        $normalizer = new DisjunctiveLicenseNormalizer($factory);
+        self::assertSame($expected, $normalizer->normalize($license));
     }
 
-    public function dpTransform(): Generator
+    public function dpNormalize(): Generator
     {
         yield 'prefer id' => [
             $this->createConfiguredMock(DisjunctiveLicenseWithId::class, [
@@ -86,15 +86,15 @@ class DisjunctiveLicenseTransformerTest extends TestCase
         ];
     }
 
-    public function testTransformThrowsOnUnknown(): void
+    public function testNormalizeThrowsOnUnknown(): void
     {
         $license = $this->createStub(AbstractDisjunctiveLicense::class);
-        $factory = $this->createMock(TransformerFactory::class);
-        $transformer = new DisjunctiveLicenseTransformer($factory);
+        $factory = $this->createMock(NormalizerFactory::class);
+        $normalizer = new DisjunctiveLicenseNormalizer($factory);
 
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessageMatches('/unsupported license class/i');
 
-        $transformer->transform($license);
+        $normalizer->normalize($license);
     }
 }

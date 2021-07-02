@@ -21,36 +21,36 @@ declare(strict_types=1);
  * Copyright (c) Steve Springett. All Rights Reserved.
  */
 
-namespace CycloneDX\Core\Serialize\DomTransformer;
+namespace CycloneDX\Core\Serialize\DOM\Normalizers;
 
 use CycloneDX\Core\Helpers\SimpleDomTrait;
+use CycloneDX\Core\Repositories\DisjunctiveLicenseRepository;
+use CycloneDX\Core\Serialize\DOM\AbstractNormalizer;
 use DomainException;
 use DOMElement;
+use InvalidArgumentException;
 
 /**
  * @author jkowalleck
  */
-class HashTransformer extends AbstractTransformer
+final class DisjunctiveLicenseRepositoryNormalizer extends AbstractNormalizer
 {
     use SimpleDomTrait;
 
     /**
      * @throws DomainException
+     *
+     * @return DOMElement[]
+     * @psalm-return list<DOMElement>
      */
-    public function transform(string $algorithm, string $content): DOMElement
+    public function normalize(DisjunctiveLicenseRepository $repo): array
     {
-        $spec = $this->getTransformerFactory()->getSpec();
-        if (false === $spec->isSupportedHashAlgorithm($algorithm)) {
-            throw new DomainException("Invalid hash algorithm: $algorithm", 1);
+        $normalizer = $this->getNormalizerFactory()->makeForDisjunctiveLicense();
+        $licenses = $repo->getLicenses();
+        try {
+            return array_map([$normalizer, 'normalize'], $licenses);
+        } catch (InvalidArgumentException $exception) {
+            throw new DomainException('Unsupported license detected', 0, $exception);
         }
-        if (false === $spec->isSupportedHashContent($content)) {
-            throw new DomainException("Invalid hash content: $content", 2);
-        }
-
-        $element = $this->simpleDomSafeTextElement($this->getTransformerFactory()->getDocument(), 'hash', $content);
-        \assert(null !== $element);
-        $this->simpleDomSetAttributes($element, ['alg' => $algorithm]);
-
-        return $element;
     }
 }

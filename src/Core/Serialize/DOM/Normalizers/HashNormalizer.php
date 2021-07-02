@@ -21,23 +21,36 @@ declare(strict_types=1);
  * Copyright (c) Steve Springett. All Rights Reserved.
  */
 
-namespace CycloneDX\Core\Serialize\DomTransformer;
+namespace CycloneDX\Core\Serialize\DOM\Normalizers;
 
 use CycloneDX\Core\Helpers\SimpleDomTrait;
-use CycloneDX\Core\Models\License\LicenseExpression;
+use CycloneDX\Core\Serialize\DOM\AbstractNormalizer;
+use DomainException;
 use DOMElement;
 
 /**
  * @author jkowalleck
  */
-class LicenseExpressionTransformer extends AbstractTransformer
+class HashNormalizer extends AbstractNormalizer
 {
     use SimpleDomTrait;
 
-    public function transform(LicenseExpression $license): DOMElement
+    /**
+     * @throws DomainException
+     */
+    public function normalize(string $algorithm, string $content): DOMElement
     {
-        $element = $this->simpleDomSafeTextElement($this->getTransformerFactory()->getDocument(), 'expression', $license->getExpression());
+        $spec = $this->getNormalizerFactory()->getSpec();
+        if (false === $spec->isSupportedHashAlgorithm($algorithm)) {
+            throw new DomainException("Invalid hash algorithm: $algorithm", 1);
+        }
+        if (false === $spec->isSupportedHashContent($content)) {
+            throw new DomainException("Invalid hash content: $content", 2);
+        }
+
+        $element = $this->simpleDomSafeTextElement($this->getNormalizerFactory()->getDocument(), 'hash', $content);
         \assert(null !== $element);
+        $this->simpleDomSetAttributes($element, ['alg' => $algorithm]);
 
         return $element;
     }

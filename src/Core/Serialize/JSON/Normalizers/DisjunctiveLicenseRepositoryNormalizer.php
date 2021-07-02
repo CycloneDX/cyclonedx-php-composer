@@ -21,25 +21,29 @@ declare(strict_types=1);
  * Copyright (c) Steve Springett. All Rights Reserved.
  */
 
-namespace CycloneDX\Core\Serialize\JsonTransformer;
+namespace CycloneDX\Core\Serialize\JSON\Normalizers;
 
-use CycloneDX\Core\Repositories\ComponentRepository;
+use CycloneDX\Core\Repositories\DisjunctiveLicenseRepository;
+use CycloneDX\Core\Serialize\JSON\AbstractNormalizer;
+use DomainException;
+use InvalidArgumentException;
 
 /**
  * @author jkowalleck
  */
-class ComponentRepositoryTransformer extends AbstractTransformer
+final class DisjunctiveLicenseRepositoryNormalizer extends AbstractNormalizer
 {
     /**
-     * @psalm-return list<mixed>
+     * @throws DomainException
      */
-    public function transform(ComponentRepository $components): array
+    public function normalize(DisjunctiveLicenseRepository $repo): array
     {
-        return 0 === \count($components)
-            ? []
-            : array_map(
-                [$this->getTransformerFactory()->makeForComponent(), 'transform'],
-                $components->getComponents()
-            );
+        $normalizer = $this->getNormalizerFactory()->makeForDisjunctiveLicense();
+        $licenses = $repo->getLicenses();
+        try {
+            return array_map([$normalizer, 'normalize'], $licenses);
+        } catch (InvalidArgumentException $exception) {
+            throw new DomainException('Unsupported license detected', 0, $exception);
+        }
     }
 }

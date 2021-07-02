@@ -21,34 +21,25 @@ declare(strict_types=1);
  * Copyright (c) Steve Springett. All Rights Reserved.
  */
 
-namespace CycloneDX\Core\Serialize\DomTransformer;
-
-use CycloneDX\Core\Helpers\SimpleDomTrait;
-use CycloneDX\Core\Repositories\HashRepository;
-use DomainException;
-use DOMElement;
+namespace CycloneDX\Core\Serialize\DOM;
 
 /**
+ * @internal
+ *
  * @author jkowalleck
  */
-class HashRepositoryTransformer extends AbstractTransformer
+abstract class AbstractNormalizer
 {
-    use SimpleDomTrait;
+    /** @var NormalizerFactory */
+    private $normalizerFactory;
 
-    /**
-     * @throws DomainException
-     *
-     * @return DOMElement[]
-     * @psalm-return list<DOMElement>
-     */
-    public function transform(HashRepository $repo): array
+    public function __construct(NormalizerFactory $normalizerFactory)
     {
-        $hashes = $repo->getHashes();
+        $this->normalizerFactory = $normalizerFactory;
+    }
 
-        return array_map(
-            [$this->getTransformerFactory()->makeForHash(), 'transform'],
-            array_keys($hashes),
-            array_values($hashes)
-        );
+    public function getNormalizerFactory(): NormalizerFactory
+    {
+        return $this->normalizerFactory;
     }
 }

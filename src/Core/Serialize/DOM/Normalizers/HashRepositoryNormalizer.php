@@ -21,18 +21,18 @@ declare(strict_types=1);
  * Copyright (c) Steve Springett. All Rights Reserved.
  */
 
-namespace CycloneDX\Core\Serialize\DomTransformer;
+namespace CycloneDX\Core\Serialize\DOM\Normalizers;
 
 use CycloneDX\Core\Helpers\SimpleDomTrait;
-use CycloneDX\Core\Repositories\DisjunctiveLicenseRepository;
+use CycloneDX\Core\Repositories\HashRepository;
+use CycloneDX\Core\Serialize\DOM\AbstractNormalizer;
 use DomainException;
 use DOMElement;
-use InvalidArgumentException;
 
 /**
  * @author jkowalleck
  */
-final class DisjunctiveLicenseRepositoryTransformer extends AbstractTransformer
+class HashRepositoryNormalizer extends AbstractNormalizer
 {
     use SimpleDomTrait;
 
@@ -42,14 +42,14 @@ final class DisjunctiveLicenseRepositoryTransformer extends AbstractTransformer
      * @return DOMElement[]
      * @psalm-return list<DOMElement>
      */
-    public function transform(DisjunctiveLicenseRepository $repo): array
+    public function normalize(HashRepository $repo): array
     {
-        $transformer = $this->getTransformerFactory()->makeForDisjunctiveLicense();
-        $licenses = $repo->getLicenses();
-        try {
-            return array_map([$transformer, 'transform'], $licenses);
-        } catch (InvalidArgumentException $exception) {
-            throw new DomainException('Unsupported license detected', 0, $exception);
-        }
+        $hashes = $repo->getHashes();
+
+        return array_map(
+            [$this->getNormalizerFactory()->makeForHash(), 'normalize'],
+            array_keys($hashes),
+            array_values($hashes)
+        );
     }
 }

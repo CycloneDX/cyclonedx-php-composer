@@ -21,28 +21,30 @@ declare(strict_types=1);
  * Copyright (c) Steve Springett. All Rights Reserved.
  */
 
-namespace CycloneDX\Core\Serialize\DomTransformer;
+namespace CycloneDX\Core\Serialize\JSON\Normalizers;
 
-use CycloneDX\Core\Helpers\SimpleDomTrait;
+use CycloneDX\Core\Helpers\NullAssertionTrait;
 use CycloneDX\Core\Models\License\AbstractDisjunctiveLicense;
 use CycloneDX\Core\Models\License\DisjunctiveLicenseWithId;
 use CycloneDX\Core\Models\License\DisjunctiveLicenseWithName;
-use DOMElement;
+use CycloneDX\Core\Serialize\JSON\AbstractNormalizer;
 use InvalidArgumentException;
 
 /**
  * @author jkowalleck
  */
-class DisjunctiveLicenseTransformer extends AbstractTransformer
+class DisjunctiveLicenseNormalizer extends AbstractNormalizer
 {
-    use SimpleDomTrait;
+    use NullAssertionTrait;
 
     /**
      * @psalm-assert DisjunctiveLicenseWithId|DisjunctiveLicenseWithName $license
      *
      * @throws InvalidArgumentException
+     *
+     * @psalm-return array{'license': array<string, mixed>}
      */
-    public function transform(AbstractDisjunctiveLicense $license): DOMElement
+    public function normalize(AbstractDisjunctiveLicense $license): array
     {
         if ($license instanceof DisjunctiveLicenseWithId) {
             $id = $license->getId();
@@ -54,15 +56,13 @@ class DisjunctiveLicenseTransformer extends AbstractTransformer
             throw new InvalidArgumentException('Unsupported license class: '.\get_class($license));
         }
 
-        $document = $this->getTransformerFactory()->getDocument();
-
-        return $this->simpleDomAppendChildren(
-            $document->createElement('license'),
+        return ['license' => array_filter(
             [
-                $this->simpleDomSafeTextElement($document, 'id', $id),
-                $this->simpleDomSafeTextElement($document, 'name', $name),
-                $this->simpleDomSafeTextElement($document, 'url', $license->getUrl()),
-            ]
-        );
+                'id' => $id,
+                'name' => $name,
+                'url' => $license->getUrl(),
+            ],
+            [$this, 'isNotNull']
+        )];
     }
 }

@@ -21,8 +21,16 @@ declare(strict_types=1);
  * Copyright (c) Steve Springett. All Rights Reserved.
  */
 
-namespace CycloneDX\Core\Serialize\DomTransformer;
+namespace CycloneDX\Core\Serialize\DOM;
 
+use CycloneDX\Core\Serialize\DOM\Normalizers\BomNormalizer;
+use CycloneDX\Core\Serialize\DOM\Normalizers\ComponentNormalizer;
+use CycloneDX\Core\Serialize\DOM\Normalizers\ComponentRepositoryNormalizer;
+use CycloneDX\Core\Serialize\DOM\Normalizers\DisjunctiveLicenseNormalizer;
+use CycloneDX\Core\Serialize\DOM\Normalizers\DisjunctiveLicenseRepositoryNormalizer;
+use CycloneDX\Core\Serialize\DOM\Normalizers\HashNormalizer;
+use CycloneDX\Core\Serialize\DOM\Normalizers\HashRepositoryNormalizer;
+use CycloneDX\Core\Serialize\DOM\Normalizers\LicenseExpressionNormalizer;
 use CycloneDX\Core\Spec\Format;
 use CycloneDX\Core\Spec\SpecInterface;
 use DomainException;
@@ -31,7 +39,7 @@ use DOMDocument;
 /**
  * @author jkowalleck
  */
-class TransformerFactory
+class NormalizerFactory
 {
     public const FORMAT = Format::XML;
 
@@ -78,43 +86,43 @@ class TransformerFactory
         return $this->document;
     }
 
-    public function makeForBom(): BomTransformer
+    public function makeForBom(): BomNormalizer
     {
-        return new BomTransformer($this);
+        return new BomNormalizer($this);
     }
 
-    public function makeForComponentRepository(): ComponentRepositoryTransformer
+    public function makeForComponentRepository(): ComponentRepositoryNormalizer
     {
-        return new ComponentRepositoryTransformer($this);
+        return new ComponentRepositoryNormalizer($this);
     }
 
-    public function makeForComponent(): ComponentTransformer
+    public function makeForComponent(): ComponentNormalizer
     {
-        return new ComponentTransformer($this);
+        return new ComponentNormalizer($this);
     }
 
-    public function makeForLicenseExpression(): LicenseExpressionTransformer
+    public function makeForLicenseExpression(): LicenseExpressionNormalizer
     {
-        return new LicenseExpressionTransformer($this);
+        return new LicenseExpressionNormalizer($this);
     }
 
-    public function makeForDisjunctiveLicenseRepository(): DisjunctiveLicenseRepositoryTransformer
+    public function makeForDisjunctiveLicenseRepository(): DisjunctiveLicenseRepositoryNormalizer
     {
-        return new DisjunctiveLicenseRepositoryTransformer($this);
+        return new DisjunctiveLicenseRepositoryNormalizer($this);
     }
 
-    public function makeForDisjunctiveLicense(): DisjunctiveLicenseTransformer
+    public function makeForDisjunctiveLicense(): DisjunctiveLicenseNormalizer
     {
-        return new DisjunctiveLicenseTransformer($this);
+        return new DisjunctiveLicenseNormalizer($this);
     }
 
-    public function makeForHashRepository(): HashRepositoryTransformer
+    public function makeForHashRepository(): HashRepositoryNormalizer
     {
-        return new HashRepositoryTransformer($this);
+        return new HashRepositoryNormalizer($this);
     }
 
-    public function makeForHash(): HashTransformer
+    public function makeForHash(): HashNormalizer
     {
-        return new HashTransformer($this);
+        return new HashNormalizer($this);
     }
 }

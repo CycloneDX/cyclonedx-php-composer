@@ -21,39 +21,39 @@ declare(strict_types=1);
  * Copyright (c) Steve Springett. All Rights Reserved.
  */
 
-namespace CycloneDX\Tests\Core\Serialize\JsonTransformer;
+namespace CycloneDX\Tests\Core\Serialize\JSON\Normalizers;
 
 use CycloneDX\Core\Models\License\LicenseExpression;
-use CycloneDX\Core\Serialize\JsonTransformer\LicenseExpressionTransformer;
-use CycloneDX\Core\Serialize\JsonTransformer\TransformerFactory;
+use CycloneDX\Core\Serialize\JSON\NormalizerFactory;
+use CycloneDX\Core\Serialize\JSON\Normalizers\LicenseExpressionNormalizer;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \CycloneDX\Core\Serialize\JsonTransformer\LicenseExpressionTransformer
- * @covers \CycloneDX\Core\Serialize\JsonTransformer\AbstractTransformer
+ * @covers \CycloneDX\Core\Serialize\JSON\Normalizers\LicenseExpressionNormalizer
+ * @covers \CycloneDX\Core\Serialize\JSON\AbstractNormalizer
  */
-class LicenseExpressionTransformerTest extends TestCase
+class LicenseExpressionNormalizerTest extends TestCase
 {
-    public function testConstructor(): LicenseExpressionTransformer
+    public function testConstructor(): LicenseExpressionNormalizer
     {
-        $factory = $this->createStub(TransformerFactory::class);
+        $factory = $this->createStub(NormalizerFactory::class);
 
-        $transformer = new LicenseExpressionTransformer($factory);
-        self::assertSame($factory, $transformer->getTransformerFactory());
+        $normalizer = new LicenseExpressionNormalizer($factory);
+        self::assertSame($factory, $normalizer->getNormalizerFactory());
 
-        return $transformer;
+        return $normalizer;
     }
 
     /**
      * @depends testConstructor
      */
-    public function testTransform(LicenseExpressionTransformer $transformer): void
+    public function testNormalize(LicenseExpressionNormalizer $normalizer): void
     {
         $license = $this->createMock(LicenseExpression::class);
         $license->method('getExpression')->willReturn('foo');
 
-        $transformed = $transformer->transform($license);
+        $normalizeed = $normalizer->normalize($license);
 
-        self::assertSame(['expression' => 'foo'], $transformed);
+        self::assertSame(['expression' => 'foo'], $normalizeed);
     }
 }

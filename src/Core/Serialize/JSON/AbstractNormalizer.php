@@ -21,24 +21,25 @@ declare(strict_types=1);
  * Copyright (c) Steve Springett. All Rights Reserved.
  */
 
-namespace CycloneDX\Core\Serialize\JsonTransformer;
-
-use CycloneDX\Core\Models\Bom;
+namespace CycloneDX\Core\Serialize\JSON;
 
 /**
+ * @internal
+ *
  * @author jkowalleck
  */
-class BomTransformer extends AbstractTransformer
+abstract class AbstractNormalizer
 {
-    private const BOM_FORMAT = 'CycloneDX';
+    /** @var NormalizerFactory */
+    private $normalizerFactory;
 
-    public function transform(Bom $bom): array
+    public function __construct(NormalizerFactory $normalizerFactory)
     {
-        return [
-            'bomFormat' => self::BOM_FORMAT,
-            'specVersion' => $this->getTransformerFactory()->getSpec()->getVersion(),
-            'version' => $bom->getVersion(),
-            'components' => $this->getTransformerFactory()->makeForComponentRepository()->transform($bom->getComponentRepository()),
-        ];
+        $this->normalizerFactory = $normalizerFactory;
+    }
+
+    public function getNormalizerFactory(): NormalizerFactory
+    {
+        return $this->normalizerFactory;
     }
 }

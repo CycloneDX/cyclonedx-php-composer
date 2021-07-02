@@ -21,28 +21,29 @@ declare(strict_types=1);
  * Copyright (c) Steve Springett. All Rights Reserved.
  */
 
-namespace CycloneDX\Core\Serialize\DomTransformer;
+namespace CycloneDX\Core\Serialize\DOM\Normalizers;
 
 use CycloneDX\Core\Helpers\SimpleDomTrait;
 use CycloneDX\Core\Models\Bom;
 use CycloneDX\Core\Repositories\ComponentRepository;
+use CycloneDX\Core\Serialize\DOM\AbstractNormalizer;
 use DOMElement;
 
 /**
  * @author jkowalleck
  */
-class BomTransformer extends AbstractTransformer
+class BomNormalizer extends AbstractNormalizer
 {
     use SimpleDomTrait;
 
     private const XML_NAMESPACE_PATTERN = 'http://cyclonedx.org/schema/bom/%s';
 
-    public function transform(Bom $bom): DOMElement
+    public function normalize(Bom $bom): DOMElement
     {
-        $document = $this->getTransformerFactory()->getDocument();
+        $document = $this->getNormalizerFactory()->getDocument();
 
         $element = $document->createElementNS(
-            sprintf(self::XML_NAMESPACE_PATTERN, $this->getTransformerFactory()->getSpec()->getVersion()),
+            sprintf(self::XML_NAMESPACE_PATTERN, $this->getNormalizerFactory()->getSpec()->getVersion()),
             'bom' // no namespace = default NS - so children w/o NS fall under this NS
         );
         $this->simpleDomSetAttributes(
@@ -55,7 +56,7 @@ class BomTransformer extends AbstractTransformer
         $this->simpleDomAppendChildren(
             $element,
             [
-                $this->transformComponents($bom->getComponentRepository()),
+                $this->normalizeComponents($bom->getComponentRepository()),
                 // externalReferences
             ]
         );
@@ -63,13 +64,13 @@ class BomTransformer extends AbstractTransformer
         return $element;
     }
 
-    private function transformComponents(ComponentRepository $components): DOMElement
+    private function normalizeComponents(ComponentRepository $components): DOMElement
     {
-        $factory = $this->getTransformerFactory();
+        $factory = $this->getNormalizerFactory();
 
         return $this->simpleDomAppendChildren(
             $factory->getDocument()->createElement('components'),
-            $factory->makeForComponentRepository()->transform($components)
+            $factory->makeForComponentRepository()->normalize($components)
         );
     }
 }

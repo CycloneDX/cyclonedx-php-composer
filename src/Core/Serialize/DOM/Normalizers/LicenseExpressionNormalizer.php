@@ -21,25 +21,25 @@ declare(strict_types=1);
  * Copyright (c) Steve Springett. All Rights Reserved.
  */
 
-namespace CycloneDX\Core\Serialize\JsonTransformer;
+namespace CycloneDX\Core\Serialize\DOM\Normalizers;
+
+use CycloneDX\Core\Helpers\SimpleDomTrait;
+use CycloneDX\Core\Models\License\LicenseExpression;
+use CycloneDX\Core\Serialize\DOM\AbstractNormalizer;
+use DOMElement;
 
 /**
- * @internal
- *
  * @author jkowalleck
  */
-abstract class AbstractTransformer
+class LicenseExpressionNormalizer extends AbstractNormalizer
 {
-    /** @var TransformerFactory */
-    private $transformerFactory;
+    use SimpleDomTrait;
 
-    public function __construct(TransformerFactory $transformerFactory)
+    public function normalize(LicenseExpression $license): DOMElement
     {
-        $this->transformerFactory = $transformerFactory;
-    }
+        $element = $this->simpleDomSafeTextElement($this->getNormalizerFactory()->getDocument(), 'expression', $license->getExpression());
+        \assert(null !== $element);
 
-    public function getTransformerFactory(): TransformerFactory
-    {
-        return $this->transformerFactory;
+        return $element;
     }
 }

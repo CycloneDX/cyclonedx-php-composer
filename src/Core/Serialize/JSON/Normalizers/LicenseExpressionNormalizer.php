@@ -21,27 +21,21 @@ declare(strict_types=1);
  * Copyright (c) Steve Springett. All Rights Reserved.
  */
 
-namespace CycloneDX\Core\Serialize\DomTransformer;
+namespace CycloneDX\Core\Serialize\JSON\Normalizers;
 
-use CycloneDX\Core\Repositories\ComponentRepository;
-use DOMElement;
+use CycloneDX\Core\Models\License\LicenseExpression;
+use CycloneDX\Core\Serialize\JSON\AbstractNormalizer;
 
 /**
  * @author jkowalleck
  */
-class ComponentRepositoryTransformer extends AbstractTransformer
+class LicenseExpressionNormalizer extends AbstractNormalizer
 {
     /**
-     * @return DOMElement[]
-     * @psalm-return list<DOMElement>
+     * @psalm-return array{'expression': string}
      */
-    public function transform(ComponentRepository $components): array
+    public function normalize(LicenseExpression $license): array
     {
-        return 0 === \count($components)
-            ? []
-            : array_map(
-                [$this->getTransformerFactory()->makeForComponent(), 'transform'],
-                $components->getComponents()
-            );
+        return ['expression' => $license->getExpression()];
     }
 }
