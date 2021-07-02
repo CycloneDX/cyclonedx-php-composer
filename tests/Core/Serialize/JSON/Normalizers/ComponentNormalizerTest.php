@@ -45,7 +45,7 @@ class ComponentNormalizerTest extends TestCase
 {
     public function testNormalizeThrowsOnUnsupportedType(): void
     {
-        $bom = $this->createConfiguredMock(
+        $component = $this->createConfiguredMock(
             Component::class,
             [
                 'getName' => 'foo',
@@ -64,12 +64,12 @@ class ComponentNormalizerTest extends TestCase
         $this->expectException(DomainException::class);
         $this->expectExceptionMessageMatches('/Component .+ has unsupported type/i');
 
-        $normalizer->normalize($bom);
+        $normalizer->normalize($component);
     }
 
     public function testNormalizeMinimal(): void
     {
-        $bom = $this->createConfiguredMock(
+        $component = $this->createConfiguredMock(
             Component::class,
             [
                 'getName' => 'foo',
@@ -90,7 +90,7 @@ class ComponentNormalizerTest extends TestCase
             ->with('FakeType')
             ->willReturn(true);
 
-        $got = $normalizer->normalize($bom);
+        $got = $normalizer->normalize($component);
 
         self::assertSame([
             'type' => 'FakeType',
@@ -101,7 +101,7 @@ class ComponentNormalizerTest extends TestCase
 
     public function testNormalizeFull(): void
     {
-        $bom = $this->createConfiguredMock(
+        $component = $this->createConfiguredMock(
             Component::class,
             [
                 'getName' => 'myName',
@@ -128,13 +128,13 @@ class ComponentNormalizerTest extends TestCase
             ->with('FakeType')
             ->willReturn(true);
         $licenseExpressionNormalizer->expects(self::once())->method('normalize')
-            ->with($bom->getLicense())
+            ->with($component->getLicense())
             ->willReturn(['FakeLicense']);
         $hashRepositoryNormalizer->expects(self::once())->method('normalize')
-            ->with($bom->getHashRepository())
+            ->with($component->getHashRepository())
             ->willReturn(['FakeHashes']);
 
-        $got = $normalizer->normalize($bom);
+        $got = $normalizer->normalize($component);
 
         self::assertEquals([
             'type' => 'FakeType',
@@ -150,7 +150,7 @@ class ComponentNormalizerTest extends TestCase
 
     public function testNormalizeDisjunctiveLicenses(): void
     {
-        $bom = $this->createConfiguredMock(
+        $component = $this->createConfiguredMock(
             Component::class,
             [
                 'getName' => 'myName',
@@ -171,10 +171,10 @@ class ComponentNormalizerTest extends TestCase
             ->with('FakeType')
             ->willReturn(true);
         $licenseNormalizer->expects(self::once())->method('normalize')
-            ->with($bom->getLicense())
+            ->with($component->getLicense())
             ->willReturn(['FakeLicenses']);
 
-        $got = $normalizer->normalize($bom);
+        $got = $normalizer->normalize($component);
 
         self::assertEquals([
             'type' => 'FakeType',
@@ -186,7 +186,7 @@ class ComponentNormalizerTest extends TestCase
 
     public function testNormalizeDisjunctiveLicensesEmpty(): void
     {
-        $bom = $this->createConfiguredMock(
+        $component = $this->createConfiguredMock(
             Component::class,
             [
                 'getName' => 'myName',
@@ -208,7 +208,7 @@ class ComponentNormalizerTest extends TestCase
             ->willReturn(true);
         $licenseNormalizer->expects(self::never())->method('normalize');
 
-        $got = $normalizer->normalize($bom);
+        $got = $normalizer->normalize($component);
 
         self::assertEquals([
             'type' => 'FakeType',
