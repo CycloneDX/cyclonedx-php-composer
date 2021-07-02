@@ -31,7 +31,7 @@ use InvalidArgumentException;
 /**
  * @author jkowalleck
  */
-final class DisjunctiveLicenseRepositoryNormalizer extends AbstractNormalizer
+class DisjunctiveLicenseRepositoryNormalizer extends AbstractNormalizer
 {
     /**
      * @throws DomainException

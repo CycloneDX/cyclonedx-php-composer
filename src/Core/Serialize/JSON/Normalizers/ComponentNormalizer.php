@@ -89,7 +89,7 @@ class ComponentNormalizer extends AbstractNormalizer
         return null;
     }
 
-    public function normalizeHashes(?HashRepository $hashes): ?array
+    private function normalizeHashes(?HashRepository $hashes): ?array
     {
         return null === $hashes || 0 === \count($hashes)
             ? null

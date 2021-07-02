@@ -106,7 +106,7 @@ class ComponentNormalizer extends AbstractNormalizer
         return null;
     }
 
-    public function normalizeHashes(?HashRepository $hashes): ?DOMElement
+    private function normalizeHashes(?HashRepository $hashes): ?DOMElement
     {
         return null === $hashes || 0 === \count($hashes)
             ? null
