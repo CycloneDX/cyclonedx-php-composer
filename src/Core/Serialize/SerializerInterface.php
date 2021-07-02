@@ -36,10 +36,8 @@ interface SerializerInterface
      *
      * May throw {@see \RuntimeException} if spec version is not supported.
      * May throw additional implementation-dependent Exceptions.
-     *
-     * @param bool $pretty pretty print the output
      */
-    public function serialize(Bom $bom, bool $pretty = false): string;
+    public function serialize(Bom $bom): string;
 
     public function __construct(SpecInterface $spec);
 }

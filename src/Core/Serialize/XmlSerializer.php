@@ -55,7 +55,7 @@ class XmlSerializer implements SerializerInterface
     /**
      * @throws DomainException if something was not supported
      */
-    public function serialize(Bom $bom, bool $pretty = true): string
+    public function serialize(Bom $bom): string
     {
         $document = new DOMDocument(self::XML_VERSION, self::XML_ENCODING);
         $document->appendChild(
@@ -67,7 +67,7 @@ class XmlSerializer implements SerializerInterface
             )
         );
 
-        $document->formatOutput = $pretty;
+        $document->formatOutput = true;
 
         // option LIBXML_NOEMPTYTAG might lead to errors in consumers
         $xml = $document->saveXML();

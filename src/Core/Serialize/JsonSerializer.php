@@ -52,12 +52,9 @@ class JsonSerializer implements SerializerInterface
      *
      * @throws DomainException if something was not supported
      */
-    public function serialize(Bom $bom, bool $pretty = true): string
+    public function serialize(Bom $bom): string
     {
-        $options = \JSON_THROW_ON_ERROR | \JSON_PRESERVE_ZERO_FRACTION;
-        if ($pretty) {
-            $options |= \JSON_PRETTY_PRINT;
-        }
+        $options = \JSON_THROW_ON_ERROR | \JSON_PRESERVE_ZERO_FRACTION | \JSON_PRETTY_PRINT;
 
         $json = json_encode(
             (new NormalizerFactory($this->spec))

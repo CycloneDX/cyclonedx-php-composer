@@ -31,6 +31,7 @@ use CycloneDX\Composer\Factories\LicenseFactory;
 use CycloneDX\Composer\Factories\SpecFactory;
 use CycloneDX\Composer\Locker;
 use CycloneDX\Composer\Plugin\Exceptions\ValueError;
+use CycloneDX\Core\Serialize\SerializerInterface;
 use CycloneDX\Core\Spdx\License as SpdxLicenseValidator;
 use RuntimeException;
 use Symfony\Component\Console\Formatter\OutputFormatter;
@@ -102,6 +103,7 @@ class MakeBomCommand extends BaseCommand
 
     /**
      * @psalm-suppress MissingThrowsDocblock - Exceptions are handled by caller
+     * @psalm-suppress RedundantConditionGivenDocblockType - Some IDEs need the assert as a help
      */
     private function makeAndWrite(Locker $locker, MakeBomCommandOptions $options, OutputInterface $output): bool
     {
@@ -117,6 +119,7 @@ class MakeBomCommand extends BaseCommand
 
         $spec = (new SpecFactory())->make($options->specVersion);
         $bomWriter = new $options->bomWriterClass($spec);
+        \assert($bomWriter instanceof SerializerInterface);
 
         $output->writeln(
             '<info>Serializing BOM: '.OutputFormatter::escape($options->bomFormat).' '.OutputFormatter::escape(
@@ -124,7 +127,7 @@ class MakeBomCommand extends BaseCommand
             ).'</info>',
             OutputInterface::VERBOSITY_VERBOSE
         );
-        $bomContents = $bomWriter->serialize($bom, true);
+        $bomContents = $bomWriter->serialize($bom);
 
         if (MakeBomCommandOptions::OUTPUT_FILE_STDOUT === $options->outputFile) {
             $output->writeln('<info>Writing output to STDOUT</info>', OutputInterface::VERBOSITY_VERBOSE);
