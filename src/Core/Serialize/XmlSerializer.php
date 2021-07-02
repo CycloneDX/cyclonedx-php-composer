@@ -27,7 +27,6 @@ use CycloneDX\Core\Helpers\HasSpecTrait;
 use CycloneDX\Core\Helpers\SimpleDomTrait;
 use CycloneDX\Core\Models\Bom;
 use CycloneDX\Core\Serialize\DOM\NormalizerFactory;
-use CycloneDX\Core\Spec\Format;
 use CycloneDX\Core\Spec\SpecInterface;
 use DomainException;
 use DOMDocument;
@@ -41,8 +40,6 @@ class XmlSerializer implements SerializerInterface
 {
     use HasSpecTrait;
     use SimpleDomTrait;
-
-    private const FORMAT = Format::XML;
 
     private const XML_VERSION = '1.0';
     private const XML_ENCODING = 'UTF-8';

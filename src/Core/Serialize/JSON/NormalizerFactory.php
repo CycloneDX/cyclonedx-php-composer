@@ -49,7 +49,7 @@ class NormalizerFactory
     private $spec;
 
     /**
-     * @throws DomainException when the spec does not support XML format
+     * @throws DomainException when the spec does not support JSON format
      */
     public function __construct(SpecInterface $spec)
     {

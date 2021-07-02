@@ -38,14 +38,10 @@ class JsonSerializer implements SerializerInterface
 {
     use HasSpecTrait;
 
-    private const BOM_FORMAT = 'CycloneDX';
-
     public function __construct(SpecInterface $spec)
     {
         $this->spec = $spec;
     }
-
-    // region SerializerInterface
 
     /**
      * Serialize a Bom to JSON.

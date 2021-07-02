@@ -39,17 +39,15 @@ class BomNormalizerTest extends TestCase
 {
     public function testNormalize(): void
     {
-        $spec = $this->createConfiguredMock(
-            SpecInterface::class,
+        $spec = $this->createConfiguredMock(SpecInterface::class, ['getVersion' => '1.2']);
+        $componentsNormalizer = $this->createMock(ComponentRepositoryNormalizer::class);
+        $factory = $this->createConfiguredMock(
+            NormalizerFactory::class,
             [
-                'getVersion' => '1.2',
+                'getSpec' => $spec,
+                'makeForComponentRepository' => $componentsNormalizer,
             ]
         );
-        $componentsNormalizer = $this->createMock(ComponentRepositoryNormalizer::class);
-        $factory = $this->createConfiguredMock(NormalizerFactory::class, [
-            'getSpec' => $spec,
-            'makeForComponentRepository' => $componentsNormalizer,
-            ]);
         $normalizer = new BomNormalizer($factory);
         $bom = $this->createConfiguredMock(
             Bom::class,
