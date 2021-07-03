@@ -25,6 +25,7 @@ namespace CycloneDX\Core\Serialize\DOM\Normalizers;
 
 use CycloneDX\Core\Helpers\SimpleDomTrait;
 use CycloneDX\Core\Models\Component;
+use CycloneDX\Core\Models\License\DisjunctiveLicenseWithName;
 use CycloneDX\Core\Models\License\LicenseExpression;
 use CycloneDX\Core\Repositories\DisjunctiveLicenseRepository;
 use CycloneDX\Core\Repositories\HashRepository;
@@ -70,7 +71,7 @@ class ComponentNormalizer extends AbstractNormalizer
                 $this->simpleDomSafeTextElement($document, 'description', $component->getDescription()),
                 // scope
                 $this->normalizeHashes($component->getHashRepository()),
-                $this->normalizeformLicense($component->getLicense()),
+                $this->normalizeLicense($component->getLicense()),
                 // copyright
                 // cpe <-- DEPRECATED in latest spec
                 $this->normalizePurl($component->getPackageUrl()),
@@ -84,26 +85,57 @@ class ComponentNormalizer extends AbstractNormalizer
 
     /**
      * @param LicenseExpression|DisjunctiveLicenseRepository|null $license
+     *
+     * @throws DomainException
      */
-    private function normalizeformLicense($license): ?DOMElement
+    private function normalizeLicense($license): ?DOMElement
     {
+        /**
+         * @var DOMElement[] $licenses
+         * @psalm-var list<DOMElement> $licenses
+         */
         if ($license instanceof LicenseExpression) {
-            return $this->simpleDomAppendChildren(
+            $licenses = $this->normalizeLicenseExpression($license);
+        } elseif ($license instanceof DisjunctiveLicenseRepository) {
+            $licenses = $this->normalizeDisjunctiveLicenses($license);
+        } else {
+            $licenses = [];
+        }
+
+        return 0 === \count($licenses)
+            ? null
+            : $this->simpleDomAppendChildren(
                 $this->getNormalizerFactory()->getDocument()->createElement('licenses'),
-                [$this->getNormalizerFactory()->makeForLicenseExpression()->normalize($license)]
+                $licenses
             );
+    }
+
+    /**
+     * @return DOMElement[]
+     * @psalm-return list<DOMElement>
+     */
+    private function normalizeLicenseExpression(LicenseExpression $license): array
+    {
+        if ($this->getNormalizerFactory()->getSpec()->supportsLicenseExpression()) {
+            return [$this->getNormalizerFactory()->makeForLicenseExpression()->normalize($license)];
         }
 
-        if ($license instanceof DisjunctiveLicenseRepository) {
-            return 0 === \count($license)
-                ? null
-                : $this->simpleDomAppendChildren(
-                    $this->getNormalizerFactory()->getDocument()->createElement('licenses'),
-                    $this->getNormalizerFactory()->makeForDisjunctiveLicenseRepository()->normalize($license)
-                );
-        }
+        return $this->normalizeDisjunctiveLicenses(
+            new DisjunctiveLicenseRepository(
+                new DisjunctiveLicenseWithName($license->getExpression())
+            )
+        );
+    }
 
-        return null;
+    /**
+     * @return DOMElement[]
+     * @psalm-return list<DOMElement>
+     */
+    private function normalizeDisjunctiveLicenses(DisjunctiveLicenseRepository $licenses): array
+    {
+        return 0 === \count($licenses)
+            ? []
+            : $this->getNormalizerFactory()->makeForDisjunctiveLicenseRepository()->normalize($licenses);
     }
 
     private function normalizeHashes(?HashRepository $hashes): ?DOMElement

@@ -61,4 +61,10 @@ interface SpecInterface
     public function getSupportedHashAlgorithms(): array;
 
     public function isSupportedHashContent(string $content): bool;
+
+    /**
+     * version 1.0 does not support license expressions
+     * they must be normalized to disjunctive licenses.
+     */
+    public function supportsLicenseExpression(): bool;
 }

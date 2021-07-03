@@ -114,7 +114,9 @@ class ComponentNormalizerTest extends TestCase
                 'getPackageUrl' => $this->createConfiguredMock(PackageUrl::class, ['toString' => 'FakePURL', '__toString' => 'FakePURL']),
             ]
         );
-        $spec = $this->createMock(SpecInterface::class);
+        $spec = $this->createConfiguredMock(SpecInterface::class, [
+            'supportsLicenseExpression' => true,
+        ]);
         $licenseExpressionNormalizer = $this->createMock(LicenseExpressionNormalizer::class);
         $hashRepositoryNormalizer = $this->createMock(HashRepositoryNormalizer::class);
         $factory = $this->createConfiguredMock(NormalizerFactory::class, [
@@ -145,6 +147,57 @@ class ComponentNormalizerTest extends TestCase
             'hashes' => ['FakeHashes'],
             'licenses' => [['FakeLicense']],
             'purl' => 'FakePURL',
+        ], $got);
+    }
+
+    /**
+     * @uses \CycloneDX\Core\Models\License\DisjunctiveLicenseWithName
+     * @uses \CycloneDX\Core\Repositories\DisjunctiveLicenseRepository
+     */
+    public function testNormalizeUnsupportedLicenseExpression(): void
+    {
+        $component = $this->createConfiguredMock(
+            Component::class,
+            [
+                'getName' => 'myName',
+                'getVersion' => 'some-version',
+                'getType' => 'FakeType',
+                'getLicense' => $this->createConfiguredMock(LicenseExpression::class, ['getExpression' => 'myLicense']),
+            ]
+        );
+        $spec = $this->createConfiguredMock(SpecInterface::class,
+        [
+            'supportsLicenseExpression' => false,
+        ]);
+        $licenseNormalizer = $this->createMock(DisjunctiveLicenseRepositoryNormalizer::class);
+        $factory = $this->createConfiguredMock(NormalizerFactory::class, [
+            'getSpec' => $spec,
+            'makeForDisjunctiveLicenseRepository' => $licenseNormalizer,
+        ]);
+        $normalizer = new ComponentNormalizer($factory);
+
+        $transformedLicenseTest = function (DisjunctiveLicenseRepository $licenses): bool {
+            $licenses = $licenses->getLicenses();
+            self::assertCount(1, $licenses);
+            self::assertSame('myLicense', $licenses[0]->getName());
+
+            return true;
+        };
+
+        $spec->expects(self::once())->method('isSupportedComponentType')
+            ->with('FakeType')
+            ->willReturn(true);
+        $licenseNormalizer->expects(self::once())->method('normalize')
+            ->with($this->callback($transformedLicenseTest))
+            ->willReturn(['FakeLicense']);
+
+        $got = $normalizer->normalize($component);
+
+        self::assertEquals([
+            'type' => 'FakeType',
+            'name' => 'myName',
+            'version' => 'some-version',
+            'licenses' => ['FakeLicense'],
         ], $got);
     }
 

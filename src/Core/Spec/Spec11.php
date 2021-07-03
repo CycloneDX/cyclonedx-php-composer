@@ -59,4 +59,9 @@ final class Spec11 implements SpecInterface
     ];
 
     private const HASH_CONTENT_REGEX = '/^(?:[a-fA-F0-9]{32}|[a-fA-F0-9]{40}|[a-fA-F0-9]{64}|[a-fA-F0-9]{96}|[a-fA-F0-9]{128})$/';
+
+    public function supportsLicenseExpression(): bool
+    {
+        return true;
+    }
 }

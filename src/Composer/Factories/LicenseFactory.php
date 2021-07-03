@@ -54,11 +54,11 @@ class LicenseFactory extends \CycloneDX\Core\Factories\LicenseFactory
 
     protected function makeDisjunctiveLicenseRepository(string ...$licenses): DisjunctiveLicenseRepository
     {
-        $disjunctiveLicenses = array_map(
-            [$this, 'makeDisjunctive'],
-            $licenses
+        return new DisjunctiveLicenseRepository(
+            ...array_map(
+                [$this, 'makeDisjunctive'],
+                $licenses
+            )
         );
-
-        return new DisjunctiveLicenseRepository(...$disjunctiveLicenses);
     }
 }

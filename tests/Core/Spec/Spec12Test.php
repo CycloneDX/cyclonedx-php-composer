@@ -46,4 +46,9 @@ class Spec12Test extends AbstractSpecTestCase
     {
         return [Format::XML, Format::JSON];
     }
+
+    public function shouldSupportLicenseExpression(): bool
+    {
+        return true;
+    }
 }

@@ -158,4 +158,12 @@ abstract class AbstractSpecTestCase extends TestCase
         yield 'crap' => ['this is an invalid hash', false];
         yield 'valid sha1' => ['a052cfe45093f1c2d26bd854d06aa370ceca3b38', true];
     }
+
+    final public function testSupportsLicenseExpression(): void
+    {
+        $isSupported = $this->getSpec()->supportsLicenseExpression();
+        self::assertSame($this->shouldSupportLicenseExpression(), $isSupported);
+    }
+
+    abstract public function shouldSupportLicenseExpression(): bool;
 }

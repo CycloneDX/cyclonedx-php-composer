@@ -25,6 +25,7 @@ namespace CycloneDX\Core\Serialize\JSON\Normalizers;
 
 use CycloneDX\Core\Helpers\NullAssertionTrait;
 use CycloneDX\Core\Models\Component;
+use CycloneDX\Core\Models\License\DisjunctiveLicenseWithName;
 use CycloneDX\Core\Models\License\LicenseExpression;
 use CycloneDX\Core\Repositories\DisjunctiveLicenseRepository;
 use CycloneDX\Core\Repositories\HashRepository;
@@ -77,16 +78,34 @@ class ComponentNormalizer extends AbstractNormalizer
     private function normalizeLicense($license): ?array
     {
         if ($license instanceof LicenseExpression) {
-            return [$this->getNormalizerFactory()->makeForLicenseExpression()->normalize($license)];
+            return $this->normalizeLicenseExpression($license);
         }
 
         if ($license instanceof DisjunctiveLicenseRepository) {
-            return 0 === \count($license)
-                ? null
-                : $this->getNormalizerFactory()->makeForDisjunctiveLicenseRepository()->normalize($license);
+            return $this->normalizeDisjunctiveLicenses($license);
         }
 
         return null;
+    }
+
+    private function normalizeLicenseExpression(LicenseExpression $license): ?array
+    {
+        if ($this->getNormalizerFactory()->getSpec()->supportsLicenseExpression()) {
+            return [$this->getNormalizerFactory()->makeForLicenseExpression()->normalize($license)];
+        }
+
+        return $this->normalizeDisjunctiveLicenses(
+            new DisjunctiveLicenseRepository(
+                new DisjunctiveLicenseWithName($license->getExpression())
+            )
+        );
+    }
+
+    private function normalizeDisjunctiveLicenses(DisjunctiveLicenseRepository $licenses): ?array
+    {
+        return 0 === \count($licenses)
+            ? null
+            : $this->getNormalizerFactory()->makeForDisjunctiveLicenseRepository()->normalize($licenses);
     }
 
     private function normalizeHashes(?HashRepository $hashes): ?array

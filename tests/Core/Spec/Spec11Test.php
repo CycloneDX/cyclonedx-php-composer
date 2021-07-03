@@ -46,4 +46,9 @@ class Spec11Test extends AbstractSpecTestCase
     {
         return [Format::XML];
     }
+
+    public function shouldSupportLicenseExpression(): bool
+    {
+        return true;
+    }
 }
