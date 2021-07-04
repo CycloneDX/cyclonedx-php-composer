@@ -23,9 +23,9 @@ declare(strict_types=1);
 
 namespace CycloneDX\Core\Serialize\DOM\Normalizers;
 
+use CycloneDX\Core\Factories\LicenseFactory;
 use CycloneDX\Core\Helpers\SimpleDomTrait;
 use CycloneDX\Core\Models\Component;
-use CycloneDX\Core\Models\License\DisjunctiveLicenseWithName;
 use CycloneDX\Core\Models\License\LicenseExpression;
 use CycloneDX\Core\Repositories\DisjunctiveLicenseRepository;
 use CycloneDX\Core\Repositories\HashRepository;
@@ -117,13 +117,13 @@ class ComponentNormalizer extends AbstractNormalizer
     private function normalizeLicenseExpression(LicenseExpression $license): array
     {
         if ($this->getNormalizerFactory()->getSpec()->supportsLicenseExpression()) {
-            return [$this->getNormalizerFactory()->makeForLicenseExpression()->normalize($license)];
+            return [
+                $this->getNormalizerFactory()->makeForLicenseExpression()->normalize($license),
+            ];
         }
 
         return $this->normalizeDisjunctiveLicenses(
-            new DisjunctiveLicenseRepository(
-                new DisjunctiveLicenseWithName($license->getExpression())
-            )
+            (new LicenseFactory())->makeDisjunctiveFromExpression($license)
         );
     }
 

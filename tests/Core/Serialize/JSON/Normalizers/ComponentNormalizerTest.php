@@ -24,6 +24,7 @@ declare(strict_types=1);
 namespace CycloneDX\Tests\Core\Serialize\JSON\Normalizers;
 
 use CycloneDX\Core\Models\Component;
+use CycloneDX\Core\Models\License\DisjunctiveLicenseWithName;
 use CycloneDX\Core\Models\License\LicenseExpression;
 use CycloneDX\Core\Repositories\DisjunctiveLicenseRepository;
 use CycloneDX\Core\Repositories\HashRepository;
@@ -153,6 +154,7 @@ class ComponentNormalizerTest extends TestCase
     /**
      * @uses \CycloneDX\Core\Models\License\DisjunctiveLicenseWithName
      * @uses \CycloneDX\Core\Repositories\DisjunctiveLicenseRepository
+     * @uses \CycloneDX\Core\Factories\LicenseFactory
      */
     public function testNormalizeUnsupportedLicenseExpression(): void
     {
@@ -176,9 +178,11 @@ class ComponentNormalizerTest extends TestCase
         ]);
         $normalizer = new ComponentNormalizer($factory);
 
-        $transformedLicenseTest = function (DisjunctiveLicenseRepository $licenses): bool {
+        $transformedLicenseTest = static function (DisjunctiveLicenseRepository $licenses): bool {
             $licenses = $licenses->getLicenses();
             self::assertCount(1, $licenses);
+            self::assertArrayHasKey(0, $licenses);
+            self::assertInstanceOf(DisjunctiveLicenseWithName::class, $licenses[0]);
             self::assertSame('myLicense', $licenses[0]->getName());
 
             return true;
