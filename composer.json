@@ -35,7 +35,7 @@
         "ext-dom": "*",
         "composer/composer": "^1.10.22 || ^2.0.13",
         "phpunit/phpunit": "7.5.20 || 8.5.15 || 9.5.4",
-        "swaggest/json-schema": "0.12.33",
+        "swaggest/json-schema": "0.12.35",
         "symfony/console": "^3.4.35 || ^4.4 || ^5.0"
     },
     "autoload": {

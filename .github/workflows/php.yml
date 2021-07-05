@@ -4,7 +4,7 @@ name: PHP CI
 
 on:
   push:
-    branches: ["master"]
+    branches: ["2.x"]
   pull_request:
   workflow_dispatch:
   schedule:

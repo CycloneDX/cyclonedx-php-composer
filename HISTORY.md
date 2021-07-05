@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.1.1
+
+* Maintenance release
+
 ## 2.1.0
 
 * Added
