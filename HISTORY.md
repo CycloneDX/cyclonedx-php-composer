@@ -35,7 +35,7 @@
   * Utilize [`package-url/packageurl-php`](https://packagist.org/packages/package-url/packageurl-php)
     over own implementation.
   * Added more tests during the build process.
-  * Added [Psalm](https://psalm.dev/) & [PHP-CS-Fixer](https://cs.symfony.com/) to the CI chain and fixed all findings accordingly:.
+  * Added [Psalm](https://psalm.dev/) & [PHP-CS-Fixer](https://cs.symfony.com/) to the CI chain and fixed all findings accordingly.
   * Added a demo run of the plugin to the CI chain.
 
 ## 2.1.1
