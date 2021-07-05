@@ -11,23 +11,34 @@
          failOnRisky="true"
          failOnWarning="true"
          verbose="true"
+         defaultTestSuite="default"
 >
     <testsuites>
         <testsuite name="default">
-            <directory suffix="Test.php">tests</directory>
+            <directory>tests</directory>
+        </testsuite>
+        <testsuite name="Core">
+            <directory>tests/Core</directory>
+        </testsuite>
+        <testsuite name="Composer">
+            <directory>tests/Composer</directory>
         </testsuite>
     </testsuites>
     <coverage cacheDirectory=".phpunit.cache/code-coverage">
         <include>
             <directory suffix=".php">src</directory>
         </include>
-        <!-- report>
+        <!--
+        <report>
             <clover outputFile="reports/coverage.clover.xml"/>
             <html outputDirectory="reports/coverage.html"/>
-        </report -->
+        </report>
+         /-->
     </coverage>
-    <!-- logging>
+    <!--
+    <logging>
         <junit outputFile="reports/phpunits.junit.xml"/>
         <testdoxText outputFile="reports/phpunits.txt"/>
-    </logging -->
+    </logging>
+    /-->
 </phpunit>

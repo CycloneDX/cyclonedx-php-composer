@@ -20,13 +20,6 @@ indent_style = space
 indent_size = 4
 trim_trailing_whitespace = true
 
-[{.php_cs,.php_cs.dist}]
-# in fact its another php file
-charset = utf-8
-indent_style = space
-indent_size = 4
-trim_trailing_whitespace = true
-
 [*.{yml,yaml,neon,neon.dist}]
 charset = utf-8
 indent_style = space

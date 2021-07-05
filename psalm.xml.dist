@@ -5,11 +5,14 @@
        errorLevel="1"
        checkForThrowsDocblock="true"
        findUnusedPsalmSuppress="true"
+       ensureArrayStringOffsetsExist="true"
+       ensureArrayIntOffsetsExist="true"
        cacheDirectory=".psalm.cache"
-       errorBaseline=".psalm/baseline-highest.xml"
 >
-    <!-- use with a proper baseline - see `.psalm/` /-->
     <projectFiles>
         <directory name="src"/>
     </projectFiles>
+    <extraFiles>
+
+    </extraFiles>
 </psalm>

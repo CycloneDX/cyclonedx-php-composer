@@ -1,13 +1,13 @@
 {
     "bomFormat": "CycloneDX",
-    "specVersion": "1.2",
+    "specVersion": "1.3",
     "version": 1,
     "components": [
         {
-            "name": "annotations",
-            "group": "doctrine",
             "type": "library",
-            "version": "1.12.1",
+            "name": "annotations",
+            "version": "1.13.1",
+            "group": "doctrine",
             "description": "Docblock Annotations Parser",
             "licenses": [
                 {
@@ -16,13 +16,13 @@
                     }
                 }
             ],
-            "purl": "pkg:composer\/doctrine\/annotations@1.12.1"
+            "purl": "pkg:composer\/doctrine\/annotations@1.13.1"
         },
         {
-            "name": "cache",
-            "group": "doctrine",
             "type": "library",
-            "version": "1.10.2",
+            "name": "cache",
+            "version": "2.0.3",
+            "group": "doctrine",
             "description": "PHP Doctrine Cache library is a popular cache implementation that supports many different drivers such as redis, memcache, apc, mongodb and others.",
             "licenses": [
                 {
@@ -31,13 +31,13 @@
                     }
                 }
             ],
-            "purl": "pkg:composer\/doctrine\/cache@1.10.2"
+            "purl": "pkg:composer\/doctrine\/cache@2.0.3"
         },
         {
-            "name": "collections",
-            "group": "doctrine",
             "type": "library",
+            "name": "collections",
             "version": "1.6.7",
+            "group": "doctrine",
             "description": "PHP Doctrine Collections library that adds additional functionality on top of PHP arrays.",
             "licenses": [
                 {
@@ -49,10 +49,25 @@
             "purl": "pkg:composer\/doctrine\/collections@1.6.7"
         },
         {
-            "name": "event-manager",
-            "group": "doctrine",
             "type": "library",
+            "name": "deprecations",
+            "version": "0.5.3",
+            "group": "doctrine",
+            "description": "A small layer on top of trigger_error(E_USER_DEPRECATED) or PSR-3 logging with options to disable all deprecations or selectively for packages.",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "MIT"
+                    }
+                }
+            ],
+            "purl": "pkg:composer\/doctrine\/deprecations@0.5.3"
+        },
+        {
+            "type": "library",
+            "name": "event-manager",
             "version": "1.1.1",
+            "group": "doctrine",
             "description": "The Doctrine Event Manager is a simple PHP event system that was built to be used with the various Doctrine projects.",
             "licenses": [
                 {
@@ -64,10 +79,10 @@
             "purl": "pkg:composer\/doctrine\/event-manager@1.1.1"
         },
         {
-            "name": "lexer",
-            "group": "doctrine",
             "type": "library",
+            "name": "lexer",
             "version": "1.2.1",
+            "group": "doctrine",
             "description": "PHP Doctrine Lexer parser library that can be used in Top-Down, Recursive Descent Parsers.",
             "licenses": [
                 {
@@ -79,10 +94,10 @@
             "purl": "pkg:composer\/doctrine\/lexer@1.2.1"
         },
         {
-            "name": "persistence",
-            "group": "doctrine",
             "type": "library",
-            "version": "2.1.0",
+            "name": "persistence",
+            "version": "2.2.1",
+            "group": "doctrine",
             "description": "The Doctrine Persistence project is a set of shared interfaces and functionality that the different Doctrine object mappers share.",
             "licenses": [
                 {
@@ -91,13 +106,13 @@
                     }
                 }
             ],
-            "purl": "pkg:composer\/doctrine\/persistence@2.1.0"
+            "purl": "pkg:composer\/doctrine\/persistence@2.2.1"
         },
         {
-            "name": "proxy-manager-lts",
-            "group": "friendsofphp",
             "type": "library",
-            "version": "1.0.3",
+            "name": "proxy-manager-lts",
+            "version": "1.0.5",
+            "group": "friendsofphp",
             "description": "Adding support for a wider range of PHP versions to ocramius\/proxy-manager",
             "licenses": [
                 {
@@ -106,13 +121,13 @@
                     }
                 }
             ],
-            "purl": "pkg:composer\/friendsofphp\/proxy-manager-lts@1.0.3"
+            "purl": "pkg:composer\/friendsofphp\/proxy-manager-lts@1.0.5"
         },
         {
-            "name": "laminas-code",
-            "group": "laminas",
             "type": "library",
-            "version": "4.1.0",
+            "name": "laminas-code",
+            "version": "4.3.0",
+            "group": "laminas",
             "description": "Extensions to the PHP Reflection API, static code scanning, and code generation",
             "licenses": [
                 {
@@ -121,13 +136,13 @@
                     }
                 }
             ],
-            "purl": "pkg:composer\/laminas\/laminas-code@4.1.0"
+            "purl": "pkg:composer\/laminas\/laminas-code@4.3.0"
         },
         {
-            "name": "laminas-eventmanager",
-            "group": "laminas",
             "type": "library",
+            "name": "laminas-eventmanager",
             "version": "3.3.1",
+            "group": "laminas",
             "description": "Trigger and listen to events within a PHP application",
             "licenses": [
                 {
@@ -139,10 +154,10 @@
             "purl": "pkg:composer\/laminas\/laminas-eventmanager@3.3.1"
         },
         {
-            "name": "laminas-zendframework-bridge",
-            "group": "laminas",
             "type": "library",
+            "name": "laminas-zendframework-bridge",
             "version": "1.2.0",
+            "group": "laminas",
             "description": "Alias legacy ZF class names to Laminas Project equivalents.",
             "licenses": [
                 {
@@ -154,10 +169,10 @@
             "purl": "pkg:composer\/laminas\/laminas-zendframework-bridge@1.2.0"
         },
         {
-            "name": "cache",
-            "group": "psr",
             "type": "library",
+            "name": "cache",
             "version": "1.0.1",
+            "group": "psr",
             "description": "Common interface for caching libraries",
             "licenses": [
                 {
@@ -169,10 +184,10 @@
             "purl": "pkg:composer\/psr\/cache@1.0.1"
         },
         {
-            "name": "container",
-            "group": "psr",
             "type": "library",
+            "name": "container",
             "version": "1.1.1",
+            "group": "psr",
             "description": "Common Container Interface (PHP FIG PSR-11)",
             "licenses": [
                 {
@@ -184,10 +199,10 @@
             "purl": "pkg:composer\/psr\/container@1.1.1"
         },
         {
-            "name": "event-dispatcher",
-            "group": "psr",
             "type": "library",
+            "name": "event-dispatcher",
             "version": "1.0.0",
+            "group": "psr",
             "description": "Standard interfaces for event handling.",
             "licenses": [
                 {
@@ -199,10 +214,10 @@
             "purl": "pkg:composer\/psr\/event-dispatcher@1.0.0"
         },
         {
-            "name": "link",
-            "group": "psr",
             "type": "library",
+            "name": "link",
             "version": "1.0.0",
+            "group": "psr",
             "description": "Common interfaces for HTTP links",
             "licenses": [
                 {
@@ -214,10 +229,10 @@
             "purl": "pkg:composer\/psr\/link@1.0.0"
         },
         {
-            "name": "log",
-            "group": "psr",
             "type": "library",
-            "version": "1.1.3",
+            "name": "log",
+            "version": "1.1.4",
+            "group": "psr",
             "description": "Common interface for logging libraries",
             "licenses": [
                 {
@@ -226,13 +241,13 @@
                     }
                 }
             ],
-            "purl": "pkg:composer\/psr\/log@1.1.3"
+            "purl": "pkg:composer\/psr\/log@1.1.4"
         },
         {
-            "name": "contracts",
-            "group": "symfony",
             "type": "library",
-            "version": "2.3.1",
+            "name": "contracts",
+            "version": "2.4.0",
+            "group": "symfony",
             "description": "A set of abstractions extracted out of the Symfony components",
             "licenses": [
                 {
@@ -241,13 +256,13 @@
                     }
                 }
             ],
-            "purl": "pkg:composer\/symfony\/contracts@2.3.1"
+            "purl": "pkg:composer\/symfony\/contracts@2.4.0"
         },
         {
-            "name": "polyfill-ctype",
-            "group": "symfony",
             "type": "library",
-            "version": "1.22.1",
+            "name": "polyfill-ctype",
+            "version": "1.23.0",
+            "group": "symfony",
             "description": "Symfony polyfill for ctype functions",
             "licenses": [
                 {
@@ -256,13 +271,13 @@
                     }
                 }
             ],
-            "purl": "pkg:composer\/symfony\/polyfill-ctype@1.22.1"
+            "purl": "pkg:composer\/symfony\/polyfill-ctype@1.23.0"
         },
         {
-            "name": "polyfill-intl-grapheme",
-            "group": "symfony",
             "type": "library",
-            "version": "1.22.1",
+            "name": "polyfill-intl-grapheme",
+            "version": "1.23.0",
+            "group": "symfony",
             "description": "Symfony polyfill for intl's grapheme_* functions",
             "licenses": [
                 {
@@ -271,13 +286,13 @@
                     }
                 }
             ],
-            "purl": "pkg:composer\/symfony\/polyfill-intl-grapheme@1.22.1"
+            "purl": "pkg:composer\/symfony\/polyfill-intl-grapheme@1.23.0"
         },
         {
-            "name": "polyfill-intl-icu",
-            "group": "symfony",
             "type": "library",
-            "version": "1.22.1",
+            "name": "polyfill-intl-icu",
+            "version": "1.23.0",
+            "group": "symfony",
             "description": "Symfony polyfill for intl's ICU-related data and classes",
             "licenses": [
                 {
@@ -286,13 +301,13 @@
                     }
                 }
             ],
-            "purl": "pkg:composer\/symfony\/polyfill-intl-icu@1.22.1"
+            "purl": "pkg:composer\/symfony\/polyfill-intl-icu@1.23.0"
         },
         {
-            "name": "polyfill-intl-idn",
-            "group": "symfony",
             "type": "library",
-            "version": "1.22.1",
+            "name": "polyfill-intl-idn",
+            "version": "1.23.0",
+            "group": "symfony",
             "description": "Symfony polyfill for intl's idn_to_ascii and idn_to_utf8 functions",
             "licenses": [
                 {
@@ -301,13 +316,13 @@
                     }
                 }
             ],
-            "purl": "pkg:composer\/symfony\/polyfill-intl-idn@1.22.1"
+            "purl": "pkg:composer\/symfony\/polyfill-intl-idn@1.23.0"
         },
         {
-            "name": "polyfill-intl-normalizer",
-            "group": "symfony",
             "type": "library",
-            "version": "1.22.1",
+            "name": "polyfill-intl-normalizer",
+            "version": "1.23.0",
+            "group": "symfony",
             "description": "Symfony polyfill for intl's Normalizer class and related functions",
             "licenses": [
                 {
@@ -316,13 +331,13 @@
                     }
                 }
             ],
-            "purl": "pkg:composer\/symfony\/polyfill-intl-normalizer@1.22.1"
+            "purl": "pkg:composer\/symfony\/polyfill-intl-normalizer@1.23.0"
         },
         {
-            "name": "polyfill-mbstring",
-            "group": "symfony",
             "type": "library",
-            "version": "1.22.1",
+            "name": "polyfill-mbstring",
+            "version": "1.23.0",
+            "group": "symfony",
             "description": "Symfony polyfill for the Mbstring extension",
             "licenses": [
                 {
@@ -331,13 +346,13 @@
                     }
                 }
             ],
-            "purl": "pkg:composer\/symfony\/polyfill-mbstring@1.22.1"
+            "purl": "pkg:composer\/symfony\/polyfill-mbstring@1.23.0"
         },
         {
-            "name": "polyfill-php72",
-            "group": "symfony",
             "type": "library",
-            "version": "1.22.1",
+            "name": "polyfill-php72",
+            "version": "1.23.0",
+            "group": "symfony",
             "description": "Symfony polyfill backporting some PHP 7.2+ features to lower PHP versions",
             "licenses": [
                 {
@@ -346,13 +361,13 @@
                     }
                 }
             ],
-            "purl": "pkg:composer\/symfony\/polyfill-php72@1.22.1"
+            "purl": "pkg:composer\/symfony\/polyfill-php72@1.23.0"
         },
         {
-            "name": "polyfill-php73",
-            "group": "symfony",
             "type": "library",
-            "version": "1.22.1",
+            "name": "polyfill-php73",
+            "version": "1.23.0",
+            "group": "symfony",
             "description": "Symfony polyfill backporting some PHP 7.3+ features to lower PHP versions",
             "licenses": [
                 {
@@ -361,13 +376,13 @@
                     }
                 }
             ],
-            "purl": "pkg:composer\/symfony\/polyfill-php73@1.22.1"
+            "purl": "pkg:composer\/symfony\/polyfill-php73@1.23.0"
         },
         {
-            "name": "polyfill-php80",
-            "group": "symfony",
             "type": "library",
-            "version": "1.22.1",
+            "name": "polyfill-php80",
+            "version": "1.23.0",
+            "group": "symfony",
             "description": "Symfony polyfill backporting some PHP 8.0+ features to lower PHP versions",
             "licenses": [
                 {
@@ -376,13 +391,28 @@
                     }
                 }
             ],
-            "purl": "pkg:composer\/symfony\/polyfill-php80@1.22.1"
+            "purl": "pkg:composer\/symfony\/polyfill-php80@1.23.0"
         },
         {
-            "name": "polyfill-uuid",
-            "group": "symfony",
             "type": "library",
-            "version": "1.22.1",
+            "name": "polyfill-php81",
+            "version": "1.23.0",
+            "group": "symfony",
+            "description": "Symfony polyfill backporting some PHP 8.1+ features to lower PHP versions",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "MIT"
+                    }
+                }
+            ],
+            "purl": "pkg:composer\/symfony\/polyfill-php81@1.23.0"
+        },
+        {
+            "type": "library",
+            "name": "polyfill-uuid",
+            "version": "1.23.0",
+            "group": "symfony",
             "description": "Symfony polyfill for uuid functions",
             "licenses": [
                 {
@@ -391,13 +421,28 @@
                     }
                 }
             ],
-            "purl": "pkg:composer\/symfony\/polyfill-uuid@1.22.1"
+            "purl": "pkg:composer\/symfony\/polyfill-uuid@1.23.0"
         },
         {
-            "name": "symfony",
-            "group": "symfony",
             "type": "library",
-            "version": "5.2.6",
+            "name": "runtime",
+            "version": "5.3.0",
+            "group": "symfony",
+            "description": "Enables decoupling PHP applications from global state",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "MIT"
+                    }
+                }
+            ],
+            "purl": "pkg:composer\/symfony\/runtime@5.3.0"
+        },
+        {
+            "type": "library",
+            "name": "symfony",
+            "version": "5.3.0",
+            "group": "symfony",
             "description": "The Symfony PHP framework",
             "licenses": [
                 {
@@ -406,13 +451,13 @@
                     }
                 }
             ],
-            "purl": "pkg:composer\/symfony\/symfony@5.2.6"
+            "purl": "pkg:composer\/symfony\/symfony@5.3.0"
         },
         {
-            "name": "twig",
-            "group": "twig",
             "type": "library",
-            "version": "3.3.0",
+            "name": "twig",
+            "version": "3.3.2",
+            "group": "twig",
             "description": "Twig, the flexible, fast, and secure template language for PHP",
             "licenses": [
                 {
@@ -421,7 +466,7 @@
                     }
                 }
             ],
-            "purl": "pkg:composer\/twig\/twig@3.3.0"
+            "purl": "pkg:composer\/twig\/twig@3.3.2"
         }
     ]
 }

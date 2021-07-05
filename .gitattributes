@@ -3,15 +3,9 @@
 *.md          diff=markdown
 *.php         diff=php
 composer.lock diff=json
-.php_cs       diff=php
-.php_cs.dist  diff=php
 *.xml.dist    diff=xml
 *.neon        diff=yaml
 *.neon.dist   diff=yaml
-
-# demo is not part of actual project
-/demo/project/**    vendor-vendored
-/demo/result/**     vendor-generated
 
 # files that are not bundled into the "dist" release are marked `export-ignore`
 .gitattributes          export-ignore
@@ -20,7 +14,6 @@ composer.lock diff=json
 /.github                export-ignore
 /tests                  export-ignore
 /tools                  export-ignore
-/.php_cs.dist           export-ignore
 /.php-cs-fixer.dist.php export-ignore
 /phpunit.xml.dist       export-ignore
 /psalm.xml.dist         export-ignore

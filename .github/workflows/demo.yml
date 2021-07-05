@@ -1,0 +1,128 @@
+# For details of what checks are run for PRs please refer below
+# docs: https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions
+name: DEMO
+
+on:
+  push:
+    branches: ["master"]
+  pull_request:
+  workflow_dispatch:
+  schedule:
+    # schedule weekly tests, since dependencies are not intended to be pinned
+    # this means: at 23:42 on Fridays
+    - cron: '42 23 * * 5'
+
+env:
+  PHP_PROJECT_EXT: dom,filter,json,libxml # via `composer info -pt` and removed dev req
+  REPORTS_DIR: CI_reports
+
+jobs:
+  reproducible:
+    name: Reproducible "${{ matrix.subject }}" (${{ matrix.spec-version }} ${{ matrix.output-format }}, composer${{ matrix.composer }} php${{ matrix.php }}, stdout:${{ matrix.stdout }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      REPORTS_ARTIFACT: demo-reproducible
+    strategy:
+      fail-fast: false
+      matrix:
+        subject: # list of reproducible demos
+          - laravel-7.12.0
+          - local
+        php: ["8.0"] # highest supported
+        composer:
+        - "2" # latest supported
+        - "2.0.13" # lowest supported without any security issues
+        output-format:
+          # lowercase the format, since it is also used as a file extension when searching the original file
+          - xml
+          - json
+        spec-version:
+          - "1.3"
+          - "1.2"
+          - "1.1"
+          # - "1.0" # not implemented
+        stdout: [false]
+        exclude:
+          # exclude unsupported combinations: json is defined in spec >= 1.2
+          - output-format: json
+            spec-version: "1.0"
+          - output-format: json
+            spec-version: "1.1"
+        include:
+          - # test if stdout receives no data except the SBOM
+            subject: laravel-7.12.0
+            php: "8.0"
+            composer: 2
+            output-format: xml
+            spec-version: "1.2"
+            stdout: true
+    steps:
+      - name: Checkout
+        # see https://github.com/actions/checkout
+        uses: actions/checkout@v2
+      - name: Setup paths and folders
+        run: |
+          PWD="$(pwd -P)"
+          OUT_FILE="${{ matrix.subject }}_php${{ matrix.php }}_composer${{ matrix.composer }}_bom.${{ matrix.spec-version }}.${{ matrix.output-format }}"
+          COMPARE_FILE="bom.${{ matrix.spec-version }}.${{ matrix.output-format }}"
+          DEMO_RUN_DIR="demo/${{ matrix.subject }}"
+          echo "DEMO_RUN_DIR=$DEMO_RUN_DIR" >> $GITHUB_ENV
+          REPORTS_DIR_PATH="$PWD/$REPORTS_DIR"
+          mkdir -p "$REPORTS_DIR_PATH/${{ matrix.subject }}"
+          echo "REPORTS_DIR_PATH=$REPORTS_DIR_PATH" >> $GITHUB_ENV
+          echo "OUT_FILE_PATH=$REPORTS_DIR_PATH/$OUT_FILE" >> $GITHUB_ENV
+          echo "COMPARE_FILE_PATH=$PWD/$DEMO_RUN_DIR/results/$COMPARE_FILE" >> $GITHUB_ENV
+      - name: Setup PHP
+        # see https://github.com/shivammathur/setup-php
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: ${{ env.PHP_PROJECT_EXT }}
+          tools: composer:v${{ matrix.composer }}
+          coverage: none
+      - name: Determine composer cache directory
+        run: echo "COMPOSER_CACHE_DIR_PATH=$(composer config cache-dir)" >> $GITHUB_ENV
+      - name: Cache dependencies installed with composer
+        # see https://github.com/actions/cache
+        uses: actions/cache@v2.1.6
+        with:
+          path: ${{ env.COMPOSER_CACHE_DIR_PATH }}
+          key: rep_demo-php${{ matrix.php }}-${{ hashFiles('**/composer.json') }}
+          restore-keys: rep_demo-php${{ matrix.php }}-
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-interaction --no-progress
+        working-directory: ${{ env.DEMO_RUN_DIR }}/project
+      - name: Make SBOM to file
+        if: ${{ ! matrix.stdout }}
+        run: >
+          composer make-bom
+          -vvv
+          --exclude-dev
+          --spec-version=${{ matrix.spec-version }}
+          --output-format=${{ matrix.output-format }}
+          --output-file="$OUT_FILE_PATH"
+        working-directory: ${{ env.DEMO_RUN_DIR }}/project
+      - name: Make SBOM to STDOUT
+        if: ${{ matrix.stdout }}
+        run: >
+          composer make-bom
+          --exclude-dev
+          --spec-version=${{ matrix.spec-version }}
+          --output-format=${{ matrix.output-format }}
+          --output-file=-
+          > "$OUT_FILE_PATH"
+        working-directory: ${{ env.DEMO_RUN_DIR }}/project
+      - name: Compare reproducible SBOM
+        run: >
+          diff -s
+          "$COMPARE_FILE_PATH"
+          "$OUT_FILE_PATH"
+      - name: Artifact reports
+        if: ${{ failure() }}
+        # see https://github.com/actions/upload-artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: ${{ env.REPORTS_ARTIFACT }}-failed
+          path: ${{ env.REPORTS_DIR }}
+          if-no-files-found: error

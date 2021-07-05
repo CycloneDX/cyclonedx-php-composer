@@ -1,0 +1,22 @@
+{
+    "bomFormat": "CycloneDX",
+    "specVersion": "1.2",
+    "version": 1,
+    "components": [
+        {
+            "type": "library",
+            "name": "local-demo-dependency",
+            "version": "1.33.7",
+            "group": "cyclonedx-demo",
+            "description": "a package that is hosted locally and required in a local demo",
+            "purl": "pkg:composer\/cyclonedx-demo\/local-demo-dependency@1.33.7"
+        },
+        {
+            "type": "library",
+            "name": "local-dependency-with-minimal-setup",
+            "version": "dev-master",
+            "group": "cyclonedx-demo",
+            "purl": "pkg:composer\/cyclonedx-demo\/local-dependency-with-minimal-setup@dev-master"
+        }
+    ]
+}

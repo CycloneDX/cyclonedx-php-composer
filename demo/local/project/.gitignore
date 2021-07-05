@@ -1,8 +1,8 @@
-*
+/*
 !/.gitignore
 !/.gitattributes
 
 !/composer.json
+!/composer.lock
 
-!/composer.template.json
-!/temp_setup-helper.sh
+!/packages/

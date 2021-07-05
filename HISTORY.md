@@ -1,5 +1,43 @@
 # Changelog
 
+## unreleased
+
+* Breaking Changes
+  * Now requires php `^7.3 || ^8.0`, was `^7.1 || ^8.0`.
+  * Now requires composer v2 - `composer-plugin-api:^2.0`, was `composer-plugin-api:^1.1||^2.0`. 
+  * CLI via `composer make-bom`
+    * Now defaults to the latest supported version of CycloneDX spec: 1.3  
+      See option `--spec-version`.
+    * Deprecated switch `--json` was removed.  
+      Use option `--output-format=JSON` instead.
+  * Components' license in SpdxLicenseExpression format are no longer split into disjunctive licenses.
+    They are still used properly in the resulting output file.
+  * Complete rewrite/refactor.  
+    Expect library classes/methods/functions to be removed, renamed or incompatible to previous versions - see the source for changes.
+* Added
+  * CLI
+    * Output is less verbose per default. Can be increased via `-v`, `-vv`, `-vvv`.
+    * Support for output to _STDOUT_. Use option `--output-file=-`.
+    * Added an optional option `--spec-version` for the CycloneDX spec version.  
+      Supported values: "1.1", "1.2", "1.3".  
+      Defaults to "1.3".
+  * Support for JSON output format.  
+    JSON support was a preview before and became a basic part of the plugin now.
+* Removed
+  * This plugin no longer supports `php<7.3`.
+  * This plugin no longer supports composer v1.
+  * CLI
+    * Deprecated switch `--json` was removed.  
+      Use option `--output-format=JSON` instead.
+* Fixed
+  * Some cases when the JSON SBoM generator created schema-invalid data.
+* Misc
+  * Utilize [`package-url/packageurl-php`](https://packagist.org/packages/package-url/packageurl-php)
+    over own implementation.
+  * Added more tests during the build process.
+  * Added [Psalm](https://psalm.dev/) & [PHP-CS-Fixer](https://cs.symfony.com/) to the CI chain and fixed all findings accordingly:.
+  * Added a demo run of the plugin to the CI chain.
+
 ## 2.1.0
 
 * Added

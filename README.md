@@ -16,7 +16,8 @@ A plugin for PHP's [Composer](https://getcomposer.org/) that generates Bill of M
 
 ### Requirements
 
-The plugin supports PHP 7.1 and later.
+The plugin supports PHP `^7.3 || ^8.0`
+with composer `^1.3 || ^2.0`.
 
 ### Installation
 
@@ -34,11 +35,13 @@ Usage:
 Options:
       --output-format=OUTPUT-FORMAT  Which output format to use.
                                      Values: "XML", "JSON" [default: "XML"]
-      --output-file=OUTPUT-FILE      Path to the output file (default is bom.xml or bom.json)
+      --output-file=OUTPUT-FILE      Path to the output file.
+                                     Set to "-" to write to STDOUT.
+                                     Depending on the output-format, default is one of: "bom.xml", "bom.json"
       --exclude-dev                  Exclude dev dependencies
       --exclude-plugins              Exclude composer plugins
-      --json                         Produce the BOM in JSON format (preview support)
-                                     DEPRECATED. USE "--output-format=JSON" instead
+      --spec-version=SPEC-VERSION    Which version of CycloneDX spec to use.
+                                     Values: "1.1", "1.2", "1.3" [default: "1.3"]
   -h, --help                         Display this help message
   -q, --quiet                        Do not output any message
   -V, --version                      Display this application version
