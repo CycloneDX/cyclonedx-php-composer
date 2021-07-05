@@ -37,6 +37,9 @@ use PHPUnit\Framework\TestCase;
  */
 class DisjunctiveLicenseRepositoryNormalizerTest extends TestCase
 {
+    /**
+     * @uses \CycloneDX\Core\Serialize\JSON\Normalizers\DisjunctiveLicenseNormalizer
+     */
     public function testNormalize(): void
     {
         $license1 = $this->createStub(DisjunctiveLicenseWithId::class);
