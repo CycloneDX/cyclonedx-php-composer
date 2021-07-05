@@ -24,6 +24,7 @@ declare(strict_types=1);
 namespace CycloneDX\Tests\Core\Factories;
 
 use CycloneDX\Core\Factories\LicenseFactory;
+use CycloneDX\Core\Models\License\DisjunctiveLicenseWithId;
 use CycloneDX\Core\Models\License\DisjunctiveLicenseWithName;
 use CycloneDX\Core\Models\License\LicenseExpression;
 use CycloneDX\Core\Spdx\License as SpdxLicenseValidator;
@@ -73,7 +74,7 @@ class LicenseFactoryTest extends TestCase
         self::assertSame($spdxLicenseValidator, $factory->getSpdxLicenseValidator());
     }
 
-    public function testMakeFromStringExpression(): void
+    public function testMakeFromStringIsExpression(): void
     {
         $factory = $this->createPartialMock(LicenseFactory::class, ['makeExpression', 'makeDisjunctive']);
         $license = $this->createStub(LicenseExpression::class);
@@ -88,7 +89,7 @@ class LicenseFactoryTest extends TestCase
         self::assertSame($license, $got);
     }
 
-    public function testMakeFromStringDisjunctive(): void
+    public function testMakeFromStringIsDisjunctive(): void
     {
         $factory = $this->createPartialMock(LicenseFactory::class, ['makeExpression', 'makeDisjunctive']);
         $license = $this->createStub(DisjunctiveLicenseWithName::class);
@@ -116,6 +117,38 @@ class LicenseFactoryTest extends TestCase
 
         self::assertInstanceOf(LicenseExpression::class, $got);
         self::assertEquals('(A or B)', $got->getExpression());
+    }
+
+    public function testMakeDisjunctiveIsId(): void
+    {
+        $factory = $this->createPartialMock(LicenseFactory::class, ['makeDisjunctiveWithId', 'makeDisjunctiveWithName']);
+        $license = $this->createStub(DisjunctiveLicenseWithId::class);
+
+        $factory->expects(self::once())->method('makeDisjunctiveWithId')
+            ->with('FooBar')
+            ->willReturn($license);
+        $factory->expects(self::never())->method('makeDisjunctiveWithName');
+
+        $got = $factory->makeDisjunctive('FooBar');
+
+        self::assertSame($license, $got);
+    }
+
+    public function testMakeDisjunctiveIsName(): void
+    {
+        $factory = $this->createPartialMock(LicenseFactory::class, ['makeDisjunctiveWithId', 'makeDisjunctiveWithName']);
+        $license = $this->createStub(DisjunctiveLicenseWithName::class);
+
+        $factory->expects(self::once())->method('makeDisjunctiveWithId')
+            ->with('FooBar')
+            ->willThrowException(new DomainException());
+        $factory->expects(self::once())->method('makeDisjunctiveWithName')
+            ->with('FooBar')
+            ->willReturn($license);
+
+        $got = $factory->makeDisjunctive('FooBar');
+
+        self::assertSame($license, $got);
     }
 
     /**
