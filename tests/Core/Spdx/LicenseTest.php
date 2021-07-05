@@ -104,7 +104,9 @@ class LicenseTest extends TestCase
         yield 'PascalCase' => ['FooBar'];
     }
 
-    // @TODO this is an integration test
+    /**
+     * @coversNothing
+     */
     public function testShippedLicensesFile(): void
     {
         $file = (new License())->getResourcesFile();

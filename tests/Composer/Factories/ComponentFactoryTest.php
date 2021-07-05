@@ -114,7 +114,5 @@ class ComponentFactoryTest extends TestCase
             (new Component('library', 'some-package', '1.2.3'))
                 ->setPackageUrl((new PackageUrl('composer', 'some-package'))->setVersion('1.2.3')),
         ];
-
-        // @TODO add complete test set
     }
 }
