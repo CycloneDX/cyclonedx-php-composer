@@ -42,9 +42,9 @@
     "require-dev": {
         "ext-simplexml": "*",
         "composer/composer": "^2.0.13",
-        "phpunit/phpunit": "9.5.5",
+        "phpunit/phpunit": "9.5.6",
         "roave/security-advisories": "dev-latest",
-        "swaggest/json-schema": "0.12.33"
+        "swaggest/json-schema": "0.12.35"
     },
     "autoload": {
         "psr-4": {
