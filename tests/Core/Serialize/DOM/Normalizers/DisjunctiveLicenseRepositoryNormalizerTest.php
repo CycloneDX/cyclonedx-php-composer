@@ -21,19 +21,20 @@ declare(strict_types=1);
  * Copyright (c) Steve Springett. All Rights Reserved.
  */
 
-namespace CycloneDX\Tests\Core\Serialize\JSON\Normalizers;
+namespace CycloneDX\Tests\Core\Serialize\DOM\Normalizers;
 
 use CycloneDX\Core\Models\License\DisjunctiveLicenseWithId;
 use CycloneDX\Core\Models\License\DisjunctiveLicenseWithName;
 use CycloneDX\Core\Repositories\DisjunctiveLicenseRepository;
-use CycloneDX\Core\Serialize\JSON\NormalizerFactory;
-use CycloneDX\Core\Serialize\JSON\Normalizers\DisjunctiveLicenseNormalizer;
-use CycloneDX\Core\Serialize\JSON\Normalizers\DisjunctiveLicenseRepositoryNormalizer;
+use CycloneDX\Core\Serialize\DOM\NormalizerFactory;
+use CycloneDX\Core\Serialize\DOM\Normalizers\DisjunctiveLicenseNormalizer;
+use CycloneDX\Core\Serialize\DOM\Normalizers\DisjunctiveLicenseRepositoryNormalizer;
+use DOMElement;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \CycloneDX\Core\Serialize\JSON\Normalizers\DisjunctiveLicenseRepositoryNormalizer
- * @covers \CycloneDX\Core\Serialize\JSON\AbstractNormalizer
+ * @covers \CycloneDX\Core\Serialize\DOM\Normalizers\DisjunctiveLicenseRepositoryNormalizer
+ * @covers \CycloneDX\Core\Serialize\DOM\AbstractNormalizer
  */
 class DisjunctiveLicenseRepositoryNormalizerTest extends TestCase
 {
@@ -46,14 +47,16 @@ class DisjunctiveLicenseRepositoryNormalizerTest extends TestCase
         $normalizer = new DisjunctiveLicenseRepositoryNormalizer($factory);
         $repo = $this->createStub(DisjunctiveLicenseRepository::class);
         $repo->method('getLicenses')->willReturn([$license1, $license2]);
+        $dummy1 = $this->createStub(DOMElement::class);
+        $dummy2 = $this->createStub(DOMElement::class);
 
         $licenseNormalizer->expects(self::exactly(2))->method('normalize')
             ->withConsecutive([$license1], [$license2])
-            ->willReturnOnConsecutiveCalls(['dummy1'], ['dummy2']);
+            ->willReturnOnConsecutiveCalls($dummy1, $dummy2);
 
         $normalized = $normalizer->normalize($repo);
 
-        self::assertSame([['dummy1'], ['dummy2']], $normalized);
+        self::assertSame([$dummy1, $dummy2], $normalized);
     }
 
     public function testNormalizeThrows(): void

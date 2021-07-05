@@ -24,41 +24,43 @@ declare(strict_types=1);
 namespace CycloneDX\Tests\Core\Serialize;
 
 use CycloneDX\Core\Models\Bom;
-use CycloneDX\Core\Serialize\JsonSerializer;
+use CycloneDX\Core\Serialize\XmlSerializer;
 use CycloneDX\Core\Spec\SpecInterface;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \CycloneDX\Core\Serialize\JsonSerializer
+ * @covers \CycloneDX\Core\Serialize\XmlSerializer
  */
-class JsonSerializerTest extends TestCase
+class XmlSerializerTest extends TestCase
 {
     /**
-     * @covers \CycloneDX\Core\Serialize\JsonSerializer
+     * @covers \CycloneDX\Core\Serialize\XmlSerializer
      *
-     * @uses \CycloneDX\Core\Serialize\JSON\AbstractNormalizer
-     * @uses \CycloneDX\Core\Serialize\JSON\NormalizerFactory
-     * @uses \CycloneDX\Core\Serialize\JSON\Normalizers\BomNormalizer
-     * @uses \CycloneDX\Core\Serialize\JSON\Normalizers\ComponentRepositoryNormalizer
+     * @uses   \CycloneDX\Core\Serialize\DOM\AbstractNormalizer
+     * @uses   \CycloneDX\Core\Serialize\DOM\NormalizerFactory
+     * @uses   \CycloneDX\Core\Serialize\DOM\Normalizers\BomNormalizer
+     * @uses   \CycloneDX\Core\Serialize\DOM\Normalizers\ComponentRepositoryNormalizer
      */
     public function testSerialize(): void
     {
-        $spec = $this->createConfiguredMock(SpecInterface::class, [
-            'getVersion' => '1.2',
-            'isSupportedFormat' => true,
-            ]);
-        $serializer = new JsonSerializer($spec);
+        $spec = $this->createConfiguredMock(
+            SpecInterface::class,
+            [
+                'getVersion' => '1.2',
+                'isSupportedFormat' => true,
+            ]
+        );
+        $serializer = new XmlSerializer($spec);
         $bom = $this->createStub(Bom::class);
 
         $got = $serializer->serialize($bom);
 
-        self::assertJsonStringEqualsJsonString(<<<'JSON'
-            {
-                "bomFormat": "CycloneDX",
-                "specVersion": "1.2",
-                "version": 0,
-                "components": []
-            }
-            JSON, $got);
+        self::assertXmlStringEqualsXmlString(<<<'XML'
+            <?xml version="1.0" encoding="UTF-8"?>
+            <bom xmlns="http://cyclonedx.org/schema/bom/1.2" version="0">
+              <components/>
+            </bom>
+            XML, $got
+        );
     }
 }

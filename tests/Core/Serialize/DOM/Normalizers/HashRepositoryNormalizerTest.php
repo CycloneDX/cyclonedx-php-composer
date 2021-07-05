@@ -21,18 +21,20 @@ declare(strict_types=1);
  * Copyright (c) Steve Springett. All Rights Reserved.
  */
 
-namespace CycloneDX\Tests\Core\Serialize\JSON\Normalizers;
+namespace CycloneDX\Tests\Core\Serialize\DOM\Normalizers;
 
 use CycloneDX\Core\Repositories\HashRepository;
-use CycloneDX\Core\Serialize\JSON\NormalizerFactory;
-use CycloneDX\Core\Serialize\JSON\Normalizers\HashNormalizer;
-use CycloneDX\Core\Serialize\JSON\Normalizers\HashRepositoryNormalizer;
+use CycloneDX\Core\Serialize\DOM\NormalizerFactory;
+use CycloneDX\Core\Serialize\DOM\Normalizers\HashNormalizer;
+use CycloneDX\Core\Serialize\DOM\Normalizers\HashRepositoryNormalizer;
 use DomainException;
+use DOMDocument;
+use DOMElement;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \CycloneDX\Core\Serialize\JSON\Normalizers\HashRepositoryNormalizer
- * @covers \CycloneDX\Core\Serialize\JSON\AbstractNormalizer
+ * @covers \CycloneDX\Core\Serialize\DOM\Normalizers\HashRepositoryNormalizer
+ * @covers \CycloneDX\Core\Serialize\DOM\AbstractNormalizer
  */
 class HashRepositoryNormalizerTest extends TestCase
 {
@@ -46,18 +48,23 @@ class HashRepositoryNormalizerTest extends TestCase
     public function testNormalize(): void
     {
         $hashNormalizer = $this->createMock(HashNormalizer::class);
-        $factory = $this->createConfiguredMock(NormalizerFactory::class, ['makeForHash' => $hashNormalizer]);
+        $factory = $this->createConfiguredMock(NormalizerFactory::class, [
+            'makeForHash' => $hashNormalizer,
+            'getDocument' => new DOMDocument(),
+            ]);
+        $dummy1 = $this->createStub(DOMElement::class);
+        $dummy2 = $this->createStub(DOMElement::class);
         $normalizer = new HashRepositoryNormalizer($factory);
         $repo = $this->createStub(HashRepository::class);
         $repo->method('getHashes')->willReturn(['alg1' => 'content1', 'alg2' => 'content2']);
 
         $hashNormalizer->expects(self::exactly(2))->method('normalize')
             ->withConsecutive(['alg1', 'content1'], ['alg2', 'content2'])
-            ->willReturnOnConsecutiveCalls(['dummy1'], ['dummy2']);
+            ->willReturnOnConsecutiveCalls($dummy1, $dummy2);
 
         $normalized = $normalizer->normalize($repo);
 
-        self::assertSame([['dummy1'], ['dummy2']], $normalized);
+        self::assertSame([$dummy1, $dummy2], $normalized);
     }
 
     /**

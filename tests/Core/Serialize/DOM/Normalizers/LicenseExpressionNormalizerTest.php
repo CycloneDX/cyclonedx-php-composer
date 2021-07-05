@@ -21,22 +21,26 @@ declare(strict_types=1);
  * Copyright (c) Steve Springett. All Rights Reserved.
  */
 
-namespace CycloneDX\Tests\Core\Serialize\JSON\Normalizers;
+namespace CycloneDX\Tests\Core\Serialize\DOM\Normalizers;
 
 use CycloneDX\Core\Models\License\LicenseExpression;
-use CycloneDX\Core\Serialize\JSON\NormalizerFactory;
-use CycloneDX\Core\Serialize\JSON\Normalizers\LicenseExpressionNormalizer;
+use CycloneDX\Core\Serialize\DOM\NormalizerFactory;
+use CycloneDX\Core\Serialize\DOM\Normalizers\LicenseExpressionNormalizer;
+use CycloneDX\Tests\_traits\DomNodeAssertionTrait;
+use DOMDocument;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \CycloneDX\Core\Serialize\JSON\Normalizers\LicenseExpressionNormalizer
- * @covers \CycloneDX\Core\Serialize\JSON\AbstractNormalizer
+ * @covers \CycloneDX\Core\Serialize\DOM\Normalizers\LicenseExpressionNormalizer
+ * @covers \CycloneDX\Core\Serialize\DOM\AbstractNormalizer
  */
 class LicenseExpressionNormalizerTest extends TestCase
 {
+    use DomNodeAssertionTrait;
+
     public function testConstructor(): LicenseExpressionNormalizer
     {
-        $factory = $this->createStub(NormalizerFactory::class);
+        $factory = $this->createConfiguredMock(NormalizerFactory::class, ['getDocument' => new DOMDocument()]);
 
         $normalizer = new LicenseExpressionNormalizer($factory);
         self::assertSame($factory, $normalizer->getNormalizerFactory());
@@ -54,6 +58,6 @@ class LicenseExpressionNormalizerTest extends TestCase
 
         $normalized = $normalizer->normalize($license);
 
-        self::assertSame(['expression' => 'foo'], $normalized);
+        self::assertStringEqualsDomNode('<expression>foo</expression>', $normalized);
     }
 }

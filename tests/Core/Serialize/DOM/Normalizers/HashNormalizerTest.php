@@ -21,20 +21,24 @@ declare(strict_types=1);
  * Copyright (c) Steve Springett. All Rights Reserved.
  */
 
-namespace CycloneDX\Tests\Core\Serialize\JSON\Normalizers;
+namespace CycloneDX\Tests\Core\Serialize\DOM\Normalizers;
 
-use CycloneDX\Core\Serialize\JSON\NormalizerFactory;
-use CycloneDX\Core\Serialize\JSON\Normalizers\HashNormalizer;
+use CycloneDX\Core\Serialize\DOM\NormalizerFactory;
+use CycloneDX\Core\Serialize\DOM\Normalizers\HashNormalizer;
 use CycloneDX\Core\Spec\SpecInterface;
+use CycloneDX\Tests\_traits\DomNodeAssertionTrait;
 use DomainException;
+use DOMDocument;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \CycloneDX\Core\Serialize\JSON\Normalizers\HashNormalizer
- * @covers \CycloneDX\Core\Serialize\JSON\AbstractNormalizer
+ * @covers \CycloneDX\Core\Serialize\DOM\Normalizers\HashNormalizer
+ * @covers \CycloneDX\Core\Serialize\DOM\AbstractNormalizer
  */
 class HashNormalizerTest extends TestCase
 {
+    use DomNodeAssertionTrait;
+
     public function testConstructor(): void
     {
         $factory = $this->createMock(NormalizerFactory::class);
@@ -44,7 +48,11 @@ class HashNormalizerTest extends TestCase
 
     public function testNormalize(): void
     {
-        $factory = $this->createMock(NormalizerFactory::class);
+        $factory = $this->createConfiguredMock(NormalizerFactory::class,
+            [
+                'getDocument' => new DOMDocument(),
+            ]
+        );
         $normalizer = new HashNormalizer($factory);
         $factory->method('getSpec')->willReturn(
             $this->createConfiguredMock(
@@ -59,7 +67,7 @@ class HashNormalizerTest extends TestCase
 
         $normalized = $normalizer->normalize('foo', 'bar');
 
-        self::assertSame(['alg' => 'foo', 'content' => 'bar'], $normalized);
+        self::assertStringEqualsDomNode('<hash alg="foo">bar</hash>', $normalized);
     }
 
     public function testNormalizeThrowOnUnsupportedAlgorithm(): void
