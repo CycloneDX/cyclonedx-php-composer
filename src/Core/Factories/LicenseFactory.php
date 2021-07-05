@@ -23,6 +23,7 @@ declare(strict_types=1);
 
 namespace CycloneDX\Core\Factories;
 
+use CycloneDX\Core\Models\License\AbstractDisjunctiveLicense;
 use CycloneDX\Core\Models\License\DisjunctiveLicenseWithId;
 use CycloneDX\Core\Models\License\DisjunctiveLicenseWithName;
 use CycloneDX\Core\Models\License\LicenseExpression;
@@ -80,7 +81,7 @@ class LicenseFactory
     /**
      * @throws DomainException if the expression was invalid
      */
-    protected function makeExpression(string $license): LicenseExpression
+    public function makeExpression(string $license): LicenseExpression
     {
         return new LicenseExpression($license);
     }
@@ -88,7 +89,7 @@ class LicenseFactory
     /**
      * @return DisjunctiveLicenseWithId|DisjunctiveLicenseWithName
      */
-    protected function makeDisjunctive(string $license)
+    public function makeDisjunctive(string $license): AbstractDisjunctiveLicense
     {
         try {
             return $this->makeDisjunctiveWithId($license);

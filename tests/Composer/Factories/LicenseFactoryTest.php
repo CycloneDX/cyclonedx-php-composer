@@ -104,6 +104,7 @@ class LicenseFactoryTest extends TestCase
      */
     public function testMakeDisjunctiveLicenseRepository(): void
     {
+        /** @see \CycloneDX\Composer\Factories\LicenseFactory::makeDisjunctiveLicenseRepository() */
         $makeDisjunctiveLicenseRepository = new \ReflectionMethod(
             LicenseFactory::class,
             'makeDisjunctiveLicenseRepository'
