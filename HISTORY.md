@@ -1,6 +1,6 @@
 # Changelog
 
-## unreleased
+## 3.0.0
 
 * Breaking Changes
   * Now requires php `^7.3 || ^8.0`, was `^7.1 || ^8.0`.
@@ -37,6 +37,10 @@
   * Added more tests during the build process.
   * Added [Psalm](https://psalm.dev/) & [PHP-CS-Fixer](https://cs.symfony.com/) to the CI chain and fixed all findings accordingly:.
   * Added a demo run of the plugin to the CI chain.
+
+## 2.1.1
+
+* Maintenance release.
 
 ## 2.1.0
 
