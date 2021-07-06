@@ -29,6 +29,8 @@ use CycloneDX\Composer\Plugin\MakeBomCommandOptions;
 use CycloneDX\Core\Serialize\JsonSerializer;
 use CycloneDX\Core\Serialize\XmlSerializer;
 use CycloneDX\Core\Spec\Version;
+use CycloneDX\Core\Validation\Validators\JsonStrictValidator;
+use CycloneDX\Core\Validation\Validators\XmlValidator;
 use PHPUnit\Framework\MockObject\Stub\ReturnSelf;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Command\Command;
@@ -62,26 +64,33 @@ class MakeBomCommandOptionsTest extends TestCase
     public static function dpMakeFromInput(): \Generator
     {
         $data = [
-            /* @see \CycloneDX\Composer\Plugin\MakeBomCommandOptions::bomFormat */
+            /* @see \CycloneDX\Composer\Plugin\MakeBomCommandOptions::$bomFormat */
             'bomFormat default XML' => ['', 'bomFormat', 'XML'],
             ['--output-format=XML', 'bomFormat', 'XML'],
             ['--output-format=JSON', 'bomFormat', 'JSON'],
-            /* @see \CycloneDX\Composer\Plugin\MakeBomCommandOptions::bomWriterClass */
+            /* @see \CycloneDX\Composer\Plugin\MakeBomCommandOptions::$bomWriterClass */
             'bomWriterClass default XML' => ['', 'bomWriterClass', XmlSerializer::class],
             ['--output-format=XML', 'bomWriterClass', XmlSerializer::class],
             ['--output-format=JSON', 'bomWriterClass', JsonSerializer::class],
-            /* @see \CycloneDX\Composer\Plugin\MakeBomCommandOptions::outputFile */
+            /* @see \CycloneDX\Composer\Plugin\MakeBomCommandOptions::$bomValidatorClass */
+            'bomValidatorClass default XML' => ['', 'bomValidatorClass', XmlValidator::class],
+            ['--output-format=XML', 'bomValidatorClass', XmlValidator::class],
+            ['--output-format=JSON', 'bomValidatorClass', JsonStrictValidator::class],
+            ['--no-validate', 'bomValidatorClass', null],
+            ['--no-validate --output-format=XML', 'bomValidatorClass', null],
+            ['--no-validate --output-format=JSON', 'bomValidatorClass', null],
+            /* @see \CycloneDX\Composer\Plugin\MakeBomCommandOptions::$outputFile */
             'outputFile default XML' => ['', 'outputFile', 'bom.xml'],
             ['--output-format=XML', 'outputFile', 'bom.xml'],
             ['--output-format=JSON', 'outputFile', 'bom.json'],
             ['--output-file=fooBar', 'outputFile', 'fooBar'],
-            /* @see \CycloneDX\Composer\Plugin\MakeBomCommandOptions::excludeDev */
+            /* @see \CycloneDX\Composer\Plugin\MakeBomCommandOptions::$excludeDev */
             'excludeDev default disabled' => ['', 'excludeDev', false],
             ['--exclude-dev', 'excludeDev', true],
-            /* @see \CycloneDX\Composer\Plugin\MakeBomCommandOptions::excludePlugins */
+            /* @see \CycloneDX\Composer\Plugin\MakeBomCommandOptions::$excludePlugins */
             'excludePlugins default disabled' => ['', 'excludePlugins', false],
             ['--exclude-plugins', 'excludePlugins', true],
-            /* @see \CycloneDX\Composer\Plugin\MakeBomCommandOptions::specVersion */
+            /* @see \CycloneDX\Composer\Plugin\MakeBomCommandOptions::$specVersion */
             'specVersion default latest' => ['', 'specVersion', SpecFactory::VERSION_LATEST],
             ['--spec-version=1.1', 'specVersion', Version::V_1_1],
             ['--spec-version=1.2', 'specVersion', Version::V_1_2],

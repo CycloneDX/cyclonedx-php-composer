@@ -21,25 +21,26 @@ declare(strict_types=1);
  * Copyright (c) Steve Springett. All Rights Reserved.
  */
 
-namespace CycloneDX\Core\Serialize;
+namespace CycloneDX\Tests\Core\Validation\Errors;
 
-use CycloneDX\Core\Models\Bom;
-use CycloneDX\Core\Spec\SpecInterface;
+use CycloneDX\Core\Validation\Errors\JsonValidationError;
+use PHPUnit\Framework\TestCase;
 
 /**
- * @author jkowalleck
+ * @covers \CycloneDX\Core\Validation\Errors\JsonValidationError
+ * @covers \CycloneDX\Core\Validation\ValidationError
  */
-interface SerializerInterface
+class JsonValidationErrorTest extends TestCase
 {
     /**
-     * Serialize a {@see \CycloneDX\Core\Models\Bom} to a string.
-     *
-     * May throw {@see \RuntimeException} if spec version is not supported.
-     * May throw additional implementation-dependent Exceptions.
+     * @uses \Swaggest\JsonSchema\InvalidValue
      */
-    public function serialize(Bom $bom): string;
+    public function testFromJsonSchemaInvalidValue(): void
+    {
+        $errorJsonSchemaInvalidValue = new \Swaggest\JsonSchema\InvalidValue('foo bar', 1337);
 
-    public function __construct(SpecInterface $spec);
+        $error = JsonValidationError::fromJsonSchemaInvalidValue($errorJsonSchemaInvalidValue);
 
-    public function getSpec(): SpecInterface;
+        self::assertSame('foo bar', $error->getMessage());
+    }
 }

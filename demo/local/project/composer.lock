@@ -12,7 +12,7 @@
             "dist": {
                 "type": "path",
                 "url": "packages/local-demo-dependency",
-                "reference": ""
+                "reference": "d3891c11328cd514196cc9a8d3c3e524884d5066"
             },
             "type": "library",
             "description": "a package that is hosted locally and required in a local demo",
@@ -25,8 +25,7 @@
             "version": "dev-master",
             "dist": {
                 "type": "path",
-                "url": "packages/local-dependency-with-minimal-setup",
-                "reference": ""
+                "url": "packages/local-dependency-with-minimal-setup"
             },
             "type": "library",
             "transport-options": {
@@ -40,8 +39,7 @@
             "version": "dev-master",
             "dist": {
                 "type": "path",
-                "url": "../../..",
-                "reference": ""
+                "url": "../../.."
             },
             "require": {
                 "composer-plugin-api": "^2.0",
@@ -50,14 +48,14 @@
                 "ext-json": "*",
                 "ext-libxml": "*",
                 "package-url/packageurl-php": "^1.0",
-                "php": "^7.3 || ^8.0"
+                "php": "^7.3 || ^8.0",
+                "swaggest/json-schema": "^0.12.35"
             },
             "require-dev": {
                 "composer/composer": "^2.0.13",
                 "ext-simplexml": "*",
-                "phpunit/phpunit": "9.5.5",
-                "roave/security-advisories": "dev-latest",
-                "swaggest/json-schema": "0.12.33"
+                "phpunit/phpunit": "9.5.6",
+                "roave/security-advisories": "dev-latest"
             },
             "type": "composer-plugin",
             "extra": {
@@ -68,7 +66,8 @@
             },
             "autoload": {
                 "psr-4": {
-                    "CycloneDX\\": "src"
+                    "CycloneDX\\Composer\\": "src/Composer/",
+                    "CycloneDX\\Core\\": "src/Core/"
                 }
             },
             "autoload-dev": {
@@ -187,6 +186,146 @@
                 "source": "https://github.com/package-url/packageurl-php/tree/1.0.3"
             },
             "time": "2021-05-13T17:29:18+00:00"
+        },
+        {
+            "name": "phplang/scope-exit",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phplang/scope-exit.git",
+                "reference": "239b73abe89f9414aa85a7ca075ec9445629192b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phplang/scope-exit/zipball/239b73abe89f9414aa85a7ca075ec9445629192b",
+                "reference": "239b73abe89f9414aa85a7ca075ec9445629192b",
+                "shasum": ""
+            },
+            "require-dev": {
+                "phpunit/phpunit": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "PhpLang\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD"
+            ],
+            "authors": [
+                {
+                    "name": "Sara Golemon",
+                    "email": "pollita@php.net",
+                    "homepage": "https://twitter.com/SaraMG",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Emulation of SCOPE_EXIT construct from C++",
+            "homepage": "https://github.com/phplang/scope-exit",
+            "keywords": [
+                "cleanup",
+                "exit",
+                "scope"
+            ],
+            "support": {
+                "issues": "https://github.com/phplang/scope-exit/issues",
+                "source": "https://github.com/phplang/scope-exit/tree/master"
+            },
+            "time": "2016-09-17T00:15:18+00:00"
+        },
+        {
+            "name": "swaggest/json-diff",
+            "version": "v3.8.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/swaggest/json-diff.git",
+                "reference": "d2184358c5ef5ecaa1f6b4c2bce175fac2d25670"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/swaggest/json-diff/zipball/d2184358c5ef5ecaa1f6b4c2bce175fac2d25670",
+                "reference": "d2184358c5ef5ecaa1f6b4c2bce175fac2d25670",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.8.23"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Swaggest\\JsonDiff\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Viacheslav Poturaev",
+                    "email": "vearutop@gmail.com"
+                }
+            ],
+            "description": "JSON diff/rearrange/patch/pointer library for PHP",
+            "support": {
+                "issues": "https://github.com/swaggest/json-diff/issues",
+                "source": "https://github.com/swaggest/json-diff/tree/v3.8.1"
+            },
+            "time": "2020-09-25T17:47:07+00:00"
+        },
+        {
+            "name": "swaggest/json-schema",
+            "version": "v0.12.35",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/swaggest/php-json-schema.git",
+                "reference": "d0126bd830c92a498691d278f01d3ce13a2c9c0a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/swaggest/php-json-schema/zipball/d0126bd830c92a498691d278f01d3ce13a2c9c0a",
+                "reference": "d0126bd830c92a498691d278f01d3ce13a2c9c0a",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "ext-mbstring": "*",
+                "php": ">=5.4",
+                "phplang/scope-exit": "^1.0",
+                "swaggest/json-diff": "^3.5.1"
+            },
+            "require-dev": {
+                "phpunit/php-code-coverage": "^4",
+                "phpunit/phpunit": "^5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Swaggest\\JsonSchema\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Viacheslav Poturaev",
+                    "email": "vearutop@gmail.com"
+                }
+            ],
+            "description": "High definition PHP structures with JSON-schema based validation",
+            "support": {
+                "email": "vearutop@gmail.com",
+                "issues": "https://github.com/swaggest/php-json-schema/issues",
+                "source": "https://github.com/swaggest/php-json-schema/tree/v0.12.35"
+            },
+            "time": "2021-06-17T22:28:26+00:00"
         }
     ],
     "aliases": [],

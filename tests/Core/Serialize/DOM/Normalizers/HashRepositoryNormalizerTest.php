@@ -35,6 +35,9 @@ use PHPUnit\Framework\TestCase;
 /**
  * @covers \CycloneDX\Core\Serialize\DOM\Normalizers\HashRepositoryNormalizer
  * @covers \CycloneDX\Core\Serialize\DOM\AbstractNormalizer
+ * @covers \CycloneDX\Core\Helpers\SimpleDomTrait
+ *
+ * @uses \CycloneDX\Core\Serialize\DOM\Normalizers\HashNormalizer
  */
 class HashRepositoryNormalizerTest extends TestCase
 {

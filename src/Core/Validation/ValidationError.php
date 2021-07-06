@@ -21,25 +21,46 @@ declare(strict_types=1);
  * Copyright (c) Steve Springett. All Rights Reserved.
  */
 
-namespace CycloneDX\Core\Serialize;
-
-use CycloneDX\Core\Models\Bom;
-use CycloneDX\Core\Spec\SpecInterface;
+namespace CycloneDX\Core\Validation;
 
 /**
  * @author jkowalleck
  */
-interface SerializerInterface
+class ValidationError
 {
     /**
-     * Serialize a {@see \CycloneDX\Core\Models\Bom} to a string.
-     *
-     * May throw {@see \RuntimeException} if spec version is not supported.
-     * May throw additional implementation-dependent Exceptions.
+     * @var string
+     * @readonly
      */
-    public function serialize(Bom $bom): string;
+    private $message;
 
-    public function __construct(SpecInterface $spec);
+    /**
+     * keep for internal debug purposes.
+     *
+     * @var object|null
+     */
+    private $error;
 
-    public function getSpec(): SpecInterface;
+    final protected function __construct(string $message)
+    {
+        $this->message = $message;
+    }
+
+    public function getMessage(): string
+    {
+        return $this->message;
+    }
+
+    /**
+     * @internal
+     *
+     * @return static
+     */
+    public static function fromThrowable(\Throwable $error): self
+    {
+        $i = new static($error->getMessage());
+        $i->error = $error;
+
+        return $i;
+    }
 }

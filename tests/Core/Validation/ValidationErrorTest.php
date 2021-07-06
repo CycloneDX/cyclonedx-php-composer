@@ -21,25 +21,22 @@ declare(strict_types=1);
  * Copyright (c) Steve Springett. All Rights Reserved.
  */
 
-namespace CycloneDX\Core\Serialize;
+namespace CycloneDX\Tests\Core\Validation;
 
-use CycloneDX\Core\Models\Bom;
-use CycloneDX\Core\Spec\SpecInterface;
+use CycloneDX\Core\Validation\ValidationError;
+use PHPUnit\Framework\TestCase;
 
 /**
- * @author jkowalleck
+ * @covers \CycloneDX\Core\Validation\ValidationError
  */
-interface SerializerInterface
+class ValidationErrorTest extends TestCase
 {
-    /**
-     * Serialize a {@see \CycloneDX\Core\Models\Bom} to a string.
-     *
-     * May throw {@see \RuntimeException} if spec version is not supported.
-     * May throw additional implementation-dependent Exceptions.
-     */
-    public function serialize(Bom $bom): string;
+    public function testFromThrowable(): void
+    {
+        $throwable = new \Exception('foo bar');
 
-    public function __construct(SpecInterface $spec);
+        $error = ValidationError::fromThrowable($throwable);
 
-    public function getSpec(): SpecInterface;
+        self::assertSame('foo bar', $error->getMessage());
+    }
 }

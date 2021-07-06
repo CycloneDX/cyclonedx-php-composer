@@ -21,25 +21,28 @@ declare(strict_types=1);
  * Copyright (c) Steve Springett. All Rights Reserved.
  */
 
-namespace CycloneDX\Core\Serialize;
+namespace CycloneDX\Tests\Core\Validation\Errors;
 
-use CycloneDX\Core\Models\Bom;
-use CycloneDX\Core\Spec\SpecInterface;
+use CycloneDX\Core\Validation\Errors\XmlValidationError;
+use PHPUnit\Framework\TestCase;
 
 /**
- * @author jkowalleck
+ * @covers \CycloneDX\Core\Validation\Errors\XmlValidationError
+ * @covers \CycloneDX\Core\Validation\ValidationError
  */
-interface SerializerInterface
+class XmlValidationErrorTest extends TestCase
 {
-    /**
-     * Serialize a {@see \CycloneDX\Core\Models\Bom} to a string.
-     *
-     * May throw {@see \RuntimeException} if spec version is not supported.
-     * May throw additional implementation-dependent Exceptions.
-     */
-    public function serialize(Bom $bom): string;
+    public function testFromLibXMLError(): void
+    {
+        $libXmlError = new \LibXMLError();
+        $libXmlError->message = 'foo bar';
+        $libXmlError->level = \LIBXML_ERR_ERROR;
+        $libXmlError->code = 1337;
+        $libXmlError->line = 23;
+        $libXmlError->column = 42;
 
-    public function __construct(SpecInterface $spec);
+        $error = XmlValidationError::fromLibXMLError($libXmlError);
 
-    public function getSpec(): SpecInterface;
+        self::assertSame('foo bar', $error->getMessage());
+    }
 }

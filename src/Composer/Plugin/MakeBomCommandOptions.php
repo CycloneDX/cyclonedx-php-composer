@@ -28,6 +28,9 @@ use CycloneDX\Composer\Plugin\Exceptions\ValueError;
 use CycloneDX\Core\Serialize\JsonSerializer;
 use CycloneDX\Core\Serialize\SerializerInterface;
 use CycloneDX\Core\Serialize\XmlSerializer;
+use CycloneDX\Core\Validation\ValidatorInterface;
+use CycloneDX\Core\Validation\Validators\JsonStrictValidator;
+use CycloneDX\Core\Validation\Validators\XmlValidator;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -41,25 +44,42 @@ class MakeBomCommandOptions
 {
     private const OPTION_OUTPUT_FORMAT = 'output-format';
     private const OPTION_OUTPUT_FILE = 'output-file';
-    private const OPTION_EXCLUDE_DEV = 'exclude-dev';
-    private const OPTION_EXCLUDE_PLUGINS = 'exclude-plugins';
     private const OPTION_SPEC_VERSION = 'spec-version';
+
+    private const SWITCH_EXCLUDE_DEV = 'exclude-dev';
+    private const SWITCH_EXCLUDE_PLUGINS = 'exclude-plugins';
+    private const SWITCH_NO_VALIDATE = 'no-validate';
 
     private const OUTPUT_FORMAT_XML = 'XML';
     private const OUTPUT_FORMAT_JSON = 'JSON';
 
     public const OUTPUT_FILE_STDOUT = '-';
 
-    /** @psalm-var array<MakeBomCommandOptions::OUTPUT_FORMAT_*, string> */
+    /**
+     * @var string[]
+     * @psalm-var array<MakeBomCommandOptions::OUTPUT_FORMAT_*, string>
+     */
     private const OUTPUT_FILE_DEFAULT = [
         self::OUTPUT_FORMAT_XML => 'bom.xml',
         self::OUTPUT_FORMAT_JSON => 'bom.json',
     ];
 
-    /** @psalm-var array<MakeBomCommandOptions::OUTPUT_FORMAT_*, class-string<SerializerInterface>> */
+    /**
+     * @var string[]
+     * @psalm-var array<MakeBomCommandOptions::OUTPUT_FORMAT_*, class-string<SerializerInterface>>
+     */
     private const SERIALISERS = [
         self::OUTPUT_FORMAT_XML => XmlSerializer::class,
         self::OUTPUT_FORMAT_JSON => JsonSerializer::class,
+    ];
+
+    /**
+     * @var string[]
+     * @psalm-var array<MakeBomCommandOptions::OUTPUT_FORMAT_*, class-string<ValidatorInterface>>
+     */
+    private const VALIDATORS = [
+        self::OUTPUT_FORMAT_XML => XmlValidator::class,
+        self::OUTPUT_FORMAT_JSON => JsonStrictValidator::class,
     ];
 
     /**
@@ -90,13 +110,13 @@ class MakeBomCommandOptions
                 ).'"'
             )
             ->addOption(
-                self::OPTION_EXCLUDE_DEV,
+                self::SWITCH_EXCLUDE_DEV,
                 null,
                 InputOption::VALUE_NONE,
                 'Exclude dev dependencies'
             )
             ->addOption(
-                self::OPTION_EXCLUDE_PLUGINS,
+                self::SWITCH_EXCLUDE_PLUGINS,
                 null,
                 InputOption::VALUE_NONE,
                 'Exclude composer plugins'
@@ -108,12 +128,18 @@ class MakeBomCommandOptions
                 'Which version of CycloneDX spec to use.'.\PHP_EOL.
                 'Values: "'.implode('", "', array_keys(SpecFactory::SPECS)).'"',
                 SpecFactory::VERSION_LATEST
+            )
+            ->addOption(
+                self::SWITCH_NO_VALIDATE,
+                null,
+                InputOption::VALUE_NONE,
+                'Dont validate the resulting output'
             );
     }
 
     /**
      * @var string
-     * @psalm-var \CycloneDX\Core\Spec\Version::*
+     * @psalm-var \CycloneDX\Core\Spec\Version::V_*
      * @readonly
      * @psalm-allow-private-mutation
      */
@@ -150,6 +176,14 @@ class MakeBomCommandOptions
     public $bomWriterClass = self::SERIALISERS[self::OUTPUT_FORMAT_XML];
 
     /**
+     * @var string|null
+     * @psalm-var class-string<ValidatorInterface>|null
+     * @readonly
+     * @psalm-allow-private-mutation
+     */
+    public $bomValidatorClass;
+
+    /**
      * @var string
      * @readonly
      * @psalm-allow-private-mutation
@@ -172,8 +206,8 @@ class MakeBomCommandOptions
         }
         $options->specVersion = $specVersion;
 
-        $options->excludeDev = false !== $input->getOption(self::OPTION_EXCLUDE_DEV);
-        $options->excludePlugins = false !== $input->getOption(self::OPTION_EXCLUDE_PLUGINS);
+        $options->excludeDev = false !== $input->getOption(self::SWITCH_EXCLUDE_DEV);
+        $options->excludePlugins = false !== $input->getOption(self::SWITCH_EXCLUDE_PLUGINS);
 
         $outputFormat = $input->getOption(self::OPTION_OUTPUT_FORMAT);
         \assert(\is_string($outputFormat));
@@ -184,7 +218,12 @@ class MakeBomCommandOptions
             throw new ValueError('Invalid value for option "'.self::OPTION_OUTPUT_FORMAT.'": '.$bomFormat);
         }
         $options->bomFormat = $bomFormat;
+
         $options->bomWriterClass = self::SERIALISERS[$bomFormat];
+
+        $options->bomValidatorClass = $input->getOption(self::SWITCH_NO_VALIDATE)
+            ? null
+            : self::VALIDATORS[$bomFormat];
 
         $outputFile = $input->getOption(self::OPTION_OUTPUT_FILE);
         $options->outputFile = false === \is_string($outputFile) || '' === $outputFile

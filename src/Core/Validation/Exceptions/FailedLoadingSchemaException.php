@@ -21,25 +21,8 @@ declare(strict_types=1);
  * Copyright (c) Steve Springett. All Rights Reserved.
  */
 
-namespace CycloneDX\Core\Serialize;
+namespace CycloneDX\Core\Validation\Exceptions;
 
-use CycloneDX\Core\Models\Bom;
-use CycloneDX\Core\Spec\SpecInterface;
-
-/**
- * @author jkowalleck
- */
-interface SerializerInterface
+class FailedLoadingSchemaException extends \RuntimeException
 {
-    /**
-     * Serialize a {@see \CycloneDX\Core\Models\Bom} to a string.
-     *
-     * May throw {@see \RuntimeException} if spec version is not supported.
-     * May throw additional implementation-dependent Exceptions.
-     */
-    public function serialize(Bom $bom): string;
-
-    public function __construct(SpecInterface $spec);
-
-    public function getSpec(): SpecInterface;
 }
