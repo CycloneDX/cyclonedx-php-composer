@@ -2,6 +2,13 @@
 
 ## unreleased
 
+## 3.1.1
+
+* Misc
+  * Updated some documentation.
+  * Bumped some dev-tools.
+  * Added normalizer for `composer.json` files.
+
 ## 3.1.0
 
 * Added
@@ -10,9 +17,9 @@
     * Added a switch `--no-validate` to disable result validation.
     * When the verbosity at "debug" level, then detailed debug info will be put out.
       This should help to find validation issues.
- * Validation classes/methods to test SBoM
-   in XML and JSON format
-   for spec 1.1, 1.2, 1.3
+  * Validation classes/methods to test SBoM
+    in XML and JSON format
+    for spec 1.1, 1.2, 1.3
 
 ## 3.0.0
 
