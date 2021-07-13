@@ -265,3 +265,40 @@ jobs:
           --using-cache=no
           --show-progress=dots
           --no-interaction
+  composer-normalize:
+    name: Composer normalize
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        # see https://github.com/actions/checkout
+        uses: actions/checkout@v2
+      - name: Setup PHP
+        # see https://github.com/shivammathur/setup-php
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.0"
+          tools: composer:v2
+          coverage: none
+      - name: Determine composer cache directory
+        run: echo "COMPOSER_CACHE_DIR_PATH=$(composer config cache-dir)" >> $GITHUB_ENV
+      - name: Cache dependencies installed with composer
+        # see https://github.com/actions/cache
+        uses: actions/cache@v2.1.6
+        with:
+          path: ${{ env.COMPOSER_CACHE_DIR_PATH }}
+          key: php8.0-highest-${{ hashFiles('**/composer.json') }}
+          restore-keys: php8.0-highest-
+      - name: Install composer-normalize
+        run: composer update --prefer-dist --no-interaction --no-progress
+        working-directory: tools/composer-normalize
+      - name: Run composer-normalize tests
+        run: >
+          composer -dtools/composer-normalize
+          normalize
+          --dry-run
+          --diff
+          --no-check-lock
+          --no-update-lock
+          --no-interaction
+          $PWD/composer.json

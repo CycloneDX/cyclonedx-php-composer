@@ -1,12 +1,9 @@
 {
     "name": "cyclonedx/cyclonedx-php-composer",
-    "description": "Creates CycloneDX Software Bill-of-Materials (SBOM) from PHP Composer projects",
     "type": "composer-plugin",
-    "license": "Apache-2.0",
+    "description": "Creates CycloneDX Software Bill-of-Materials (SBOM) from PHP Composer projects",
     "homepage": "https://github.com/CycloneDX/cyclonedx-php-composer/",
-    "support": {
-        "issues": "https://github.com/CycloneDX/cyclonedx-php-composer/issues"
-    },
+    "license": "Apache-2.0",
     "authors": [
         {
             "name": "nscuro",
@@ -19,17 +16,6 @@
             "role": "Developer"
         }
     ],
-    "extra": {
-        "class": "CycloneDX\\Composer\\Plugin\\Plugin",
-        "unused": [
-            "composer-plugin-api"
-        ]
-    },
-    "config": {
-        "preferred-install": "dist",
-        "sort-packages": true
-    },
-    "prefer-stable": true,
     "require": {
         "php": "^7.3 || ^8.0",
         "ext-dom": "*",
@@ -46,6 +32,20 @@
         "phpunit/phpunit": "9.5.6",
         "roave/security-advisories": "dev-latest"
     },
+    "config": {
+        "preferred-install": "dist",
+        "sort-packages": true
+    },
+    "extra": {
+        "class": "CycloneDX\\Composer\\Plugin\\Plugin",
+        "composer-normalize": {
+            "indent-size": 4,
+            "indent-style": "space"
+        },
+        "unused": [
+            "composer-plugin-api"
+        ]
+    },
     "autoload": {
         "psr-4": {
             "CycloneDX\\Composer\\": "src/Composer/",
@@ -57,37 +57,47 @@
             "CycloneDX\\Tests\\": "tests"
         }
     },
+    "prefer-stable": true,
     "scripts": {
+        "cs-fix": "@php tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/php-cs-fixer fix --diff",
         "dev-setup": [
+            "@composer -dtools/composer-normalize update",
             "@composer -dtools/composer-require-checker update",
             "@composer -dtools/composer-unused update",
             "@composer -dtools/php-cs-fixer update",
             "@composer -dtools/psalm update",
             "@composer update"
         ],
+        "normalize": "@composer -dtools/composer-normalize normalize --diff $PWD/composer.json",
         "test": [
             "@composer validate",
             "@test:psalm",
             "@test:phpunit",
             "@test:cs-fixer",
             "@test:composer-unused",
-            "@test:composer-require-checker"
+            "@test:composer-require-checker",
+            "@test:composer-normalize"
         ],
-        "test:phpunit" : "@php -d zend.assertions=1 -d assert.exception=1 -d display_errors=On -d error_reporting=-1 -d log_errors_max_len=0 -d memory_limit=-1 vendor/phpunit/phpunit/phpunit",
-        "test:psalm": "@php tools/psalm/vendor/vimeo/psalm/psalm",
-        "test:cs-fixer": "@php tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/php-cs-fixer fix --dry-run --diff",
-        "test:composer-unused": "@php tools/composer-unused/vendor/icanhazstring/composer-unused/bin/composer-unused --excludeDir=tools",
+        "test:composer-normalize": "@composer -dtools/composer-normalize normalize --dry-run --diff $PWD/composer.json",
         "test:composer-require-checker": "@php tools/composer-require-checker/vendor/maglnet/composer-require-checker/bin/composer-require-checker || :",
-        "cs-fix": "@php tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/php-cs-fixer fix --diff"
+        "test:composer-unused": "@php tools/composer-unused/vendor/icanhazstring/composer-unused/bin/composer-unused --excludeDir=tools",
+        "test:cs-fixer": "@php tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/php-cs-fixer fix --dry-run --diff",
+        "test:phpunit": "@php -d zend.assertions=1 -d assert.exception=1 -d display_errors=On -d error_reporting=-1 -d log_errors_max_len=0 -d memory_limit=-1 vendor/phpunit/phpunit/phpunit",
+        "test:psalm": "@php tools/psalm/vendor/vimeo/psalm/psalm"
     },
     "scripts-descriptions": {
+        "cs-fix": "Fix files according to coding standards.",
         "dev-setup": "Install dev-requirements and tools.",
+        "normalize": "Normalize composer.json",
         "test": "Run all tests!",
-        "test:phpunit": "Run tests with PHPUnit.",
-        "test:psalm": "Run static code analysis with Psalm.",
-        "test:cs-fixer": "Test coding standards with PHP-CS-fixer.",
-        "test:composer-unused": "Test compoer requirements with composer-unused.",
+        "test:composer-normalize": "Test if composer.json was normalized",
         "test:composer-require-checker": "Test compoer requirements with composer-require-checker.",
-        "cs-fix": "Fix files according to coding standards."
+        "test:composer-unused": "Test compoer requirements with composer-unused.",
+        "test:cs-fixer": "Test coding standards with PHP-CS-fixer.",
+        "test:phpunit": "Run tests with PHPUnit.",
+        "test:psalm": "Run static code analysis with Psalm."
+    },
+    "support": {
+        "issues": "https://github.com/CycloneDX/cyclonedx-php-composer/issues"
     }
 }

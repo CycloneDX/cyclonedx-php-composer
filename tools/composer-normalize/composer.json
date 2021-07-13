@@ -1,9 +1,9 @@
 {
-    "name": "tools/composer-require-checker",
+    "name": "tools/composer-normalize",
     "type": "metapackage",
-    "description": "composer-require-checker",
+    "description": "composer-normalize",
     "require": {
-        "maglnet/composer-require-checker": "2.0.0 || 2.1.0 || 3.2.0"
+        "ergebnis/composer-normalize": "2.15.0"
     },
     "require-dev": {
         "roave/security-advisories": "dev-latest"
