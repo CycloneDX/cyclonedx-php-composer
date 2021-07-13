@@ -2,6 +2,8 @@
 
 ## unreleased
 
+## 3.1.0
+
 * Added
   * CLI via `composer make-bom`
     * Per default the command will validate the resulting SBoM before writing it to file/stdOut.
