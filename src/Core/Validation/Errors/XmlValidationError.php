@@ -21,25 +21,33 @@ declare(strict_types=1);
  * Copyright (c) Steve Springett. All Rights Reserved.
  */
 
-namespace CycloneDX\Core\Serialize;
+namespace CycloneDX\Core\Validation\Errors;
 
-use CycloneDX\Core\Models\Bom;
-use CycloneDX\Core\Spec\SpecInterface;
+use CycloneDX\Core\Validation\ValidationError;
+use LibXMLError;
 
 /**
  * @author jkowalleck
  */
-interface SerializerInterface
+class XmlValidationError extends ValidationError
 {
     /**
-     * Serialize a {@see \CycloneDX\Core\Models\Bom} to a string.
+     * keep for internal debug purposes.
      *
-     * May throw {@see \RuntimeException} if spec version is not supported.
-     * May throw additional implementation-dependent Exceptions.
+     * @var object|null
      */
-    public function serialize(Bom $bom): string;
+    private $error;
 
-    public function __construct(SpecInterface $spec);
+    /**
+     * @internal
+     *
+     * @return static
+     */
+    public static function fromLibXMLError(LibXMLError $error): self
+    {
+        $i = new static($error->message);
+        $i->error = $error;
 
-    public function getSpec(): SpecInterface;
+        return $i;
+    }
 }

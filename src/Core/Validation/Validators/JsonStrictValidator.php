@@ -21,25 +21,27 @@ declare(strict_types=1);
  * Copyright (c) Steve Springett. All Rights Reserved.
  */
 
-namespace CycloneDX\Core\Serialize;
+namespace CycloneDX\Core\Validation\Validators;
 
-use CycloneDX\Core\Models\Bom;
-use CycloneDX\Core\Spec\SpecInterface;
+use CycloneDX\Core\Resources;
+use CycloneDX\Core\Spec\Version;
 
 /**
  * @author jkowalleck
  */
-interface SerializerInterface
+class JsonStrictValidator extends JsonValidator
 {
     /**
-     * Serialize a {@see \CycloneDX\Core\Models\Bom} to a string.
+     * {@inheritdoc}
      *
-     * May throw {@see \RuntimeException} if spec version is not supported.
-     * May throw additional implementation-dependent Exceptions.
+     * @internal
      */
-    public function serialize(Bom $bom): string;
-
-    public function __construct(SpecInterface $spec);
-
-    public function getSpec(): SpecInterface;
+    protected static function listSchemaFiles(): array
+    {
+        return [
+            Version::V_1_1 => null, // unsupported version
+            Version::V_1_2 => Resources::FILE_CDX_JSON_STRICT_SCHEMA_1_2,
+            Version::V_1_3 => Resources::FILE_CDX_JSON_STRICT_SCHEMA_1_3,
+        ];
+    }
 }

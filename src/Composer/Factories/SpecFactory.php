@@ -40,6 +40,7 @@ final class SpecFactory
     public const VERSION_LATEST = Version::V_1_3;
 
     /**
+     * @var string[]
      * @psalm-var array<Version::V_*, class-string<SpecInterface>>
      */
     public const SPECS = [

@@ -1,11 +1,15 @@
 * text=auto
 
-*.md          diff=markdown
-*.php         diff=php
-composer.lock diff=json
-*.xml.dist    diff=xml
-*.neon        diff=yaml
-*.neon.dist   diff=yaml
+*.txt         text eol=lf
+*.md          text eol=lf diff=markdown
+*.php         text eol=lf diff=php
+*.json        text eol=lf diff=json
+*.xml         text eol=lf diff=xml
+*.xml.dist    text eol=lf diff=xml
+*.xsd         text eol=lf diff=xml
+*.neon        text eol=lf diff=yaml
+*.neon.dist   text eol=lf diff=yaml
+composer.lock text eol=lf diff=json
 
 # files that are not bundled into the "dist" release are marked `export-ignore`
 .gitattributes          export-ignore
@@ -21,3 +25,4 @@ composer.lock diff=json
 /HISTORY.md             export-ignore
 /CODEOWNERS             export-ignore
 /demo                   export-ignore
+/docs/decisions         export-ignore

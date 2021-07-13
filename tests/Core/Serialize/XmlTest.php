@@ -28,8 +28,7 @@ use CycloneDX\Core\Serialize\XmlSerializer;
 use CycloneDX\Core\Spec\Spec11;
 use CycloneDX\Core\Spec\Spec12;
 use CycloneDX\Core\Spec\Spec13;
-use DOMDocument;
-use DOMException;
+use CycloneDX\Core\Validation\Validators\XmlValidator;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -54,21 +53,13 @@ class XmlTest extends TestCase
     public function testSchema11(Bom $bom): void
     {
         $spec = new Spec11();
-        $schema = realpath(__DIR__.'/../../../res/bom-1.1.SNAPSHOT.xsd');
-
-        self::assertIsString($schema);
-        self::assertFileExists($schema);
-
         $serializer = new XmlSerializer($spec);
+        $validator = new XmlValidator($spec);
 
         $xml = $serializer->serialize($bom);
-        $doc = $this->loadDomFromXml($xml); // throws on error
+        $validationErrors = $validator->validateString($xml);
 
-        libxml_use_internal_errors(false); // send errors to PHPUnit
-        self::assertTrue(
-            $doc->schemaValidate($schema), // warns on schema mismatch. might be handled by PHPUnit as error.
-            $xml
-        );
+        self::assertNull($validationErrors);
     }
 
     // endregion Spec 1.1
@@ -86,21 +77,13 @@ class XmlTest extends TestCase
     public function testSchema12(Bom $bom): void
     {
         $spec = new Spec12();
-        $schema = realpath(__DIR__.'/../../../res/bom-1.2.SNAPSHOT.xsd');
-
-        self::assertIsString($schema);
-        self::assertFileExists($schema);
-
         $serializer = new XmlSerializer($spec);
+        $validator = new XmlValidator($spec);
 
         $xml = $serializer->serialize($bom);
-        $doc = $this->loadDomFromXml($xml); // throws on error
+        $validationErrors = $validator->validateString($xml);
 
-        libxml_use_internal_errors(false); // send errors to PHPUnit
-        self::assertTrue(
-            $doc->schemaValidate($schema), // warns on schema mismatch. might be handled by PHPUnit as error.
-            $xml
-        );
+        self::assertNull($validationErrors);
     }
 
     // endregion Spec 1.2
@@ -118,44 +101,14 @@ class XmlTest extends TestCase
     public function testSchema13(Bom $bom): void
     {
         $spec = new Spec13();
-        $schema = realpath(__DIR__.'/../../../res/bom-1.3.SNAPSHOT.xsd');
-
-        self::assertIsString($schema);
-        self::assertFileExists($schema);
-
         $serializer = new XmlSerializer($spec);
+        $validator = new XmlValidator($spec);
 
         $xml = $serializer->serialize($bom);
-        $doc = $this->loadDomFromXml($xml); // throws on error
+        $validationErrors = $validator->validateString($xml);
 
-        libxml_use_internal_errors(false); // send errors to PHPUnit
-        self::assertTrue(
-            $doc->schemaValidate($schema), // warns on schema mismatch. might be handled by PHPUnit as error.
-            $xml
-        );
+        self::assertNull($validationErrors);
     }
 
     // endregion Spec 1.3
-
-    // region helpers
-
-    private function loadDomFromXml(string $xml): DOMDocument
-    {
-        $doc = new DOMDocument();
-        $options = \LIBXML_NONET;
-        if (\defined('LIBXML_COMPACT')) {
-            $options |= \LIBXML_COMPACT;
-        }
-        if (\defined('LIBXML_PARSEHUGE')) {
-            $options |= \LIBXML_PARSEHUGE;
-        }
-        $loaded = $doc->loadXML($xml, $options);
-        if (false === $loaded) {
-            throw new DOMException('loading failed');
-        }
-
-        return $doc;
-    }
-
-    // endregion helpers
 }

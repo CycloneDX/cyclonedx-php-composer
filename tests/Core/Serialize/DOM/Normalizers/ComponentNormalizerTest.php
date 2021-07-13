@@ -43,6 +43,7 @@ use PHPUnit\Framework\TestCase;
 /**
  * @covers \CycloneDX\Core\Serialize\DOM\Normalizers\ComponentNormalizer
  * @covers \CycloneDX\Core\Serialize\DOM\AbstractNormalizer
+ * @covers \CycloneDX\Core\Helpers\SimpleDomTrait
  */
 class ComponentNormalizerTest extends TestCase
 {

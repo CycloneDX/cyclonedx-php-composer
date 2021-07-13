@@ -28,45 +28,15 @@ use CycloneDX\Core\Serialize\JsonSerializer;
 use CycloneDX\Core\Spec\Spec11;
 use CycloneDX\Core\Spec\Spec12;
 use CycloneDX\Core\Spec\Spec13;
+use CycloneDX\Core\Validation\Validators\JsonStrictValidator;
 use DomainException;
 use PHPUnit\Framework\TestCase;
-use Swaggest\JsonSchema;
-
-class SnapshotRemoteRefProvider implements JsonSchema\RemoteRefProvider
-{
-    public function getSchemaData($url)
-    {
-        $path = parse_url($url, \PHP_URL_PATH);
-        if (false !== $path) {
-            $file = basename($path);
-            if (false !== preg_match('/\.SNAPSHOT\./', $file)) {
-                $url = realpath(__DIR__.'/../../../res/'.$file);
-            }
-        }
-
-        return json_decode(file_get_contents($url));
-    }
-}
 
 /**
  * @coversNothing
  */
 class JsonTest extends TestCase
 {
-    private $schemaContracts = [];
-
-    private function getSchemaContract(string $schema): JsonSchema\SchemaContract
-    {
-        if (false === \array_key_exists($schema, $this->schemaContracts)) {
-            $this->schemaContracts[$schema] = JsonSchema\Schema::import(
-                $schema,
-                new JsonSchema\Context(new SnapshotRemoteRefProvider())
-            );
-        }
-
-        return $this->schemaContracts[$schema];
-    }
-
     // region Spec 1.0
     // Spec 1.0 is not implemented
     // endregion Spec 1.0
@@ -102,22 +72,13 @@ class JsonTest extends TestCase
     public function testSchema12(Bom $bom): void
     {
         $spec = new Spec12();
-        $schemaPath = realpath(__DIR__.'/../../../res/bom-1.2-strict.SNAPSHOT.schema.json');
-
-        self::assertIsString($schemaPath);
-        self::assertFileExists($schemaPath);
-
         $serializer = new JsonSerializer($spec);
+        $validator = new JsonStrictValidator($spec);
 
         $json = $serializer->serialize($bom);
-        self::assertJson($json);
-        $data = json_decode($json, false, 512, \JSON_THROW_ON_ERROR);
+        $validationErrors = $validator->validateString($json);
 
-        $schemaContracts = $this->getSchemaContract($schemaPath);
-        self::assertInstanceOf(
-            JsonSchema\Structure\ObjectItem::class,
-            $schemaContracts->in($data) // throws on schema mismatch
-        );
+        self::assertNull($validationErrors);
     }
 
     // endregion Spec 1.2
@@ -135,22 +96,13 @@ class JsonTest extends TestCase
     public function testSchema13(Bom $bom): void
     {
         $spec = new Spec13();
-        $schemaPath = realpath(__DIR__.'/../../../res/bom-1.3-strict.SNAPSHOT.schema.json');
-
-        self::assertIsString($schemaPath);
-        self::assertFileExists($schemaPath);
-
         $serializer = new JsonSerializer($spec);
+        $validator = new JsonStrictValidator($spec);
 
         $json = $serializer->serialize($bom);
-        self::assertJson($json);
-        $data = json_decode($json, false, 512, \JSON_THROW_ON_ERROR);
+        $validationErrors = $validator->validateString($json);
 
-        $schemaContracts = $this->getSchemaContract($schemaPath);
-        self::assertInstanceOf(
-            JsonSchema\Structure\ObjectItem::class,
-            $schemaContracts->in($data) // throws on schema mismatch
-        );
+        self::assertNull($validationErrors);
     }
 
     // endregion Spec 1.3

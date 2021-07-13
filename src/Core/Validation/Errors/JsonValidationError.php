@@ -21,25 +21,23 @@ declare(strict_types=1);
  * Copyright (c) Steve Springett. All Rights Reserved.
  */
 
-namespace CycloneDX\Core\Serialize;
+namespace CycloneDX\Core\Validation\Errors;
 
-use CycloneDX\Core\Models\Bom;
-use CycloneDX\Core\Spec\SpecInterface;
+use CycloneDX\Core\Validation\ValidationError;
+use Swaggest\JsonSchema;
 
 /**
  * @author jkowalleck
  */
-interface SerializerInterface
+class JsonValidationError extends ValidationError
 {
     /**
-     * Serialize a {@see \CycloneDX\Core\Models\Bom} to a string.
+     * @internal
      *
-     * May throw {@see \RuntimeException} if spec version is not supported.
-     * May throw additional implementation-dependent Exceptions.
+     * @return static
      */
-    public function serialize(Bom $bom): string;
-
-    public function __construct(SpecInterface $spec);
-
-    public function getSpec(): SpecInterface;
+    public static function fromJsonSchemaInvalidValue(JsonSchema\InvalidValue $error): self
+    {
+        return parent::fromThrowable($error);
+    }
 }

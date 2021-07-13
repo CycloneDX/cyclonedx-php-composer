@@ -23,6 +23,7 @@ declare(strict_types=1);
 
 namespace CycloneDX\Core\Spdx;
 
+use CycloneDX\Core\Resources;
 use JsonException;
 use RuntimeException;
 
@@ -33,8 +34,6 @@ use RuntimeException;
  */
 class License
 {
-    private const LICENSES_FILE = __DIR__.'/../../../res/spdx.SNAPSHOT.schema.json';
-
     /**
      * @var string[]
      * @psalm-var array<string, string>
@@ -53,7 +52,7 @@ class License
 
     public function getResourcesFile(): string
     {
-        return realpath(self::LICENSES_FILE);
+        return realpath(Resources::FILE_SPDX_JSON_SCHEMA);
     }
 
     /**

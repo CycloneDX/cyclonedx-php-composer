@@ -1,5 +1,17 @@
 # Changelog
 
+## unreleased
+
+* Added
+  * CLI via `composer make-bom`
+    * Per default the command will validate the resulting SBoM before writing it to file/stdOut.
+    * Added a switch `--no-validate` to disable result validation.
+    * When the verbosity at "debug" level, then detailed debug info will be put out.
+      This should help to find validation issues.
+ * Validation classes/methods to test SBoM
+   in XML and JSON format
+   for spec 1.1, 1.2, 1.3
+
 ## 3.0.0
 
 * Breaking Changes
@@ -10,8 +22,8 @@
       See option `--spec-version`.
     * Deprecated switch `--json` was removed.  
       Use option `--output-format=JSON` instead.
-  * Components' license in SpdxLicenseExpression format are no longer split into disjunctive licenses.
-    They are still used properly in the resulting output file.
+  * Component's license in SpdxLicenseExpression format is no longer split into disjunctive licenses.
+    Still using licenses properly in the resulting output file.
   * Complete rewrite/refactor.  
     Expect library classes/methods/functions to be removed, renamed or incompatible to previous versions - see the source for changes.
 * Added
