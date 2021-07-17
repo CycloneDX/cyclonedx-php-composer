@@ -21,22 +21,11 @@ declare(strict_types=1);
  * Copyright (c) Steve Springett. All Rights Reserved.
  */
 
-namespace CycloneDX\Composer\Plugin;
-
-use Composer\Plugin\Capability\CommandProvider as CommandProviderCapability;
+namespace CycloneDX\Composer\MakeBom\Exceptions;
 
 /**
  * @internal
- *
- * @author nscuro
  */
-class CommandProvider implements CommandProviderCapability
+class LockerIsOutdatedError extends \RuntimeException
 {
-    /**
-     * @psalm-suppress MissingThrowsDocblock - Exceptions are handled by caller
-     */
-    public function getCommands(): array
-    {
-        return [new MakeBomCommand('make-bom')];
-    }
 }

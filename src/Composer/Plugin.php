@@ -21,39 +21,60 @@ declare(strict_types=1);
  * Copyright (c) Steve Springett. All Rights Reserved.
  */
 
-namespace CycloneDX\Composer\Plugin;
+namespace CycloneDX\Composer;
 
 use Composer\Composer;
+use Composer\Factory as ComposerFactory;
 use Composer\IO\IOInterface;
+use Composer\Plugin\Capability\CommandProvider;
 use Composer\Plugin\Capable;
 use Composer\Plugin\PluginInterface;
+use CycloneDX\Core\Spdx\License as SpdxLicenseValidator;
 
 /**
  * @internal
  *
- * @author nscuro
+ * @author jkowalleck
  */
-class Plugin implements PluginInterface, Capable
+class Plugin implements PluginInterface, Capable, CommandProvider
 {
     public function activate(Composer $composer, IOInterface $io): void
     {
-        // Nothing to do
     }
 
     public function deactivate(Composer $composer, IOInterface $io): void
     {
-        // Nothing to do
     }
 
     public function uninstall(Composer $composer, IOInterface $io): void
     {
-        // Nothing to do
     }
 
     public function getCapabilities(): array
     {
         return [
-            \Composer\Plugin\Capability\CommandProvider::class => CommandProvider::class,
+            CommandProvider::class => self::class,
+        ];
+    }
+
+    /**
+     * @psalm-suppress MissingThrowsDocblock - Exceptions are handled by caller
+     */
+    public function getCommands(): array
+    {
+        return [
+            new MakeBom\Command(
+                new MakeBom\Options(),
+                new MakeBom\Factory(new ComposerFactory()),
+                new Factories\BomFactory(
+                    new Factories\ComponentFactory(
+                        new Factories\LicenseFactory(
+                            new SpdxLicenseValidator()
+                        )
+                    )
+                ),
+                'make-bom'
+            ),
         ];
     }
 }

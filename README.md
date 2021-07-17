@@ -10,27 +10,32 @@
 
 # CycloneDX PHP Composer Plugin
 
-A plugin for PHP's [Composer](https://getcomposer.org/) that generates Bill of Materials in [CycloneDX](https://cyclonedx.org/) format.
+A plugin for PHP's [Composer](https://getcomposer.org/)
+that generates Bill of Materials in [CycloneDX](https://cyclonedx.org/) format.
 
-## Usage
+## Requirements
 
-### Requirements
-
-The plugin supports PHP `^7.3 || ^8.0` with composer `^2.0`.  
+The plugin currently supports PHP `^7.3 || ^8.0` with composer `^2.0`.  
 There are older versions of this plugin available, which support php `^5.5 || ^7.0` with composer `^1.0 || ^2.0`.
 
-### Installation
+## Installation
+
+Install via composer: 
 
 `composer require --dev cyclonedx/cyclonedx-php-composer`
 
-### Options
+## Usage
 
 After successful installation, the composer command `make-bom` is available.
 
 ```
 $ composer make-bom -h
 Usage:
-  make-bom [options]
+  make-bom [options] [--] [<composer-file>]
+
+Arguments:
+  composer-file                      Path to "composer.json" file.
+                                     Defaults to file in current working dir.
 
 Options:
       --output-format=OUTPUT-FORMAT  Which output format to use.
@@ -75,7 +80,7 @@ Make sure
 
 ## License
 
-Permission to modify and redistribute is granted under the terms of the Apache 2.0 license.
+Permission to modify and redistribute is granted under the terms of the Apache 2.0 license.  
 See the [LICENSE][license_file] file for the full license.
 
 [license_file]: https://github.com/CycloneDX/cyclonedx-php-composer/blob/master/LICENSE

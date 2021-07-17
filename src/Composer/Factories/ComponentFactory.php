@@ -134,10 +134,12 @@ class ComponentFactory
                 ->setNamespace($component->getGroup())
                 ->setVersion($component->getVersion());
             $component->setPackageUrl($purl);
+            // @codeCoverageIgnoreStart
         } catch (DomainException $exception) {
             unset($exception);
             $purl = null;
         }
+        // @codeCoverageIgnoreEnd
 
         if ('' !== $sha1sum) {
             $component->setHashRepository(new HashRepository([HashAlgorithm::SHA_1 => $sha1sum]));

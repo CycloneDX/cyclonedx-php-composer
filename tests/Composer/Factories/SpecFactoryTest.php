@@ -29,7 +29,6 @@ use CycloneDX\Core\Spec\Spec12;
 use CycloneDX\Core\Spec\Spec13;
 use CycloneDX\Core\Spec\SpecInterface;
 use Generator;
-use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -70,7 +69,7 @@ class SpecFactoryTest extends TestCase
     public function testMakeThrowsOnUnexpected(): void
     {
         $version = uniqid('unknown', true);
-        $this->expectException(InvalidArgumentException::class);
+        $this->expectException(\UnexpectedValueException::class);
         $this->factory->make($version);
     }
 
