@@ -21,17 +21,12 @@ declare(strict_types=1);
  * Copyright (c) Steve Springett. All Rights Reserved.
  */
 
-namespace CycloneDX\Composer\Plugin;
+namespace CycloneDX\Composer\MakeBom;
 
 use CycloneDX\Composer\Factories\SpecFactory;
-use CycloneDX\Composer\Plugin\Exceptions\ValueError;
-use CycloneDX\Core\Serialize\JsonSerializer;
-use CycloneDX\Core\Serialize\SerializerInterface;
-use CycloneDX\Core\Serialize\XmlSerializer;
-use CycloneDX\Core\Validation\ValidatorInterface;
-use CycloneDX\Core\Validation\Validators\JsonStrictValidator;
-use CycloneDX\Core\Validation\Validators\XmlValidator;
+use CycloneDX\Composer\MakeBom\Exceptions\ValueError;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 
@@ -40,7 +35,7 @@ use Symfony\Component\Console\Input\InputOption;
  *
  * @author jkowalleck
  */
-class MakeBomCommandOptions
+class Options
 {
     private const OPTION_OUTPUT_FORMAT = 'output-format';
     private const OPTION_OUTPUT_FILE = 'output-file';
@@ -50,14 +45,16 @@ class MakeBomCommandOptions
     private const SWITCH_EXCLUDE_PLUGINS = 'exclude-plugins';
     private const SWITCH_NO_VALIDATE = 'no-validate';
 
-    private const OUTPUT_FORMAT_XML = 'XML';
-    private const OUTPUT_FORMAT_JSON = 'JSON';
+    private const ARGUMENT_COMPOSER_FILE = 'composer-file';
+
+    public const OUTPUT_FORMAT_XML = 'XML';
+    public const OUTPUT_FORMAT_JSON = 'JSON';
 
     public const OUTPUT_FILE_STDOUT = '-';
 
     /**
      * @var string[]
-     * @psalm-var array<MakeBomCommandOptions::OUTPUT_FORMAT_*, string>
+     * @psalm-var array<Options::OUTPUT_FORMAT_*, string>
      */
     private const OUTPUT_FILE_DEFAULT = [
         self::OUTPUT_FORMAT_XML => 'bom.xml',
@@ -65,37 +62,17 @@ class MakeBomCommandOptions
     ];
 
     /**
-     * @var string[]
-     * @psalm-var array<MakeBomCommandOptions::OUTPUT_FORMAT_*, class-string<SerializerInterface>>
-     */
-    private const SERIALISERS = [
-        self::OUTPUT_FORMAT_XML => XmlSerializer::class,
-        self::OUTPUT_FORMAT_JSON => JsonSerializer::class,
-    ];
-
-    /**
-     * @var string[]
-     * @psalm-var array<MakeBomCommandOptions::OUTPUT_FORMAT_*, class-string<ValidatorInterface>>
-     */
-    private const VALIDATORS = [
-        self::OUTPUT_FORMAT_XML => XmlValidator::class,
-        self::OUTPUT_FORMAT_JSON => JsonStrictValidator::class,
-    ];
-
-    /**
-     * @return Command the command that was put in
-     *
      * @psalm-suppress MissingThrowsDocblock since {@see \Symfony\Component\Console\Command\Command::addOption()} is intended to work this way
      */
-    public static function configureCommand(Command $command): Command
+    public function configureCommand(Command $command): void
     {
-        return $command
+        $command
             ->addOption(
                 self::OPTION_OUTPUT_FORMAT,
                 null,
                 InputOption::VALUE_REQUIRED,
                 'Which output format to use.'.\PHP_EOL.
-                'Values: "'.implode('", "', array_keys(self::SERIALISERS)).'"',
+                'Values: "'.self::OUTPUT_FORMAT_XML.'", "'.self::OUTPUT_FORMAT_JSON.'"',
                 self::OUTPUT_FORMAT_XML
             )
             ->addOption(
@@ -134,6 +111,12 @@ class MakeBomCommandOptions
                 null,
                 InputOption::VALUE_NONE,
                 'Dont validate the resulting output'
+            )
+            ->addArgument(
+                self::ARGUMENT_COMPOSER_FILE,
+                InputArgument::OPTIONAL,
+                'Path to composer config file.'.\PHP_EOL.
+                'Defaults to file in current working dir.'
             );
     }
 
@@ -161,27 +144,18 @@ class MakeBomCommandOptions
 
     /**
      * @var string
-     * @psalm-var MakeBomCommandOptions::OUTPUT_FORMAT_*
+     * @psalm-var Options::OUTPUT_FORMAT_*
      * @readonly
      * @psalm-allow-private-mutation
      */
-    public $bomFormat = self::OUTPUT_FORMAT_XML;
+    public $outputFormat = self::OUTPUT_FORMAT_XML;
 
     /**
-     * @var string
-     * @psalm-var class-string<SerializerInterface>
+     * @var bool
      * @readonly
      * @psalm-allow-private-mutation
      */
-    public $bomWriterClass = self::SERIALISERS[self::OUTPUT_FORMAT_XML];
-
-    /**
-     * @var string|null
-     * @psalm-var class-string<ValidatorInterface>|null
-     * @readonly
-     * @psalm-allow-private-mutation
-     */
-    public $bomValidatorClass;
+    public $skipOutputValidation = false;
 
     /**
      * @var string
@@ -191,45 +165,63 @@ class MakeBomCommandOptions
     public $outputFile = self::OUTPUT_FILE_STDOUT;
 
     /**
+     * @var string|null
+     * @readonly
+     * @psalm-allow-private-mutation
+     */
+    public $composerFile;
+
+    /**
      * @throws ValueError
+     *
+     * @return $this
      *
      * @psalm-suppress MissingThrowsDocblock since {@see \Symfony\Component\Console\Input\InputInterface::getOption()} is intended to work this way
      */
-    public static function makeFromInput(InputInterface $input): self
+    public function setFromInput(InputInterface $input): self
     {
-        $options = new self();
+        // region get from input
 
         $specVersion = $input->getOption(self::OPTION_SPEC_VERSION);
         \assert(\is_string($specVersion));
         if (false === \array_key_exists($specVersion, SpecFactory::SPECS)) {
             throw new ValueError('Invalid value for option "'.self::OPTION_SPEC_VERSION.'": '.$specVersion);
         }
-        $options->specVersion = $specVersion;
-
-        $options->excludeDev = false !== $input->getOption(self::SWITCH_EXCLUDE_DEV);
-        $options->excludePlugins = false !== $input->getOption(self::SWITCH_EXCLUDE_PLUGINS);
 
         $outputFormat = $input->getOption(self::OPTION_OUTPUT_FORMAT);
         \assert(\is_string($outputFormat));
-        $bomFormat = strtoupper($outputFormat);
-        unset($outputFormat);
-
-        if (false === \array_key_exists($bomFormat, self::SERIALISERS)) {
-            throw new ValueError('Invalid value for option "'.self::OPTION_OUTPUT_FORMAT.'": '.$bomFormat);
+        $outputFormat = strtoupper($outputFormat);
+        if (false === \in_array($outputFormat, [self::OUTPUT_FORMAT_XML, self::OUTPUT_FORMAT_JSON], true)) {
+            throw new ValueError('Invalid value for option "'.self::OPTION_OUTPUT_FORMAT.'": '.$outputFormat);
         }
-        $options->bomFormat = $bomFormat;
 
-        $options->bomWriterClass = self::SERIALISERS[$bomFormat];
-
-        $options->bomValidatorClass = $input->getOption(self::SWITCH_NO_VALIDATE)
-            ? null
-            : self::VALIDATORS[$bomFormat];
-
+        $excludeDev = false !== $input->getOption(self::SWITCH_EXCLUDE_DEV);
+        $excludePlugins = false !== $input->getOption(self::SWITCH_EXCLUDE_PLUGINS);
+        $skipOutputValidation = false !== $input->getOption(self::SWITCH_NO_VALIDATE);
         $outputFile = $input->getOption(self::OPTION_OUTPUT_FILE);
-        $options->outputFile = false === \is_string($outputFile) || '' === $outputFile
-            ? self::OUTPUT_FILE_DEFAULT[$bomFormat]
-            : $outputFile;
+        $composerFile = $input->getArgument(self::ARGUMENT_COMPOSER_FILE);
 
-        return $options;
+        // endregion get from input
+
+        // those regions are spit,
+        // so the state does not modify unless everything is clear
+
+        // region set state
+
+        $this->specVersion = $specVersion;
+        $this->excludeDev = $excludeDev;
+        $this->excludePlugins = $excludePlugins;
+        $this->outputFormat = $outputFormat;
+        $this->skipOutputValidation = $skipOutputValidation;
+        $this->outputFile = \is_string($outputFile) && '' !== $outputFile
+            ? $outputFile
+            : self::OUTPUT_FILE_DEFAULT[$outputFormat];
+        $this->composerFile = \is_string($composerFile) && '' !== $outputFile
+            ? $composerFile
+            : null;
+
+        // endregion set state
+
+        return $this;
     }
 }

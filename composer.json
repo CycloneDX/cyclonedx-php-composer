@@ -37,7 +37,7 @@
         "sort-packages": true
     },
     "extra": {
-        "class": "CycloneDX\\Composer\\Plugin\\Plugin",
+        "class": "CycloneDX\\Composer\\Plugin",
         "composer-normalize": {
             "indent-size": 4,
             "indent-style": "space"

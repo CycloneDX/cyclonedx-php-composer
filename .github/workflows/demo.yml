@@ -107,6 +107,7 @@ jobs:
         if: ${{ matrix.stdout }}
         run: >
           composer make-bom
+          -vvv
           --exclude-dev
           --spec-version=${{ matrix.spec-version }}
           --output-format=${{ matrix.output-format }}

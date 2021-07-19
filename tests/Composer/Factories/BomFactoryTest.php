@@ -23,11 +23,10 @@ declare(strict_types=1);
 
 namespace CycloneDX\Tests\Composer\Factories;
 
-use Composer\Package\Package;
+use Composer\Package\PackageInterface;
 use Composer\Repository\LockArrayRepository;
 use CycloneDX\Composer\Factories\BomFactory;
 use CycloneDX\Composer\Factories\ComponentFactory;
-use CycloneDX\Composer\Locker;
 use CycloneDX\Core\Repositories\ComponentRepository;
 use PHPUnit\Framework\TestCase;
 
@@ -39,27 +38,18 @@ class BomFactoryTest extends TestCase
     /**
      * @uses \CycloneDX\Core\Models\Bom
      */
-    public function testMakeFromLocker(): void
+    public function testMakeForPackageWithComponents(): void
     {
-        $expectedComponents = $this->createStub(ComponentRepository::class);
-        $package1 = $this->createStub(Package::class);
-        $package2 = $this->createStub(Package::class);
-        $locker = $this->createMock(Locker::class);
-        $lockedRepository = $this->createConfiguredMock(LockArrayRepository::class, ['getPackages' => [$package1, $package2]]);
         $componentFactory = $this->createMock(ComponentFactory::class);
-        $factory = new BomFactory(false, true, $componentFactory);
+        $factory = new BomFactory($componentFactory);
+        $package = $this->createMock(PackageInterface::class);
+        $componentsPackages = [$this->createStub(PackageInterface::class)];
+        $components = $this->createConfiguredMock(LockArrayRepository::class, ['getPackages' => $componentsPackages]);
 
-        $locker->expects(self::once())->method('getLockedRepository')
-            ->with(false, true)
-            ->willReturn($lockedRepository);
         $componentFactory->expects(self::once())->method('makeFromPackages')
-            ->with([$package1, $package2])
-            ->willReturn($expectedComponents);
+            ->with($componentsPackages)
+            ->willReturn($this->createStub(ComponentRepository::class));
 
-        $got = $factory->makeFromLocker($locker);
-        $gotComponents = $got->getComponentRepository();
-
-        self::assertInstanceOf(ComponentRepository::class, $gotComponents);
-        self::assertSame($expectedComponents, $gotComponents);
+        $factory->makeForPackageWithComponents($package, $components);
     }
 }

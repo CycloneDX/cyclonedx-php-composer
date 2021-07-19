@@ -2,6 +2,25 @@
 
 ## unreleased
 
+* Changed
+  * CLI via `composer make-bom`
+    * All informational/error output will appear on _STDERR_, was _STDOUT_.
+      Output of the SBoM might still happen on _STDOUT_.  
+      This makes utilization of _STDOUT_ via `--output-file=-` more flexible (pipe, redirect)
+      whilst verbosity can be increased via `-v`.
+* Added
+  * CLI via `composer make-bom`
+    * Added an optional argument `composer-file`.  
+      If given, then the SBoM is generated based on that file instead of the file in the current working directory.  
+      This enables the plugin to analyze projects outside the plugin's own setup.
+* Fixed
+  * Fixed detection of invalid/outdated composer lock file.
+  * Fixed a rare case that caused the CLI to crash unexpectedly, if the composer lock file was unexpected.
+* Misc
+  * Internals
+    * Refactored the plugin's internals.
+    * Added more tests.
+
 ## 3.1.1
 
 * Misc

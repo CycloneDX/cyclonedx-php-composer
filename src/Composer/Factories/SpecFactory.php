@@ -28,7 +28,7 @@ use CycloneDX\Core\Spec\Spec12;
 use CycloneDX\Core\Spec\Spec13;
 use CycloneDX\Core\Spec\SpecInterface;
 use CycloneDX\Core\Spec\Version;
-use InvalidArgumentException;
+use UnexpectedValueException;
 
 /**
  * @internal
@@ -50,16 +50,16 @@ final class SpecFactory
     ];
 
     /**
-     * @psalm-param Version::V_* $version
+     * @psalm-assert Version::V_* $version
      *
-     * @throws InvalidArgumentException if version is unknown
+     * @throws UnexpectedValueException if version is unknown
      */
     public function make(string $version = self::VERSION_LATEST): SpecInterface
     {
-        $class = self::SPECS[$version] ?? null;
-        if (null === $class) {
-            throw new InvalidArgumentException("Unexpected spec-version: $version");
+        if (false === \array_key_exists($version, self::SPECS)) {
+            throw new UnexpectedValueException("Unexpected spec-version: $version");
         }
+        $class = self::SPECS[$version];
 
         return new $class();
     }

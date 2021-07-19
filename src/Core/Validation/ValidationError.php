@@ -51,6 +51,11 @@ class ValidationError
         return $this->message;
     }
 
+    public function getError(): ?object
+    {
+        return $this->error;
+    }
+
     /**
      * @internal
      *

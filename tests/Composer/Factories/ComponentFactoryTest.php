@@ -23,10 +23,15 @@ declare(strict_types=1);
 
 namespace CycloneDX\Tests\Composer\Factories;
 
+use Composer\Package\CompletePackageInterface;
 use Composer\Package\PackageInterface;
 use CycloneDX\Composer\Factories\ComponentFactory;
 use CycloneDX\Composer\Factories\LicenseFactory;
+use CycloneDX\Core\Enums\HashAlgorithm;
 use CycloneDX\Core\Models\Component;
+use CycloneDX\Core\Repositories\ComponentRepository;
+use CycloneDX\Core\Repositories\DisjunctiveLicenseRepository;
+use CycloneDX\Core\Repositories\HashRepository;
 use PackageUrl\PackageUrl;
 use PHPUnit\Framework\TestCase;
 
@@ -87,7 +92,9 @@ class ComponentFactoryTest extends TestCase
     /**
      * @dataProvider dpMakeFromPackage
      *
-     * @uses \CycloneDX\Core\Enums\Classification::isValidValue
+     * @uses         \CycloneDX\Core\Enums\Classification::isValidValue
+     * @uses         \CycloneDX\Core\Enums\HashAlgorithm::isValidValue
+     * @uses         \CycloneDX\Core\Repositories\HashRepository
      */
     public function testMakeFromPackage(
         PackageInterface $package,
@@ -109,10 +116,78 @@ class ComponentFactoryTest extends TestCase
                 [
                     'getPrettyName' => 'some-package',
                     'getPrettyVersion' => 'v1.2.3',
-                ]
+                ],
             ),
             (new Component('library', 'some-package', '1.2.3'))
                 ->setPackageUrl((new PackageUrl('composer', 'some-package'))->setVersion('1.2.3')),
+            null,
+        ];
+
+        $completePackage = $this->createConfiguredMock(
+            CompletePackageInterface::class,
+            [
+                'getPrettyName' => 'my/package',
+                'getPrettyVersion' => 'dev-master',
+                'isDev' => true,
+                'getDescription' => 'my description',
+                'getLicense' => ['MIT'],
+                'getDistSha1Checksum' => '1234567890',
+            ]
+        );
+        $license = $this->createStub(DisjunctiveLicenseRepository::class);
+        $licenseFactory = $this->createMock(LicenseFactory::class);
+        $licenseFactory->expects(self::once())->method('makeFromPackage')
+            ->with($completePackage)
+            ->willReturn($license);
+        yield 'complete package' => [
+            $completePackage,
+            (new Component('library', 'package', 'dev-master'))
+                ->setGroup('my')
+                ->setPackageUrl(
+                    (new PackageUrl('composer', 'package'))
+                        ->setNamespace('my')
+                        ->setVersion('dev-master')
+                        ->setChecksums(['sha1:1234567890'])
+                )
+                ->setDescription('my description')
+                ->setLicense($license)
+                ->setHashRepository(new HashRepository([HashAlgorithm::SHA_1 => '1234567890'])),
+            $licenseFactory,
+        ];
+    }
+
+    /**
+     * @dataProvider dpMakeFromPackages
+     *
+     * @param PackageInterface[] $packages
+     *
+     * @uses         \CycloneDX\Core\Repositories\ComponentRepository
+     * @uses         \CycloneDX\Core\Enums\HashAlgorithm::isValidValue
+     * @uses         \CycloneDX\Core\Repositories\HashRepository
+     * @uses         \CycloneDX\Core\Enums\Classification::isValidValue
+     */
+    public function testMakeFromPackages(
+        array $packages,
+        ?ComponentRepository $expected,
+        ?LicenseFactory $licenseFactory
+    ): void {
+        $factory = new ComponentFactory($licenseFactory ?? $this->createStub(LicenseFactory::class));
+
+        $got = $factory->makeFromPackages($packages);
+
+        self::assertEquals($expected, $got);
+    }
+
+    public function dpMakeFromPackages(): \Generator
+    {
+        yield 'empty' => [[], null, null];
+
+        $dpMakeFromPackage = $this->dpMakeFromPackage();
+        [$package, $expected, $licenseFactory] = $this->dpMakeFromPackage()->current();
+        yield $dpMakeFromPackage->key() => [
+            [$package],
+            new ComponentRepository($expected),
+            $licenseFactory,
         ];
     }
 }

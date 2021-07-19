@@ -38,6 +38,7 @@ return (new PhpCsFixer\Config())
             'declare_strict_types' => true,
             'phpdoc_order' => true,
             'header_comment' => ['header' => $header],
+            'fopen_flags' => ['b_mode' => true],
         ]
     )
     ->setRiskyAllowed(true)

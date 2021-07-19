@@ -23,7 +23,9 @@ declare(strict_types=1);
 
 namespace CycloneDX\Composer\Factories;
 
-use CycloneDX\Composer\Locker;
+use Composer\Composer;
+use Composer\Package\PackageInterface;
+use Composer\Repository\LockArrayRepository;
 use CycloneDX\Core\Models\Bom;
 
 /**
@@ -33,19 +35,11 @@ use CycloneDX\Core\Models\Bom;
  */
 class BomFactory
 {
-    /** @var bool */
-    private $excludeDev;
-
-    /** @var bool */
-    private $excludePlugins;
-
     /** @var ComponentFactory */
     private $componentFactory;
 
-    public function __construct(bool $excludeDev, bool $excludePlugins, ComponentFactory $componentFactory)
+    public function __construct(ComponentFactory $componentFactory)
     {
-        $this->excludeDev = $excludeDev;
-        $this->excludePlugins = $excludePlugins;
         $this->componentFactory = $componentFactory;
     }
 
@@ -56,15 +50,12 @@ class BomFactory
      * @throws \DomainException          if the bom structure had unexpected values
      * @throws \RuntimeException
      */
-    public function makeFromLocker(Locker $locker): Bom
+    public function makeForPackageWithComponents(PackageInterface $package, LockArrayRepository $components): Bom
     {
-        $components = $this->componentFactory->makeFromPackages(
-            $locker->getLockedRepository(
-                $this->excludeDev,
-                $this->excludePlugins
-            )->getPackages()
+        return new Bom(
+            $this->componentFactory->makeFromPackages(
+                $components->getPackages()
+            )
         );
-
-        return new Bom($components);
     }
 }
