@@ -2,6 +2,8 @@
 
 ## unreleased
 
+## 3.2.0
+
 * Changed
   * CLI via `composer make-bom`
     * All informational/error output will appear on _STDERR_, was _STDOUT_.
@@ -17,9 +19,9 @@
   * Fixed detection of invalid/outdated composer lock file.
   * Fixed a rare case that caused the CLI to crash unexpectedly, if the composer lock file was unexpected.
 * Misc
-  * Internals
-    * Refactored the plugin's internals.
-    * Added more tests.
+  * Added composer keywords.
+  * Refactored the plugin's internals.
+  * Added more tests for internals.
 
 ## 3.1.1
 
