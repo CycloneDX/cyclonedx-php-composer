@@ -25,24 +25,25 @@ namespace CycloneDX\Core\Serialize\JSON\Normalizers;
 
 use CycloneDX\Core\Repositories\HashRepository;
 use CycloneDX\Core\Serialize\JSON\AbstractNormalizer;
-use DomainException;
 
 /**
  * @author jkowalleck
  */
 class HashRepositoryNormalizer extends AbstractNormalizer
 {
-    /**
-     * @throws DomainException
-     */
     public function normalize(HashRepository $repo): array
     {
-        $hashes = $repo->getHashes();
+        $hashes = [];
 
-        return array_map(
-            [$this->getNormalizerFactory()->makeForHash(), 'normalize'],
-            array_keys($hashes),
-            array_values($hashes)
-        );
+        $normalizer = $this->getNormalizerFactory()->makeForHash();
+        foreach ($repo->getHashes() as $algorithm => $content) {
+            try {
+                $hashes[] = $normalizer->normalize($algorithm, $content);
+            } catch (\DomainException $exception) {
+                continue;
+            }
+        }
+
+        return $hashes;
     }
 }

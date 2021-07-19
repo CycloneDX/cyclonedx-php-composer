@@ -114,8 +114,7 @@ class ComponentFactory
             $license = null;
         }
 
-        // composer has no option to distinguish framework/library/application, yet
-        $type = Classification::LIBRARY;
+        $type = $this->getComponentType($package);
 
         /**
          * @psalm-suppress DocblockTypeContradiction since return value happened to be `null` for local packages
@@ -194,5 +193,18 @@ class ComponentFactory
         }
 
         return $version;
+    }
+
+    /**
+     * composer has no option to distinguish framework/library, yet.
+     * but composer knows projects and plugins, which are equivalent to application.
+     *
+     * @see https://getcomposer.org/doc/04-schema.md#type
+     */
+    private function getComponentType(PackageInterface $package): string
+    {
+        return \in_array($package->getType(), ['project', 'composer-plugin'], true)
+            ? Classification::APPLICATION
+            : Classification::LIBRARY;
     }
 }

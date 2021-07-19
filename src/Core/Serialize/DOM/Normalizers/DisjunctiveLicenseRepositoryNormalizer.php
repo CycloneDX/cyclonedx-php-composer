@@ -26,9 +26,7 @@ namespace CycloneDX\Core\Serialize\DOM\Normalizers;
 use CycloneDX\Core\Helpers\SimpleDomTrait;
 use CycloneDX\Core\Repositories\DisjunctiveLicenseRepository;
 use CycloneDX\Core\Serialize\DOM\AbstractNormalizer;
-use DomainException;
 use DOMElement;
-use InvalidArgumentException;
 
 /**
  * @author jkowalleck
@@ -38,19 +36,22 @@ class DisjunctiveLicenseRepositoryNormalizer extends AbstractNormalizer
     use SimpleDomTrait;
 
     /**
-     * @throws DomainException
-     *
      * @return DOMElement[]
      * @psalm-return list<DOMElement>
      */
     public function normalize(DisjunctiveLicenseRepository $repo): array
     {
+        $licenses = [];
+
         $normalizer = $this->getNormalizerFactory()->makeForDisjunctiveLicense();
-        $licenses = $repo->getLicenses();
-        try {
-            return array_map([$normalizer, 'normalize'], $licenses);
-        } catch (InvalidArgumentException $exception) {
-            throw new DomainException('Unsupported license detected', 0, $exception);
+        foreach ($repo->getLicenses() as $license) {
+            try {
+                $licenses[] = $normalizer->normalize($license);
+            } catch (\InvalidArgumentException $exception) {
+                continue;
+            }
         }
+
+        return $licenses;
     }
 }

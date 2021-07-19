@@ -36,29 +36,36 @@ class JsonSerializerTest extends TestCase
     /**
      * @covers \CycloneDX\Core\Serialize\JsonSerializer
      *
-     * @uses \CycloneDX\Core\Serialize\JSON\AbstractNormalizer
-     * @uses \CycloneDX\Core\Serialize\JSON\NormalizerFactory
-     * @uses \CycloneDX\Core\Serialize\JSON\Normalizers\BomNormalizer
-     * @uses \CycloneDX\Core\Serialize\JSON\Normalizers\ComponentRepositoryNormalizer
+     * @uses   \CycloneDX\Core\Serialize\JSON\AbstractNormalizer
+     * @uses   \CycloneDX\Core\Serialize\JSON\NormalizerFactory
+     * @uses   \CycloneDX\Core\Serialize\JSON\Normalizers\BomNormalizer
+     * @uses   \CycloneDX\Core\Serialize\JSON\Normalizers\ComponentRepositoryNormalizer
+     * @uses   \CycloneDX\Core\Serialize\JSON\Normalizers\ComponentNormalizer
      */
     public function testSerialize(): void
     {
-        $spec = $this->createConfiguredMock(SpecInterface::class, [
-            'getVersion' => '1.2',
-            'isSupportedFormat' => true,
-            ]);
+        $spec = $this->createConfiguredMock(
+            SpecInterface::class,
+            [
+                'getVersion' => '1.2',
+                'isSupportedFormat' => true,
+            ]
+        );
         $serializer = new JsonSerializer($spec);
         $bom = $this->createStub(Bom::class);
 
-        $got = $serializer->serialize($bom);
+        $actual = $serializer->serialize($bom);
 
-        self::assertJsonStringEqualsJsonString(<<<'JSON'
-            {
-                "bomFormat": "CycloneDX",
-                "specVersion": "1.2",
-                "version": 0,
-                "components": []
-            }
-            JSON, $got);
+        self::assertJsonStringEqualsJsonString(
+            <<<'JSON'
+                {
+                    "bomFormat": "CycloneDX",
+                    "specVersion": "1.2",
+                    "version": 0,
+                    "components": []
+                }
+                JSON,
+            $actual
+        );
     }
 }

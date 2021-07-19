@@ -67,7 +67,7 @@ class CommandTest extends TestCase
         $this->options = $this->createTestProxy(Options::class);
         $this->factory = $this->createMock(Factory::class);
         $this->bomFactory = $this->createMock(BomFactory::class);
-        $this->command = new Command($this->options, $this->factory, $this->bomFactory, 'test-dummy');
+        $this->command = new Command($this->options, $this->factory, $this->bomFactory, null, 'test-dummy');
         $this->command->setIO(new NullIO());
     }
 
@@ -77,7 +77,7 @@ class CommandTest extends TestCase
             ->method('configureCommand')
             ->with(new IsInstanceOf(Command::class));
 
-        new Command($this->options, $this->factory, $this->bomFactory, 'test-dummy');
+        new Command($this->options, $this->factory, $this->bomFactory, null, 'test-dummy');
     }
 
     public function testRunFailsWhenOptionsInvalid(): void

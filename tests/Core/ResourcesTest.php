@@ -27,7 +27,7 @@ use CycloneDX\Core\Resources;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \CycloneDX\Core\Resources
+ * @coversNothing
  */
 class ResourcesTest extends TestCase
 {

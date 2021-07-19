@@ -25,7 +25,6 @@ namespace CycloneDX\Core\Serialize\JSON\Normalizers;
 
 use CycloneDX\Core\Repositories\DisjunctiveLicenseRepository;
 use CycloneDX\Core\Serialize\JSON\AbstractNormalizer;
-use DomainException;
 use InvalidArgumentException;
 
 /**
@@ -33,17 +32,19 @@ use InvalidArgumentException;
  */
 class DisjunctiveLicenseRepositoryNormalizer extends AbstractNormalizer
 {
-    /**
-     * @throws DomainException
-     */
     public function normalize(DisjunctiveLicenseRepository $repo): array
     {
+        $licenses = [];
+
         $normalizer = $this->getNormalizerFactory()->makeForDisjunctiveLicense();
-        $licenses = $repo->getLicenses();
-        try {
-            return array_map([$normalizer, 'normalize'], $licenses);
-        } catch (InvalidArgumentException $exception) {
-            throw new DomainException('Unsupported license detected', 0, $exception);
+        foreach ($repo->getLicenses() as $license) {
+            try {
+                $licenses[] = $normalizer->normalize($license);
+            } catch (InvalidArgumentException $exception) {
+                continue;
+            }
         }
+
+        return $licenses;
     }
 }

@@ -40,6 +40,7 @@ class XmlSerializerTest extends TestCase
      * @uses   \CycloneDX\Core\Serialize\DOM\NormalizerFactory
      * @uses   \CycloneDX\Core\Serialize\DOM\Normalizers\BomNormalizer
      * @uses   \CycloneDX\Core\Serialize\DOM\Normalizers\ComponentRepositoryNormalizer
+     * @uses   \CycloneDX\Core\Serialize\DOM\Normalizers\ComponentNormalizer
      */
     public function testSerialize(): void
     {
@@ -53,14 +54,16 @@ class XmlSerializerTest extends TestCase
         $serializer = new XmlSerializer($spec);
         $bom = $this->createStub(Bom::class);
 
-        $got = $serializer->serialize($bom);
+        $actual = $serializer->serialize($bom);
 
-        self::assertXmlStringEqualsXmlString(<<<'XML'
-            <?xml version="1.0" encoding="UTF-8"?>
-            <bom xmlns="http://cyclonedx.org/schema/bom/1.2" version="0">
-              <components/>
-            </bom>
-            XML, $got
+        self::assertXmlStringEqualsXmlString(
+            <<<'XML'
+                <?xml version="1.0" encoding="UTF-8"?>
+                <bom xmlns="http://cyclonedx.org/schema/bom/1.2" version="0">
+                  <components/>
+                </bom>
+                XML,
+            $actual
         );
     }
 }

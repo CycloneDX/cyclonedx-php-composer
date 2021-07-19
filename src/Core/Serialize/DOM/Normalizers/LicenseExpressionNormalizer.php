@@ -37,7 +37,11 @@ class LicenseExpressionNormalizer extends AbstractNormalizer
 
     public function normalize(LicenseExpression $license): DOMElement
     {
-        $element = $this->simpleDomSafeTextElement($this->getNormalizerFactory()->getDocument(), 'expression', $license->getExpression());
+        $element = $this->simpleDomSafeTextElement(
+            $this->getNormalizerFactory()->getDocument(),
+            'expression',
+            $license->getExpression()
+        );
         \assert(null !== $element);
 
         return $element;

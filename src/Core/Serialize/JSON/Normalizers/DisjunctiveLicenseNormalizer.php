@@ -41,8 +41,6 @@ class DisjunctiveLicenseNormalizer extends AbstractNormalizer
      * @psalm-assert DisjunctiveLicenseWithId|DisjunctiveLicenseWithName $license
      *
      * @throws InvalidArgumentException
-     *
-     * @psalm-return array{'license': array<string, mixed>}
      */
     public function normalize(AbstractDisjunctiveLicense $license): array
     {

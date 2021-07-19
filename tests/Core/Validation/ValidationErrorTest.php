@@ -38,5 +38,6 @@ class ValidationErrorTest extends TestCase
         $error = ValidationError::fromThrowable($throwable);
 
         self::assertSame('foo bar', $error->getMessage());
+        self::assertSame($throwable, $error->getError());
     }
 }

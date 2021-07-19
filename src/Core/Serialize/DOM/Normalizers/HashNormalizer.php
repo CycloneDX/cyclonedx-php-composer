@@ -48,7 +48,11 @@ class HashNormalizer extends AbstractNormalizer
             throw new DomainException("Invalid hash content: $content", 2);
         }
 
-        $element = $this->simpleDomSafeTextElement($this->getNormalizerFactory()->getDocument(), 'hash', $content);
+        $element = $this->simpleDomSafeTextElement(
+            $this->getNormalizerFactory()->getDocument(),
+            'hash',
+            $content
+        );
         \assert(null !== $element);
         $this->simpleDomSetAttributes($element, ['alg' => $algorithm]);
 

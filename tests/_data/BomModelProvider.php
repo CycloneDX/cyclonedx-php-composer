@@ -30,10 +30,12 @@ use CycloneDX\Core\Models\Component;
 use CycloneDX\Core\Models\License\DisjunctiveLicenseWithId;
 use CycloneDX\Core\Models\License\DisjunctiveLicenseWithName;
 use CycloneDX\Core\Models\License\LicenseExpression;
+use CycloneDX\Core\Models\MetaData;
+use CycloneDX\Core\Models\Tool;
 use CycloneDX\Core\Repositories\ComponentRepository;
 use CycloneDX\Core\Repositories\DisjunctiveLicenseRepository;
 use CycloneDX\Core\Repositories\HashRepository;
-use CycloneDX\Core\Spec\Version;
+use CycloneDX\Core\Repositories\ToolRepository;
 use Generator;
 
 /**
@@ -46,16 +48,13 @@ abstract class BomModelProvider
      *
      * @psalm-return Generator<array{Bom}>
      */
-    public static function fullBomTestData(): Generator
+    public static function allBomTestData(): Generator
     {
         yield from self::bomPlain();
-        yield from self::bomWithComponentPlain();
-        yield from self::bomWithComponentVersion();
-        yield from self::bomWithComponentDescription();
-        yield from self::bomWithComponentLicenseId();
-        yield from self::bomWithComponentLicenseName();
-        yield from self::bomWithComponentLicenseExpression();
-        yield from self::bomWithComponentLicenseUrl();
+
+        yield from self::bomWithAllComponents();
+
+        yield from self::bomWithAllMetadata();
     }
 
     /**
@@ -67,6 +66,39 @@ abstract class BomModelProvider
     {
         yield 'plain' => [new Bom()];
         yield 'plain v23' => [(new Bom())->setVersion(23)];
+    }
+
+    /**
+     * BOM wil all possible components.
+     *
+     * @psalm-return Generator<array{Bom}>
+     */
+    public static function bomWithAllComponents(): Generator
+    {
+        yield from self::bomWithComponentPlain();
+        yield from self::bomWithComponentVersion();
+        yield from self::bomWithComponentDescription();
+
+        yield from self::bomWithComponentLicenseId();
+        yield from self::bomWithComponentLicenseName();
+        yield from self::bomWithComponentLicenseExpression();
+        yield from self::bomWithComponentLicenseUrl();
+
+        yield from self::bomWithComponentHashAlgorithmsAllKnown();
+
+        yield from self::bomWithComponentTypeAllKnown();
+    }
+
+    /**
+     * BOM wil all possible metadata.
+     *
+     * @psalm-return Generator<array{Bom}>
+     */
+    public static function bomWithAllMetadata(): Generator
+    {
+        yield from self::bomWithMetaDataPlain();
+        yield from self::bomWithMetaDataTools();
+        yield from self::bomWithMetaDataComponent();
     }
 
     /**
@@ -86,11 +118,29 @@ abstract class BomModelProvider
     }
 
     /**
+     * BOMs with all classification types known.
+     *
+     * @psalm-return Generator<array{Bom}>
+     */
+    public static function bomWithComponentTypeAllKnown(): Generator
+    {
+        /** @psalm-var list<string> $known */
+        $known = array_values((new \ReflectionClass(Classification::class))->getConstants());
+        yield from self::bomWithComponentTypes(
+            ...$known,
+            ...BomSpecData::getClassificationEnumForVersion('1.0'),
+            ...BomSpecData::getClassificationEnumForVersion('1.1'),
+            ...BomSpecData::getClassificationEnumForVersion('1.2'),
+            ...BomSpecData::getClassificationEnumForVersion('1.3')
+        );
+    }
+
+    /**
      * @psalm-return Generator<array{Bom}>
      */
     public static function bomWithComponentTypeSpec10(): Generator
     {
-        yield from self::bomWithComponentTypesFromSpec(BomSpecData::getClassificationEnumForVersion(Version::V_1_0));
+        yield from self::bomWithComponentTypes(...BomSpecData::getClassificationEnumForVersion('1.0'));
     }
 
     /**
@@ -98,7 +148,7 @@ abstract class BomModelProvider
      */
     public static function bomWithComponentTypeSpec11(): Generator
     {
-        yield from self::bomWithComponentTypesFromSpec(BomSpecData::getClassificationEnumForVersion(Version::V_1_1));
+        yield from self::bomWithComponentTypes(...BomSpecData::getClassificationEnumForVersion('1.1'));
     }
 
     /**
@@ -106,7 +156,7 @@ abstract class BomModelProvider
      */
     public static function bomWithComponentTypeSpec12(): Generator
     {
-        yield from self::bomWithComponentTypesFromSpec(BomSpecData::getClassificationEnumForVersion(Version::V_1_2));
+        yield from self::bomWithComponentTypes(...BomSpecData::getClassificationEnumForVersion('1.2'));
     }
 
     /**
@@ -114,32 +164,26 @@ abstract class BomModelProvider
      */
     public static function bomWithComponentTypeSpec13(): Generator
     {
-        yield from self::bomWithComponentTypesFromSpec(BomSpecData::getClassificationEnumForVersion(Version::V_1_3));
+        yield from self::bomWithComponentTypes(...BomSpecData::getClassificationEnumForVersion('1.3'));
     }
 
     /**
      * BOMs with all hash algorithms available in a spec.
      *
-     * @psalm-param list<Classification::*> $types
-     *
      * @psalm-return Generator<array{Bom}>
      */
-    public static function bomWithComponentTypesFromSpec(array $types): Generator
+    public static function bomWithComponentTypes(string ...$types): Generator
     {
         $types = array_unique($types, \SORT_STRING);
-        $label = implode(',', $types);
-        yield "component types: $label" => [
-            (new Bom())->setComponentRepository(
-                new ComponentRepository(
-                    ...array_map(
-                    static function (string $type) {
-                        return new Component($type, "dummy_$type", 'v0');
-                    },
-                    $types
-                )
-                )
-            ),
-        ];
+        foreach ($types as $type) {
+            yield "component types: $type" => [
+                (new Bom())->setComponentRepository(
+                    new ComponentRepository(
+                        new Component($type, "dummy_$type", 'v0')
+                    )
+                ),
+            ];
+        }
     }
 
     /**
@@ -150,7 +194,7 @@ abstract class BomModelProvider
     public static function bomWithComponentLicenseId(): Generator
     {
         $license = 'MIT';
-        yield "license: $license" => [
+        yield "component license: $license" => [
             (new Bom())->setComponentRepository(
                 new ComponentRepository(
                     (new Component(Classification::LIBRARY, 'name', 'version'))
@@ -175,7 +219,7 @@ abstract class BomModelProvider
     public static function bomWithComponentLicenseName(): Generator
     {
         $license = 'random '.bin2hex(random_bytes(32));
-        yield 'license: random' => [
+        yield 'component license: random' => [
             (new Bom())->setComponentRepository(
                 new ComponentRepository(
                     (new Component(Classification::LIBRARY, 'name', 'version'))
@@ -191,7 +235,7 @@ abstract class BomModelProvider
 
     public static function bomWithComponentLicenseExpression(): Generator
     {
-        yield 'license expression' => [
+        yield 'component license expression' => [
             (new Bom())->setComponentRepository(
                 new ComponentRepository(
                     (new Component(Classification::LIBRARY, 'name', 'version'))
@@ -208,7 +252,7 @@ abstract class BomModelProvider
      */
     public static function bomWithComponentLicenseUrl(): Generator
     {
-        yield 'License with URL' => [
+        yield 'component license with URL' => [
             (new Bom())->setComponentRepository(
                 new ComponentRepository(
                     (new Component(Classification::LIBRARY, 'name', 'version'))
@@ -232,7 +276,7 @@ abstract class BomModelProvider
     {
         $versions = ['1.0', 'dev-master'];
         foreach ($versions as $version) {
-            yield "version: {$version}" => [
+            yield "component version: $version" => [
                 (new Bom())->setComponentRepository(
                     new ComponentRepository(
                         new Component(Classification::LIBRARY, 'name', $version),
@@ -243,13 +287,31 @@ abstract class BomModelProvider
     }
 
     /**
+     * BOMs with all hash algorithms known.
+     *
+     * @psalm-return Generator<array{Bom}>
+     */
+    public static function bomWithComponentHashAlgorithmsAllKnown(): Generator
+    {
+        /** @psalm-var list<string> $known */
+        $known = array_values((new \ReflectionClass(HashAlgorithm::class))->getConstants());
+        yield from self::bomWithComponentHashAlgorithms(
+            ...$known,
+            ...BomSpecData::getHashAlgEnumForVersion('1.0'),
+            ...BomSpecData::getHashAlgEnumForVersion('1.1'),
+            ...BomSpecData::getHashAlgEnumForVersion('1.2'),
+            ...BomSpecData::getHashAlgEnumForVersion('1.3'),
+        );
+    }
+
+    /**
      * BOMs with all hash algorithms available in Spec 1.0.
      *
      * @psalm-return Generator<array{Bom}>
      */
     public static function bomWithComponentHashAlgorithmsSpec10(): Generator
     {
-        yield from self::bomWithComponentHashAlgorithmsFromSpec(BomSpecData::getHashAlgEnumForVersion('1.0'));
+        yield from self::bomWithComponentHashAlgorithms(...BomSpecData::getHashAlgEnumForVersion('1.0'));
     }
 
     /**
@@ -259,7 +321,7 @@ abstract class BomModelProvider
      */
     public static function bomWithComponentHashAlgorithmsSpec11(): Generator
     {
-        yield from self::bomWithComponentHashAlgorithmsFromSpec(BomSpecData::getHashAlgEnumForVersion('1.1'));
+        yield from self::bomWithComponentHashAlgorithms(...BomSpecData::getHashAlgEnumForVersion('1.1'));
     }
 
     /**
@@ -269,7 +331,7 @@ abstract class BomModelProvider
      */
     public static function bomWithComponentHashAlgorithmsSpec12(): Generator
     {
-        yield from self::bomWithComponentHashAlgorithmsFromSpec(BomSpecData::getHashAlgEnumForVersion('1.2'));
+        yield from self::bomWithComponentHashAlgorithms(...BomSpecData::getHashAlgEnumForVersion('1.2'));
     }
 
     /**
@@ -279,30 +341,29 @@ abstract class BomModelProvider
      */
     public static function bomWithComponentHashAlgorithmsSpec13(): Generator
     {
-        yield from self::bomWithComponentHashAlgorithmsFromSpec(BomSpecData::getHashAlgEnumForVersion('1.3'));
+        yield from self::bomWithComponentHashAlgorithms(...BomSpecData::getHashAlgEnumForVersion('1.3'));
     }
 
     /**
      * BOMs with all hash algorithms available in a spec.
      *
-     * @psalm-param list<HashAlgorithm::*> $hashAlgorithms
-     *
      * @psalm-return Generator<array{Bom}>
      */
-    public static function bomWithComponentHashAlgorithmsFromSpec(array $hashAlgorithms): Generator
+    public static function bomWithComponentHashAlgorithms(string ...$hashAlgorithms): Generator
     {
         $hashAlgorithms = array_unique($hashAlgorithms, \SORT_STRING);
-        $label = implode(',', $hashAlgorithms);
-        yield "hash algs: $label" => [
-            (new Bom())->setComponentRepository(
-                new ComponentRepository(
-                    (new Component(Classification::LIBRARY, 'name', '1.0'))
-                        ->setHashRepository(
-                            new HashRepository(array_fill_keys($hashAlgorithms, '12345678901234567890123456789012'))
-                        )
-                )
-            ),
-        ];
+        foreach ($hashAlgorithms as $hashAlgorithm) {
+            yield "component hash alg: $hashAlgorithm" => [
+                (new Bom())->setComponentRepository(
+                    new ComponentRepository(
+                        (new Component(Classification::LIBRARY, 'name', '1.0'))
+                            ->setHashRepository(
+                                new HashRepository([$hashAlgorithm => '12345678901234567890123456789012'])
+                            )
+                    )
+                ),
+            ];
+        }
     }
 
     /**
@@ -312,7 +373,7 @@ abstract class BomModelProvider
      */
     public static function bomWithComponentDescription(): Generator
     {
-        yield 'description: none' => [
+        yield 'component description: none' => [
             (new Bom())->setComponentRepository(
                 new ComponentRepository(
                     (new Component(Classification::LIBRARY, 'name', '1.0'))
@@ -320,7 +381,7 @@ abstract class BomModelProvider
                 )
             ),
         ];
-        yield 'description: empty' => [
+        yield 'component description: empty' => [
             (new Bom())->setComponentRepository(
                 new ComponentRepository(
                     (new Component(Classification::LIBRARY, 'name', '1.0'))
@@ -328,7 +389,7 @@ abstract class BomModelProvider
                 )
             ),
         ];
-        yield 'description: random' => [
+        yield 'component description: random' => [
             (new Bom())->setComponentRepository(
                 new ComponentRepository(
                     (new Component(Classification::LIBRARY, 'name', '1.0'))
@@ -336,7 +397,7 @@ abstract class BomModelProvider
                 )
             ),
         ];
-        yield 'description: spaces' => [
+        yield 'component description: spaces' => [
             (new Bom())->setComponentRepository(
                 new ComponentRepository(
                     (
@@ -346,7 +407,7 @@ abstract class BomModelProvider
                 )
             ),
         ];
-        yield 'description: XML special chars' => [
+        yield 'component description: XML special chars' => [
             (new Bom())->setComponentRepository(
                 new ComponentRepository(
                     (new Component(Classification::LIBRARY, 'name', '1.0'))
@@ -355,6 +416,69 @@ abstract class BomModelProvider
                             '<strong>html<strong>'. // things that might cause schema-invalid XML
                             'bar ]]><[CDATA[baz]]> foo' // unexpected CDATA end
                         )
+                )
+            ),
+        ];
+    }
+
+    /**
+     * BOMs with plain metadata.
+     *
+     * @psalm-return Generator<array{Bom}>
+     */
+    private static function bomWithMetaDataPlain(): Generator
+    {
+        yield 'metadata: plain' => [
+            (new Bom())->setMetaData(new MetaData()),
+        ];
+    }
+
+    /**
+     * BOMs with plain metadata that have tools.
+     *
+     * @psalm-return Generator<array{Bom}>
+     */
+    private static function bomWithMetaDataTools(): Generator
+    {
+        yield 'metadata: empty tools' => [
+            (new Bom())->setMetaData(
+                (new MetaData())->setTools(new ToolRepository())
+            ),
+        ];
+
+        yield 'metadata: some tools' => [
+            (new Bom())->setMetaData(
+                (new MetaData())->setTools(
+                    new ToolRepository(
+                        new Tool(),
+                        (new Tool())
+                            ->setVendor('myToolVendor')
+                            ->setName('myTool')
+                            ->setVersion('toolVersion')
+                            ->setHashRepository(
+                                new HashRepository([HashAlgorithm::MD5 => '12345678901234567890123456789012'])
+                            ),
+                    )
+                )
+            ),
+        ];
+    }
+
+    /**
+     * BOMs with plain metadata that have a component.
+     *
+     * @psalm-return Generator<array{Bom}>
+     */
+    private static function bomWithMetaDataComponent(): Generator
+    {
+        yield 'metadata: minimal component' => [
+            (new Bom())->setMetaData(
+                (new MetaData())->setComponent(
+                    new Component(
+                        Classification::APPLICATION,
+                        'foo',
+                        'bar'
+                    )
                 )
             ),
         ];

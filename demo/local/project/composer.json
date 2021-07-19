@@ -1,12 +1,19 @@
 {
     "name": "cyclonedx-demo/cyclonedx-php-composer-local",
-    "description": "demo of cyclonedx/cyclonedx-php-composer with a local dependency",
     "type": "project",
-    "config": {
-        "sort-packages": true,
-        "preferred-install": "dist"
+    "description": "demo of cyclonedx/cyclonedx-php-composer with a local dependency",
+    "version": "dev-master",
+    "require": {
+        "cyclonedx-demo/local-demo-dependency": "@dev",
+        "cyclonedx-demo/local-dependency-with-minimal-setup": "@dev"
     },
-    "prefer-stable": true,
+    "require-dev": {
+        "cyclonedx/cyclonedx-php-composer": "@dev"
+    },
+    "config": {
+        "preferred-install": "dist",
+        "sort-packages": true
+    },
     "repositories": [
         {
             "type": "path",
@@ -19,11 +26,5 @@
             "symlink": true
         }
     ],
-    "require": {
-        "cyclonedx-demo/local-demo-dependency": "@dev",
-        "cyclonedx-demo/local-dependency-with-minimal-setup": "@dev"
-    },
-    "require-dev": {
-        "cyclonedx/cyclonedx-php-composer": "@dev"
-    }
+    "prefer-stable": true
 }

@@ -24,6 +24,7 @@ declare(strict_types=1);
 namespace CycloneDX\Tests\Core\Models;
 
 use CycloneDX\Core\Models\Bom;
+use CycloneDX\Core\Models\MetaData;
 use CycloneDX\Core\Repositories\ComponentRepository;
 use PHPUnit\Framework\TestCase;
 
@@ -72,4 +73,15 @@ class BomTest extends TestCase
     }
 
     // endregion version setter&getter
+
+    // region metaData setter&getter
+
+    public function testMetaDataSetterGetter(): void
+    {
+        $metaData = $this->createStub(MetaData::class);
+        $this->bom->setMetaData($metaData);
+        self::assertSame($metaData, $this->bom->getMetaData());
+    }
+
+    // endregion metaData setter&getter
 }

@@ -23,10 +23,12 @@ declare(strict_types=1);
 
 namespace CycloneDX\Composer\Factories;
 
-use Composer\Composer;
 use Composer\Package\PackageInterface;
 use Composer\Repository\LockArrayRepository;
 use CycloneDX\Core\Models\Bom;
+use CycloneDX\Core\Models\MetaData;
+use CycloneDX\Core\Models\Tool;
+use CycloneDX\Core\Repositories\ToolRepository;
 
 /**
  * @internal
@@ -38,9 +40,25 @@ class BomFactory
     /** @var ComponentFactory */
     private $componentFactory;
 
-    public function __construct(ComponentFactory $componentFactory)
+    /**
+     * @var Tool|null
+     */
+    private $tool;
+
+    public function __construct(ComponentFactory $componentFactory, ?Tool $tool = null)
     {
         $this->componentFactory = $componentFactory;
+        $this->tool = $tool;
+    }
+
+    public function getComponentFactory(): ComponentFactory
+    {
+        return $this->componentFactory;
+    }
+
+    public function getTool(): ?Tool
+    {
+        return $this->tool;
     }
 
     /**
@@ -52,10 +70,15 @@ class BomFactory
      */
     public function makeForPackageWithComponents(PackageInterface $package, LockArrayRepository $components): Bom
     {
-        return new Bom(
-            $this->componentFactory->makeFromPackages(
-                $components->getPackages()
-            )
-        );
+        $tools = null === $this->tool ? null : new ToolRepository($this->tool);
+        $bomComponent = $this->componentFactory->makeFromPackage($package);
+
+        $bomMetaData = (new MetaData())
+            ->setComponent($bomComponent)
+            ->setTools($tools);
+        $bomComponents = $this->componentFactory->makeFromPackages($components->getPackages());
+
+        return (new Bom($bomComponents))
+            ->setMetaData($bomMetaData);
     }
 }

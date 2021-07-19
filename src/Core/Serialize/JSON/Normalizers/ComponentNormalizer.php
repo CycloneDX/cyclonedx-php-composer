@@ -42,8 +42,6 @@ class ComponentNormalizer extends AbstractNormalizer
 
     /**
      * @throws DomainException
-     *
-     * @psalm-return array<string, mixed>
      */
     public function normalize(Component $component): array
     {

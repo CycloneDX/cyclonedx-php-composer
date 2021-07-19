@@ -31,9 +31,6 @@ use CycloneDX\Core\Serialize\JSON\AbstractNormalizer;
  */
 class LicenseExpressionNormalizer extends AbstractNormalizer
 {
-    /**
-     * @psalm-return array{'expression': string}
-     */
     public function normalize(LicenseExpression $license): array
     {
         return ['expression' => $license->getExpression()];

@@ -51,4 +51,9 @@ class Spec12Test extends AbstractSpecTestCase
     {
         return true;
     }
+
+    public function shouldSupportMetaData(): bool
+    {
+        return true;
+    }
 }

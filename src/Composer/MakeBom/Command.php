@@ -28,6 +28,7 @@ use Composer\Composer;
 use Composer\IO\IOInterface;
 use CycloneDX\Composer\Factories\BomFactory;
 use CycloneDX\Composer\MakeBom\Exceptions\ValueError;
+use CycloneDX\Composer\ToolUpdater;
 use CycloneDX\Core\Models\Bom;
 use Symfony\Component\Console\Formatter\OutputFormatter;
 use Symfony\Component\Console\Input\InputInterface;
@@ -60,13 +61,24 @@ class Command extends BaseCommand
     private $bomFactory;
 
     /**
+     * @var ToolUpdater|null
+     */
+    private $toolUpdater;
+
+    /**
      * @throws \LogicException When the command name is empty
      */
-    public function __construct(Options $options, Factory $factory, BomFactory $bomFactory, ?string $name = null)
-    {
+    public function __construct(
+        Options $options,
+        Factory $factory,
+        BomFactory $bomFactory,
+        ?ToolUpdater $toolUpdater,
+        ?string $name = null
+    ) {
         $this->options = $options;
         $this->factory = $factory;
         $this->bomFactory = $bomFactory;
+        $this->toolUpdater = $toolUpdater;
         parent::__construct($name);
     }
 
@@ -104,6 +116,8 @@ class Command extends BaseCommand
             return self::INVALID;
         }
         $io->writeErrorRaw(__METHOD__.' Options: '.print_r($this->options, true), true, IOInterface::DEBUG);
+
+        $this->updateTool();
 
         $bomString = $this->makeBomString(
             $this->makeBom(
@@ -219,5 +233,32 @@ class Command extends BaseCommand
         );
 
         return false;
+    }
+
+    private function updateTool(): ?bool
+    {
+        $tool = $this->bomFactory->getTool();
+        if (null === $tool) {
+            return null;
+        }
+
+        $updater = $this->toolUpdater;
+        if (null === $updater) {
+            return null;
+        }
+
+        try {
+            $composer = $this->getComposer();
+            if (null === $composer) {
+                throw new \UnexpectedValueException('empty composer');
+            }
+
+            $withDevReqs = !empty($composer->getLocker()->getDevPackageNames());
+            $lockerRepo = $composer->getLocker()->getLockedRepository($withDevReqs);
+
+            return $updater->updateTool($tool, $lockerRepo);
+        } catch (\Exception $exception) {
+            return false;
+        }
     }
 }
