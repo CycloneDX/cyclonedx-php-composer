@@ -2,6 +2,15 @@
     "name": "cyclonedx/cyclonedx-php-composer",
     "type": "composer-plugin",
     "description": "Creates CycloneDX Software Bill-of-Materials (SBOM) from PHP Composer projects",
+    "keywords": [
+        "CycloneDX",
+        "SBOM",
+        "software-bill-of-materials",
+        "BOM",
+        "bill-of-materials",
+        "package-url",
+        "PURL"
+    ],
     "homepage": "https://github.com/CycloneDX/cyclonedx-php-composer/",
     "license": "Apache-2.0",
     "authors": [
