@@ -21,7 +21,7 @@ declare(strict_types=1);
  * Copyright (c) Steve Springett. All Rights Reserved.
  */
 
-namespace CycloneDX\Tests\Core\Serialize;
+namespace CycloneDX\Tests\Core;
 
 use CycloneDX\Core\Models\Bom;
 use CycloneDX\Core\Serialize\XmlSerializer;
@@ -34,7 +34,7 @@ use PHPUnit\Framework\TestCase;
 /**
  * @coversNothing
  */
-class XmlTest extends TestCase
+class SerializeToXmlTest extends TestCase
 {
     // region Spec 1.0
     // Spec 1.0 is not implemented
@@ -46,9 +46,7 @@ class XmlTest extends TestCase
      * This test might be slow.
      * This test might require online-connectivity.
      *
-     * @dataProvider \CycloneDX\Tests\_data\BomModelProvider::fullBomTestData
-     * @dataProvider \CycloneDX\Tests\_data\BomModelProvider::bomWithComponentHashAlgorithmsSpec11()
-     * @dataProvider \CycloneDX\Tests\_data\BomModelProvider::bomWithComponentTypeSpec11()
+     * @dataProvider \CycloneDX\Tests\_data\BomModelProvider::allBomTestData
      */
     public function testSchema11(Bom $bom): void
     {
@@ -70,9 +68,7 @@ class XmlTest extends TestCase
      * This test might be slow.
      * This test might require online-connectivity.
      *
-     * @dataProvider \CycloneDX\Tests\_data\BomModelProvider::fullBomTestData
-     * @dataProvider \CycloneDX\Tests\_data\BomModelProvider::bomWithComponentHashAlgorithmsSpec12()
-     * @dataProvider \CycloneDX\Tests\_data\BomModelProvider::bomWithComponentTypeSpec12()
+     * @dataProvider \CycloneDX\Tests\_data\BomModelProvider::allBomTestData
      */
     public function testSchema12(Bom $bom): void
     {
@@ -94,9 +90,7 @@ class XmlTest extends TestCase
      * This test might be slow.
      * This test might require online-connectivity.
      *
-     * @dataProvider \CycloneDX\Tests\_data\BomModelProvider::fullBomTestData
-     * @dataProvider \CycloneDX\Tests\_data\BomModelProvider::bomWithComponentHashAlgorithmsSpec13()
-     * @dataProvider \CycloneDX\Tests\_data\BomModelProvider::bomWithComponentTypeSpec13()
+     * @dataProvider \CycloneDX\Tests\_data\BomModelProvider::allBomTestData
      */
     public function testSchema13(Bom $bom): void
     {

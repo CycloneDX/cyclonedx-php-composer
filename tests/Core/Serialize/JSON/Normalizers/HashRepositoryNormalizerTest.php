@@ -63,23 +63,23 @@ class HashRepositoryNormalizerTest extends TestCase
     /**
      * @depends testConstructor
      */
-    public function testNormalizeThrowOnThrow(): void
+    public function testNormalizeSkipOnThrow(): void
     {
         $hashNormalizer = $this->createMock(HashNormalizer::class);
         $factory = $this->createConfiguredMock(NormalizerFactory::class, ['makeForHash' => $hashNormalizer]);
         $normalizer = new HashRepositoryNormalizer($factory);
 
         $repo = $this->createConfiguredMock(HashRepository::class, [
-            'getHashes' => ['alg1' => 'cont1', 'alg2', 'cont2'],
+            'getHashes' => ['alg1' => 'cont1', 'alg2' => 'cont2'],
         ]);
 
-        $exception = new DomainException();
-        $hashNormalizer->expects(self::once())->method('normalize')
-            ->with('alg1', 'cont1')
-            ->willThrowException($exception);
+        $hashNormalizer->expects(self::exactly(2))
+            ->method('normalize')
+            ->withConsecutive(['alg1', 'cont1'], ['alg2', 'cont2'])
+            ->willThrowException(new DomainException());
 
-        $this->expectExceptionObject($exception);
+        $got = $normalizer->normalize($repo);
 
-        $normalizer->normalize($repo);
+        self::assertSame([], $got);
     }
 }

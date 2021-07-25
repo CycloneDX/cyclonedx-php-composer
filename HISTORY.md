@@ -2,6 +2,24 @@
 
 ## unreleased
 
+* Changed
+  * Core library
+    * SerializersGroups will skipp unsupported elements silently, instead of forwarding caught exceptions.  
+      This results in an overall smoother SBoM generation process, just as intended.
+* Added
+  * CLI via `composer make-bom`
+    * Will try to populate metadata of the SBoM.
+  * Core library
+    * Added models for spec elements: `metadata`, `tools`, `tool`
+    * Added ability to serialize `metadata` to XML
+    * Added ability to serialize `metadata` to JSON
+* Fixed
+  * CLI via `composer make-bom`
+    * composer packages of type `project` or `composer-plugin` 
+      result as CycloneDX component of type `application`, was `library`.
+* Misc
+  * Split some tests to more fine-grained scenarios.
+
 ## 3.2.0
 
 * Changed

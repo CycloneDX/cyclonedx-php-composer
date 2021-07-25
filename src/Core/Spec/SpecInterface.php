@@ -67,4 +67,9 @@ interface SpecInterface
      * they must be normalized to disjunctive licenses.
      */
     public function supportsLicenseExpression(): bool;
+
+    /**
+     * version < 1.2 does not support MetaData.
+     */
+    public function supportsMetaData(): bool;
 }

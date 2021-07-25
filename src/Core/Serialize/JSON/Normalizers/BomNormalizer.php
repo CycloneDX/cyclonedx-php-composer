@@ -23,7 +23,9 @@ declare(strict_types=1);
 
 namespace CycloneDX\Core\Serialize\JSON\Normalizers;
 
+use CycloneDX\Core\Helpers\NullAssertionTrait;
 use CycloneDX\Core\Models\Bom;
+use CycloneDX\Core\Models\MetaData;
 use CycloneDX\Core\Serialize\JSON\AbstractNormalizer;
 
 /**
@@ -31,15 +33,42 @@ use CycloneDX\Core\Serialize\JSON\AbstractNormalizer;
  */
 class BomNormalizer extends AbstractNormalizer
 {
+    use NullAssertionTrait;
+
     private const BOM_FORMAT = 'CycloneDX';
 
     public function normalize(Bom $bom): array
     {
-        return [
-            'bomFormat' => self::BOM_FORMAT,
-            'specVersion' => $this->getNormalizerFactory()->getSpec()->getVersion(),
-            'version' => $bom->getVersion(),
-            'components' => $this->getNormalizerFactory()->makeForComponentRepository()->normalize($bom->getComponentRepository()),
-        ];
+        $factory = $this->getNormalizerFactory();
+
+        return array_filter(
+            [
+                'bomFormat' => self::BOM_FORMAT,
+                'specVersion' => $factory->getSpec()->getVersion(),
+                'version' => $bom->getVersion(),
+                'metadata' => $this->normalizeMetaData($bom->getMetaData()),
+                'components' => $factory->makeForComponentRepository()->normalize($bom->getComponentRepository()),
+            ],
+            [$this, 'isNotNull']
+        );
+    }
+
+    private function normalizeMetaData(?MetaData $metaData): ?array
+    {
+        if (null === $metaData) {
+            return null;
+        }
+
+        $factory = $this->getNormalizerFactory();
+
+        if (false === $factory->getSpec()->supportsMetaData()) {
+            return null;
+        }
+
+        $data = $factory->makeForMetaData()->normalize($metaData);
+
+        return empty($data)
+            ? null
+            : $data;
     }
 }

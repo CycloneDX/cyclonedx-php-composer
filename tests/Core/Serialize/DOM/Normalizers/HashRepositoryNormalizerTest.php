@@ -27,7 +27,6 @@ use CycloneDX\Core\Repositories\HashRepository;
 use CycloneDX\Core\Serialize\DOM\NormalizerFactory;
 use CycloneDX\Core\Serialize\DOM\Normalizers\HashNormalizer;
 use CycloneDX\Core\Serialize\DOM\Normalizers\HashRepositoryNormalizer;
-use DomainException;
 use DOMDocument;
 use DOMElement;
 use PHPUnit\Framework\TestCase;
@@ -37,7 +36,7 @@ use PHPUnit\Framework\TestCase;
  * @covers \CycloneDX\Core\Serialize\DOM\AbstractNormalizer
  * @covers \CycloneDX\Core\Helpers\SimpleDomTrait
  *
- * @uses \CycloneDX\Core\Serialize\DOM\Normalizers\HashNormalizer
+ * @uses   \CycloneDX\Core\Serialize\DOM\Normalizers\HashNormalizer
  */
 class HashRepositoryNormalizerTest extends TestCase
 {
@@ -51,10 +50,13 @@ class HashRepositoryNormalizerTest extends TestCase
     public function testNormalize(): void
     {
         $hashNormalizer = $this->createMock(HashNormalizer::class);
-        $factory = $this->createConfiguredMock(NormalizerFactory::class, [
-            'makeForHash' => $hashNormalizer,
-            'getDocument' => new DOMDocument(),
-            ]);
+        $factory = $this->createConfiguredMock(
+            NormalizerFactory::class,
+            [
+                'makeForHash' => $hashNormalizer,
+                'getDocument' => new DOMDocument(),
+            ]
+        );
         $dummy1 = $this->createStub(DOMElement::class);
         $dummy2 = $this->createStub(DOMElement::class);
         $normalizer = new HashRepositoryNormalizer($factory);
@@ -73,23 +75,26 @@ class HashRepositoryNormalizerTest extends TestCase
     /**
      * @depends testConstructor
      */
-    public function testNormalizeThrowOnThrow(): void
+    public function testNormalizeSkipOnThrow(): void
     {
         $hashNormalizer = $this->createMock(HashNormalizer::class);
         $factory = $this->createConfiguredMock(NormalizerFactory::class, ['makeForHash' => $hashNormalizer]);
         $normalizer = new HashRepositoryNormalizer($factory);
 
-        $repo = $this->createConfiguredMock(HashRepository::class, [
-            'getHashes' => ['alg1' => 'cont1', 'alg2', 'cont2'],
-        ]);
+        $repo = $this->createConfiguredMock(
+            HashRepository::class,
+            [
+                'getHashes' => ['alg1' => 'cont1', 'alg2' => 'cont2', 'alg3' => 'cont3'],
+            ]
+        );
 
-        $exception = new DomainException();
-        $hashNormalizer->expects(self::once())->method('normalize')
-            ->with('alg1', 'cont1')
-            ->willThrowException($exception);
+        $hashNormalizer->expects(self::exactly(3))
+            ->method('normalize')
+            ->withConsecutive(['alg1', 'cont1'], ['alg2', 'cont2'], ['alg3', 'cont3'])
+            ->willThrowException(new \DomainException());
 
-        $this->expectExceptionObject($exception);
+        $got = $normalizer->normalize($repo);
 
-        $normalizer->normalize($repo);
+        self::assertSame([], $got);
     }
 }

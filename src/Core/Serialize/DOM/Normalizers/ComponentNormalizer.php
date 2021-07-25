@@ -58,11 +58,11 @@ class ComponentNormalizer extends AbstractNormalizer
 
         $document = $this->getNormalizerFactory()->getDocument();
 
-        $element = $document->createElement('component');
-        $this->simpleDomSetAttributes($element, ['type' => $type]);
-
         return $this->simpleDomAppendChildren(
-            $element,
+            $this->simpleDomSetAttributes(
+                $document->createElement('component'),
+                ['type' => $type]
+            ),
             [
                 // publisher
                 $this->simpleDomSafeTextElement($document, 'group', $group),
@@ -85,8 +85,6 @@ class ComponentNormalizer extends AbstractNormalizer
 
     /**
      * @param LicenseExpression|DisjunctiveLicenseRepository|null $license
-     *
-     * @throws DomainException
      */
     private function normalizeLicense($license): ?DOMElement
     {

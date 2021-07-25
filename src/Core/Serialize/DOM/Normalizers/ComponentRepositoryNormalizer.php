@@ -36,13 +36,19 @@ class ComponentRepositoryNormalizer extends AbstractNormalizer
      * @return DOMElement[]
      * @psalm-return list<DOMElement>
      */
-    public function normalize(ComponentRepository $components): array
+    public function normalize(ComponentRepository $repo): array
     {
-        return 0 === \count($components)
-            ? []
-            : array_map(
-                [$this->getNormalizerFactory()->makeForComponent(), 'normalize'],
-                $components->getComponents()
-            );
+        $normalizer = $this->getNormalizerFactory()->makeForComponent();
+
+        $components = [];
+        foreach ($repo->getComponents() as $component) {
+            try {
+                $components[] = $normalizer->normalize($component);
+            } catch (\DomainException $exception) {
+                continue;
+            }
+        }
+
+        return $components;
     }
 }

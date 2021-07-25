@@ -75,4 +75,29 @@ class ComponentRepositoryNormalizerTest extends TestCase
 
         self::assertSame([$FakeComponent], $got);
     }
+
+    public function testNormalizeSkipsOnThrow(): void
+    {
+        $spec = $this->createStub(SpecInterface::class);
+        $componentNormalizer = $this->createMock(ComponentNormalizer::class);
+        $factory = $this->createConfiguredMock(NormalizerFactory::class, [
+            'getSpec' => $spec,
+            'makeForComponent' => $componentNormalizer,
+        ]);
+        $normalizer = new ComponentRepositoryNormalizer($factory);
+        $component1 = $this->createStub(Component::class);
+        $component2 = $this->createStub(Component::class);
+        $components = $this->createConfiguredMock(ComponentRepository::class, [
+            'count' => 1,
+            'getComponents' => [$component1, $component2],
+        ]);
+
+        $componentNormalizer->expects(self::exactly(2))->method('normalize')
+            ->withConsecutive([$component1], [$component2])
+            ->willThrowException(new \DomainException());
+
+        $got = $normalizer->normalize($components);
+
+        self::assertSame([], $got);
+    }
 }

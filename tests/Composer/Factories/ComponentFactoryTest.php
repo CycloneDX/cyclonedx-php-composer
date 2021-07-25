@@ -110,16 +110,60 @@ class ComponentFactoryTest extends TestCase
 
     public function dpMakeFromPackage(): \Generator
     {
-        yield 'minimal package' => [
+        yield 'minimal library' => [
             $this->createConfiguredMock(
                 PackageInterface::class,
                 [
-                    'getPrettyName' => 'some-package',
-                    'getPrettyVersion' => 'v1.2.3',
+                    'getType' => 'library',
+                    'getPrettyName' => 'some-library',
+                    'getPrettyVersion' => '1.2.3',
                 ],
             ),
-            (new Component('library', 'some-package', '1.2.3'))
-                ->setPackageUrl((new PackageUrl('composer', 'some-package'))->setVersion('1.2.3')),
+            (new Component('library', 'some-library', '1.2.3'))
+                ->setPackageUrl((new PackageUrl('composer', 'some-library'))->setVersion('1.2.3')),
+            null,
+        ];
+
+        yield 'minimal project' => [
+            $this->createConfiguredMock(
+                PackageInterface::class,
+                [
+                    'getType' => 'project',
+                    'getPrettyName' => 'some-project',
+                    'getPrettyVersion' => '1.2.3',
+                ],
+            ),
+            (new Component('application', 'some-project', '1.2.3'))
+                ->setPackageUrl((new PackageUrl('composer', 'some-project'))->setVersion('1.2.3')),
+            null,
+        ];
+
+        yield 'minimal composer-plugin' => [
+            $this->createConfiguredMock(
+                PackageInterface::class,
+                [
+                    'getType' => 'composer-plugin',
+                    'getPrettyName' => 'some-composer-plugin',
+                    'getPrettyVersion' => '1.2.3',
+                ],
+            ),
+            (new Component('application', 'some-composer-plugin', '1.2.3'))
+                ->setPackageUrl((new PackageUrl('composer', 'some-composer-plugin'))->setVersion('1.2.3')),
+            null,
+        ];
+
+        yield 'minimal inDev of unknown type' => [
+            $this->createConfiguredMock(
+                PackageInterface::class,
+                [
+                    'getType' => 'myTye',
+                    'getPrettyName' => 'some-inDev',
+                    'getPrettyVersion' => 'dev-master',
+                    'isDev' => true,
+                ],
+            ),
+            (new Component('library', 'some-inDev', 'dev-master'))
+                ->setPackageUrl((new PackageUrl('composer', 'some-inDev'))->setVersion('dev-master')),
             null,
         ];
 
@@ -127,11 +171,10 @@ class ComponentFactoryTest extends TestCase
             CompletePackageInterface::class,
             [
                 'getPrettyName' => 'my/package',
-                'getPrettyVersion' => 'dev-master',
-                'isDev' => true,
+                'getPrettyVersion' => 'v1.2.3',
                 'getDescription' => 'my description',
                 'getLicense' => ['MIT'],
-                'getDistSha1Checksum' => '1234567890',
+                'getDistSha1Checksum' => '12345678901234567890123456789012',
             ]
         );
         $license = $this->createStub(DisjunctiveLicenseRepository::class);
@@ -139,19 +182,19 @@ class ComponentFactoryTest extends TestCase
         $licenseFactory->expects(self::once())->method('makeFromPackage')
             ->with($completePackage)
             ->willReturn($license);
-        yield 'complete package' => [
+        yield 'complete library' => [
             $completePackage,
-            (new Component('library', 'package', 'dev-master'))
+            (new Component('library', 'package', '1.2.3'))
                 ->setGroup('my')
                 ->setPackageUrl(
                     (new PackageUrl('composer', 'package'))
                         ->setNamespace('my')
-                        ->setVersion('dev-master')
-                        ->setChecksums(['sha1:1234567890'])
+                        ->setVersion('1.2.3')
+                        ->setChecksums(['sha1:12345678901234567890123456789012'])
                 )
                 ->setDescription('my description')
                 ->setLicense($license)
-                ->setHashRepository(new HashRepository([HashAlgorithm::SHA_1 => '1234567890'])),
+                ->setHashRepository(new HashRepository([HashAlgorithm::SHA_1 => '12345678901234567890123456789012'])),
             $licenseFactory,
         ];
     }

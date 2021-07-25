@@ -29,6 +29,7 @@ use Composer\IO\IOInterface;
 use Composer\Plugin\Capability\CommandProvider;
 use Composer\Plugin\Capable;
 use Composer\Plugin\PluginInterface;
+use CycloneDX\Core\Models\Tool;
 use CycloneDX\Core\Spdx\License as SpdxLicenseValidator;
 
 /**
@@ -38,6 +39,8 @@ use CycloneDX\Core\Spdx\License as SpdxLicenseValidator;
  */
 class Plugin implements PluginInterface, Capable, CommandProvider
 {
+    private const FILE_VERSION = __DIR__.'/../../semver.txt';
+
     public function activate(Composer $composer, IOInterface $io): void
     {
     }
@@ -62,19 +65,33 @@ class Plugin implements PluginInterface, Capable, CommandProvider
      */
     public function getCommands(): array
     {
+        $componentFactory = new Factories\ComponentFactory(
+            new Factories\LicenseFactory(
+                new SpdxLicenseValidator()
+            )
+        );
+
         return [
             new MakeBom\Command(
                 new MakeBom\Options(),
                 new MakeBom\Factory(new ComposerFactory()),
                 new Factories\BomFactory(
-                    new Factories\ComponentFactory(
-                        new Factories\LicenseFactory(
-                            new SpdxLicenseValidator()
-                        )
-                    )
+                    $componentFactory,
+                    $this->getTool()
                 ),
+                new ToolUpdater($componentFactory),
                 'make-bom'
             ),
         ];
+    }
+
+    private function getTool(): Tool
+    {
+        $version = file_get_contents(self::FILE_VERSION);
+
+        return (new Tool())
+            ->setVendor('cyclonedx')
+            ->setName('cyclonedx-php-composer')
+            ->setVersion(false === $version ? null : trim($version));
     }
 }

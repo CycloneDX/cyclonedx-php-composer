@@ -2,6 +2,23 @@
     "bomFormat": "CycloneDX",
     "specVersion": "1.2",
     "version": 1,
+    "metadata": {
+        "tools": [
+            {
+                "vendor": "cyclonedx",
+                "name": "cyclonedx-php-composer",
+                "version": "dev-master"
+            }
+        ],
+        "component": {
+            "type": "application",
+            "name": "cyclonedx-php-composer-local",
+            "version": "dev-master",
+            "group": "cyclonedx-demo",
+            "description": "demo of cyclonedx\/cyclonedx-php-composer with a local dependency",
+            "purl": "pkg:composer\/cyclonedx-demo\/cyclonedx-php-composer-local@dev-master"
+        }
+    },
     "components": [
         {
             "type": "library",

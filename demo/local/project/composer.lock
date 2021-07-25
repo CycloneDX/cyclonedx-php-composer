@@ -4,15 +4,14 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e4059accfb938a17e57b4259d858c76f",
+    "content-hash": "11b0fed7055fd94d4eb0a8bcd342adc3",
     "packages": [
         {
             "name": "cyclonedx-demo/local-demo-dependency",
             "version": "1.33.7",
             "dist": {
                 "type": "path",
-                "url": "packages/local-demo-dependency",
-                "reference": "d3891c11328cd514196cc9a8d3c3e524884d5066"
+                "url": "packages/local-demo-dependency"
             },
             "type": "library",
             "description": "a package that is hosted locally and required in a local demo",
@@ -54,7 +53,7 @@
             "require-dev": {
                 "composer/composer": "^2.0.13",
                 "ext-simplexml": "*",
-                "phpunit/phpunit": "9.5.6",
+                "phpunit/phpunit": "9.5.7",
                 "roave/security-advisories": "dev-latest"
             },
             "type": "composer-plugin",
@@ -139,6 +138,15 @@
             ],
             "description": "Creates CycloneDX Software Bill-of-Materials (SBOM) from PHP Composer projects",
             "homepage": "https://github.com/CycloneDX/cyclonedx-php-composer/",
+            "keywords": [
+                "BOM",
+                "CycloneDX",
+                "PURL",
+                "SBOM",
+                "bill-of-materials",
+                "package-url",
+                "software-bill-of-materials"
+            ],
             "support": {
                 "issues": "https://github.com/CycloneDX/cyclonedx-php-composer/issues"
             },

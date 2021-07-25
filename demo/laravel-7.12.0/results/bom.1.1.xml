@@ -145,7 +145,7 @@
       </licenses>
       <purl><![CDATA[pkg:composer/laravel/framework@7.30.4]]></purl>
     </component>
-    <component type="library">
+    <component type="application">
       <group><![CDATA[laravel]]></group>
       <name><![CDATA[laravel]]></name>
       <version><![CDATA[7.12.0]]></version>

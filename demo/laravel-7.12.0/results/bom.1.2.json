@@ -2,6 +2,23 @@
     "bomFormat": "CycloneDX",
     "specVersion": "1.2",
     "version": 1,
+    "metadata": {
+        "tools": [
+            {
+                "vendor": "cyclonedx",
+                "name": "cyclonedx-php-composer",
+                "version": "dev-master"
+            }
+        ],
+        "component": {
+            "type": "application",
+            "name": "cyclonedx-php-composer-demo",
+            "version": "dev-master",
+            "group": "cyclonedx",
+            "description": "demo of cyclonedx\/cyclonedx-php-composer with a pinned version of laravel\/framework",
+            "purl": "pkg:composer\/cyclonedx\/cyclonedx-php-composer-demo@dev-master"
+        }
+    },
     "components": [
         {
             "type": "library",
@@ -184,7 +201,7 @@
             "purl": "pkg:composer\/laravel\/framework@7.30.4"
         },
         {
-            "type": "library",
+            "type": "application",
             "name": "laravel",
             "version": "7.12.0",
             "group": "laravel",

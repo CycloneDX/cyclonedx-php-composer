@@ -23,14 +23,6 @@ declare(strict_types=1);
 
 namespace CycloneDX\Core\Serialize\DOM;
 
-use CycloneDX\Core\Serialize\DOM\Normalizers\BomNormalizer;
-use CycloneDX\Core\Serialize\DOM\Normalizers\ComponentNormalizer;
-use CycloneDX\Core\Serialize\DOM\Normalizers\ComponentRepositoryNormalizer;
-use CycloneDX\Core\Serialize\DOM\Normalizers\DisjunctiveLicenseNormalizer;
-use CycloneDX\Core\Serialize\DOM\Normalizers\DisjunctiveLicenseRepositoryNormalizer;
-use CycloneDX\Core\Serialize\DOM\Normalizers\HashNormalizer;
-use CycloneDX\Core\Serialize\DOM\Normalizers\HashRepositoryNormalizer;
-use CycloneDX\Core\Serialize\DOM\Normalizers\LicenseExpressionNormalizer;
 use CycloneDX\Core\Spec\Format;
 use CycloneDX\Core\Spec\SpecInterface;
 use DomainException;
@@ -86,43 +78,58 @@ class NormalizerFactory
         return $this->document;
     }
 
-    public function makeForBom(): BomNormalizer
+    public function makeForBom(): Normalizers\BomNormalizer
     {
-        return new BomNormalizer($this);
+        return new Normalizers\BomNormalizer($this);
     }
 
-    public function makeForComponentRepository(): ComponentRepositoryNormalizer
+    public function makeForComponentRepository(): Normalizers\ComponentRepositoryNormalizer
     {
-        return new ComponentRepositoryNormalizer($this);
+        return new Normalizers\ComponentRepositoryNormalizer($this);
     }
 
-    public function makeForComponent(): ComponentNormalizer
+    public function makeForComponent(): Normalizers\ComponentNormalizer
     {
-        return new ComponentNormalizer($this);
+        return new Normalizers\ComponentNormalizer($this);
     }
 
-    public function makeForLicenseExpression(): LicenseExpressionNormalizer
+    public function makeForLicenseExpression(): Normalizers\LicenseExpressionNormalizer
     {
-        return new LicenseExpressionNormalizer($this);
+        return new Normalizers\LicenseExpressionNormalizer($this);
     }
 
-    public function makeForDisjunctiveLicenseRepository(): DisjunctiveLicenseRepositoryNormalizer
+    public function makeForDisjunctiveLicenseRepository(): Normalizers\DisjunctiveLicenseRepositoryNormalizer
     {
-        return new DisjunctiveLicenseRepositoryNormalizer($this);
+        return new Normalizers\DisjunctiveLicenseRepositoryNormalizer($this);
     }
 
-    public function makeForDisjunctiveLicense(): DisjunctiveLicenseNormalizer
+    public function makeForDisjunctiveLicense(): Normalizers\DisjunctiveLicenseNormalizer
     {
-        return new DisjunctiveLicenseNormalizer($this);
+        return new Normalizers\DisjunctiveLicenseNormalizer($this);
     }
 
-    public function makeForHashRepository(): HashRepositoryNormalizer
+    public function makeForHashRepository(): Normalizers\HashRepositoryNormalizer
     {
-        return new HashRepositoryNormalizer($this);
+        return new Normalizers\HashRepositoryNormalizer($this);
     }
 
-    public function makeForHash(): HashNormalizer
+    public function makeForHash(): Normalizers\HashNormalizer
     {
-        return new HashNormalizer($this);
+        return new Normalizers\HashNormalizer($this);
+    }
+
+    public function makeForMetaData(): Normalizers\MetaDataNormalizer
+    {
+        return new Normalizers\MetaDataNormalizer($this);
+    }
+
+    public function makeForToolRepository(): Normalizers\ToolRepositoryNormalizer
+    {
+        return new Normalizers\ToolRepositoryNormalizer($this);
+    }
+
+    public function makeForTool(): Normalizers\ToolNormalizer
+    {
+        return new Normalizers\ToolNormalizer($this);
     }
 }

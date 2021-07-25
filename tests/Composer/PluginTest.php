@@ -78,8 +78,11 @@ class PluginTest extends TestCase
 
     /**
      * @depends testPluginIsRegistered
+     *
+     * @return PluginInterface|Capable
+     * @psalm-return PluginInterface&Capable
      */
-    public function testPluginImplementsRequiredInterfaces(string $pluginClass): Capable
+    public function testPluginImplementsRequiredInterfaces(string $pluginClass)
     {
         $implements = class_implements($pluginClass);
 
@@ -114,12 +117,18 @@ class PluginTest extends TestCase
      * @uses \CycloneDX\Composer\Factories\ComponentFactory
      * @uses \CycloneDX\Core\Factories\LicenseFactory
      * @uses \CycloneDX\Core\Spdx\License
+     * @uses \CycloneDX\Core\Models\Tool
+     * @uses \CycloneDX\Composer\ToolUpdater
      */
     public function testMakeBomCommandIsRegistered(CommandProvider $commandProvider): void
     {
         $commands = $commandProvider->getCommands();
 
+        self::assertContainsOnlyInstancesOf(\Composer\Command\BaseCommand::class, $commands);
+
         self::assertCount(1, $commands);
-        self::assertContainsOnlyInstancesOf(Command::class, $commands);
+        $command = reset($commands);
+        self::assertInstanceOf(Command::class, $command);
+        self::assertSame('make-bom', $command->getName());
     }
 }

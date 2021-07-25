@@ -166,4 +166,12 @@ abstract class AbstractSpecTestCase extends TestCase
     }
 
     abstract public function shouldSupportLicenseExpression(): bool;
+
+    final public function testSupportsMetaData(): void
+    {
+        $isSupported = $this->getSpec()->supportsMetaData();
+        self::assertSame($this->shouldSupportMetaData(), $isSupported);
+    }
+
+    abstract public function shouldSupportMetaData(): bool;
 }

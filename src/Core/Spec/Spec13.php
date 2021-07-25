@@ -72,4 +72,9 @@ final class Spec13 implements SpecInterface
     {
         return true;
     }
+
+    public function supportsMetaData(): bool
+    {
+        return true;
+    }
 }

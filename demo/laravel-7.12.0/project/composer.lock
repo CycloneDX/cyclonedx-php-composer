@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a7d3a418be2bfd9bdb787ec5c93985fc",
+    "content-hash": "86b7d5a89aa0649f53ff01e733715352",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -4693,7 +4693,7 @@
             "require-dev": {
                 "composer/composer": "^2.0.13",
                 "ext-simplexml": "*",
-                "phpunit/phpunit": "9.5.6",
+                "phpunit/phpunit": "9.5.7",
                 "roave/security-advisories": "dev-latest"
             },
             "type": "composer-plugin",
@@ -4778,6 +4778,15 @@
             ],
             "description": "Creates CycloneDX Software Bill-of-Materials (SBOM) from PHP Composer projects",
             "homepage": "https://github.com/CycloneDX/cyclonedx-php-composer/",
+            "keywords": [
+                "BOM",
+                "CycloneDX",
+                "PURL",
+                "SBOM",
+                "bill-of-materials",
+                "package-url",
+                "software-bill-of-materials"
+            ],
             "support": {
                 "issues": "https://github.com/CycloneDX/cyclonedx-php-composer/issues"
             },

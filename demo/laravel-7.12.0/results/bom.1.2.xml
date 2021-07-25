@@ -1,5 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bom xmlns="http://cyclonedx.org/schema/bom/1.2" version="1">
+  <metadata>
+    <tools>
+      <tool>
+        <vendor><![CDATA[cyclonedx]]></vendor>
+        <name><![CDATA[cyclonedx-php-composer]]></name>
+        <version><![CDATA[dev-master]]></version>
+      </tool>
+    </tools>
+    <component type="application">
+      <group><![CDATA[cyclonedx]]></group>
+      <name><![CDATA[cyclonedx-php-composer-demo]]></name>
+      <version><![CDATA[dev-master]]></version>
+      <description><![CDATA[demo of cyclonedx/cyclonedx-php-composer with a pinned version of laravel/framework]]></description>
+      <purl><![CDATA[pkg:composer/cyclonedx/cyclonedx-php-composer-demo@dev-master]]></purl>
+    </component>
+  </metadata>
   <components>
     <component type="library">
       <group><![CDATA[asm89]]></group>
@@ -145,7 +161,7 @@
       </licenses>
       <purl><![CDATA[pkg:composer/laravel/framework@7.30.4]]></purl>
     </component>
-    <component type="library">
+    <component type="application">
       <group><![CDATA[laravel]]></group>
       <name><![CDATA[laravel]]></name>
       <version><![CDATA[7.12.0]]></version>

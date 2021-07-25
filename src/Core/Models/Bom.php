@@ -49,6 +49,11 @@ class Bom
      */
     private $version = 1;
 
+    /**
+     * @var MetaData|null
+     */
+    private $metaData;
+
     public function __construct(?ComponentRepository $componentRepository = null)
     {
         $this->setComponentRepository($componentRepository ?? new ComponentRepository());
@@ -101,5 +106,20 @@ class Bom
     private function isValidVersion(int $version): bool
     {
         return $version > 0;
+    }
+
+    public function getMetaData(): ?MetaData
+    {
+        return $this->metaData;
+    }
+
+    /**
+     * @return $this
+     */
+    public function setMetaData(?MetaData $metaData): self
+    {
+        $this->metaData = $metaData;
+
+        return $this;
     }
 }

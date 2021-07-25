@@ -24,10 +24,12 @@ declare(strict_types=1);
 namespace CycloneDX\Tests\Core\Serialize\JSON\Normalizers;
 
 use CycloneDX\Core\Models\Bom;
+use CycloneDX\Core\Models\MetaData;
 use CycloneDX\Core\Repositories\ComponentRepository;
 use CycloneDX\Core\Serialize\JSON\NormalizerFactory;
 use CycloneDX\Core\Serialize\JSON\Normalizers\BomNormalizer;
 use CycloneDX\Core\Serialize\JSON\Normalizers\ComponentRepositoryNormalizer;
+use CycloneDX\Core\Serialize\JSON\Normalizers\MetaDataNormalizer;
 use CycloneDX\Core\Spec\SpecInterface;
 use PHPUnit\Framework\TestCase;
 
@@ -38,6 +40,36 @@ use PHPUnit\Framework\TestCase;
 class BomNormalizerTest extends TestCase
 {
     public function testNormalize(): void
+    {
+        $spec = $this->createConfiguredMock(SpecInterface::class, ['getVersion' => '1.2']);
+        $factory = $this->createConfiguredMock(
+            NormalizerFactory::class,
+            [
+                'getSpec' => $spec,
+            ]
+        );
+        $normalizer = new BomNormalizer($factory);
+        $bom = $this->createConfiguredMock(
+            Bom::class,
+            [
+                'getVersion' => 23,
+            ]
+        );
+
+        $got = $normalizer->normalize($bom);
+
+        self::assertSame(
+            [
+                'bomFormat' => 'CycloneDX',
+                'specVersion' => '1.2',
+                'version' => 23,
+                'components' => [],
+            ],
+            $got
+        );
+    }
+
+    public function testNormalizeComponents(): void
     {
         $spec = $this->createConfiguredMock(SpecInterface::class, ['getVersion' => '1.2']);
         $componentsNormalizer = $this->createMock(ComponentRepositoryNormalizer::class);
@@ -57,7 +89,8 @@ class BomNormalizerTest extends TestCase
             ]
         );
 
-        $componentsNormalizer->expects(self::once())->method('normalize')
+        $componentsNormalizer->expects(self::once())
+            ->method('normalize')
             ->with($bom->getComponentRepository())
             ->willReturn(['FakeComponents']);
 
@@ -69,6 +102,137 @@ class BomNormalizerTest extends TestCase
                 'specVersion' => '1.2',
                 'version' => 23,
                 'components' => ['FakeComponents'],
+            ],
+            $got
+        );
+    }
+
+    public function testNormalizeMetaData(): void
+    {
+        $spec = $this->createConfiguredMock(
+            SpecInterface::class,
+            [
+                'getVersion' => '1.2',
+                'supportsMetaData' => true,
+            ]
+        );
+        $metadataNormalizer = $this->createMock(MetaDataNormalizer::class);
+        $factory = $this->createConfiguredMock(
+            NormalizerFactory::class,
+            [
+                'getSpec' => $spec,
+                'makeForMetaData' => $metadataNormalizer,
+            ]
+        );
+        $normalizer = new BomNormalizer($factory);
+        $bom = $this->createConfiguredMock(
+            Bom::class,
+            [
+                'getVersion' => 23,
+                'getMetaData' => $this->createStub(MetaData::class),
+            ]
+        );
+
+        $metadataNormalizer->expects(self::once())
+            ->method('normalize')
+            ->with($bom->getMetaData())
+            ->willReturn(['FakeMetaData']);
+
+        $got = $normalizer->normalize($bom);
+
+        self::assertSame(
+            [
+                'bomFormat' => 'CycloneDX',
+                'specVersion' => '1.2',
+                'version' => 23,
+                'metadata' => ['FakeMetaData'],
+                'components' => [],
+            ],
+            $got
+        );
+    }
+
+    public function testNormalizeMetaDataEmpty(): void
+    {
+        $spec = $this->createConfiguredMock(
+            SpecInterface::class,
+            [
+                'getVersion' => '1.2',
+                'supportsMetaData' => true,
+            ]
+        );
+        $metadataNormalizer = $this->createMock(MetaDataNormalizer::class);
+        $factory = $this->createConfiguredMock(
+            NormalizerFactory::class,
+            [
+                'getSpec' => $spec,
+                'makeForMetaData' => $metadataNormalizer,
+            ]
+        );
+        $normalizer = new BomNormalizer($factory);
+        $bom = $this->createConfiguredMock(
+            Bom::class,
+            [
+                'getVersion' => 23,
+                'getMetaData' => $this->createStub(MetaData::class),
+            ]
+        );
+
+        $metadataNormalizer->method('normalize')
+            ->with($bom->getMetaData())
+            ->willReturn([/* empty */]);
+
+        $got = $normalizer->normalize($bom);
+
+        self::assertSame(
+            [
+                'bomFormat' => 'CycloneDX',
+                'specVersion' => '1.2',
+                'version' => 23,
+                'components' => [],
+            ],
+            $got
+        );
+    }
+
+    public function testNormalizeMetaDataSkipped(): void
+    {
+        $spec = $this->createConfiguredMock(
+            SpecInterface::class,
+            [
+                'getVersion' => '1.2',
+                'supportsMetaData' => false,
+            ]
+        );
+        $metadataNormalizer = $this->createMock(MetaDataNormalizer::class);
+        $factory = $this->createConfiguredMock(
+            NormalizerFactory::class,
+            [
+                'getSpec' => $spec,
+                'makeForMetaData' => $metadataNormalizer,
+            ]
+        );
+        $normalizer = new BomNormalizer($factory);
+        $bom = $this->createConfiguredMock(
+            Bom::class,
+            [
+                'getVersion' => 23,
+                'getMetaData' => $this->createStub(MetaData::class),
+            ]
+        );
+
+        $metadataNormalizer->method('normalize')
+            ->with($bom->getMetaData())
+            ->willReturn(['FakeMetaData']);
+
+        $got = $normalizer->normalize($bom);
+
+        self::assertSame(
+            [
+                'bomFormat' => 'CycloneDX',
+                'specVersion' => '1.2',
+                'version' => 23,
+                'components' => [],
             ],
             $got
         );

@@ -2,6 +2,23 @@
     "bomFormat": "CycloneDX",
     "specVersion": "1.3",
     "version": 1,
+    "metadata": {
+        "tools": [
+            {
+                "vendor": "cyclonedx",
+                "name": "cyclonedx-php-composer",
+                "version": "dev-issue_14"
+            }
+        ],
+        "component": {
+            "type": "application",
+            "name": "cyclonedx-php-composer-demo",
+            "version": "dev-master",
+            "group": "cyclonedx",
+            "description": "demo of cyclonedx\/cyclonedx-php-composer with symfony\/symfony",
+            "purl": "pkg:composer\/cyclonedx\/cyclonedx-php-composer-demo@dev-master"
+        }
+    },
     "components": [
         {
             "type": "library",
@@ -21,7 +38,7 @@
         {
             "type": "library",
             "name": "cache",
-            "version": "2.0.3",
+            "version": "2.1.1",
             "group": "doctrine",
             "description": "PHP Doctrine Cache library is a popular cache implementation that supports many different drivers such as redis, memcache, apc, mongodb and others.",
             "licenses": [
@@ -31,7 +48,7 @@
                     }
                 }
             ],
-            "purl": "pkg:composer\/doctrine\/cache@2.0.3"
+            "purl": "pkg:composer\/doctrine\/cache@2.1.1"
         },
         {
             "type": "library",
@@ -126,7 +143,7 @@
         {
             "type": "library",
             "name": "laminas-code",
-            "version": "4.3.0",
+            "version": "4.4.2",
             "group": "laminas",
             "description": "Extensions to the PHP Reflection API, static code scanning, and code generation",
             "licenses": [
@@ -136,37 +153,7 @@
                     }
                 }
             ],
-            "purl": "pkg:composer\/laminas\/laminas-code@4.3.0"
-        },
-        {
-            "type": "library",
-            "name": "laminas-eventmanager",
-            "version": "3.3.1",
-            "group": "laminas",
-            "description": "Trigger and listen to events within a PHP application",
-            "licenses": [
-                {
-                    "license": {
-                        "id": "BSD-3-Clause"
-                    }
-                }
-            ],
-            "purl": "pkg:composer\/laminas\/laminas-eventmanager@3.3.1"
-        },
-        {
-            "type": "library",
-            "name": "laminas-zendframework-bridge",
-            "version": "1.2.0",
-            "group": "laminas",
-            "description": "Alias legacy ZF class names to Laminas Project equivalents.",
-            "licenses": [
-                {
-                    "license": {
-                        "id": "BSD-3-Clause"
-                    }
-                }
-            ],
-            "purl": "pkg:composer\/laminas\/laminas-zendframework-bridge@1.2.0"
+            "purl": "pkg:composer\/laminas\/laminas-code@4.4.2"
         },
         {
             "type": "library",
@@ -425,23 +412,8 @@
         },
         {
             "type": "library",
-            "name": "runtime",
-            "version": "5.3.0",
-            "group": "symfony",
-            "description": "Enables decoupling PHP applications from global state",
-            "licenses": [
-                {
-                    "license": {
-                        "id": "MIT"
-                    }
-                }
-            ],
-            "purl": "pkg:composer\/symfony\/runtime@5.3.0"
-        },
-        {
-            "type": "library",
             "name": "symfony",
-            "version": "5.3.0",
+            "version": "5.3.3",
             "group": "symfony",
             "description": "The Symfony PHP framework",
             "licenses": [
@@ -451,7 +423,7 @@
                     }
                 }
             ],
-            "purl": "pkg:composer\/symfony\/symfony@5.3.0"
+            "purl": "pkg:composer\/symfony\/symfony@5.3.3"
         },
         {
             "type": "library",

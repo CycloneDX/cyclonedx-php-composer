@@ -25,6 +25,7 @@ namespace CycloneDX\Core\Serialize\DOM\Normalizers;
 
 use CycloneDX\Core\Helpers\SimpleDomTrait;
 use CycloneDX\Core\Models\Bom;
+use CycloneDX\Core\Models\MetaData;
 use CycloneDX\Core\Repositories\ComponentRepository;
 use CycloneDX\Core\Serialize\DOM\AbstractNormalizer;
 use DOMElement;
@@ -40,11 +41,12 @@ class BomNormalizer extends AbstractNormalizer
 
     public function normalize(Bom $bom): DOMElement
     {
-        $document = $this->getNormalizerFactory()->getDocument();
+        $factory = $this->getNormalizerFactory();
+        $document = $factory->getDocument();
 
         $element = $document->createElementNS(
-            sprintf(self::XML_NAMESPACE_PATTERN, $this->getNormalizerFactory()->getSpec()->getVersion()),
-            'bom' // no namespace = default NS - so children w/o NS fall under this NS
+            sprintf(self::XML_NAMESPACE_PATTERN, $factory->getSpec()->getVersion()),
+            'bom' // no namespace = defaultNS - so children w/o NS fall under this NS
         );
         $this->simpleDomSetAttributes(
             $element,
@@ -56,6 +58,7 @@ class BomNormalizer extends AbstractNormalizer
         $this->simpleDomAppendChildren(
             $element,
             [
+                $this->normalizeMetaData($bom->getMetaData()),
                 $this->normalizeComponents($bom->getComponentRepository()),
                 // externalReferences
             ]
@@ -72,5 +75,20 @@ class BomNormalizer extends AbstractNormalizer
             $factory->getDocument()->createElement('components'),
             $factory->makeForComponentRepository()->normalize($components)
         );
+    }
+
+    private function normalizeMetaData(?MetaData $metaData): ?DOMElement
+    {
+        if (null === $metaData) {
+            return null;
+        }
+
+        $factory = $this->getNormalizerFactory();
+
+        if (false === $factory->getSpec()->supportsMetaData()) {
+            return null;
+        }
+
+        return $factory->makeForMetaData()->normalize($metaData);
     }
 }

@@ -27,6 +27,7 @@ use Composer\Package\PackageInterface;
 use Composer\Repository\LockArrayRepository;
 use CycloneDX\Composer\Factories\BomFactory;
 use CycloneDX\Composer\Factories\ComponentFactory;
+use CycloneDX\Core\Models\Tool;
 use CycloneDX\Core\Repositories\ComponentRepository;
 use PHPUnit\Framework\TestCase;
 
@@ -35,8 +36,22 @@ use PHPUnit\Framework\TestCase;
  */
 class BomFactoryTest extends TestCase
 {
+    public function testConstruct(): BomFactory
+    {
+        $componentFactory = $this->createMock(ComponentFactory::class);
+        $tool = $this->createMock(Tool::class);
+
+        $factory = new BomFactory($componentFactory, $tool);
+
+        self::assertSame($componentFactory, $factory->getComponentFactory());
+        self::assertSame($tool, $factory->getTool());
+
+        return $factory;
+    }
+
     /**
      * @uses \CycloneDX\Core\Models\Bom
+     * @uses \CycloneDX\Core\Models\MetaData
      */
     public function testMakeForPackageWithComponents(): void
     {

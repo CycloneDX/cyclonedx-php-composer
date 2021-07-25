@@ -64,4 +64,9 @@ final class Spec11 implements SpecInterface
     {
         return true;
     }
+
+    public function supportsMetaData(): bool
+    {
+        return false;
+    }
 }
