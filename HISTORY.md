@@ -1,26 +1,31 @@
 # Changelog
 
+All notable changes to this project will be documented in this file.
+
 ## unreleased
+
+## 3.3.0 - 2021-07-25
 
 * Changed
   * Core library
-    * SerializersGroups will skipp unsupported elements silently, instead of forwarding caught exceptions.  
+    * SerializersGroups will skip unsupported elements silently, instead of forwarding caught exceptions.  
       This results in an overall smoother SBoM generation process, just as intended.
 * Added
   * CLI via `composer make-bom`
-    * Will try to populate metadata of the SBoM.
+    * Will try to populate metadata of the SBoM result.
   * Core library
     * Added models for spec elements: `metadata`, `tools`, `tool`
-    * Added ability to serialize `metadata` to XML
-    * Added ability to serialize `metadata` to JSON
+    * Added ability to serialize `metadata` to XML.
+    * Added ability to serialize `metadata` to JSON.
 * Fixed
   * CLI via `composer make-bom`
     * composer packages of type `project` or `composer-plugin` 
       result as CycloneDX component of type `application`, was `library`.
 * Misc
+  * Updated demos/examples to reflect current state of SBoM results including metadata.
   * Split some tests to more fine-grained scenarios.
 
-## 3.2.0
+## 3.2.0 - 2021-07-19
 
 * Changed
   * CLI via `composer make-bom`
@@ -41,14 +46,14 @@
   * Refactored the plugin's internals.
   * Added more tests for internals.
 
-## 3.1.1
+## 3.1.1 - 2021-07-13
 
 * Misc
   * Updated some documentation.
   * Bumped some dev-tools.
   * Added normalizer for `composer.json` files.
 
-## 3.1.0
+## 3.1.0 - 2021-07-13
 
 * Added
   * CLI via `composer make-bom`
@@ -60,7 +65,7 @@
     in XML and JSON format
     for spec 1.1, 1.2, 1.3
 
-## 3.0.0
+## 3.0.0 - 2021-07-05
 
 * Breaking Changes
   * Now requires php `^7.3 || ^8.0`, was `^7.1 || ^8.0`.
@@ -98,11 +103,11 @@
   * Added [Psalm](https://psalm.dev/) & [PHP-CS-Fixer](https://cs.symfony.com/) to the CI chain and fixed all findings accordingly.
   * Added a demo run of the plugin to the CI chain.
 
-## 2.1.1
+## 2.1.1 - 2021-07-05
 
 * Maintenance release.
 
-## 2.1.0
+## 2.1.0 - 2021-05-24
 
 * Added
   * CLI got an option `--output-format` to decide the output format. (via [#80])  
@@ -115,19 +120,19 @@
 
 [#80]: https://github.com/CycloneDX/cyclonedx-php-composer/pull/80
 
-## 2.0.3
+## 2.0.3 - 2021-05-13
 
 * Misc
   * Removed `php-cs-fixer` config from dist release.
 
-## 2.0.2
+## 2.0.2 - 2021-05-13
 
 * Misc
   * Applied latest rules of `php-cs-fixer` to the code. (via [#78])
 
 [#78]: https://github.com/CycloneDX/cyclonedx-php-composer/pull/78
 
-## 2.0.1
+## 2.0.1 - 2021-04-11
 
 * Added
   * Support for slim dist-builds (via [#24])
@@ -144,7 +149,7 @@
 [#40]: https://github.com/CycloneDX/cyclonedx-php-composer/pull/40
 [#54]: https://github.com/CycloneDX/cyclonedx-php-composer/pull/54
 
-## 2.0
+## 2.0 - 2021-02-06
 
 * Breaking changes
   * Removed support for PHP < 7.1 (via [#17])
@@ -153,7 +158,7 @@
 
 [#17]: https://github.com/CycloneDX/cyclonedx-php-composer/pull/17
 
-## 1.2
+## 1.2 - 2021-02-06
 
 * Added
   * Initial JSON support (via [#16])
@@ -165,14 +170,14 @@
 [#15]: https://github.com/CycloneDX/cyclonedx-php-composer/pull/15
 [#11]: https://github.com/CycloneDX/cyclonedx-php-composer/pull/11
 
-## 1.1
+## 1.1 - 2020-11-25
 
 * Added
   * Support for composer v2 (via [#9])
 
 [#9]: https://github.com/CycloneDX/cyclonedx-php-composer/pull/9
 
-## 1.0.1
+## 1.0.1 - 2020-10-13
 
 * Fixed
   * Removed unneeded double forward slash from package URLs (via [#7])
@@ -182,6 +187,6 @@
 [#7]: https://github.com/CycloneDX/cyclonedx-php-composer/pull/7
 [#8]: https://github.com/CycloneDX/cyclonedx-php-composer/pull/8
 
-## 1.0
+## 1.0 - 2019-12-05
 
 Initial release.
