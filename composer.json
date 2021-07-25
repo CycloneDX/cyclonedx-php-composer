@@ -38,7 +38,7 @@
     "require-dev": {
         "ext-simplexml": "*",
         "composer/composer": "^2.0.13",
-        "phpunit/phpunit": "9.5.6",
+        "phpunit/phpunit": "9.5.7",
         "roave/security-advisories": "dev-latest"
     },
     "config": {
