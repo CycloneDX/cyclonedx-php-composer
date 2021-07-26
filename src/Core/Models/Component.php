@@ -25,6 +25,7 @@ namespace CycloneDX\Core\Models;
 
 use CycloneDX\Core\Enums\Classification;
 use CycloneDX\Core\Models\License\LicenseExpression;
+use CycloneDX\Core\Repositories\BomRefRepository;
 use CycloneDX\Core\Repositories\DisjunctiveLicenseRepository;
 use CycloneDX\Core\Repositories\HashRepository;
 use DomainException;
@@ -37,6 +38,16 @@ use UnexpectedValueException;
  */
 class Component
 {
+    /**
+     * An optional identifier which can be used to reference the component elsewhere in the BOM. Every bom-ref should be unique.
+     *
+     * Implementation is intended to prevent memory leaks.
+     * See ../../../docs/dev/decisions/BomDependencyDataModel.md
+     *
+     * @var BomRef
+     */
+    private $bomRef;
+
     /**
      * The name of the component. This will often be a shortened, single name
      * of the component.
@@ -57,6 +68,7 @@ class Component
      * Examples include: apache, org.apache.commons, and apache.org.
      *
      * @var string|null
+     * @psalm-var non-empty-string|null
      */
     private $group;
 
@@ -78,6 +90,7 @@ class Component
      * Specifies a description for the component.
      *
      * @var string|null
+     * @psalm-var non-empty-string|null
      */
     private $description;
 
@@ -106,6 +119,16 @@ class Component
     private $hashRepository;
 
     /**
+     * References to dependencies.
+     *
+     * Implementation is intended to prevent memory leaks.
+     * See ../../../docs/dev/decisions/BomDependencyDataModel.md
+     *
+     * @var BomRefRepository|null
+     */
+    private $dependenciesBomRefRepository;
+
+    /**
      * The component version. The version should ideally comply with semantic versioning
      * but is not enforced.
      *
@@ -113,6 +136,23 @@ class Component
      * @psalm-suppress PropertyNotSetInConstructor
      */
     private $version;
+
+    public function getBomRef(): BomRef
+    {
+        return $this->bomRef;
+    }
+
+    /**
+     * shorthand for `{@see getBomRef()}->{@see BomRef::setValue() setValue()}`.
+     *
+     * @return $this
+     */
+    public function setBomRefValue(?string $value): self
+    {
+        $this->bomRef->setValue($value);
+
+        return $this;
+    }
 
     public function getName(): string
     {
@@ -129,6 +169,9 @@ class Component
         return $this;
     }
 
+    /**
+     * @return non-empty-string|null
+     */
     public function getGroup(): ?string
     {
         return $this->group;
@@ -139,7 +182,9 @@ class Component
      */
     public function setGroup(?string $group): self
     {
-        $this->group = $group;
+        $this->group = '' === $group
+            ? null
+            : $group;
 
         return $this;
     }
@@ -180,7 +225,9 @@ class Component
      */
     public function setDescription(?string $description): self
     {
-        $this->description = $description;
+        $this->description = '' === $description
+            ? null
+            : $description;
 
         return $this;
     }
@@ -194,7 +241,7 @@ class Component
     }
 
     /**
-     * @param mixed|LicenseExpression|DisjunctiveLicenseRepository|null $license
+     * @param mixed $license
      * @psalm-assert LicenseExpression|DisjunctiveLicenseRepository|null $license
      *
      * @throws UnexpectedValueException
@@ -258,6 +305,9 @@ class Component
         return $this->packageUrl;
     }
 
+    /**
+     * @return $this
+     */
     public function setPackageUrl(?PackageUrl $purl): self
     {
         $this->packageUrl = $purl;
@@ -265,8 +315,23 @@ class Component
         return $this;
     }
 
+    public function getDependenciesBomRefRepository(): ?BomRefRepository
+    {
+        return $this->dependenciesBomRefRepository;
+    }
+
     /**
-     * @psalm-param Classification::*|string $type
+     * @return $this
+     */
+    public function setDependenciesBomRefRepository(?BomRefRepository $dependenciesBomRefRepository): self
+    {
+        $this->dependenciesBomRefRepository = $dependenciesBomRefRepository;
+
+        return $this;
+    }
+
+    /**
+     * @psalm-assert Classification::* $type
      *
      * @throws DomainException if type is unknown
      */
@@ -275,5 +340,12 @@ class Component
         $this->setType($type);
         $this->setName($name);
         $this->setVersion($version);
+        $this->bomRef = new BomRef();
+    }
+
+    public function __clone()
+    {
+        // bom ref must stay unique. a clone must have its own id!
+        $this->bomRef = clone $this->bomRef;
     }
 }

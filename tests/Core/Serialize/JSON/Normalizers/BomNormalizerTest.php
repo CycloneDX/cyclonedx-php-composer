@@ -29,6 +29,7 @@ use CycloneDX\Core\Repositories\ComponentRepository;
 use CycloneDX\Core\Serialize\JSON\NormalizerFactory;
 use CycloneDX\Core\Serialize\JSON\Normalizers\BomNormalizer;
 use CycloneDX\Core\Serialize\JSON\Normalizers\ComponentRepositoryNormalizer;
+use CycloneDX\Core\Serialize\JSON\Normalizers\DependenciesNormalizer;
 use CycloneDX\Core\Serialize\JSON\Normalizers\MetaDataNormalizer;
 use CycloneDX\Core\Spec\SpecInterface;
 use PHPUnit\Framework\TestCase;
@@ -235,6 +236,96 @@ class BomNormalizerTest extends TestCase
                 'components' => [],
             ],
             $got
+        );
+    }
+
+    public function testNormalizeDependencies(): void
+    {
+        $spec = $this->createConfiguredMock(
+            SpecInterface::class,
+            [
+                'getVersion' => '1.2',
+                'supportsDependencies' => true,
+            ]
+        );
+        $dependencyNormalizer = $this->createMock(DependenciesNormalizer::class);
+        $factory = $this->createConfiguredMock(
+            NormalizerFactory::class,
+            [
+                'getSpec' => $spec,
+                'makeForDependencies' => $dependencyNormalizer,
+            ]
+        );
+        $normalizer = new BomNormalizer($factory);
+        $bom = $this->createConfiguredMock(
+            Bom::class,
+            [
+                'getVersion' => 23,
+                'getMetaData' => $this->createStub(MetaData::class),
+            ]
+        );
+
+        $dependencyNormalizer->expects(self::once())
+            ->method('normalize')
+            ->with($bom)
+            ->willReturn(['FakeDependencies' => 'dummy']);
+
+        $actual = $normalizer->normalize($bom);
+
+        self::assertSame(
+            [
+                'bomFormat' => 'CycloneDX',
+                'specVersion' => '1.2',
+                'version' => 23,
+                'components' => [],
+                'dependencies' => ['FakeDependencies' => 'dummy'],
+            ],
+            $actual
+        );
+    }
+
+    public function testNormalizeDependenciesOmitWhenEmpty(): void
+    {
+        $spec = $this->createConfiguredMock(
+            SpecInterface::class,
+            [
+                'getVersion' => '1.2',
+                'supportsDependencies' => true,
+            ]
+        );
+        $dependencyNormalizer = $this->createMock(DependenciesNormalizer::class);
+        $factory = $this->createConfiguredMock(
+            NormalizerFactory::class,
+            [
+                'getSpec' => $spec,
+                'makeForDependencies' => $dependencyNormalizer,
+            ]
+        );
+        $normalizer = new BomNormalizer($factory);
+        $bom = $this->createConfiguredMock(
+            Bom::class,
+            [
+                'getVersion' => 23,
+                'getMetaData' => $this->createStub(MetaData::class),
+            ]
+        );
+
+        $dependencyNormalizer->expects(self::once())
+            ->method('normalize')
+            ->with($bom)
+            ->willReturn([]);
+
+        $actual = $normalizer->normalize($bom);
+
+        self::assertSame(
+            [
+                'bomFormat' => 'CycloneDX',
+                'specVersion' => '1.2',
+                'version' => 23,
+                'components' => [],
+                // 'dependencies' is unset,
+            ],
+            $actual
         );
     }
 }

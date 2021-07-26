@@ -21,33 +21,41 @@ declare(strict_types=1);
  * Copyright (c) Steve Springett. All Rights Reserved.
  */
 
-namespace CycloneDX\Core\Helpers;
-
-use CycloneDX\Core\Spec\SpecInterface;
+namespace CycloneDX\Core\Models;
 
 /**
- * @internal
+ * An identifier which can be used to reference objects elsewhere in the BOM.
+ *
+ * Implementation is intended to prevent memory leaks.
+ * See ../../../docs/dev/decisions/BomDependencyDataModel.md
+ *
+ * Class is currently final, to enforce proper usage.
  *
  * @author jkowalleck
  */
-trait HasSpecTrait
+final class BomRef
 {
     /**
-     * @var SpecInterface
+     * @var string|null
      */
-    private $spec;
+    private $value;
 
-    public function getSpec(): SpecInterface
+    public function __construct(?string $value = null)
     {
-        return $this->spec;
+        $this->value = $value;
+    }
+
+    public function getValue(): ?string
+    {
+        return $this->value;
     }
 
     /**
      * @return $this
      */
-    public function setSpec(SpecInterface $spec): self
+    public function setValue(?string $value): self
     {
-        $this->spec = $spec;
+        $this->value = $value;
 
         return $this;
     }

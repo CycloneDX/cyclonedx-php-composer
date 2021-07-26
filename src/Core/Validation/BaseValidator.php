@@ -23,22 +23,39 @@ declare(strict_types=1);
 
 namespace CycloneDX\Core\Validation;
 
-use CycloneDX\Core\Helpers\HasSpecTrait;
 use CycloneDX\Core\Spec\SpecInterface;
 use CycloneDX\Core\Spec\Version;
 
 /**
- * @internal
- *
  * @author jkowalleck
  */
-abstract class AbstractValidator implements ValidatorInterface
+abstract class BaseValidator implements ValidatorInterface
 {
-    use HasSpecTrait;
+    /**
+     * @var SpecInterface
+     */
+    private $spec;
 
     public function __construct(SpecInterface $spec)
     {
         $this->spec = $spec;
+    }
+
+    public function getSpec(): SpecInterface
+    {
+        return $this->spec;
+    }
+
+    /**
+     * @deprecated
+     *
+     * @return $this
+     */
+    public function setSpec(SpecInterface $spec): self
+    {
+        $this->spec = $spec;
+
+        return $this;
     }
 
     /**

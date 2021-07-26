@@ -73,7 +73,10 @@ class PluginTest extends TestCase
     {
         return json_decode(
             file_get_contents(self::COMPOSER_JSON_FILE_PATH),
-            true, 512, \JSON_THROW_ON_ERROR);
+            true,
+            512,
+            \JSON_THROW_ON_ERROR
+        );
     }
 
     /**
@@ -110,15 +113,15 @@ class PluginTest extends TestCase
     /**
      * @depends testPluginIsCapableOfCommand
      *
-     * @uses \CycloneDX\Composer\MakeBom\Command
-     * @uses \CycloneDX\Composer\MakeBom\Options
-     * @uses \CycloneDX\Composer\MakeBom\Factory
-     * @uses \CycloneDX\Composer\Factories\BomFactory
-     * @uses \CycloneDX\Composer\Factories\ComponentFactory
-     * @uses \CycloneDX\Core\Factories\LicenseFactory
-     * @uses \CycloneDX\Core\Spdx\License
-     * @uses \CycloneDX\Core\Models\Tool
-     * @uses \CycloneDX\Composer\ToolUpdater
+     * @uses    \CycloneDX\Composer\MakeBom\Command
+     * @uses    \CycloneDX\Composer\MakeBom\Options
+     * @uses    \CycloneDX\Composer\MakeBom\Factory
+     * @uses    \CycloneDX\Composer\Builders\BomBuilder
+     * @uses    \CycloneDX\Composer\Builders\ComponentBuilder
+     * @uses    \CycloneDX\Core\Factories\LicenseFactory
+     * @uses    \CycloneDX\Core\Spdx\License
+     * @uses    \CycloneDX\Core\Models\Tool
+     * @uses    \CycloneDX\Composer\ToolUpdater
      */
     public function testMakeBomCommandIsRegistered(CommandProvider $commandProvider): void
     {
@@ -130,5 +133,50 @@ class PluginTest extends TestCase
         $command = reset($commands);
         self::assertInstanceOf(Command::class, $command);
         self::assertSame('make-bom', $command->getName());
+    }
+
+    /**
+     * @depends testPluginImplementsRequiredInterfaces
+     */
+    public function testActivatePlugin(PluginInterface $plugin): PluginInterface
+    {
+        $plugin->activate(
+            $this->createMock(\Composer\Composer::class),
+            $this->createMock(\Composer\IO\IOInterface::class),
+        );
+
+        self::assertTrue(true, 'no tests at the moment');
+
+        return $plugin;
+    }
+
+    /**
+     * @depends testActivatePlugin
+     */
+    public function testDeactivatePlugin(PluginInterface $plugin): PluginInterface
+    {
+        $plugin->deactivate(
+            $this->createMock(\Composer\Composer::class),
+            $this->createMock(\Composer\IO\IOInterface::class),
+        );
+
+        self::assertTrue(true, 'no tests at the moment');
+
+        return $plugin;
+    }
+
+    /**
+     * @depends testDeactivatePlugin
+     */
+    public function testUninstallPlugin(PluginInterface $plugin): PluginInterface
+    {
+        $plugin->uninstall(
+            $this->createMock(\Composer\Composer::class),
+            $this->createMock(\Composer\IO\IOInterface::class),
+        );
+
+        self::assertTrue(true, 'no tests at the moment');
+
+        return $plugin;
     }
 }

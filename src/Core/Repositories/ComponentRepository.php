@@ -26,6 +26,8 @@ namespace CycloneDX\Core\Repositories;
 use CycloneDX\Core\Models\Component;
 
 /**
+ * Unique list of {@see \CycloneDX\Core\Models\Component}.
+ *
  * @author jkowalleck
  */
 class ComponentRepository implements \Countable
@@ -46,7 +48,12 @@ class ComponentRepository implements \Countable
      */
     public function addComponent(Component ...$components): self
     {
-        array_push($this->components, ...array_values($components));
+        foreach ($components as $component) {
+            if (\in_array($component, $this->components, true)) {
+                continue;
+            }
+            $this->components[] = $component;
+        }
 
         return $this;
     }
@@ -63,5 +70,26 @@ class ComponentRepository implements \Countable
     public function count(): int
     {
         return \count($this->components);
+    }
+
+    /**
+     * @return Component[]
+     * @psalm-return list<Component>
+     */
+    public function findComponents(string $name, ?string $group): array
+    {
+        if ('' === $group) {
+            $group = null;
+        }
+
+        return array_values(
+            array_filter(
+                $this->components,
+                static function (Component $component) use ($name, $group): bool {
+                    return $component->getName() === $name
+                        && $component->getGroup() === $group;
+                }
+            )
+        );
     }
 }

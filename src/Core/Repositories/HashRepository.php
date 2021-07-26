@@ -27,6 +27,8 @@ use CycloneDX\Core\Enums\HashAlgorithm;
 use DomainException;
 
 /**
+ * Dictionary of {@see \CycloneDX\Core\Enums\HashAlgorithm} => $content.
+ *
  * @author jkowalleck
  */
 class HashRepository implements \Countable

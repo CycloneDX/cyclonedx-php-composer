@@ -8,7 +8,7 @@
         <version><![CDATA[dev-issue_14]]></version>
       </tool>
     </tools>
-    <component type="application">
+    <component type="application" bom-ref="pkg:composer/cyclonedx/cyclonedx-php-composer-demo@dev-master">
       <group><![CDATA[cyclonedx]]></group>
       <name><![CDATA[cyclonedx-php-composer-demo]]></name>
       <version><![CDATA[dev-master]]></version>
@@ -17,7 +17,7 @@
     </component>
   </metadata>
   <components>
-    <component type="library">
+    <component type="library" bom-ref="pkg:composer/doctrine/annotations@1.13.1">
       <group><![CDATA[doctrine]]></group>
       <name><![CDATA[annotations]]></name>
       <version><![CDATA[1.13.1]]></version>
@@ -29,7 +29,7 @@
       </licenses>
       <purl><![CDATA[pkg:composer/doctrine/annotations@1.13.1]]></purl>
     </component>
-    <component type="library">
+    <component type="library" bom-ref="pkg:composer/doctrine/cache@2.1.1">
       <group><![CDATA[doctrine]]></group>
       <name><![CDATA[cache]]></name>
       <version><![CDATA[2.1.1]]></version>
@@ -41,7 +41,7 @@
       </licenses>
       <purl><![CDATA[pkg:composer/doctrine/cache@2.1.1]]></purl>
     </component>
-    <component type="library">
+    <component type="library" bom-ref="pkg:composer/doctrine/collections@1.6.7">
       <group><![CDATA[doctrine]]></group>
       <name><![CDATA[collections]]></name>
       <version><![CDATA[1.6.7]]></version>
@@ -53,7 +53,7 @@
       </licenses>
       <purl><![CDATA[pkg:composer/doctrine/collections@1.6.7]]></purl>
     </component>
-    <component type="library">
+    <component type="library" bom-ref="pkg:composer/doctrine/deprecations@0.5.3">
       <group><![CDATA[doctrine]]></group>
       <name><![CDATA[deprecations]]></name>
       <version><![CDATA[0.5.3]]></version>
@@ -65,7 +65,7 @@
       </licenses>
       <purl><![CDATA[pkg:composer/doctrine/deprecations@0.5.3]]></purl>
     </component>
-    <component type="library">
+    <component type="library" bom-ref="pkg:composer/doctrine/event-manager@1.1.1">
       <group><![CDATA[doctrine]]></group>
       <name><![CDATA[event-manager]]></name>
       <version><![CDATA[1.1.1]]></version>
@@ -77,7 +77,7 @@
       </licenses>
       <purl><![CDATA[pkg:composer/doctrine/event-manager@1.1.1]]></purl>
     </component>
-    <component type="library">
+    <component type="library" bom-ref="pkg:composer/doctrine/lexer@1.2.1">
       <group><![CDATA[doctrine]]></group>
       <name><![CDATA[lexer]]></name>
       <version><![CDATA[1.2.1]]></version>
@@ -89,7 +89,7 @@
       </licenses>
       <purl><![CDATA[pkg:composer/doctrine/lexer@1.2.1]]></purl>
     </component>
-    <component type="library">
+    <component type="library" bom-ref="pkg:composer/doctrine/persistence@2.2.1">
       <group><![CDATA[doctrine]]></group>
       <name><![CDATA[persistence]]></name>
       <version><![CDATA[2.2.1]]></version>
@@ -101,7 +101,7 @@
       </licenses>
       <purl><![CDATA[pkg:composer/doctrine/persistence@2.2.1]]></purl>
     </component>
-    <component type="library">
+    <component type="library" bom-ref="pkg:composer/friendsofphp/proxy-manager-lts@1.0.5">
       <group><![CDATA[friendsofphp]]></group>
       <name><![CDATA[proxy-manager-lts]]></name>
       <version><![CDATA[1.0.5]]></version>
@@ -113,7 +113,7 @@
       </licenses>
       <purl><![CDATA[pkg:composer/friendsofphp/proxy-manager-lts@1.0.5]]></purl>
     </component>
-    <component type="library">
+    <component type="library" bom-ref="pkg:composer/laminas/laminas-code@4.4.2">
       <group><![CDATA[laminas]]></group>
       <name><![CDATA[laminas-code]]></name>
       <version><![CDATA[4.4.2]]></version>
@@ -125,7 +125,7 @@
       </licenses>
       <purl><![CDATA[pkg:composer/laminas/laminas-code@4.4.2]]></purl>
     </component>
-    <component type="library">
+    <component type="library" bom-ref="pkg:composer/psr/cache@1.0.1">
       <group><![CDATA[psr]]></group>
       <name><![CDATA[cache]]></name>
       <version><![CDATA[1.0.1]]></version>
@@ -137,7 +137,7 @@
       </licenses>
       <purl><![CDATA[pkg:composer/psr/cache@1.0.1]]></purl>
     </component>
-    <component type="library">
+    <component type="library" bom-ref="pkg:composer/psr/container@1.1.1">
       <group><![CDATA[psr]]></group>
       <name><![CDATA[container]]></name>
       <version><![CDATA[1.1.1]]></version>
@@ -149,7 +149,7 @@
       </licenses>
       <purl><![CDATA[pkg:composer/psr/container@1.1.1]]></purl>
     </component>
-    <component type="library">
+    <component type="library" bom-ref="pkg:composer/psr/event-dispatcher@1.0.0">
       <group><![CDATA[psr]]></group>
       <name><![CDATA[event-dispatcher]]></name>
       <version><![CDATA[1.0.0]]></version>
@@ -161,7 +161,7 @@
       </licenses>
       <purl><![CDATA[pkg:composer/psr/event-dispatcher@1.0.0]]></purl>
     </component>
-    <component type="library">
+    <component type="library" bom-ref="pkg:composer/psr/link@1.0.0">
       <group><![CDATA[psr]]></group>
       <name><![CDATA[link]]></name>
       <version><![CDATA[1.0.0]]></version>
@@ -173,7 +173,7 @@
       </licenses>
       <purl><![CDATA[pkg:composer/psr/link@1.0.0]]></purl>
     </component>
-    <component type="library">
+    <component type="library" bom-ref="pkg:composer/psr/log@1.1.4">
       <group><![CDATA[psr]]></group>
       <name><![CDATA[log]]></name>
       <version><![CDATA[1.1.4]]></version>
@@ -185,7 +185,7 @@
       </licenses>
       <purl><![CDATA[pkg:composer/psr/log@1.1.4]]></purl>
     </component>
-    <component type="library">
+    <component type="library" bom-ref="pkg:composer/symfony/contracts@2.4.0">
       <group><![CDATA[symfony]]></group>
       <name><![CDATA[contracts]]></name>
       <version><![CDATA[2.4.0]]></version>
@@ -197,7 +197,7 @@
       </licenses>
       <purl><![CDATA[pkg:composer/symfony/contracts@2.4.0]]></purl>
     </component>
-    <component type="library">
+    <component type="library" bom-ref="pkg:composer/symfony/polyfill-ctype@1.23.0">
       <group><![CDATA[symfony]]></group>
       <name><![CDATA[polyfill-ctype]]></name>
       <version><![CDATA[1.23.0]]></version>
@@ -209,7 +209,7 @@
       </licenses>
       <purl><![CDATA[pkg:composer/symfony/polyfill-ctype@1.23.0]]></purl>
     </component>
-    <component type="library">
+    <component type="library" bom-ref="pkg:composer/symfony/polyfill-intl-grapheme@1.23.0">
       <group><![CDATA[symfony]]></group>
       <name><![CDATA[polyfill-intl-grapheme]]></name>
       <version><![CDATA[1.23.0]]></version>
@@ -221,7 +221,7 @@
       </licenses>
       <purl><![CDATA[pkg:composer/symfony/polyfill-intl-grapheme@1.23.0]]></purl>
     </component>
-    <component type="library">
+    <component type="library" bom-ref="pkg:composer/symfony/polyfill-intl-icu@1.23.0">
       <group><![CDATA[symfony]]></group>
       <name><![CDATA[polyfill-intl-icu]]></name>
       <version><![CDATA[1.23.0]]></version>
@@ -233,7 +233,7 @@
       </licenses>
       <purl><![CDATA[pkg:composer/symfony/polyfill-intl-icu@1.23.0]]></purl>
     </component>
-    <component type="library">
+    <component type="library" bom-ref="pkg:composer/symfony/polyfill-intl-idn@1.23.0">
       <group><![CDATA[symfony]]></group>
       <name><![CDATA[polyfill-intl-idn]]></name>
       <version><![CDATA[1.23.0]]></version>
@@ -245,7 +245,7 @@
       </licenses>
       <purl><![CDATA[pkg:composer/symfony/polyfill-intl-idn@1.23.0]]></purl>
     </component>
-    <component type="library">
+    <component type="library" bom-ref="pkg:composer/symfony/polyfill-intl-normalizer@1.23.0">
       <group><![CDATA[symfony]]></group>
       <name><![CDATA[polyfill-intl-normalizer]]></name>
       <version><![CDATA[1.23.0]]></version>
@@ -257,7 +257,7 @@
       </licenses>
       <purl><![CDATA[pkg:composer/symfony/polyfill-intl-normalizer@1.23.0]]></purl>
     </component>
-    <component type="library">
+    <component type="library" bom-ref="pkg:composer/symfony/polyfill-mbstring@1.23.0">
       <group><![CDATA[symfony]]></group>
       <name><![CDATA[polyfill-mbstring]]></name>
       <version><![CDATA[1.23.0]]></version>
@@ -269,7 +269,7 @@
       </licenses>
       <purl><![CDATA[pkg:composer/symfony/polyfill-mbstring@1.23.0]]></purl>
     </component>
-    <component type="library">
+    <component type="library" bom-ref="pkg:composer/symfony/polyfill-php72@1.23.0">
       <group><![CDATA[symfony]]></group>
       <name><![CDATA[polyfill-php72]]></name>
       <version><![CDATA[1.23.0]]></version>
@@ -281,7 +281,7 @@
       </licenses>
       <purl><![CDATA[pkg:composer/symfony/polyfill-php72@1.23.0]]></purl>
     </component>
-    <component type="library">
+    <component type="library" bom-ref="pkg:composer/symfony/polyfill-php73@1.23.0">
       <group><![CDATA[symfony]]></group>
       <name><![CDATA[polyfill-php73]]></name>
       <version><![CDATA[1.23.0]]></version>
@@ -293,7 +293,7 @@
       </licenses>
       <purl><![CDATA[pkg:composer/symfony/polyfill-php73@1.23.0]]></purl>
     </component>
-    <component type="library">
+    <component type="library" bom-ref="pkg:composer/symfony/polyfill-php80@1.23.0">
       <group><![CDATA[symfony]]></group>
       <name><![CDATA[polyfill-php80]]></name>
       <version><![CDATA[1.23.0]]></version>
@@ -305,7 +305,7 @@
       </licenses>
       <purl><![CDATA[pkg:composer/symfony/polyfill-php80@1.23.0]]></purl>
     </component>
-    <component type="library">
+    <component type="library" bom-ref="pkg:composer/symfony/polyfill-php81@1.23.0">
       <group><![CDATA[symfony]]></group>
       <name><![CDATA[polyfill-php81]]></name>
       <version><![CDATA[1.23.0]]></version>
@@ -317,7 +317,7 @@
       </licenses>
       <purl><![CDATA[pkg:composer/symfony/polyfill-php81@1.23.0]]></purl>
     </component>
-    <component type="library">
+    <component type="library" bom-ref="pkg:composer/symfony/polyfill-uuid@1.23.0">
       <group><![CDATA[symfony]]></group>
       <name><![CDATA[polyfill-uuid]]></name>
       <version><![CDATA[1.23.0]]></version>
@@ -329,7 +329,7 @@
       </licenses>
       <purl><![CDATA[pkg:composer/symfony/polyfill-uuid@1.23.0]]></purl>
     </component>
-    <component type="library">
+    <component type="library" bom-ref="pkg:composer/symfony/symfony@5.3.3">
       <group><![CDATA[symfony]]></group>
       <name><![CDATA[symfony]]></name>
       <version><![CDATA[5.3.3]]></version>
@@ -341,7 +341,7 @@
       </licenses>
       <purl><![CDATA[pkg:composer/symfony/symfony@5.3.3]]></purl>
     </component>
-    <component type="library">
+    <component type="library" bom-ref="pkg:composer/twig/twig@3.3.2">
       <group><![CDATA[twig]]></group>
       <name><![CDATA[twig]]></name>
       <version><![CDATA[3.3.2]]></version>
@@ -354,4 +354,80 @@
       <purl><![CDATA[pkg:composer/twig/twig@3.3.2]]></purl>
     </component>
   </components>
+  <dependencies>
+    <dependency ref="pkg:composer/doctrine/annotations@1.13.1">
+      <dependency ref="pkg:composer/doctrine/lexer@1.2.1"/>
+      <dependency ref="pkg:composer/psr/cache@1.0.1"/>
+    </dependency>
+    <dependency ref="pkg:composer/doctrine/cache@2.1.1"/>
+    <dependency ref="pkg:composer/doctrine/collections@1.6.7"/>
+    <dependency ref="pkg:composer/doctrine/deprecations@0.5.3"/>
+    <dependency ref="pkg:composer/doctrine/event-manager@1.1.1"/>
+    <dependency ref="pkg:composer/doctrine/lexer@1.2.1"/>
+    <dependency ref="pkg:composer/doctrine/persistence@2.2.1">
+      <dependency ref="pkg:composer/doctrine/annotations@1.13.1"/>
+      <dependency ref="pkg:composer/doctrine/cache@2.1.1"/>
+      <dependency ref="pkg:composer/doctrine/collections@1.6.7"/>
+      <dependency ref="pkg:composer/doctrine/deprecations@0.5.3"/>
+      <dependency ref="pkg:composer/doctrine/event-manager@1.1.1"/>
+      <dependency ref="pkg:composer/psr/cache@1.0.1"/>
+    </dependency>
+    <dependency ref="pkg:composer/friendsofphp/proxy-manager-lts@1.0.5">
+      <dependency ref="pkg:composer/laminas/laminas-code@4.4.2"/>
+    </dependency>
+    <dependency ref="pkg:composer/laminas/laminas-code@4.4.2"/>
+    <dependency ref="pkg:composer/psr/cache@1.0.1"/>
+    <dependency ref="pkg:composer/psr/container@1.1.1"/>
+    <dependency ref="pkg:composer/psr/event-dispatcher@1.0.0"/>
+    <dependency ref="pkg:composer/psr/link@1.0.0"/>
+    <dependency ref="pkg:composer/psr/log@1.1.4"/>
+    <dependency ref="pkg:composer/symfony/contracts@2.4.0">
+      <dependency ref="pkg:composer/psr/cache@1.0.1"/>
+      <dependency ref="pkg:composer/psr/container@1.1.1"/>
+      <dependency ref="pkg:composer/psr/event-dispatcher@1.0.0"/>
+    </dependency>
+    <dependency ref="pkg:composer/symfony/polyfill-ctype@1.23.0"/>
+    <dependency ref="pkg:composer/symfony/polyfill-intl-grapheme@1.23.0"/>
+    <dependency ref="pkg:composer/symfony/polyfill-intl-icu@1.23.0"/>
+    <dependency ref="pkg:composer/symfony/polyfill-intl-idn@1.23.0">
+      <dependency ref="pkg:composer/symfony/polyfill-intl-normalizer@1.23.0"/>
+      <dependency ref="pkg:composer/symfony/polyfill-php72@1.23.0"/>
+    </dependency>
+    <dependency ref="pkg:composer/symfony/polyfill-intl-normalizer@1.23.0"/>
+    <dependency ref="pkg:composer/symfony/polyfill-mbstring@1.23.0"/>
+    <dependency ref="pkg:composer/symfony/polyfill-php72@1.23.0"/>
+    <dependency ref="pkg:composer/symfony/polyfill-php73@1.23.0"/>
+    <dependency ref="pkg:composer/symfony/polyfill-php80@1.23.0"/>
+    <dependency ref="pkg:composer/symfony/polyfill-php81@1.23.0"/>
+    <dependency ref="pkg:composer/symfony/polyfill-uuid@1.23.0"/>
+    <dependency ref="pkg:composer/symfony/symfony@5.3.3">
+      <dependency ref="pkg:composer/doctrine/event-manager@1.1.1"/>
+      <dependency ref="pkg:composer/doctrine/persistence@2.2.1"/>
+      <dependency ref="pkg:composer/friendsofphp/proxy-manager-lts@1.0.5"/>
+      <dependency ref="pkg:composer/psr/cache@1.0.1"/>
+      <dependency ref="pkg:composer/psr/container@1.1.1"/>
+      <dependency ref="pkg:composer/psr/event-dispatcher@1.0.0"/>
+      <dependency ref="pkg:composer/psr/link@1.0.0"/>
+      <dependency ref="pkg:composer/psr/log@1.1.4"/>
+      <dependency ref="pkg:composer/symfony/contracts@2.4.0"/>
+      <dependency ref="pkg:composer/symfony/polyfill-ctype@1.23.0"/>
+      <dependency ref="pkg:composer/symfony/polyfill-intl-grapheme@1.23.0"/>
+      <dependency ref="pkg:composer/symfony/polyfill-intl-icu@1.23.0"/>
+      <dependency ref="pkg:composer/symfony/polyfill-intl-idn@1.23.0"/>
+      <dependency ref="pkg:composer/symfony/polyfill-intl-normalizer@1.23.0"/>
+      <dependency ref="pkg:composer/symfony/polyfill-mbstring@1.23.0"/>
+      <dependency ref="pkg:composer/symfony/polyfill-php73@1.23.0"/>
+      <dependency ref="pkg:composer/symfony/polyfill-php80@1.23.0"/>
+      <dependency ref="pkg:composer/symfony/polyfill-php81@1.23.0"/>
+      <dependency ref="pkg:composer/symfony/polyfill-uuid@1.23.0"/>
+      <dependency ref="pkg:composer/twig/twig@3.3.2"/>
+    </dependency>
+    <dependency ref="pkg:composer/twig/twig@3.3.2">
+      <dependency ref="pkg:composer/symfony/polyfill-ctype@1.23.0"/>
+      <dependency ref="pkg:composer/symfony/polyfill-mbstring@1.23.0"/>
+    </dependency>
+    <dependency ref="pkg:composer/cyclonedx/cyclonedx-php-composer-demo@dev-master">
+      <dependency ref="pkg:composer/symfony/symfony@5.3.3"/>
+    </dependency>
+  </dependencies>
 </bom>

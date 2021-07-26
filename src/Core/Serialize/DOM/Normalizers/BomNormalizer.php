@@ -55,11 +55,13 @@ class BomNormalizer extends AbstractNormalizer
                 // serialNumber
             ]
         );
+
         $this->simpleDomAppendChildren(
             $element,
             [
                 $this->normalizeMetaData($bom->getMetaData()),
                 $this->normalizeComponents($bom->getComponentRepository()),
+                $this->normalizeDependencies($bom),
                 // externalReferences
             ]
         );
@@ -90,5 +92,23 @@ class BomNormalizer extends AbstractNormalizer
         }
 
         return $factory->makeForMetaData()->normalize($metaData);
+    }
+
+    private function normalizeDependencies(Bom $bom): ?DOMElement
+    {
+        $factory = $this->getNormalizerFactory();
+
+        if (false === $factory->getSpec()->supportsDependencies()) {
+            return null;
+        }
+
+        $deps = $factory->makeForDependencies()->normalize($bom);
+
+        return empty($deps)
+            ? null
+            : $this->simpleDomAppendChildren(
+                $factory->getDocument()->createElement('dependencies'),
+                $deps
+            );
     }
 }

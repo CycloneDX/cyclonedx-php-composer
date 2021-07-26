@@ -32,31 +32,12 @@ use PHPUnit\Framework\TestCase;
  */
 class ToolRepositoryTest extends TestCase
 {
-    public function testAddAndGetTool(): void
+    public function testEmptyConstructor(): void
     {
-        $tool1 = $this->createStub(Tool::class);
-        $tool2 = $this->createStub(Tool::class);
-        $tool3 = $this->createStub(Tool::class);
+        $repo = new ToolRepository();
 
-        $repo = new ToolRepository($tool1);
-        $repo->addTool($tool2, $tool3);
-        $got = $repo->getTools();
-
-        self::assertCount(3, $got);
-        self::assertContains($tool1, $got);
-        self::assertContains($tool2, $got);
-        self::assertContains($tool3, $got);
-    }
-
-    public function testCount(): void
-    {
-        $tool1 = $this->createStub(Tool::class);
-        $tool2 = $this->createStub(Tool::class);
-
-        $repo = new ToolRepository($tool1);
-        $repo->addTool($tool2);
-
-        self::assertSame(2, $repo->count());
+        self::assertCount(0, $repo);
+        self::assertSame([], $repo->getTools());
     }
 
     public function testConstructAndGet(): void
@@ -64,11 +45,28 @@ class ToolRepositoryTest extends TestCase
         $tool1 = $this->createStub(Tool::class);
         $tool2 = $this->createStub(Tool::class);
 
-        $repo = new ToolRepository($tool1, $tool2);
-        $got = $repo->getTools();
+        $repo = new ToolRepository($tool1, $tool2, $tool1, $tool2);
 
-        self::assertCount(2, $got);
-        self::assertContains($tool1, $got);
-        self::assertContains($tool2, $got);
+        self::assertCount(2, $repo);
+        self::assertCount(2, $repo->getTools());
+        self::assertContains($tool1, $repo->getTools());
+        self::assertContains($tool2, $repo->getTools());
+    }
+
+    public function testAddAndGetTool(): void
+    {
+        $tool1 = $this->createStub(Tool::class);
+        $tool2 = $this->createStub(Tool::class);
+        $tool3 = $this->createStub(Tool::class);
+        $repo = new ToolRepository($tool1, $tool2);
+
+        $actual = $repo->addTool($tool2, $tool3, $tool3);
+
+        self::assertSame($repo, $actual);
+        self::assertCount(3, $repo);
+        self::assertCount(3, $repo->getTools());
+        self::assertContains($tool1, $repo->getTools());
+        self::assertContains($tool2, $repo->getTools());
+        self::assertContains($tool3, $repo->getTools());
     }
 }

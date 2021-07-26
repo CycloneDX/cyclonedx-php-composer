@@ -4,6 +4,27 @@ All notable changes to this project will be documented in this file.
 
 ## unreleased
 
+* Changed
+  * Core library
+    * Some repository data-types are lists of unique items, so no duplicates are kept.   
+      Affected classes/data-types : 
+      * `ComponentRepository`
+      * `DisjunctiveLicenseRepository`
+      * `ToolRepository`
+* Added 
+  * CLI via `composer make-bom`
+    * Will try to populate dependencies of the SBoM result.
+  * Core library
+    * Added `BomRef` model to link bom elements in general.   
+      Added `BomRefRepository` data type as a collection of unique `BomRef`.
+    * Added bomRef to `Component` model to link components as dependencies.   
+      Added dependencies to `Component` model.
+    * Added ability to serialize `dependencies` to XML.
+    * Added ability to serialize `dependencies` to JSON.
+* Misc
+  * Moved development docs to [`docs/dev/`](docs/dev).
+  * Refactored the plugin's internals.
+
 ## 3.3.1 - 2021-07-29
 
 * Fixed

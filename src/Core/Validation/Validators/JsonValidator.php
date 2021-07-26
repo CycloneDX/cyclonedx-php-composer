@@ -25,7 +25,7 @@ namespace CycloneDX\Core\Validation\Validators;
 
 use CycloneDX\Core\Resources;
 use CycloneDX\Core\Spec\Version;
-use CycloneDX\Core\Validation\AbstractValidator;
+use CycloneDX\Core\Validation\BaseValidator;
 use CycloneDX\Core\Validation\Errors\JsonValidationError;
 use CycloneDX\Core\Validation\Exceptions\FailedLoadingSchemaException;
 use CycloneDX\Core\Validation\Helpers\JsonSchemaRemoteRefProviderForSnapshotResources;
@@ -37,7 +37,7 @@ use Swaggest\JsonSchema;
 /**
  * @author jkowalleck
  */
-class JsonValidator extends AbstractValidator
+class JsonValidator extends BaseValidator
 {
     /**
      * {@inheritdoc}

@@ -132,4 +132,9 @@ class NormalizerFactory
     {
         return new Normalizers\ToolNormalizer($this);
     }
+
+    public function makeForDependencies(): Normalizers\DependenciesNormalizer
+    {
+        return new Normalizers\DependenciesNormalizer($this);
+    }
 }

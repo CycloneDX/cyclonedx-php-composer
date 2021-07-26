@@ -21,18 +21,17 @@ declare(strict_types=1);
  * Copyright (c) Steve Springett. All Rights Reserved.
  */
 
-namespace CycloneDX\Composer\Factories;
+namespace CycloneDX\Composer\Builders;
 
-use Composer\Package\AliasPackage;
 use Composer\Package\CompletePackageInterface;
 use Composer\Package\PackageInterface;
+use CycloneDX\Composer\Factories\LicenseFactory;
+use CycloneDX\Composer\Factories\PackageUrlFactory;
 use CycloneDX\Core\Enums\Classification;
 use CycloneDX\Core\Enums\HashAlgorithm;
 use CycloneDX\Core\Models\Component;
-use CycloneDX\Core\Repositories\ComponentRepository;
 use CycloneDX\Core\Repositories\HashRepository;
 use DomainException;
-use PackageUrl\PackageUrl;
 use UnexpectedValueException;
 
 /**
@@ -40,20 +39,20 @@ use UnexpectedValueException;
  *
  * @author jkowalleck
  */
-class ComponentFactory
+class ComponentBuilder
 {
-    /**
-     * purl type for composer packages,
-     * as defined in {@link https://github.com/package-url/purl-spec/blob/master/PURL-TYPES.rst the PURL specs}.
-     */
-    public const PURL_TYPE = 'composer';
-
     /** @var LicenseFactory */
     private $licenseFactory;
 
-    public function __construct(LicenseFactory $licenseFactory)
-    {
+    /** @var PackageUrlFactory */
+    private $packageUrlFactory;
+
+    public function __construct(
+        LicenseFactory $licenseFactory,
+        PackageUrlFactory $packageUrlFactory
+    ) {
         $this->licenseFactory = $licenseFactory;
+        $this->packageUrlFactory = $packageUrlFactory;
     }
 
     public function getLicenseFactory(): LicenseFactory
@@ -61,38 +60,9 @@ class ComponentFactory
         return $this->licenseFactory;
     }
 
-    /**
-     * @return $this
-     */
-    public function setLicenseFactory(LicenseFactory $licenseFactory): self
+    public function getPackageUrlFactory(): PackageUrlFactory
     {
-        $this->licenseFactory = $licenseFactory;
-
-        return $this;
-    }
-
-    /**
-     * @param PackageInterface[] $packages
-     *
-     * @throws UnexpectedValueException if the given package does not provide a name or version
-     */
-    public function makeFromPackages(array $packages): ?ComponentRepository
-    {
-        if (0 === \count($packages)) {
-            return null;
-        }
-
-        $components = array_map(
-            [$this, 'makeFromPackage'],
-            array_filter(
-                $packages,
-                static function ($p): bool {
-                    return false === $p instanceof AliasPackage;
-                }
-            )
-        );
-
-        return new ComponentRepository(...array_values($components));
+        return $this->packageUrlFactory;
     }
 
     /**
@@ -110,43 +80,30 @@ class ComponentFactory
             throw new UnexpectedValueException("Encountered package without version: $rawName");
         }
 
+        $type = $this->getComponentType($package);
         [$name, $vendor] = $this->splitNameAndVendor($rawName);
 
-        if ($package instanceof CompletePackageInterface) {
-            $description = $package->getDescription();
-            $license = $this->licenseFactory->makeFromPackage($package);
-        } else {
-            $description = null;
-            $license = null;
-        }
+        /** @psalm-suppress MissingThrowsDocblock since correct $type is asserted */
+        $component = new Component($type, $name, $version);
 
-        $type = $this->getComponentType($package);
+        $component->setGroup($vendor);
+
+        if ($package instanceof CompletePackageInterface) {
+            $component->setDescription($package->getDescription());
+            $component->setLicense($this->licenseFactory->makeFromPackage($package));
+        }
 
         $sha1sum = $package->getDistSha1Checksum();
-
-        /** @psalm-suppress MissingThrowsDocblock */
-        $component = (new Component($type, $name, $version))
-            ->setGroup($vendor)
-            ->setDescription($description)
-            ->setLicense($license);
+        if (false === empty($sha1sum)) {
+            $component->setHashRepository(new HashRepository([HashAlgorithm::SHA_1 => $sha1sum]));
+        }
 
         try {
-            $purl = (new PackageUrl(self::PURL_TYPE, $component->getName()))
-                ->setNamespace($component->getGroup())
-                ->setVersion($component->getVersion());
+            $purl = $this->packageUrlFactory->makeFromComponent($component);
             $component->setPackageUrl($purl);
-            // @codeCoverageIgnoreStart
+            $component->setBomRefValue((string) $purl);
         } catch (DomainException $exception) {
             unset($exception);
-            $purl = null;
-        }
-        // @codeCoverageIgnoreEnd
-
-        if (!empty($sha1sum)) {
-            $component->setHashRepository(new HashRepository([HashAlgorithm::SHA_1 => $sha1sum]));
-            if (null !== $purl) {
-                $purl->setChecksums(["sha1:$sha1sum"]);
-            }
         }
 
         return $component;
@@ -155,7 +112,7 @@ class ComponentFactory
     /**
      * @psalm-return array{string, ?string}
      */
-    private function splitNameAndVendor(string $packageName): array
+    public function splitNameAndVendor(string $packageName): array
     {
         // Composer2 requires published packages to be named like <vendor>/<packageName>.
         // Because this was a loose requirement in composer1 that doesn't apply to "internal" packages,

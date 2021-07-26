@@ -24,8 +24,10 @@ declare(strict_types=1);
 namespace CycloneDX\Tests\Core\Models;
 
 use CycloneDX\Core\Enums\Classification;
+use CycloneDX\Core\Models\BomRef;
 use CycloneDX\Core\Models\Component;
 use CycloneDX\Core\Models\License\LicenseExpression;
+use CycloneDX\Core\Repositories\BomRefRepository;
 use CycloneDX\Core\Repositories\DisjunctiveLicenseRepository;
 use CycloneDX\Core\Repositories\HashRepository;
 use PackageUrl\PackageUrl;
@@ -35,6 +37,9 @@ use PHPUnit\Framework\TestCase;
  * Class ComponentTest.
  *
  * @covers \CycloneDX\Core\Models\Component
+ *
+ * @uses   \CycloneDX\Core\Enums\Classification::isValidValue
+ * @uses   \CycloneDX\Core\Models\BomRef::__construct
  */
 class ComponentTest extends TestCase
 {
@@ -42,12 +47,17 @@ class ComponentTest extends TestCase
 
     protected function setUp(): void
     {
-        parent::setUp();
-
-        $this->component = $this->createPartialMock(Component::class, []);
+        $this->component = new Component(
+            'library',
+            uniqid('myName', false),
+            uniqid('myVersion', true)
+        );
     }
 
-    /** @uses \CycloneDX\Core\Enums\Classification::isValidValue */
+    /**
+     * @uses \CycloneDX\Core\Enums\Classification::isValidValue
+     * @uses \CycloneDX\Core\Models\BomRef
+     */
     public function testConstructor(): void
     {
         $type = Classification::LIBRARY;
@@ -59,6 +69,27 @@ class ComponentTest extends TestCase
         self::assertSame($type, $component->getType());
         self::assertSame($name, $component->getName());
         self::assertSame($version, $component->getVersion());
+    }
+
+    public function testGetBomRefConstant(): void
+    {
+        $bomRef = $this->component->getBomRef();
+        self::assertInstanceOf(BomRef::class, $bomRef);
+        self::assertSame($bomRef, $this->component->getBomRef());
+    }
+
+    /**
+     * @uses \CycloneDX\Core\Models\BomRef::getValue
+     * @uses \CycloneDX\Core\Models\BomRef::setValue
+     */
+    public function testsetBomRefValue(): void
+    {
+        $bomRef = $this->component->getBomRef();
+        self::assertNull($bomRef->getValue());
+
+        $this->component->setBomRefValue('foo');
+
+        self::assertSame('foo', $bomRef->getValue());
     }
 
     // region type getter&setter
@@ -155,23 +186,73 @@ class ComponentTest extends TestCase
 
     // region description setter&getter
 
-    public function testDescriptionSetterGetter(): void
+    /**
+     * @dataProvider dpDescriptionSetterGetter
+     */
+    public function testDescriptionSetterGetter(?string $description, ?string $expected): void
     {
-        $description = bin2hex(random_bytes(32));
-        $this->component->setDescription($description);
-        self::assertSame($description, $this->component->getDescription());
+        $setOn = $this->component->setDescription($description);
+
+        self::assertSame($this->component, $setOn);
+        self::assertSame($expected, $this->component->getDescription());
+    }
+
+    public function dpDescriptionSetterGetter(): \Generator
+    {
+        yield 'null' => [null, null];
+        yield 'empty string' => ['', null];
+        $group = bin2hex(random_bytes(32));
+        yield 'non-empty-string' => [$group, $group];
     }
 
     // endregion description setter&getter
 
     // region group setter&getter
 
-    public function testGroupSetterGetter(): void
+    /**
+     * @dataProvider dpGroupSetterGetter
+     */
+    public function testGroupSetterGetter(?string $group, ?string $expected): void
     {
+        $setOn = $this->component->setGroup($group);
+
+        self::assertSame($this->component, $setOn);
+        self::assertSame($expected, $this->component->getGroup());
+    }
+
+    public function dpGroupSetterGetter(): \Generator
+    {
+        yield 'null' => [null, null];
+        yield 'empty string' => ['', null];
         $group = bin2hex(random_bytes(32));
-        $this->component->setGroup($group);
-        self::assertSame($group, $this->component->getGroup());
+        yield 'non-empty-string' => [$group, $group];
     }
 
     // endregion group setter&getter
+
+    // region dependenciesBomRefRepository setter&getter
+
+    public function testDependenciesBomRefRepositorySetterGetter(): void
+    {
+        $repo = $this->createMock(BomRefRepository::class);
+        self::assertNull($this->component->getDependenciesBomRefRepository());
+
+        $this->component->setDependenciesBomRefRepository($repo);
+
+        self::assertSame($repo, $this->component->getDependenciesBomRefRepository());
+    }
+
+    // endregion dependenciesBomRefRepository setter&getter
+
+    // region clone
+
+    public function testCloneHasOwnBom(): void
+    {
+        $actual = clone $this->component;
+
+        self::assertEquals($this->component, $actual);
+        self::assertNotSame($this->component->getBomRef(), $actual->getBomRef());
+    }
+
+    // endregion clone
 }

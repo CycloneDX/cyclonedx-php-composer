@@ -25,7 +25,7 @@ namespace CycloneDX\Core\Validation\Validators;
 
 use CycloneDX\Core\Resources;
 use CycloneDX\Core\Spec\Version;
-use CycloneDX\Core\Validation\AbstractValidator;
+use CycloneDX\Core\Validation\BaseValidator;
 use CycloneDX\Core\Validation\Errors\XmlValidationError;
 use CycloneDX\Core\Validation\Exceptions\FailedLoadingSchemaException;
 use CycloneDX\Core\Validation\ValidationError;
@@ -35,7 +35,7 @@ use DOMException;
 /**
  * @author jkowalleck
  */
-class XmlValidator extends AbstractValidator
+class XmlValidator extends BaseValidator
 {
     /**
      * {@inheritdoc}

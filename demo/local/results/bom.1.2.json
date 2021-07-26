@@ -11,6 +11,7 @@
             }
         ],
         "component": {
+            "bom-ref": "pkg:composer\/cyclonedx-demo\/cyclonedx-php-composer-local@dev-master",
             "type": "application",
             "name": "cyclonedx-php-composer-local",
             "version": "dev-master",
@@ -21,6 +22,7 @@
     },
     "components": [
         {
+            "bom-ref": "pkg:composer\/cyclonedx-demo\/local-demo-dependency@1.33.7",
             "type": "library",
             "name": "local-demo-dependency",
             "version": "1.33.7",
@@ -29,11 +31,29 @@
             "purl": "pkg:composer\/cyclonedx-demo\/local-demo-dependency@1.33.7"
         },
         {
+            "bom-ref": "pkg:composer\/cyclonedx-demo\/local-dependency-with-minimal-setup@dev-master",
             "type": "library",
             "name": "local-dependency-with-minimal-setup",
             "version": "dev-master",
             "group": "cyclonedx-demo",
             "purl": "pkg:composer\/cyclonedx-demo\/local-dependency-with-minimal-setup@dev-master"
+        }
+    ],
+    "dependencies": [
+        {
+            "ref": "pkg:composer\/cyclonedx-demo\/local-demo-dependency@1.33.7",
+            "dependsOn": [
+                "pkg:composer\/cyclonedx-demo\/local-dependency-with-minimal-setup@dev-master"
+            ]
+        },
+        {
+            "ref": "pkg:composer\/cyclonedx-demo\/local-dependency-with-minimal-setup@dev-master"
+        },
+        {
+            "ref": "pkg:composer\/cyclonedx-demo\/cyclonedx-php-composer-local@dev-master",
+            "dependsOn": [
+                "pkg:composer\/cyclonedx-demo\/local-demo-dependency@1.33.7"
+            ]
         }
     ]
 }

@@ -83,6 +83,9 @@ class MetaDataNormalizerTest extends TestCase
         );
     }
 
+    /**
+     * @uses \CycloneDX\Core\Serialize\JSON\Normalizers\ComponentNormalizer
+     */
     public function testNormalizeComponent(): void
     {
         $metaData = $this->createConfiguredMock(

@@ -23,9 +23,7 @@ declare(strict_types=1);
 
 namespace CycloneDX\Core\Serialize;
 
-use CycloneDX\Core\Helpers\HasSpecTrait;
 use CycloneDX\Core\Models\Bom;
-use CycloneDX\Core\Spec\SpecInterface;
 use DomainException;
 
 /**
@@ -33,26 +31,17 @@ use DomainException;
  *
  * @author jkowalleck
  */
-class JsonSerializer implements SerializerInterface
+class JsonSerializer extends BaseSerializer
 {
-    use HasSpecTrait;
-
-    public function __construct(SpecInterface $spec)
-    {
-        $this->spec = $spec;
-    }
-
     /**
-     * Serialize a Bom to JSON.
-     *
      * @throws DomainException if something was not supported
      */
-    public function serialize(Bom $bom): string
+    protected function normalize(Bom $bom): string
     {
         $options = \JSON_THROW_ON_ERROR | \JSON_PRESERVE_ZERO_FRACTION | \JSON_PRETTY_PRINT;
 
         $json = json_encode(
-            (new JSON\NormalizerFactory($this->spec))
+            (new JSON\NormalizerFactory($this->getSpec()))
                 ->makeForBom()
                 ->normalize($bom),
             $options

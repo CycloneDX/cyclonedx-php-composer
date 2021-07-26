@@ -25,17 +25,17 @@ namespace CycloneDX\Tests\Composer\MakeBom;
 
 use Composer\Composer;
 use Composer\Factory as ComposerFactory;
+use Composer\Package\AliasPackage;
 use Composer\Package\Locker;
 use Composer\Package\Package;
 use Composer\Repository\LockArrayRepository;
+use CycloneDX\Composer\Factories\SpecFactory;
 use CycloneDX\Composer\MakeBom\Exceptions\LockerIsOutdatedError;
 use CycloneDX\Composer\MakeBom\Factory;
 use CycloneDX\Composer\MakeBom\Options;
 use CycloneDX\Core\Serialize\JsonSerializer;
 use CycloneDX\Core\Serialize\XmlSerializer;
-use CycloneDX\Core\Spec\Spec11;
-use CycloneDX\Core\Spec\Spec12;
-use CycloneDX\Core\Spec\Spec13;
+use CycloneDX\Core\Spec\SpecInterface;
 use CycloneDX\Core\Validation\Validators\JsonValidator;
 use CycloneDX\Core\Validation\Validators\XmlValidator;
 use PHPUnit\Framework\TestCase;
@@ -56,27 +56,34 @@ class FactoryTest extends TestCase
      */
     private $composerFactory;
 
+    /**
+     * @var SpecFactory|\PHPUnit\Framework\MockObject\MockObject
+     * @psalm-var  SpecFactory&\PHPUnit\Framework\MockObject\MockObject
+     */
+    private $specFactory;
+
     protected function setUp(): void
     {
         $this->composerFactory = $this->createMock(ComposerFactory::class);
-        $this->factory = new Factory($this->composerFactory);
+        $this->specFactory = $this->createMock(SpecFactory::class);
+        $this->factory = new Factory($this->composerFactory, $this->specFactory);
     }
 
     /**
      * @dataProvider dpMakeSerializerFromOptions
      *
-     * @uses         \CycloneDX\Composer\Factories\SpecFactory
      * @uses         \CycloneDX\Core\Serialize\JsonSerializer
      * @uses         \CycloneDX\Core\Serialize\XmlSerializer
+     * @uses         \CycloneDX\Core\Serialize\BaseSerializer
      */
     public function testMakeSerializerFromOptions(string $outputFormat, string $expectedClass): void
     {
         $options = $this->createMock(Options::class);
         $options->outputFormat = $outputFormat;
 
-        $got = $this->factory->makeSerializerFromOptions($options);
+        $actual = $this->factory->makeSerializerFromOptions($options);
 
-        self::assertInstanceOf($expectedClass, $got);
+        self::assertInstanceOf($expectedClass, $actual);
     }
 
     public function dpMakeSerializerFromOptions()
@@ -85,33 +92,26 @@ class FactoryTest extends TestCase
         yield 'json' => ['JSON', JsonSerializer::class];
     }
 
-    /**
-     * @dataProvider dpMakeSpecFromOptions
-     *
-     * @uses         \CycloneDX\Composer\Factories\SpecFactory
-     */
-    public function testMakeSpecFromOptions(string $specVersion, string $specClass): void
+    public function testMakeSpecFromOptions(): void
     {
         $options = $this->createMock(Options::class);
-        $options->specVersion = $specVersion;
+        $options->specVersion = 'foobar';
+        $spec = $this->createStub(SpecInterface::class);
 
-        $got = $this->factory->makeSpecFromOptions($options);
+        $this->specFactory->expects(self::once())
+            ->method('make')
+            ->with('foobar')
+            ->willReturn($spec);
 
-        self::assertInstanceOf($specClass, $got);
-    }
+        $actual = $this->factory->makeSpecFromOptions($options);
 
-    public function dpMakeSpecFromOptions(): \Generator
-    {
-        yield '1.1' => ['1.1', Spec11::class];
-        yield '1.2' => ['1.2', Spec12::class];
-        yield '1.3' => ['1.3', Spec13::class];
+        self::assertSame($spec, $actual);
     }
 
     /**
      * @dataProvider dpMakeValidatorFromOptions
      *
-     * @uses         \CycloneDX\Composer\Factories\SpecFactory
-     * @uses         \CycloneDX\Core\Validation\AbstractValidator
+     * @uses         \CycloneDX\Core\Validation\BaseValidator
      * @uses         \CycloneDX\Core\Validation\Validators\XmlValidator
      * @uses         \CycloneDX\Core\Validation\Validators\JsonValidator
      */
@@ -121,9 +121,9 @@ class FactoryTest extends TestCase
         $options->outputFormat = $outputFormat;
         $options->skipOutputValidation = false;
 
-        $got = $this->factory->makeValidatorFromOptions($options);
+        $actual = $this->factory->makeValidatorFromOptions($options);
 
-        self::assertInstanceOf($expectedClass, $got);
+        self::assertInstanceOf($expectedClass, $actual);
     }
 
     public function dpMakeValidatorFromOptions()
@@ -138,9 +138,9 @@ class FactoryTest extends TestCase
         $options->outputFormat = uniqid('format', true);
         $options->skipOutputValidation = true;
 
-        $got = $this->factory->makeValidatorFromOptions($options);
+        $actual = $this->factory->makeValidatorFromOptions($options);
 
-        self::assertNull($got);
+        self::assertNull($actual);
     }
 
     // region test makeLockerFromComposerForOptions
@@ -156,7 +156,7 @@ class FactoryTest extends TestCase
         $this->factory->makeLockerFromComposerForOptions($composer, $options);
     }
 
-    public function testMakeLockerFromComposerForOptionsTrowsWHenNotFresh(): void
+    public function testMakeLockerFromComposerForOptionsTrowsWhenNotFresh(): void
     {
         $locker = $this->createConfiguredMock(Locker::class, ['isLocked' => true, 'isFresh' => false]);
         $composer = $this->createConfiguredMock(Composer::class, ['getLocker' => $locker]);
@@ -173,7 +173,7 @@ class FactoryTest extends TestCase
             Locker::class,
             ['isLocked' => true, 'isFresh' => true, 'getDevPackageNames' => ['foo']]
         );
-        $lockedRepository = $this->createStub(LockArrayRepository::class);
+        $lockedRepository = $this->createConfiguredMock(LockArrayRepository::class, ['getPackages' => []]);
         $composer = $this->createConfiguredMock(Composer::class, ['getLocker' => $locker]);
         $options = $this->createStub(Options::class);
         $options->excludeDev = false;
@@ -183,9 +183,9 @@ class FactoryTest extends TestCase
             ->with(true)
             ->willReturn($lockedRepository);
 
-        $got = $this->factory->makeLockerFromComposerForOptions($composer, $options);
+        $actual = $this->factory->makeLockerFromComposerForOptions($composer, $options);
 
-        self::assertSame($lockedRepository, $got);
+        self::assertSame($lockedRepository, $actual);
     }
 
     public function testMakeLockerFromComposerExcludesDev(): void
@@ -194,7 +194,7 @@ class FactoryTest extends TestCase
             Locker::class,
             ['isLocked' => true, 'isFresh' => true, 'getDevPackageNames' => []]
         );
-        $lockedRepository = $this->createStub(LockArrayRepository::class);
+        $lockedRepository = $this->createConfiguredMock(LockArrayRepository::class, ['getPackages' => []]);
         $composer = $this->createConfiguredMock(Composer::class, ['getLocker' => $locker]);
         $options = $this->createStub(Options::class);
         $options->excludeDev = true;
@@ -204,9 +204,9 @@ class FactoryTest extends TestCase
             ->with(false)
             ->willReturn($lockedRepository);
 
-        $got = $this->factory->makeLockerFromComposerForOptions($composer, $options);
+        $actual = $this->factory->makeLockerFromComposerForOptions($composer, $options);
 
-        self::assertSame($lockedRepository, $got);
+        self::assertSame($lockedRepository, $actual);
     }
 
     public function testMakeLockerFromComposerExcludesPlugins(): void
@@ -232,9 +232,37 @@ class FactoryTest extends TestCase
         $lockedRepository->expects(self::once())->method('removePackage')
             ->with($package2);
 
-        $got = $this->factory->makeLockerFromComposerForOptions($composer, $options);
+        $actual = $this->factory->makeLockerFromComposerForOptions($composer, $options);
 
-        self::assertSame($lockedRepository, $got);
+        self::assertSame($lockedRepository, $actual);
+    }
+
+    public function testMakeLockerFromComposerExcludesAliases(): void
+    {
+        $package1 = $this->createConfiguredMock(Package::class, ['getType' => 'library']);
+        $package2 = $this->createConfiguredMock(AliasPackage::class, ['getType' => 'library']);
+        $locker = $this->createConfiguredMock(
+            Locker::class,
+            ['isLocked' => true, 'isFresh' => true, 'getDevPackageNames' => []]
+        );
+        $lockedRepository = $this->createConfiguredMock(
+            LockArrayRepository::class,
+            ['getPackages' => [$package1, $package2]]
+        );
+        $composer = $this->createConfiguredMock(Composer::class, ['getLocker' => $locker]);
+        $options = $this->createStub(Options::class);
+        $options->excludeDev = false;
+        $options->excludePlugins = true;
+
+        $locker->expects(self::once())->method('getLockedRepository')
+            ->willReturn($lockedRepository);
+
+        $lockedRepository->expects(self::once())->method('removePackage')
+            ->with($package2);
+
+        $actual = $this->factory->makeLockerFromComposerForOptions($composer, $options);
+
+        self::assertSame($lockedRepository, $actual);
     }
 
     // endregion test makeLockerFromComposerForOptions
@@ -250,9 +278,9 @@ class FactoryTest extends TestCase
             ->with($io, 'foo/bar', true)
             ->willReturn($composer);
 
-        $got = $this->factory->makeComposer($options, $io);
+        $actual = $this->factory->makeComposer($options, $io);
 
-        self::assertSame($composer, $got);
+        self::assertSame($composer, $actual);
     }
 
     // region test makeBomOutput
@@ -262,9 +290,9 @@ class FactoryTest extends TestCase
         $options = $this->createMock(Options::class);
         $options->outputFile = '-';
 
-        $got = $this->factory->makeBomOutput($options);
+        $actual = $this->factory->makeBomOutput($options);
 
-        self::assertNull($got);
+        self::assertNull($actual);
     }
 
     public function testMakeBomOutputForFile(): void
@@ -275,10 +303,10 @@ class FactoryTest extends TestCase
             $options = $this->createMock(Options::class);
             $options->outputFile = $tempFile;
 
-            $got = $this->factory->makeBomOutput($options);
-            self::assertNotNull($got);
+            $actual = $this->factory->makeBomOutput($options);
+            self::assertNotNull($actual);
 
-            $got->write('foo! bar');
+            $actual->write('foo! bar');
             self::assertSame('foo! bar', file_get_contents($tempFile));
         } finally {
             unlink($tempFile);

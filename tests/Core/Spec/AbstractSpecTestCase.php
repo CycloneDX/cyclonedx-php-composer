@@ -174,4 +174,20 @@ abstract class AbstractSpecTestCase extends TestCase
     }
 
     abstract public function shouldSupportMetaData(): bool;
+
+    final public function testSupportsBomRef(): void
+    {
+        $isSupported = $this->getSpec()->supportsBomRef();
+        self::assertSame($this->shouldSupportBomRef(), $isSupported);
+    }
+
+    abstract public function shouldSupportBomRef(): bool;
+
+    final public function testSupportsDependencies(): void
+    {
+        $isSupported = $this->getSpec()->supportsDependencies();
+        self::assertSame($this->shouldSupportDependencies(), $isSupported);
+    }
+
+    abstract public function shouldSupportDependencies(): bool;
 }

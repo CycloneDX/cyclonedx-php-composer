@@ -21,7 +21,7 @@ declare(strict_types=1);
  * Copyright (c) Steve Springett. All Rights Reserved.
  */
 
-namespace CycloneDX\Tests\Core\Validate\Validators;
+namespace CycloneDX\Tests\Core\Validation\Validators;
 
 use CycloneDX\Core\Spec\SpecInterface;
 use CycloneDX\Core\Validation\Errors\XmlValidationError;
@@ -34,7 +34,7 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @covers   \CycloneDX\Core\Validation\Validators\XmlValidator
- * @covers   \CycloneDX\Core\Validation\AbstractValidator
+ * @covers   \CycloneDX\Core\Validation\BaseValidator
  */
 class XmlValidatorTest extends TestCase
 {
@@ -163,6 +163,50 @@ class XmlValidatorTest extends TestCase
         $error = $validator->validateDom($doc);
 
         self::assertNotNull($error);
+        self::assertInstanceOf(XmlValidationError::class, $error);
+        self::assertStringContainsString(
+            "Element '{http://cyclonedx.org/schema/bom/1.2}name': This element is not expected.",
+            $error->getMessage()
+        );
+    }
+
+    /**
+     * @uses \CycloneDX\Core\Validation\Errors\XmlValidationError
+     * @uses \CycloneDX\Core\Validation\ValidationError
+     */
+    public function testValidateDomThrowsOnDuplicateBomRef(): void
+    {
+        $spec = $this->createConfiguredMock(SpecInterface::class, ['getVersion' => '1.2']);
+        $validator = new XmlValidator($spec);
+        $doc = new DOMDocument();
+        $loaded = $doc->loadXML(
+            <<<'XML'
+                <?xml version="1.0" encoding="utf-8"?>
+                <bom xmlns="http://cyclonedx.org/schema/bom/1.2" version="1">
+                    <components>
+                        <component type="library" bom-ref="BomRef-foo">
+                            <name>foo1</name>
+                            <version>1.2.3</version>
+                        </component>
+                        <component type="library" bom-ref="BomRef-foo">
+                            <name>foo2</name>
+                            <version>1.0.0</version>
+                        </component>
+                    </components>
+                </bom>
+                XML,
+            \LIBXML_NONET
+        );
+        self::assertTrue($loaded);
+
+        $error = $validator->validateDom($doc);
+
+        self::assertNotNull($error);
+        self::assertInstanceOf(XmlValidationError::class, $error);
+        self::assertStringContainsString(
+            "Element '{http://cyclonedx.org/schema/bom/1.2}component': Duplicate key-sequence ['BomRef-foo'] in unique identity-constraint '{http://cyclonedx.org/schema/bom/1.2}bom-ref'.",
+            $error->getMessage()
+        );
     }
 
     public function testValidateDomThrowsOnSchemaFileUnknown(): void

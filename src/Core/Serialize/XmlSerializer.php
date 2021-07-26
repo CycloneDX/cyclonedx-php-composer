@@ -23,10 +23,8 @@ declare(strict_types=1);
 
 namespace CycloneDX\Core\Serialize;
 
-use CycloneDX\Core\Helpers\HasSpecTrait;
 use CycloneDX\Core\Helpers\SimpleDomTrait;
 use CycloneDX\Core\Models\Bom;
-use CycloneDX\Core\Spec\SpecInterface;
 use DomainException;
 use DOMDocument;
 
@@ -35,28 +33,22 @@ use DOMDocument;
  *
  * @author jkowalleck
  */
-class XmlSerializer implements SerializerInterface
+class XmlSerializer extends BaseSerializer
 {
-    use HasSpecTrait;
     use SimpleDomTrait;
 
     private const XML_VERSION = '1.0';
     private const XML_ENCODING = 'UTF-8';
 
-    public function __construct(SpecInterface $spec)
-    {
-        $this->spec = $spec;
-    }
-
     /**
      * @throws DomainException if something was not supported
      */
-    public function serialize(Bom $bom): string
+    protected function normalize(Bom $bom): string
     {
         $document = new DOMDocument(self::XML_VERSION, self::XML_ENCODING);
         $document->appendChild(
             $document->importNode(
-                (new DOM\NormalizerFactory($this->spec))
+                (new DOM\NormalizerFactory($this->getSpec()))
                     ->makeForBom()
                     ->normalize($bom),
                 true

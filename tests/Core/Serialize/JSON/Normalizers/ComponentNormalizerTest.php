@@ -23,6 +23,7 @@ declare(strict_types=1);
 
 namespace CycloneDX\Tests\Core\Serialize\JSON\Normalizers;
 
+use CycloneDX\Core\Models\BomRef;
 use CycloneDX\Core\Models\Component;
 use CycloneDX\Core\Models\License\DisjunctiveLicenseWithName;
 use CycloneDX\Core\Models\License\LicenseExpression;
@@ -100,11 +101,15 @@ class ComponentNormalizerTest extends TestCase
         ], $got);
     }
 
+    /**
+     * @uses \CycloneDX\Core\Models\BomRef
+     */
     public function testNormalizeFull(): void
     {
         $component = $this->createConfiguredMock(
             Component::class,
             [
+                'getBomRef' => new BomRef('myBomRef'),
                 'getName' => 'myName',
                 'getVersion' => 'some-version',
                 'getType' => 'FakeType',
@@ -112,11 +117,15 @@ class ComponentNormalizerTest extends TestCase
                 'getDescription' => 'my description',
                 'getLicense' => $this->createStub(LicenseExpression::class),
                 'getHashRepository' => $this->createConfiguredMock(HashRepository::class, ['count' => 1]),
-                'getPackageUrl' => $this->createConfiguredMock(PackageUrl::class, ['toString' => 'FakePURL', '__toString' => 'FakePURL']),
+                'getPackageUrl' => $this->createConfiguredMock(
+                    PackageUrl::class,
+                    ['toString' => 'FakePURL', '__toString' => 'FakePURL']
+                ),
             ]
         );
         $spec = $this->createConfiguredMock(SpecInterface::class, [
             'supportsLicenseExpression' => true,
+            'supportsBomRef' => true,
         ]);
         $licenseExpressionNormalizer = $this->createMock(LicenseExpressionNormalizer::class);
         $hashRepositoryNormalizer = $this->createMock(HashRepositoryNormalizer::class);
@@ -137,18 +146,22 @@ class ComponentNormalizerTest extends TestCase
             ->with($component->getHashRepository())
             ->willReturn(['FakeHashes']);
 
-        $got = $normalizer->normalize($component);
+        $actual = $normalizer->normalize($component);
 
-        self::assertEquals([
-            'type' => 'FakeType',
-            'name' => 'myName',
-            'version' => 'some-version',
-            'group' => 'myGroup',
-            'description' => 'my description',
-            'hashes' => ['FakeHashes'],
-            'licenses' => [['FakeLicense']],
-            'purl' => 'FakePURL',
-        ], $got);
+        self::assertEquals(
+            [
+                'bom-ref' => 'myBomRef',
+                'type' => 'FakeType',
+                'name' => 'myName',
+                'version' => 'some-version',
+                'group' => 'myGroup',
+                'description' => 'my description',
+                'hashes' => ['FakeHashes'],
+                'licenses' => [['FakeLicense']],
+                'purl' => 'FakePURL',
+            ],
+            $actual
+        );
     }
 
     /**
@@ -167,10 +180,12 @@ class ComponentNormalizerTest extends TestCase
                 'getLicense' => $this->createConfiguredMock(LicenseExpression::class, ['getExpression' => 'myLicense']),
             ]
         );
-        $spec = $this->createConfiguredMock(SpecInterface::class,
-        [
-            'supportsLicenseExpression' => false,
-        ]);
+        $spec = $this->createConfiguredMock(
+            SpecInterface::class,
+            [
+                'supportsLicenseExpression' => false,
+            ]
+        );
         $licenseNormalizer = $this->createMock(DisjunctiveLicenseRepositoryNormalizer::class);
         $factory = $this->createConfiguredMock(NormalizerFactory::class, [
             'getSpec' => $spec,

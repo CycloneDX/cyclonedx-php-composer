@@ -4,8 +4,7 @@
     "description": "demo of cyclonedx/cyclonedx-php-composer with a local dependency",
     "version": "dev-master",
     "require": {
-        "cyclonedx-demo/local-demo-dependency": "@dev",
-        "cyclonedx-demo/local-dependency-with-minimal-setup": "@dev"
+        "cyclonedx-demo/local-demo-dependency": "@dev"
     },
     "require-dev": {
         "cyclonedx/cyclonedx-php-composer": "@dev"
@@ -26,5 +25,6 @@
             "symlink": true
         }
     ],
-    "prefer-stable": true
+    "prefer-stable": true,
+    "minimum-stability": "dev"
 }

@@ -23,6 +23,7 @@ declare(strict_types=1);
 
 namespace CycloneDX\Tests\Core\Serialize\DOM\Normalizers;
 
+use CycloneDX\Core\Models\BomRef;
 use CycloneDX\Core\Models\Component;
 use CycloneDX\Core\Models\License\DisjunctiveLicenseWithName;
 use CycloneDX\Core\Models\License\LicenseExpression;
@@ -107,11 +108,15 @@ class ComponentNormalizerTest extends TestCase
         );
     }
 
+    /**
+     * @uses \CycloneDX\Core\Models\BomRef
+     */
     public function testNormalizeFull(): void
     {
         $component = $this->createConfiguredMock(
             Component::class,
             [
+                'getBomRef' => new BomRef('myBomRef'),
                 'getName' => 'myName',
                 'getVersion' => 'some-version',
                 'getType' => 'FakeType',
@@ -129,6 +134,7 @@ class ComponentNormalizerTest extends TestCase
             SpecInterface::class,
             [
                 'supportsLicenseExpression' => true,
+                'supportsBomRef' => true,
             ]
         );
         $licenseExpressionNormalizer = $this->createMock(LicenseExpressionNormalizer::class);
@@ -154,10 +160,10 @@ class ComponentNormalizerTest extends TestCase
             ->with($component->getHashRepository())
             ->willReturn([$factory->getDocument()->createElement('FakeHash', 'dummy')]);
 
-        $got = $normalizer->normalize($component);
+        $actual = $normalizer->normalize($component);
 
         self::assertStringEqualsDomNode(
-            '<component type="FakeType">'.
+            '<component bom-ref="myBomRef" type="FakeType">'.
             '<group>myGroup</group>'.
             '<name>myName</name>'.
             '<version>some-version</version>'.
@@ -166,7 +172,7 @@ class ComponentNormalizerTest extends TestCase
             '<licenses><FakeLicense>dummy</FakeLicense></licenses>'.
             '<purl>FakePURL</purl>'.
             '</component>',
-            $got
+            $actual
         );
     }
 

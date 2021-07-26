@@ -51,6 +51,8 @@ class Bom
 
     /**
      * @var MetaData|null
+     *
+     * @TODO deprecated rename it in v4 to `$metadata` and also rename the getter/setter
      */
     private $metaData;
 

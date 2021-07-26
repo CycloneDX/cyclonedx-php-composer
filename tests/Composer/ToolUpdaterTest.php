@@ -27,7 +27,7 @@ use Composer\Package\AliasPackage;
 use Composer\Package\PackageInterface;
 use Composer\Repository\LockArrayRepository;
 use Composer\Semver\Constraint\MatchAllConstraint;
-use CycloneDX\Composer\Factories\ComponentFactory;
+use CycloneDX\Composer\Builders\ComponentBuilder;
 use CycloneDX\Composer\ToolUpdater;
 use CycloneDX\Core\Models\Component;
 use CycloneDX\Core\Models\Tool;
@@ -42,8 +42,8 @@ class ToolUpdaterTest extends TestCase
 {
     public function testUpdateTool(): void
     {
-        $componentFactory = $this->createMock(ComponentFactory::class);
-        $updater = new ToolUpdater($componentFactory);
+        $componentBuilder = $this->createMock(ComponentBuilder::class);
+        $updater = new ToolUpdater($componentBuilder);
         $tool = $this->createConfiguredMock(
             Tool::class,
             [
@@ -67,7 +67,7 @@ class ToolUpdaterTest extends TestCase
             ->with('myVendor/myName', new IsInstanceOf(MatchAllConstraint::class))
             ->willReturn([$alias, $package]);
 
-        $componentFactory->method('makeFromPackage')
+        $componentBuilder->method('makeFromPackage')
             ->with($package)
             ->willReturn($component);
 
@@ -86,8 +86,8 @@ class ToolUpdaterTest extends TestCase
 
     public function testUpdateToolWithputNameAndVendor(): void
     {
-        $componentFactory = $this->createMock(ComponentFactory::class);
-        $updater = new ToolUpdater($componentFactory);
+        $componentBuilder = $this->createMock(ComponentBuilder::class);
+        $updater = new ToolUpdater($componentBuilder);
         $tool = $this->createMock(Tool::class);
         $lockRepo = $this->createStub(LockArrayRepository::class);
 
@@ -104,8 +104,8 @@ class ToolUpdaterTest extends TestCase
 
     public function testUpdateToolThatIsUnknown(): void
     {
-        $componentFactory = $this->createMock(ComponentFactory::class);
-        $updater = new ToolUpdater($componentFactory);
+        $componentBuilder = $this->createMock(ComponentBuilder::class);
+        $updater = new ToolUpdater($componentBuilder);
         $tool = $this->createConfiguredMock(
             Tool::class,
             [
@@ -132,8 +132,8 @@ class ToolUpdaterTest extends TestCase
 
     public function testUpdateToolThatDoesNotConvertToComponent(): void
     {
-        $componentFactory = $this->createMock(ComponentFactory::class);
-        $updater = new ToolUpdater($componentFactory);
+        $componentBuilder = $this->createMock(ComponentBuilder::class);
+        $updater = new ToolUpdater($componentBuilder);
         $tool = $this->createConfiguredMock(
             Tool::class,
             [
@@ -148,7 +148,7 @@ class ToolUpdaterTest extends TestCase
             ->with('myVendor/myName', new IsInstanceOf(MatchAllConstraint::class))
             ->willReturn([$package]);
 
-        $componentFactory->method('makeFromPackage')
+        $componentBuilder->method('makeFromPackage')
             ->with($package)
             ->willThrowException(new \Exception());
 

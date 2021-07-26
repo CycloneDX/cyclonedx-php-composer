@@ -34,33 +34,48 @@ use PHPUnit\Framework\TestCase;
  */
 class HashRepositoryTest extends TestCase
 {
-    public function testConstructorAndGetHash(): void
+    public function testNonEmptyConstructor(): void
     {
         $hashes = new HashRepository([HashAlgorithm::MD5 => 'foobar']);
-        self::assertSame([HashAlgorithm::MD5 => 'foobar'], $hashes->getHashes());
-    }
 
-    public function testCount(): void
-    {
-        $hashes = new HashRepository([HashAlgorithm::MD5 => 'foobar', HashAlgorithm::SHA_1 => 'barfoo']);
-        self::assertSame(2, $hashes->count());
-    }
-
-    public function testSetAndGetHash(): void
-    {
-        $hashes = new HashRepository();
-        $hashes->setHash(HashAlgorithm::MD5, 'foobar');
+        self::assertCount(1, $hashes);
+        self::assertArrayHasKey(HashAlgorithm::MD5, $hashes->getHashes());
+        self::assertSame('foobar', $hashes->getHashes()[HashAlgorithm::MD5]);
         self::assertSame('foobar', $hashes->getHash(HashAlgorithm::MD5));
+    }
+
+    public function testAddHash(): void
+    {
+        $hashes = new HashRepository([HashAlgorithm::SHA_1 => 'foo']);
+
+        $hashes->setHash(HashAlgorithm::MD5, 'bar');
+
+        self::assertCount(2, $hashes);
+        self::assertArrayHasKey(HashAlgorithm::MD5, $hashes->getHashes());
+        self::assertSame('bar', $hashes->getHashes()[HashAlgorithm::MD5]);
+        self::assertSame('bar', $hashes->getHash(HashAlgorithm::MD5));
+    }
+
+    public function testUpdateHash(): void
+    {
+        $hashes = new HashRepository([HashAlgorithm::MD5 => 'foo', HashAlgorithm::SHA_1 => 'foo']);
+
+        $hashes->setHash(HashAlgorithm::MD5, 'bar');
+
+        self::assertCount(2, $hashes);
+        self::assertArrayHasKey(HashAlgorithm::MD5, $hashes->getHashes());
+        self::assertSame('bar', $hashes->getHashes()[HashAlgorithm::MD5]);
+        self::assertSame('bar', $hashes->getHash(HashAlgorithm::MD5));
     }
 
     public function testUnsetHash(): void
     {
-        $hashes = new HashRepository();
-        $hashes->setHash(HashAlgorithm::MD5, 'foobar');
-        self::assertSame('foobar', $hashes->getHash(HashAlgorithm::MD5));
-
+        $hashes = new HashRepository([HashAlgorithm::MD5 => 'foo', HashAlgorithm::SHA_1 => 'foo']);
         $hashes->setHash(HashAlgorithm::MD5, null);
+
         self::assertNull($hashes->getHash(HashAlgorithm::MD5));
+        self::assertCount(1, $hashes);
+        self::assertSame([HashAlgorithm::SHA_1 => 'foo'], $hashes->getHashes());
     }
 
     public function testGetUnknownHash(): void
@@ -69,7 +84,7 @@ class HashRepositoryTest extends TestCase
         self::assertNull($hashes->getHash(HashAlgorithm::MD5));
     }
 
-    public function testSetHashThrows(): void
+    public function testSetUnknownHashAlgorithmThrows(): void
     {
         $hashes = new HashRepository();
 

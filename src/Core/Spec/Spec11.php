@@ -69,4 +69,14 @@ final class Spec11 implements SpecInterface
     {
         return false;
     }
+
+    public function supportsBomRef(): bool
+    {
+        return false;
+    }
+
+    public function supportsDependencies(): bool
+    {
+        return false;
+    }
 }

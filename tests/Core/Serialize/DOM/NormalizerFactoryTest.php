@@ -82,10 +82,10 @@ class NormalizerFactoryTest extends TestCase
             ]
         );
 
-        $got = $factory->setSpec($spec);
+        $actual = $factory->setSpec($spec);
 
         self::assertSame($spec, $factory->getSpec());
-        self::assertSame($got, $factory);
+        self::assertSame($factory, $actual);
     }
 
     /**
@@ -114,9 +114,9 @@ class NormalizerFactoryTest extends TestCase
      */
     public function testMakeForComponentRepository(NormalizerFactory $factory): void
     {
-        $got = $factory->makeForComponentRepository();
-        self::assertInstanceOf(Normalizers\ComponentRepositoryNormalizer::class, $got);
-        self::assertSame($factory, $got->getNormalizerFactory());
+        $normalizer = $factory->makeForComponentRepository();
+        self::assertInstanceOf(Normalizers\ComponentRepositoryNormalizer::class, $normalizer);
+        self::assertSame($factory, $normalizer->getNormalizerFactory());
     }
 
     /**
@@ -126,9 +126,9 @@ class NormalizerFactoryTest extends TestCase
      */
     public function testMakeForBom(NormalizerFactory $factory): void
     {
-        $got = $factory->makeForBom();
-        self::assertInstanceOf(Normalizers\BomNormalizer::class, $got);
-        self::assertSame($factory, $got->getNormalizerFactory());
+        $normalizer = $factory->makeForBom();
+        self::assertInstanceOf(Normalizers\BomNormalizer::class, $normalizer);
+        self::assertSame($factory, $normalizer->getNormalizerFactory());
     }
 
     /**
@@ -138,9 +138,9 @@ class NormalizerFactoryTest extends TestCase
      */
     public function testMakeForDisjunctiveLicense(NormalizerFactory $factory): void
     {
-        $got = $factory->makeForDisjunctiveLicense();
-        self::assertInstanceOf(Normalizers\DisjunctiveLicenseNormalizer::class, $got);
-        self::assertSame($factory, $got->getNormalizerFactory());
+        $normalizer = $factory->makeForDisjunctiveLicense();
+        self::assertInstanceOf(Normalizers\DisjunctiveLicenseNormalizer::class, $normalizer);
+        self::assertSame($factory, $normalizer->getNormalizerFactory());
     }
 
     /**
@@ -150,9 +150,9 @@ class NormalizerFactoryTest extends TestCase
      */
     public function testMakeForHashRepository(NormalizerFactory $factory): void
     {
-        $got = $factory->makeForHashRepository();
-        self::assertInstanceOf(Normalizers\HashRepositoryNormalizer::class, $got);
-        self::assertSame($factory, $got->getNormalizerFactory());
+        $normalizer = $factory->makeForHashRepository();
+        self::assertInstanceOf(Normalizers\HashRepositoryNormalizer::class, $normalizer);
+        self::assertSame($factory, $normalizer->getNormalizerFactory());
     }
 
     /**
@@ -162,9 +162,9 @@ class NormalizerFactoryTest extends TestCase
      */
     public function testMakeForComponent(NormalizerFactory $factory): void
     {
-        $got = $factory->makeForComponent();
-        self::assertInstanceOf(Normalizers\ComponentNormalizer::class, $got);
-        self::assertSame($factory, $got->getNormalizerFactory());
+        $normalizer = $factory->makeForComponent();
+        self::assertInstanceOf(Normalizers\ComponentNormalizer::class, $normalizer);
+        self::assertSame($factory, $normalizer->getNormalizerFactory());
     }
 
     /**
@@ -174,9 +174,9 @@ class NormalizerFactoryTest extends TestCase
      */
     public function testMakeForDisjunctiveLicenseRepository(NormalizerFactory $factory): void
     {
-        $got = $factory->makeForDisjunctiveLicenseRepository();
-        self::assertInstanceOf(Normalizers\DisjunctiveLicenseRepositoryNormalizer::class, $got);
-        self::assertSame($factory, $got->getNormalizerFactory());
+        $normalizer = $factory->makeForDisjunctiveLicenseRepository();
+        self::assertInstanceOf(Normalizers\DisjunctiveLicenseRepositoryNormalizer::class, $normalizer);
+        self::assertSame($factory, $normalizer->getNormalizerFactory());
     }
 
     /**
@@ -186,9 +186,9 @@ class NormalizerFactoryTest extends TestCase
      */
     public function testMakeForLicenseExpression(NormalizerFactory $factory): void
     {
-        $got = $factory->makeForLicenseExpression();
-        self::assertInstanceOf(Normalizers\LicenseExpressionNormalizer::class, $got);
-        self::assertSame($factory, $got->getNormalizerFactory());
+        $normalizer = $factory->makeForLicenseExpression();
+        self::assertInstanceOf(Normalizers\LicenseExpressionNormalizer::class, $normalizer);
+        self::assertSame($factory, $normalizer->getNormalizerFactory());
     }
 
     /**
@@ -198,9 +198,9 @@ class NormalizerFactoryTest extends TestCase
      */
     public function testMakeForHash(NormalizerFactory $factory): void
     {
-        $got = $factory->makeForHash();
-        self::assertInstanceOf(Normalizers\HashNormalizer::class, $got);
-        self::assertSame($factory, $got->getNormalizerFactory());
+        $normalizer = $factory->makeForHash();
+        self::assertInstanceOf(Normalizers\HashNormalizer::class, $normalizer);
+        self::assertSame($factory, $normalizer->getNormalizerFactory());
     }
 
     /**
@@ -210,9 +210,9 @@ class NormalizerFactoryTest extends TestCase
      */
     public function testMakeForMetaData(NormalizerFactory $factory): void
     {
-        $got = $factory->makeForMetaData();
-        self::assertInstanceOf(Normalizers\MetaDataNormalizer::class, $got);
-        self::assertSame($factory, $got->getNormalizerFactory());
+        $normalizer = $factory->makeForMetaData();
+        self::assertInstanceOf(Normalizers\MetaDataNormalizer::class, $normalizer);
+        self::assertSame($factory, $normalizer->getNormalizerFactory());
     }
 
     /**
@@ -222,9 +222,9 @@ class NormalizerFactoryTest extends TestCase
      */
     public function testMakeForToolRepository(NormalizerFactory $factory): void
     {
-        $got = $factory->makeForToolRepository();
-        self::assertInstanceOf(Normalizers\ToolRepositoryNormalizer::class, $got);
-        self::assertSame($factory, $got->getNormalizerFactory());
+        $normalizer = $factory->makeForToolRepository();
+        self::assertInstanceOf(Normalizers\ToolRepositoryNormalizer::class, $normalizer);
+        self::assertSame($factory, $normalizer->getNormalizerFactory());
     }
 
     /**
@@ -234,8 +234,20 @@ class NormalizerFactoryTest extends TestCase
      */
     public function testMakeForTool(NormalizerFactory $factory): void
     {
-        $got = $factory->makeForTool();
-        self::assertInstanceOf(Normalizers\ToolNormalizer::class, $got);
-        self::assertSame($factory, $got->getNormalizerFactory());
+        $normalizer = $factory->makeForTool();
+        self::assertInstanceOf(Normalizers\ToolNormalizer::class, $normalizer);
+        self::assertSame($factory, $normalizer->getNormalizerFactory());
+    }
+
+    /**
+     * @depends testConstructor
+     *
+     * @uses \CycloneDX\Core\Serialize\DOM\Normalizers\ToolNormalizer
+     */
+    public function testMakeForDependencies(NormalizerFactory $factory): void
+    {
+        $normalizer = $factory->makeForDependencies();
+        self::assertInstanceOf(Normalizers\DependenciesNormalizer::class, $normalizer);
+        self::assertSame($factory, $normalizer->getNormalizerFactory());
     }
 }

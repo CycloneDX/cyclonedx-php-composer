@@ -25,6 +25,7 @@ namespace CycloneDX\Tests\Core\Repositories;
 
 use CycloneDX\Core\Models\Component;
 use CycloneDX\Core\Repositories\ComponentRepository;
+use Generator;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -32,43 +33,113 @@ use PHPUnit\Framework\TestCase;
  */
 class ComponentRepositoryTest extends TestCase
 {
+    public function testEmptyConstructor(): void
+    {
+        $repo = new ComponentRepository();
+
+        self::assertSame([], $repo->getComponents());
+        self::assertCount(0, $repo);
+    }
+
+    public function testConstructor(): void
+    {
+        $component1 = $this->createStub(Component::class);
+        $component2 = $this->createStub(Component::class);
+
+        $repo = new ComponentRepository($component1, $component2, $component1, $component2);
+
+        self::assertCount(2, $repo);
+        self::assertCount(2, $repo->getComponents());
+        self::assertContains($component1, $repo->getComponents());
+        self::assertContains($component2, $repo->getComponents());
+    }
+
     public function testAddAndGetComponent(): void
     {
         $component1 = $this->createStub(Component::class);
         $component2 = $this->createStub(Component::class);
         $component3 = $this->createStub(Component::class);
+        $repo = new ComponentRepository($component1, $component3);
 
-        $repo = new ComponentRepository($component1);
-        $repo->addComponent($component2, $component3);
-        $got = $repo->getComponents();
+        $actual = $repo->addComponent($component2, $component3, $component2);
 
-        self::assertCount(3, $got);
-        self::assertContains($component1, $got);
-        self::assertContains($component2, $got);
-        self::assertContains($component3, $got);
+        self::assertSame($repo, $actual);
+        self::assertCount(3, $actual);
+        self::assertCount(3, $repo->getComponents());
+        self::assertContains($component1, $repo->getComponents());
+        self::assertContains($component2, $repo->getComponents());
+        self::assertContains($component3, $repo->getComponents());
     }
 
-    public function testCount(): void
-    {
-        $component1 = $this->createStub(Component::class);
-        $component2 = $this->createStub(Component::class);
+    /**
+     * @param Component[] $expected
+     *
+     * @dataProvider dpFindComponents
+     */
+    public function testFindComponents(
+        ComponentRepository $repo,
+        string $findName,
+        ?string $findGroup,
+        array $expectedFindings
+    ): void {
+        $actual = $repo->findComponents($findName, $findGroup);
 
-        $repo = new ComponentRepository($component1);
-        $repo->addComponent($component2);
-
-        self::assertSame(2, $repo->count());
+        self::assertSameSize($expectedFindings, $actual);
+        foreach ($expectedFindings as $expectedFinding) {
+            self::assertContains($expectedFinding, $actual);
+        }
     }
 
-    public function testConstructAndGet(): void
+    public function dpFindComponents(): Generator
     {
-        $component1 = $this->createStub(Component::class);
-        $component2 = $this->createStub(Component::class);
+        yield 'nothing in empty' => [
+            new ComponentRepository(),
+            'foo',
+            'bar',
+            [],
+        ];
 
-        $repo = new ComponentRepository($component1, $component2);
-        $got = $repo->getComponents();
+        $component1 = $this->createConfiguredMock(
+            Component::class,
+            [
+                'getName' => 'foo',
+                'getGroup' => null,
+            ]
+        );
+        $component2 = $this->createConfiguredMock(
+            Component::class,
+            [
+                'getName' => 'foo',
+                'getGroup' => 'bar',
+            ]
+        );
+        $component3 = $this->createConfiguredMock(
+            Component::class,
+            [
+                'getName' => 'foo',
+                'getGroup' => 'bar',
+            ]
+        );
+        $components = new ComponentRepository($component1, $component2, $component3);
+        yield 'single empty group' => [
+            $components,
+            'foo',
+            '',
+            [$component1],
+        ];
 
-        self::assertCount(2, $got);
-        self::assertContains($component1, $got);
-        self::assertContains($component2, $got);
+        yield 'single no group' => [
+            $components,
+            'foo',
+            null,
+            [$component1],
+        ];
+
+        yield 'multiple' => [
+            $components,
+            'foo',
+            'bar',
+            [$component2, $component3],
+        ];
     }
 }

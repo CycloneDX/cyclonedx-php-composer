@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "11b0fed7055fd94d4eb0a8bcd342adc3",
+    "content-hash": "f25715c307d920abd97b22d5cc296297",
     "packages": [
         {
             "name": "cyclonedx-demo/local-demo-dependency",
@@ -12,6 +12,9 @@
             "dist": {
                 "type": "path",
                 "url": "packages/local-demo-dependency"
+            },
+            "require": {
+                "cyclonedx-demo/local-dependency-with-minimal-setup": "@dev"
             },
             "type": "library",
             "description": "a package that is hosted locally and required in a local demo",
@@ -300,16 +303,16 @@
         },
         {
             "name": "swaggest/json-schema",
-            "version": "v0.12.35",
+            "version": "v0.12.36",
             "source": {
                 "type": "git",
                 "url": "https://github.com/swaggest/php-json-schema.git",
-                "reference": "d0126bd830c92a498691d278f01d3ce13a2c9c0a"
+                "reference": "cbdf1d92d45ace7e1152714ba878bc57ba896461"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swaggest/php-json-schema/zipball/d0126bd830c92a498691d278f01d3ce13a2c9c0a",
-                "reference": "d0126bd830c92a498691d278f01d3ce13a2c9c0a",
+                "url": "https://api.github.com/repos/swaggest/php-json-schema/zipball/cbdf1d92d45ace7e1152714ba878bc57ba896461",
+                "reference": "cbdf1d92d45ace7e1152714ba878bc57ba896461",
                 "shasum": ""
             },
             "require": {
@@ -343,16 +346,15 @@
             "support": {
                 "email": "vearutop@gmail.com",
                 "issues": "https://github.com/swaggest/php-json-schema/issues",
-                "source": "https://github.com/swaggest/php-json-schema/tree/v0.12.35"
+                "source": "https://github.com/swaggest/php-json-schema/tree/v0.12.36"
             },
-            "time": "2021-06-17T22:28:26+00:00"
+            "time": "2021-07-13T22:20:37+00:00"
         }
     ],
     "aliases": [],
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "stability-flags": {
         "cyclonedx-demo/local-demo-dependency": 20,
-        "cyclonedx-demo/local-dependency-with-minimal-setup": 20,
         "cyclonedx/cyclonedx-php-composer": 20
     },
     "prefer-stable": true,
