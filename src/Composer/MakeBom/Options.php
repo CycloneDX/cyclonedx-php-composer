@@ -199,7 +199,9 @@ class Options
         $excludePlugins = false !== $input->getOption(self::SWITCH_EXCLUDE_PLUGINS);
         $skipOutputValidation = false !== $input->getOption(self::SWITCH_NO_VALIDATE);
         $outputFile = $input->getOption(self::OPTION_OUTPUT_FILE);
+        \assert(null === $outputFile || \is_string($outputFile));
         $composerFile = $input->getArgument(self::ARGUMENT_COMPOSER_FILE);
+        \assert(null === $composerFile || \is_string($composerFile));
 
         // endregion get from input
 
