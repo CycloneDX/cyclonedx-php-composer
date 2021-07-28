@@ -23,6 +23,7 @@ declare(strict_types=1);
 
 namespace CycloneDX\Tests\Composer\Factories;
 
+use Composer\Package\AliasPackage;
 use Composer\Package\CompletePackageInterface;
 use Composer\Package\PackageInterface;
 use CycloneDX\Composer\Factories\ComponentFactory;
@@ -216,9 +217,9 @@ class ComponentFactoryTest extends TestCase
     ): void {
         $factory = new ComponentFactory($licenseFactory ?? $this->createStub(LicenseFactory::class));
 
-        $got = $factory->makeFromPackages($packages);
+        $actual = $factory->makeFromPackages($packages);
 
-        self::assertEquals($expected, $got);
+        self::assertEquals($expected, $actual);
     }
 
     public function dpMakeFromPackages(): \Generator
@@ -226,11 +227,25 @@ class ComponentFactoryTest extends TestCase
         yield 'empty' => [[], null, null];
 
         $dpMakeFromPackage = $this->dpMakeFromPackage();
-        [$package, $expected, $licenseFactory] = $this->dpMakeFromPackage()->current();
-        yield $dpMakeFromPackage->key() => [
-            [$package],
+        $dpMakeFromPackage->rewind();
+
+        [$package, $expected, $licenseFactory] = $dpMakeFromPackage->current();
+
+        yield 'skip alias: '.$dpMakeFromPackage->key() => [
+            [
+                $this->createConfiguredMock(AliasPackage::class, ['getAliasOf' => $package]),
+                $package,
+            ],
             new ComponentRepository($expected),
             $licenseFactory,
         ];
+
+        foreach ($dpMakeFromPackage as [$package, $expected, $licenseFactory]) {
+            yield $dpMakeFromPackage->key() => [
+                [$package],
+                new ComponentRepository($expected),
+                $licenseFactory,
+            ];
+        }
     }
 }

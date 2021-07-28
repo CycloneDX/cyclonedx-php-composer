@@ -24,6 +24,7 @@ declare(strict_types=1);
 namespace CycloneDX\Tests\Composer\Factories;
 
 use Composer\Package\PackageInterface;
+use Composer\Package\RootPackageInterface;
 use Composer\Repository\LockArrayRepository;
 use CycloneDX\Composer\Factories\BomFactory;
 use CycloneDX\Composer\Factories\ComponentFactory;
@@ -53,18 +54,21 @@ class BomFactoryTest extends TestCase
      * @uses \CycloneDX\Core\Models\Bom
      * @uses \CycloneDX\Core\Models\MetaData
      */
-    public function testMakeForPackageWithComponents(): void
+    public function testMakeForPackageWithRequires(): void
     {
         $componentFactory = $this->createMock(ComponentFactory::class);
         $factory = new BomFactory($componentFactory);
-        $package = $this->createMock(PackageInterface::class);
+        $package = $this->createMock(RootPackageInterface::class);
         $componentsPackages = [$this->createStub(PackageInterface::class)];
-        $components = $this->createConfiguredMock(LockArrayRepository::class, ['getPackages' => $componentsPackages]);
+        $components = $this->createConfiguredMock(
+            LockArrayRepository::class,
+            ['getPackages' => $componentsPackages]
+        );
 
         $componentFactory->expects(self::once())->method('makeFromPackages')
             ->with($componentsPackages)
             ->willReturn($this->createStub(ComponentRepository::class));
 
-        $factory->makeForPackageWithComponents($package, $components);
+        $factory->makeForPackageWithRequires($package, $components);
     }
 }

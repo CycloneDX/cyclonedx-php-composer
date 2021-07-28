@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 ## unreleased
 
+* Fixed
+  * CLI via `composer make-bom`
+    * Will ignore "AliasPackages" when generating the SBoM, since their alias-target is part of the SBoM already.
+
 ## 3.3.0 - 2021-07-25
 
 * Changed

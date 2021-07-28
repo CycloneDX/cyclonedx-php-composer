@@ -23,7 +23,7 @@ declare(strict_types=1);
 
 namespace CycloneDX\Composer\Factories;
 
-use Composer\Package\PackageInterface;
+use Composer\Package\RootPackageInterface;
 use Composer\Repository\LockArrayRepository;
 use CycloneDX\Core\Models\Bom;
 use CycloneDX\Core\Models\MetaData;
@@ -68,17 +68,17 @@ class BomFactory
      * @throws \DomainException          if the bom structure had unexpected values
      * @throws \RuntimeException
      */
-    public function makeForPackageWithComponents(PackageInterface $package, LockArrayRepository $components): Bom
+    public function makeForPackageWithRequires(RootPackageInterface $rootPackage, LockArrayRepository $requires): Bom
     {
         $tools = null === $this->tool ? null : new ToolRepository($this->tool);
-        $bomComponent = $this->componentFactory->makeFromPackage($package);
+        $rootComponent = $this->componentFactory->makeFromPackage($rootPackage);
 
-        $bomMetaData = (new MetaData())
-            ->setComponent($bomComponent)
+        $metadata = (new MetaData())
+            ->setComponent($rootComponent)
             ->setTools($tools);
-        $bomComponents = $this->componentFactory->makeFromPackages($components->getPackages());
+        $components = $this->componentFactory->makeFromPackages($requires->getPackages());
 
-        return (new Bom($bomComponents))
-            ->setMetaData($bomMetaData);
+        return (new Bom($components))
+            ->setMetaData($metadata);
     }
 }
