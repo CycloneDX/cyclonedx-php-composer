@@ -46,6 +46,9 @@
         "sort-packages": true
     },
     "extra": {
+        "branch-alias": {
+            "dev-master": "3.x-dev"
+        },
         "class": "CycloneDX\\Composer\\Plugin",
         "composer-normalize": {
             "indent-size": 4,
