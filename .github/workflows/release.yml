@@ -1,7 +1,10 @@
 # This workflow is used for publishing releases.
 #
-# Before triggering a release the `semver.txt` file should be updated in the
+# Before triggering a release the `../../semver.txt` file should be updated in the
 # relevant branch.
+#
+# Before triggering a major release or when planning a switch:
+# follow the instructions in `../../docs/dev/processes/major_version_switch.md`.
 #
 # When committing the version change in `semver.txt` the commit message is
 # important as it will be used for the release in GitHub.
