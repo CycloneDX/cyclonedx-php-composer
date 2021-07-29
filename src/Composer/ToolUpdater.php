@@ -23,6 +23,7 @@ declare(strict_types=1);
 
 namespace CycloneDX\Composer;
 
+use Composer\Package\AliasPackage;
 use Composer\Repository\LockArrayRepository;
 use Composer\Semver\Constraint\MatchAllConstraint;
 use CycloneDX\Composer\Factories\ComponentFactory;
@@ -59,13 +60,18 @@ class ToolUpdater
             return false;
         }
 
-        $package = $lockRepo->findPackage($toolComposerName, new MatchAllConstraint());
-        if (null === $package) {
+        $packages = array_filter(
+            $lockRepo->findPackages($toolComposerName, new MatchAllConstraint()),
+            static function ($p): bool {
+                return false === $p instanceof AliasPackage;
+            }
+        );
+        if (empty($packages)) {
             return false;
         }
 
         try {
-            $component = $this->componentFactory->makeFromPackage($package);
+            $component = $this->componentFactory->makeFromPackage(reset($packages));
         } catch (\Throwable $exception) {
             return false;
         }

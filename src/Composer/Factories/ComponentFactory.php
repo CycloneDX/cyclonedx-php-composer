@@ -23,6 +23,7 @@ declare(strict_types=1);
 
 namespace CycloneDX\Composer\Factories;
 
+use Composer\Package\AliasPackage;
 use Composer\Package\CompletePackageInterface;
 use Composer\Package\PackageInterface;
 use CycloneDX\Core\Enums\Classification;
@@ -83,10 +84,15 @@ class ComponentFactory
 
         $components = array_map(
             [$this, 'makeFromPackage'],
-            array_values($packages)
+            array_filter(
+                $packages,
+                static function ($p): bool {
+                    return false === $p instanceof AliasPackage;
+                }
+            )
         );
 
-        return new ComponentRepository(...$components);
+        return new ComponentRepository(...array_values($components));
     }
 
     /**

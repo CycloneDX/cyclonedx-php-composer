@@ -23,6 +23,7 @@ declare(strict_types=1);
 
 namespace CycloneDX\Tests\Composer;
 
+use Composer\Package\AliasPackage;
 use Composer\Package\PackageInterface;
 use Composer\Repository\LockArrayRepository;
 use Composer\Semver\Constraint\MatchAllConstraint;
@@ -53,6 +54,7 @@ class ToolUpdaterTest extends TestCase
         $lockRepo = $this->createMock(LockArrayRepository::class);
         $hashes = $this->createStub(HashRepository::class);
         $package = $this->createStub(PackageInterface::class);
+        $alias = $this->createStub(AliasPackage::class);
         $component = $this->createConfiguredMock(
             Component::class,
             [
@@ -61,9 +63,9 @@ class ToolUpdaterTest extends TestCase
             ]
         );
 
-        $lockRepo->method('findPackage')
+        $lockRepo->method('findPackages')
             ->with('myVendor/myName', new IsInstanceOf(MatchAllConstraint::class))
-            ->willReturn($package);
+            ->willReturn([$alias, $package]);
 
         $componentFactory->method('makeFromPackage')
             ->with($package)
@@ -113,9 +115,9 @@ class ToolUpdaterTest extends TestCase
         );
         $lockRepo = $this->createMock(LockArrayRepository::class);
 
-        $lockRepo->method('findPackage')
+        $lockRepo->method('findPackages')
             ->with('myVendor/myName', new IsInstanceOf(MatchAllConstraint::class))
-            ->willReturn(null);
+            ->willReturn([]);
 
         $tool->expects(self::never())
             ->method('setVersion');
@@ -142,9 +144,9 @@ class ToolUpdaterTest extends TestCase
         $lockRepo = $this->createMock(LockArrayRepository::class);
         $package = $this->createStub(PackageInterface::class);
 
-        $lockRepo->method('findPackage')
+        $lockRepo->method('findPackages')
             ->with('myVendor/myName', new IsInstanceOf(MatchAllConstraint::class))
-            ->willReturn($package);
+            ->willReturn([$package]);
 
         $componentFactory->method('makeFromPackage')
             ->with($package)

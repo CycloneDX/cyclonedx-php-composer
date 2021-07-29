@@ -160,10 +160,10 @@ class Command extends BaseCommand
         $io = $this->getIO();
         $io->writeError('<info>Generate BOM</info>', true, IOInterface::VERBOSE);
 
-        $package = $composer->getPackage();
+        $rootPackage = $composer->getPackage();
         $components = $this->factory->makeLockerFromComposerForOptions($composer, $this->options);
 
-        $bom = $this->bomFactory->makeForPackageWithComponents($package, $components);
+        $bom = $this->bomFactory->makeForPackageWithRequires($rootPackage, $components);
 
         $io->writeErrorRaw('Bom: '.print_r($bom, true), true, IOInterface::DEBUG);
 
