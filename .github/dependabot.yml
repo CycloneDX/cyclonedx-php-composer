@@ -3,9 +3,6 @@
 version: 2
 updates:
   - package-ecosystem: 'composer'
-    # some sub-dirs of `demo/` are marked as vendored via `.gitattributes`.
-    # it is intended to maintain this dir manually.
-    # vendor: false ## adding this line back in causes issue#61
     directory: '/'
     schedule:
       interval: 'weekly'
@@ -19,12 +16,84 @@ updates:
       prefix: 'composer'
       include: 'scope'
     open-pull-requests-limit: 999
+
+  - directory: '/tools/composer-normalize'
+    package-ecosystem: 'composer'
+    schedule:
+      interval: 'weekly'
+      day: 'saturday'
+    allow:
+      - dependency-type: 'all'
+    versioning-strategy: 'auto'
+    labels: [ 'dependencies', 'tools' ]
+    commit-message:
+      ## prefix maximum string length of 15
+      prefix: 'tools'
+      include: 'scope'
+    open-pull-requests-limit: 999
+  - directory: '/tools/composer-require-checker'
+    package-ecosystem: 'composer'
+    schedule:
+      interval: 'weekly'
+      day: 'saturday'
+    allow:
+      - dependency-type: 'all'
+    versioning-strategy: 'auto'
+    labels: [ 'dependencies', 'tools' ]
+    commit-message:
+      ## prefix maximum string length of 15
+      prefix: 'tools'
+      include: 'scope'
+    open-pull-requests-limit: 999
+  - directory: '/tools/composer-unused'
+    package-ecosystem: 'composer'
+    schedule:
+      interval: 'weekly'
+      day: 'saturday'
+    allow:
+      - dependency-type: 'all'
+    versioning-strategy: 'auto'
+    labels: [ 'dependencies', 'tools' ]
+    commit-message:
+      ## prefix maximum string length of 15
+      prefix: 'tools'
+      include: 'scope'
+    open-pull-requests-limit: 999
+  - directory: '/tools/php-cs-fixer'
+    package-ecosystem: 'composer'
+    schedule:
+      interval: 'weekly'
+      day: 'saturday'
+    allow:
+      - dependency-type: 'all'
+    versioning-strategy: 'auto'
+    labels: [ 'dependencies', 'tools' ]
+    commit-message:
+      ## prefix maximum string length of 15
+      prefix: 'tools'
+      include: 'scope'
+    open-pull-requests-limit: 999
+  - directory: '/tools/psalm'
+    package-ecosystem: 'composer'
+    schedule:
+      interval: 'weekly'
+      day: 'saturday'
+    allow:
+      - dependency-type: 'all'
+    versioning-strategy: 'auto'
+    labels: [ 'dependencies', 'tools' ]
+    commit-message:
+      ## prefix maximum string length of 15
+      prefix: 'tools'
+      include: 'scope'
+    open-pull-requests-limit: 999
+
   - package-ecosystem: 'github-actions'
     directory: '/'
     schedule:
       interval: 'weekly'
       day: 'saturday'
-    labels: [ 'dependencies' ]
+    labels: [ 'dependencies', 'CI' ]
     commit-message:
       ## prefix maximum string length of 15
       prefix: 'gh-actions'

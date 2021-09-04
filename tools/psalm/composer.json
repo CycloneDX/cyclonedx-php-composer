@@ -2,10 +2,8 @@
     "name": "tools/psalm",
     "type": "metapackage",
     "description": "psalm and plugins",
-    "require": {
-        "vimeo/psalm": "4.8.1"
-    },
     "require-dev": {
+        "vimeo/psalm": "4.8.1",
         "roave/security-advisories": "dev-latest"
     },
     "config": {
