@@ -122,11 +122,7 @@ class ComponentFactory
 
         $type = $this->getComponentType($package);
 
-        /**
-         * @psalm-suppress DocblockTypeContradiction since return value happened to be `null` for local packages
-         * @psalm-suppress RedundantConditionGivenDocblockType since return value happened to be `null` for local packages
-         */
-        $sha1sum = $package->getDistSha1Checksum() ?? '';
+        $sha1sum = $package->getDistSha1Checksum();
 
         /** @psalm-suppress MissingThrowsDocblock */
         $component = (new Component($type, $name, $version))
@@ -146,7 +142,7 @@ class ComponentFactory
         }
         // @codeCoverageIgnoreEnd
 
-        if ('' !== $sha1sum) {
+        if (!empty($sha1sum)) {
             $component->setHashRepository(new HashRepository([HashAlgorithm::SHA_1 => $sha1sum]));
             if (null !== $purl) {
                 $purl->setChecksums(["sha1:$sha1sum"]);
