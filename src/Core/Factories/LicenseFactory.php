@@ -93,7 +93,7 @@ class LicenseFactory
     {
         try {
             return $this->makeDisjunctiveWithId($license);
-        } catch (UnexpectedValueException | DomainException $exception) {
+        } catch (UnexpectedValueException|DomainException $exception) {
             return $this->makeDisjunctiveWithName($license);
         }
     }
