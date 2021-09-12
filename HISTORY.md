@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## unreleased
 
+## 3.4.0 - 2021-09-12
+
 * Changed
   * Core library
     * Some repository data-types are lists of unique items, so no duplicates are kept.   
