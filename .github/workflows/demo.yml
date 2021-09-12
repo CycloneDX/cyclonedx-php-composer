@@ -2,6 +2,8 @@
 # docs: https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions
 name: DEMO
 
+# @TODO make this an integration test
+
 on:
   push:
     branches: ["master"]

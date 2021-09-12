@@ -29,6 +29,7 @@ use CycloneDX\Core\Repositories\ComponentRepository;
 use CycloneDX\Core\Serialize\DOM\NormalizerFactory;
 use CycloneDX\Core\Serialize\DOM\Normalizers\BomNormalizer;
 use CycloneDX\Core\Serialize\DOM\Normalizers\ComponentRepositoryNormalizer;
+use CycloneDX\Core\Serialize\DOM\Normalizers\DependenciesNormalizer;
 use CycloneDX\Core\Serialize\DOM\Normalizers\MetaDataNormalizer;
 use CycloneDX\Core\Spec\SpecInterface;
 use CycloneDX\Tests\_traits\DomNodeAssertionTrait;
@@ -62,13 +63,13 @@ class BomNormalizerTest extends TestCase
             ]
         );
 
-        $got = $normalizer->normalize($bom);
+        $actual = $normalizer->normalize($bom);
 
         self::assertStringEqualsDomNode(
             '<bom xmlns="http://cyclonedx.org/schema/bom/1.2" version="23">'.
             '<components></components>'.
             '</bom>',
-            $got
+            $actual
         );
     }
 
@@ -98,13 +99,13 @@ class BomNormalizerTest extends TestCase
             ->with($bom->getComponentRepository())
             ->willReturn([$factory->getDocument()->createElement('FakeComponent', 'dummy')]);
 
-        $got = $normalizer->normalize($bom);
+        $actual = $normalizer->normalize($bom);
 
         self::assertStringEqualsDomNode(
             '<bom xmlns="http://cyclonedx.org/schema/bom/1.2" version="23">'.
             '<components><FakeComponent>dummy</FakeComponent></components>'.
             '</bom>',
-            $got
+            $actual
         );
     }
 
@@ -117,13 +118,13 @@ class BomNormalizerTest extends TestCase
                 'supportsMetaData' => true,
             ]
         );
-        $metaDataNormalizer = $this->createMock(MetaDataNormalizer::class);
+        $metadataNormalizer = $this->createMock(MetaDataNormalizer::class);
         $factory = $this->createConfiguredMock(
             NormalizerFactory::class,
             [
                 'getSpec' => $spec,
                 'getDocument' => new DOMDocument(),
-                'makeForMetaData' => $metaDataNormalizer,
+                'makeForMetaData' => $metadataNormalizer,
             ]
         );
         $normalizer = new BomNormalizer($factory);
@@ -135,19 +136,19 @@ class BomNormalizerTest extends TestCase
             ]
         );
 
-        $metaDataNormalizer->expects(self::once())
+        $metadataNormalizer->expects(self::once())
             ->method('normalize')
             ->with($bom->getMetaData())
             ->willReturn($factory->getDocument()->createElement('metadata', 'FakeMetaData'));
 
-        $got = $normalizer->normalize($bom);
+        $actual = $normalizer->normalize($bom);
 
         self::assertStringEqualsDomNode(
             '<bom xmlns="http://cyclonedx.org/schema/bom/1.2" version="23">'.
             '<metadata>FakeMetaData</metadata>'.
             '<components></components>'.
             '</bom>',
-            $got
+            $actual
         );
     }
 
@@ -160,13 +161,13 @@ class BomNormalizerTest extends TestCase
                 'supportsMetaData' => false,
             ]
         );
-        $metaDataNormalizer = $this->createMock(MetaDataNormalizer::class);
+        $metadataNormalizer = $this->createMock(MetaDataNormalizer::class);
         $factory = $this->createConfiguredMock(
             NormalizerFactory::class,
             [
                 'getSpec' => $spec,
                 'getDocument' => new DOMDocument(),
-                'makeForMetaData' => $metaDataNormalizer,
+                'makeForMetaData' => $metadataNormalizer,
             ]
         );
         $normalizer = new BomNormalizer($factory);
@@ -178,17 +179,103 @@ class BomNormalizerTest extends TestCase
             ]
         );
 
-        $metaDataNormalizer->method('normalize')
+        $metadataNormalizer->method('normalize')
             ->with($bom->getMetaData())
             ->willReturn($factory->getDocument()->createElement('metadata', 'FakeMetaData'));
 
-        $got = $normalizer->normalize($bom);
+        $actual = $normalizer->normalize($bom);
 
         self::assertStringEqualsDomNode(
             '<bom xmlns="http://cyclonedx.org/schema/bom/1.2" version="23">'.
             '<components></components>'.
             '</bom>',
-            $got
+            $actual
+        );
+    }
+
+    public function testNormalizeDependencies(): void
+    {
+        $spec = $this->createConfiguredMock(
+            SpecInterface::class,
+            [
+                'getVersion' => '1.2',
+                'supportsDependencies' => true,
+            ]
+        );
+        $dependencyNormalizer = $this->createMock(DependenciesNormalizer::class);
+        $factory = $this->createConfiguredMock(
+            NormalizerFactory::class,
+            [
+                'getSpec' => $spec,
+                'getDocument' => new DOMDocument(),
+                'makeForDependencies' => $dependencyNormalizer,
+            ]
+        );
+        $normalizer = new BomNormalizer($factory);
+        $bom = $this->createConfiguredMock(
+            Bom::class,
+            [
+                'getVersion' => 23,
+                'getMetaData' => $this->createStub(MetaData::class),
+            ]
+        );
+
+        $dependencyNormalizer->expects(self::once())
+            ->method('normalize')
+            ->with($bom)
+            ->willReturn([$factory->getDocument()->createElement('FakeDependencies', 'faked')]);
+
+        $actual = $normalizer->normalize($bom);
+
+        self::assertStringEqualsDomNode(
+            '<bom xmlns="http://cyclonedx.org/schema/bom/1.2" version="23">'.
+            '<components></components>'.
+            '<dependencies><FakeDependencies>faked</FakeDependencies></dependencies>'.
+            '</bom>',
+            $actual
+        );
+    }
+
+    public function testNormalizeDependenciesOmitWhenEmpty(): void
+    {
+        $spec = $this->createConfiguredMock(
+            SpecInterface::class,
+            [
+                'getVersion' => '1.2',
+                'supportsDependencies' => true,
+            ]
+        );
+        $dependencyNormalizer = $this->createMock(DependenciesNormalizer::class);
+        $factory = $this->createConfiguredMock(
+            NormalizerFactory::class,
+            [
+                'getSpec' => $spec,
+                'getDocument' => new DOMDocument(),
+                'makeForDependencies' => $dependencyNormalizer,
+            ]
+        );
+        $normalizer = new BomNormalizer($factory);
+        $bom = $this->createConfiguredMock(
+            Bom::class,
+            [
+                'getVersion' => 23,
+                'getMetaData' => $this->createStub(MetaData::class),
+            ]
+        );
+
+        $dependencyNormalizer->expects(self::once())
+            ->method('normalize')
+            ->with($bom)
+            ->willReturn([]);
+
+        $actual = $normalizer->normalize($bom);
+
+        self::assertStringEqualsDomNode(
+            '<bom xmlns="http://cyclonedx.org/schema/bom/1.2" version="23">'.
+            '<components></components>'.
+            // 'dependencies' is unset,
+            '</bom>',
+            $actual
         );
     }
 }

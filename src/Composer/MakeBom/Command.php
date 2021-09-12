@@ -26,7 +26,7 @@ namespace CycloneDX\Composer\MakeBom;
 use Composer\Command\BaseCommand;
 use Composer\Composer;
 use Composer\IO\IOInterface;
-use CycloneDX\Composer\Factories\BomFactory;
+use CycloneDX\Composer\Builders\BomBuilder;
 use CycloneDX\Composer\MakeBom\Exceptions\ValueError;
 use CycloneDX\Composer\ToolUpdater;
 use CycloneDX\Core\Models\Bom;
@@ -56,7 +56,7 @@ class Command extends BaseCommand
     private $factory;
 
     /**
-     * @var BomFactory
+     * @var \CycloneDX\Composer\Builders\BomBuilder
      */
     private $bomFactory;
 
@@ -71,7 +71,7 @@ class Command extends BaseCommand
     public function __construct(
         Options $options,
         Factory $factory,
-        BomFactory $bomFactory,
+        BomBuilder $bomFactory,
         ?ToolUpdater $toolUpdater,
         ?string $name = null
     ) {
@@ -181,9 +181,8 @@ class Command extends BaseCommand
         $bomWriter = $this->factory->makeSerializerFromOptions($this->options);
         $io->writeError(
             sprintf(
-                '<info>Serialize BOM with %s for %s</info>',
-                OutputFormatter::escape(\get_class($bomWriter)),
-                OutputFormatter::escape($bomWriter->getSpec()->getVersion())
+                '<info>Serialize BOM with %s</info>',
+                OutputFormatter::escape(\get_class($bomWriter))
             ),
             true,
             IOInterface::VERY_VERBOSE
@@ -237,11 +236,6 @@ class Command extends BaseCommand
 
     private function updateTool(): ?bool
     {
-        $tool = $this->bomFactory->getTool();
-        if (null === $tool) {
-            return null;
-        }
-
         $updater = $this->toolUpdater;
         if (null === $updater) {
             return null;
@@ -255,8 +249,9 @@ class Command extends BaseCommand
 
             $withDevReqs = !empty($composer->getLocker()->getDevPackageNames());
             $lockerRepo = $composer->getLocker()->getLockedRepository($withDevReqs);
+            // @TODO better use the installed-repo than the lockerRepo - as of milestone v4
 
-            return $updater->updateTool($tool, $lockerRepo);
+            return $updater->updateTool($this->bomFactory->getTool(), $lockerRepo);
         } catch (\Exception $exception) {
             return false;
         }

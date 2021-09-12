@@ -50,18 +50,28 @@ class ComponentNormalizer extends AbstractNormalizer
         $group = $component->getGroup();
         $version = $component->getVersion();
 
+        $factory = $this->getNormalizerFactory();
+        $spec = $factory->getSpec();
+
         $type = $component->getType();
-        if (false === $this->getNormalizerFactory()->getSpec()->isSupportedComponentType($type)) {
+        if (false === $spec->isSupportedComponentType($type)) {
             $reportFQN = "$group/$name@$version";
             throw new DomainException("Component '$reportFQN' has unsupported type: $type");
         }
 
-        $document = $this->getNormalizerFactory()->getDocument();
+        $bomRef = $spec->supportsBomRef()
+            ? $component->getBomRef()->getValue()
+            : null;
+
+        $document = $factory->getDocument();
 
         return $this->simpleDomAppendChildren(
             $this->simpleDomSetAttributes(
                 $document->createElement('component'),
-                ['type' => $type]
+                [
+                    'type' => $type,
+                    'bom-ref' => $bomRef,
+                ]
             ),
             [
                 // publisher

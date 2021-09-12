@@ -72,4 +72,14 @@ interface SpecInterface
      * version < 1.2 does not support MetaData.
      */
     public function supportsMetaData(): bool;
+
+    /**
+     * version < 1.2 does not support BomRef.
+     */
+    public function supportsBomRef(): bool;
+
+    /**
+     * version < 1.2 does not support BomRef.
+     */
+    public function supportsDependencies(): bool;
 }

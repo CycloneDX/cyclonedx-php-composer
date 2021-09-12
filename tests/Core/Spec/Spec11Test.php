@@ -56,4 +56,14 @@ class Spec11Test extends AbstractSpecTestCase
     {
         return false;
     }
+
+    public function shouldSupportBomRef(): bool
+    {
+        return false;
+    }
+
+    public function shouldSupportDependencies(): bool
+    {
+        return false;
+    }
 }

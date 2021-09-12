@@ -48,6 +48,7 @@ class BomNormalizer extends AbstractNormalizer
                 'version' => $bom->getVersion(),
                 'metadata' => $this->normalizeMetaData($bom->getMetaData()),
                 'components' => $factory->makeForComponentRepository()->normalize($bom->getComponentRepository()),
+                'dependencies' => $this->normalizeDependencies($bom),
             ],
             [$this, 'isNotNull']
         );
@@ -66,6 +67,21 @@ class BomNormalizer extends AbstractNormalizer
         }
 
         $data = $factory->makeForMetaData()->normalize($metaData);
+
+        return empty($data)
+            ? null
+            : $data;
+    }
+
+    private function normalizeDependencies(Bom $bom): ?array
+    {
+        $factory = $this->getNormalizerFactory();
+
+        if (false === $factory->getSpec()->supportsDependencies()) {
+            return null;
+        }
+
+        $data = $factory->makeForDependencies()->normalize($bom);
 
         return empty($data)
             ? null

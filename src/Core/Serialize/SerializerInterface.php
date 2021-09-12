@@ -24,7 +24,6 @@ declare(strict_types=1);
 namespace CycloneDX\Core\Serialize;
 
 use CycloneDX\Core\Models\Bom;
-use CycloneDX\Core\Spec\SpecInterface;
 
 /**
  * @author jkowalleck
@@ -32,14 +31,9 @@ use CycloneDX\Core\Spec\SpecInterface;
 interface SerializerInterface
 {
     /**
-     * Serialize a {@see \CycloneDX\Core\Models\Bom} to a string.
+     * Serialize a {@see \CycloneDX\Core\Models\Bom} to string.
      *
-     * May throw {@see \RuntimeException} if spec version is not supported.
-     * May throw additional implementation-dependent Exceptions.
+     * May throw implementation-dependent Exceptions.
      */
     public function serialize(Bom $bom): string;
-
-    public function __construct(SpecInterface $spec);
-
-    public function getSpec(): SpecInterface;
 }

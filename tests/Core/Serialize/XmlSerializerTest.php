@@ -30,17 +30,18 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @covers \CycloneDX\Core\Serialize\XmlSerializer
+ *
+ * @uses   \CycloneDX\Core\Serialize\BaseSerializer
  */
 class XmlSerializerTest extends TestCase
 {
     /**
-     * @covers \CycloneDX\Core\Serialize\XmlSerializer
-     *
      * @uses   \CycloneDX\Core\Serialize\DOM\AbstractNormalizer
      * @uses   \CycloneDX\Core\Serialize\DOM\NormalizerFactory
      * @uses   \CycloneDX\Core\Serialize\DOM\Normalizers\BomNormalizer
      * @uses   \CycloneDX\Core\Serialize\DOM\Normalizers\ComponentRepositoryNormalizer
      * @uses   \CycloneDX\Core\Serialize\DOM\Normalizers\ComponentNormalizer
+     * @uses   \CycloneDX\Core\Serialize\BomRefDiscriminator
      */
     public function testSerialize(): void
     {

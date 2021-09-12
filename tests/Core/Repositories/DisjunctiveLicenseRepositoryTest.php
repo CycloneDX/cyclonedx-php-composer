@@ -33,42 +33,41 @@ use PHPUnit\Framework\TestCase;
  */
 class DisjunctiveLicenseRepositoryTest extends TestCase
 {
-    public function testAddAndGetLicense(): void
+    public function testEmptyConstructor(): void
+    {
+        $repo = new DisjunctiveLicenseRepository();
+
+        self::assertCount(0, $repo);
+        self::assertSame([], $repo->getLicenses());
+    }
+
+    public function testNonEmptyConstruct(): void
+    {
+        $license1 = $this->createStub(DisjunctiveLicenseWithId::class);
+        $license2 = $this->createStub(DisjunctiveLicenseWithName::class);
+
+        $repo = new DisjunctiveLicenseRepository($license1, $license2, $license1, $license2);
+
+        self::assertCount(2, $repo);
+        self::assertCount(2, $repo->getLicenses());
+        self::assertContains($license1, $repo->getLicenses());
+        self::assertContains($license2, $repo->getLicenses());
+    }
+
+    public function testAddLicense(): void
     {
         $license1 = $this->createStub(DisjunctiveLicenseWithName::class);
         $license2 = $this->createStub(DisjunctiveLicenseWithId::class);
         $license3 = $this->createStub(DisjunctiveLicenseWithName::class);
-        $repo = new DisjunctiveLicenseRepository($license1);
-
-        $repo->addLicense($license2, $license3);
-
-        $got = $repo->getLicenses();
-
-        self::assertCount(3, $got);
-        self::assertContains($license1, $got);
-        self::assertContains($license2, $got);
-        self::assertContains($license3, $got);
-    }
-
-    public function testConstructAndGet(): void
-    {
-        $license1 = $this->createStub(DisjunctiveLicenseWithId::class);
-        $license2 = $this->createStub(DisjunctiveLicenseWithName::class);
         $repo = new DisjunctiveLicenseRepository($license1, $license2);
-        $got = $repo->getLicenses();
 
-        self::assertCount(2, $got);
-        self::assertContains($license1, $got);
-        self::assertContains($license2, $got);
-    }
+        $actual = $repo->addLicense($license2, $license3, $license3);
 
-    public function testCount(): void
-    {
-        $license1 = $this->createStub(DisjunctiveLicenseWithId::class);
-        $license2 = $this->createStub(DisjunctiveLicenseWithName::class);
-        $repo = new DisjunctiveLicenseRepository($license1);
-        $repo->addLicense($license2);
-
-        self::assertSame(2, $repo->count());
+        self::assertSame($repo, $actual);
+        self::assertCount(3, $repo);
+        self::assertCount(3, $repo->getLicenses());
+        self::assertContains($license1, $repo->getLicenses());
+        self::assertContains($license2, $repo->getLicenses());
+        self::assertContains($license3, $repo->getLicenses());
     }
 }

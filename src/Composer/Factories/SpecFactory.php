@@ -35,7 +35,7 @@ use UnexpectedValueException;
  *
  * @author jkowalleck
  */
-final class SpecFactory
+class SpecFactory
 {
     public const VERSION_LATEST = Version::V_1_3;
 

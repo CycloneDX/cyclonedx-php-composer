@@ -26,7 +26,7 @@ namespace CycloneDX\Composer;
 use Composer\Package\AliasPackage;
 use Composer\Repository\LockArrayRepository;
 use Composer\Semver\Constraint\MatchAllConstraint;
-use CycloneDX\Composer\Factories\ComponentFactory;
+use CycloneDX\Composer\Builders\ComponentBuilder;
 use CycloneDX\Core\Models\Tool;
 
 /**
@@ -37,13 +37,13 @@ use CycloneDX\Core\Models\Tool;
 class ToolUpdater
 {
     /**
-     * @var ComponentFactory
+     * @var ComponentBuilder
      */
-    private $componentFactory;
+    private $componentBuilder;
 
-    public function __construct(ComponentFactory $componentFactory)
+    public function __construct(ComponentBuilder $componentBuilder)
     {
-        $this->componentFactory = $componentFactory;
+        $this->componentBuilder = $componentBuilder;
     }
 
     /**
@@ -71,7 +71,7 @@ class ToolUpdater
         }
 
         try {
-            $component = $this->componentFactory->makeFromPackage(reset($packages));
+            $component = $this->componentBuilder->makeFromPackage(reset($packages));
         } catch (\Throwable $exception) {
             return false;
         }

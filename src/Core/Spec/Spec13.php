@@ -77,4 +77,14 @@ final class Spec13 implements SpecInterface
     {
         return true;
     }
+
+    public function supportsBomRef(): bool
+    {
+        return true;
+    }
+
+    public function supportsDependencies(): bool
+    {
+        return true;
+    }
 }

@@ -21,44 +21,44 @@ declare(strict_types=1);
  * Copyright (c) Steve Springett. All Rights Reserved.
  */
 
-namespace CycloneDX\Tests\Composer\Factories;
+namespace CycloneDX\Tests\Composer\Builders;
 
-use Composer\Package\AliasPackage;
 use Composer\Package\CompletePackageInterface;
 use Composer\Package\PackageInterface;
-use CycloneDX\Composer\Factories\ComponentFactory;
+use CycloneDX\Composer\Builders\ComponentBuilder;
 use CycloneDX\Composer\Factories\LicenseFactory;
+use CycloneDX\Composer\Factories\PackageUrlFactory;
 use CycloneDX\Core\Enums\HashAlgorithm;
 use CycloneDX\Core\Models\Component;
-use CycloneDX\Core\Repositories\ComponentRepository;
 use CycloneDX\Core\Repositories\DisjunctiveLicenseRepository;
 use CycloneDX\Core\Repositories\HashRepository;
 use PackageUrl\PackageUrl;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \CycloneDX\Composer\Factories\ComponentFactory
+ * @covers \CycloneDX\Composer\Builders\ComponentBuilder
  *
  * @uses   \CycloneDX\Core\Models\Component
+ * @uses   \CycloneDX\Core\Models\BomRef
  */
-class ComponentFactoryTest extends TestCase
+class ComponentBuilderTest extends TestCase
 {
-    public function testLicenseFactoryGetterSetter(): void
+    public function testConstructor(): void
     {
-        $licenseFactory1 = $this->createStub(LicenseFactory::class);
-        $licenseFactory2 = $this->createStub(LicenseFactory::class);
+        $licenseFactory = $this->createMock(LicenseFactory::class);
+        $packageUrlFactory = $this->createMock(PackageUrlFactory::class);
 
-        $factory = new ComponentFactory($licenseFactory1);
-        self::assertSame($licenseFactory1, $factory->getLicenseFactory());
+        $builder = new ComponentBuilder($licenseFactory, $packageUrlFactory);
 
-        $factory->setLicenseFactory($licenseFactory2);
-        self::assertSame($licenseFactory2, $factory->getLicenseFactory());
+        self::assertSame($licenseFactory, $builder->getLicenseFactory());
+        self::assertSame($packageUrlFactory, $builder->getPackageUrlFactory());
     }
 
     public function testMakeFromPackageThrowsOnEmptyName(): void
     {
         $licenseFactory = $this->createStub(LicenseFactory::class);
-        $factory = new ComponentFactory($licenseFactory);
+        $packageUrlFactory = $this->createStub(PackageUrlFactory::class);
+        $builder = new ComponentBuilder($licenseFactory, $packageUrlFactory);
         $package = $this->createConfiguredMock(
             PackageInterface::class,
             [
@@ -69,13 +69,14 @@ class ComponentFactoryTest extends TestCase
         $this->expectException(\UnexpectedValueException::class);
         $this->expectErrorMessageMatches('/package without name/i');
 
-        $factory->makeFromPackage($package);
+        $builder->makeFromPackage($package);
     }
 
     public function testMakeFromPackageThrowsOnEmptyVersion(): void
     {
         $licenseFactory = $this->createStub(LicenseFactory::class);
-        $factory = new ComponentFactory($licenseFactory);
+        $packageUrlFactory = $this->createStub(PackageUrlFactory::class);
+        $builder = new ComponentBuilder($licenseFactory, $packageUrlFactory);
         $package = $this->createConfiguredMock(
             PackageInterface::class,
             [
@@ -87,7 +88,35 @@ class ComponentFactoryTest extends TestCase
         $this->expectException(\UnexpectedValueException::class);
         $this->expectErrorMessageMatches('/package without version/i');
 
-        $factory->makeFromPackage($package);
+        $builder->makeFromPackage($package);
+    }
+
+    /**
+     * @uses \CycloneDX\Core\Enums\Classification::isValidValue
+     * @uses \CycloneDX\Core\Enums\HashAlgorithm::isValidValue
+     * @uses \CycloneDX\Core\Repositories\HashRepository
+     */
+    public function testMakeFromPackageEmptPurlOnThrow(): void
+    {
+        $licenseFactory = $this->createStub(LicenseFactory::class);
+        $packageUrlFactory = $this->createMock(PackageUrlFactory::class);
+        $builder = new ComponentBuilder($licenseFactory, $packageUrlFactory);
+        $package = $this->createConfiguredMock(
+            PackageInterface::class,
+            [
+                'getType' => 'library',
+                'getPrettyName' => 'some-library',
+                'getPrettyVersion' => '1.2.3',
+            ],
+        );
+
+        $packageUrlFactory->expects(self::once())
+            ->method('makeFromComponent')
+            ->willThrowException(new \DomainException());
+
+        $actual = $builder->makeFromPackage($package);
+
+        self::assertNull($actual->getPackageUrl());
     }
 
     /**
@@ -102,11 +131,30 @@ class ComponentFactoryTest extends TestCase
         Component $expected,
         ?LicenseFactory $licenseFactory = null
     ): void {
-        $factory = new ComponentFactory($licenseFactory ?? $this->createStub(LicenseFactory::class));
+        $packageUrlFactory = $this->createMock(PackageUrlFactory::class);
+        $builder = new ComponentBuilder(
+            $licenseFactory ?? $this->createStub(LicenseFactory::class),
+            $packageUrlFactory
+        );
 
-        $got = $factory->makeFromPackage($package);
+        $purlMadeFromComponent = null;
+        $packageUrlFactory->expects(self::once())
+            ->method('makeFromComponent')
+            ->with(
+                $this->callback(
+                    function (Component $c) use (&$purlMadeFromComponent): bool {
+                        $purlMadeFromComponent = $c;
 
-        self::assertEquals($expected, $got);
+                        return true;
+                    }
+                )
+            )
+            ->willReturn($expected->getPackageUrl());
+
+        $actual = $builder->makeFromPackage($package);
+
+        self::assertEquals($expected, $actual);
+        self::assertSame($actual, $purlMadeFromComponent);
     }
 
     public function dpMakeFromPackage(): \Generator
@@ -121,7 +169,8 @@ class ComponentFactoryTest extends TestCase
                 ],
             ),
             (new Component('library', 'some-library', '1.2.3'))
-                ->setPackageUrl((new PackageUrl('composer', 'some-library'))->setVersion('1.2.3')),
+                ->setPackageUrl((new PackageUrl('composer', 'some-library'))->setVersion('1.2.3'))
+                ->setBomRefValue('pkg:composer/some-library@1.2.3'),
             null,
         ];
 
@@ -135,7 +184,8 @@ class ComponentFactoryTest extends TestCase
                 ],
             ),
             (new Component('application', 'some-project', '1.2.3'))
-                ->setPackageUrl((new PackageUrl('composer', 'some-project'))->setVersion('1.2.3')),
+                ->setPackageUrl((new PackageUrl('composer', 'some-project'))->setVersion('1.2.3'))
+                ->setBomRefValue('pkg:composer/some-project@1.2.3'),
             null,
         ];
 
@@ -149,7 +199,8 @@ class ComponentFactoryTest extends TestCase
                 ],
             ),
             (new Component('application', 'some-composer-plugin', '1.2.3'))
-                ->setPackageUrl((new PackageUrl('composer', 'some-composer-plugin'))->setVersion('1.2.3')),
+                ->setPackageUrl((new PackageUrl('composer', 'some-composer-plugin'))->setVersion('1.2.3'))
+                ->setBomRefValue('pkg:composer/some-composer-plugin@1.2.3'),
             null,
         ];
 
@@ -157,14 +208,15 @@ class ComponentFactoryTest extends TestCase
             $this->createConfiguredMock(
                 PackageInterface::class,
                 [
-                    'getType' => 'myTye',
+                    'getType' => 'myType',
                     'getPrettyName' => 'some-inDev',
                     'getPrettyVersion' => 'dev-master',
                     'isDev' => true,
                 ],
             ),
             (new Component('library', 'some-inDev', 'dev-master'))
-                ->setPackageUrl((new PackageUrl('composer', 'some-inDev'))->setVersion('dev-master')),
+                ->setPackageUrl((new PackageUrl('composer', 'some-inDev'))->setVersion('dev-master'))
+                ->setBomRefValue('pkg:composer/some-inDev@dev-master'),
             null,
         ];
 
@@ -180,7 +232,8 @@ class ComponentFactoryTest extends TestCase
         );
         $license = $this->createStub(DisjunctiveLicenseRepository::class);
         $licenseFactory = $this->createMock(LicenseFactory::class);
-        $licenseFactory->expects(self::once())->method('makeFromPackage')
+        $licenseFactory->expects(self::once())
+            ->method('makeFromPackage')
             ->with($completePackage)
             ->willReturn($license);
         yield 'complete library' => [
@@ -195,57 +248,9 @@ class ComponentFactoryTest extends TestCase
                 )
                 ->setDescription('my description')
                 ->setLicense($license)
-                ->setHashRepository(new HashRepository([HashAlgorithm::SHA_1 => '12345678901234567890123456789012'])),
+                ->setHashRepository(new HashRepository([HashAlgorithm::SHA_1 => '12345678901234567890123456789012']))
+                ->setBomRefValue('pkg:composer/my/package@1.2.3?checksum=sha1:12345678901234567890123456789012'),
             $licenseFactory,
         ];
-    }
-
-    /**
-     * @dataProvider dpMakeFromPackages
-     *
-     * @param PackageInterface[] $packages
-     *
-     * @uses         \CycloneDX\Core\Repositories\ComponentRepository
-     * @uses         \CycloneDX\Core\Enums\HashAlgorithm::isValidValue
-     * @uses         \CycloneDX\Core\Repositories\HashRepository
-     * @uses         \CycloneDX\Core\Enums\Classification::isValidValue
-     */
-    public function testMakeFromPackages(
-        array $packages,
-        ?ComponentRepository $expected,
-        ?LicenseFactory $licenseFactory
-    ): void {
-        $factory = new ComponentFactory($licenseFactory ?? $this->createStub(LicenseFactory::class));
-
-        $actual = $factory->makeFromPackages($packages);
-
-        self::assertEquals($expected, $actual);
-    }
-
-    public function dpMakeFromPackages(): \Generator
-    {
-        yield 'empty' => [[], null, null];
-
-        $dpMakeFromPackage = $this->dpMakeFromPackage();
-        $dpMakeFromPackage->rewind();
-
-        [$package, $expected, $licenseFactory] = $dpMakeFromPackage->current();
-
-        yield 'skip alias: '.$dpMakeFromPackage->key() => [
-            [
-                $this->createConfiguredMock(AliasPackage::class, ['getAliasOf' => $package]),
-                $package,
-            ],
-            new ComponentRepository($expected),
-            $licenseFactory,
-        ];
-
-        foreach ($dpMakeFromPackage as [$package, $expected, $licenseFactory]) {
-            yield $dpMakeFromPackage->key() => [
-                [$package],
-                new ComponentRepository($expected),
-                $licenseFactory,
-            ];
-        }
     }
 }

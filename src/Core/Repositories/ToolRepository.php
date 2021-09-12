@@ -26,6 +26,8 @@ namespace CycloneDX\Core\Repositories;
 use CycloneDX\Core\Models\Tool;
 
 /**
+ * Unique list of {@see \CycloneDX\Core\Models\Tool}.
+ *
  * @author jkowalleck
  */
 class ToolRepository implements \Countable
@@ -46,7 +48,12 @@ class ToolRepository implements \Countable
      */
     public function addTool(Tool ...$tools): self
     {
-        array_push($this->tools, ...array_values($tools));
+        foreach ($tools as $tool) {
+            if (\in_array($tool, $this->tools, true)) {
+                continue;
+            }
+            $this->tools[] = $tool;
+        }
 
         return $this;
     }

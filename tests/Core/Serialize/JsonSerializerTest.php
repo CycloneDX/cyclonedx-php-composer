@@ -30,17 +30,18 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @covers \CycloneDX\Core\Serialize\JsonSerializer
+ *
+ * @uses   \CycloneDX\Core\Serialize\BaseSerializer
  */
 class JsonSerializerTest extends TestCase
 {
     /**
-     * @covers \CycloneDX\Core\Serialize\JsonSerializer
-     *
      * @uses   \CycloneDX\Core\Serialize\JSON\AbstractNormalizer
      * @uses   \CycloneDX\Core\Serialize\JSON\NormalizerFactory
      * @uses   \CycloneDX\Core\Serialize\JSON\Normalizers\BomNormalizer
      * @uses   \CycloneDX\Core\Serialize\JSON\Normalizers\ComponentRepositoryNormalizer
      * @uses   \CycloneDX\Core\Serialize\JSON\Normalizers\ComponentNormalizer
+     * @uses   \CycloneDX\Core\Serialize\BomRefDiscriminator
      */
     public function testSerialize(): void
     {

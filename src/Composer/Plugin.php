@@ -29,6 +29,7 @@ use Composer\IO\IOInterface;
 use Composer\Plugin\Capability\CommandProvider;
 use Composer\Plugin\Capable;
 use Composer\Plugin\PluginInterface;
+use CycloneDX\Composer\Factories\SpecFactory;
 use CycloneDX\Core\Models\Tool;
 use CycloneDX\Core\Spdx\License as SpdxLicenseValidator;
 
@@ -65,33 +66,37 @@ class Plugin implements PluginInterface, Capable, CommandProvider
      */
     public function getCommands(): array
     {
-        $componentFactory = new Factories\ComponentFactory(
+        $componentBuilder = new Builders\ComponentBuilder(
             new Factories\LicenseFactory(
                 new SpdxLicenseValidator()
-            )
+            ),
+            new Factories\PackageUrlFactory()
         );
 
         return [
             new MakeBom\Command(
                 new MakeBom\Options(),
-                new MakeBom\Factory(new ComposerFactory()),
-                new Factories\BomFactory(
-                    $componentFactory,
-                    $this->getTool()
+                new MakeBom\Factory(
+                    new ComposerFactory(),
+                    new SpecFactory()
                 ),
-                new ToolUpdater($componentFactory),
+                new Builders\BomBuilder(
+                    $componentBuilder,
+                    $this->makeTool()
+                ),
+                new ToolUpdater($componentBuilder),
                 'make-bom'
             ),
         ];
     }
 
-    private function getTool(): Tool
+    private function makeTool(): Tool
     {
-        $version = file_get_contents(self::FILE_VERSION);
+        $fileVersion = file_get_contents(self::FILE_VERSION);
 
         return (new Tool())
             ->setVendor('cyclonedx')
             ->setName('cyclonedx-php-composer')
-            ->setVersion(false === $version ? null : trim($version));
+            ->setVersion(false === $fileVersion ? null : trim($fileVersion));
     }
 }

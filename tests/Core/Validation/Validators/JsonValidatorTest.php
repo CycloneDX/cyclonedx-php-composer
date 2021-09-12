@@ -21,7 +21,7 @@ declare(strict_types=1);
  * Copyright (c) Steve Springett. All Rights Reserved.
  */
 
-namespace CycloneDX\Tests\Core\Validate\Validators;
+namespace CycloneDX\Tests\Core\Validation\Validators;
 
 use CycloneDX\Core\Spec\SpecInterface;
 use CycloneDX\Core\Validation\Errors\JsonValidationError;
@@ -34,7 +34,7 @@ use stdClass;
 
 /**
  * @covers \CycloneDX\Core\Validation\Validators\JsonValidator
- * @covers \CycloneDX\Core\Validation\AbstractValidator
+ * @covers \CycloneDX\Core\Validation\BaseValidator
  *
  * @uses   \CycloneDX\Core\Validation\Helpers\JsonSchemaRemoteRefProviderForSnapshotResources
  */

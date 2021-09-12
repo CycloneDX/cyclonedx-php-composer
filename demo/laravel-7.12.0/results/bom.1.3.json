@@ -11,6 +11,7 @@
             }
         ],
         "component": {
+            "bom-ref": "pkg:composer\/cyclonedx\/cyclonedx-php-composer-demo@dev-master",
             "type": "application",
             "name": "cyclonedx-php-composer-demo",
             "version": "dev-master",
@@ -21,6 +22,7 @@
     },
     "components": [
         {
+            "bom-ref": "pkg:composer\/asm89\/stack-cors@1.3.0",
             "type": "library",
             "name": "stack-cors",
             "version": "1.3.0",
@@ -36,6 +38,7 @@
             "purl": "pkg:composer\/asm89\/stack-cors@1.3.0"
         },
         {
+            "bom-ref": "pkg:composer\/brick\/math@0.9.2",
             "type": "library",
             "name": "math",
             "version": "0.9.2",
@@ -51,6 +54,7 @@
             "purl": "pkg:composer\/brick\/math@0.9.2"
         },
         {
+            "bom-ref": "pkg:composer\/doctrine\/inflector@2.0.3",
             "type": "library",
             "name": "inflector",
             "version": "2.0.3",
@@ -66,6 +70,7 @@
             "purl": "pkg:composer\/doctrine\/inflector@2.0.3"
         },
         {
+            "bom-ref": "pkg:composer\/doctrine\/lexer@1.2.1",
             "type": "library",
             "name": "lexer",
             "version": "1.2.1",
@@ -81,6 +86,7 @@
             "purl": "pkg:composer\/doctrine\/lexer@1.2.1"
         },
         {
+            "bom-ref": "pkg:composer\/dragonmantank\/cron-expression@2.3.1",
             "type": "library",
             "name": "cron-expression",
             "version": "2.3.1",
@@ -96,6 +102,7 @@
             "purl": "pkg:composer\/dragonmantank\/cron-expression@2.3.1"
         },
         {
+            "bom-ref": "pkg:composer\/egulias\/email-validator@2.1.25",
             "type": "library",
             "name": "email-validator",
             "version": "2.1.25",
@@ -111,6 +118,7 @@
             "purl": "pkg:composer\/egulias\/email-validator@2.1.25"
         },
         {
+            "bom-ref": "pkg:composer\/fideloper\/proxy@4.4.1",
             "type": "library",
             "name": "proxy",
             "version": "4.4.1",
@@ -126,6 +134,7 @@
             "purl": "pkg:composer\/fideloper\/proxy@4.4.1"
         },
         {
+            "bom-ref": "pkg:composer\/fruitcake\/laravel-cors@1.0.6",
             "type": "library",
             "name": "laravel-cors",
             "version": "1.0.6",
@@ -141,6 +150,7 @@
             "purl": "pkg:composer\/fruitcake\/laravel-cors@1.0.6"
         },
         {
+            "bom-ref": "pkg:composer\/guzzlehttp\/guzzle@6.5.5",
             "type": "library",
             "name": "guzzle",
             "version": "6.5.5",
@@ -156,6 +166,7 @@
             "purl": "pkg:composer\/guzzlehttp\/guzzle@6.5.5"
         },
         {
+            "bom-ref": "pkg:composer\/guzzlehttp\/promises@1.4.1",
             "type": "library",
             "name": "promises",
             "version": "1.4.1",
@@ -171,6 +182,7 @@
             "purl": "pkg:composer\/guzzlehttp\/promises@1.4.1"
         },
         {
+            "bom-ref": "pkg:composer\/guzzlehttp\/psr7@1.8.2",
             "type": "library",
             "name": "psr7",
             "version": "1.8.2",
@@ -186,6 +198,7 @@
             "purl": "pkg:composer\/guzzlehttp\/psr7@1.8.2"
         },
         {
+            "bom-ref": "pkg:composer\/laravel\/framework@7.30.4",
             "type": "library",
             "name": "framework",
             "version": "7.30.4",
@@ -201,6 +214,7 @@
             "purl": "pkg:composer\/laravel\/framework@7.30.4"
         },
         {
+            "bom-ref": "pkg:composer\/laravel\/laravel@7.12.0",
             "type": "application",
             "name": "laravel",
             "version": "7.12.0",
@@ -216,6 +230,7 @@
             "purl": "pkg:composer\/laravel\/laravel@7.12.0"
         },
         {
+            "bom-ref": "pkg:composer\/laravel\/tinker@2.6.1",
             "type": "library",
             "name": "tinker",
             "version": "2.6.1",
@@ -231,6 +246,7 @@
             "purl": "pkg:composer\/laravel\/tinker@2.6.1"
         },
         {
+            "bom-ref": "pkg:composer\/league\/commonmark@1.6.0",
             "type": "library",
             "name": "commonmark",
             "version": "1.6.0",
@@ -246,6 +262,7 @@
             "purl": "pkg:composer\/league\/commonmark@1.6.0"
         },
         {
+            "bom-ref": "pkg:composer\/league\/flysystem@1.1.3",
             "type": "library",
             "name": "flysystem",
             "version": "1.1.3",
@@ -261,6 +278,7 @@
             "purl": "pkg:composer\/league\/flysystem@1.1.3"
         },
         {
+            "bom-ref": "pkg:composer\/league\/mime-type-detection@1.7.0",
             "type": "library",
             "name": "mime-type-detection",
             "version": "1.7.0",
@@ -276,6 +294,7 @@
             "purl": "pkg:composer\/league\/mime-type-detection@1.7.0"
         },
         {
+            "bom-ref": "pkg:composer\/monolog\/monolog@2.2.0",
             "type": "library",
             "name": "monolog",
             "version": "2.2.0",
@@ -291,6 +310,7 @@
             "purl": "pkg:composer\/monolog\/monolog@2.2.0"
         },
         {
+            "bom-ref": "pkg:composer\/nesbot\/carbon@2.47.0",
             "type": "library",
             "name": "carbon",
             "version": "2.47.0",
@@ -306,6 +326,7 @@
             "purl": "pkg:composer\/nesbot\/carbon@2.47.0"
         },
         {
+            "bom-ref": "pkg:composer\/nikic\/php-parser@4.10.4",
             "type": "library",
             "name": "php-parser",
             "version": "4.10.4",
@@ -321,6 +342,7 @@
             "purl": "pkg:composer\/nikic\/php-parser@4.10.4"
         },
         {
+            "bom-ref": "pkg:composer\/opis\/closure@3.6.2",
             "type": "library",
             "name": "closure",
             "version": "3.6.2",
@@ -336,6 +358,7 @@
             "purl": "pkg:composer\/opis\/closure@3.6.2"
         },
         {
+            "bom-ref": "pkg:composer\/phpoption\/phpoption@1.7.5",
             "type": "library",
             "name": "phpoption",
             "version": "1.7.5",
@@ -351,6 +374,7 @@
             "purl": "pkg:composer\/phpoption\/phpoption@1.7.5"
         },
         {
+            "bom-ref": "pkg:composer\/psr\/container@1.1.1",
             "type": "library",
             "name": "container",
             "version": "1.1.1",
@@ -366,6 +390,7 @@
             "purl": "pkg:composer\/psr\/container@1.1.1"
         },
         {
+            "bom-ref": "pkg:composer\/psr\/event-dispatcher@1.0.0",
             "type": "library",
             "name": "event-dispatcher",
             "version": "1.0.0",
@@ -381,6 +406,7 @@
             "purl": "pkg:composer\/psr\/event-dispatcher@1.0.0"
         },
         {
+            "bom-ref": "pkg:composer\/psr\/http-message@1.0.1",
             "type": "library",
             "name": "http-message",
             "version": "1.0.1",
@@ -396,6 +422,7 @@
             "purl": "pkg:composer\/psr\/http-message@1.0.1"
         },
         {
+            "bom-ref": "pkg:composer\/psr\/log@1.1.4",
             "type": "library",
             "name": "log",
             "version": "1.1.4",
@@ -411,6 +438,7 @@
             "purl": "pkg:composer\/psr\/log@1.1.4"
         },
         {
+            "bom-ref": "pkg:composer\/psr\/simple-cache@1.0.1",
             "type": "library",
             "name": "simple-cache",
             "version": "1.0.1",
@@ -426,6 +454,7 @@
             "purl": "pkg:composer\/psr\/simple-cache@1.0.1"
         },
         {
+            "bom-ref": "pkg:composer\/psy\/psysh@0.10.8",
             "type": "library",
             "name": "psysh",
             "version": "0.10.8",
@@ -441,6 +470,7 @@
             "purl": "pkg:composer\/psy\/psysh@0.10.8"
         },
         {
+            "bom-ref": "pkg:composer\/ralouphie\/getallheaders@3.0.3",
             "type": "library",
             "name": "getallheaders",
             "version": "3.0.3",
@@ -456,6 +486,7 @@
             "purl": "pkg:composer\/ralouphie\/getallheaders@3.0.3"
         },
         {
+            "bom-ref": "pkg:composer\/ramsey\/collection@1.1.3",
             "type": "library",
             "name": "collection",
             "version": "1.1.3",
@@ -471,6 +502,7 @@
             "purl": "pkg:composer\/ramsey\/collection@1.1.3"
         },
         {
+            "bom-ref": "pkg:composer\/ramsey\/uuid@4.1.1",
             "type": "library",
             "name": "uuid",
             "version": "4.1.1",
@@ -486,6 +518,7 @@
             "purl": "pkg:composer\/ramsey\/uuid@4.1.1"
         },
         {
+            "bom-ref": "pkg:composer\/swiftmailer\/swiftmailer@6.2.7",
             "type": "library",
             "name": "swiftmailer",
             "version": "6.2.7",
@@ -501,6 +534,7 @@
             "purl": "pkg:composer\/swiftmailer\/swiftmailer@6.2.7"
         },
         {
+            "bom-ref": "pkg:composer\/symfony\/console@5.2.7",
             "type": "library",
             "name": "console",
             "version": "5.2.7",
@@ -516,6 +550,7 @@
             "purl": "pkg:composer\/symfony\/console@5.2.7"
         },
         {
+            "bom-ref": "pkg:composer\/symfony\/css-selector@5.2.7",
             "type": "library",
             "name": "css-selector",
             "version": "5.2.7",
@@ -531,6 +566,7 @@
             "purl": "pkg:composer\/symfony\/css-selector@5.2.7"
         },
         {
+            "bom-ref": "pkg:composer\/symfony\/deprecation-contracts@2.4.0",
             "type": "library",
             "name": "deprecation-contracts",
             "version": "2.4.0",
@@ -546,6 +582,7 @@
             "purl": "pkg:composer\/symfony\/deprecation-contracts@2.4.0"
         },
         {
+            "bom-ref": "pkg:composer\/symfony\/error-handler@5.2.7",
             "type": "library",
             "name": "error-handler",
             "version": "5.2.7",
@@ -561,6 +598,7 @@
             "purl": "pkg:composer\/symfony\/error-handler@5.2.7"
         },
         {
+            "bom-ref": "pkg:composer\/symfony\/event-dispatcher@5.2.4",
             "type": "library",
             "name": "event-dispatcher",
             "version": "5.2.4",
@@ -576,6 +614,7 @@
             "purl": "pkg:composer\/symfony\/event-dispatcher@5.2.4"
         },
         {
+            "bom-ref": "pkg:composer\/symfony\/event-dispatcher-contracts@2.4.0",
             "type": "library",
             "name": "event-dispatcher-contracts",
             "version": "2.4.0",
@@ -591,6 +630,7 @@
             "purl": "pkg:composer\/symfony\/event-dispatcher-contracts@2.4.0"
         },
         {
+            "bom-ref": "pkg:composer\/symfony\/finder@5.2.4",
             "type": "library",
             "name": "finder",
             "version": "5.2.4",
@@ -606,6 +646,7 @@
             "purl": "pkg:composer\/symfony\/finder@5.2.4"
         },
         {
+            "bom-ref": "pkg:composer\/symfony\/http-client-contracts@2.4.0",
             "type": "library",
             "name": "http-client-contracts",
             "version": "2.4.0",
@@ -621,6 +662,7 @@
             "purl": "pkg:composer\/symfony\/http-client-contracts@2.4.0"
         },
         {
+            "bom-ref": "pkg:composer\/symfony\/http-foundation@5.2.7",
             "type": "library",
             "name": "http-foundation",
             "version": "5.2.7",
@@ -636,6 +678,7 @@
             "purl": "pkg:composer\/symfony\/http-foundation@5.2.7"
         },
         {
+            "bom-ref": "pkg:composer\/symfony\/http-kernel@5.2.7",
             "type": "library",
             "name": "http-kernel",
             "version": "5.2.7",
@@ -651,6 +694,7 @@
             "purl": "pkg:composer\/symfony\/http-kernel@5.2.7"
         },
         {
+            "bom-ref": "pkg:composer\/symfony\/mime@5.2.7",
             "type": "library",
             "name": "mime",
             "version": "5.2.7",
@@ -666,6 +710,7 @@
             "purl": "pkg:composer\/symfony\/mime@5.2.7"
         },
         {
+            "bom-ref": "pkg:composer\/symfony\/polyfill-ctype@1.22.1",
             "type": "library",
             "name": "polyfill-ctype",
             "version": "1.22.1",
@@ -681,6 +726,7 @@
             "purl": "pkg:composer\/symfony\/polyfill-ctype@1.22.1"
         },
         {
+            "bom-ref": "pkg:composer\/symfony\/polyfill-iconv@1.22.1",
             "type": "library",
             "name": "polyfill-iconv",
             "version": "1.22.1",
@@ -696,6 +742,7 @@
             "purl": "pkg:composer\/symfony\/polyfill-iconv@1.22.1"
         },
         {
+            "bom-ref": "pkg:composer\/symfony\/polyfill-intl-grapheme@1.22.1",
             "type": "library",
             "name": "polyfill-intl-grapheme",
             "version": "1.22.1",
@@ -711,6 +758,7 @@
             "purl": "pkg:composer\/symfony\/polyfill-intl-grapheme@1.22.1"
         },
         {
+            "bom-ref": "pkg:composer\/symfony\/polyfill-intl-idn@1.22.1",
             "type": "library",
             "name": "polyfill-intl-idn",
             "version": "1.22.1",
@@ -726,6 +774,7 @@
             "purl": "pkg:composer\/symfony\/polyfill-intl-idn@1.22.1"
         },
         {
+            "bom-ref": "pkg:composer\/symfony\/polyfill-intl-normalizer@1.22.1",
             "type": "library",
             "name": "polyfill-intl-normalizer",
             "version": "1.22.1",
@@ -741,6 +790,7 @@
             "purl": "pkg:composer\/symfony\/polyfill-intl-normalizer@1.22.1"
         },
         {
+            "bom-ref": "pkg:composer\/symfony\/polyfill-mbstring@1.22.1",
             "type": "library",
             "name": "polyfill-mbstring",
             "version": "1.22.1",
@@ -756,6 +806,7 @@
             "purl": "pkg:composer\/symfony\/polyfill-mbstring@1.22.1"
         },
         {
+            "bom-ref": "pkg:composer\/symfony\/polyfill-php72@1.22.1",
             "type": "library",
             "name": "polyfill-php72",
             "version": "1.22.1",
@@ -771,6 +822,7 @@
             "purl": "pkg:composer\/symfony\/polyfill-php72@1.22.1"
         },
         {
+            "bom-ref": "pkg:composer\/symfony\/polyfill-php73@1.22.1",
             "type": "library",
             "name": "polyfill-php73",
             "version": "1.22.1",
@@ -786,6 +838,7 @@
             "purl": "pkg:composer\/symfony\/polyfill-php73@1.22.1"
         },
         {
+            "bom-ref": "pkg:composer\/symfony\/polyfill-php80@1.22.1",
             "type": "library",
             "name": "polyfill-php80",
             "version": "1.22.1",
@@ -801,6 +854,7 @@
             "purl": "pkg:composer\/symfony\/polyfill-php80@1.22.1"
         },
         {
+            "bom-ref": "pkg:composer\/symfony\/process@5.2.7",
             "type": "library",
             "name": "process",
             "version": "5.2.7",
@@ -816,6 +870,7 @@
             "purl": "pkg:composer\/symfony\/process@5.2.7"
         },
         {
+            "bom-ref": "pkg:composer\/symfony\/routing@5.2.7",
             "type": "library",
             "name": "routing",
             "version": "5.2.7",
@@ -831,6 +886,7 @@
             "purl": "pkg:composer\/symfony\/routing@5.2.7"
         },
         {
+            "bom-ref": "pkg:composer\/symfony\/service-contracts@2.4.0",
             "type": "library",
             "name": "service-contracts",
             "version": "2.4.0",
@@ -846,6 +902,7 @@
             "purl": "pkg:composer\/symfony\/service-contracts@2.4.0"
         },
         {
+            "bom-ref": "pkg:composer\/symfony\/string@5.2.6",
             "type": "library",
             "name": "string",
             "version": "5.2.6",
@@ -861,6 +918,7 @@
             "purl": "pkg:composer\/symfony\/string@5.2.6"
         },
         {
+            "bom-ref": "pkg:composer\/symfony\/translation@5.2.7",
             "type": "library",
             "name": "translation",
             "version": "5.2.7",
@@ -876,6 +934,7 @@
             "purl": "pkg:composer\/symfony\/translation@5.2.7"
         },
         {
+            "bom-ref": "pkg:composer\/symfony\/translation-contracts@2.4.0",
             "type": "library",
             "name": "translation-contracts",
             "version": "2.4.0",
@@ -891,6 +950,7 @@
             "purl": "pkg:composer\/symfony\/translation-contracts@2.4.0"
         },
         {
+            "bom-ref": "pkg:composer\/symfony\/var-dumper@5.2.7",
             "type": "library",
             "name": "var-dumper",
             "version": "5.2.7",
@@ -906,6 +966,7 @@
             "purl": "pkg:composer\/symfony\/var-dumper@5.2.7"
         },
         {
+            "bom-ref": "pkg:composer\/tijsverkoyen\/css-to-inline-styles@2.2.3",
             "type": "library",
             "name": "css-to-inline-styles",
             "version": "2.2.3",
@@ -921,6 +982,7 @@
             "purl": "pkg:composer\/tijsverkoyen\/css-to-inline-styles@2.2.3"
         },
         {
+            "bom-ref": "pkg:composer\/vlucas\/phpdotenv@4.2.0",
             "type": "library",
             "name": "phpdotenv",
             "version": "4.2.0",
@@ -936,6 +998,7 @@
             "purl": "pkg:composer\/vlucas\/phpdotenv@4.2.0"
         },
         {
+            "bom-ref": "pkg:composer\/voku\/portable-ascii@1.5.6",
             "type": "library",
             "name": "portable-ascii",
             "version": "1.5.6",
@@ -949,6 +1012,365 @@
                 }
             ],
             "purl": "pkg:composer\/voku\/portable-ascii@1.5.6"
+        }
+    ],
+    "dependencies": [
+        {
+            "ref": "pkg:composer\/asm89\/stack-cors@1.3.0",
+            "dependsOn": [
+                "pkg:composer\/symfony\/http-foundation@5.2.7",
+                "pkg:composer\/symfony\/http-kernel@5.2.7"
+            ]
+        },
+        {
+            "ref": "pkg:composer\/brick\/math@0.9.2"
+        },
+        {
+            "ref": "pkg:composer\/doctrine\/inflector@2.0.3"
+        },
+        {
+            "ref": "pkg:composer\/doctrine\/lexer@1.2.1"
+        },
+        {
+            "ref": "pkg:composer\/dragonmantank\/cron-expression@2.3.1"
+        },
+        {
+            "ref": "pkg:composer\/egulias\/email-validator@2.1.25",
+            "dependsOn": [
+                "pkg:composer\/doctrine\/lexer@1.2.1",
+                "pkg:composer\/symfony\/polyfill-intl-idn@1.22.1"
+            ]
+        },
+        {
+            "ref": "pkg:composer\/fideloper\/proxy@4.4.1"
+        },
+        {
+            "ref": "pkg:composer\/fruitcake\/laravel-cors@1.0.6",
+            "dependsOn": [
+                "pkg:composer\/asm89\/stack-cors@1.3.0",
+                "pkg:composer\/symfony\/http-foundation@5.2.7",
+                "pkg:composer\/symfony\/http-kernel@5.2.7"
+            ]
+        },
+        {
+            "ref": "pkg:composer\/guzzlehttp\/guzzle@6.5.5",
+            "dependsOn": [
+                "pkg:composer\/guzzlehttp\/promises@1.4.1",
+                "pkg:composer\/guzzlehttp\/psr7@1.8.2",
+                "pkg:composer\/symfony\/polyfill-intl-idn@1.22.1"
+            ]
+        },
+        {
+            "ref": "pkg:composer\/guzzlehttp\/promises@1.4.1"
+        },
+        {
+            "ref": "pkg:composer\/guzzlehttp\/psr7@1.8.2",
+            "dependsOn": [
+                "pkg:composer\/psr\/http-message@1.0.1",
+                "pkg:composer\/ralouphie\/getallheaders@3.0.3"
+            ]
+        },
+        {
+            "ref": "pkg:composer\/laravel\/framework@7.30.4",
+            "dependsOn": [
+                "pkg:composer\/doctrine\/inflector@2.0.3",
+                "pkg:composer\/dragonmantank\/cron-expression@2.3.1",
+                "pkg:composer\/egulias\/email-validator@2.1.25",
+                "pkg:composer\/league\/commonmark@1.6.0",
+                "pkg:composer\/league\/flysystem@1.1.3",
+                "pkg:composer\/monolog\/monolog@2.2.0",
+                "pkg:composer\/nesbot\/carbon@2.47.0",
+                "pkg:composer\/opis\/closure@3.6.2",
+                "pkg:composer\/psr\/container@1.1.1",
+                "pkg:composer\/psr\/simple-cache@1.0.1",
+                "pkg:composer\/ramsey\/uuid@4.1.1",
+                "pkg:composer\/swiftmailer\/swiftmailer@6.2.7",
+                "pkg:composer\/symfony\/console@5.2.7",
+                "pkg:composer\/symfony\/error-handler@5.2.7",
+                "pkg:composer\/symfony\/finder@5.2.4",
+                "pkg:composer\/symfony\/http-foundation@5.2.7",
+                "pkg:composer\/symfony\/http-kernel@5.2.7",
+                "pkg:composer\/symfony\/mime@5.2.7",
+                "pkg:composer\/symfony\/polyfill-php73@1.22.1",
+                "pkg:composer\/symfony\/process@5.2.7",
+                "pkg:composer\/symfony\/routing@5.2.7",
+                "pkg:composer\/symfony\/var-dumper@5.2.7",
+                "pkg:composer\/tijsverkoyen\/css-to-inline-styles@2.2.3",
+                "pkg:composer\/vlucas\/phpdotenv@4.2.0",
+                "pkg:composer\/voku\/portable-ascii@1.5.6"
+            ]
+        },
+        {
+            "ref": "pkg:composer\/laravel\/laravel@7.12.0",
+            "dependsOn": [
+                "pkg:composer\/fideloper\/proxy@4.4.1",
+                "pkg:composer\/fruitcake\/laravel-cors@1.0.6",
+                "pkg:composer\/guzzlehttp\/guzzle@6.5.5",
+                "pkg:composer\/laravel\/framework@7.30.4",
+                "pkg:composer\/laravel\/tinker@2.6.1"
+            ]
+        },
+        {
+            "ref": "pkg:composer\/laravel\/tinker@2.6.1",
+            "dependsOn": [
+                "pkg:composer\/psy\/psysh@0.10.8",
+                "pkg:composer\/symfony\/var-dumper@5.2.7"
+            ]
+        },
+        {
+            "ref": "pkg:composer\/league\/commonmark@1.6.0"
+        },
+        {
+            "ref": "pkg:composer\/league\/flysystem@1.1.3",
+            "dependsOn": [
+                "pkg:composer\/league\/mime-type-detection@1.7.0"
+            ]
+        },
+        {
+            "ref": "pkg:composer\/league\/mime-type-detection@1.7.0"
+        },
+        {
+            "ref": "pkg:composer\/monolog\/monolog@2.2.0",
+            "dependsOn": [
+                "pkg:composer\/psr\/log@1.1.4"
+            ]
+        },
+        {
+            "ref": "pkg:composer\/nesbot\/carbon@2.47.0",
+            "dependsOn": [
+                "pkg:composer\/symfony\/polyfill-mbstring@1.22.1",
+                "pkg:composer\/symfony\/translation@5.2.7"
+            ]
+        },
+        {
+            "ref": "pkg:composer\/nikic\/php-parser@4.10.4"
+        },
+        {
+            "ref": "pkg:composer\/opis\/closure@3.6.2"
+        },
+        {
+            "ref": "pkg:composer\/phpoption\/phpoption@1.7.5"
+        },
+        {
+            "ref": "pkg:composer\/psr\/container@1.1.1"
+        },
+        {
+            "ref": "pkg:composer\/psr\/event-dispatcher@1.0.0"
+        },
+        {
+            "ref": "pkg:composer\/psr\/http-message@1.0.1"
+        },
+        {
+            "ref": "pkg:composer\/psr\/log@1.1.4"
+        },
+        {
+            "ref": "pkg:composer\/psr\/simple-cache@1.0.1"
+        },
+        {
+            "ref": "pkg:composer\/psy\/psysh@0.10.8",
+            "dependsOn": [
+                "pkg:composer\/nikic\/php-parser@4.10.4",
+                "pkg:composer\/symfony\/console@5.2.7",
+                "pkg:composer\/symfony\/var-dumper@5.2.7"
+            ]
+        },
+        {
+            "ref": "pkg:composer\/ralouphie\/getallheaders@3.0.3"
+        },
+        {
+            "ref": "pkg:composer\/ramsey\/collection@1.1.3"
+        },
+        {
+            "ref": "pkg:composer\/ramsey\/uuid@4.1.1",
+            "dependsOn": [
+                "pkg:composer\/brick\/math@0.9.2",
+                "pkg:composer\/ramsey\/collection@1.1.3",
+                "pkg:composer\/symfony\/polyfill-ctype@1.22.1"
+            ]
+        },
+        {
+            "ref": "pkg:composer\/swiftmailer\/swiftmailer@6.2.7",
+            "dependsOn": [
+                "pkg:composer\/egulias\/email-validator@2.1.25",
+                "pkg:composer\/symfony\/polyfill-iconv@1.22.1",
+                "pkg:composer\/symfony\/polyfill-intl-idn@1.22.1",
+                "pkg:composer\/symfony\/polyfill-mbstring@1.22.1"
+            ]
+        },
+        {
+            "ref": "pkg:composer\/symfony\/console@5.2.7",
+            "dependsOn": [
+                "pkg:composer\/symfony\/polyfill-mbstring@1.22.1",
+                "pkg:composer\/symfony\/polyfill-php73@1.22.1",
+                "pkg:composer\/symfony\/polyfill-php80@1.22.1",
+                "pkg:composer\/symfony\/service-contracts@2.4.0",
+                "pkg:composer\/symfony\/string@5.2.6"
+            ]
+        },
+        {
+            "ref": "pkg:composer\/symfony\/css-selector@5.2.7"
+        },
+        {
+            "ref": "pkg:composer\/symfony\/deprecation-contracts@2.4.0"
+        },
+        {
+            "ref": "pkg:composer\/symfony\/error-handler@5.2.7",
+            "dependsOn": [
+                "pkg:composer\/psr\/log@1.1.4",
+                "pkg:composer\/symfony\/polyfill-php80@1.22.1",
+                "pkg:composer\/symfony\/var-dumper@5.2.7"
+            ]
+        },
+        {
+            "ref": "pkg:composer\/symfony\/event-dispatcher@5.2.4",
+            "dependsOn": [
+                "pkg:composer\/symfony\/deprecation-contracts@2.4.0",
+                "pkg:composer\/symfony\/event-dispatcher-contracts@2.4.0",
+                "pkg:composer\/symfony\/polyfill-php80@1.22.1"
+            ]
+        },
+        {
+            "ref": "pkg:composer\/symfony\/event-dispatcher-contracts@2.4.0",
+            "dependsOn": [
+                "pkg:composer\/psr\/event-dispatcher@1.0.0"
+            ]
+        },
+        {
+            "ref": "pkg:composer\/symfony\/finder@5.2.4"
+        },
+        {
+            "ref": "pkg:composer\/symfony\/http-client-contracts@2.4.0"
+        },
+        {
+            "ref": "pkg:composer\/symfony\/http-foundation@5.2.7",
+            "dependsOn": [
+                "pkg:composer\/symfony\/deprecation-contracts@2.4.0",
+                "pkg:composer\/symfony\/polyfill-mbstring@1.22.1",
+                "pkg:composer\/symfony\/polyfill-php80@1.22.1"
+            ]
+        },
+        {
+            "ref": "pkg:composer\/symfony\/http-kernel@5.2.7",
+            "dependsOn": [
+                "pkg:composer\/psr\/log@1.1.4",
+                "pkg:composer\/symfony\/deprecation-contracts@2.4.0",
+                "pkg:composer\/symfony\/error-handler@5.2.7",
+                "pkg:composer\/symfony\/event-dispatcher@5.2.4",
+                "pkg:composer\/symfony\/http-client-contracts@2.4.0",
+                "pkg:composer\/symfony\/http-foundation@5.2.7",
+                "pkg:composer\/symfony\/polyfill-ctype@1.22.1",
+                "pkg:composer\/symfony\/polyfill-php73@1.22.1",
+                "pkg:composer\/symfony\/polyfill-php80@1.22.1"
+            ]
+        },
+        {
+            "ref": "pkg:composer\/symfony\/mime@5.2.7",
+            "dependsOn": [
+                "pkg:composer\/symfony\/deprecation-contracts@2.4.0",
+                "pkg:composer\/symfony\/polyfill-intl-idn@1.22.1",
+                "pkg:composer\/symfony\/polyfill-mbstring@1.22.1",
+                "pkg:composer\/symfony\/polyfill-php80@1.22.1"
+            ]
+        },
+        {
+            "ref": "pkg:composer\/symfony\/polyfill-ctype@1.22.1"
+        },
+        {
+            "ref": "pkg:composer\/symfony\/polyfill-iconv@1.22.1"
+        },
+        {
+            "ref": "pkg:composer\/symfony\/polyfill-intl-grapheme@1.22.1"
+        },
+        {
+            "ref": "pkg:composer\/symfony\/polyfill-intl-idn@1.22.1",
+            "dependsOn": [
+                "pkg:composer\/symfony\/polyfill-intl-normalizer@1.22.1",
+                "pkg:composer\/symfony\/polyfill-php72@1.22.1"
+            ]
+        },
+        {
+            "ref": "pkg:composer\/symfony\/polyfill-intl-normalizer@1.22.1"
+        },
+        {
+            "ref": "pkg:composer\/symfony\/polyfill-mbstring@1.22.1"
+        },
+        {
+            "ref": "pkg:composer\/symfony\/polyfill-php72@1.22.1"
+        },
+        {
+            "ref": "pkg:composer\/symfony\/polyfill-php73@1.22.1"
+        },
+        {
+            "ref": "pkg:composer\/symfony\/polyfill-php80@1.22.1"
+        },
+        {
+            "ref": "pkg:composer\/symfony\/process@5.2.7",
+            "dependsOn": [
+                "pkg:composer\/symfony\/polyfill-php80@1.22.1"
+            ]
+        },
+        {
+            "ref": "pkg:composer\/symfony\/routing@5.2.7",
+            "dependsOn": [
+                "pkg:composer\/symfony\/deprecation-contracts@2.4.0",
+                "pkg:composer\/symfony\/polyfill-php80@1.22.1"
+            ]
+        },
+        {
+            "ref": "pkg:composer\/symfony\/service-contracts@2.4.0",
+            "dependsOn": [
+                "pkg:composer\/psr\/container@1.1.1"
+            ]
+        },
+        {
+            "ref": "pkg:composer\/symfony\/string@5.2.6",
+            "dependsOn": [
+                "pkg:composer\/symfony\/polyfill-ctype@1.22.1",
+                "pkg:composer\/symfony\/polyfill-intl-grapheme@1.22.1",
+                "pkg:composer\/symfony\/polyfill-intl-normalizer@1.22.1",
+                "pkg:composer\/symfony\/polyfill-mbstring@1.22.1",
+                "pkg:composer\/symfony\/polyfill-php80@1.22.1"
+            ]
+        },
+        {
+            "ref": "pkg:composer\/symfony\/translation@5.2.7",
+            "dependsOn": [
+                "pkg:composer\/symfony\/polyfill-mbstring@1.22.1",
+                "pkg:composer\/symfony\/polyfill-php80@1.22.1",
+                "pkg:composer\/symfony\/translation-contracts@2.4.0"
+            ]
+        },
+        {
+            "ref": "pkg:composer\/symfony\/translation-contracts@2.4.0"
+        },
+        {
+            "ref": "pkg:composer\/symfony\/var-dumper@5.2.7",
+            "dependsOn": [
+                "pkg:composer\/symfony\/polyfill-mbstring@1.22.1",
+                "pkg:composer\/symfony\/polyfill-php80@1.22.1"
+            ]
+        },
+        {
+            "ref": "pkg:composer\/tijsverkoyen\/css-to-inline-styles@2.2.3",
+            "dependsOn": [
+                "pkg:composer\/symfony\/css-selector@5.2.7"
+            ]
+        },
+        {
+            "ref": "pkg:composer\/vlucas\/phpdotenv@4.2.0",
+            "dependsOn": [
+                "pkg:composer\/phpoption\/phpoption@1.7.5",
+                "pkg:composer\/symfony\/polyfill-ctype@1.22.1"
+            ]
+        },
+        {
+            "ref": "pkg:composer\/voku\/portable-ascii@1.5.6"
+        },
+        {
+            "ref": "pkg:composer\/cyclonedx\/cyclonedx-php-composer-demo@dev-master",
+            "dependsOn": [
+                "pkg:composer\/laravel\/laravel@7.12.0"
+            ]
         }
     ]
 }

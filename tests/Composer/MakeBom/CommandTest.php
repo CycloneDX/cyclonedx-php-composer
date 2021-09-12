@@ -24,7 +24,7 @@ declare(strict_types=1);
 namespace CycloneDX\Tests\Composer\MakeBom;
 
 use Composer\IO\NullIO;
-use CycloneDX\Composer\Factories\BomFactory;
+use CycloneDX\Composer\Builders\BomBuilder;
 use CycloneDX\Composer\MakeBom\Command;
 use CycloneDX\Composer\MakeBom\Exceptions\ValueError;
 use CycloneDX\Composer\MakeBom\Factory;
@@ -57,8 +57,8 @@ class CommandTest extends TestCase
     private $command;
 
     /**
-     * @var BomFactory|\PHPUnit\Framework\MockObject\MockObject
-     * @psalm-var BomFactory&\PHPUnit\Framework\MockObject\MockObject
+     * @var BomBuilder|\PHPUnit\Framework\MockObject\MockObject
+     * @psalm-var \CycloneDX\Composer\Builders\BomBuilder&\PHPUnit\Framework\MockObject\MockObject
      */
     private $bomFactory;
 
@@ -66,7 +66,7 @@ class CommandTest extends TestCase
     {
         $this->options = $this->createTestProxy(Options::class);
         $this->factory = $this->createMock(Factory::class);
-        $this->bomFactory = $this->createMock(BomFactory::class);
+        $this->bomFactory = $this->createMock(BomBuilder::class);
         $this->command = new Command($this->options, $this->factory, $this->bomFactory, null, 'test-dummy');
         $this->command->setIO(new NullIO());
     }

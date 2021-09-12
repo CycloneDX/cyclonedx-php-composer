@@ -60,9 +60,12 @@ class DisjunctiveLicenseRepository implements \Countable
      */
     public function addLicense(AbstractDisjunctiveLicense ...$licenses): self
     {
-        array_push($this->licenses, ...array_values(
-            array_filter($licenses, [$this, 'isSupportedLicense'])
-        ));
+        foreach (array_filter($licenses, [$this, 'isSupportedLicense']) as $license) {
+            if (\in_array($license, $this->licenses, true)) {
+                continue;
+            }
+            $this->licenses[] = $license;
+        }
 
         return $this;
     }

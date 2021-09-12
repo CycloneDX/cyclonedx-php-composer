@@ -25,6 +25,7 @@ namespace CycloneDX\Composer\MakeBom;
 
 use Composer\Composer;
 use Composer\Factory as ComposerFactory;
+use Composer\Package\AliasPackage;
 use Composer\Repository\LockArrayRepository;
 use CycloneDX\Composer\Factories\SpecFactory;
 use CycloneDX\Core\Serialize\JsonSerializer;
@@ -47,9 +48,9 @@ class Factory
 {
     /**
      * @var string[]
-     * @psalm-var array<Options::OUTPUT_FORMAT_*, class-string<SerializerInterface>>
+     * @psalm-var array<Options::OUTPUT_FORMAT_*, class-string<\CycloneDX\Core\Serialize\BaseSerializer>>
      */
-    private const SERIALISERS = [
+    private const SERIALIZERS = [
         Options::OUTPUT_FORMAT_XML => XmlSerializer::class,
         Options::OUTPUT_FORMAT_JSON => JsonSerializer::class,
     ];
@@ -68,9 +69,17 @@ class Factory
      */
     private $composerFactory;
 
-    public function __construct(ComposerFactory $composerFactory)
-    {
+    /**
+     * @var SpecFactory
+     */
+    private $specFactory;
+
+    public function __construct(
+        ComposerFactory $composerFactory,
+        SpecFactory $specFactory
+    ) {
         $this->composerFactory = $composerFactory;
+        $this->specFactory = $specFactory;
     }
 
     /**
@@ -78,7 +87,7 @@ class Factory
      */
     public function makeSpecFromOptions(Options $options): SpecInterface
     {
-        return (new SpecFactory())->make($options->specVersion);
+        return $this->specFactory->make($options->specVersion);
     }
 
     /**
@@ -100,9 +109,11 @@ class Factory
      */
     public function makeSerializerFromOptions(Options $options): SerializerInterface
     {
-        $serializer = self::SERIALISERS[$options->outputFormat];
+        $serializer = self::SERIALIZERS[$options->outputFormat];
 
-        return new $serializer($this->makeSpecFromOptions($options));
+        return new $serializer(
+            $this->makeSpecFromOptions($options)
+        );
     }
 
     /**
@@ -122,7 +133,11 @@ class Factory
             && false === empty($locker->getDevPackageNames()); // prevent a possible throw in `getLockedRepository()`
         $repo = $locker->getLockedRepository($withDevReqs);
 
-        // dont filter out alias-packages. they might be needed for dependency trees
+        foreach ($repo->getPackages() as $package) {
+            if ($package instanceof AliasPackage) {
+                $repo->removePackage($package);
+            }
+        }
 
         if ($options->excludePlugins) {
             foreach ($repo->getPackages() as $package) {
