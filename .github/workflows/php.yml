@@ -63,8 +63,11 @@ jobs:
         uses: actions/cache@v2.1.6
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
-          key:          composer-${{ runner.os }}-php${{ matrix.php }}-${{ matrix.dependencies }}-${{ hashFiles('**/composer.json') }}
-          restore-keys: composer-${{ runner.os }}-php${{ matrix.php }}-${{ matrix.dependencies }}-
+          key: composer-${{ github.job }}-${{ runner.os }}-${{ matrix.php }}-${{ matrix.dependencies }}-${{ hashFiles('**/composer.json') }}
+          restore-keys: |
+            composer-${{ github.job }}-${{ runner.os }}-${{ matrix.php }}-${{ matrix.dependencies }}-
+            composer-${{ github.job }}-${{ runner.os }}-${{ matrix.php }}-
+            composer-${{ github.job }}-${{ runner.os }}-
       - name: Validate composer.json and composer.lock
         run: >
           composer validate
@@ -131,8 +134,11 @@ jobs:
         uses: actions/cache@v2.1.6
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
-          key:          composer-${{ runner.os }}-php${{ matrix.php }}-${{ matrix.dependencies }}-${{ hashFiles('**/composer.lock') }}
-          restore-keys: composer-${{ runner.os }}-php${{ matrix.php }}-${{ matrix.dependencies }}-
+          key: composer-${{ github.job }}-${{ runner.os }}-${{ matrix.php }}-${{ matrix.dependencies }}-${{ hashFiles('**/composer.json') }}
+          restore-keys: |
+            composer-${{ github.job }}-${{ runner.os }}-${{ matrix.php }}-${{ matrix.dependencies }}-
+            composer-${{ github.job }}-${{ runner.os }}-${{ matrix.php }}-
+            composer-${{ github.job }}-${{ runner.os }}-
       - name: Install psalm
         run: composer update --prefer-dist --no-interaction --no-progress
         working-directory: tools/psalm
@@ -181,8 +187,9 @@ jobs:
         uses: actions/cache@v2.1.6
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
-          key:          composer-${{ runner.os }}-php8.0-${{ hashFiles('**/composer.json') }}
-          restore-keys: composer-${{ runner.os }}-php8.0-
+          key: composer-${{ github.job }}-${{ runner.os }}-${{ hashFiles('**/composer.json') }}
+          restore-keys: |
+            composer-${{ github.job }}-${{ runner.os }}-
       - name: Install composer-unused
         run: composer update --prefer-dist --no-interaction --no-progress
         working-directory: tools/composer-unused
@@ -216,8 +223,9 @@ jobs:
         uses: actions/cache@v2.1.6
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
-          key:          composer-${{ runner.os }}-php8.0-${{ hashFiles('**/composer.json') }}
-          restore-keys: composer-${{ runner.os }}-php8.0-
+          key: composer-${{ github.job }}-${{ runner.os }}-${{ hashFiles('**/composer.json') }}
+          restore-keys: |
+            composer-${{ github.job }}-${{ runner.os }}-
       - name: Install composer-require-checker
         run: composer update --prefer-dist --no-interaction --no-progress
         working-directory: tools/composer-require-checker
@@ -252,8 +260,9 @@ jobs:
         uses: actions/cache@v2.1.6
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
-          key:          composer-${{ runner.os }}-php8.0-${{ hashFiles('**/composer.json') }}
-          restore-keys: composer-${{ runner.os }}-php8.0-
+          key: composer-${{ github.job }}-${{ runner.os }}-${{ hashFiles('**/composer.json') }}
+          restore-keys: |
+            composer-${{ github.job }}-${{ runner.os }}-
       - name: Install PHP-CS-Fixer
         run: composer update --prefer-dist --no-interaction --no-progress
         working-directory: tools/php-cs-fixer
@@ -289,8 +298,9 @@ jobs:
         uses: actions/cache@v2.1.6
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
-          key:          composer-${{ runner.os }}-php8.0-${{ hashFiles('**/composer.json') }}
-          restore-keys: composer-${{ runner.os }}-php8.0-
+          key: composer-${{ github.job }}-${{ runner.os }}-${{ hashFiles('**/composer.json') }}
+          restore-keys: |
+            composer-${{ github.job }}-${{ runner.os }}-
       - name: Install composer-normalize
         run: composer update --prefer-dist --no-interaction --no-progress
         working-directory: tools/composer-normalize
