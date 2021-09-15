@@ -32,11 +32,11 @@ jobs:
           - "7.3" # lowest supported
         dependencies: [ "lowest", "highest" ]
         include:
-          - # windows cutting edge highest
+          - # Windows highest
             os: windows-latest
             php: "8.0"
             dependencies: "highest"
-          - # macos cutting edge highest
+          - # MacOS highest
             os: macos-latest
             php: "8.0"
             dependencies: "highest"
@@ -55,19 +55,16 @@ jobs:
           extensions: ${{ env.PHP_PROJECT_EXT }}
           tools: composer:v2
           coverage: pcov,xdebug
-      - name: Determine composer cache directory on Linux/macOS
-        if: ${{ matrix.os == 'ubuntu-latest' || matrix.os == 'macos-latest' }}
-        run: echo "COMPOSER_CACHE_DIR_PATH=$(composer config cache-dir)" >> $GITHUB_ENV
-      - name: Determine composer cache directory on Windows
-        if: ${{ matrix.os == 'windows-latest' }}
-        run: ECHO "COMPOSER_CACHE_DIR_PATH=~\AppData\Local\Composer" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
-      - name: Cache dependencies installed with composer
+      - name: Get composer cache directory
+        id: composer-cache
+        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+      - name: Cache dependencies
         # see https://github.com/actions/cache
         uses: actions/cache@v2.1.6
         with:
-          path: ${{ env.COMPOSER_CACHE_DIR_PATH }}
-          key:          php${{ matrix.php }}-${{ matrix.dependencies }}-${{ hashFiles('**/composer.json') }}
-          restore-keys: php${{ matrix.php }}-${{ matrix.dependencies }}-
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key:          composer-${{ runner.os }}-php${{ matrix.php }}-${{ matrix.dependencies }}-${{ hashFiles('**/composer.json') }}
+          restore-keys: composer-${{ runner.os }}-php${{ matrix.php }}-${{ matrix.dependencies }}-
       - name: Validate composer.json and composer.lock
         run: >
           composer validate
@@ -126,15 +123,16 @@ jobs:
           extensions: ${{ env.PHP_PROJECT_EXT }}
           tools: composer:v2
           coverage: none
-      - name: Determine composer cache directory
-        run: echo "COMPOSER_CACHE_DIR_PATH=$(composer config cache-dir)" >> $GITHUB_ENV
-      - name: Cache dependencies installed with composer
+      - name: Get composer cache directory
+        id: composer-cache
+        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+      - name: Cache dependencies
         # see https://github.com/actions/cache
         uses: actions/cache@v2.1.6
         with:
-          path: ${{ env.COMPOSER_CACHE_DIR_PATH }}
-          key:          php${{ matrix.php }}-${{ matrix.dependencies }}-${{ hashFiles('**/composer.json') }}
-          restore-keys: php${{ matrix.php }}-${{ matrix.dependencies }}-
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key:          composer-${{ runner.os }}-php${{ matrix.php }}-${{ matrix.dependencies }}-${{ hashFiles('**/composer.lock') }}
+          restore-keys: composer-${{ runner.os }}-php${{ matrix.php }}-${{ matrix.dependencies }}-
       - name: Install psalm
         run: composer update --prefer-dist --no-interaction --no-progress
         working-directory: tools/psalm
@@ -175,15 +173,16 @@ jobs:
           extensions: ${{ env.PHP_PROJECT_EXT }}
           tools: composer:v2
           coverage: none
-      - name: Determine composer cache directory
-        run: echo "COMPOSER_CACHE_DIR_PATH=$(composer config cache-dir)" >> $GITHUB_ENV
-      - name: Cache dependencies installed with composer
+      - name: Get composer cache directory
+        id: composer-cache
+        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+      - name: Cache dependencies
         # see https://github.com/actions/cache
         uses: actions/cache@v2.1.6
         with:
-          path: ${{ env.COMPOSER_CACHE_DIR_PATH }}
-          key:          php8.0-highest-${{ hashFiles('**/composer.json') }}
-          restore-keys: php8.0-highest-
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key:          composer-${{ runner.os }}-php8.0-${{ hashFiles('**/composer.json') }}
+          restore-keys: composer-${{ runner.os }}-php8.0-
       - name: Install composer-unused
         run: composer update --prefer-dist --no-interaction --no-progress
         working-directory: tools/composer-unused
@@ -209,15 +208,16 @@ jobs:
           extensions: ${{ env.PHP_PROJECT_EXT }}
           tools: composer:v2
           coverage: none
-      - name: Determine composer cache directory
-        run: echo "COMPOSER_CACHE_DIR_PATH=$(composer config cache-dir)" >> $GITHUB_ENV
-      - name: Cache dependencies installed with composer
+      - name: Get composer cache directory
+        id: composer-cache
+        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+      - name: Cache dependencies
         # see https://github.com/actions/cache
         uses: actions/cache@v2.1.6
         with:
-          path: ${{ env.COMPOSER_CACHE_DIR_PATH }}
-          key:          php8.0-highest-${{ hashFiles('**/composer.json') }}
-          restore-keys: php8.0-highest-
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key:          composer-${{ runner.os }}-php8.0-${{ hashFiles('**/composer.json') }}
+          restore-keys: composer-${{ runner.os }}-php8.0-
       - name: Install composer-require-checker
         run: composer update --prefer-dist --no-interaction --no-progress
         working-directory: tools/composer-require-checker
@@ -244,15 +244,16 @@ jobs:
           extensions: ${{ env.PHP_PROJECT_EXT }}
           tools: composer:v2
           coverage: none
-      - name: Determine composer cache directory
-        run: echo "COMPOSER_CACHE_DIR_PATH=$(composer config cache-dir)" >> $GITHUB_ENV
-      - name: Cache dependencies installed with composer
+      - name: Get composer cache directory
+        id: composer-cache
+        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+      - name: Cache dependencies
         # see https://github.com/actions/cache
         uses: actions/cache@v2.1.6
         with:
-          path: ${{ env.COMPOSER_CACHE_DIR_PATH }}
-          key:          php8.0-highest-${{ hashFiles('**/composer.json') }}
-          restore-keys: php8.0-highest-
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key:          composer-${{ runner.os }}-php8.0-${{ hashFiles('**/composer.json') }}
+          restore-keys: composer-${{ runner.os }}-php8.0-
       - name: Install PHP-CS-Fixer
         run: composer update --prefer-dist --no-interaction --no-progress
         working-directory: tools/php-cs-fixer
@@ -280,15 +281,16 @@ jobs:
           php-version: "8.0"
           tools: composer:v2
           coverage: none
-      - name: Determine composer cache directory
-        run: echo "COMPOSER_CACHE_DIR_PATH=$(composer config cache-dir)" >> $GITHUB_ENV
-      - name: Cache dependencies installed with composer
+      - name: Get composer cache directory
+        id: composer-cache
+        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+      - name: Cache dependencies
         # see https://github.com/actions/cache
         uses: actions/cache@v2.1.6
         with:
-          path: ${{ env.COMPOSER_CACHE_DIR_PATH }}
-          key: php8.0-highest-${{ hashFiles('**/composer.json') }}
-          restore-keys: php8.0-highest-
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key:          composer-${{ runner.os }}-php8.0-${{ hashFiles('**/composer.json') }}
+          restore-keys: composer-${{ runner.os }}-php8.0-
       - name: Install composer-normalize
         run: composer update --prefer-dist --no-interaction --no-progress
         working-directory: tools/composer-normalize
