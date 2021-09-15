@@ -124,8 +124,16 @@ class Factory
         Composer $composer,
         Options $options
     ): LockArrayRepository {
+        /**
+         * Composer <  2.1.7 -> nullable, but type hint was wrong
+         * Composer >= 2.1.7 -> nullable.
+         *
+         * @var \Composer\Package\Locker|null
+         * @psalm-suppress UnnecessaryVarAnnotation
+         */
         $locker = $composer->getLocker();
-        if (!$locker->isLocked() || !$locker->isFresh()) {
+
+        if (null === $locker || !$locker->isLocked() || !$locker->isFresh()) {
             throw new Exceptions\LockerIsOutdatedError('The lock file is missing or not up to date with composer config');
         }
 

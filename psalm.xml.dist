@@ -4,7 +4,7 @@
        xsi:schemaLocation="https://getpsalm.org/schema/config tools/psalm/vendor/vimeo/psalm/config.xsd"
        errorLevel="1"
        checkForThrowsDocblock="true"
-       findUnusedPsalmSuppress="true"
+       findUnusedPsalmSuppress="false"
        ensureArrayStringOffsetsExist="true"
        ensureArrayIntOffsetsExist="true"
        cacheDirectory=".psalm.cache"
