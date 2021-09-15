@@ -247,10 +247,22 @@ class Command extends BaseCommand
                 throw new \UnexpectedValueException('empty composer');
             }
 
-            $withDevReqs = !empty($composer->getLocker()->getDevPackageNames());
-            $lockerRepo = $composer->getLocker()->getLockedRepository($withDevReqs);
-            // @TODO better use the installed-repo than the lockerRepo - as of milestone v4
+            /**
+             * Composer <  2.1.7 -> nullable, but type hint was wrong
+             * Composer >= 2.1.7 -> nullable.
+             *
+             * @var \Composer\Package\Locker|null
+             * @psalm-suppress UnnecessaryVarAnnotation
+             */
+            $locker = $composer->getLocker();
+            if (null === $locker) {
+                throw new \UnexpectedValueException('empty locker');
+            }
 
+            $withDevReqs = !empty($locker->getDevPackageNames());
+            $lockerRepo = $locker->getLockedRepository($withDevReqs);
+
+            // @TODO better use the installed-repo than the lockerRepo - as of milestone v4
             return $updater->updateTool($this->bomFactory->getTool(), $lockerRepo);
         } catch (\Exception $exception) {
             return false;
