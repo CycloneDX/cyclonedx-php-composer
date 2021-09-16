@@ -4,10 +4,12 @@ All notable changes to this project will be documented in this file.
 
 ## unreleased
 
+## 3.4.1 - 2021-09-16
+
 * Fixed
   * Improved compatibility to composer. (via [#125])    
-    This was made possible since composer's type hints are getting fixed.
-    See https://github.com/composer/composer/releases/tag/2.1.7
+    This was made possible since composer's type hints are getting fixed.   
+    See https://github.com/composer/composer/releases/tag/2.1.7   
     > Added many type annotations internally, which may have an effect on CI/static analysis for people using Composer as a dependency.
 
 [#125]: https://github.com/CycloneDX/cyclonedx-php-composer/pull/125
