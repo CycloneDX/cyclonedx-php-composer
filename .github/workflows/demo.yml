@@ -83,20 +83,25 @@ jobs:
           extensions: ${{ env.PHP_PROJECT_EXT }}
           tools: composer:v${{ matrix.composer }}
           coverage: none
-      - name: Determine composer cache directory
-        run: echo "COMPOSER_CACHE_DIR_PATH=$(composer config cache-dir)" >> $GITHUB_ENV
-      - name: Cache dependencies installed with composer
+      - name: Get composer cache directory
+        id: composer-cache
+        working-directory: ${{ env.DEMO_RUN_DIR }}/project
+        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+      - name: Cache dependencies
         # see https://github.com/actions/cache
         uses: actions/cache@v2.1.6
         with:
-          path: ${{ env.COMPOSER_CACHE_DIR_PATH }}
-          key: rep_demo-php${{ matrix.php }}-${{ hashFiles('**/composer.json') }}
-          restore-keys: rep_demo-php${{ matrix.php }}-
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: composer-${{ github.job }}-${{ matrix.subject }}-${{ runner.os }}-${{ matrix.php }}-${{ hashFiles('demo/**/composer.lock') }}
+          restore-keys: |
+            composer-${{ github.job }}-${{ matrix.subject }}-${{ runner.os }}-${{ matrix.php }}-
+            composer-${{ github.job }}-${{ matrix.subject }}-${{ runner.os }}-
       - name: Install dependencies
-        run: composer install --prefer-dist --no-interaction --no-progress
         working-directory: ${{ env.DEMO_RUN_DIR }}/project
+        run: composer install --prefer-dist --no-interaction --no-progress
       - name: Make SBOM to file
         if: ${{ ! matrix.stdout }}
+        working-directory: ${{ env.DEMO_RUN_DIR }}/project
         run: >
           composer make-bom
           -vvv
@@ -104,9 +109,9 @@ jobs:
           --spec-version=${{ matrix.spec-version }}
           --output-format=${{ matrix.output-format }}
           --output-file="$OUT_FILE_PATH"
-        working-directory: ${{ env.DEMO_RUN_DIR }}/project
       - name: Make SBOM to STDOUT
         if: ${{ matrix.stdout }}
+        working-directory: ${{ env.DEMO_RUN_DIR }}/project
         run: >
           composer make-bom
           -vvv
@@ -115,7 +120,6 @@ jobs:
           --output-format=${{ matrix.output-format }}
           --output-file=-
           > "$OUT_FILE_PATH"
-        working-directory: ${{ env.DEMO_RUN_DIR }}/project
       - name: Compare reproducible SBOM
         run: >
           diff -s
