@@ -31,10 +31,12 @@ jobs:
         subject: # list of reproducible demos
           - laravel-7.12.0
           - local
-        php: ["8.0"] # highest supported
+        php:
+          - "8.1" # upcoming php version
+          - "8.0" # highest supported
         composer:
-        - "2" # latest supported
-        - "2.0.13" # lowest supported without any security issues
+          - "2"      # latest supported
+          - "2.0.13" # lowest supported without any security issues
         output-format:
           # lowercase the format, since it is also used as a file extension when searching the original file
           - xml
@@ -51,6 +53,9 @@ jobs:
             spec-version: "1.0"
           - output-format: json
             spec-version: "1.1"
+          # broken combinations
+          - php: "8.1"
+            composer: "2.0.13"
         include:
           - # test if stdout receives no data except the SBOM
             subject: laravel-7.12.0

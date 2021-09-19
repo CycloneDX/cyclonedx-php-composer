@@ -4688,12 +4688,12 @@
                 "ext-libxml": "*",
                 "package-url/packageurl-php": "^1.0",
                 "php": "^7.3 || ^8.0",
-                "swaggest/json-schema": "^0.12.35"
+                "swaggest/json-schema": "^0.12.38"
             },
             "require-dev": {
                 "composer/composer": "^2.0.13",
                 "ext-simplexml": "*",
-                "phpunit/phpunit": "9.5.7",
+                "phpunit/phpunit": "9.5.9",
                 "roave/security-advisories": "dev-latest"
             },
             "type": "composer-plugin",
@@ -4796,16 +4796,16 @@
         },
         {
             "name": "package-url/packageurl-php",
-            "version": "1.0.0",
+            "version": "1.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/package-url/packageurl-php.git",
-                "reference": "353b430a0631cf6f5cb04e8283d7f88ca5c35fab"
+                "reference": "3d593b87966d3dff60d6cc02fd0a83fccb0a01f4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/package-url/packageurl-php/zipball/353b430a0631cf6f5cb04e8283d7f88ca5c35fab",
-                "reference": "353b430a0631cf6f5cb04e8283d7f88ca5c35fab",
+                "url": "https://api.github.com/repos/package-url/packageurl-php/zipball/3d593b87966d3dff60d6cc02fd0a83fccb0a01f4",
+                "reference": "3d593b87966d3dff60d6cc02fd0a83fccb0a01f4",
                 "shasum": ""
             },
             "require": {
@@ -4843,9 +4843,9 @@
             ],
             "support": {
                 "issues": "https://github.com/package-url/packageurl-php/issues",
-                "source": "https://github.com/package-url/packageurl-php/tree/1.0.0"
+                "source": "https://github.com/package-url/packageurl-php/tree/1.0.3"
             },
-            "time": "2021-04-02T03:47:48+00:00"
+            "time": "2021-05-13T17:29:18+00:00"
         },
         {
             "name": "phplang/scope-exit",
@@ -4897,16 +4897,16 @@
         },
         {
             "name": "swaggest/json-diff",
-            "version": "v3.8.1",
+            "version": "v3.8.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/swaggest/json-diff.git",
-                "reference": "d2184358c5ef5ecaa1f6b4c2bce175fac2d25670"
+                "reference": "d223be0ee90cd6001c21af39573fbc2f600a0bbe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swaggest/json-diff/zipball/d2184358c5ef5ecaa1f6b4c2bce175fac2d25670",
-                "reference": "d2184358c5ef5ecaa1f6b4c2bce175fac2d25670",
+                "url": "https://api.github.com/repos/swaggest/json-diff/zipball/d223be0ee90cd6001c21af39573fbc2f600a0bbe",
+                "reference": "d223be0ee90cd6001c21af39573fbc2f600a0bbe",
                 "shasum": ""
             },
             "require": {
@@ -4934,22 +4934,22 @@
             "description": "JSON diff/rearrange/patch/pointer library for PHP",
             "support": {
                 "issues": "https://github.com/swaggest/json-diff/issues",
-                "source": "https://github.com/swaggest/json-diff/tree/v3.8.1"
+                "source": "https://github.com/swaggest/json-diff/tree/v3.8.2"
             },
-            "time": "2020-09-25T17:47:07+00:00"
+            "time": "2021-09-17T13:39:44+00:00"
         },
         {
             "name": "swaggest/json-schema",
-            "version": "v0.12.35",
+            "version": "v0.12.38",
             "source": {
                 "type": "git",
                 "url": "https://github.com/swaggest/php-json-schema.git",
-                "reference": "d0126bd830c92a498691d278f01d3ce13a2c9c0a"
+                "reference": "ab7cca149a5822acc5be538dd6c008a348f6cb89"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swaggest/php-json-schema/zipball/d0126bd830c92a498691d278f01d3ce13a2c9c0a",
-                "reference": "d0126bd830c92a498691d278f01d3ce13a2c9c0a",
+                "url": "https://api.github.com/repos/swaggest/php-json-schema/zipball/ab7cca149a5822acc5be538dd6c008a348f6cb89",
+                "reference": "ab7cca149a5822acc5be538dd6c008a348f6cb89",
                 "shasum": ""
             },
             "require": {
@@ -4957,11 +4957,10 @@
                 "ext-mbstring": "*",
                 "php": ">=5.4",
                 "phplang/scope-exit": "^1.0",
-                "swaggest/json-diff": "^3.5.1"
+                "swaggest/json-diff": "^3.8.2"
             },
             "require-dev": {
-                "phpunit/php-code-coverage": "^4",
-                "phpunit/phpunit": "^5"
+                "phpunit/phpunit": "^4.8.23"
             },
             "type": "library",
             "autoload": {
@@ -4983,9 +4982,9 @@
             "support": {
                 "email": "vearutop@gmail.com",
                 "issues": "https://github.com/swaggest/php-json-schema/issues",
-                "source": "https://github.com/swaggest/php-json-schema/tree/v0.12.35"
+                "source": "https://github.com/swaggest/php-json-schema/tree/v0.12.38"
             },
-            "time": "2021-06-17T22:28:26+00:00"
+            "time": "2021-09-17T13:54:01+00:00"
         }
     ],
     "aliases": [],

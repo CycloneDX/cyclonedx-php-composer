@@ -33,7 +33,7 @@
         "ext-libxml": "*",
         "composer-plugin-api": "^2.0",
         "package-url/packageurl-php": "^1.0",
-        "swaggest/json-schema": "^0.12.35"
+        "swaggest/json-schema": "^0.12.38"
     },
     "require-dev": {
         "ext-simplexml": "*",
