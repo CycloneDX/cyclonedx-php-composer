@@ -25,4 +25,5 @@ composer.lock text eol=lf diff=json
 /HISTORY.md             export-ignore
 /CODEOWNERS             export-ignore
 /demo                   export-ignore
-/docs/decisions         export-ignore
+/docs/dev               export-ignore
+
