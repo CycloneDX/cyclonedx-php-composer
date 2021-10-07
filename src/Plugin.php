@@ -40,7 +40,7 @@ use CycloneDX\Core\Spdx\License as SpdxLicenseValidator;
  */
 class Plugin implements PluginInterface, Capable, CommandProvider
 {
-    private const FILE_VERSION = __DIR__.'/../../semver.txt';
+    private const FILE_VERSION = __DIR__.'/../semver.txt';
 
     public function activate(Composer $composer, IOInterface $io): void
     {

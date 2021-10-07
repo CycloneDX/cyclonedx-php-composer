@@ -55,12 +55,12 @@
     },
     "autoload": {
         "psr-4": {
-            "CycloneDX\\Composer\\": "src/Composer/"
+            "CycloneDX\\Composer\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "CycloneDX\\Tests\\": "tests"
+            "CycloneDX\\Tests\\": "tests/"
         }
     },
     "prefer-stable": true,

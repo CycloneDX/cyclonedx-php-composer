@@ -38,7 +38,7 @@ class PluginTest extends TestCase
     /**
      * path to composer.json file.
      */
-    private const COMPOSER_JSON_FILE_PATH = __DIR__.'/../../composer.json';
+    private const COMPOSER_JSON_FILE_PATH = __DIR__.'/../composer.json';
 
     /**
      * assert the correct setup as described in
