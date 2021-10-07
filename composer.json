@@ -27,16 +27,11 @@
     ],
     "require": {
         "php": "^7.3 || ^8.0",
-        "ext-dom": "*",
-        "ext-filter": "*",
-        "ext-json": "*",
-        "ext-libxml": "*",
         "composer-plugin-api": "^2.0",
-        "package-url/packageurl-php": "^1.0",
-        "swaggest/json-schema": "^0.12.38"
+        "cyclonedx/cyclonedx-library": "^1.0",
+        "package-url/packageurl-php": "^1.0"
     },
     "require-dev": {
-        "ext-simplexml": "*",
         "composer/composer": "^2.0.13",
         "phpunit/phpunit": "9.5.10",
         "roave/security-advisories": "dev-latest"
@@ -60,8 +55,7 @@
     },
     "autoload": {
         "psr-4": {
-            "CycloneDX\\Composer\\": "src/Composer/",
-            "CycloneDX\\Core\\": "src/Core/"
+            "CycloneDX\\Composer\\": "src/Composer/"
         }
     },
     "autoload-dev": {

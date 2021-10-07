@@ -17,12 +17,6 @@
         <testsuite name="default">
             <directory>tests</directory>
         </testsuite>
-        <testsuite name="Core">
-            <directory>tests/Core</directory>
-        </testsuite>
-        <testsuite name="Composer">
-            <directory>tests/Composer</directory>
-        </testsuite>
     </testsuites>
     <coverage cacheDirectory=".phpunit.cache/code-coverage">
         <include>
