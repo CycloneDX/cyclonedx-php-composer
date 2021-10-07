@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 
 ## unreleased
 
+* Changed
+  * Core library
+    * Was moved to an own package: https://packagist.org/packages/cyclonedx/cyclonedx-library  
+      The new external package/library is a one-to-one copy of the original code from this project, which now is a dependency/required of this project. So usage/leverage of the original code is still possible without any changes for third parties.  
+      See [#87] for details.
+
+[#87]: https://github.com/CycloneDX/cyclonedx-php-composer/issues/87
+
 ## 3.4.1 - 2021-09-16
 
 * Fixed
