@@ -68,6 +68,12 @@ Help:
 
 For a demo of _cyclonedx-php-composer_ see the [demo project][demo_readme].
 
+## Internals
+
+This Composer-Plugin utilizes the [CycloneDX library][cyclonedx-library] to generate the actual data structures.
+
+This Composer-Plugin does not expose any additional _public_ api or classes - all code is marked as `@internal` and might change without any notice during version upgrades.
+
 ## Contributing
 
 Feel free to open pull requests.
@@ -85,6 +91,8 @@ See the [LICENSE][license_file] file for the full license.
 
 [license_file]: https://github.com/CycloneDX/cyclonedx-php-composer/blob/master/LICENSE
 [demo_readme]: https://github.com/CycloneDX/cyclonedx-php-composer/blob/master/demo/README.md
+
+[cyclonedx-library]: https://packagist.org/packages/cyclonedx/cyclonedx-library
 
 [shield_gh-workflow-test]: https://img.shields.io/github/workflow/status/CycloneDX/cyclonedx-php-composer/PHP%20CI/master?logo=GitHub&logoColor=white "build"
 [shield_packagist-version]: https://img.shields.io/packagist/v/cyclonedx/cyclonedx-php-composer?logo=&logoColor=white "packagist"
