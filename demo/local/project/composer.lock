@@ -37,6 +37,85 @@
     ],
     "packages-dev": [
         {
+            "name": "cyclonedx/cyclonedx-library",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/CycloneDX/cyclonedx-php-library.git",
+                "reference": "9fcba9e5030b8497bd7aaeb915ffedb8c74c7121"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/CycloneDX/cyclonedx-php-library/zipball/9fcba9e5030b8497bd7aaeb915ffedb8c74c7121",
+                "reference": "9fcba9e5030b8497bd7aaeb915ffedb8c74c7121",
+                "shasum": ""
+            },
+            "require": {
+                "ext-dom": "*",
+                "ext-filter": "*",
+                "ext-json": "*",
+                "ext-libxml": "*",
+                "package-url/packageurl-php": "^1.0",
+                "php": "^7.3 || ^8.0",
+                "swaggest/json-schema": "^0.12.35"
+            },
+            "conflict": {
+                "cyclonedx/cyclonedx-php-composer": "<3.5"
+            },
+            "require-dev": {
+                "ext-simplexml": "*",
+                "phpunit/phpunit": "9.5.10",
+                "roave/security-advisories": "dev-latest"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.x-dev"
+                },
+                "composer-normalize": {
+                    "indent-size": 4,
+                    "indent-style": "space"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "CycloneDX\\Core\\": "src/Core/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "nscuro",
+                    "email": "nscuro@protonmail.com",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Jan Kowalleck",
+                    "email": "jan.kowalleck@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Work with CycloneDX Software Bill-of-Materials (SBOM)",
+            "homepage": "https://github.com/CycloneDX/cyclonedx-php-library/",
+            "keywords": [
+                "CycloneDX",
+                "SBOM",
+                "bill-of-materials",
+                "bom",
+                "package-url",
+                "purl",
+                "software-bill-of-materials"
+            ],
+            "support": {
+                "issues": "https://github.com/CycloneDX/cyclonedx-php-library/issues",
+                "source": "https://github.com/CycloneDX/cyclonedx-php-library/tree/v1.0.0"
+            },
+            "time": "2021-10-07T12:22:45+00:00"
+        },
+        {
             "name": "cyclonedx/cyclonedx-php-composer",
             "version": "dev-master",
             "dist": {
@@ -45,18 +124,13 @@
             },
             "require": {
                 "composer-plugin-api": "^2.0",
-                "ext-dom": "*",
-                "ext-filter": "*",
-                "ext-json": "*",
-                "ext-libxml": "*",
+                "cyclonedx/cyclonedx-library": "^1.0",
                 "package-url/packageurl-php": "^1.0",
-                "php": "^7.3 || ^8.0",
-                "swaggest/json-schema": "^0.12.38"
+                "php": "^7.3 || ^8.0"
             },
             "require-dev": {
                 "composer/composer": "^2.0.13",
-                "ext-simplexml": "*",
-                "phpunit/phpunit": "9.5.9",
+                "phpunit/phpunit": "9.5.10",
                 "roave/security-advisories": "dev-latest"
             },
             "type": "composer-plugin",
@@ -72,13 +146,12 @@
             },
             "autoload": {
                 "psr-4": {
-                    "CycloneDX\\Composer\\": "src/Composer/",
-                    "CycloneDX\\Core\\": "src/Core/"
+                    "CycloneDX\\Composer\\": "src/"
                 }
             },
             "autoload-dev": {
                 "psr-4": {
-                    "CycloneDX\\Tests\\": "tests"
+                    "CycloneDX\\Tests\\": "tests/"
                 }
             },
             "scripts": {
@@ -260,16 +333,16 @@
         },
         {
             "name": "swaggest/json-diff",
-            "version": "v3.8.2",
+            "version": "v3.8.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/swaggest/json-diff.git",
-                "reference": "d223be0ee90cd6001c21af39573fbc2f600a0bbe"
+                "reference": "bb3e3b4e9d842bb2e48f31ea568d0459968d1d42"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swaggest/json-diff/zipball/d223be0ee90cd6001c21af39573fbc2f600a0bbe",
-                "reference": "d223be0ee90cd6001c21af39573fbc2f600a0bbe",
+                "url": "https://api.github.com/repos/swaggest/json-diff/zipball/bb3e3b4e9d842bb2e48f31ea568d0459968d1d42",
+                "reference": "bb3e3b4e9d842bb2e48f31ea568d0459968d1d42",
                 "shasum": ""
             },
             "require": {
@@ -297,9 +370,9 @@
             "description": "JSON diff/rearrange/patch/pointer library for PHP",
             "support": {
                 "issues": "https://github.com/swaggest/json-diff/issues",
-                "source": "https://github.com/swaggest/json-diff/tree/v3.8.2"
+                "source": "https://github.com/swaggest/json-diff/tree/v3.8.3"
             },
-            "time": "2021-09-17T13:39:44+00:00"
+            "time": "2021-09-25T22:09:03+00:00"
         },
         {
             "name": "swaggest/json-schema",
