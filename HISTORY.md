@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## unreleased
+## 3.5.0 - 2021-10-07
 
 * Changed
   * Core library
