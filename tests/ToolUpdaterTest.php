@@ -21,7 +21,7 @@ declare(strict_types=1);
  * Copyright (c) Steve Springett. All Rights Reserved.
  */
 
-namespace CycloneDX\Tests\Composer;
+namespace Tests;
 
 use Composer\Package\AliasPackage;
 use Composer\Package\PackageInterface;

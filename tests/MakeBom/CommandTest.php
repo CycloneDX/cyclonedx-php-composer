@@ -21,7 +21,7 @@ declare(strict_types=1);
  * Copyright (c) Steve Springett. All Rights Reserved.
  */
 
-namespace CycloneDX\Tests\Composer\MakeBom;
+namespace Tests\MakeBom;
 
 use Composer\IO\NullIO;
 use CycloneDX\Composer\Builders\BomBuilder;

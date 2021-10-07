@@ -21,7 +21,7 @@ declare(strict_types=1);
  * Copyright (c) Steve Springett. All Rights Reserved.
  */
 
-namespace CycloneDX\Tests\Composer\MakeBom;
+namespace Tests\MakeBom;
 
 use CycloneDX\Composer\Factories\SpecFactory;
 use CycloneDX\Composer\MakeBom\Exceptions\ValueError;
