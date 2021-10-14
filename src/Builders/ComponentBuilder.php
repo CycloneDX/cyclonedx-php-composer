@@ -68,14 +68,14 @@ class ComponentBuilder
     /**
      * @throws UnexpectedValueException if the given package does not provide a name or version
      */
-    public function makeFromPackage(PackageInterface $package): Component
+    public function makeFromPackage(PackageInterface $package, ?string $packageVersionOverride = null): Component
     {
         $rawName = $package->getPrettyName();
         if (empty($rawName)) {
             throw new UnexpectedValueException('Encountered package without name:'.\PHP_EOL.print_r($package, true));
         }
 
-        $version = $this->getPackageVersion($package);
+        $version = $packageVersionOverride ?? $this->getPackageVersion($package);
         if ('' === $version) {
             throw new UnexpectedValueException("Encountered package without version: $rawName");
         }

@@ -2,12 +2,22 @@
 
 All notable changes to this project will be documented in this file.
 
+## unreleased
+
+* Added
+  * CLI got new option `--mc-version`. (via [#133])  
+    That allows to set the main component's version in the resulting SBoM,
+    so that the auto-detection can be overridden.
+
+[#133]: https://github.com/CycloneDX/cyclonedx-php-composer/pull/133
+
 ## 3.5.0 - 2021-10-07
 
 * Changed
   * Core library
     * Was moved to an own package: https://packagist.org/packages/cyclonedx/cyclonedx-library  
-      The new external package/library is a one-to-one copy of the original code from this project, which now is a dependency/required of this project. So usage/leverage of the original code is still possible without any changes for third parties.  
+      The new external package/library is a one-to-one copy of the original code from this project.  
+      The new external package/library is a dependency/required of this project. So usage/leverage of the original code is still possible without any changes for third parties.  
       See [#87] for details.
 
 [#87]: https://github.com/CycloneDX/cyclonedx-php-composer/issues/87

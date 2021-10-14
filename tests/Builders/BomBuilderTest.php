@@ -68,6 +68,7 @@ class BomBuilderTest extends TestCase
         $componentBuilder = $this->createMock(ComponentBuilder::class);
         $tool = $this->createStub(Tool::class);
         $builder = new BomBuilder($componentBuilder, $tool);
+        $rootPackageOverride = uniqid('vRand-', true);
         $rootPackageWithDeps = $this->createConfiguredMock(
             RootPackageInterface::class,
             [
@@ -127,9 +128,9 @@ class BomBuilderTest extends TestCase
             ->method('makeFromPackage')
             ->willReturnMap(
                 [
-                    [$rootPackageWithDeps, $rootComponentWithDeps],
-                    [$requiredPackageDepP2, $componentDepP2],
-                    [$requiredPackageNoDeps, $componentNoDeps],
+                    [$rootPackageWithDeps, $rootPackageOverride, $rootComponentWithDeps],
+                    [$requiredPackageDepP2, null, $componentDepP2],
+                    [$requiredPackageNoDeps, null, $componentNoDeps],
                 ]
             );
         $rootComponentWithDeps->expects(self::once())
@@ -162,7 +163,7 @@ class BomBuilderTest extends TestCase
             ->with(null)
             ->willReturnSelf();
 
-        $bom = $builder->makeForPackageWithRequires($rootPackageWithDeps, $requires);
+        $bom = $builder->makeForPackageWithRequires($rootPackageWithDeps, $requires, $rootPackageOverride);
 
         self::assertEquals(new ComponentRepository($componentDepP2, $componentNoDeps), $bom->getComponentRepository());
         self::assertSame($rootComponentWithDeps, $bom->getMetaData()->getComponent());

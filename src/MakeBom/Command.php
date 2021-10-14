@@ -162,8 +162,9 @@ class Command extends BaseCommand
 
         $rootPackage = $composer->getPackage();
         $components = $this->factory->makeLockerFromComposerForOptions($composer, $this->options);
+        $rootComponentVersionOverride = $this->options->mainComponentVersion;
 
-        $bom = $this->bomFactory->makeForPackageWithRequires($rootPackage, $components);
+        $bom = $this->bomFactory->makeForPackageWithRequires($rootPackage, $components, $rootComponentVersionOverride);
 
         $io->writeErrorRaw('Bom: '.print_r($bom, true), true, IOInterface::DEBUG);
 
