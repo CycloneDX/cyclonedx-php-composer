@@ -4,8 +4,10 @@ All notable changes to this project will be documented in this file.
 
 ## unreleased
 
+## 3.6.0 - 2021-10-15
+
 * Added
-  * CLI got new option `--mc-version`. (via [#133])  
+  * CLI got a new option `--mc-version`. (via [#133])  
     That allows to set the main component's version in the resulting SBoM,
     so that the auto-detection can be overridden.
 * Fixed
