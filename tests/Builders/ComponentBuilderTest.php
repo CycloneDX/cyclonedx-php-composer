@@ -25,6 +25,7 @@ namespace Tests\Builders;
 
 use Composer\Package\CompletePackageInterface;
 use Composer\Package\PackageInterface;
+use Composer\Package\RootPackage;
 use CycloneDX\Composer\Builders\ComponentBuilder;
 use CycloneDX\Composer\Factories\LicenseFactory;
 use CycloneDX\Composer\Factories\PackageUrlFactory;
@@ -217,6 +218,21 @@ class ComponentBuilderTest extends TestCase
             (new Component('library', 'some-inDev', 'dev-master'))
                 ->setPackageUrl((new PackageUrl('composer', 'some-inDev'))->setVersion('dev-master'))
                 ->setBomRefValue('pkg:composer/some-inDev@dev-master'),
+            null,
+        ];
+
+        yield 'minimal without version' => [
+            $this->createConfiguredMock(
+                RootPackage::class,
+                [
+                    'getType' => 'myType',
+                    'getPrettyName' => 'some-noVersion',
+                    'getPrettyVersion' => RootPackage::DEFAULT_PRETTY_VERSION,
+                ],
+            ),
+            (new Component('library', 'some-noVersion', RootPackage::DEFAULT_PRETTY_VERSION))
+                ->setPackageUrl((new PackageUrl('composer', 'some-noVersion'))->setVersion(null))
+                ->setBomRefValue('pkg:composer/some-noVersion'),
             null,
         ];
 

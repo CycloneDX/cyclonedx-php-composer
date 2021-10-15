@@ -25,6 +25,7 @@ namespace CycloneDX\Composer\Builders;
 
 use Composer\Package\CompletePackageInterface;
 use Composer\Package\PackageInterface;
+use Composer\Package\RootPackage;
 use CycloneDX\Composer\Factories\LicenseFactory;
 use CycloneDX\Composer\Factories\PackageUrlFactory;
 use CycloneDX\Core\Enums\Classification;
@@ -100,6 +101,11 @@ class ComponentBuilder
 
         try {
             $purl = $this->packageUrlFactory->makeFromComponent($component);
+            if ($package instanceof RootPackage
+                && RootPackage::DEFAULT_PRETTY_VERSION === $version
+            ) {
+                $purl->setVersion(null);
+            }
             $component->setPackageUrl($purl);
             $component->setBomRefValue((string) $purl);
         } catch (DomainException $exception) {

@@ -8,8 +8,13 @@ All notable changes to this project will be documented in this file.
   * CLI got new option `--mc-version`. (via [#133])  
     That allows to set the main component's version in the resulting SBoM,
     so that the auto-detection can be overridden.
+* Fixed
+  * The resulting SBoM's main component's `purl` does not get a version assigned,
+    if the version auto-detection fails. (via [#134])
 
 [#133]: https://github.com/CycloneDX/cyclonedx-php-composer/pull/133
+[#134]: https://github.com/CycloneDX/cyclonedx-php-composer/pull/134
+
 
 ## 3.5.0 - 2021-10-07
 
