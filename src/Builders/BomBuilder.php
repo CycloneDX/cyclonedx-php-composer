@@ -70,9 +70,12 @@ class BomBuilder
      * @throws \DomainException          if the bom structure had unexpected values
      * @throws \RuntimeException
      */
-    public function makeForPackageWithRequires(RootPackageInterface $rootPackage, LockArrayRepository $requires): Bom
-    {
-        $rootComponent = $this->componentBuilder->makeFromPackage($rootPackage);
+    public function makeForPackageWithRequires(
+        RootPackageInterface $rootPackage,
+        LockArrayRepository $requires,
+        ?string $rootPackageVersionOverride
+    ): Bom {
+        $rootComponent = $this->componentBuilder->makeFromPackage($rootPackage, $rootPackageVersionOverride);
 
         $requiresPackageComponent = [];
         foreach ($requires->getPackages() as $requirePackage) {

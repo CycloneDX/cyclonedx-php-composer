@@ -40,6 +40,7 @@ class Options
     private const OPTION_OUTPUT_FORMAT = 'output-format';
     private const OPTION_OUTPUT_FILE = 'output-file';
     private const OPTION_SPEC_VERSION = 'spec-version';
+    private const OPTION_MAIN_COMPONENT_VERSION = 'mc-version';
 
     private const SWITCH_EXCLUDE_DEV = 'exclude-dev';
     private const SWITCH_EXCLUDE_PLUGINS = 'exclude-plugins';
@@ -112,6 +113,14 @@ class Options
                 InputOption::VALUE_NONE,
                 'Dont validate the resulting output'
             )
+            ->addOption(
+                self::OPTION_MAIN_COMPONENT_VERSION,
+                null,
+                InputOption::VALUE_REQUIRED,
+                'Version of the main component.'.\PHP_EOL.
+                'This will override auto-detection.',
+                null
+            )
             ->addArgument(
                 self::ARGUMENT_COMPOSER_FILE,
                 InputArgument::OPTIONAL,
@@ -172,6 +181,13 @@ class Options
     public $composerFile;
 
     /**
+     * @var string|null
+     * @readonly
+     * @psalm-allow-private-mutation
+     */
+    public $mainComponentVersion;
+
+    /**
      * @throws ValueError
      *
      * @return $this
@@ -202,10 +218,12 @@ class Options
         \assert(null === $outputFile || \is_string($outputFile));
         $composerFile = $input->getArgument(self::ARGUMENT_COMPOSER_FILE);
         \assert(null === $composerFile || \is_string($composerFile));
+        $mainComponentVersion = $input->getOption(self::OPTION_MAIN_COMPONENT_VERSION);
+        \assert(null === $mainComponentVersion || \is_string($mainComponentVersion));
 
         // endregion get from input
 
-        // those regions are spit,
+        // those regions are split,
         // so the state does not modify unless everything is clear
 
         // region set state
@@ -220,6 +238,9 @@ class Options
             : self::OUTPUT_FILE_DEFAULT[$outputFormat];
         $this->composerFile = \is_string($composerFile) && '' !== $outputFile
             ? $composerFile
+            : null;
+        $this->mainComponentVersion = \is_string($mainComponentVersion) && '' !== $mainComponentVersion
+            ? $mainComponentVersion
             : null;
 
         // endregion set state
