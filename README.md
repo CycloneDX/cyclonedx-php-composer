@@ -34,8 +34,8 @@ Usage:
   make-bom [options] [--] [<composer-file>]
 
 Arguments:
-  composer-file                      Path to "composer.json" file.
-                                     Defaults to file in current working dir.
+  composer-file                      Path to composer config file.
+                                     Defaults to "composer.json" file in working directory.
 
 Options:
       --output-format=OUTPUT-FORMAT  Which output format to use.

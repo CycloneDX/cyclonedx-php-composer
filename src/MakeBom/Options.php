@@ -125,7 +125,7 @@ class Options
                 self::ARGUMENT_COMPOSER_FILE,
                 InputArgument::OPTIONAL,
                 'Path to composer config file.'.\PHP_EOL.
-                'Defaults to file in current working dir.'
+                'Defaults to "composer.json" file in working directory.'
             );
     }
 
