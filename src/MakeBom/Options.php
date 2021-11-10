@@ -46,6 +46,10 @@ class Options
     private const SWITCH_EXCLUDE_PLUGINS = 'exclude-plugins';
     private const SWITCH_NO_VALIDATE = 'no-validate';
 
+    // added in preparation for https://github.com/CycloneDX/cyclonedx-php-composer/issues/102
+    // @TODO remove with next major version
+    private const SWITCH_NO_VERSION_NORMALIZATION = 'no-version-normalization';
+
     private const ARGUMENT_COMPOSER_FILE = 'composer-file';
 
     public const OUTPUT_FORMAT_XML = 'XML';
@@ -111,7 +115,7 @@ class Options
                 self::SWITCH_NO_VALIDATE,
                 null,
                 InputOption::VALUE_NONE,
-                'Dont validate the resulting output'
+                'Don\'t validate the resulting output'
             )
             ->addOption(
                 self::OPTION_MAIN_COMPONENT_VERSION,
@@ -120,6 +124,14 @@ class Options
                 'Version of the main component.'.\PHP_EOL.
                 'This will override auto-detection.',
                 null
+            )
+            ->addOption(
+                self::SWITCH_NO_VERSION_NORMALIZATION,
+                null,
+                InputOption::VALUE_NONE,
+                'Don\'t normalize component version strings.'.\PHP_EOL.
+                'Per default this plugin will normalize version strings by stripping leading "v".'.\PHP_EOL.
+                'This is a compatibility-switch. The next major-version of this plugin will not modify component versions.'
             )
             ->addArgument(
                 self::ARGUMENT_COMPOSER_FILE,
@@ -150,6 +162,13 @@ class Options
      * @psalm-allow-private-mutation
      */
     public $excludePlugins = false;
+
+    /**
+     * @var bool
+     * @readonly
+     * @psalm-allow-private-mutation
+     */
+    public $omitVersionNormalization = false;
 
     /**
      * @var string
@@ -214,6 +233,7 @@ class Options
         $excludeDev = false !== $input->getOption(self::SWITCH_EXCLUDE_DEV);
         $excludePlugins = false !== $input->getOption(self::SWITCH_EXCLUDE_PLUGINS);
         $skipOutputValidation = false !== $input->getOption(self::SWITCH_NO_VALIDATE);
+        $omitVersionNormalization = false !== $input->getOption(self::SWITCH_NO_VERSION_NORMALIZATION);
         $outputFile = $input->getOption(self::OPTION_OUTPUT_FILE);
         \assert(null === $outputFile || \is_string($outputFile));
         $composerFile = $input->getArgument(self::ARGUMENT_COMPOSER_FILE);
@@ -233,6 +253,7 @@ class Options
         $this->excludePlugins = $excludePlugins;
         $this->outputFormat = $outputFormat;
         $this->skipOutputValidation = $skipOutputValidation;
+        $this->omitVersionNormalization = $omitVersionNormalization;
         $this->outputFile = \is_string($outputFile) && '' !== $outputFile
             ? $outputFile
             : self::OUTPUT_FILE_DEFAULT[$outputFormat];

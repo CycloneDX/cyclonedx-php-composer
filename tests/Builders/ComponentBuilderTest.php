@@ -130,12 +130,14 @@ class ComponentBuilderTest extends TestCase
     public function testMakeFromPackage(
         PackageInterface $package,
         Component $expected,
+        bool $enableVersionNormalization = true,
         ?LicenseFactory $licenseFactory = null
     ): void {
         $packageUrlFactory = $this->createMock(PackageUrlFactory::class);
         $builder = new ComponentBuilder(
             $licenseFactory ?? $this->createStub(LicenseFactory::class),
-            $packageUrlFactory
+            $packageUrlFactory,
+            $enableVersionNormalization
         );
 
         $purlMadeFromComponent = null;
@@ -172,6 +174,7 @@ class ComponentBuilderTest extends TestCase
             (new Component('library', 'some-library', '1.2.3'))
                 ->setPackageUrl((new PackageUrl('composer', 'some-library'))->setVersion('1.2.3'))
                 ->setBomRefValue('pkg:composer/some-library@1.2.3'),
+            true,
             null,
         ];
 
@@ -187,6 +190,7 @@ class ComponentBuilderTest extends TestCase
             (new Component('application', 'some-project', '1.2.3'))
                 ->setPackageUrl((new PackageUrl('composer', 'some-project'))->setVersion('1.2.3'))
                 ->setBomRefValue('pkg:composer/some-project@1.2.3'),
+            true,
             null,
         ];
 
@@ -202,6 +206,7 @@ class ComponentBuilderTest extends TestCase
             (new Component('application', 'some-composer-plugin', '1.2.3'))
                 ->setPackageUrl((new PackageUrl('composer', 'some-composer-plugin'))->setVersion('1.2.3'))
                 ->setBomRefValue('pkg:composer/some-composer-plugin@1.2.3'),
+            true,
             null,
         ];
 
@@ -218,6 +223,7 @@ class ComponentBuilderTest extends TestCase
             (new Component('library', 'some-inDev', 'dev-master'))
                 ->setPackageUrl((new PackageUrl('composer', 'some-inDev'))->setVersion('dev-master'))
                 ->setBomRefValue('pkg:composer/some-inDev@dev-master'),
+            true,
             null,
         ];
 
@@ -233,6 +239,7 @@ class ComponentBuilderTest extends TestCase
             (new Component('library', 'some-noVersion', RootPackage::DEFAULT_PRETTY_VERSION))
                 ->setPackageUrl((new PackageUrl('composer', 'some-noVersion'))->setVersion(null))
                 ->setBomRefValue('pkg:composer/some-noVersion'),
+            true,
             null,
         ];
 
@@ -266,7 +273,28 @@ class ComponentBuilderTest extends TestCase
                 ->setLicense($license)
                 ->setHashRepository(new HashRepository([HashAlgorithm::SHA_1 => '12345678901234567890123456789012']))
                 ->setBomRefValue('pkg:composer/my/package@1.2.3?checksum=sha1:12345678901234567890123456789012'),
+            true,
             $licenseFactory,
+        ];
+
+        yield 'library with non-normalized version' => [
+            $this->createConfiguredMock(
+                CompletePackageInterface::class,
+                [
+                    'getPrettyName' => 'my/package',
+                    'getPrettyVersion' => 'v1.2.3',
+                ]
+            ),
+            (new Component('library', 'package', 'v1.2.3'))
+                ->setGroup('my')
+                ->setPackageUrl(
+                    (new PackageUrl('composer', 'package'))
+                        ->setNamespace('my')
+                        ->setVersion('v1.2.3')
+                )
+                ->setBomRefValue('pkg:composer/my/package@v1.2.3'),
+            false,
+            null,
         ];
     }
 }
