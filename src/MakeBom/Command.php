@@ -58,7 +58,7 @@ class Command extends BaseCommand
     /**
      * @var \CycloneDX\Composer\Builders\BomBuilder
      */
-    private $bomFactory;
+    private $bomBuilder;
 
     /**
      * @var ToolUpdater|null
@@ -77,7 +77,7 @@ class Command extends BaseCommand
     ) {
         $this->options = $options;
         $this->factory = $factory;
-        $this->bomFactory = $bomFactory;
+        $this->bomBuilder = $bomFactory;
         $this->toolUpdater = $toolUpdater;
         parent::__construct($name);
     }
@@ -116,6 +116,10 @@ class Command extends BaseCommand
             return self::INVALID;
         }
         $io->writeErrorRaw(__METHOD__.' Options: '.print_r($this->options, true), true, IOInterface::DEBUG);
+
+        $this->bomBuilder->getComponentBuilder()->setVersionNormalization(
+          false === $this->options->omitVersionNormalization
+        );
 
         $this->updateTool();
 
@@ -164,7 +168,7 @@ class Command extends BaseCommand
         $components = $this->factory->makeLockerFromComposerForOptions($composer, $this->options);
         $rootComponentVersionOverride = $this->options->mainComponentVersion;
 
-        $bom = $this->bomFactory->makeForPackageWithRequires($rootPackage, $components, $rootComponentVersionOverride);
+        $bom = $this->bomBuilder->makeForPackageWithRequires($rootPackage, $components, $rootComponentVersionOverride);
 
         $io->writeErrorRaw('Bom: '.print_r($bom, true), true, IOInterface::DEBUG);
 
@@ -264,7 +268,7 @@ class Command extends BaseCommand
             $lockerRepo = $locker->getLockedRepository($withDevReqs);
 
             // @TODO better use the installed-repo than the lockerRepo - as of milestone v4
-            return $updater->updateTool($this->bomFactory->getTool(), $lockerRepo);
+            return $updater->updateTool($this->bomBuilder->getTool(), $lockerRepo);
         } catch (\Exception $exception) {
             return false;
         }

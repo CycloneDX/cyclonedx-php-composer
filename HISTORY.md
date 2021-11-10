@@ -4,6 +4,17 @@ All notable changes to this project will be documented in this file.
 
 ## unreleased
 
+* Added
+  * CLI got a new switch `--no-version-normalization`. (via [#138])  
+    That allows to omit component version-string normalization.  
+    Per default this plugin will normalize version strings by stripping leading "v".  
+    This is a compatibility-switch. The next major-version of this plugin will not modify component versions. (see [#102])
+
+[#138]: https://github.com/CycloneDX/cyclonedx-php-composer/pull/138
+[#102]: https://github.com/CycloneDX/cyclonedx-php-composer/issues/102
+
+
+
 ## 3.6.0 - 2021-10-15
 
 * Added

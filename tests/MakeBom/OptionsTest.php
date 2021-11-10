@@ -90,6 +90,9 @@ class OptionsTest extends TestCase
             ['--spec-version=1.1', 'specVersion', Version::V_1_1],
             ['--spec-version=1.2', 'specVersion', Version::V_1_2],
             ['--spec-version=1.3', 'specVersion', Version::V_1_3],
+            /* @see \CycloneDX\Composer\MakeBom\Options::$omitVersionNormalization */
+            'omitVersionNormalization default' => ['', 'omitVersionNormalization', false],
+            ['--no-version-normalization', 'omitVersionNormalization', true],
             /* @see \CycloneDX\Composer\MakeBom\Options::$composerFile */
             'composerFile default to null' => ['', 'composerFile', null],
             ['my/project/composer.json', 'composerFile', 'my/project/composer.json'],

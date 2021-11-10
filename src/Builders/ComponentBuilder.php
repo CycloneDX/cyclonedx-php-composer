@@ -48,12 +48,17 @@ class ComponentBuilder
     /** @var PackageUrlFactory */
     private $packageUrlFactory;
 
+    /** @var bool */
+    private $enableVersionNormalization;
+
     public function __construct(
         LicenseFactory $licenseFactory,
-        PackageUrlFactory $packageUrlFactory
+        PackageUrlFactory $packageUrlFactory,
+        bool $enableVersionNormalization = true
     ) {
         $this->licenseFactory = $licenseFactory;
         $this->packageUrlFactory = $packageUrlFactory;
+        $this->enableVersionNormalization = $enableVersionNormalization;
     }
 
     public function getLicenseFactory(): LicenseFactory
@@ -64,6 +69,13 @@ class ComponentBuilder
     public function getPackageUrlFactory(): PackageUrlFactory
     {
         return $this->packageUrlFactory;
+    }
+
+    public function setVersionNormalization(bool $enableVersionNormalization): self
+    {
+        $this->enableVersionNormalization = $enableVersionNormalization;
+
+        return $this;
     }
 
     /**
@@ -144,17 +156,22 @@ class ComponentBuilder
             return $version;
         }
 
-        // Versions of Composer packages may be prefixed with "v".
-        //     * This prefix appears to be problematic for CPE and PURL matching and thus is removed here.
-        //     *
-        //     * See for example {@link https://ossindex.sonatype.org/component/pkg:composer/phpmailer/phpmailer@v6.0.7}
-        //     * vs {@link https://ossindex.sonatype.org/component/pkg:composer/phpmailer/phpmailer@6.0.7}.
-        //
-        // A _numeric_ version can be prefixed with 'v'.
-        // Strip leading 'v' must not be applied if the "version" is actually a branch name,
-        // which is totally fine in the composer ecosystem.
-        if (1 === preg_match('/^v\\d/', $version)) {
-            return substr($version, 1);
+        if ($this->enableVersionNormalization) {
+            // Versions of Composer packages may be prefixed with "v".
+            //     * This prefix appears to be problematic for CPE and PURL matching and thus is removed here.
+            //     *
+            //     * See for example {@link https://ossindex.sonatype.org/component/pkg:composer/phpmailer/phpmailer@v6.0.7}
+            //     * vs {@link https://ossindex.sonatype.org/component/pkg:composer/phpmailer/phpmailer@6.0.7}.
+            //
+            // A _numeric_ version can be prefixed with 'v'.
+            // Strip leading 'v' must not be applied if the "version" is actually a branch name,
+            // which is totally fine in the composer ecosystem.
+            //
+            // will be removed via https://github.com/CycloneDX/cyclonedx-php-composer/issues/102
+            // @TODO remove the whole normalizer with next major version
+            if (1 === preg_match('/^v\\d/', $version)) {
+                return substr($version, 1);
+            }
         }
 
         return $version;

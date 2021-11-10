@@ -47,9 +47,12 @@ Options:
       --exclude-plugins              Exclude composer plugins
       --spec-version=SPEC-VERSION    Which version of CycloneDX spec to use.
                                      Values: "1.1", "1.2", "1.3" [default: "1.3"]
-      --no-validate                  Dont validate the resulting output
+      --no-validate                  Don't validate the resulting output
       --mc-version=MC-VERSION        Version of the main component.
                                      This will override auto-detection.
+      --no-version-normalization     Don't normalize component version strings.
+                                     Per default this plugin will normalize version strings by stripping leading "v".
+                                     This is a compatibility-switch. The next major-version of this plugin will not modify component versions.
   -h, --help                         Display this help message
   -q, --quiet                        Do not output any message
   -V, --version                      Display this application version
