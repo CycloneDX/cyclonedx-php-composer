@@ -7,7 +7,15 @@ name: DEMO
 on:
   push:
     branches: ["master"]
+    paths-ignore:
+      - 'docs/**'
+      - 'tests/**'
+      - 'tools/**'
   pull_request:
+    paths-ignore:
+      - 'docs/**'
+      - 'tests/**'
+      - 'tools/**'
   workflow_dispatch:
   schedule:
     # schedule weekly tests, since dependencies are not intended to be pinned
