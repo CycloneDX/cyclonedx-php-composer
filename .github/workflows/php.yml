@@ -64,7 +64,7 @@ jobs:
         run: echo "::set-output name=dir::$(composer config cache-files-dir)"
       - name: Cache dependencies
         # see https://github.com/actions/cache
-        uses: actions/cache@v2.1.6
+        uses: actions/cache@v2.1.7
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
           key: composer-${{ github.job }}-${{ runner.os }}-${{ matrix.php }}-${{ matrix.dependencies }}-${{ hashFiles('**/composer.json') }}
@@ -138,7 +138,7 @@ jobs:
         run: echo "::set-output name=dir::$(composer config cache-files-dir)"
       - name: Cache dependencies
         # see https://github.com/actions/cache
-        uses: actions/cache@v2.1.6
+        uses: actions/cache@v2.1.7
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
           key: composer-${{ github.job }}-${{ runner.os }}-${{ matrix.php }}-${{ matrix.dependencies }}-${{ hashFiles('**/composer.json') }}
@@ -191,7 +191,7 @@ jobs:
         run: echo "::set-output name=dir::$(composer config cache-files-dir)"
       - name: Cache dependencies
         # see https://github.com/actions/cache
-        uses: actions/cache@v2.1.6
+        uses: actions/cache@v2.1.7
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
           key: composer-${{ github.job }}-${{ runner.os }}-${{ hashFiles('**/composer.json') }}
@@ -227,7 +227,7 @@ jobs:
         run: echo "::set-output name=dir::$(composer config cache-files-dir)"
       - name: Cache dependencies
         # see https://github.com/actions/cache
-        uses: actions/cache@v2.1.6
+        uses: actions/cache@v2.1.7
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
           key: composer-${{ github.job }}-${{ runner.os }}-${{ hashFiles('**/composer.json') }}
@@ -264,7 +264,7 @@ jobs:
         run: echo "::set-output name=dir::$(composer config cache-files-dir)"
       - name: Cache dependencies
         # see https://github.com/actions/cache
-        uses: actions/cache@v2.1.6
+        uses: actions/cache@v2.1.7
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
           key: composer-${{ github.job }}-${{ runner.os }}-${{ hashFiles('**/composer.json') }}
@@ -302,7 +302,7 @@ jobs:
         run: echo "::set-output name=dir::$(composer config cache-files-dir)"
       - name: Cache dependencies
         # see https://github.com/actions/cache
-        uses: actions/cache@v2.1.6
+        uses: actions/cache@v2.1.7
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
           key: composer-${{ github.job }}-${{ runner.os }}-${{ hashFiles('**/composer.json') }}
