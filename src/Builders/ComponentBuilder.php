@@ -113,9 +113,7 @@ class ComponentBuilder
 
         try {
             $purl = $this->packageUrlFactory->makeFromComponent($component);
-            if ($package instanceof RootPackage
-                && RootPackage::DEFAULT_PRETTY_VERSION === $version
-            ) {
+            if ($this->compatGetDefaultPrettyVersion() === $version) {
                 $purl->setVersion(null);
             }
             $component->setPackageUrl($purl);
@@ -125,6 +123,19 @@ class ComponentBuilder
         }
 
         return $component;
+    }
+
+    /**
+     * Not all versions of composer have {@see RootPackage::DEFAULT_PRETTY_VERSION}.
+     * This is a compatibility layer for it.
+     */
+    private function compatGetDefaultPrettyVersion(): string
+    {
+        $r = new \ReflectionClass(RootPackage::class);
+
+        return $r->hasConstant('DEFAULT_PRETTY_VERSION')
+            ? (string) $r->getConstant('DEFAULT_PRETTY_VERSION')
+            : '1.0.0+no-version-set';
     }
 
     /**
@@ -150,9 +161,13 @@ class ComponentBuilder
     private function getPackageVersion(PackageInterface $package): string
     {
         $version = $package->getPrettyVersion();
+        if ('' === $version) {
+            $version = $this->compatGetDefaultPrettyVersion();
+        }
+
         if ($package->isDev()) {
             // package is installed in dev-mode
-            // so the version is a branch name
+            // so the version is already final.
             return $version;
         }
 

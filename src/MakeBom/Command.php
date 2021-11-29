@@ -264,7 +264,7 @@ class Command extends BaseCommand
                 throw new \UnexpectedValueException('empty locker');
             }
 
-            $withDevReqs = !empty($locker->getDevPackageNames());
+            $withDevReqs = isset($locker->getLockData()['packages-dev']);
             $lockerRepo = $locker->getLockedRepository($withDevReqs);
 
             // @TODO better use the installed-repo than the lockerRepo - as of milestone v4

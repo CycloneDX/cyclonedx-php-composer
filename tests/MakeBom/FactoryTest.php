@@ -171,7 +171,11 @@ class FactoryTest extends TestCase
     {
         $locker = $this->createConfiguredMock(
             Locker::class,
-            ['isLocked' => true, 'isFresh' => true, 'getDevPackageNames' => ['foo']]
+            [
+                'isLocked' => true,
+                'isFresh' => true,
+                'getLockData' => ['packages-dev' => ['foo' => [/* some data */]]],
+            ]
         );
         $lockedRepository = $this->createConfiguredMock(LockArrayRepository::class, ['getPackages' => []]);
         $composer = $this->createConfiguredMock(Composer::class, ['getLocker' => $locker]);
@@ -192,7 +196,11 @@ class FactoryTest extends TestCase
     {
         $locker = $this->createConfiguredMock(
             Locker::class,
-            ['isLocked' => true, 'isFresh' => true, 'getDevPackageNames' => []]
+            [
+                'isLocked' => true,
+                'isFresh' => true,
+                'getLockData' => ['packages-dev' => []],
+            ]
         );
         $lockedRepository = $this->createConfiguredMock(LockArrayRepository::class, ['getPackages' => []]);
         $composer = $this->createConfiguredMock(Composer::class, ['getLocker' => $locker]);
@@ -215,7 +223,11 @@ class FactoryTest extends TestCase
         $package2 = $this->createConfiguredMock(Package::class, ['getType' => 'composer-plugin']);
         $locker = $this->createConfiguredMock(
             Locker::class,
-            ['isLocked' => true, 'isFresh' => true, 'getDevPackageNames' => []]
+            [
+                'isLocked' => true,
+                'isFresh' => true,
+                'getLockData' => ['packages-dev' => []],
+            ]
         );
         $lockedRepository = $this->createConfiguredMock(
             LockArrayRepository::class,
@@ -243,7 +255,11 @@ class FactoryTest extends TestCase
         $package2 = $this->createConfiguredMock(AliasPackage::class, ['getType' => 'library']);
         $locker = $this->createConfiguredMock(
             Locker::class,
-            ['isLocked' => true, 'isFresh' => true, 'getDevPackageNames' => []]
+            [
+                'isLocked' => true,
+                'isFresh' => true,
+                'getLockData' => ['packages-dev' => []],
+            ]
         );
         $lockedRepository = $this->createConfiguredMock(
             LockArrayRepository::class,
