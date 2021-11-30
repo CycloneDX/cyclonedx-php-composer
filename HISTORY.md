@@ -4,8 +4,10 @@ All notable changes to this project will be documented in this file.
 
 ## unreleased
 
+## 3.8.0 - 2021-11-30
+
 * Fixed
-  * Compatibility to composer v2.0.0 to v2.0.4 were improved. (via [#152])
+  * Compatibility with composer v2.0.0 to v2.0.4 was improved. (via [#152])
   * Possible crashes when composer was not able to detect component's version properly.
 
 [#152]: https://github.com/CycloneDX/cyclonedx-php-composer/pull/152
