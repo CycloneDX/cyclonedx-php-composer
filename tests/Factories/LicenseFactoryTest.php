@@ -21,7 +21,7 @@ declare(strict_types=1);
  * Copyright (c) Steve Springett. All Rights Reserved.
  */
 
-namespace Tests\Factories;
+namespace CycloneDX\Tests\Factories;
 
 use Composer\Package\CompletePackageInterface;
 use CycloneDX\Composer\Factories\LicenseFactory;
