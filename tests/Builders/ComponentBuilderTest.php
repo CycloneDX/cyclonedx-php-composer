@@ -89,7 +89,7 @@ class ComponentBuilderTest extends TestCase
         $this->expectException(\UnexpectedValueException::class);
         $this->expectErrorMessageMatches('/package without version/i');
 
-        $builder->makeFromPackage($package);
+        $builder->makeFromPackage($package, '');
     }
 
     /**
@@ -227,16 +227,26 @@ class ComponentBuilderTest extends TestCase
             null,
         ];
 
-        yield 'minimal without version' => [
+        /**
+         * Fallback behaviour if {@see RootPackage::DEFAULT_PRETTY_VERSION} is undefined.
+         *
+         * @see ComponentBuilder::compatGetDefaultPrettyVersion()
+         *
+         * @var string
+         */
+        $_rp_DEFAULT_PRETTY_VERSION = \defined(RootPackage::class.'::DEFAULT_PRETTY_VERSION')
+            ? RootPackage::DEFAULT_PRETTY_VERSION
+            : '1.0.0+no-version-set';
+        yield 'minimal without version fallback' => [
             $this->createConfiguredMock(
                 RootPackage::class,
                 [
                     'getType' => 'myType',
                     'getPrettyName' => 'some-noVersion',
-                    'getPrettyVersion' => RootPackage::DEFAULT_PRETTY_VERSION,
+                    'getPrettyVersion' => '',
                 ],
             ),
-            (new Component('library', 'some-noVersion', RootPackage::DEFAULT_PRETTY_VERSION))
+            (new Component('library', 'some-noVersion', $_rp_DEFAULT_PRETTY_VERSION))
                 ->setPackageUrl((new PackageUrl('composer', 'some-noVersion'))->setVersion(null))
                 ->setBomRefValue('pkg:composer/some-noVersion'),
             true,

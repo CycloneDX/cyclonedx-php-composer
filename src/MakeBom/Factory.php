@@ -138,7 +138,7 @@ class Factory
         }
 
         $withDevReqs = false === $options->excludeDev
-            && false === empty($locker->getDevPackageNames()); // prevent a possible throw in `getLockedRepository()`
+            && isset($locker->getLockData()['packages-dev']); // prevent a possible throw in `getLockedRepository()`
         $repo = $locker->getLockedRepository($withDevReqs);
 
         foreach ($repo->getPackages() as $package) {
