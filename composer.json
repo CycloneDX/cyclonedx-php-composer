@@ -60,7 +60,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Tests\\": "tests/"
+            "CycloneDX\\Tests\\": "tests/"
         }
     },
     "prefer-stable": true,
