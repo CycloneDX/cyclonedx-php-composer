@@ -78,6 +78,11 @@ class ComponentBuilder
         return $this;
     }
 
+    public function getVersionNormalization(): bool
+    {
+        return $this->enableVersionNormalization;
+    }
+
     /**
      * @throws UnexpectedValueException if the given package does not provide a name or version
      */

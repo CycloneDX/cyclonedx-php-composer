@@ -44,15 +44,32 @@ use PHPUnit\Framework\TestCase;
  */
 class ComponentBuilderTest extends TestCase
 {
-    public function testConstructor(): void
+    public function testConstructor(): ComponentBuilder
     {
         $licenseFactory = $this->createMock(LicenseFactory::class);
         $packageUrlFactory = $this->createMock(PackageUrlFactory::class);
+        $enableVersionNormalization = true;
 
-        $builder = new ComponentBuilder($licenseFactory, $packageUrlFactory);
+        $builder = new ComponentBuilder($licenseFactory, $packageUrlFactory, $enableVersionNormalization);
 
         self::assertSame($licenseFactory, $builder->getLicenseFactory());
         self::assertSame($packageUrlFactory, $builder->getPackageUrlFactory());
+        self::assertSame($enableVersionNormalization, $builder->getVersionNormalization());
+
+        return $builder;
+    }
+
+    /**
+     * @depends testConstructor
+     */
+    public function testGetterSetterVersionNormalization(ComponentBuilder $builder): void
+    {
+        $enableVersionNormalization = !$builder->getVersionNormalization();
+
+        $actual = $builder->setVersionNormalization($enableVersionNormalization);
+
+        self::assertSame($builder, $actual);
+        self::assertSame($enableVersionNormalization, $builder->getVersionNormalization());
     }
 
     public function testMakeFromPackageThrowsOnEmptyName(): void
@@ -97,7 +114,7 @@ class ComponentBuilderTest extends TestCase
      * @uses \CycloneDX\Core\Enums\HashAlgorithm::isValidValue
      * @uses \CycloneDX\Core\Repositories\HashRepository
      */
-    public function testMakeFromPackageEmptPurlOnThrow(): void
+    public function testMakeFromPackageEmptyPurlOnThrow(): void
     {
         $licenseFactory = $this->createStub(LicenseFactory::class);
         $packageUrlFactory = $this->createMock(PackageUrlFactory::class);
@@ -145,7 +162,7 @@ class ComponentBuilderTest extends TestCase
             ->method('makeFromComponent')
             ->with(
                 $this->callback(
-                    function (Component $c) use (&$purlMadeFromComponent): bool {
+                    static function (Component $c) use (&$purlMadeFromComponent): bool {
                         $purlMadeFromComponent = $c;
 
                         return true;
