@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 
 ## unreleased
 
+* Added
+  * The resulting SBoM hold ExternalReferences as fetched from package descriptions. (via [#145]) 
+
+[#145]: https://github.com/CycloneDX/cyclonedx-php-composer/pull/145
+
 ## 3.8.0 - 2021-11-30
 
 * Fixed

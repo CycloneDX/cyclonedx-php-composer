@@ -2,6 +2,7 @@
     "name": "cyclonedx-demo/cyclonedx-php-composer-local",
     "type": "project",
     "description": "demo of cyclonedx/cyclonedx-php-composer with a local dependency",
+    "homepage": "https://cyclonedx.org/",
     "version": "dev-master",
     "require": {
         "cyclonedx-demo/local-demo-dependency": "@dev"
@@ -25,6 +26,12 @@
             "symlink": true
         }
     ],
+    "minimum-stability": "dev",
     "prefer-stable": true,
-    "minimum-stability": "dev"
+    "support": {
+        "issues": "https://github.com/CycloneDX/cyclonedx-php-composer/issues",
+        "forum": "https://groups.io/g/CycloneDX",
+        "chat": "https://cyclonedx.org/slack/invite",
+        "docs": "https://github.com/CycloneDX/cyclonedx-php-composer/blob/master/demo/local/README.md"
+    }
 }

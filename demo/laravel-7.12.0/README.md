@@ -55,11 +55,7 @@ Run one of these from the demo directory:
 Lock-file should stay in a certain state, after updating dependencies.
 
 Upgrade the `composer.lock` tile to the latest changes to the plugin via:
+1. downgrade composer to v2: `composer self-update -- 2.0.0`
 1. run `composer -dproject update 'cyclonedx/cyclonedx-php-composer'`
-2. revert in the `composer.lock` some setup 
-   * for package `cyclonedx/cyclonedx-php-composer`:
-     * set `version` to `dev-master`
-     * delete the `dist.reference`
-   * set `plugin-api-version` to `2.0.0`
 
 Then re-generate all results as shown in section above.

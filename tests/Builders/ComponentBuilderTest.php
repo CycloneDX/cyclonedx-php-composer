@@ -27,11 +27,13 @@ use Composer\Package\CompletePackageInterface;
 use Composer\Package\PackageInterface;
 use Composer\Package\RootPackage;
 use CycloneDX\Composer\Builders\ComponentBuilder;
+use CycloneDX\Composer\Builders\ExternalReferenceRepositoryBuilder;
 use CycloneDX\Composer\Factories\LicenseFactory;
 use CycloneDX\Composer\Factories\PackageUrlFactory;
 use CycloneDX\Core\Enums\HashAlgorithm;
 use CycloneDX\Core\Models\Component;
 use CycloneDX\Core\Repositories\DisjunctiveLicenseRepository;
+use CycloneDX\Core\Repositories\ExternalReferenceRepository;
 use CycloneDX\Core\Repositories\HashRepository;
 use PackageUrl\PackageUrl;
 use PHPUnit\Framework\TestCase;
@@ -49,8 +51,9 @@ class ComponentBuilderTest extends TestCase
         $licenseFactory = $this->createMock(LicenseFactory::class);
         $packageUrlFactory = $this->createMock(PackageUrlFactory::class);
         $enableVersionNormalization = true;
+        $extRefBuilder = $this->createMock(ExternalReferenceRepositoryBuilder::class);
 
-        $builder = new ComponentBuilder($licenseFactory, $packageUrlFactory, $enableVersionNormalization);
+        $builder = new ComponentBuilder($licenseFactory, $packageUrlFactory, $extRefBuilder, $enableVersionNormalization);
 
         self::assertSame($licenseFactory, $builder->getLicenseFactory());
         self::assertSame($packageUrlFactory, $builder->getPackageUrlFactory());
@@ -76,7 +79,8 @@ class ComponentBuilderTest extends TestCase
     {
         $licenseFactory = $this->createStub(LicenseFactory::class);
         $packageUrlFactory = $this->createStub(PackageUrlFactory::class);
-        $builder = new ComponentBuilder($licenseFactory, $packageUrlFactory);
+        $extRefBuilder = $this->createMock(ExternalReferenceRepositoryBuilder::class);
+        $builder = new ComponentBuilder($licenseFactory, $packageUrlFactory, $extRefBuilder);
         $package = $this->createConfiguredMock(
             PackageInterface::class,
             [
@@ -94,7 +98,8 @@ class ComponentBuilderTest extends TestCase
     {
         $licenseFactory = $this->createStub(LicenseFactory::class);
         $packageUrlFactory = $this->createStub(PackageUrlFactory::class);
-        $builder = new ComponentBuilder($licenseFactory, $packageUrlFactory);
+        $extRefBuilder = $this->createMock(ExternalReferenceRepositoryBuilder::class);
+        $builder = new ComponentBuilder($licenseFactory, $packageUrlFactory, $extRefBuilder);
         $package = $this->createConfiguredMock(
             PackageInterface::class,
             [
@@ -118,7 +123,8 @@ class ComponentBuilderTest extends TestCase
     {
         $licenseFactory = $this->createStub(LicenseFactory::class);
         $packageUrlFactory = $this->createMock(PackageUrlFactory::class);
-        $builder = new ComponentBuilder($licenseFactory, $packageUrlFactory);
+        $extRefBuilder = $this->createMock(ExternalReferenceRepositoryBuilder::class);
+        $builder = new ComponentBuilder($licenseFactory, $packageUrlFactory, $extRefBuilder);
         $package = $this->createConfiguredMock(
             PackageInterface::class,
             [
@@ -150,10 +156,15 @@ class ComponentBuilderTest extends TestCase
         bool $enableVersionNormalization = true,
         ?LicenseFactory $licenseFactory = null
     ): void {
+        $externalReferenceRepository = $this->createStub(ExternalReferenceRepository::class);
+        $expected->setExternalReferenceRepository($externalReferenceRepository);
+
+        $extRefBuilder = $this->createMock(ExternalReferenceRepositoryBuilder::class);
         $packageUrlFactory = $this->createMock(PackageUrlFactory::class);
         $builder = new ComponentBuilder(
             $licenseFactory ?? $this->createStub(LicenseFactory::class),
             $packageUrlFactory,
+            $extRefBuilder,
             $enableVersionNormalization
         );
 
@@ -170,6 +181,10 @@ class ComponentBuilderTest extends TestCase
                 )
             )
             ->willReturn($expected->getPackageUrl());
+        $extRefBuilder->expects(self::once())
+            ->method('makeFromPackage')
+            ->with($package)
+            ->willReturn($externalReferenceRepository);
 
         $actual = $builder->makeFromPackage($package);
 
@@ -177,6 +192,9 @@ class ComponentBuilderTest extends TestCase
         self::assertSame($actual, $purlMadeFromComponent);
     }
 
+    /**
+     * @psalm-return \Generator<string, list{PackageInterface, Component, bool?, ?LicenseFactory?}>
+     */
     public function dpMakeFromPackage(): \Generator
     {
         yield 'minimal library' => [
@@ -191,8 +209,6 @@ class ComponentBuilderTest extends TestCase
             (new Component('library', 'some-library', '1.2.3'))
                 ->setPackageUrl((new PackageUrl('composer', 'some-library'))->setVersion('1.2.3'))
                 ->setBomRefValue('pkg:composer/some-library@1.2.3'),
-            true,
-            null,
         ];
 
         yield 'minimal project' => [
@@ -207,8 +223,6 @@ class ComponentBuilderTest extends TestCase
             (new Component('application', 'some-project', '1.2.3'))
                 ->setPackageUrl((new PackageUrl('composer', 'some-project'))->setVersion('1.2.3'))
                 ->setBomRefValue('pkg:composer/some-project@1.2.3'),
-            true,
-            null,
         ];
 
         yield 'minimal composer-plugin' => [
@@ -223,8 +237,6 @@ class ComponentBuilderTest extends TestCase
             (new Component('application', 'some-composer-plugin', '1.2.3'))
                 ->setPackageUrl((new PackageUrl('composer', 'some-composer-plugin'))->setVersion('1.2.3'))
                 ->setBomRefValue('pkg:composer/some-composer-plugin@1.2.3'),
-            true,
-            null,
         ];
 
         yield 'minimal inDev of unknown type' => [
@@ -240,8 +252,6 @@ class ComponentBuilderTest extends TestCase
             (new Component('library', 'some-inDev', 'dev-master'))
                 ->setPackageUrl((new PackageUrl('composer', 'some-inDev'))->setVersion('dev-master'))
                 ->setBomRefValue('pkg:composer/some-inDev@dev-master'),
-            true,
-            null,
         ];
 
         /**
@@ -266,8 +276,6 @@ class ComponentBuilderTest extends TestCase
             (new Component('library', 'some-noVersion', $_rp_DEFAULT_PRETTY_VERSION))
                 ->setPackageUrl((new PackageUrl('composer', 'some-noVersion'))->setVersion(null))
                 ->setBomRefValue('pkg:composer/some-noVersion'),
-            true,
-            null,
         ];
 
         $completePackage = $this->createConfiguredMock(
@@ -321,7 +329,6 @@ class ComponentBuilderTest extends TestCase
                 )
                 ->setBomRefValue('pkg:composer/my/package@v1.2.3'),
             false,
-            null,
         ];
     }
 }

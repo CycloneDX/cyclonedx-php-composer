@@ -48,16 +48,21 @@ class ComponentBuilder
     /** @var PackageUrlFactory */
     private $packageUrlFactory;
 
+    /** @var ExternalReferenceRepositoryBuilder */
+    private $externalReferenceRepositoryBuilder;
+
     /** @var bool */
     private $enableVersionNormalization;
 
     public function __construct(
         LicenseFactory $licenseFactory,
         PackageUrlFactory $packageUrlFactory,
+        ExternalReferenceRepositoryBuilder $externalReferenceRepositoryBuilder,
         bool $enableVersionNormalization = true
     ) {
         $this->licenseFactory = $licenseFactory;
         $this->packageUrlFactory = $packageUrlFactory;
+        $this->externalReferenceRepositoryBuilder = $externalReferenceRepositoryBuilder;
         $this->enableVersionNormalization = $enableVersionNormalization;
     }
 
@@ -126,6 +131,10 @@ class ComponentBuilder
         } catch (DomainException $exception) {
             unset($exception);
         }
+
+        $component->setExternalReferenceRepository(
+            $this->externalReferenceRepositoryBuilder->makeFromPackage($package)
+        );
 
         return $component;
     }

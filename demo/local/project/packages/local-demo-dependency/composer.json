@@ -5,5 +5,11 @@
     "version": "1.33.7",
     "require": {
         "cyclonedx-demo/local-dependency-with-minimal-setup": "@dev"
-    }
+    },
+    "funding": [
+        {
+            "type": "demo-funding-purpose",
+            "url": "https://cyclonedx.org/about/participate/"
+        }
+    ]
 }

@@ -70,7 +70,8 @@ class Plugin implements PluginInterface, Capable, CommandProvider
             new Factories\LicenseFactory(
                 new SpdxLicenseValidator()
             ),
-            new Factories\PackageUrlFactory()
+            new Factories\PackageUrlFactory(),
+            new Builders\ExternalReferenceRepositoryBuilder()
         );
 
         return [

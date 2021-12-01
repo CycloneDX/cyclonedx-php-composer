@@ -93,8 +93,8 @@ class BomBuilder
             $this->setComponentDependencies(
                 $rootComponent,
                 $allBomComponents,
-                // if dev-requires were found in $requiresComponentRepo then they must be made visible.
-                // its on the outer logic to decide, if dev-requires are included in $requiresComponentRepo
+                // If dev-requires were found in $requiresComponentRepo then they must be made visible.
+                // It is on the outer logic to decide, if dev-requires are included in $requiresComponentRepo
                 array_merge($rootPackage->getRequires(), $rootPackage->getDevRequires())
             );
             foreach ($requiresPackageComponent as [$requirePackage, $component]) {
