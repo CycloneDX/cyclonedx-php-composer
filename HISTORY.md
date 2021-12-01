@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## unreleased
 
+## 3.9.0 - 2021-12-01
+
 * Added
   * The resulting SBoM hold ExternalReferences as fetched from package descriptions. (via [#145]) 
 
