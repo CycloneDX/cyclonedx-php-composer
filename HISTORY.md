@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## unreleased
 
+## 3.9.1 - 2021-12-03
+
 * Fixed
   * XML validation error for ExternalReference. ([#158] via [#159])
 * Changed
