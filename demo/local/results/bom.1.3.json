@@ -70,6 +70,32 @@
             ]
         },
         {
+            "bom-ref": "pkg:composer/cyclonedx-demo/local-demo-issue-158@dev-issue-158",
+            "type": "library",
+            "name": "local-demo-issue-158",
+            "version": "dev-issue-158",
+            "group": "cyclonedx-demo",
+            "description": "a package that reproduces issue#158",
+            "purl": "pkg:composer/cyclonedx-demo/local-demo-issue-158@dev-issue-158",
+            "externalReferences": [
+                {
+                    "type": "distribution",
+                    "url": "packages/local-demo-issue-158",
+                    "comment": "As detected by composer's `getDistUrls()` (type=path & reference=78d99483a833a64aa57cff5d79c34c2dc84e6d22 & sha1=UNDEFINED)"
+                },
+                {
+                    "type": "website",
+                    "url": "https://github.com/CycloneDX/cyclonedx-php-composer/issues/158",
+                    "comment": "As set via `homepage` in composer package definition."
+                },
+                {
+                    "type": "issue-tracker",
+                    "url": "https://pear.php.net/bugs/search.php?cmd=display&package_name[]=PEAR_Exception",
+                    "comment": "As set via `support.issues` in composer package definition."
+                }
+            ]
+        },
+        {
             "bom-ref": "pkg:composer/cyclonedx-demo/local-dependency-with-minimal-setup@dev-master",
             "type": "library",
             "name": "local-dependency-with-minimal-setup",
@@ -93,12 +119,16 @@
             ]
         },
         {
+            "ref": "pkg:composer/cyclonedx-demo/local-demo-issue-158@dev-issue-158"
+        },
+        {
             "ref": "pkg:composer/cyclonedx-demo/local-dependency-with-minimal-setup@dev-master"
         },
         {
             "ref": "pkg:composer/cyclonedx-demo/cyclonedx-php-composer-local@dev-master",
             "dependsOn": [
-                "pkg:composer/cyclonedx-demo/local-demo-dependency@1.33.7"
+                "pkg:composer/cyclonedx-demo/local-demo-dependency@1.33.7",
+                "pkg:composer/cyclonedx-demo/local-demo-issue-158@dev-issue-158"
             ]
         }
     ]

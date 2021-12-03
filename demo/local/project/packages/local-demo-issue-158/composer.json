@@ -1,0 +1,10 @@
+{
+    "name": "cyclonedx-demo/local-demo-issue-158",
+    "description": "a package that reproduces issue#158",
+    "type": "library",
+    "version": "dev-issue-158",
+    "homepage": "https://github.com/CycloneDX/cyclonedx-php-composer/issues/158",
+    "support": {
+        "issues": "https://pear.php.net/bugs/search.php?cmd=display&package_name[]=PEAR_Exception"
+    }
+}

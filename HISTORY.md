@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 ## unreleased
 
+* Fixed
+  * XML validation error for ExternalReference. ([#158] via [#159])
+
+[#158]: https://github.com/CycloneDX/cyclonedx-php-composer/issues/158
+[#159]: https://github.com/CycloneDX/cyclonedx-php-composer/pull/159
+
 ## 3.9.0 - 2021-12-01
 
 * Added

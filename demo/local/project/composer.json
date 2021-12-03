@@ -5,7 +5,8 @@
     "homepage": "https://cyclonedx.org/",
     "version": "dev-master",
     "require": {
-        "cyclonedx-demo/local-demo-dependency": "@dev"
+        "cyclonedx-demo/local-demo-dependency": "@dev",
+        "cyclonedx-demo/local-demo-issue-158": "dev-issue-158"
     },
     "require-dev": {
         "cyclonedx/cyclonedx-php-composer": "@dev"
