@@ -1466,16 +1466,16 @@
         },
         {
             "name": "nesbot/carbon",
-            "version": "2.54.0",
+            "version": "2.55.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/briannesbitt/Carbon.git",
-                "reference": "eed83939f1aed3eee517d03a33f5ec587ac529b5"
+                "reference": "8c2a18ce3e67c34efc1b29f64fe61304368259a2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/eed83939f1aed3eee517d03a33f5ec587ac529b5",
-                "reference": "eed83939f1aed3eee517d03a33f5ec587ac529b5",
+                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/8c2a18ce3e67c34efc1b29f64fe61304368259a2",
+                "reference": "8c2a18ce3e67c34efc1b29f64fe61304368259a2",
                 "shasum": ""
             },
             "require": {
@@ -1483,7 +1483,7 @@
                 "php": "^7.1.8 || ^8.0",
                 "symfony/polyfill-mbstring": "^1.0",
                 "symfony/polyfill-php80": "^1.16",
-                "symfony/translation": "^3.4 || ^4.0 || ^5.0"
+                "symfony/translation": "^3.4 || ^4.0 || ^5.0 || ^6.0"
             },
             "require-dev": {
                 "doctrine/dbal": "^2.0 || ^3.0",
@@ -1544,6 +1544,7 @@
                 "time"
             ],
             "support": {
+                "docs": "https://carbon.nesbot.com/docs",
                 "issues": "https://github.com/briannesbitt/Carbon/issues",
                 "source": "https://github.com/briannesbitt/Carbon"
             },
@@ -1557,7 +1558,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-11-01T21:22:20+00:00"
+            "time": "2021-12-03T14:59:52+00:00"
         },
         {
             "name": "nikic/php-parser",
@@ -4771,16 +4772,16 @@
     "packages-dev": [
         {
             "name": "cyclonedx/cyclonedx-library",
-            "version": "v1.3.0",
+            "version": "v1.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/CycloneDX/cyclonedx-php-library.git",
-                "reference": "e94ce9e6987905412cfeecbb50f13c9cb4a6529a"
+                "reference": "21c23b1d9a3499c63d6f6cc28cef53100c51830d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/CycloneDX/cyclonedx-php-library/zipball/e94ce9e6987905412cfeecbb50f13c9cb4a6529a",
-                "reference": "e94ce9e6987905412cfeecbb50f13c9cb4a6529a",
+                "url": "https://api.github.com/repos/CycloneDX/cyclonedx-php-library/zipball/21c23b1d9a3499c63d6f6cc28cef53100c51830d",
+                "reference": "21c23b1d9a3499c63d6f6cc28cef53100c51830d",
                 "shasum": ""
             },
             "require": {
@@ -4840,9 +4841,9 @@
             ],
             "support": {
                 "issues": "https://github.com/CycloneDX/cyclonedx-php-library/issues",
-                "source": "https://github.com/CycloneDX/cyclonedx-php-library/tree/v1.3.0"
+                "source": "https://github.com/CycloneDX/cyclonedx-php-library/tree/v1.3.1"
             },
-            "time": "2021-12-01T13:18:19+00:00"
+            "time": "2021-12-03T11:46:08+00:00"
         },
         {
             "name": "cyclonedx/cyclonedx-php-composer",
@@ -4850,11 +4851,11 @@
             "dist": {
                 "type": "path",
                 "url": "../../..",
-                "reference": "1970ab463dcc54781bb87698e7c55d4427d65edf"
+                "reference": "9d677976e461f0a845e503d4c5346f588aa1bd05"
             },
             "require": {
                 "composer-plugin-api": "^2.0",
-                "cyclonedx/cyclonedx-library": "^1.2",
+                "cyclonedx/cyclonedx-library": "^1.3.1",
                 "package-url/packageurl-php": "^1.0",
                 "php": "^7.3 || ^8.0"
             },

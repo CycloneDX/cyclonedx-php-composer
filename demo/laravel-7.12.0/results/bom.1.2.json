@@ -891,10 +891,10 @@
             ]
         },
         {
-            "bom-ref": "pkg:composer/nesbot/carbon@2.54.0",
+            "bom-ref": "pkg:composer/nesbot/carbon@2.55.2",
             "type": "library",
             "name": "carbon",
-            "version": "2.54.0",
+            "version": "2.55.2",
             "group": "nesbot",
             "description": "An API extension for DateTime that supports 281 different languages.",
             "licenses": [
@@ -904,22 +904,27 @@
                     }
                 }
             ],
-            "purl": "pkg:composer/nesbot/carbon@2.54.0",
+            "purl": "pkg:composer/nesbot/carbon@2.55.2",
             "externalReferences": [
                 {
                     "type": "distribution",
                     "url": "https://github.com/briannesbitt/Carbon.git",
-                    "comment": "As detected by composer's `getSourceUrls()` (type=git & reference=eed83939f1aed3eee517d03a33f5ec587ac529b5)"
+                    "comment": "As detected by composer's `getSourceUrls()` (type=git & reference=8c2a18ce3e67c34efc1b29f64fe61304368259a2)"
                 },
                 {
                     "type": "distribution",
-                    "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/eed83939f1aed3eee517d03a33f5ec587ac529b5",
-                    "comment": "As detected by composer's `getDistUrls()` (type=zip & reference=eed83939f1aed3eee517d03a33f5ec587ac529b5 & sha1=UNDEFINED)"
+                    "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/8c2a18ce3e67c34efc1b29f64fe61304368259a2",
+                    "comment": "As detected by composer's `getDistUrls()` (type=zip & reference=8c2a18ce3e67c34efc1b29f64fe61304368259a2 & sha1=UNDEFINED)"
                 },
                 {
                     "type": "website",
                     "url": "https://carbon.nesbot.com",
                     "comment": "As set via `homepage` in composer package definition."
+                },
+                {
+                    "type": "documentation",
+                    "url": "https://carbon.nesbot.com/docs",
+                    "comment": "As set via `support.docs` in composer package definition."
                 },
                 {
                     "type": "issue-tracker",
@@ -3148,7 +3153,7 @@
                 "pkg:composer/league/commonmark@1.6.6",
                 "pkg:composer/league/flysystem@1.1.8",
                 "pkg:composer/monolog/monolog@2.3.5",
-                "pkg:composer/nesbot/carbon@2.54.0",
+                "pkg:composer/nesbot/carbon@2.55.2",
                 "pkg:composer/opis/closure@3.6.2",
                 "pkg:composer/psr/container@1.1.1",
                 "pkg:composer/psr/simple-cache@1.0.1",
@@ -3205,7 +3210,7 @@
             ]
         },
         {
-            "ref": "pkg:composer/nesbot/carbon@2.54.0",
+            "ref": "pkg:composer/nesbot/carbon@2.55.2",
             "dependsOn": [
                 "pkg:composer/symfony/polyfill-mbstring@1.23.1",
                 "pkg:composer/symfony/polyfill-php80@1.23.1",

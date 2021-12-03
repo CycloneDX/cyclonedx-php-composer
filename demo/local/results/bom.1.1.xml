@@ -20,6 +20,27 @@
     </component>
     <component type="library">
       <group><![CDATA[cyclonedx-demo]]></group>
+      <name><![CDATA[local-demo-issue-158]]></name>
+      <version><![CDATA[dev-issue-158]]></version>
+      <description><![CDATA[a package that reproduces issue#158]]></description>
+      <purl><![CDATA[pkg:composer/cyclonedx-demo/local-demo-issue-158@dev-issue-158]]></purl>
+      <externalReferences>
+        <reference type="distribution">
+          <url><![CDATA[packages/local-demo-issue-158]]></url>
+          <comment><![CDATA[As detected by composer's `getDistUrls()` (type=path & reference=78d99483a833a64aa57cff5d79c34c2dc84e6d22 & sha1=UNDEFINED)]]></comment>
+        </reference>
+        <reference type="website">
+          <url><![CDATA[https://github.com/CycloneDX/cyclonedx-php-composer/issues/158]]></url>
+          <comment><![CDATA[As set via `homepage` in composer package definition.]]></comment>
+        </reference>
+        <reference type="issue-tracker">
+          <url><![CDATA[https://pear.php.net/bugs/search.php?cmd=display&package_name%5B%5D=PEAR_Exception]]></url>
+          <comment><![CDATA[As set via `support.issues` in composer package definition.]]></comment>
+        </reference>
+      </externalReferences>
+    </component>
+    <component type="library">
+      <group><![CDATA[cyclonedx-demo]]></group>
       <name><![CDATA[local-dependency-with-minimal-setup]]></name>
       <version><![CDATA[dev-master]]></version>
       <purl><![CDATA[pkg:composer/cyclonedx-demo/local-dependency-with-minimal-setup@dev-master]]></purl>

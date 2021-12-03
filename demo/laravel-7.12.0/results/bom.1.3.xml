@@ -705,29 +705,33 @@
         </reference>
       </externalReferences>
     </component>
-    <component type="library" bom-ref="pkg:composer/nesbot/carbon@2.54.0">
+    <component type="library" bom-ref="pkg:composer/nesbot/carbon@2.55.2">
       <group><![CDATA[nesbot]]></group>
       <name><![CDATA[carbon]]></name>
-      <version><![CDATA[2.54.0]]></version>
+      <version><![CDATA[2.55.2]]></version>
       <description><![CDATA[An API extension for DateTime that supports 281 different languages.]]></description>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
-      <purl><![CDATA[pkg:composer/nesbot/carbon@2.54.0]]></purl>
+      <purl><![CDATA[pkg:composer/nesbot/carbon@2.55.2]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://github.com/briannesbitt/Carbon.git]]></url>
-          <comment><![CDATA[As detected by composer's `getSourceUrls()` (type=git & reference=eed83939f1aed3eee517d03a33f5ec587ac529b5)]]></comment>
+          <comment><![CDATA[As detected by composer's `getSourceUrls()` (type=git & reference=8c2a18ce3e67c34efc1b29f64fe61304368259a2)]]></comment>
         </reference>
         <reference type="distribution">
-          <url><![CDATA[https://api.github.com/repos/briannesbitt/Carbon/zipball/eed83939f1aed3eee517d03a33f5ec587ac529b5]]></url>
-          <comment><![CDATA[As detected by composer's `getDistUrls()` (type=zip & reference=eed83939f1aed3eee517d03a33f5ec587ac529b5 & sha1=UNDEFINED)]]></comment>
+          <url><![CDATA[https://api.github.com/repos/briannesbitt/Carbon/zipball/8c2a18ce3e67c34efc1b29f64fe61304368259a2]]></url>
+          <comment><![CDATA[As detected by composer's `getDistUrls()` (type=zip & reference=8c2a18ce3e67c34efc1b29f64fe61304368259a2 & sha1=UNDEFINED)]]></comment>
         </reference>
         <reference type="website">
           <url><![CDATA[https://carbon.nesbot.com]]></url>
           <comment><![CDATA[As set via `homepage` in composer package definition.]]></comment>
+        </reference>
+        <reference type="documentation">
+          <url><![CDATA[https://carbon.nesbot.com/docs]]></url>
+          <comment><![CDATA[As set via `support.docs` in composer package definition.]]></comment>
         </reference>
         <reference type="issue-tracker">
           <url><![CDATA[https://github.com/briannesbitt/Carbon/issues]]></url>
@@ -2478,7 +2482,7 @@
       <dependency ref="pkg:composer/league/commonmark@1.6.6"/>
       <dependency ref="pkg:composer/league/flysystem@1.1.8"/>
       <dependency ref="pkg:composer/monolog/monolog@2.3.5"/>
-      <dependency ref="pkg:composer/nesbot/carbon@2.54.0"/>
+      <dependency ref="pkg:composer/nesbot/carbon@2.55.2"/>
       <dependency ref="pkg:composer/opis/closure@3.6.2"/>
       <dependency ref="pkg:composer/psr/container@1.1.1"/>
       <dependency ref="pkg:composer/psr/simple-cache@1.0.1"/>
@@ -2517,7 +2521,7 @@
     <dependency ref="pkg:composer/monolog/monolog@2.3.5">
       <dependency ref="pkg:composer/psr/log@1.1.4"/>
     </dependency>
-    <dependency ref="pkg:composer/nesbot/carbon@2.54.0">
+    <dependency ref="pkg:composer/nesbot/carbon@2.55.2">
       <dependency ref="pkg:composer/symfony/polyfill-mbstring@1.23.1"/>
       <dependency ref="pkg:composer/symfony/polyfill-php80@1.23.1"/>
       <dependency ref="pkg:composer/symfony/translation@5.4.0"/>

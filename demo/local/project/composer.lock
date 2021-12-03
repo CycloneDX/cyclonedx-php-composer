@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f25715c307d920abd97b22d5cc296297",
+    "content-hash": "6c978f1ba2d2a9717e9dc1edd1026bf4",
     "packages": [
         {
             "name": "cyclonedx-demo/local-demo-dependency",
@@ -30,6 +30,24 @@
             }
         },
         {
+            "name": "cyclonedx-demo/local-demo-issue-158",
+            "version": "dev-issue-158",
+            "dist": {
+                "type": "path",
+                "url": "packages/local-demo-issue-158",
+                "reference": "78d99483a833a64aa57cff5d79c34c2dc84e6d22"
+            },
+            "type": "library",
+            "description": "a package that reproduces issue#158",
+            "homepage": "https://github.com/CycloneDX/cyclonedx-php-composer/issues/158",
+            "support": {
+                "issues": "https://pear.php.net/bugs/search.php?cmd=display&package_name[]=PEAR_Exception"
+            },
+            "transport-options": {
+                "relative": true
+            }
+        },
+        {
             "name": "cyclonedx-demo/local-dependency-with-minimal-setup",
             "version": "dev-master",
             "dist": {
@@ -46,16 +64,16 @@
     "packages-dev": [
         {
             "name": "cyclonedx/cyclonedx-library",
-            "version": "v1.3.0",
+            "version": "v1.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/CycloneDX/cyclonedx-php-library.git",
-                "reference": "e94ce9e6987905412cfeecbb50f13c9cb4a6529a"
+                "reference": "21c23b1d9a3499c63d6f6cc28cef53100c51830d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/CycloneDX/cyclonedx-php-library/zipball/e94ce9e6987905412cfeecbb50f13c9cb4a6529a",
-                "reference": "e94ce9e6987905412cfeecbb50f13c9cb4a6529a",
+                "url": "https://api.github.com/repos/CycloneDX/cyclonedx-php-library/zipball/21c23b1d9a3499c63d6f6cc28cef53100c51830d",
+                "reference": "21c23b1d9a3499c63d6f6cc28cef53100c51830d",
                 "shasum": ""
             },
             "require": {
@@ -115,9 +133,9 @@
             ],
             "support": {
                 "issues": "https://github.com/CycloneDX/cyclonedx-php-library/issues",
-                "source": "https://github.com/CycloneDX/cyclonedx-php-library/tree/v1.3.0"
+                "source": "https://github.com/CycloneDX/cyclonedx-php-library/tree/v1.3.1"
             },
-            "time": "2021-12-01T13:18:19+00:00"
+            "time": "2021-12-03T11:46:08+00:00"
         },
         {
             "name": "cyclonedx/cyclonedx-php-composer",
@@ -125,11 +143,11 @@
             "dist": {
                 "type": "path",
                 "url": "../../..",
-                "reference": "1970ab463dcc54781bb87698e7c55d4427d65edf"
+                "reference": "9d677976e461f0a845e503d4c5346f588aa1bd05"
             },
             "require": {
                 "composer-plugin-api": "^2.0",
-                "cyclonedx/cyclonedx-library": "^1.2",
+                "cyclonedx/cyclonedx-library": "^1.3.1",
                 "package-url/packageurl-php": "^1.0",
                 "php": "^7.3 || ^8.0"
             },
@@ -518,6 +536,7 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "cyclonedx-demo/local-demo-dependency": 20,
+        "cyclonedx-demo/local-demo-issue-158": 20,
         "cyclonedx/cyclonedx-php-composer": 20
     },
     "prefer-stable": true,
