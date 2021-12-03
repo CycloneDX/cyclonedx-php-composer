@@ -134,7 +134,7 @@ class Command extends BaseCommand
                 [
                     '<error>Failed to generate valid output.</error>',
                     '<warning>Please report the issue and provide the composer lock file of the current project to:</warning>',
-                    '<warning>https://github.com/CycloneDX/cyclonedx-php-composer/issues/new</warning>',
+                    '<warning>https://github.com/CycloneDX/cyclonedx-php-composer/issues/new?template=ValidationError-report.md&labels=ValidationError&title=%5BValidationError%5D</warning>',
                 ]
             );
 
