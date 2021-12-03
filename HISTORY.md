@@ -6,9 +6,13 @@ All notable changes to this project will be documented in this file.
 
 * Fixed
   * XML validation error for ExternalReference. ([#158] via [#159])
+* Changed
+  * The `ValidationError` message requests reporting with the "ValidationError" issue template. (via [#160])  
+    No template was used in the past.
 
 [#158]: https://github.com/CycloneDX/cyclonedx-php-composer/issues/158
 [#159]: https://github.com/CycloneDX/cyclonedx-php-composer/pull/159
+[#160]: https://github.com/CycloneDX/cyclonedx-php-composer/pull/160
 
 ## 3.9.0 - 2021-12-01
 
