@@ -25,12 +25,13 @@ If applicable, add screenshots or past the output to help explain your problem.
 
 ## Environment
 
-- Version of _cyclonedx-php-composer_: <!-- e.g. `v3.2.0` -->
-- OS: <!-- e.g. windows 11, linux ubuntu , ...-->
-- Composer version: <!-- get via `composer --version` -->
-- PHP version: <!-- get via `php --version` -->
+- _cyclonedx-php-composer_ version: <!-- e.g. `v3.2.0` -->
+- Composer version: <!-- get via `composer -V` -->
+- PHP version: <!-- get via `php -v` -->
+- OS: <!-- e.g. windows 11, ubuntu linux, ... -->
 
-**Additional context**
+## Additional context
+
 Add any other context about the problem here.
 
 --
