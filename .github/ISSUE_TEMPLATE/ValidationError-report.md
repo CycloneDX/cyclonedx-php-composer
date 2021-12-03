@@ -14,14 +14,14 @@ Steps to reproduce the behavior:
 1. How was _cyclonedx-php-composer_  called?
    <!-- e.g. `composer make-bom --exclude-dev ...` -->
 2. What `composer.lock` file was processed?
-   <!-- upload it to a pastebin of you choice and put the link here. -->
+   <!-- upload it to this issue, or a pastebin of you choice and put the link here. -->
 3. Error report:
    <!-- run the original call again with switch `-vv`,
-    then upload the output to a pastebin of you choice and put the link here. -->
+    then upload the output to this issue, or a pastebin of you choice and put the link here. -->
 4. Expected result:
    <!-- run the original call again
-   with switch `--no-validate --output-file=-`, 
-   then upload the output to a pastebin of you choice and put the link here. -->
+   with parameters `--no-validate --output-file=-`, 
+   then upload the output this issue, or to a pastebin of you choice and put the link here. -->
 
 ## Environment
  
