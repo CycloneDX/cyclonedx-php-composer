@@ -35,6 +35,10 @@
           <url><![CDATA[https://github.com/CycloneDX/cyclonedx-php-composer/blob/master/demo/local/README.md]]></url>
           <comment><![CDATA[As set via `support.docs` in composer package definition.]]></comment>
         </reference>
+        <reference type="other">
+          <url><![CDATA[mailto:support@cyclonedx.org]]></url>
+          <comment><![CDATA[As set via `support.email` in composer package definition.]]></comment>
+        </reference>
       </externalReferences>
     </component>
   </metadata>

@@ -229,6 +229,31 @@ class ExternalReferenceRepositoryBuilderTest extends \PHPUnit\Framework\TestCase
             ],
         ];
 
+        yield 'package support: email empty' => [
+            $this->createConfiguredMock(CompletePackageInterface::class, [
+                'getSupport' => ['email' => '' /* empty string */],
+            ]),
+            [/* empty */],
+        ];
+        yield 'package support: email with mailto' => [
+            $this->createConfiguredMock(CompletePackageInterface::class, [
+                'getSupport' => ['email' => 'mailto:support@example.com'],
+            ]),
+            [
+                (new ExternalReference(ExternalReferenceType::OTHER, 'mailto:support@example.com'))
+                    ->setComment('As set via `support.email` in composer package definition.'),
+            ],
+        ];
+        yield 'package support: email add mailto' => [
+            $this->createConfiguredMock(CompletePackageInterface::class, [
+                'getSupport' => ['email' => 'support@example.com'],
+            ]),
+            [
+                (new ExternalReference(ExternalReferenceType::OTHER, 'mailto:support@example.com'))
+                    ->setComment('As set via `support.email` in composer package definition.'),
+            ],
+        ];
+
         yield 'package support: unknown is general support' => [
             $this->createConfiguredMock(CompletePackageInterface::class, [
                 'getSupport' => ['foo' => 'some-support-foo'],

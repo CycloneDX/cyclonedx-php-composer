@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 ## unreleased
 
+* Fixed
+  * ExternalReferences fetched from composer's `support.email` are correctly prefixed with "mailto:". (via [#161])  
+    Value was unmodified in the past.
+
+[#161]: https://github.com/CycloneDX/cyclonedx-php-composer/pull/161
+
 ## 3.9.1 - 2021-12-03
 
 * Fixed

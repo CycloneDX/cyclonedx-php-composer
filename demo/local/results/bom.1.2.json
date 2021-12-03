@@ -43,6 +43,11 @@
                     "type": "documentation",
                     "url": "https://github.com/CycloneDX/cyclonedx-php-composer/blob/master/demo/local/README.md",
                     "comment": "As set via `support.docs` in composer package definition."
+                },
+                {
+                    "type": "other",
+                    "url": "mailto:support@cyclonedx.org",
+                    "comment": "As set via `support.email` in composer package definition."
                 }
             ]
         }
