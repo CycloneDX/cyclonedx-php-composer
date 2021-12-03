@@ -45,7 +45,7 @@ class ExternalReferenceRepositoryBuilder
      * Map composer's `support` keys to {@see ExternalReferenceType}.
      * Any non-listed shall default to {@see ExternalReferenceType::SUPPORT}.
      *
-     * @psalm-var array<string, null|ExternalReferenceType::*>
+     * @psalm-var array<string, ExternalReferenceType::*>
      */
     private const MAP_PackageSupportType_ExtRefType = [
         'source' => ExternalReferenceType::DISTRIBUTION,
@@ -54,6 +54,17 @@ class ExternalReferenceRepositoryBuilder
         'chat' => ExternalReferenceType::CHAT,
         'docs' => ExternalReferenceType::DOCUMENTATION,
         'wiki' => ExternalReferenceType::DOCUMENTATION,
+        'email' => ExternalReferenceType::OTHER, // not sure if mailbox or mailing-list
+    ];
+
+    /**
+     * Map composer's `support` keys to function the `support` value will be applied to.
+     * Any non-listed value shall not be modified.
+     *
+     * @psalm-var array<string, callable(string):string>
+     */
+    private const MAP_PackageSupportType_ModifierFunction = [
+        'email' => [self::class, 'prefixMailto'],
     ];
 
     public function makeFromPackage(PackageInterface $package): ExternalReferenceRepository
@@ -179,13 +190,19 @@ class ExternalReferenceRepositoryBuilder
         }
 
         foreach ($support as $supportType => $supportValue) {
-            if (empty($supportValue)) {
+            $modifierFunction = self::MAP_PackageSupportType_ModifierFunction[$supportType] ?? null;
+            /** @var string $extRefUri */
+            $extRefUri = (null === $modifierFunction)
+                ? $supportValue
+                : $modifierFunction($supportValue);
+
+            if (empty($extRefUri)) {
                 continue;
             }
 
             $extRefType = self::MAP_PackageSupportType_ExtRefType[$supportType] ?? ExternalReferenceType::SUPPORT;
 
-            yield $supportType => (new ExternalReference($extRefType, $supportValue))
+            yield $supportType => (new ExternalReference($extRefType, $extRefUri))
                 ->setComment("As set via `support.$supportType` in composer package definition.");
         }
     }
@@ -215,5 +232,16 @@ class ExternalReferenceRepositoryBuilder
             yield (new ExternalReference(ExternalReferenceType::OTHER, $url))
                 ->setComment("As set via `funding` in composer package definition. (type=$type)");
         }
+    }
+
+    private static function prefixMailto(string $mail): string
+    {
+        if ('' === $mail) {
+            return '';
+        }
+
+        return 0 === strpos($mail, 'mailto:')
+            ? $mail
+            : "mailto:$mail";
     }
 }

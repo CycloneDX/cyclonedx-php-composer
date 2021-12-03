@@ -143,7 +143,7 @@
             "dist": {
                 "type": "path",
                 "url": "../../..",
-                "reference": "9d677976e461f0a845e503d4c5346f588aa1bd05"
+                "reference": "259c2f775a0337e7aea2c2b5cbb453eeae63263f"
             },
             "require": {
                 "composer-plugin-api": "^2.0",
