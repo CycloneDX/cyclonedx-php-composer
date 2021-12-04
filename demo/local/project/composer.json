@@ -30,10 +30,10 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "support": {
+        "email": "support@cyclonedx.org",
         "issues": "https://github.com/CycloneDX/cyclonedx-php-composer/issues",
         "forum": "https://groups.io/g/CycloneDX",
         "chat": "https://cyclonedx.org/slack/invite",
-        "docs": "https://github.com/CycloneDX/cyclonedx-php-composer/blob/master/demo/local/README.md",
-        "email": "support@cyclonedx.org"
+        "docs": "https://github.com/CycloneDX/cyclonedx-php-composer/blob/master/demo/local/README.md"
     }
 }

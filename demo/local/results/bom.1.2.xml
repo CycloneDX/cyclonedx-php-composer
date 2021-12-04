@@ -19,6 +19,10 @@
           <url><![CDATA[https://cyclonedx.org/]]></url>
           <comment><![CDATA[As set via `homepage` in composer package definition.]]></comment>
         </reference>
+        <reference type="other">
+          <url><![CDATA[mailto:support@cyclonedx.org]]></url>
+          <comment><![CDATA[As set via `support.email` in composer package definition.]]></comment>
+        </reference>
         <reference type="issue-tracker">
           <url><![CDATA[https://github.com/CycloneDX/cyclonedx-php-composer/issues]]></url>
           <comment><![CDATA[As set via `support.issues` in composer package definition.]]></comment>
@@ -35,10 +39,6 @@
           <url><![CDATA[https://github.com/CycloneDX/cyclonedx-php-composer/blob/master/demo/local/README.md]]></url>
           <comment><![CDATA[As set via `support.docs` in composer package definition.]]></comment>
         </reference>
-        <reference type="other">
-          <url><![CDATA[mailto:support@cyclonedx.org]]></url>
-          <comment><![CDATA[As set via `support.email` in composer package definition.]]></comment>
-        </reference>
       </externalReferences>
     </component>
   </metadata>
@@ -52,7 +52,7 @@
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[packages/local-demo-dependency]]></url>
-          <comment><![CDATA[As detected by composer's `getDistUrls()` (type=path & reference=d96cf16bf7e2a7f2a83ef45554f83a051cf9735f & sha1=UNDEFINED)]]></comment>
+          <comment><![CDATA[As detected by composer's `getDistUrls()` (type=path & reference=cef4d2e23e681fb587778e7e044718bce2f15c3f & sha1=UNDEFINED)]]></comment>
         </reference>
         <reference type="other">
           <url><![CDATA[https://cyclonedx.org/about/participate/]]></url>
@@ -69,7 +69,7 @@
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[packages/local-demo-issue-158]]></url>
-          <comment><![CDATA[As detected by composer's `getDistUrls()` (type=path & reference=78d99483a833a64aa57cff5d79c34c2dc84e6d22 & sha1=UNDEFINED)]]></comment>
+          <comment><![CDATA[As detected by composer's `getDistUrls()` (type=path & reference=b49b55826a803c5105b1b455b3fac8f5da3007f1 & sha1=UNDEFINED)]]></comment>
         </reference>
         <reference type="website">
           <url><![CDATA[https://github.com/CycloneDX/cyclonedx-php-composer/issues/158]]></url>
