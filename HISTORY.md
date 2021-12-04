@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## unreleased
 
+## 3.9.2 - 2021-12-04
+
 * Fixed
   * ExternalReferences fetched from composer's `support.email` are correctly prefixed with "mailto:". (via [#161])  
     Value was unmodified in the past.
