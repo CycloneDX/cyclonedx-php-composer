@@ -1,7 +1,7 @@
 {
     "name": "cyclonedx-demo/local-demo-dependency",
-    "description": "a package that is hosted locally and required in a local demo",
     "type": "library",
+    "description": "a package that is hosted locally and required in a local demo",
     "version": "1.33.7",
     "require": {
         "cyclonedx-demo/local-dependency-with-minimal-setup": "@dev"

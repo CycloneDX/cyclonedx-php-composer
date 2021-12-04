@@ -25,6 +25,11 @@
                     "comment": "As set via `homepage` in composer package definition."
                 },
                 {
+                    "type": "other",
+                    "url": "mailto:support@cyclonedx.org",
+                    "comment": "As set via `support.email` in composer package definition."
+                },
+                {
                     "type": "issue-tracker",
                     "url": "https://github.com/CycloneDX/cyclonedx-php-composer/issues",
                     "comment": "As set via `support.issues` in composer package definition."
@@ -43,11 +48,6 @@
                     "type": "documentation",
                     "url": "https://github.com/CycloneDX/cyclonedx-php-composer/blob/master/demo/local/README.md",
                     "comment": "As set via `support.docs` in composer package definition."
-                },
-                {
-                    "type": "other",
-                    "url": "mailto:support@cyclonedx.org",
-                    "comment": "As set via `support.email` in composer package definition."
                 }
             ]
         }
@@ -65,7 +65,7 @@
                 {
                     "type": "distribution",
                     "url": "packages/local-demo-dependency",
-                    "comment": "As detected by composer's `getDistUrls()` (type=path & reference=d96cf16bf7e2a7f2a83ef45554f83a051cf9735f & sha1=UNDEFINED)"
+                    "comment": "As detected by composer's `getDistUrls()` (type=path & reference=cef4d2e23e681fb587778e7e044718bce2f15c3f & sha1=UNDEFINED)"
                 },
                 {
                     "type": "other",
@@ -86,7 +86,7 @@
                 {
                     "type": "distribution",
                     "url": "packages/local-demo-issue-158",
-                    "comment": "As detected by composer's `getDistUrls()` (type=path & reference=78d99483a833a64aa57cff5d79c34c2dc84e6d22 & sha1=UNDEFINED)"
+                    "comment": "As detected by composer's `getDistUrls()` (type=path & reference=b49b55826a803c5105b1b455b3fac8f5da3007f1 & sha1=UNDEFINED)"
                 },
                 {
                     "type": "website",

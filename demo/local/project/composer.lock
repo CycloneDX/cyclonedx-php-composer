@@ -12,7 +12,7 @@
             "dist": {
                 "type": "path",
                 "url": "packages/local-demo-dependency",
-                "reference": "d96cf16bf7e2a7f2a83ef45554f83a051cf9735f"
+                "reference": "cef4d2e23e681fb587778e7e044718bce2f15c3f"
             },
             "require": {
                 "cyclonedx-demo/local-dependency-with-minimal-setup": "@dev"
@@ -35,7 +35,7 @@
             "dist": {
                 "type": "path",
                 "url": "packages/local-demo-issue-158",
-                "reference": "78d99483a833a64aa57cff5d79c34c2dc84e6d22"
+                "reference": "b49b55826a803c5105b1b455b3fac8f5da3007f1"
             },
             "type": "library",
             "description": "a package that reproduces issue#158",
@@ -143,7 +143,7 @@
             "dist": {
                 "type": "path",
                 "url": "../../..",
-                "reference": "259c2f775a0337e7aea2c2b5cbb453eeae63263f"
+                "reference": "6f4056e436198face62b3065ba95ac46831a775b"
             },
             "require": {
                 "composer-plugin-api": "^2.0",
