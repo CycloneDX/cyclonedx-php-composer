@@ -190,8 +190,8 @@ class ExternalReferenceRepositoryBuilder
         }
 
         foreach ($support as $supportType => $supportValue) {
+            /** @psalm-var ?callable(string):string $modifierFunction */
             $modifierFunction = self::MAP_PackageSupportType_ModifierFunction[$supportType] ?? null;
-            /** @var string $extRefUri */
             $extRefUri = (null === $modifierFunction)
                 ? $supportValue
                 : $modifierFunction($supportValue);
