@@ -97,6 +97,8 @@ class Command extends BaseCommand
      * @throws \UnexpectedValueException
      * @throws \DomainException
      * @throws \RuntimeException
+     *
+     * @psalm-return self::SUCCESS|self::FAILURE|self::INVALID
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
