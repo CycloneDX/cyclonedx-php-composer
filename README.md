@@ -1,5 +1,3 @@
-# CycloneDX PHP Composer Plugin
-
 [![shield_gh-workflow-test]][link_gh-workflow-test]
 [![shield_packagist-version]][link_packagist]
 [![shield_license]][license_file]  
@@ -9,6 +7,8 @@
 [![shield_twitter-follow]][link_twitter]
 
 ----
+
+# CycloneDX PHP Composer Plugin
 
 A plugin for PHP's [Composer](https://getcomposer.org/)
 that generates Bill of Materials in [CycloneDX](https://cyclonedx.org/) format.
