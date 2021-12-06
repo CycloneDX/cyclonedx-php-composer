@@ -10,14 +10,13 @@ There are multiple demo projects:
 * [`laravel-7.12.0`](laravel-7.12.0/README.md)
   which composer-requires `laravel/framework:7.12.0`.  
   The output is _reproducible_, due to the shipped composer-locked versions.
-  Therefore, the demo requires a special php environment.  
   *ATTENTION*: this demo might use vulnerable dependencies for showcasing purposes.
 * [`local`](local/README.md)
   which composer-requires a private/local package `cyclonedx/cyclonedx-php-composer-local-demo-dependency` and other locals.  
   The output is _reproducible_, due to the shipped composer-locked versions.
-  Therefore, the demo requires a special php environment.  
 
-Purpose is to demonstrate how _cyclonedx-php-composer_ integrates, can be used,
+Purpose is to demonstrate how _cyclonedx-php-composer_ integrates, 
+can be used,
 and how the generated output will look like.
 
 ## Maintenance 
