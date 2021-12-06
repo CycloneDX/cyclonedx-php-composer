@@ -33,5 +33,3 @@ Steps to reproduce the behavior:
 ## Additional context
 
 Add any other context about the problem here.
-
----
