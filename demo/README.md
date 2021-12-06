@@ -9,7 +9,7 @@ There are multiple demo projects:
   due to the fact that version-locks are fluid, and the composer-lock file is not shipped as code.
 * [`laravel-7.12.0`](laravel-7.12.0/README.md)
   which composer-requires `laravel/framework:7.12.0`.  
-  The output is _reproducible_, due to the shipped composer-locked versions.
+  The output is _reproducible_, due to the shipped composer-locked versions.  
   *ATTENTION*: this demo might use vulnerable dependencies for showcasing purposes.
 * [`local`](local/README.md)
   which composer-requires a private/local package `cyclonedx/cyclonedx-php-composer-local-demo-dependency` and other locals.  
