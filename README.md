@@ -22,13 +22,15 @@ There are older versions of this plugin available, which support php `^5.5 || ^7
 
 Install via composer: 
 
-`composer require --dev cyclonedx/cyclonedx-php-composer`
+```sh
+composer require --dev cyclonedx/cyclonedx-php-composer
+```
 
 ## Usage
 
 After successful installation, the composer command `make-bom` is available.
 
-```
+```text
 $ composer make-bom -h
 Usage:
   make-bom [options] [--] [<composer-file>]
