@@ -83,13 +83,8 @@ This Composer-Plugin does not expose any additional _public_ api or classes - al
 
 ## Contributing
 
-Feel free to open pull requests.
-
-To start developing simply run `composer run-script dev-setup` to install dev-dependencies and tools.
-
-Make sure
-* to run `composer run-script cs-fix` to have the coding standards applied.
-* to run `composer run-script test` and pass all tests.
+Feel free to open issues, bugreports or pull requests.  
+See the [CONTRIBUTING][contributing_file] file for details.
 
 ## License
 
@@ -97,6 +92,7 @@ Permission to modify and redistribute is granted under the terms of the Apache 2
 See the [LICENSE][license_file] file for the full license.
 
 [license_file]: https://github.com/CycloneDX/cyclonedx-php-composer/blob/master/LICENSE
+[contributing_file]: https://github.com/CycloneDX/cyclonedx-php-composer/blob/master/CONTRIBUTING.md
 [demo_readme]: https://github.com/CycloneDX/cyclonedx-php-composer/blob/master/demo/README.md
 
 [cyclonedx-library]: https://packagist.org/packages/cyclonedx/cyclonedx-library
