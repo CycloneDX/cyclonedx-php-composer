@@ -13,10 +13,9 @@ There are multiple demo projects:
   Therefore, the demo requires a special php environment.  
   *ATTENTION*: this demo might use vulnerable dependencies for showcasing purposes.
 * [`local`](local/README.md)
-  which composer-requires a private/local package `cyclonedx/cyclonedx-php-composer-local-demo-dependency`.  
-  The demo is intended to run on every environment.  
-  This also means, the output might not be reproducible on independent systems,
-  due to the fact that version-locks are fluid, and the composer-lock file is not shipped as code.
+  which composer-requires a private/local package `cyclonedx/cyclonedx-php-composer-local-demo-dependency` and other locals.  
+  The output is _reproducible_, due to the shipped composer-locked versions.
+  Therefore, the demo requires a special php environment.  
 
 Purpose is to demonstrate how _cyclonedx-php-composer_ integrates, can be used,
 and how the generated output will look like.
