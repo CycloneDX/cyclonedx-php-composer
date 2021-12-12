@@ -1,7 +1,8 @@
 {
     "name": "cyclonedx/cyclonedx-php-composer",
-    "type": "composer-plugin",
     "description": "Creates CycloneDX Software Bill-of-Materials (SBOM) from PHP Composer projects",
+    "license": "Apache-2.0",
+    "type": "composer-plugin",
     "keywords": [
         "CycloneDX",
         "SBOM",
@@ -11,8 +12,6 @@
         "package-url",
         "PURL"
     ],
-    "homepage": "https://github.com/CycloneDX/cyclonedx-php-composer/",
-    "license": "Apache-2.0",
     "authors": [
         {
             "name": "nscuro",
@@ -25,6 +24,10 @@
             "role": "Developer"
         }
     ],
+    "homepage": "https://github.com/CycloneDX/cyclonedx-php-composer/",
+    "support": {
+        "issues": "https://github.com/CycloneDX/cyclonedx-php-composer/issues"
+    },
     "require": {
         "php": "^7.3 || ^8.0",
         "composer-plugin-api": "^2.0",
@@ -35,6 +38,17 @@
         "composer/composer": "^2.0.0",
         "phpunit/phpunit": "9.5.10",
         "roave/security-advisories": "dev-latest"
+    },
+    "prefer-stable": true,
+    "autoload": {
+        "psr-4": {
+            "CycloneDX\\Composer\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "CycloneDX\\Tests\\": "tests/"
+        }
     },
     "config": {
         "preferred-install": "dist",
@@ -53,17 +67,6 @@
             "composer-plugin-api"
         ]
     },
-    "autoload": {
-        "psr-4": {
-            "CycloneDX\\Composer\\": "src/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "CycloneDX\\Tests\\": "tests/"
-        }
-    },
-    "prefer-stable": true,
     "scripts": {
         "cs-fix": "@php tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/php-cs-fixer fix --diff",
         "dev-setup": [
@@ -102,8 +105,5 @@
         "test:cs-fixer": "Test coding standards with PHP-CS-fixer.",
         "test:phpunit": "Run tests with PHPUnit.",
         "test:psalm": "Run static code analysis with Psalm."
-    },
-    "support": {
-        "issues": "https://github.com/CycloneDX/cyclonedx-php-composer/issues"
     }
 }
