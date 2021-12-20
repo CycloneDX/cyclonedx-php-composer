@@ -13,6 +13,7 @@ on:
     - cron: '42 23 * * 5'
 
 env:
+  PHP_VERSION_LATEST: "8.1"
   PHP_PROJECT_EXT: dom,filter,json,libxml,simplexml  # via `composer info -pt`
   REPORTS_DIR: CI_reports
 
@@ -27,22 +28,23 @@ jobs:
       matrix:
         os: [ "ubuntu-latest" ]
         php:
-          - "8.0" # highest supported
+          - "8.1" # highest supported
+          - "8.0"
           - "7.4"
           - "7.3" # lowest supported
         dependencies: [ "lowest", "highest" ]
-        include:
-          - # upcoming php version
-            os: ubuntu-latest
+        exclude:
+          - # unstable combinations: throws PHP Deprecated warnings
             php: "8.1"
-            dependencies: "highest"
+            dependencies: "lowest"
+        include:
           - # Windows highest
             os: windows-latest
-            php: "8.0"
+            php: "8.1"
             dependencies: "highest"
           - # MacOS highest
             os: macos-latest
-            php: "8.0"
+            php: "8.1"
             dependencies: "highest"
     timeout-minutes: 30
     steps:
@@ -114,11 +116,8 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - # upcoming php version
-            php: "8.1"
-            dependencies: "highest"
           - # highest supported
-            php: "8.0"
+            php: "8.1"
             dependencies: "highest"
           - # lowest supported
             php: "7.3"
@@ -186,7 +185,7 @@ jobs:
         # see https://github.com/shivammathur/setup-php
         uses: shivammathur/setup-php@v2
         with:
-          php-version: "8.0"
+          php-version: ${{ env.PHP_VERSION_LATEST }}
           extensions: ${{ env.PHP_PROJECT_EXT }}
           tools: composer:v2
           coverage: none
@@ -222,7 +221,7 @@ jobs:
         # see https://github.com/shivammathur/setup-php
         uses: shivammathur/setup-php@v2
         with:
-          php-version: "8.0"
+          php-version: ${{ env.PHP_VERSION_LATEST }}
           extensions: ${{ env.PHP_PROJECT_EXT }}
           tools: composer:v2
           coverage: none
@@ -259,7 +258,7 @@ jobs:
         # see https://github.com/shivammathur/setup-php
         uses: shivammathur/setup-php@v2
         with:
-          php-version: "8.0"
+          php-version: ${{ env.PHP_VERSION_LATEST }}
           extensions: ${{ env.PHP_PROJECT_EXT }}
           tools: composer:v2
           coverage: none
@@ -298,7 +297,7 @@ jobs:
         # see https://github.com/shivammathur/setup-php
         uses: shivammathur/setup-php@v2
         with:
-          php-version: "8.0"
+          php-version: ${{ env.PHP_VERSION_LATEST }}
           tools: composer:v2
           coverage: none
       - name: Get composer cache directory
