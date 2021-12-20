@@ -64,16 +64,16 @@
     "packages-dev": [
         {
             "name": "cyclonedx/cyclonedx-library",
-            "version": "v1.3.1",
+            "version": "v1.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/CycloneDX/cyclonedx-php-library.git",
-                "reference": "21c23b1d9a3499c63d6f6cc28cef53100c51830d"
+                "reference": "43b567fba4a3bc56057b4bff9c49e13b62ce1e39"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/CycloneDX/cyclonedx-php-library/zipball/21c23b1d9a3499c63d6f6cc28cef53100c51830d",
-                "reference": "21c23b1d9a3499c63d6f6cc28cef53100c51830d",
+                "url": "https://api.github.com/repos/CycloneDX/cyclonedx-php-library/zipball/43b567fba4a3bc56057b4bff9c49e13b62ce1e39",
+                "reference": "43b567fba4a3bc56057b4bff9c49e13b62ce1e39",
                 "shasum": ""
             },
             "require": {
@@ -133,9 +133,9 @@
             ],
             "support": {
                 "issues": "https://github.com/CycloneDX/cyclonedx-php-library/issues",
-                "source": "https://github.com/CycloneDX/cyclonedx-php-library/tree/v1.3.1"
+                "source": "https://github.com/CycloneDX/cyclonedx-php-library/tree/v1.4.0"
             },
-            "time": "2021-12-03T11:46:08+00:00"
+            "time": "2021-12-20T15:02:08+00:00"
         },
         {
             "name": "cyclonedx/cyclonedx-php-composer",
@@ -143,7 +143,7 @@
             "dist": {
                 "type": "path",
                 "url": "../../..",
-                "reference": "6f4056e436198face62b3065ba95ac46831a775b"
+                "reference": "2c5dee78591700f300478cf19571d29361a35064"
             },
             "require": {
                 "composer-plugin-api": "^2.0",
@@ -543,5 +543,5 @@
     "prefer-lowest": false,
     "platform": [],
     "platform-dev": [],
-    "plugin-api-version": "2.0.0"
+    "plugin-api-version": "2.1.0"
 }
