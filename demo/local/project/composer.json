@@ -1,19 +1,22 @@
 {
     "name": "cyclonedx-demo/cyclonedx-php-composer-local",
-    "type": "project",
     "description": "demo of cyclonedx/cyclonedx-php-composer with a local dependency",
-    "homepage": "https://cyclonedx.org/",
+    "type": "project",
     "version": "dev-master",
+    "homepage": "https://cyclonedx.org/",
+    "support": {
+        "email": "support@cyclonedx.org",
+        "issues": "https://github.com/CycloneDX/cyclonedx-php-composer/issues",
+        "forum": "https://groups.io/g/CycloneDX",
+        "chat": "https://cyclonedx.org/slack/invite",
+        "docs": "https://github.com/CycloneDX/cyclonedx-php-composer/blob/master/demo/local/README.md"
+    },
     "require": {
         "cyclonedx-demo/local-demo-dependency": "@dev",
         "cyclonedx-demo/local-demo-issue-158": "dev-issue-158"
     },
     "require-dev": {
         "cyclonedx/cyclonedx-php-composer": "@dev"
-    },
-    "config": {
-        "preferred-install": "dist",
-        "sort-packages": true
     },
     "repositories": [
         {
@@ -29,11 +32,12 @@
     ],
     "minimum-stability": "dev",
     "prefer-stable": true,
-    "support": {
-        "email": "support@cyclonedx.org",
-        "issues": "https://github.com/CycloneDX/cyclonedx-php-composer/issues",
-        "forum": "https://groups.io/g/CycloneDX",
-        "chat": "https://cyclonedx.org/slack/invite",
-        "docs": "https://github.com/CycloneDX/cyclonedx-php-composer/blob/master/demo/local/README.md"
+    "config": {
+        "allow-plugins": {
+            "cyclonedx/cyclonedx-php-composer": true,
+            "ergebnis/composer-normalize": true
+        },
+        "preferred-install": "dist",
+        "sort-packages": true
     }
 }

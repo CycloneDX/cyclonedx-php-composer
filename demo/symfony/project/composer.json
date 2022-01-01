@@ -1,17 +1,13 @@
 {
     "name": "cyclonedx/cyclonedx-php-composer-demo",
-    "type": "project",
     "description": "demo of cyclonedx/cyclonedx-php-composer with symfony/symfony",
+    "type": "project",
     "require": {
         "symfony/symfony": "@stable"
     },
     "require-dev": {
         "cyclonedx/cyclonedx-php-composer": "@dev",
         "roave/security-advisories": "dev-latest"
-    },
-    "config": {
-        "preferred-install": "dist",
-        "sort-packages": true
     },
     "repositories": [
         {
@@ -21,5 +17,13 @@
         }
     ],
     "minimum-stability": "stable",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "config": {
+        "allow-plugins": {
+            "cyclonedx/cyclonedx-php-composer": true,
+            "ergebnis/composer-normalize": true
+        },
+        "preferred-install": "dist",
+        "sort-packages": true
+    }
 }
