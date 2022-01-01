@@ -51,6 +51,10 @@
         }
     },
     "config": {
+        "allow-plugins": {
+            "ergebnis/composer-normalize": true,
+            "icanhazstring/composer-unused": true
+        },
         "preferred-install": "dist",
         "sort-packages": true
     },
