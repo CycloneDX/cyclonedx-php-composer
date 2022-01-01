@@ -4851,7 +4851,7 @@
             "dist": {
                 "type": "path",
                 "url": "../../..",
-                "reference": "2c5dee78591700f300478cf19571d29361a35064"
+                "reference": "97af1e1ebb554a9231b9dff736818c834f899e85"
             },
             "require": {
                 "composer-plugin-api": "^2.0",
@@ -4861,7 +4861,7 @@
             },
             "require-dev": {
                 "composer/composer": "^2.0.0",
-                "phpunit/phpunit": "9.5.10",
+                "phpunit/phpunit": "9.5.11",
                 "roave/security-advisories": "dev-latest"
             },
             "type": "composer-plugin",
@@ -5172,5 +5172,5 @@
     "platform-overrides": {
         "php": "7.3"
     },
-    "plugin-api-version": "2.1.0"
+    "plugin-api-version": "2.2.0"
 }
