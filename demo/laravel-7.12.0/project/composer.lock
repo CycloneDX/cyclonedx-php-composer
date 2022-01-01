@@ -4851,7 +4851,7 @@
             "dist": {
                 "type": "path",
                 "url": "../../..",
-                "reference": "97af1e1ebb554a9231b9dff736818c834f899e85"
+                "reference": "592166cff210a415312a34c804023ca09869444e"
             },
             "require": {
                 "composer-plugin-api": "^2.0",

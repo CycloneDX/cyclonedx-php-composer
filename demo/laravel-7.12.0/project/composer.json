@@ -1,23 +1,13 @@
 {
     "name": "cyclonedx/cyclonedx-php-composer-demo",
-    "type": "project",
     "description": "demo of cyclonedx/cyclonedx-php-composer with a pinned version of laravel/framework",
+    "type": "project",
     "version": "dev-master",
     "require": {
         "laravel/laravel": "7.12.0"
     },
     "require-dev": {
         "cyclonedx/cyclonedx-php-composer": "@dev"
-    },
-    "config": {
-        "platform": {
-            "php": "7.3"
-        },
-        "preferred-install": "dist",
-        "sort-packages": true,
-        "allow-plugins": {
-            "cyclonedx/cyclonedx-php-composer": true
-        }
     },
     "repositories": [
         {
@@ -27,5 +17,16 @@
         }
     ],
     "minimum-stability": "stable",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "config": {
+        "allow-plugins": {
+            "cyclonedx/cyclonedx-php-composer": true,
+            "ergebnis/composer-normalize": true
+        },
+        "platform": {
+            "php": "7.3"
+        },
+        "preferred-install": "dist",
+        "sort-packages": true
+    }
 }
