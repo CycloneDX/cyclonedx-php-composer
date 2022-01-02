@@ -31,3 +31,4 @@ composer.lock text eol=lf diff=json
 # files that are forced to be exported in "dist" releaes
 /NOTICE                 -export-ignore
 /LICENSE                -export-ignore
+/semver.txt             -export-ignore
