@@ -11,7 +11,7 @@
 # CycloneDX PHP Composer Plugin
 
 A plugin for PHP's [Composer](https://getcomposer.org/)
-that generates Software Bill of Materials(SBoM) in [CycloneDX](https://cyclonedx.org/) format.
+that generates Software Bill of Materials (SBoM) in [CycloneDX](https://cyclonedx.org/) format.
 
 ## Requirements
 
