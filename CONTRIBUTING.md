@@ -4,6 +4,9 @@ Feel free to open pull requests.
 
 ## Setup 
 
+The development-setup requires PHP >= 7.4,
+even though the project might support PHP 7.3 on runtime.
+
 To start developing simply run `composer run-script dev-setup` to install dev-dependencies and tools.
 
 ## Tests
