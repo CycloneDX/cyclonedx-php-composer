@@ -36,7 +36,7 @@
     },
     "require-dev": {
         "composer/composer": "^2.0.0",
-        "phpunit/phpunit": "9.5.11",
+        "phpunit/phpunit": "9.5.12",
         "roave/security-advisories": "dev-latest"
     },
     "prefer-stable": true,
