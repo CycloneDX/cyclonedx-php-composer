@@ -4772,16 +4772,16 @@
     "packages-dev": [
         {
             "name": "cyclonedx/cyclonedx-library",
-            "version": "v1.4.0",
+            "version": "v1.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/CycloneDX/cyclonedx-php-library.git",
-                "reference": "43b567fba4a3bc56057b4bff9c49e13b62ce1e39"
+                "reference": "8a3f94cb976bf439763d162c1640b53bcb83bb38"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/CycloneDX/cyclonedx-php-library/zipball/43b567fba4a3bc56057b4bff9c49e13b62ce1e39",
-                "reference": "43b567fba4a3bc56057b4bff9c49e13b62ce1e39",
+                "url": "https://api.github.com/repos/CycloneDX/cyclonedx-php-library/zipball/8a3f94cb976bf439763d162c1640b53bcb83bb38",
+                "reference": "8a3f94cb976bf439763d162c1640b53bcb83bb38",
                 "shasum": ""
             },
             "require": {
@@ -4794,7 +4794,7 @@
             },
             "require-dev": {
                 "ext-simplexml": "*",
-                "phpunit/phpunit": "9.5.10",
+                "phpunit/phpunit": "9.5.13",
                 "roave/security-advisories": "dev-latest"
             },
             "type": "library",
@@ -4841,9 +4841,9 @@
             ],
             "support": {
                 "issues": "https://github.com/CycloneDX/cyclonedx-php-library/issues",
-                "source": "https://github.com/CycloneDX/cyclonedx-php-library/tree/v1.4.0"
+                "source": "https://github.com/CycloneDX/cyclonedx-php-library/tree/v1.4.2"
             },
-            "time": "2021-12-20T15:02:08+00:00"
+            "time": "2022-02-05T10:00:03+00:00"
         },
         {
             "name": "cyclonedx/cyclonedx-php-composer",
@@ -4851,17 +4851,17 @@
             "dist": {
                 "type": "path",
                 "url": "../../..",
-                "reference": "592166cff210a415312a34c804023ca09869444e"
+                "reference": "6700af9e93981efdc132cebac1f919b43b6421f8"
             },
             "require": {
                 "composer-plugin-api": "^2.0",
-                "cyclonedx/cyclonedx-library": "^1.3.1",
+                "cyclonedx/cyclonedx-library": "^1.4.2",
                 "package-url/packageurl-php": "^1.0",
                 "php": "^7.3 || ^8.0"
             },
             "require-dev": {
                 "composer/composer": "^2.0.0",
-                "phpunit/phpunit": "9.5.11",
+                "phpunit/phpunit": "9.5.13",
                 "roave/security-advisories": "dev-latest"
             },
             "type": "composer-plugin",
