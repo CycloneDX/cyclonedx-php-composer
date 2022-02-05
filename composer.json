@@ -66,10 +66,7 @@
         "composer-normalize": {
             "indent-size": 4,
             "indent-style": "space"
-        },
-        "unused": [
-            "composer-plugin-api"
-        ]
+        }
     },
     "scripts": {
         "cs-fix": "@php tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/php-cs-fixer fix --diff",
