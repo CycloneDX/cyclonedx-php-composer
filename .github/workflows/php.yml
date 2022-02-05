@@ -203,6 +203,8 @@ jobs:
       - name: Install composer-unused
         run: composer install --prefer-dist --no-interaction --no-progress
         working-directory: tools/composer-unused
+      - name: Install dependencies
+        run: composer install --no-dev --prefer-dist --no-interaction --no-progress
       - name: Run composer-unused tests
         run: >
           php tools/composer-unused/vendor/icanhazstring/composer-unused/bin/composer-unused
@@ -240,7 +242,7 @@ jobs:
         run: composer install --prefer-dist --no-interaction --no-progress
         working-directory: tools/composer-require-checker
       - name: Install dependencies
-        run: composer update --no-dev --prefer-dist --no-interaction --no-progress
+        run: composer install --no-dev --prefer-dist --no-interaction --no-progress
       - name: Run composer-require-checker tests
         run: >
           php tools/composer-require-checker/vendor/maglnet/composer-require-checker/bin/composer-require-checker
