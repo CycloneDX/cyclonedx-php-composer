@@ -179,6 +179,8 @@ class Command extends BaseCommand
 
     /**
      * @throws \UnexpectedValueException if SPEC version is unknown
+     *
+     * @psalm-return non-empty-string
      */
     private function makeBomString(Bom $bom): string
     {
@@ -199,6 +201,8 @@ class Command extends BaseCommand
     }
 
     /**
+     * @psalm-param  non-empty-string $bom
+     *
      * @throws \UnexpectedValueException if SPEC version is unknown
      */
     private function validateBomString(string $bom): ?bool

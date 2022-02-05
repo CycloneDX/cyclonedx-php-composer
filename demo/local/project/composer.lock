@@ -64,16 +64,16 @@
     "packages-dev": [
         {
             "name": "cyclonedx/cyclonedx-library",
-            "version": "v1.4.0",
+            "version": "v1.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/CycloneDX/cyclonedx-php-library.git",
-                "reference": "43b567fba4a3bc56057b4bff9c49e13b62ce1e39"
+                "reference": "8a3f94cb976bf439763d162c1640b53bcb83bb38"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/CycloneDX/cyclonedx-php-library/zipball/43b567fba4a3bc56057b4bff9c49e13b62ce1e39",
-                "reference": "43b567fba4a3bc56057b4bff9c49e13b62ce1e39",
+                "url": "https://api.github.com/repos/CycloneDX/cyclonedx-php-library/zipball/8a3f94cb976bf439763d162c1640b53bcb83bb38",
+                "reference": "8a3f94cb976bf439763d162c1640b53bcb83bb38",
                 "shasum": ""
             },
             "require": {
@@ -86,7 +86,7 @@
             },
             "require-dev": {
                 "ext-simplexml": "*",
-                "phpunit/phpunit": "9.5.10",
+                "phpunit/phpunit": "9.5.13",
                 "roave/security-advisories": "dev-latest"
             },
             "type": "library",
@@ -133,9 +133,9 @@
             ],
             "support": {
                 "issues": "https://github.com/CycloneDX/cyclonedx-php-library/issues",
-                "source": "https://github.com/CycloneDX/cyclonedx-php-library/tree/v1.4.0"
+                "source": "https://github.com/CycloneDX/cyclonedx-php-library/tree/v1.4.2"
             },
-            "time": "2021-12-20T15:02:08+00:00"
+            "time": "2022-02-05T10:00:03+00:00"
         },
         {
             "name": "cyclonedx/cyclonedx-php-composer",
@@ -143,17 +143,17 @@
             "dist": {
                 "type": "path",
                 "url": "../../..",
-                "reference": "592166cff210a415312a34c804023ca09869444e"
+                "reference": "6700af9e93981efdc132cebac1f919b43b6421f8"
             },
             "require": {
                 "composer-plugin-api": "^2.0",
-                "cyclonedx/cyclonedx-library": "^1.3.1",
+                "cyclonedx/cyclonedx-library": "^1.4.2",
                 "package-url/packageurl-php": "^1.0",
                 "php": "^7.3 || ^8.0"
             },
             "require-dev": {
                 "composer/composer": "^2.0.0",
-                "phpunit/phpunit": "9.5.11",
+                "phpunit/phpunit": "9.5.13",
                 "roave/security-advisories": "dev-latest"
             },
             "type": "composer-plugin",
@@ -258,16 +258,16 @@
         },
         {
             "name": "package-url/packageurl-php",
-            "version": "1.0.3",
+            "version": "1.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/package-url/packageurl-php.git",
-                "reference": "3d593b87966d3dff60d6cc02fd0a83fccb0a01f4"
+                "reference": "c45953babed516d27a0cf6c1a2d9f7e883ce214f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/package-url/packageurl-php/zipball/3d593b87966d3dff60d6cc02fd0a83fccb0a01f4",
-                "reference": "3d593b87966d3dff60d6cc02fd0a83fccb0a01f4",
+                "url": "https://api.github.com/repos/package-url/packageurl-php/zipball/c45953babed516d27a0cf6c1a2d9f7e883ce214f",
+                "reference": "c45953babed516d27a0cf6c1a2d9f7e883ce214f",
                 "shasum": ""
             },
             "require": {
@@ -275,10 +275,16 @@
             },
             "require-dev": {
                 "ext-json": "*",
-                "phpunit/phpunit": "9.5.4",
+                "phpunit/phpunit": "9.5.11",
                 "roave/security-advisories": "dev-latest"
             },
             "type": "library",
+            "extra": {
+                "composer-normalize": {
+                    "indent-size": 4,
+                    "indent-style": "space"
+                }
+            },
             "autoload": {
                 "psr-4": {
                     "PackageUrl\\": "src"
@@ -305,9 +311,9 @@
             ],
             "support": {
                 "issues": "https://github.com/package-url/packageurl-php/issues",
-                "source": "https://github.com/package-url/packageurl-php/tree/1.0.3"
+                "source": "https://github.com/package-url/packageurl-php/tree/1.0.4"
             },
-            "time": "2021-05-13T17:29:18+00:00"
+            "time": "2022-01-04T14:39:41+00:00"
         },
         {
             "name": "phplang/scope-exit",
@@ -453,20 +459,23 @@
         },
         {
             "name": "symfony/polyfill-mbstring",
-            "version": "v1.23.1",
+            "version": "v1.24.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-mbstring.git",
-                "reference": "9174a3d80210dca8daa7f31fec659150bbeabfc6"
+                "reference": "0abb51d2f102e00a4eefcf46ba7fec406d245825"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/9174a3d80210dca8daa7f31fec659150bbeabfc6",
-                "reference": "9174a3d80210dca8daa7f31fec659150bbeabfc6",
+                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/0abb51d2f102e00a4eefcf46ba7fec406d245825",
+                "reference": "0abb51d2f102e00a4eefcf46ba7fec406d245825",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7.1"
+            },
+            "provide": {
+                "ext-mbstring": "*"
             },
             "suggest": {
                 "ext-mbstring": "For best performance"
@@ -513,7 +522,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-mbstring/tree/v1.23.1"
+                "source": "https://github.com/symfony/polyfill-mbstring/tree/v1.24.0"
             },
             "funding": [
                 {
@@ -529,7 +538,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-05-27T12:26:48+00:00"
+            "time": "2021-11-30T18:21:41+00:00"
         }
     ],
     "aliases": [],

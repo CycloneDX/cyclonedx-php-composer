@@ -17,40 +17,6 @@
     </component>
   </metadata>
   <components>
-    <component type="library" bom-ref="pkg:composer/doctrine/annotations@1.13.2">
-      <group><![CDATA[doctrine]]></group>
-      <name><![CDATA[annotations]]></name>
-      <version><![CDATA[1.13.2]]></version>
-      <description><![CDATA[Docblock Annotations Parser]]></description>
-      <licenses>
-        <license>
-          <id><![CDATA[MIT]]></id>
-        </license>
-      </licenses>
-      <purl><![CDATA[pkg:composer/doctrine/annotations@1.13.2]]></purl>
-      <externalReferences>
-        <reference type="distribution">
-          <url><![CDATA[https://github.com/doctrine/annotations.git]]></url>
-          <comment><![CDATA[As detected by composer's `getSourceUrls()` (type=git & reference=5b668aef16090008790395c02c893b1ba13f7e08)]]></comment>
-        </reference>
-        <reference type="distribution">
-          <url><![CDATA[https://api.github.com/repos/doctrine/annotations/zipball/5b668aef16090008790395c02c893b1ba13f7e08]]></url>
-          <comment><![CDATA[As detected by composer's `getDistUrls()` (type=zip & reference=5b668aef16090008790395c02c893b1ba13f7e08 & sha1=UNDEFINED)]]></comment>
-        </reference>
-        <reference type="website">
-          <url><![CDATA[https://www.doctrine-project.org/projects/annotations.html]]></url>
-          <comment><![CDATA[As set via `homepage` in composer package definition.]]></comment>
-        </reference>
-        <reference type="issue-tracker">
-          <url><![CDATA[https://github.com/doctrine/annotations/issues]]></url>
-          <comment><![CDATA[As set via `support.issues` in composer package definition.]]></comment>
-        </reference>
-        <reference type="distribution">
-          <url><![CDATA[https://github.com/doctrine/annotations/tree/1.13.2]]></url>
-          <comment><![CDATA[As set via `support.source` in composer package definition.]]></comment>
-        </reference>
-      </externalReferences>
-    </component>
     <component type="library" bom-ref="pkg:composer/doctrine/cache@2.1.1">
       <group><![CDATA[doctrine]]></group>
       <name><![CDATA[cache]]></name>
@@ -211,71 +177,25 @@
         </reference>
       </externalReferences>
     </component>
-    <component type="library" bom-ref="pkg:composer/doctrine/lexer@1.2.1">
-      <group><![CDATA[doctrine]]></group>
-      <name><![CDATA[lexer]]></name>
-      <version><![CDATA[1.2.1]]></version>
-      <description><![CDATA[PHP Doctrine Lexer parser library that can be used in Top-Down, Recursive Descent Parsers.]]></description>
-      <licenses>
-        <license>
-          <id><![CDATA[MIT]]></id>
-        </license>
-      </licenses>
-      <purl><![CDATA[pkg:composer/doctrine/lexer@1.2.1]]></purl>
-      <externalReferences>
-        <reference type="distribution">
-          <url><![CDATA[https://github.com/doctrine/lexer.git]]></url>
-          <comment><![CDATA[As detected by composer's `getSourceUrls()` (type=git & reference=e864bbf5904cb8f5bb334f99209b48018522f042)]]></comment>
-        </reference>
-        <reference type="distribution">
-          <url><![CDATA[https://api.github.com/repos/doctrine/lexer/zipball/e864bbf5904cb8f5bb334f99209b48018522f042]]></url>
-          <comment><![CDATA[As detected by composer's `getDistUrls()` (type=zip & reference=e864bbf5904cb8f5bb334f99209b48018522f042 & sha1=UNDEFINED)]]></comment>
-        </reference>
-        <reference type="website">
-          <url><![CDATA[https://www.doctrine-project.org/projects/lexer.html]]></url>
-          <comment><![CDATA[As set via `homepage` in composer package definition.]]></comment>
-        </reference>
-        <reference type="issue-tracker">
-          <url><![CDATA[https://github.com/doctrine/lexer/issues]]></url>
-          <comment><![CDATA[As set via `support.issues` in composer package definition.]]></comment>
-        </reference>
-        <reference type="distribution">
-          <url><![CDATA[https://github.com/doctrine/lexer/tree/1.2.1]]></url>
-          <comment><![CDATA[As set via `support.source` in composer package definition.]]></comment>
-        </reference>
-        <reference type="other">
-          <url><![CDATA[https://www.doctrine-project.org/sponsorship.html]]></url>
-          <comment><![CDATA[As set via `funding` in composer package definition. (type=custom)]]></comment>
-        </reference>
-        <reference type="other">
-          <url><![CDATA[https://www.patreon.com/phpdoctrine]]></url>
-          <comment><![CDATA[As set via `funding` in composer package definition. (type=patreon)]]></comment>
-        </reference>
-        <reference type="other">
-          <url><![CDATA[https://tidelift.com/funding/github/packagist/doctrine%2Flexer]]></url>
-          <comment><![CDATA[As set via `funding` in composer package definition. (type=tidelift)]]></comment>
-        </reference>
-      </externalReferences>
-    </component>
-    <component type="library" bom-ref="pkg:composer/doctrine/persistence@2.2.3">
+    <component type="library" bom-ref="pkg:composer/doctrine/persistence@2.3.0">
       <group><![CDATA[doctrine]]></group>
       <name><![CDATA[persistence]]></name>
-      <version><![CDATA[2.2.3]]></version>
+      <version><![CDATA[2.3.0]]></version>
       <description><![CDATA[The Doctrine Persistence project is a set of shared interfaces and functionality that the different Doctrine object mappers share.]]></description>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
-      <purl><![CDATA[pkg:composer/doctrine/persistence@2.2.3]]></purl>
+      <purl><![CDATA[pkg:composer/doctrine/persistence@2.3.0]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://github.com/doctrine/persistence.git]]></url>
-          <comment><![CDATA[As detected by composer's `getSourceUrls()` (type=git & reference=5e7bdbbfe9811c06e1f745d1c166647d5c47d6ee)]]></comment>
+          <comment><![CDATA[As detected by composer's `getSourceUrls()` (type=git & reference=f8af155c1e7963f3d2b4415097d55757bbaa53d8)]]></comment>
         </reference>
         <reference type="distribution">
-          <url><![CDATA[https://api.github.com/repos/doctrine/persistence/zipball/5e7bdbbfe9811c06e1f745d1c166647d5c47d6ee]]></url>
-          <comment><![CDATA[As detected by composer's `getDistUrls()` (type=zip & reference=5e7bdbbfe9811c06e1f745d1c166647d5c47d6ee & sha1=UNDEFINED)]]></comment>
+          <url><![CDATA[https://api.github.com/repos/doctrine/persistence/zipball/f8af155c1e7963f3d2b4415097d55757bbaa53d8]]></url>
+          <comment><![CDATA[As detected by composer's `getDistUrls()` (type=zip & reference=f8af155c1e7963f3d2b4415097d55757bbaa53d8 & sha1=UNDEFINED)]]></comment>
         </reference>
         <reference type="website">
           <url><![CDATA[https://doctrine-project.org/projects/persistence.html]]></url>
@@ -286,7 +206,7 @@
           <comment><![CDATA[As set via `support.issues` in composer package definition.]]></comment>
         </reference>
         <reference type="distribution">
-          <url><![CDATA[https://github.com/doctrine/persistence/tree/2.2.3]]></url>
+          <url><![CDATA[https://github.com/doctrine/persistence/tree/2.3.0]]></url>
           <comment><![CDATA[As set via `support.source` in composer package definition.]]></comment>
         </reference>
       </externalReferences>
@@ -333,25 +253,25 @@
         </reference>
       </externalReferences>
     </component>
-    <component type="library" bom-ref="pkg:composer/laminas/laminas-code@4.4.3">
+    <component type="library" bom-ref="pkg:composer/laminas/laminas-code@4.5.1">
       <group><![CDATA[laminas]]></group>
       <name><![CDATA[laminas-code]]></name>
-      <version><![CDATA[4.4.3]]></version>
+      <version><![CDATA[4.5.1]]></version>
       <description><![CDATA[Extensions to the PHP Reflection API, static code scanning, and code generation]]></description>
       <licenses>
         <license>
           <id><![CDATA[BSD-3-Clause]]></id>
         </license>
       </licenses>
-      <purl><![CDATA[pkg:composer/laminas/laminas-code@4.4.3]]></purl>
+      <purl><![CDATA[pkg:composer/laminas/laminas-code@4.5.1]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://github.com/laminas/laminas-code.git]]></url>
-          <comment><![CDATA[As detected by composer's `getSourceUrls()` (type=git & reference=bb324850d09dd437b6acb142c13e64fdc725b0e1)]]></comment>
+          <comment><![CDATA[As detected by composer's `getSourceUrls()` (type=git & reference=6fd96d4d913571a2cd056a27b123fa28cb90ac4e)]]></comment>
         </reference>
         <reference type="distribution">
-          <url><![CDATA[https://api.github.com/repos/laminas/laminas-code/zipball/bb324850d09dd437b6acb142c13e64fdc725b0e1]]></url>
-          <comment><![CDATA[As detected by composer's `getDistUrls()` (type=zip & reference=bb324850d09dd437b6acb142c13e64fdc725b0e1 & sha1=UNDEFINED)]]></comment>
+          <url><![CDATA[https://api.github.com/repos/laminas/laminas-code/zipball/6fd96d4d913571a2cd056a27b123fa28cb90ac4e]]></url>
+          <comment><![CDATA[As detected by composer's `getDistUrls()` (type=zip & reference=6fd96d4d913571a2cd056a27b123fa28cb90ac4e & sha1=UNDEFINED)]]></comment>
         </reference>
         <reference type="website">
           <url><![CDATA[https://laminas.dev]]></url>
@@ -387,51 +307,51 @@
         </reference>
       </externalReferences>
     </component>
-    <component type="library" bom-ref="pkg:composer/psr/cache@1.0.1">
+    <component type="library" bom-ref="pkg:composer/psr/cache@3.0.0">
       <group><![CDATA[psr]]></group>
       <name><![CDATA[cache]]></name>
-      <version><![CDATA[1.0.1]]></version>
+      <version><![CDATA[3.0.0]]></version>
       <description><![CDATA[Common interface for caching libraries]]></description>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
-      <purl><![CDATA[pkg:composer/psr/cache@1.0.1]]></purl>
+      <purl><![CDATA[pkg:composer/psr/cache@3.0.0]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://github.com/php-fig/cache.git]]></url>
-          <comment><![CDATA[As detected by composer's `getSourceUrls()` (type=git & reference=d11b50ad223250cf17b86e38383413f5a6764bf8)]]></comment>
+          <comment><![CDATA[As detected by composer's `getSourceUrls()` (type=git & reference=aa5030cfa5405eccfdcb1083ce040c2cb8d253bf)]]></comment>
         </reference>
         <reference type="distribution">
-          <url><![CDATA[https://api.github.com/repos/php-fig/cache/zipball/d11b50ad223250cf17b86e38383413f5a6764bf8]]></url>
-          <comment><![CDATA[As detected by composer's `getDistUrls()` (type=zip & reference=d11b50ad223250cf17b86e38383413f5a6764bf8 & sha1=UNDEFINED)]]></comment>
+          <url><![CDATA[https://api.github.com/repos/php-fig/cache/zipball/aa5030cfa5405eccfdcb1083ce040c2cb8d253bf]]></url>
+          <comment><![CDATA[As detected by composer's `getDistUrls()` (type=zip & reference=aa5030cfa5405eccfdcb1083ce040c2cb8d253bf & sha1=UNDEFINED)]]></comment>
         </reference>
         <reference type="distribution">
-          <url><![CDATA[https://github.com/php-fig/cache/tree/master]]></url>
+          <url><![CDATA[https://github.com/php-fig/cache/tree/3.0.0]]></url>
           <comment><![CDATA[As set via `support.source` in composer package definition.]]></comment>
         </reference>
       </externalReferences>
     </component>
-    <component type="library" bom-ref="pkg:composer/psr/container@1.1.2">
+    <component type="library" bom-ref="pkg:composer/psr/container@2.0.2">
       <group><![CDATA[psr]]></group>
       <name><![CDATA[container]]></name>
-      <version><![CDATA[1.1.2]]></version>
+      <version><![CDATA[2.0.2]]></version>
       <description><![CDATA[Common Container Interface (PHP FIG PSR-11)]]></description>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
-      <purl><![CDATA[pkg:composer/psr/container@1.1.2]]></purl>
+      <purl><![CDATA[pkg:composer/psr/container@2.0.2]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://github.com/php-fig/container.git]]></url>
-          <comment><![CDATA[As detected by composer's `getSourceUrls()` (type=git & reference=513e0666f7216c7459170d56df27dfcefe1689ea)]]></comment>
+          <comment><![CDATA[As detected by composer's `getSourceUrls()` (type=git & reference=c71ecc56dfe541dbd90c5360474fbc405f8d5963)]]></comment>
         </reference>
         <reference type="distribution">
-          <url><![CDATA[https://api.github.com/repos/php-fig/container/zipball/513e0666f7216c7459170d56df27dfcefe1689ea]]></url>
-          <comment><![CDATA[As detected by composer's `getDistUrls()` (type=zip & reference=513e0666f7216c7459170d56df27dfcefe1689ea & sha1=UNDEFINED)]]></comment>
+          <url><![CDATA[https://api.github.com/repos/php-fig/container/zipball/c71ecc56dfe541dbd90c5360474fbc405f8d5963]]></url>
+          <comment><![CDATA[As detected by composer's `getDistUrls()` (type=zip & reference=c71ecc56dfe541dbd90c5360474fbc405f8d5963 & sha1=UNDEFINED)]]></comment>
         </reference>
         <reference type="website">
           <url><![CDATA[https://github.com/php-fig/container]]></url>
@@ -442,7 +362,7 @@
           <comment><![CDATA[As set via `support.issues` in composer package definition.]]></comment>
         </reference>
         <reference type="distribution">
-          <url><![CDATA[https://github.com/php-fig/container/tree/1.1.2]]></url>
+          <url><![CDATA[https://github.com/php-fig/container/tree/2.0.2]]></url>
           <comment><![CDATA[As set via `support.source` in composer package definition.]]></comment>
         </reference>
       </externalReferences>
@@ -477,88 +397,92 @@
         </reference>
       </externalReferences>
     </component>
-    <component type="library" bom-ref="pkg:composer/psr/link@1.0.0">
+    <component type="library" bom-ref="pkg:composer/psr/link@2.0.1">
       <group><![CDATA[psr]]></group>
       <name><![CDATA[link]]></name>
-      <version><![CDATA[1.0.0]]></version>
+      <version><![CDATA[2.0.1]]></version>
       <description><![CDATA[Common interfaces for HTTP links]]></description>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
-      <purl><![CDATA[pkg:composer/psr/link@1.0.0]]></purl>
+      <purl><![CDATA[pkg:composer/psr/link@2.0.1]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://github.com/php-fig/link.git]]></url>
-          <comment><![CDATA[As detected by composer's `getSourceUrls()` (type=git & reference=eea8e8662d5cd3ae4517c9b864493f59fca95562)]]></comment>
+          <comment><![CDATA[As detected by composer's `getSourceUrls()` (type=git & reference=84b159194ecfd7eaa472280213976e96415433f7)]]></comment>
         </reference>
         <reference type="distribution">
-          <url><![CDATA[https://api.github.com/repos/php-fig/link/zipball/eea8e8662d5cd3ae4517c9b864493f59fca95562]]></url>
-          <comment><![CDATA[As detected by composer's `getDistUrls()` (type=zip & reference=eea8e8662d5cd3ae4517c9b864493f59fca95562 & sha1=UNDEFINED)]]></comment>
+          <url><![CDATA[https://api.github.com/repos/php-fig/link/zipball/84b159194ecfd7eaa472280213976e96415433f7]]></url>
+          <comment><![CDATA[As detected by composer's `getDistUrls()` (type=zip & reference=84b159194ecfd7eaa472280213976e96415433f7 & sha1=UNDEFINED)]]></comment>
+        </reference>
+        <reference type="website">
+          <url><![CDATA[https://github.com/php-fig/link]]></url>
+          <comment><![CDATA[As set via `homepage` in composer package definition.]]></comment>
         </reference>
         <reference type="distribution">
-          <url><![CDATA[https://github.com/php-fig/link/tree/master]]></url>
+          <url><![CDATA[https://github.com/php-fig/link/tree/2.0.1]]></url>
           <comment><![CDATA[As set via `support.source` in composer package definition.]]></comment>
         </reference>
       </externalReferences>
     </component>
-    <component type="library" bom-ref="pkg:composer/psr/log@1.1.4">
+    <component type="library" bom-ref="pkg:composer/psr/log@3.0.0">
       <group><![CDATA[psr]]></group>
       <name><![CDATA[log]]></name>
-      <version><![CDATA[1.1.4]]></version>
+      <version><![CDATA[3.0.0]]></version>
       <description><![CDATA[Common interface for logging libraries]]></description>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
-      <purl><![CDATA[pkg:composer/psr/log@1.1.4]]></purl>
+      <purl><![CDATA[pkg:composer/psr/log@3.0.0]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://github.com/php-fig/log.git]]></url>
-          <comment><![CDATA[As detected by composer's `getSourceUrls()` (type=git & reference=d49695b909c3b7628b6289db5479a1c204601f11)]]></comment>
+          <comment><![CDATA[As detected by composer's `getSourceUrls()` (type=git & reference=fe5ea303b0887d5caefd3d431c3e61ad47037001)]]></comment>
         </reference>
         <reference type="distribution">
-          <url><![CDATA[https://api.github.com/repos/php-fig/log/zipball/d49695b909c3b7628b6289db5479a1c204601f11]]></url>
-          <comment><![CDATA[As detected by composer's `getDistUrls()` (type=zip & reference=d49695b909c3b7628b6289db5479a1c204601f11 & sha1=UNDEFINED)]]></comment>
+          <url><![CDATA[https://api.github.com/repos/php-fig/log/zipball/fe5ea303b0887d5caefd3d431c3e61ad47037001]]></url>
+          <comment><![CDATA[As detected by composer's `getDistUrls()` (type=zip & reference=fe5ea303b0887d5caefd3d431c3e61ad47037001 & sha1=UNDEFINED)]]></comment>
         </reference>
         <reference type="website">
           <url><![CDATA[https://github.com/php-fig/log]]></url>
           <comment><![CDATA[As set via `homepage` in composer package definition.]]></comment>
         </reference>
         <reference type="distribution">
-          <url><![CDATA[https://github.com/php-fig/log/tree/1.1.4]]></url>
+          <url><![CDATA[https://github.com/php-fig/log/tree/3.0.0]]></url>
           <comment><![CDATA[As set via `support.source` in composer package definition.]]></comment>
         </reference>
       </externalReferences>
     </component>
-    <component type="library" bom-ref="pkg:composer/symfony/contracts@2.5.0">
+    <component type="library" bom-ref="pkg:composer/symfony/contracts@3.0.0">
       <group><![CDATA[symfony]]></group>
       <name><![CDATA[contracts]]></name>
-      <version><![CDATA[2.5.0]]></version>
+      <version><![CDATA[3.0.0]]></version>
       <description><![CDATA[A set of abstractions extracted out of the Symfony components]]></description>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
-      <purl><![CDATA[pkg:composer/symfony/contracts@2.5.0]]></purl>
+      <purl><![CDATA[pkg:composer/symfony/contracts@3.0.0]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://github.com/symfony/contracts.git]]></url>
-          <comment><![CDATA[As detected by composer's `getSourceUrls()` (type=git & reference=1f4c95d47bddf0c1579779d4b85602c923ed2f1c)]]></comment>
+          <comment><![CDATA[As detected by composer's `getSourceUrls()` (type=git & reference=1309f21c0ac2268f3a2e83e7c4d7ec94afbb0603)]]></comment>
         </reference>
         <reference type="distribution">
-          <url><![CDATA[https://api.github.com/repos/symfony/contracts/zipball/1f4c95d47bddf0c1579779d4b85602c923ed2f1c]]></url>
-          <comment><![CDATA[As detected by composer's `getDistUrls()` (type=zip & reference=1f4c95d47bddf0c1579779d4b85602c923ed2f1c & sha1=UNDEFINED)]]></comment>
+          <url><![CDATA[https://api.github.com/repos/symfony/contracts/zipball/1309f21c0ac2268f3a2e83e7c4d7ec94afbb0603]]></url>
+          <comment><![CDATA[As detected by composer's `getDistUrls()` (type=zip & reference=1309f21c0ac2268f3a2e83e7c4d7ec94afbb0603 & sha1=UNDEFINED)]]></comment>
         </reference>
         <reference type="website">
           <url><![CDATA[https://symfony.com]]></url>
           <comment><![CDATA[As set via `homepage` in composer package definition.]]></comment>
         </reference>
         <reference type="distribution">
-          <url><![CDATA[https://github.com/symfony/contracts/tree/v2.5.0]]></url>
+          <url><![CDATA[https://github.com/symfony/contracts/tree/v3.0.0]]></url>
           <comment><![CDATA[As set via `support.source` in composer package definition.]]></comment>
         </reference>
         <reference type="other">
@@ -575,32 +499,32 @@
         </reference>
       </externalReferences>
     </component>
-    <component type="library" bom-ref="pkg:composer/symfony/polyfill-ctype@1.23.0">
+    <component type="library" bom-ref="pkg:composer/symfony/polyfill-ctype@1.24.0">
       <group><![CDATA[symfony]]></group>
       <name><![CDATA[polyfill-ctype]]></name>
-      <version><![CDATA[1.23.0]]></version>
+      <version><![CDATA[1.24.0]]></version>
       <description><![CDATA[Symfony polyfill for ctype functions]]></description>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
-      <purl><![CDATA[pkg:composer/symfony/polyfill-ctype@1.23.0]]></purl>
+      <purl><![CDATA[pkg:composer/symfony/polyfill-ctype@1.24.0]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://github.com/symfony/polyfill-ctype.git]]></url>
-          <comment><![CDATA[As detected by composer's `getSourceUrls()` (type=git & reference=46cd95797e9df938fdd2b03693b5fca5e64b01ce)]]></comment>
+          <comment><![CDATA[As detected by composer's `getSourceUrls()` (type=git & reference=30885182c981ab175d4d034db0f6f469898070ab)]]></comment>
         </reference>
         <reference type="distribution">
-          <url><![CDATA[https://api.github.com/repos/symfony/polyfill-ctype/zipball/46cd95797e9df938fdd2b03693b5fca5e64b01ce]]></url>
-          <comment><![CDATA[As detected by composer's `getDistUrls()` (type=zip & reference=46cd95797e9df938fdd2b03693b5fca5e64b01ce & sha1=UNDEFINED)]]></comment>
+          <url><![CDATA[https://api.github.com/repos/symfony/polyfill-ctype/zipball/30885182c981ab175d4d034db0f6f469898070ab]]></url>
+          <comment><![CDATA[As detected by composer's `getDistUrls()` (type=zip & reference=30885182c981ab175d4d034db0f6f469898070ab & sha1=UNDEFINED)]]></comment>
         </reference>
         <reference type="website">
           <url><![CDATA[https://symfony.com]]></url>
           <comment><![CDATA[As set via `homepage` in composer package definition.]]></comment>
         </reference>
         <reference type="distribution">
-          <url><![CDATA[https://github.com/symfony/polyfill-ctype/tree/v1.23.0]]></url>
+          <url><![CDATA[https://github.com/symfony/polyfill-ctype/tree/v1.24.0]]></url>
           <comment><![CDATA[As set via `support.source` in composer package definition.]]></comment>
         </reference>
         <reference type="other">
@@ -617,32 +541,32 @@
         </reference>
       </externalReferences>
     </component>
-    <component type="library" bom-ref="pkg:composer/symfony/polyfill-intl-grapheme@1.23.1">
+    <component type="library" bom-ref="pkg:composer/symfony/polyfill-intl-grapheme@1.24.0">
       <group><![CDATA[symfony]]></group>
       <name><![CDATA[polyfill-intl-grapheme]]></name>
-      <version><![CDATA[1.23.1]]></version>
+      <version><![CDATA[1.24.0]]></version>
       <description><![CDATA[Symfony polyfill for intl's grapheme_* functions]]></description>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
-      <purl><![CDATA[pkg:composer/symfony/polyfill-intl-grapheme@1.23.1]]></purl>
+      <purl><![CDATA[pkg:composer/symfony/polyfill-intl-grapheme@1.24.0]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://github.com/symfony/polyfill-intl-grapheme.git]]></url>
-          <comment><![CDATA[As detected by composer's `getSourceUrls()` (type=git & reference=16880ba9c5ebe3642d1995ab866db29270b36535)]]></comment>
+          <comment><![CDATA[As detected by composer's `getSourceUrls()` (type=git & reference=81b86b50cf841a64252b439e738e97f4a34e2783)]]></comment>
         </reference>
         <reference type="distribution">
-          <url><![CDATA[https://api.github.com/repos/symfony/polyfill-intl-grapheme/zipball/16880ba9c5ebe3642d1995ab866db29270b36535]]></url>
-          <comment><![CDATA[As detected by composer's `getDistUrls()` (type=zip & reference=16880ba9c5ebe3642d1995ab866db29270b36535 & sha1=UNDEFINED)]]></comment>
+          <url><![CDATA[https://api.github.com/repos/symfony/polyfill-intl-grapheme/zipball/81b86b50cf841a64252b439e738e97f4a34e2783]]></url>
+          <comment><![CDATA[As detected by composer's `getDistUrls()` (type=zip & reference=81b86b50cf841a64252b439e738e97f4a34e2783 & sha1=UNDEFINED)]]></comment>
         </reference>
         <reference type="website">
           <url><![CDATA[https://symfony.com]]></url>
           <comment><![CDATA[As set via `homepage` in composer package definition.]]></comment>
         </reference>
         <reference type="distribution">
-          <url><![CDATA[https://github.com/symfony/polyfill-intl-grapheme/tree/v1.23.1]]></url>
+          <url><![CDATA[https://github.com/symfony/polyfill-intl-grapheme/tree/v1.24.0]]></url>
           <comment><![CDATA[As set via `support.source` in composer package definition.]]></comment>
         </reference>
         <reference type="other">
@@ -659,32 +583,32 @@
         </reference>
       </externalReferences>
     </component>
-    <component type="library" bom-ref="pkg:composer/symfony/polyfill-intl-icu@1.23.0">
+    <component type="library" bom-ref="pkg:composer/symfony/polyfill-intl-icu@1.24.0">
       <group><![CDATA[symfony]]></group>
       <name><![CDATA[polyfill-intl-icu]]></name>
-      <version><![CDATA[1.23.0]]></version>
+      <version><![CDATA[1.24.0]]></version>
       <description><![CDATA[Symfony polyfill for intl's ICU-related data and classes]]></description>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
-      <purl><![CDATA[pkg:composer/symfony/polyfill-intl-icu@1.23.0]]></purl>
+      <purl><![CDATA[pkg:composer/symfony/polyfill-intl-icu@1.24.0]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://github.com/symfony/polyfill-intl-icu.git]]></url>
-          <comment><![CDATA[As detected by composer's `getSourceUrls()` (type=git & reference=4a80a521d6176870b6445cfb469c130f9cae1dda)]]></comment>
+          <comment><![CDATA[As detected by composer's `getSourceUrls()` (type=git & reference=c023a439b8551e320cc3c8433b198e408a623af1)]]></comment>
         </reference>
         <reference type="distribution">
-          <url><![CDATA[https://api.github.com/repos/symfony/polyfill-intl-icu/zipball/4a80a521d6176870b6445cfb469c130f9cae1dda]]></url>
-          <comment><![CDATA[As detected by composer's `getDistUrls()` (type=zip & reference=4a80a521d6176870b6445cfb469c130f9cae1dda & sha1=UNDEFINED)]]></comment>
+          <url><![CDATA[https://api.github.com/repos/symfony/polyfill-intl-icu/zipball/c023a439b8551e320cc3c8433b198e408a623af1]]></url>
+          <comment><![CDATA[As detected by composer's `getDistUrls()` (type=zip & reference=c023a439b8551e320cc3c8433b198e408a623af1 & sha1=UNDEFINED)]]></comment>
         </reference>
         <reference type="website">
           <url><![CDATA[https://symfony.com]]></url>
           <comment><![CDATA[As set via `homepage` in composer package definition.]]></comment>
         </reference>
         <reference type="distribution">
-          <url><![CDATA[https://github.com/symfony/polyfill-intl-icu/tree/v1.23.0]]></url>
+          <url><![CDATA[https://github.com/symfony/polyfill-intl-icu/tree/v1.24.0]]></url>
           <comment><![CDATA[As set via `support.source` in composer package definition.]]></comment>
         </reference>
         <reference type="other">
@@ -701,32 +625,32 @@
         </reference>
       </externalReferences>
     </component>
-    <component type="library" bom-ref="pkg:composer/symfony/polyfill-intl-idn@1.23.0">
+    <component type="library" bom-ref="pkg:composer/symfony/polyfill-intl-idn@1.24.0">
       <group><![CDATA[symfony]]></group>
       <name><![CDATA[polyfill-intl-idn]]></name>
-      <version><![CDATA[1.23.0]]></version>
+      <version><![CDATA[1.24.0]]></version>
       <description><![CDATA[Symfony polyfill for intl's idn_to_ascii and idn_to_utf8 functions]]></description>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
-      <purl><![CDATA[pkg:composer/symfony/polyfill-intl-idn@1.23.0]]></purl>
+      <purl><![CDATA[pkg:composer/symfony/polyfill-intl-idn@1.24.0]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://github.com/symfony/polyfill-intl-idn.git]]></url>
-          <comment><![CDATA[As detected by composer's `getSourceUrls()` (type=git & reference=65bd267525e82759e7d8c4e8ceea44f398838e65)]]></comment>
+          <comment><![CDATA[As detected by composer's `getSourceUrls()` (type=git & reference=749045c69efb97c70d25d7463abba812e91f3a44)]]></comment>
         </reference>
         <reference type="distribution">
-          <url><![CDATA[https://api.github.com/repos/symfony/polyfill-intl-idn/zipball/65bd267525e82759e7d8c4e8ceea44f398838e65]]></url>
-          <comment><![CDATA[As detected by composer's `getDistUrls()` (type=zip & reference=65bd267525e82759e7d8c4e8ceea44f398838e65 & sha1=UNDEFINED)]]></comment>
+          <url><![CDATA[https://api.github.com/repos/symfony/polyfill-intl-idn/zipball/749045c69efb97c70d25d7463abba812e91f3a44]]></url>
+          <comment><![CDATA[As detected by composer's `getDistUrls()` (type=zip & reference=749045c69efb97c70d25d7463abba812e91f3a44 & sha1=UNDEFINED)]]></comment>
         </reference>
         <reference type="website">
           <url><![CDATA[https://symfony.com]]></url>
           <comment><![CDATA[As set via `homepage` in composer package definition.]]></comment>
         </reference>
         <reference type="distribution">
-          <url><![CDATA[https://github.com/symfony/polyfill-intl-idn/tree/v1.23.0]]></url>
+          <url><![CDATA[https://github.com/symfony/polyfill-intl-idn/tree/v1.24.0]]></url>
           <comment><![CDATA[As set via `support.source` in composer package definition.]]></comment>
         </reference>
         <reference type="other">
@@ -743,17 +667,17 @@
         </reference>
       </externalReferences>
     </component>
-    <component type="library" bom-ref="pkg:composer/symfony/polyfill-intl-normalizer@1.23.0">
+    <component type="library" bom-ref="pkg:composer/symfony/polyfill-intl-normalizer@1.24.0">
       <group><![CDATA[symfony]]></group>
       <name><![CDATA[polyfill-intl-normalizer]]></name>
-      <version><![CDATA[1.23.0]]></version>
+      <version><![CDATA[1.24.0]]></version>
       <description><![CDATA[Symfony polyfill for intl's Normalizer class and related functions]]></description>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
-      <purl><![CDATA[pkg:composer/symfony/polyfill-intl-normalizer@1.23.0]]></purl>
+      <purl><![CDATA[pkg:composer/symfony/polyfill-intl-normalizer@1.24.0]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://github.com/symfony/polyfill-intl-normalizer.git]]></url>
@@ -768,7 +692,7 @@
           <comment><![CDATA[As set via `homepage` in composer package definition.]]></comment>
         </reference>
         <reference type="distribution">
-          <url><![CDATA[https://github.com/symfony/polyfill-intl-normalizer/tree/v1.23.0]]></url>
+          <url><![CDATA[https://github.com/symfony/polyfill-intl-normalizer/tree/v1.24.0]]></url>
           <comment><![CDATA[As set via `support.source` in composer package definition.]]></comment>
         </reference>
         <reference type="other">
@@ -785,32 +709,32 @@
         </reference>
       </externalReferences>
     </component>
-    <component type="library" bom-ref="pkg:composer/symfony/polyfill-mbstring@1.23.1">
+    <component type="library" bom-ref="pkg:composer/symfony/polyfill-mbstring@1.24.0">
       <group><![CDATA[symfony]]></group>
       <name><![CDATA[polyfill-mbstring]]></name>
-      <version><![CDATA[1.23.1]]></version>
+      <version><![CDATA[1.24.0]]></version>
       <description><![CDATA[Symfony polyfill for the Mbstring extension]]></description>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
-      <purl><![CDATA[pkg:composer/symfony/polyfill-mbstring@1.23.1]]></purl>
+      <purl><![CDATA[pkg:composer/symfony/polyfill-mbstring@1.24.0]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://github.com/symfony/polyfill-mbstring.git]]></url>
-          <comment><![CDATA[As detected by composer's `getSourceUrls()` (type=git & reference=9174a3d80210dca8daa7f31fec659150bbeabfc6)]]></comment>
+          <comment><![CDATA[As detected by composer's `getSourceUrls()` (type=git & reference=0abb51d2f102e00a4eefcf46ba7fec406d245825)]]></comment>
         </reference>
         <reference type="distribution">
-          <url><![CDATA[https://api.github.com/repos/symfony/polyfill-mbstring/zipball/9174a3d80210dca8daa7f31fec659150bbeabfc6]]></url>
-          <comment><![CDATA[As detected by composer's `getDistUrls()` (type=zip & reference=9174a3d80210dca8daa7f31fec659150bbeabfc6 & sha1=UNDEFINED)]]></comment>
+          <url><![CDATA[https://api.github.com/repos/symfony/polyfill-mbstring/zipball/0abb51d2f102e00a4eefcf46ba7fec406d245825]]></url>
+          <comment><![CDATA[As detected by composer's `getDistUrls()` (type=zip & reference=0abb51d2f102e00a4eefcf46ba7fec406d245825 & sha1=UNDEFINED)]]></comment>
         </reference>
         <reference type="website">
           <url><![CDATA[https://symfony.com]]></url>
           <comment><![CDATA[As set via `homepage` in composer package definition.]]></comment>
         </reference>
         <reference type="distribution">
-          <url><![CDATA[https://github.com/symfony/polyfill-mbstring/tree/v1.23.1]]></url>
+          <url><![CDATA[https://github.com/symfony/polyfill-mbstring/tree/v1.24.0]]></url>
           <comment><![CDATA[As set via `support.source` in composer package definition.]]></comment>
         </reference>
         <reference type="other">
@@ -827,17 +751,17 @@
         </reference>
       </externalReferences>
     </component>
-    <component type="library" bom-ref="pkg:composer/symfony/polyfill-php72@1.23.0">
+    <component type="library" bom-ref="pkg:composer/symfony/polyfill-php72@1.24.0">
       <group><![CDATA[symfony]]></group>
       <name><![CDATA[polyfill-php72]]></name>
-      <version><![CDATA[1.23.0]]></version>
+      <version><![CDATA[1.24.0]]></version>
       <description><![CDATA[Symfony polyfill backporting some PHP 7.2+ features to lower PHP versions]]></description>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
-      <purl><![CDATA[pkg:composer/symfony/polyfill-php72@1.23.0]]></purl>
+      <purl><![CDATA[pkg:composer/symfony/polyfill-php72@1.24.0]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://github.com/symfony/polyfill-php72.git]]></url>
@@ -852,7 +776,7 @@
           <comment><![CDATA[As set via `homepage` in composer package definition.]]></comment>
         </reference>
         <reference type="distribution">
-          <url><![CDATA[https://github.com/symfony/polyfill-php72/tree/v1.23.0]]></url>
+          <url><![CDATA[https://github.com/symfony/polyfill-php72/tree/v1.24.0]]></url>
           <comment><![CDATA[As set via `support.source` in composer package definition.]]></comment>
         </reference>
         <reference type="other">
@@ -869,116 +793,32 @@
         </reference>
       </externalReferences>
     </component>
-    <component type="library" bom-ref="pkg:composer/symfony/polyfill-php73@1.23.0">
-      <group><![CDATA[symfony]]></group>
-      <name><![CDATA[polyfill-php73]]></name>
-      <version><![CDATA[1.23.0]]></version>
-      <description><![CDATA[Symfony polyfill backporting some PHP 7.3+ features to lower PHP versions]]></description>
-      <licenses>
-        <license>
-          <id><![CDATA[MIT]]></id>
-        </license>
-      </licenses>
-      <purl><![CDATA[pkg:composer/symfony/polyfill-php73@1.23.0]]></purl>
-      <externalReferences>
-        <reference type="distribution">
-          <url><![CDATA[https://github.com/symfony/polyfill-php73.git]]></url>
-          <comment><![CDATA[As detected by composer's `getSourceUrls()` (type=git & reference=fba8933c384d6476ab14fb7b8526e5287ca7e010)]]></comment>
-        </reference>
-        <reference type="distribution">
-          <url><![CDATA[https://api.github.com/repos/symfony/polyfill-php73/zipball/fba8933c384d6476ab14fb7b8526e5287ca7e010]]></url>
-          <comment><![CDATA[As detected by composer's `getDistUrls()` (type=zip & reference=fba8933c384d6476ab14fb7b8526e5287ca7e010 & sha1=UNDEFINED)]]></comment>
-        </reference>
-        <reference type="website">
-          <url><![CDATA[https://symfony.com]]></url>
-          <comment><![CDATA[As set via `homepage` in composer package definition.]]></comment>
-        </reference>
-        <reference type="distribution">
-          <url><![CDATA[https://github.com/symfony/polyfill-php73/tree/v1.23.0]]></url>
-          <comment><![CDATA[As set via `support.source` in composer package definition.]]></comment>
-        </reference>
-        <reference type="other">
-          <url><![CDATA[https://symfony.com/sponsor]]></url>
-          <comment><![CDATA[As set via `funding` in composer package definition. (type=custom)]]></comment>
-        </reference>
-        <reference type="other">
-          <url><![CDATA[https://github.com/fabpot]]></url>
-          <comment><![CDATA[As set via `funding` in composer package definition. (type=github)]]></comment>
-        </reference>
-        <reference type="other">
-          <url><![CDATA[https://tidelift.com/funding/github/packagist/symfony/symfony]]></url>
-          <comment><![CDATA[As set via `funding` in composer package definition. (type=tidelift)]]></comment>
-        </reference>
-      </externalReferences>
-    </component>
-    <component type="library" bom-ref="pkg:composer/symfony/polyfill-php80@1.23.1">
-      <group><![CDATA[symfony]]></group>
-      <name><![CDATA[polyfill-php80]]></name>
-      <version><![CDATA[1.23.1]]></version>
-      <description><![CDATA[Symfony polyfill backporting some PHP 8.0+ features to lower PHP versions]]></description>
-      <licenses>
-        <license>
-          <id><![CDATA[MIT]]></id>
-        </license>
-      </licenses>
-      <purl><![CDATA[pkg:composer/symfony/polyfill-php80@1.23.1]]></purl>
-      <externalReferences>
-        <reference type="distribution">
-          <url><![CDATA[https://github.com/symfony/polyfill-php80.git]]></url>
-          <comment><![CDATA[As detected by composer's `getSourceUrls()` (type=git & reference=1100343ed1a92e3a38f9ae122fc0eb21602547be)]]></comment>
-        </reference>
-        <reference type="distribution">
-          <url><![CDATA[https://api.github.com/repos/symfony/polyfill-php80/zipball/1100343ed1a92e3a38f9ae122fc0eb21602547be]]></url>
-          <comment><![CDATA[As detected by composer's `getDistUrls()` (type=zip & reference=1100343ed1a92e3a38f9ae122fc0eb21602547be & sha1=UNDEFINED)]]></comment>
-        </reference>
-        <reference type="website">
-          <url><![CDATA[https://symfony.com]]></url>
-          <comment><![CDATA[As set via `homepage` in composer package definition.]]></comment>
-        </reference>
-        <reference type="distribution">
-          <url><![CDATA[https://github.com/symfony/polyfill-php80/tree/v1.23.1]]></url>
-          <comment><![CDATA[As set via `support.source` in composer package definition.]]></comment>
-        </reference>
-        <reference type="other">
-          <url><![CDATA[https://symfony.com/sponsor]]></url>
-          <comment><![CDATA[As set via `funding` in composer package definition. (type=custom)]]></comment>
-        </reference>
-        <reference type="other">
-          <url><![CDATA[https://github.com/fabpot]]></url>
-          <comment><![CDATA[As set via `funding` in composer package definition. (type=github)]]></comment>
-        </reference>
-        <reference type="other">
-          <url><![CDATA[https://tidelift.com/funding/github/packagist/symfony/symfony]]></url>
-          <comment><![CDATA[As set via `funding` in composer package definition. (type=tidelift)]]></comment>
-        </reference>
-      </externalReferences>
-    </component>
-    <component type="library" bom-ref="pkg:composer/symfony/polyfill-php81@1.23.0">
+    <component type="library" bom-ref="pkg:composer/symfony/polyfill-php81@1.24.0">
       <group><![CDATA[symfony]]></group>
       <name><![CDATA[polyfill-php81]]></name>
-      <version><![CDATA[1.23.0]]></version>
+      <version><![CDATA[1.24.0]]></version>
       <description><![CDATA[Symfony polyfill backporting some PHP 8.1+ features to lower PHP versions]]></description>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
-      <purl><![CDATA[pkg:composer/symfony/polyfill-php81@1.23.0]]></purl>
+      <purl><![CDATA[pkg:composer/symfony/polyfill-php81@1.24.0]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://github.com/symfony/polyfill-php81.git]]></url>
-          <comment><![CDATA[As detected by composer's `getSourceUrls()` (type=git & reference=e66119f3de95efc359483f810c4c3e6436279436)]]></comment>
+          <comment><![CDATA[As detected by composer's `getSourceUrls()` (type=git & reference=5de4ba2d41b15f9bd0e19b2ab9674135813ec98f)]]></comment>
         </reference>
         <reference type="distribution">
-          <url><![CDATA[https://api.github.com/repos/symfony/polyfill-php81/zipball/e66119f3de95efc359483f810c4c3e6436279436]]></url>
-          <comment><![CDATA[As detected by composer's `getDistUrls()` (type=zip & reference=e66119f3de95efc359483f810c4c3e6436279436 & sha1=UNDEFINED)]]></comment>
+          <url><![CDATA[https://api.github.com/repos/symfony/polyfill-php81/zipball/5de4ba2d41b15f9bd0e19b2ab9674135813ec98f]]></url>
+          <comment><![CDATA[As detected by composer's `getDistUrls()` (type=zip & reference=5de4ba2d41b15f9bd0e19b2ab9674135813ec98f & sha1=UNDEFINED)]]></comment>
         </reference>
         <reference type="website">
           <url><![CDATA[https://symfony.com]]></url>
           <comment><![CDATA[As set via `homepage` in composer package definition.]]></comment>
         </reference>
         <reference type="distribution">
-          <url><![CDATA[https://github.com/symfony/polyfill-php81/tree/v1.23.0]]></url>
+          <url><![CDATA[https://github.com/symfony/polyfill-php81/tree/v1.24.0]]></url>
           <comment><![CDATA[As set via `support.source` in composer package definition.]]></comment>
         </reference>
         <reference type="other">
@@ -995,32 +835,32 @@
         </reference>
       </externalReferences>
     </component>
-    <component type="library" bom-ref="pkg:composer/symfony/polyfill-uuid@1.23.0">
+    <component type="library" bom-ref="pkg:composer/symfony/polyfill-uuid@1.24.0">
       <group><![CDATA[symfony]]></group>
       <name><![CDATA[polyfill-uuid]]></name>
-      <version><![CDATA[1.23.0]]></version>
+      <version><![CDATA[1.24.0]]></version>
       <description><![CDATA[Symfony polyfill for uuid functions]]></description>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
-      <purl><![CDATA[pkg:composer/symfony/polyfill-uuid@1.23.0]]></purl>
+      <purl><![CDATA[pkg:composer/symfony/polyfill-uuid@1.24.0]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://github.com/symfony/polyfill-uuid.git]]></url>
-          <comment><![CDATA[As detected by composer's `getSourceUrls()` (type=git & reference=9165effa2eb8a31bb3fa608df9d529920d21ddd9)]]></comment>
+          <comment><![CDATA[As detected by composer's `getSourceUrls()` (type=git & reference=7529922412d23ac44413d0f308861d50cf68d3ee)]]></comment>
         </reference>
         <reference type="distribution">
-          <url><![CDATA[https://api.github.com/repos/symfony/polyfill-uuid/zipball/9165effa2eb8a31bb3fa608df9d529920d21ddd9]]></url>
-          <comment><![CDATA[As detected by composer's `getDistUrls()` (type=zip & reference=9165effa2eb8a31bb3fa608df9d529920d21ddd9 & sha1=UNDEFINED)]]></comment>
+          <url><![CDATA[https://api.github.com/repos/symfony/polyfill-uuid/zipball/7529922412d23ac44413d0f308861d50cf68d3ee]]></url>
+          <comment><![CDATA[As detected by composer's `getDistUrls()` (type=zip & reference=7529922412d23ac44413d0f308861d50cf68d3ee & sha1=UNDEFINED)]]></comment>
         </reference>
         <reference type="website">
           <url><![CDATA[https://symfony.com]]></url>
           <comment><![CDATA[As set via `homepage` in composer package definition.]]></comment>
         </reference>
         <reference type="distribution">
-          <url><![CDATA[https://github.com/symfony/polyfill-uuid/tree/v1.23.0]]></url>
+          <url><![CDATA[https://github.com/symfony/polyfill-uuid/tree/v1.24.0]]></url>
           <comment><![CDATA[As set via `support.source` in composer package definition.]]></comment>
         </reference>
         <reference type="other">
@@ -1037,25 +877,25 @@
         </reference>
       </externalReferences>
     </component>
-    <component type="library" bom-ref="pkg:composer/symfony/symfony@5.4.0">
+    <component type="library" bom-ref="pkg:composer/symfony/symfony@6.0.4">
       <group><![CDATA[symfony]]></group>
       <name><![CDATA[symfony]]></name>
-      <version><![CDATA[5.4.0]]></version>
+      <version><![CDATA[6.0.4]]></version>
       <description><![CDATA[The Symfony PHP framework]]></description>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
-      <purl><![CDATA[pkg:composer/symfony/symfony@5.4.0]]></purl>
+      <purl><![CDATA[pkg:composer/symfony/symfony@6.0.4]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://github.com/symfony/symfony.git]]></url>
-          <comment><![CDATA[As detected by composer's `getSourceUrls()` (type=git & reference=94eb8a9c657257360b65a6ec4a6a64fb0551fe6a)]]></comment>
+          <comment><![CDATA[As detected by composer's `getSourceUrls()` (type=git & reference=82e8d23788940421e0ad6e30163242db3ba27a02)]]></comment>
         </reference>
         <reference type="distribution">
-          <url><![CDATA[https://api.github.com/repos/symfony/symfony/zipball/94eb8a9c657257360b65a6ec4a6a64fb0551fe6a]]></url>
-          <comment><![CDATA[As detected by composer's `getDistUrls()` (type=zip & reference=94eb8a9c657257360b65a6ec4a6a64fb0551fe6a & sha1=UNDEFINED)]]></comment>
+          <url><![CDATA[https://api.github.com/repos/symfony/symfony/zipball/82e8d23788940421e0ad6e30163242db3ba27a02]]></url>
+          <comment><![CDATA[As detected by composer's `getDistUrls()` (type=zip & reference=82e8d23788940421e0ad6e30163242db3ba27a02 & sha1=UNDEFINED)]]></comment>
         </reference>
         <reference type="website">
           <url><![CDATA[https://symfony.com]]></url>
@@ -1066,7 +906,7 @@
           <comment><![CDATA[As set via `support.issues` in composer package definition.]]></comment>
         </reference>
         <reference type="distribution">
-          <url><![CDATA[https://github.com/symfony/symfony/tree/v5.4.0]]></url>
+          <url><![CDATA[https://github.com/symfony/symfony/tree/v6.0.4]]></url>
           <comment><![CDATA[As set via `support.source` in composer package definition.]]></comment>
         </reference>
         <reference type="other">
@@ -1083,25 +923,25 @@
         </reference>
       </externalReferences>
     </component>
-    <component type="library" bom-ref="pkg:composer/twig/twig@3.3.4">
+    <component type="library" bom-ref="pkg:composer/twig/twig@3.3.8">
       <group><![CDATA[twig]]></group>
       <name><![CDATA[twig]]></name>
-      <version><![CDATA[3.3.4]]></version>
+      <version><![CDATA[3.3.8]]></version>
       <description><![CDATA[Twig, the flexible, fast, and secure template language for PHP]]></description>
       <licenses>
         <license>
           <id><![CDATA[BSD-3-Clause]]></id>
         </license>
       </licenses>
-      <purl><![CDATA[pkg:composer/twig/twig@3.3.4]]></purl>
+      <purl><![CDATA[pkg:composer/twig/twig@3.3.8]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://github.com/twigphp/Twig.git]]></url>
-          <comment><![CDATA[As detected by composer's `getSourceUrls()` (type=git & reference=65cb6f0b956485e1664f13d023c55298a4bb59ca)]]></comment>
+          <comment><![CDATA[As detected by composer's `getSourceUrls()` (type=git & reference=972d8604a92b7054828b539f2febb0211dd5945c)]]></comment>
         </reference>
         <reference type="distribution">
-          <url><![CDATA[https://api.github.com/repos/twigphp/Twig/zipball/65cb6f0b956485e1664f13d023c55298a4bb59ca]]></url>
-          <comment><![CDATA[As detected by composer's `getDistUrls()` (type=zip & reference=65cb6f0b956485e1664f13d023c55298a4bb59ca & sha1=UNDEFINED)]]></comment>
+          <url><![CDATA[https://api.github.com/repos/twigphp/Twig/zipball/972d8604a92b7054828b539f2febb0211dd5945c]]></url>
+          <comment><![CDATA[As detected by composer's `getDistUrls()` (type=zip & reference=972d8604a92b7054828b539f2febb0211dd5945c & sha1=UNDEFINED)]]></comment>
         </reference>
         <reference type="website">
           <url><![CDATA[https://twig.symfony.com]]></url>
@@ -1112,7 +952,7 @@
           <comment><![CDATA[As set via `support.issues` in composer package definition.]]></comment>
         </reference>
         <reference type="distribution">
-          <url><![CDATA[https://github.com/twigphp/Twig/tree/v3.3.4]]></url>
+          <url><![CDATA[https://github.com/twigphp/Twig/tree/v3.3.8]]></url>
           <comment><![CDATA[As set via `support.source` in composer package definition.]]></comment>
         </reference>
         <reference type="other">
@@ -1127,79 +967,69 @@
     </component>
   </components>
   <dependencies>
-    <dependency ref="pkg:composer/doctrine/annotations@1.13.2">
-      <dependency ref="pkg:composer/doctrine/lexer@1.2.1"/>
-      <dependency ref="pkg:composer/psr/cache@1.0.1"/>
-    </dependency>
     <dependency ref="pkg:composer/doctrine/cache@2.1.1"/>
     <dependency ref="pkg:composer/doctrine/collections@1.6.8"/>
     <dependency ref="pkg:composer/doctrine/deprecations@0.5.3"/>
     <dependency ref="pkg:composer/doctrine/event-manager@1.1.1"/>
-    <dependency ref="pkg:composer/doctrine/lexer@1.2.1"/>
-    <dependency ref="pkg:composer/doctrine/persistence@2.2.3">
-      <dependency ref="pkg:composer/doctrine/annotations@1.13.2"/>
+    <dependency ref="pkg:composer/doctrine/persistence@2.3.0">
       <dependency ref="pkg:composer/doctrine/cache@2.1.1"/>
       <dependency ref="pkg:composer/doctrine/collections@1.6.8"/>
       <dependency ref="pkg:composer/doctrine/deprecations@0.5.3"/>
       <dependency ref="pkg:composer/doctrine/event-manager@1.1.1"/>
-      <dependency ref="pkg:composer/psr/cache@1.0.1"/>
+      <dependency ref="pkg:composer/psr/cache@3.0.0"/>
     </dependency>
     <dependency ref="pkg:composer/friendsofphp/proxy-manager-lts@1.0.5">
-      <dependency ref="pkg:composer/laminas/laminas-code@4.4.3"/>
+      <dependency ref="pkg:composer/laminas/laminas-code@4.5.1"/>
     </dependency>
-    <dependency ref="pkg:composer/laminas/laminas-code@4.4.3"/>
-    <dependency ref="pkg:composer/psr/cache@1.0.1"/>
-    <dependency ref="pkg:composer/psr/container@1.1.2"/>
+    <dependency ref="pkg:composer/laminas/laminas-code@4.5.1"/>
+    <dependency ref="pkg:composer/psr/cache@3.0.0"/>
+    <dependency ref="pkg:composer/psr/container@2.0.2"/>
     <dependency ref="pkg:composer/psr/event-dispatcher@1.0.0"/>
-    <dependency ref="pkg:composer/psr/link@1.0.0"/>
-    <dependency ref="pkg:composer/psr/log@1.1.4"/>
-    <dependency ref="pkg:composer/symfony/contracts@2.5.0">
-      <dependency ref="pkg:composer/psr/cache@1.0.1"/>
-      <dependency ref="pkg:composer/psr/container@1.1.2"/>
+    <dependency ref="pkg:composer/psr/link@2.0.1"/>
+    <dependency ref="pkg:composer/psr/log@3.0.0"/>
+    <dependency ref="pkg:composer/symfony/contracts@3.0.0">
+      <dependency ref="pkg:composer/psr/cache@3.0.0"/>
+      <dependency ref="pkg:composer/psr/container@2.0.2"/>
       <dependency ref="pkg:composer/psr/event-dispatcher@1.0.0"/>
     </dependency>
-    <dependency ref="pkg:composer/symfony/polyfill-ctype@1.23.0"/>
-    <dependency ref="pkg:composer/symfony/polyfill-intl-grapheme@1.23.1"/>
-    <dependency ref="pkg:composer/symfony/polyfill-intl-icu@1.23.0"/>
-    <dependency ref="pkg:composer/symfony/polyfill-intl-idn@1.23.0">
-      <dependency ref="pkg:composer/symfony/polyfill-intl-normalizer@1.23.0"/>
-      <dependency ref="pkg:composer/symfony/polyfill-php72@1.23.0"/>
+    <dependency ref="pkg:composer/symfony/polyfill-ctype@1.24.0"/>
+    <dependency ref="pkg:composer/symfony/polyfill-intl-grapheme@1.24.0"/>
+    <dependency ref="pkg:composer/symfony/polyfill-intl-icu@1.24.0"/>
+    <dependency ref="pkg:composer/symfony/polyfill-intl-idn@1.24.0">
+      <dependency ref="pkg:composer/symfony/polyfill-intl-normalizer@1.24.0"/>
+      <dependency ref="pkg:composer/symfony/polyfill-php72@1.24.0"/>
     </dependency>
-    <dependency ref="pkg:composer/symfony/polyfill-intl-normalizer@1.23.0"/>
-    <dependency ref="pkg:composer/symfony/polyfill-mbstring@1.23.1"/>
-    <dependency ref="pkg:composer/symfony/polyfill-php72@1.23.0"/>
-    <dependency ref="pkg:composer/symfony/polyfill-php73@1.23.0"/>
-    <dependency ref="pkg:composer/symfony/polyfill-php80@1.23.1"/>
-    <dependency ref="pkg:composer/symfony/polyfill-php81@1.23.0"/>
-    <dependency ref="pkg:composer/symfony/polyfill-uuid@1.23.0"/>
-    <dependency ref="pkg:composer/symfony/symfony@5.4.0">
+    <dependency ref="pkg:composer/symfony/polyfill-intl-normalizer@1.24.0"/>
+    <dependency ref="pkg:composer/symfony/polyfill-mbstring@1.24.0"/>
+    <dependency ref="pkg:composer/symfony/polyfill-php72@1.24.0"/>
+    <dependency ref="pkg:composer/symfony/polyfill-php81@1.24.0"/>
+    <dependency ref="pkg:composer/symfony/polyfill-uuid@1.24.0"/>
+    <dependency ref="pkg:composer/symfony/symfony@6.0.4">
       <dependency ref="pkg:composer/doctrine/event-manager@1.1.1"/>
-      <dependency ref="pkg:composer/doctrine/persistence@2.2.3"/>
+      <dependency ref="pkg:composer/doctrine/persistence@2.3.0"/>
       <dependency ref="pkg:composer/friendsofphp/proxy-manager-lts@1.0.5"/>
-      <dependency ref="pkg:composer/psr/cache@1.0.1"/>
-      <dependency ref="pkg:composer/psr/container@1.1.2"/>
+      <dependency ref="pkg:composer/psr/cache@3.0.0"/>
+      <dependency ref="pkg:composer/psr/container@2.0.2"/>
       <dependency ref="pkg:composer/psr/event-dispatcher@1.0.0"/>
-      <dependency ref="pkg:composer/psr/link@1.0.0"/>
-      <dependency ref="pkg:composer/psr/log@1.1.4"/>
-      <dependency ref="pkg:composer/symfony/contracts@2.5.0"/>
-      <dependency ref="pkg:composer/symfony/polyfill-ctype@1.23.0"/>
-      <dependency ref="pkg:composer/symfony/polyfill-intl-grapheme@1.23.1"/>
-      <dependency ref="pkg:composer/symfony/polyfill-intl-icu@1.23.0"/>
-      <dependency ref="pkg:composer/symfony/polyfill-intl-idn@1.23.0"/>
-      <dependency ref="pkg:composer/symfony/polyfill-intl-normalizer@1.23.0"/>
-      <dependency ref="pkg:composer/symfony/polyfill-mbstring@1.23.1"/>
-      <dependency ref="pkg:composer/symfony/polyfill-php73@1.23.0"/>
-      <dependency ref="pkg:composer/symfony/polyfill-php80@1.23.1"/>
-      <dependency ref="pkg:composer/symfony/polyfill-php81@1.23.0"/>
-      <dependency ref="pkg:composer/symfony/polyfill-uuid@1.23.0"/>
-      <dependency ref="pkg:composer/twig/twig@3.3.4"/>
+      <dependency ref="pkg:composer/psr/link@2.0.1"/>
+      <dependency ref="pkg:composer/psr/log@3.0.0"/>
+      <dependency ref="pkg:composer/symfony/contracts@3.0.0"/>
+      <dependency ref="pkg:composer/symfony/polyfill-ctype@1.24.0"/>
+      <dependency ref="pkg:composer/symfony/polyfill-intl-grapheme@1.24.0"/>
+      <dependency ref="pkg:composer/symfony/polyfill-intl-icu@1.24.0"/>
+      <dependency ref="pkg:composer/symfony/polyfill-intl-idn@1.24.0"/>
+      <dependency ref="pkg:composer/symfony/polyfill-intl-normalizer@1.24.0"/>
+      <dependency ref="pkg:composer/symfony/polyfill-mbstring@1.24.0"/>
+      <dependency ref="pkg:composer/symfony/polyfill-php81@1.24.0"/>
+      <dependency ref="pkg:composer/symfony/polyfill-uuid@1.24.0"/>
+      <dependency ref="pkg:composer/twig/twig@3.3.8"/>
     </dependency>
-    <dependency ref="pkg:composer/twig/twig@3.3.4">
-      <dependency ref="pkg:composer/symfony/polyfill-ctype@1.23.0"/>
-      <dependency ref="pkg:composer/symfony/polyfill-mbstring@1.23.1"/>
+    <dependency ref="pkg:composer/twig/twig@3.3.8">
+      <dependency ref="pkg:composer/symfony/polyfill-ctype@1.24.0"/>
+      <dependency ref="pkg:composer/symfony/polyfill-mbstring@1.24.0"/>
     </dependency>
     <dependency ref="pkg:composer/cyclonedx/cyclonedx-php-composer-demo@dev-master">
-      <dependency ref="pkg:composer/symfony/symfony@5.4.0"/>
+      <dependency ref="pkg:composer/symfony/symfony@6.0.4"/>
     </dependency>
   </dependencies>
 </bom>
