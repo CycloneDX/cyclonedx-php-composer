@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 
 ## unreleased
 
+* Changed
+  * Raised dependency `cyclonedx/cyclonedx-library:^1.4.2`, was `cyclonedx/cyclonedx-library:^1.3.1`. (via [#192])
+* Misc
+  * Adjusted internal typing and typehints. (via [#192])
+
+[#192]: https://github.com/CycloneDX/cyclonedx-php-composer/pull/192
+
 ## 3.9.2 - 2021-12-04
 
 * Fixed
