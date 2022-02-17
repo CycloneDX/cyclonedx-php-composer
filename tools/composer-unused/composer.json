@@ -2,6 +2,9 @@
     "name": "tools/composer-unused",
     "type": "metapackage",
     "description": "composer-unused",
+    "require": {
+        "php": ">=7.4"
+    },
     "require-dev": {
         "composer/composer": "^2.1.12",
         "icanhazstring/composer-unused": "0.8.0",

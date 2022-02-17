@@ -2,6 +2,9 @@
     "name": "tools/composer-normalize",
     "type": "metapackage",
     "description": "composer-normalize",
+    "require": {
+        "php": ">=7.4"
+    },
     "require-dev": {
         "ergebnis/composer-normalize": "2.23.1",
         "roave/security-advisories": "dev-latest"

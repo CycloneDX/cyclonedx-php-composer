@@ -2,6 +2,9 @@
     "name": "tools/php-cs-fixer",
     "type": "metapackage",
     "description": "php-cs-fixer",
+    "require": {
+        "php": ">=7.4"
+    },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "3.6.0",
         "roave/security-advisories": "dev-latest"

@@ -2,6 +2,9 @@
     "name": "tools/composer-require-checker",
     "type": "metapackage",
     "description": "composer-require-checker",
+    "require": {
+        "php": ">=7.4"
+    },
     "require-dev": {
         "maglnet/composer-require-checker": "3.8.0",
         "roave/security-advisories": "dev-latest"
