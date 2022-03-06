@@ -92,7 +92,7 @@ jobs:
     steps:
       - name: Checkout
         # see https://github.com/actions/checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Setup paths and folders
         run: |
           PWD="$(pwd -P)"
