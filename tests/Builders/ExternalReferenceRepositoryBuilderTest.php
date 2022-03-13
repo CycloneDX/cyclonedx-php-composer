@@ -69,7 +69,7 @@ class ExternalReferenceRepositoryBuilderTest extends \PHPUnit\Framework\TestCase
     {
         yield 'package empty' => [
             $this->createConfiguredMock(PackageInterface::class, []),
-            [/* empty*/],
+            [/* empty */],
         ];
     }
 
