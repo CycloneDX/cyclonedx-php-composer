@@ -37,7 +37,7 @@ use Symfony\Component\Console\Input\StringInput;
  */
 class OptionsTest extends TestCase
 {
-    //region configureCommand
+    // region configureCommand
 
     public function testConfigureCommand(): void
     {
