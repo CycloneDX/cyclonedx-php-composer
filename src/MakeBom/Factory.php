@@ -164,11 +164,20 @@ class Factory
      */
     public function makeComposer(Options $options, \Composer\IO\IOInterface $io): Composer
     {
-        return $this->composerFactory->createComposer(
+        /**
+         * Composer 2.3 introduced PartialComposer, and may return one here.
+         *
+         * @var Composer|mixed
+         */
+        $composer = $this->composerFactory->createComposer(
             $io,
             $options->composerFile,
             true // not needed for analysis
         );
+        if ($composer instanceof Composer) {
+            return $composer;
+        }
+        throw new \UnexpectedValueException('Expected Composer');
     }
 
     public function makeBomOutput(Options $options): ?OutputInterface
