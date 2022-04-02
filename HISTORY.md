@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## unreleased
 
+## 3.10.0 - 2022-04-02
+
 * Changed
   * Raised dependency `cyclonedx/cyclonedx-library:^1.4.2`, was `cyclonedx/cyclonedx-library:^1.3.1`. (via [#192])
 * Misc
