@@ -120,7 +120,7 @@ class Command extends BaseCommand
         $io->writeErrorRaw(__METHOD__.' Options: '.print_r($this->options, true), true, IOInterface::DEBUG);
 
         $this->bomBuilder->getComponentBuilder()->setVersionNormalization(
-          false === $this->options->omitVersionNormalization
+            false === $this->options->omitVersionNormalization
         );
 
         $this->updateTool();
@@ -253,16 +253,14 @@ class Command extends BaseCommand
         }
 
         try {
-            $composer = $this->getComposer();
-            if (null === $composer) {
-                throw new \UnexpectedValueException('empty composer');
-            }
+            $composer = $this->compat_getComposer();
 
             /**
              * Composer <  2.1.7 -> nullable, but type hint was wrong
              * Composer >= 2.1.7 -> nullable.
+             * Composer >= 2.3   -> not nullable.
              *
-             * @var \Composer\Package\Locker|null
+             * @var \Composer\Package\Locker|null $locker
              * @psalm-suppress UnnecessaryVarAnnotation
              */
             $locker = $composer->getLocker();
@@ -278,5 +276,32 @@ class Command extends BaseCommand
         } catch (\Exception $exception) {
             return false;
         }
+    }
+
+    /**
+     * @throws \UnexpectedValueException if composer could not be fetched
+     */
+    private function compat_getComposer(): Composer
+    {
+        $err = null;
+        try {
+            /**
+             * @psalm-suppress DeprecatedMethod as it was handled
+             *
+             * @var mixed $composer
+             */
+            $composer = method_exists($this, 'requireComposer')
+                ? $this->requireComposer()
+                : ( // method was marked as deprecated in Composer 2.3
+                    method_exists($this, 'getComposer')
+                    ? $this->getComposer()
+                    : null);
+        } catch (\Exception $err) {
+            $composer = null;
+        }
+        if ($composer instanceof Composer) {
+            return $composer;
+        }
+        throw new \UnexpectedValueException('empty composer', 0, $err);
     }
 }
