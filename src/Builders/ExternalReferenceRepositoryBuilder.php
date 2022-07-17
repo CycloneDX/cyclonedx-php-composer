@@ -148,7 +148,7 @@ class ExternalReferenceRepositoryBuilder
             yield (new ExternalReference(ExternalReferenceType::DISTRIBUTION, $url))
                 ->setComment($comment)
                 ->setHashRepository(
-                // $hashRepo is not a clone, since the values are same object for each mirror
+                    // $hashRepo is not a clone, since the values are same object for each mirror
                     $hashRepo
                 );
         }

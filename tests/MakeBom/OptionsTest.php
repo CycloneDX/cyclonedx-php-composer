@@ -106,9 +106,9 @@ class OptionsTest extends TestCase
             $input->setInteractive(false);
             $input->bind($command->getDefinition());
             yield (
-            \is_int($title)
-                ? "$inputString -> $property=".var_export($expected, true)
-                : $title
+                \is_int($title)
+                    ? "$inputString -> $property=".var_export($expected, true)
+                    : $title
             ) => [$input, $property, $expected];
         }
     }
