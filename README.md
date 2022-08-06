@@ -27,13 +27,13 @@ with Composer `^1.0||^2.0`
 
 ## Installation
 
-Install globally via composer:
+As a global composer plugin:
 
 ```shell
 composer global require cyclonedx/cyclonedx-php-composer
 ```
 
-Also supports local install via:
+As a development dependency of the current package:
 
 ```shell
 composer require --dev cyclonedx/cyclonedx-php-composer
