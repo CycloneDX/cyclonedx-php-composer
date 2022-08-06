@@ -1,11 +1,11 @@
-# Contributing 
+# Contributing
 
 Pull requests are welcome.
 But please read the
 [CycloneDX contributing guidelines](https://github.com/CycloneDX/.github/blob/master/CONTRIBUTING.md)
 first.
 
-## Setup 
+## Setup
 
 The development-setup requires PHP >= 7.4,
 even though the project might support PHP 7.3 on runtime.
@@ -21,7 +21,7 @@ Make sure
 
 ## Sign your commits
 
-Please sign your commits, 
+Please sign your commits,
 to show that you agree to publish your changes under the current terms and licenses of the project.
 
 ```shell
