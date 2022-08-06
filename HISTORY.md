@@ -38,7 +38,7 @@ All notable changes to this project will be documented in this file.
 ## 3.9.0 - 2021-12-01
 
 * Added
-  * The resulting SBoM hold ExternalReferences as fetched from package descriptions. (via [#145]) 
+  * The resulting SBoM hold ExternalReferences as fetched from package descriptions. (via [#145])
 
 [#145]: https://github.com/CycloneDX/cyclonedx-php-composer/pull/145
 
@@ -78,7 +78,7 @@ All notable changes to this project will be documented in this file.
 
 * Changed
   * Core library
-    * Was moved to an own package: https://packagist.org/packages/cyclonedx/cyclonedx-library  
+    * Was moved to an own package: <https://packagist.org/packages/cyclonedx/cyclonedx-library>  
       The new external package/library is a one-to-one copy of the original code from this project.  
       The new external package/library is a dependency/required of this project. So usage/leverage of the original code is still possible without any changes for third parties.  
       See [#87] for details.
@@ -88,9 +88,9 @@ All notable changes to this project will be documented in this file.
 ## 3.4.1 - 2021-09-16
 
 * Fixed
-  * Improved compatibility to composer. (via [#125])    
-    This was made possible since composer's type hints are getting fixed.   
-    See https://github.com/composer/composer/releases/tag/2.1.7   
+  * Improved compatibility to composer. (via [#125])  
+    This was made possible since composer's type hints are getting fixed.  
+    See <https://github.com/composer/composer/releases/tag/2.1.7>  
     > Added many type annotations internally, which may have an effect on CI/static analysis for people using Composer as a dependency.
 
 [#125]: https://github.com/CycloneDX/cyclonedx-php-composer/pull/125
@@ -99,18 +99,18 @@ All notable changes to this project will be documented in this file.
 
 * Changed
   * Core library
-    * Some repository data-types are lists of unique items, so no duplicates are kept.   
-      Affected classes/data-types : 
+    * Some repository data-types are lists of unique items, so no duplicates are kept.  
+      Affected classes/data-types:
       * `ComponentRepository`
       * `DisjunctiveLicenseRepository`
       * `ToolRepository`
-* Added 
+* Added
   * CLI via `composer make-bom`
     * Will try to populate dependencies of the SBoM result.
   * Core library
-    * Added `BomRef` model to link bom elements in general.   
+    * Added `BomRef` model to link bom elements in general.  
       Added `BomRefRepository` data type as a collection of unique `BomRef`.
-    * Added bomRef to `Component` model to link components as dependencies.   
+    * Added bomRef to `Component` model to link components as dependencies.  
       Added dependencies to `Component` model.
     * Added ability to serialize `dependencies` to XML.
     * Added ability to serialize `dependencies` to JSON.
@@ -139,7 +139,7 @@ All notable changes to this project will be documented in this file.
     * Added ability to serialize `metadata` to JSON.
 * Fixed
   * CLI via `composer make-bom`
-    * composer packages of type `project` or `composer-plugin` 
+    * composer packages of type `project` or `composer-plugin`
       result as CycloneDX component of type `application`, was `library`.
 * Misc
   * Updated demos/examples to reflect current state of SBoM results including metadata.
@@ -189,7 +189,7 @@ All notable changes to this project will be documented in this file.
 
 * Breaking Changes
   * Now requires php `^7.3 || ^8.0`, was `^7.1 || ^8.0`.
-  * Now requires composer v2 - `composer-plugin-api:^2.0`, was `composer-plugin-api:^1.1||^2.0`. 
+  * Now requires composer v2 - `composer-plugin-api:^2.0`, was `composer-plugin-api:^1.1||^2.0`.
   * CLI via `composer make-bom`
     * Now defaults to the latest supported version of CycloneDX spec: 1.3  
       See option `--spec-version`.
