@@ -28,14 +28,19 @@ composer -dproject update
 Run one of these from the demo directory:
 
 * See _cyclonedx-php-composer_ help page:
+
   ```shell
   composer -dproject make-bom --help 
   ```
+
 * Make XML sbom:
+
   ```shell
   composer -dproject make-bom --exclude-dev --output-format=XML  --output-file="$PWD/example-results/bom.xml"
   ```
+
 * Make JSON sbom:
+
   ```shell
   composer -dproject make-bom --exclude-dev --output-format=JSON --output-file="$PWD/example-results/bom.json"
   ```
