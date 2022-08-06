@@ -15,19 +15,25 @@ that generates Software Bill of Materials (SBoM) in [CycloneDX](https://cycloned
 
 ## Requirements
 
-The latest version of this plugin 
-supports PHP `^7.3||^8.0` 
+The latest version of this plugin
+supports PHP `^7.3||^8.0`
 with Composer `^2.0`
 .
 
-There are older versions of this plugin available, which 
-support PHP `^5.5||^7.0||^8.0` 
+There are older versions of this plugin available, which
+support PHP `^5.5||^7.0||^8.0`
 with Composer `^1.0||^2.0`
 .
 
 ## Installation
 
-Install via composer: 
+Install globally via composer:
+
+```shell
+composer global require cyclonedx/cyclonedx-php-composer
+```
+
+Also supports local install via:
 
 ```shell
 composer require --dev cyclonedx/cyclonedx-php-composer
