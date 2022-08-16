@@ -24,9 +24,10 @@
             "role": "Developer"
         }
     ],
-    "homepage": "https://github.com/CycloneDX/cyclonedx-php-composer/",
+    "homepage": "https://github.com/CycloneDX/cyclonedx-php-composer/#readme",
     "support": {
-        "issues": "https://github.com/CycloneDX/cyclonedx-php-composer/issues"
+        "issues": "https://github.com/CycloneDX/cyclonedx-php-composer/issues",
+        "source": "https://github.com/CycloneDX/cyclonedx-php-composer/"
     },
     "require": {
         "php": "^7.3 || ^8.0",

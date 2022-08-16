@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 ## unreleased
 
+## 3.10.1 - 2022-08-16
+
+* Maintenance release.
+
 ## 3.10.0 - 2022-04-02
 
 * Changed
