@@ -261,6 +261,7 @@ class Command extends BaseCommand
              * Composer >= 2.3   -> not nullable.
              *
              * @var \Composer\Package\Locker|null $locker
+             *
              * @psalm-suppress UnnecessaryVarAnnotation
              */
             $locker = $composer->getLocker();

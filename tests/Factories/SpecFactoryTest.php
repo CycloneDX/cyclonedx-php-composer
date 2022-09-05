@@ -75,6 +75,7 @@ class SpecFactoryTest extends TestCase
 
     /**
      * @dataProvider versionsOfSPECS
+     *
      * @coversNothing
      */
     public function testSpecsVersion(string $version): void

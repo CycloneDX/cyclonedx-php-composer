@@ -41,6 +41,7 @@ class SpecFactory
 
     /**
      * @var string[]
+     *
      * @psalm-var array<Version::V_*, class-string<SpecInterface>>
      */
     public const SPECS = [

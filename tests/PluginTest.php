@@ -83,6 +83,7 @@ class PluginTest extends TestCase
      * @depends testPluginIsRegistered
      *
      * @return PluginInterface|Capable
+     *
      * @psalm-return PluginInterface&Capable
      */
     public function testPluginImplementsRequiredInterfaces(string $pluginClass)
