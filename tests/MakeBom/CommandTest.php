@@ -43,11 +43,13 @@ class CommandTest extends TestCase
 {
     /**
      * @var Options|\PHPUnit\Framework\MockObject\MockObject
+     *
      * @psalm-var Options&\PHPUnit\Framework\MockObject\MockObject
      */
     private $options;
     /**
      * @var Factory|\PHPUnit\Framework\MockObject\MockObject
+     *
      * @psalm-var Factory&\PHPUnit\Framework\MockObject\MockObject
      */
     private $factory;
@@ -58,6 +60,7 @@ class CommandTest extends TestCase
 
     /**
      * @var BomBuilder|\PHPUnit\Framework\MockObject\MockObject
+     *
      * @psalm-var \CycloneDX\Composer\Builders\BomBuilder&\PHPUnit\Framework\MockObject\MockObject
      */
     private $bomFactory;

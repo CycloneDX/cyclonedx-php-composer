@@ -59,6 +59,7 @@ class Options
 
     /**
      * @var string[]
+     *
      * @psalm-var array<Options::OUTPUT_FORMAT_*, string>
      */
     private const OUTPUT_FILE_DEFAULT = [
@@ -143,65 +144,85 @@ class Options
 
     /**
      * @var string
+     *
      * @psalm-var \CycloneDX\Core\Spec\Version::V_*
+     *
      * @readonly
+     *
      * @psalm-allow-private-mutation
      */
     public $specVersion = SpecFactory::VERSION_LATEST;
 
     /**
      * @var bool
+     *
      * @readonly
+     *
      * @psalm-allow-private-mutation
      */
     public $excludeDev = false;
 
     /**
      * @var bool
+     *
      * @readonly
+     *
      * @psalm-allow-private-mutation
      */
     public $excludePlugins = false;
 
     /**
      * @var bool
+     *
      * @readonly
+     *
      * @psalm-allow-private-mutation
      */
     public $omitVersionNormalization = false;
 
     /**
      * @var string
+     *
      * @psalm-var Options::OUTPUT_FORMAT_*
+     *
      * @readonly
+     *
      * @psalm-allow-private-mutation
      */
     public $outputFormat = self::OUTPUT_FORMAT_XML;
 
     /**
      * @var bool
+     *
      * @readonly
+     *
      * @psalm-allow-private-mutation
      */
     public $skipOutputValidation = false;
 
     /**
      * @var string
+     *
      * @readonly
+     *
      * @psalm-allow-private-mutation
      */
     public $outputFile = self::OUTPUT_FILE_STDOUT;
 
     /**
      * @var string|null
+     *
      * @readonly
+     *
      * @psalm-allow-private-mutation
      */
     public $composerFile;
 
     /**
      * @var string|null
+     *
      * @readonly
+     *
      * @psalm-allow-private-mutation
      */
     public $mainComponentVersion;

@@ -52,12 +52,14 @@ class FactoryTest extends TestCase
 
     /**
      * @var ComposerFactory|\PHPUnit\Framework\MockObject\MockObject
+     *
      * @psalm-var ComposerFactory&\PHPUnit\Framework\MockObject\MockObject
      */
     private $composerFactory;
 
     /**
      * @var SpecFactory|\PHPUnit\Framework\MockObject\MockObject
+     *
      * @psalm-var  SpecFactory&\PHPUnit\Framework\MockObject\MockObject
      */
     private $specFactory;

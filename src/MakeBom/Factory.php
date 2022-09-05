@@ -48,6 +48,7 @@ class Factory
 {
     /**
      * @var string[]
+     *
      * @psalm-var array<Options::OUTPUT_FORMAT_*, class-string<\CycloneDX\Core\Serialize\BaseSerializer>>
      */
     private const SERIALIZERS = [
@@ -57,6 +58,7 @@ class Factory
 
     /**
      * @var string[]
+     *
      * @psalm-var array<Options::OUTPUT_FORMAT_*, class-string<ValidatorInterface>>
      */
     private const VALIDATORS = [
@@ -129,6 +131,7 @@ class Factory
          * Composer >= 2.1.7 -> nullable.
          *
          * @var \Composer\Package\Locker|null
+         *
          * @psalm-suppress UnnecessaryVarAnnotation
          */
         $locker = $composer->getLocker();
