@@ -4,6 +4,15 @@ All notable changes to this project will be documented in this file.
 
 ## unreleased
 
+## 3.10.2 - 2022-09-15
+
+Maintenance Release.
+
+* Legal:
+  * Transferred copyright to OWASP Foundation. (via [#244])
+
+[#244]: https://github.com/CycloneDX/cyclonedx-php-composer/pull/244
+
 ## 3.10.1 - 2022-08-16
 
 * Maintenance release.
