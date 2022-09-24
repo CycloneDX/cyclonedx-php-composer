@@ -33,7 +33,7 @@ As a global composer plugin:
 composer global require cyclonedx/cyclonedx-php-composer
 ```
 
-As a development dependency of the current package:
+As a development dependency of the current project:
 
 ```shell
 composer require --dev cyclonedx/cyclonedx-php-composer
