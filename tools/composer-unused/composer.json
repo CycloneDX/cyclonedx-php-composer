@@ -4,7 +4,7 @@
     "description": "composer-unused",
     "require-dev": {
         "composer/composer": "^2.1.12",
-        "icanhazstring/composer-unused": "0.8.2",
+        "icanhazstring/composer-unused": "0.8.3",
         "roave/security-advisories": "dev-latest"
     },
     "config": {
