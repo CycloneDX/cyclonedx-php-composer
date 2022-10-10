@@ -30,13 +30,13 @@
         "source": "https://github.com/CycloneDX/cyclonedx-php-composer/"
     },
     "require": {
-        "php": "^7.3 || ^8.0",
-        "composer-plugin-api": "^2.0",
-        "cyclonedx/cyclonedx-library": "^1.4.2",
+        "php": "^8.0",
+        "composer-plugin-api": "^2.3",
+        "cyclonedx/cyclonedx-library": "2.x-dev",
         "package-url/packageurl-php": "^1.0"
     },
     "require-dev": {
-        "composer/composer": "^2.0.0",
+        "composer/composer": "^2.3.0",
         "phpunit/phpunit": "9.5.25",
         "roave/security-advisories": "dev-latest"
     },
@@ -61,7 +61,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "3.x-dev"
+            "dev-master": "4.x-dev"
         },
         "class": "CycloneDX\\Composer\\Plugin",
         "composer-normalize": {

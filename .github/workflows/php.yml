@@ -29,9 +29,7 @@ jobs:
         os: [ "ubuntu-latest" ]
         php:
           - "8.1" # highest supported
-          - "8.0"
-          - "7.4"
-          - "7.3" # lowest supported
+          - "8.0" # lowest supported
         dependencies: [ "lowest", "highest" ]
         exclude:
           - # unstable combinations: throws PHP Deprecated warnings
@@ -118,11 +116,10 @@ jobs:
         php:
           - "8.1"  # highest supported
           - "8.0"
-          - "7.4"
         dependencies: [ "highest" ]
         include:
           - # lowest supported
-            php: "7.3"
+            php: "8.0"
             dependencies: "lowest"
     steps:
       - name: Checkout

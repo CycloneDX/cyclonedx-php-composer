@@ -48,13 +48,10 @@ jobs:
           - local
         php:
           - "8.1" # latest
-          - "7.3" # lowest supported
+          - "8.0" # lowest supported
         composer:
           - "2"     # latest 2.x
-          - "2.3"   # latest 2.3
-          - "2.2"   # latest 2.2
-          - "2.1"   # latest 2.1
-          - "2.0"   # latest 2.0 = lowest supported
+          - "2.3"   # latest 2.3 = lowest supported
         output-format:
           # lowercase the format, since it is also used as a file extension when searching the original file
           - xml
@@ -77,8 +74,8 @@ jobs:
             composer: "2.0"
         include:
           - # test with lowest combination
-            php: "7.3"        # lowest
-            composer: "2.0.0" # lowest
+            php: "8.0"        # lowest
+            composer: "2.3.0" # lowest
             # any other props
             spec-version: "1.3"
             subject: laravel-7.12.0

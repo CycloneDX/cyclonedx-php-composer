@@ -16,8 +16,8 @@ that generates Software Bill of Materials (SBoM) in [CycloneDX](https://cycloned
 ## Requirements
 
 The latest version of this plugin
-supports PHP `^7.3||^8.0`
-with Composer `^2.0`
+supports PHP `^8.0`
+with Composer `^2.3`
 .
 
 There are older versions of this plugin available, which
