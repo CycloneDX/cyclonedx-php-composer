@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## unreleased
+## 4.0.0 - unreleased
 
 ## 3.10.2 - 2022-09-15
 
