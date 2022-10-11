@@ -26,6 +26,7 @@ namespace CycloneDX\Composer\MakeBom;
 use CycloneDX\Composer\MakeBom\Exceptions\ValueError;
 use CycloneDX\Core\Spec\Format;
 use CycloneDX\Core\Spec\Version;
+use Exception;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -91,7 +92,7 @@ class Options
             ->addOption(
                 self::OPTION_OMIT,
                 null,
-                InputOption::VALUE_IS_ARRAY,
+                InputOption::VALUE_IS_ARRAY | InputOption::VALUE_OPTIONAL,
                 'Omit dependency types.' . PHP_EOL .
                 'Values: "' . implode('", "', self::VALUES_OMIT) . '"',
                 $this->omit,
@@ -191,7 +192,6 @@ class Options
 
     /**
      * @return $this
-     * @throws ValueError
      *
      */
     public function setFromInput(InputInterface $input): self
@@ -201,14 +201,14 @@ class Options
         $specVersion = $input->getOption(self::OPTION_SPEC_VERSION);
         \assert(\is_string($specVersion));
         if (false === \in_array($specVersion, self::VALUE_SPEC_VERSION, true)) {
-            throw new ValueError('Invalid value for option "' . self::OPTION_SPEC_VERSION . '": ' . $specVersion);
+            throw new \DomainException('Invalid value for option "' . self::OPTION_SPEC_VERSION . '": ' . $specVersion);
         }
 
         $outputFormat = $input->getOption(self::OPTION_OUTPUT_FORMAT);
         \assert(\is_string($outputFormat));
         $outputFormat = strtoupper($outputFormat);
         if (false === \in_array($outputFormat, self::VALUES_OUTPUT_FORMAT, true)) {
-            throw new ValueError('Invalid value for option "' . self::OPTION_OUTPUT_FORMAT . '": ' . $outputFormat);
+            throw new DomainException('Invalid value for option "' . self::OPTION_OUTPUT_FORMAT . '": ' . $outputFormat);
         }
 
         $omit = $input->getOption(self::OPTION_OMIT);
