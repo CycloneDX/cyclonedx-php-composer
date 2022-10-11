@@ -69,6 +69,13 @@ class Options
         Version::v1dot1
     ];
 
+    private static function formatChoice(array $values): string
+    {
+        return '[choice: "' .
+            implode('", "', $values) .
+            '"]';
+    }
+
     public function configureCommand(Command $command): void
     {
         $command
@@ -77,7 +84,7 @@ class Options
                 null,
                 InputOption::VALUE_REQUIRED,
                 'Which output format to use.' . \PHP_EOL .
-                'Values: "' . implode('", "', self::VALUES_OUTPUT_FORMAT) . '"',
+                self::formatChoice(self::VALUES_OUTPUT_FORMAT),
                 $this->outputFormat,
                 self::VALUES_OUTPUT_FORMAT
             )
@@ -94,7 +101,7 @@ class Options
                 null,
                 InputOption::VALUE_IS_ARRAY | InputOption::VALUE_OPTIONAL,
                 'Omit dependency types.' . PHP_EOL .
-                'Values: "' . implode('", "', self::VALUES_OMIT) . '"',
+                self::formatChoice(self::VALUES_OMIT),
                 $this->omit,
                 self::VALUES_OMIT
             )
@@ -103,7 +110,7 @@ class Options
                 null,
                 InputOption::VALUE_REQUIRED,
                 'Which version of CycloneDX spec to use.' . \PHP_EOL .
-                'Values: "' . implode('", "', self::VALUE_SPEC_VERSION) . '"',
+                self::formatChoice(self::VALUE_SPEC_VERSION),
                 $this->specVersion,
                 self::VALUE_SPEC_VERSION
             )

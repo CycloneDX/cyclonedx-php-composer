@@ -53,7 +53,7 @@ class Command extends BaseCommand
     protected function configure(): void
     {
         $this->options->configureCommand($this);
-        $this->setDescription('Generate a CycloneDX Bill of Materials');
+        $this->setDescription('Generate a CycloneDX Bill of Materials from a PHP composer project.');
     }
 
     /*

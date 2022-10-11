@@ -45,6 +45,9 @@ After successful installation, the composer command `make-bom` is available.
 
 ```text
 $ composer make-bom -h
+Description:
+  Generate a CycloneDX Bill of Materials from a PHP composer project.
+
 Usage:
   make-bom [options] [--] [<composer-file>]
 
@@ -54,34 +57,27 @@ Arguments:
 
 Options:
       --output-format=OUTPUT-FORMAT  Which output format to use.
-                                     Values: "XML", "JSON" [default: "XML"]
+                                     [choice: "XML", "JSON"] [default: "XML"]
       --output-file=OUTPUT-FILE      Path to the output file.
-                                     Set to "-" to write to STDOUT.
-                                     Depending on the output-format, default is one of: "bom.xml", "bom.json"
-      --exclude-dev                  Exclude dev dependencies
-      --exclude-plugins              Exclude composer plugins
+                                     Set to "-" to write to STDOUT [default: "-"]
+      --omit[=OMIT]                  Omit dependency types.
+                                     [choice: "dev", "plugin"] (multiple values allowed)
       --spec-version=SPEC-VERSION    Which version of CycloneDX spec to use.
-                                     Values: "1.1", "1.2", "1.3" [default: "1.3"]
-      --no-validate                  Don't validate the resulting output
+                                     [choice: "1.4", "1.3", "1.2", "1.1"] [default: "1.4"]
+      --validate|--no-validate       Validate the resulting output
       --mc-version=MC-VERSION        Version of the main component.
                                      This will override auto-detection.
-      --no-version-normalization     Don't normalize component version strings.
-                                     Per default this plugin will normalize version strings by stripping leading "v".
-                                     This is a compatibility-switch. The next major-version of this plugin will not modify component versions.
-  -h, --help                         Display this help message
+  -h, --help                         Display help for the given command. When no command is given display help for the list command
   -q, --quiet                        Do not output any message
   -V, --version                      Display this application version
-      --ansi                         Force ANSI output
-      --no-ansi                      Disable ANSI output
+      --ansi|--no-ansi               Force (or disable --no-ansi) ANSI output
   -n, --no-interaction               Do not ask any interactive question
       --profile                      Display timing and memory usage information
       --no-plugins                   Whether to disable plugins.
+      --no-scripts                   Skips the execution of all scripts defined in composer.json file.
   -d, --working-dir=WORKING-DIR      If specified, use the given directory as working directory.
       --no-cache                     Prevent use of the cache
   -v|vv|vvv, --verbose               Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug
-
-Help:
-  Generate a CycloneDX Bill of Materials
 ```
 
 ## Demo
