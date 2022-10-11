@@ -70,7 +70,7 @@ class OptionsTest extends TestCase
             'bomFormat default XML' => ['', 'outputFormat', 'XML'],
             ['--output-format=XML', 'outputFormat', 'XML'],
             ['--output-format=JSON', 'outputFormat', 'JSON'],
-            /* @see \CycloneDX\Composer\MakeBom\Options::$skipOutputValidation */
+            /* @see \CycloneDX\Composer\MakeBom\Options::$validate */
             'skipOutputValidation default false' => ['', 'skipOutputValidation', false],
             ['--no-validate', 'skipOutputValidation', true],
             /* @see \CycloneDX\Composer\MakeBom\Options::$outputFile */

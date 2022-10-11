@@ -121,7 +121,7 @@ class FactoryTest extends TestCase
     {
         $options = $this->createMock(Options::class);
         $options->outputFormat = $outputFormat;
-        $options->skipOutputValidation = false;
+        $options->validate = false;
 
         $actual = $this->factory->makeValidatorFromOptions($options);
 
@@ -138,7 +138,7 @@ class FactoryTest extends TestCase
     {
         $options = $this->createMock(Options::class);
         $options->outputFormat = uniqid('format', true);
-        $options->skipOutputValidation = true;
+        $options->validate = true;
 
         $actual = $this->factory->makeValidatorFromOptions($options);
 

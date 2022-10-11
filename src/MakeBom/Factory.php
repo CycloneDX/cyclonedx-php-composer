@@ -47,26 +47,6 @@ use UnexpectedValueException;
 class Factory
 {
     /**
-     * @var string[]
-     *
-     * @psalm-var array<Options::OUTPUT_FORMAT_*, class-string<\CycloneDX\Core\Serialize\BaseSerializer>>
-     */
-    private const SERIALIZERS = [
-        Options::OUTPUT_FORMAT_XML => XmlSerializer::class,
-        Options::OUTPUT_FORMAT_JSON => JsonSerializer::class,
-    ];
-
-    /**
-     * @var string[]
-     *
-     * @psalm-var array<Options::OUTPUT_FORMAT_*, class-string<ValidatorInterface>>
-     */
-    private const VALIDATORS = [
-        Options::OUTPUT_FORMAT_XML => XmlValidator::class,
-        Options::OUTPUT_FORMAT_JSON => JsonStrictValidator::class,
-    ];
-
-    /**
      * @var ComposerFactory
      */
     private $composerFactory;
@@ -97,7 +77,7 @@ class Factory
      */
     public function makeValidatorFromOptions(Options $options): ?ValidatorInterface
     {
-        if ($options->skipOutputValidation) {
+        if ($options->validate) {
             return null;
         }
 

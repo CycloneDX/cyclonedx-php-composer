@@ -31,7 +31,7 @@ use Composer\Plugin\Capable;
 use Composer\Plugin\PluginInterface;
 use CycloneDX\Composer\Factories\SpecFactory;
 use CycloneDX\Core\Models\Tool;
-use CycloneDX\Core\Spdx\License as SpdxLicenseValidator;
+use CycloneDX\Core\Spdx\LicenseValidator as SpdxLicenseValidator;
 
 /**
  * @internal
@@ -44,14 +44,17 @@ class Plugin implements PluginInterface, Capable, CommandProvider
 
     public function activate(Composer $composer, IOInterface $io): void
     {
+        /* nothing to do */
     }
 
     public function deactivate(Composer $composer, IOInterface $io): void
     {
+        /* nothing to do */
     }
 
     public function uninstall(Composer $composer, IOInterface $io): void
     {
+        /* nothing to do */
     }
 
     public function getCapabilities(): array
