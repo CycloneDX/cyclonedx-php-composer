@@ -29,6 +29,7 @@ use Symfony\Component\Console\Exception\LogicException;
 use Symfony\Component\Console\Formatter\OutputFormatter;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Throwable;
 
 /**
  * @internal
@@ -66,7 +67,7 @@ class Command extends BaseCommand
 
         try {
             $this->options->setFromInput($input);
-        } catch (\Throwable $valueError) {
+        } catch (Throwable $valueError) {
             $io->writeErrorRaw((string) $valueError, true, IOInterface::DEBUG);
             $io->writeError(
                 sprintf(
