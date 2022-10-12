@@ -23,10 +23,8 @@ declare(strict_types=1);
 
 namespace CycloneDX\Composer\MakeBom;
 
-use CycloneDX\Composer\MakeBom\Exceptions\ValueError;
 use CycloneDX\Core\Spec\Format;
 use CycloneDX\Core\Spec\Version;
-use Exception;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -52,27 +50,27 @@ class Options
 
     public const VALUES_OUTPUT_FORMAT = [
         Format::XML,
-        Format::JSON
+        Format::JSON,
     ];
 
     public const VALUE_OUTPUT_FILE_STDOUT = '-';
 
     private const VALUES_OMIT = [
         'dev',
-        'plugin'
+        'plugin',
     ];
 
     private const VALUE_SPEC_VERSION = [
         Version::v1dot4,
         Version::v1dot3,
         Version::v1dot2,
-        Version::v1dot1
+        Version::v1dot1,
     ];
 
     private static function formatChoice(array $values): string
     {
-        return '[choice: "' .
-            implode('", "', $values) .
+        return '[choice: "'.
+            implode('", "', $values).
             '"]';
     }
 
@@ -83,7 +81,7 @@ class Options
                 self::OPTION_OUTPUT_FORMAT,
                 null,
                 InputOption::VALUE_REQUIRED,
-                'Which output format to use.' . \PHP_EOL .
+                'Which output format to use.'.\PHP_EOL.
                 self::formatChoice(self::VALUES_OUTPUT_FORMAT),
                 $this->outputFormat,
                 self::VALUES_OUTPUT_FORMAT
@@ -92,15 +90,15 @@ class Options
                 self::OPTION_OUTPUT_FILE,
                 null,
                 InputOption::VALUE_REQUIRED,
-                'Path to the output file.' . \PHP_EOL .
-                'Set to "' . self::VALUE_OUTPUT_FILE_STDOUT . '" to write to STDOUT',
+                'Path to the output file.'.\PHP_EOL.
+                'Set to "'.self::VALUE_OUTPUT_FILE_STDOUT.'" to write to STDOUT',
                 $this->outputFile
             )
             ->addOption(
                 self::OPTION_OMIT,
                 null,
                 InputOption::VALUE_IS_ARRAY | InputOption::VALUE_OPTIONAL,
-                'Omit dependency types.' . PHP_EOL .
+                'Omit dependency types.'.\PHP_EOL.
                 self::formatChoice(self::VALUES_OMIT),
                 $this->omit,
                 self::VALUES_OMIT
@@ -109,7 +107,7 @@ class Options
                 self::OPTION_SPEC_VERSION,
                 null,
                 InputOption::VALUE_REQUIRED,
-                'Which version of CycloneDX spec to use.' . \PHP_EOL .
+                'Which version of CycloneDX spec to use.'.\PHP_EOL.
                 self::formatChoice(self::VALUE_SPEC_VERSION),
                 $this->specVersion,
                 self::VALUE_SPEC_VERSION
@@ -125,14 +123,14 @@ class Options
                 self::OPTION_MAIN_COMPONENT_VERSION,
                 null,
                 InputOption::VALUE_REQUIRED,
-                'Version of the main component.' . \PHP_EOL .
+                'Version of the main component.'.\PHP_EOL.
                 'This will override auto-detection.',
                 $this->mainComponentVersion
             )
             ->addArgument(
                 self::ARGUMENT_COMPOSER_FILE,
                 InputArgument::OPTIONAL,
-                'Path to composer config file.' . \PHP_EOL .
+                'Path to composer config file.'.\PHP_EOL.
                 'Defaults to "composer.json" file in working directory.',
                 $this->composerFile
             );
@@ -149,6 +147,7 @@ class Options
 
     /**
      * @var string[]
+     *
      * @psalm-var list<'dev'|'plugin'>
      *
      * @readonly
@@ -158,7 +157,6 @@ class Options
     public array $omit = [];
 
     /**
-     *
      * @psalm-var Format::*
      *
      * @readonly
@@ -168,7 +166,6 @@ class Options
     public string $outputFormat = self::VALUES_OUTPUT_FORMAT[0];
 
     /**
-     *
      * @readonly
      *
      * @psalm-allow-private-mutation
@@ -176,7 +173,6 @@ class Options
     public bool $validate = true;
 
     /**
-     *
      * @readonly
      *
      * @psalm-allow-private-mutation
@@ -199,7 +195,6 @@ class Options
 
     /**
      * @return $this
-     *
      */
     public function setFromInput(InputInterface $input): self
     {
@@ -208,18 +203,18 @@ class Options
         $specVersion = $input->getOption(self::OPTION_SPEC_VERSION);
         \assert(\is_string($specVersion));
         if (false === \in_array($specVersion, self::VALUE_SPEC_VERSION, true)) {
-            throw new \DomainException('Invalid value for option "' . self::OPTION_SPEC_VERSION . '": ' . $specVersion);
+            throw new \DomainException('Invalid value for option "'.self::OPTION_SPEC_VERSION.'": '.$specVersion);
         }
 
         $outputFormat = $input->getOption(self::OPTION_OUTPUT_FORMAT);
         \assert(\is_string($outputFormat));
         $outputFormat = strtoupper($outputFormat);
         if (false === \in_array($outputFormat, self::VALUES_OUTPUT_FORMAT, true)) {
-            throw new DomainException('Invalid value for option "' . self::OPTION_OUTPUT_FORMAT . '": ' . $outputFormat);
+            throw new DomainException('Invalid value for option "'.self::OPTION_OUTPUT_FORMAT.'": '.$outputFormat);
         }
 
         $omit = $input->getOption(self::OPTION_OMIT);
-        \assert(is_array($omit));
+        \assert(\is_array($omit));
         $validate = false !== $input->getOption(self::SWITCH_VALIDATE);
         $outputFile = $input->getOption(self::OPTION_OUTPUT_FILE);
         \assert(\is_string($outputFile));
