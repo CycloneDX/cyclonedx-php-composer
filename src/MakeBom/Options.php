@@ -25,6 +25,7 @@ namespace CycloneDX\Composer\MakeBom;
 
 use CycloneDX\Core\Spec\Format;
 use CycloneDX\Core\Spec\Version;
+use DomainException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -67,6 +68,9 @@ class Options
         Version::v1dot1,
     ];
 
+    /**
+     * @param scalar[] $values
+     */
     private static function formatChoice(array $values): string
     {
         return '[choice: "'.
@@ -74,6 +78,9 @@ class Options
             '"]';
     }
 
+    /**
+     * @psalm-suppress MissingThrowsDocblock
+     */
     public function configureCommand(Command $command): void
     {
         $command
@@ -195,6 +202,8 @@ class Options
 
     /**
      * @return $this
+     *
+     * @psalm-suppress MissingThrowsDocblock
      */
     public function setFromInput(InputInterface $input): self
     {
@@ -203,7 +212,7 @@ class Options
         $specVersion = $input->getOption(self::OPTION_SPEC_VERSION);
         \assert(\is_string($specVersion));
         if (false === \in_array($specVersion, self::VALUE_SPEC_VERSION, true)) {
-            throw new \DomainException('Invalid value for option "'.self::OPTION_SPEC_VERSION.'": '.$specVersion);
+            throw new DomainException('Invalid value for option "'.self::OPTION_SPEC_VERSION.'": '.$specVersion);
         }
 
         $outputFormat = $input->getOption(self::OPTION_OUTPUT_FORMAT);
@@ -232,7 +241,7 @@ class Options
         // region set state
 
         $this->specVersion = $specVersion;
-        $this->omit = array_intersect(self::VALUES_OMIT, $omit);
+        $this->omit = array_values(array_intersect(self::VALUES_OMIT, $omit));
         $this->outputFormat = $outputFormat;
         $this->validate = $validate;
         $this->outputFile = $outputFile;
