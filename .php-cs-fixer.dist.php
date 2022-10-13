@@ -28,17 +28,23 @@ $finder = PhpCsFixer\Finder::create()
 return (new PhpCsFixer\Config())
     ->setUsingCache(true)
     ->setRules(
-    // docs: https://github.com/FriendsOfPHP/PHP-CS-Fixer/blob/3.0/doc/rules/index.rst
+    // docs: https://github.com/FriendsOfPHP/PHP-CS-Fixer/blob/master/doc/rules/index.rst
     // assistance via tool: https://mlocati.github.io/php-cs-fixer-configurator/
         [
-            '@PHP71Migration:risky' => true,
-            '@PHP73Migration' => true,
+            '@PHP80Migration' => true,
+            '@PHP80Migration:risky' => true,
             '@Symfony' => true,
             '@Symfony:risky' => true,
             'declare_strict_types' => true,
-            'phpdoc_order' => true,
             'header_comment' => ['header' => $header],
+            'global_namespace_import' => true,
             'fopen_flags' => ['b_mode' => true],
+            'phpdoc_order' => true,
+            'phpdoc_to_comment' => [
+                'ignored_tags' => [
+                    //    'psalm-var', // needed when PSALM introduced some issues that only manual hints can solve
+                ],
+            ],
         ]
     )
     ->setRiskyAllowed(true)

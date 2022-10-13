@@ -114,15 +114,8 @@ class PluginTest extends TestCase
     /**
      * @depends testPluginIsCapableOfCommand
      *
-     * @uses    \CycloneDX\Composer\MakeBom\Command
-     * @uses    \CycloneDX\Composer\MakeBom\Options
-     * @uses    \CycloneDX\Composer\MakeBom\Factory
-     * @uses    \CycloneDX\Composer\Builders\BomBuilder
-     * @uses    \CycloneDX\Composer\Builders\ComponentBuilder
-     * @uses    \CycloneDX\Core\Factories\LicenseFactory
-     * @uses    \CycloneDX\Core\Spdx\License
-     * @uses    \CycloneDX\Core\Models\Tool
-     * @uses    \CycloneDX\Composer\ToolUpdater
+     * @covers  \CycloneDX\Composer\MakeBom\Command
+     * @covers  \CycloneDX\Composer\MakeBom\Options
      */
     public function testMakeBomCommandIsRegistered(CommandProvider $commandProvider): void
     {
