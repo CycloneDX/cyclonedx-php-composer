@@ -49,7 +49,7 @@ class Options
 
     private const ARGUMENT_COMPOSER_FILE = 'composer-file';
 
-    public const VALUES_OUTPUT_FORMAT = [
+    private const VALUES_OUTPUT_FORMAT = [
         Format::XML,
         Format::JSON,
     ];
@@ -80,7 +80,7 @@ class Options
 
     /**
      * @psalm-suppress MissingThrowsDocblock
-     * @psalm-suppress TooManyArguments as there is a optional 6th param of {@see Command::addOption()}
+     * @psalm-suppress TooManyArguments as there is an optional 6th param of {@see Command::addOption()}
      */
     public function configureCommand(Command $command): Command
     {
@@ -105,7 +105,7 @@ class Options
             ->addOption(
                 self::OPTION_OMIT,
                 null,
-                InputOption::VALUE_IS_ARRAY | InputOption::VALUE_OPTIONAL,
+                InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY,
                 'Omit dependency types.'.\PHP_EOL.
                 self::formatChoice(self::VALUES_OMIT),
                 $this->omit,
@@ -145,31 +145,31 @@ class Options
     }
 
     /**
-     * @psalm-var Version::*
-     *
      * @readonly
+     *
+     * @psalm-var Version::*
      *
      * @psalm-allow-private-mutation
      */
     public string $specVersion = self::VALUE_SPEC_VERSION[0];
 
     /**
+     * @readonly
+     *
      * @var string[]
      *
      * @psalm-var list<'dev'|'plugin'>
-     *
-     * @readonly
      *
      * @psalm-allow-private-mutation
      */
     public array $omit = [];
 
     /**
-     * @psalm-var Format::*
-     *
      * @readonly
      *
      * @psalm-allow-private-mutation
+     *
+     * @psalm-var Format::*
      */
     public string $outputFormat = self::VALUES_OUTPUT_FORMAT[0];
 
@@ -184,6 +184,8 @@ class Options
      * @readonly
      *
      * @psalm-allow-private-mutation
+     *
+     * @psalm-var non-empty-string
      */
     public string $outputFile = self::VALUE_OUTPUT_FILE_STDOUT;
 
@@ -191,6 +193,8 @@ class Options
      * @readonly
      *
      * @psalm-allow-private-mutation
+     *
+     * @psalm-var null|non-empty-string
      */
     public ?string $composerFile = null;
 
@@ -198,6 +202,8 @@ class Options
      * @readonly
      *
      * @psalm-allow-private-mutation
+     *
+     * @psalm-var null|non-empty-string
      */
     public ?string $mainComponentVersion = null;
 
@@ -223,11 +229,16 @@ class Options
             throw new DomainException('Invalid value for option "'.self::OPTION_OUTPUT_FORMAT.'": '.$outputFormat);
         }
 
+        $outputFile = $input->getOption(self::OPTION_OUTPUT_FILE);
+        \assert(\is_string($outputFile));
+        if ('' === $outputFile) {
+            throw new DomainException('Invalid value for option "'.self::OPTION_OUTPUT_FILE.'": '.$outputFile);
+        }
+        // no additional restrictions to $outputFile - stuff like 'ftp://user:pass@host/path/file' is acceptable.
+
         $omit = $input->getOption(self::OPTION_OMIT);
         \assert(\is_array($omit));
         $validate = false !== $input->getOption(self::SWITCH_VALIDATE);
-        $outputFile = $input->getOption(self::OPTION_OUTPUT_FILE);
-        \assert(\is_string($outputFile));
         $composerFile = $input->getArgument(self::ARGUMENT_COMPOSER_FILE);
         \assert(null === $composerFile || \is_string($composerFile));
         $mainComponentVersion = $input->getOption(self::OPTION_MAIN_COMPONENT_VERSION);
@@ -246,11 +257,11 @@ class Options
         $this->outputFormat = $outputFormat;
         $this->validate = $validate;
         $this->outputFile = $outputFile;
-        $this->composerFile = \is_string($composerFile) && '' !== $outputFile
-            ? $composerFile
-            : null;
-        $this->mainComponentVersion = \is_string($mainComponentVersion) && '' !== $mainComponentVersion
+        $this->mainComponentVersion = '' !== $mainComponentVersion
             ? $mainComponentVersion
+            : null;
+        $this->composerFile = '' !== $composerFile
+            ? $composerFile
             : null;
 
         // endregion set state

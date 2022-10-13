@@ -22,17 +22,13 @@
         <include>
             <directory suffix=".php">src</directory>
         </include>
-        <!--
         <report>
             <clover outputFile="reports/coverage.clover.xml"/>
             <html outputDirectory="reports/coverage.html"/>
         </report>
-         /-->
     </coverage>
-    <!--
     <logging>
         <junit outputFile="reports/phpunits.junit.xml"/>
         <testdoxText outputFile="reports/phpunits.txt"/>
     </logging>
-    /-->
 </phpunit>

@@ -44,7 +44,7 @@ composer require --dev cyclonedx/cyclonedx-php-composer
 After successful installation, the composer command `make-bom` is available.
 
 ```text
-$ composer make-bom -h
+$ composer make-bom --help
 Description:
   Generate a CycloneDX Bill of Materials from a PHP composer project.
 
@@ -60,7 +60,7 @@ Options:
                                      [choice: "XML", "JSON"] [default: "XML"]
       --output-file=OUTPUT-FILE      Path to the output file.
                                      Set to "-" to write to STDOUT [default: "-"]
-      --omit[=OMIT]                  Omit dependency types.
+      --omit=OMIT                    Omit dependency types.
                                      [choice: "dev", "plugin"] (multiple values allowed)
       --spec-version=SPEC-VERSION    Which version of CycloneDX spec to use.
                                      [choice: "1.4", "1.3", "1.2", "1.1"] [default: "1.4"]
@@ -68,16 +68,6 @@ Options:
       --mc-version=MC-VERSION        Version of the main component.
                                      This will override auto-detection.
   -h, --help                         Display help for the given command. When no command is given display help for the list command
-  -q, --quiet                        Do not output any message
-  -V, --version                      Display this application version
-      --ansi|--no-ansi               Force (or disable --no-ansi) ANSI output
-  -n, --no-interaction               Do not ask any interactive question
-      --profile                      Display timing and memory usage information
-      --no-plugins                   Whether to disable plugins.
-      --no-scripts                   Skips the execution of all scripts defined in composer.json file.
-  -d, --working-dir=WORKING-DIR      If specified, use the given directory as working directory.
-      --no-cache                     Prevent use of the cache
-  -v|vv|vvv, --verbose               Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug
 ```
 
 ## Demo
