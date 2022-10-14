@@ -147,7 +147,7 @@ class Options
     /**
      * @readonly
      *
-     * @psalm-var Version::*
+     * @psalm-var Version::v*
      *
      * @psalm-allow-private-mutation
      */
