@@ -138,7 +138,7 @@ class Command extends BaseCommand
         /** @var Validator */
         $validator = match ($this->options->outputFormat) {
             Format::JSON => new Validators\JsonStrictValidator($spec),
-            Format::XML => new Validators\XmlValidator($spec)
+            Format::XML => new Validators\XmlValidator($spec),
         };
 
         $validationError = $validator->validateString($bom);

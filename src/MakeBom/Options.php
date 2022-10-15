@@ -49,6 +49,10 @@ class Options
 
     private const ARGUMENT_COMPOSER_FILE = 'composer-file';
 
+    /**
+     * Possible output formats.
+     * First in list is the default value.
+     */
     private const VALUES_OUTPUT_FORMAT = [
         Format::XML,
         Format::JSON,
@@ -61,6 +65,10 @@ class Options
         'plugin',
     ];
 
+    /**
+     * Possible spec versions.
+     * First in list is the default value.
+     */
     private const VALUE_SPEC_VERSION = [
         Version::v1dot4,
         Version::v1dot3,
@@ -147,7 +155,7 @@ class Options
     /**
      * @readonly
      *
-     * @psalm-var Version::v*
+     * @psalm-var Version::*
      *
      * @psalm-allow-private-mutation
      */
