@@ -42,7 +42,6 @@ class Options
     private const OPTION_OUTPUT_FILE = 'output-file';
     private const OPTION_SPEC_VERSION = 'spec-version';
     private const OPTION_MAIN_COMPONENT_VERSION = 'mc-version';
-
     private const OPTION_OMIT = 'omit';
 
     private const SWITCH_VALIDATE = 'validate';
