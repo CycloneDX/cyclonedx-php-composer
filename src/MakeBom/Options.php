@@ -25,7 +25,6 @@ namespace CycloneDX\Composer\MakeBom;
 
 use CycloneDX\Core\Spec\Format;
 use CycloneDX\Core\Spec\Version;
-use DomainException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -215,6 +214,8 @@ class Options
     public ?string $mainComponentVersion = null;
 
     /**
+     * @throws Errors\OptionError
+     *
      * @return $this
      *
      * @psalm-suppress MissingThrowsDocblock
@@ -226,20 +227,20 @@ class Options
         $specVersion = $input->getOption(self::OPTION_SPEC_VERSION);
         \assert(\is_string($specVersion));
         if (false === \in_array($specVersion, self::VALUE_SPEC_VERSION, true)) {
-            throw new DomainException('Invalid value for option "'.self::OPTION_SPEC_VERSION.'": '.$specVersion);
+            throw new Errors\OptionError('Invalid value for option "'.self::OPTION_SPEC_VERSION.'": '.$specVersion);
         }
 
         $outputFormat = $input->getOption(self::OPTION_OUTPUT_FORMAT);
         \assert(\is_string($outputFormat));
         $outputFormat = strtoupper($outputFormat);
         if (false === \in_array($outputFormat, self::VALUES_OUTPUT_FORMAT, true)) {
-            throw new DomainException('Invalid value for option "'.self::OPTION_OUTPUT_FORMAT.'": '.$outputFormat);
+            throw new Errors\OptionError('Invalid value for option "'.self::OPTION_OUTPUT_FORMAT.'": '.$outputFormat);
         }
 
         $outputFile = $input->getOption(self::OPTION_OUTPUT_FILE);
         \assert(\is_string($outputFile));
         if ('' === $outputFile) {
-            throw new DomainException('Invalid value for option "'.self::OPTION_OUTPUT_FILE.'": '.$outputFile);
+            throw new Errors\OptionError('Invalid value for option "'.self::OPTION_OUTPUT_FILE.'": '.$outputFile);
         }
         // no additional restrictions to $outputFile - stuff like 'ftp://user:pass@host/path/file' is acceptable.
 
