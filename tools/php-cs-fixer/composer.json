@@ -3,7 +3,7 @@
     "type": "metapackage",
     "description": "php-cs-fixer",
     "require-dev": {
-        "friendsofphp/php-cs-fixer": "3.11.0",
+        "friendsofphp/php-cs-fixer": "3.12.0",
         "roave/security-advisories": "dev-latest"
     },
     "config": {
