@@ -25,6 +25,11 @@ namespace CycloneDX\Composer\MakeBom\Errors;
 
 use Exception;
 
+/**
+ * @internal
+ *
+ * @author jkowalleck
+ */
 class OutputError extends Exception
 {
 }
