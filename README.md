@@ -57,13 +57,13 @@ Arguments:
 
 Options:
       --output-format=OUTPUT-FORMAT  Which output format to use.
-                                     [choice: "XML", "JSON"] [default: "XML"]
+                                     {choices: "XML", "JSON"} [default: "XML"]
       --output-file=OUTPUT-FILE      Path to the output file.
                                      Set to "-" to write to STDOUT [default: "-"]
       --omit=OMIT                    Omit dependency types.
-                                     [choice: "dev", "plugin"] (multiple values allowed)
+                                     {choices: "dev", "plugin"} (multiple values allowed)
       --spec-version=SPEC-VERSION    Which version of CycloneDX spec to use.
-                                     [choice: "1.4", "1.3", "1.2", "1.1"] [default: "1.4"]
+                                     {choices: "1.4", "1.3", "1.2", "1.1"} [default: "1.4"]
       --validate|--no-validate       Validate the resulting output
       --mc-version=MC-VERSION        Version of the main component.
                                      This will override auto-detection.

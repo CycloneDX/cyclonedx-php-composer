@@ -79,9 +79,9 @@ class Options
      */
     private static function formatChoice(array $values): string
     {
-        return '[choice: "'.
+        return '{choices: "'.
             implode('", "', $values).
-            '"]';
+            '"}';
     }
 
     /**
@@ -145,8 +145,8 @@ class Options
                 self::ARGUMENT_COMPOSER_FILE,
                 InputArgument::OPTIONAL,
                 'Path to composer config file.'.\PHP_EOL.
-                'Defaults to "composer.json" file in working directory.',
-                $this->composerFile
+                '[default: "composer.json" file in current working directory]',
+                null
             );
     }
 
