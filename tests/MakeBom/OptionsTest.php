@@ -133,8 +133,8 @@ class OptionsTest extends TestCase
             "-- ''",
             ['composerFile' => null],
         ];
-        $randomFile = sys_get_temp_dir().\DIRECTORY_SEPARATOR.'composer.json';
-        yield 'some composerFile -> null' => [
+        $randomFile = 'foo/composer.json';
+        yield 'some composerFile' => [
             '-- '.escapeshellarg($randomFile),
             ['composerFile' => $randomFile],
         ];
