@@ -24,8 +24,9 @@ declare(strict_types=1);
 namespace CycloneDX\Composer\MakeBom;
 
 use Composer\Command\BaseCommand;
+use Composer\Factory as ComposerFactory;
 use Composer\IO\IOInterface;
-use CycloneDX\Core\Models\Bom;
+use CycloneDX\Composer\Builder;
 use CycloneDX\Core\Serialization;
 use CycloneDX\Core\Spec\Format;
 use CycloneDX\Core\Spec\Spec;
@@ -81,7 +82,7 @@ class Command extends BaseCommand
 
             return self::INVALID;
         }
-        $io->writeErrorRaw(__METHOD__.' Options: '.print_r($this->options, true), true, IOInterface::DEBUG);
+        $io->writeErrorRaw(__METHOD__.' Options: '.var_export($this->options, true), true, IOInterface::DEBUG);
 
         try {
             $spec = SpecFactory::makeForVersion($this->options->specVersion);
@@ -110,13 +111,17 @@ class Command extends BaseCommand
     {
         $io->writeError('<info>generate BOM...</info>', verbosity: IOInterface::VERBOSE);
 
-        $model = new Bom(); // TODO
+        $model = (new Builder())->createBomFromComposer(
+            (new ComposerFactory())->createComposer($io, $this->options->composerFile)
+        );
 
+        $io->writeError('<info>serialize BOM...</info>', verbosity: IOInterface::VERBOSE);
         /** @var Serialization\Serializer */
         $serializer = match ($this->options->outputFormat) {
             Format::JSON => new Serialization\JsonSerializer(new Serialization\JSON\NormalizerFactory($spec)),
             Format::XML => new Serialization\XmlSerializer(new Serialization\DOM\NormalizerFactory($spec)),
         };
+        $io->writeErrorRaw('using '.$serializer::class, true, IOInterface::DEBUG);
 
         return $serializer->serialize($model, prettyPrint: true);
     }
@@ -134,12 +139,12 @@ class Command extends BaseCommand
             return;
         }
         $io->writeError('<info>validate BOM...</info>', verbosity: IOInterface::VERBOSE);
-
         /** @var Validator */
         $validator = match ($this->options->outputFormat) {
             Format::JSON => new Validators\JsonStrictValidator($spec),
             Format::XML => new Validators\XmlValidator($spec),
         };
+        $io->writeErrorRaw('using '.$validator::class, true, IOInterface::DEBUG);
 
         $validationError = $validator->validateString($bom);
         if (null !== $validationError) {
