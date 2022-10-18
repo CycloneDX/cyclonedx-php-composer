@@ -62,14 +62,14 @@ class Builder
 
         $withDev = true; // TODO
         try {
-            $bom->getComponents()->addItems(
-                ...array_map(
-                    [$this, 'createComponentFromPackage'],
-                    $composer->getLocker()->getLockedRepository($withDev)->getCanonicalPackages()
-                )
-            );
+            $dependencies = $composer->getLocker()->getLockedRepository($withDev)->getCanonicalPackages();
         } catch (\Throwable) {
-            // pass
+            $dependencies = [];
+        }
+
+        foreach ($dependencies as $package) {
+            $component = $this->createComponentFromPackage($package);
+            $bom->getComponents()->addItems($component);
         }
 
         return $bom;
@@ -118,7 +118,7 @@ class Builder
         if ($sourceUrl) {
             $component->getExternalReferences()->addItems(
                 new Models\ExternalReference(
-                    Enums\ExternalReferenceType::VCS,
+                    Enums\ExternalReferenceType::DISTRIBUTION,
                     $sourceUrl
                 )
             );

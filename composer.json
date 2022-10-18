@@ -32,7 +32,7 @@
     "require": {
         "php": "^8.0",
         "composer-plugin-api": "^2.3",
-        "cyclonedx/cyclonedx-library": "@dev",
+        "cyclonedx/cyclonedx-library": "2.x-dev",
         "package-url/packageurl-php": "^1.0"
     },
     "require-dev": {
@@ -40,15 +40,6 @@
         "phpunit/phpunit": "9.5.26",
         "roave/security-advisories": "dev-latest"
     },
-    "repositories": [
-        {
-            "type": "path",
-            "url": "../cyclonedx-php-library",
-            "options": {
-                "symlink": true
-            }
-        }
-    ],
     "prefer-stable": true,
     "autoload": {
         "psr-4": {
