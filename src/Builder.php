@@ -42,6 +42,9 @@ use RuntimeException;
  */
 class Builder
 {
+    // TODO register in https://github.com/CycloneDX/cyclonedx-property-taxonomy
+    private const PropertyName_PackageType = 'cdx:composer:package:type';
+
     private LicenseFactory $licenseFactory;
 
     /**
@@ -56,20 +59,57 @@ class Builder
     {
         $bom = new Models\Bom();
 
-        $bom->getMetadata()->setComponent(
-            $this->createComponentFromRootPackage($composer->getPackage())
-        );
+        $rootPackage = $composer->getPackage();
+        $rootComponent = $this->createComponentFromRootPackage($rootPackage);
+        $bom->getMetadata()->setComponent($rootComponent);
 
         $withDev = true; // TODO
         try {
-            $dependencies = $composer->getLocker()->getLockedRepository($withDev)->getCanonicalPackages();
+            $packagesRepo = $composer->getLocker()->getLockedRepository($withDev);
         } catch (\Throwable) {
-            $dependencies = [];
+            $packagesRepo = null;
         }
 
-        foreach ($dependencies as $package) {
-            $component = $this->createComponentFromPackage($package);
-            $bom->getComponents()->addItems($component);
+        if (null !== $packagesRepo) {
+            $packages = $packagesRepo->getCanonicalPackages();
+            /** @psalm-var array<string, Models\Component> */
+            $components = [$rootPackage->getUniqueName() => $rootComponent];
+
+            foreach ($packages as $package) {
+                $component = $this->createComponentFromPackage($package);
+                $bom->getComponents()->addItems($component);
+                $components[$package->getUniqueName()] = $component;
+                unset($component, $package);
+            }
+            /** @var PackageInterface $package */
+            foreach ([$rootPackage, ...$packages] as $package) {
+                $component = $components[$package->getUniqueName()] ?? null;
+                \assert(null !== $component);
+                foreach ($package->getRequires() as $requires) {
+                    $requiredPackage = $packagesRepo->findPackage($requires->getTarget(), $requires->getConstraint());
+                    if (null === $requiredPackage) {
+                        continue;
+                    }
+                    $dependency = $components[$requiredPackage->getUniqueName()] ?? null;
+                    if (null !== $dependency) {
+                        $component->getDependencies()->addItems($dependency->getBomRef());
+                    }
+                }
+                unset($package, $component, $requires, $dependency);
+            }
+            if ($withDev) {
+                foreach ($rootPackage->getDevRequires() as $requires) {
+                    $requiredPackage = $packagesRepo->findPackage($requires->getTarget(), $requires->getConstraint());
+                    if (null === $requiredPackage) {
+                        continue;
+                    }
+                    $dependency = $components[$requiredPackage->getUniqueName()] ?? null;
+                    if (null !== $dependency) {
+                        $rootComponent->getDependencies()->addItems($dependency->getBomRef());
+                    }
+                }
+                unset($requires,$requiredPackage, $dependency);
+            }
         }
 
         return $bom;
@@ -94,10 +134,11 @@ class Builder
      */
     private function createComponentFromPackage(PackageInterface $package): Models\Component
     {
-        [$group, $name] = explode($package->getName(), '/', 2);
-        if ('' === $name) {
-            [$name, $group] = [$group, null];
-        }
+        $groupAndName = explode('/', $package->getName(), 2);
+        [$group, $name] = 2 === \count($groupAndName)
+            ? $groupAndName
+            : [null, reset($groupAndName)];
+
         $distUrl = $package->getDistUrl();
         $sourceUrl = $package->getSourceUrl();
 
@@ -136,6 +177,11 @@ class Builder
                 ...iterator_to_array($this->createExternalReferencesFromPackage($package))
             );
         }
+
+        $component->getProperties()->addItems(
+            new Models\Property(self::PropertyName_PackageType, $package->getType())
+            // TODO test whether a component was a devDependency or not
+        );
 
         // TODO continue set needed information
 
