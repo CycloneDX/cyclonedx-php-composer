@@ -71,7 +71,7 @@ class Builder
         }
 
         if (null !== $packagesRepo) {
-            $packages = $packagesRepo->getCanonicalPackages();
+            $packages = array_values($packagesRepo->getCanonicalPackages());
             /** @psalm-var array<string, Models\Component> */
             $components = [$rootPackage->getUniqueName() => $rootComponent];
 
@@ -81,7 +81,11 @@ class Builder
                 $components[$package->getUniqueName()] = $component;
                 unset($component, $package);
             }
-            /** @var PackageInterface $package */
+            /**
+             * @var PackageInterface $package
+             *
+             * @psalm-suppress UnnecessaryVarAnnotation -- as it is needed for some IDE
+             */
             foreach ([$rootPackage, ...$packages] as $package) {
                 $component = $components[$package->getUniqueName()] ?? null;
                 \assert(null !== $component);
@@ -123,7 +127,7 @@ class Builder
         $component = $this->createComponentFromPackage($package);
 
         return $component
-            ->setType(Enums\Classification::APPLICATION)
+            ->setType(Enums\ComponentType::APPLICATION)
             ->setPackageUrl(
                 $this->createPurlFromComponent($component)
             );
@@ -137,12 +141,15 @@ class Builder
         $groupAndName = explode('/', $package->getName(), 2);
         [$group, $name] = 2 === \count($groupAndName)
             ? $groupAndName
-            : [null, reset($groupAndName)];
+            : [null, $groupAndName[0]];
+        /** @psalm-suppress RedundantCondition */
+        \assert(null === $group || \is_string($group));
+        \assert(\is_string($name));
 
         $distUrl = $package->getDistUrl();
         $sourceUrl = $package->getSourceUrl();
 
-        $component = new Models\Component(Enums\Classification::LIBRARY, $name);
+        $component = new Models\Component(Enums\ComponentType::LIBRARY, $name);
         $component->setBomRefValue($package->getUniqueName());
         // TODO author(s)
         $component->setGroup($group);
@@ -210,6 +217,8 @@ class Builder
 
     /**
      * @return Generator<Models\ExternalReference>
+     *
+     * @psalm-suppress MissingThrowsDocblock
      */
     private function createExternalReferencesFromPackage(CompletePackageInterface $package): Generator
     {
