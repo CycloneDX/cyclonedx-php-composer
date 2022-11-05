@@ -32,8 +32,6 @@ use CycloneDX\Core\Enums\Classification;
 use CycloneDX\Core\Enums\HashAlgorithm;
 use CycloneDX\Core\Models\Component;
 use CycloneDX\Core\Repositories\HashRepository;
-use DomainException;
-use UnexpectedValueException;
 
 /**
  * @internal
@@ -89,18 +87,18 @@ class ComponentBuilder
     }
 
     /**
-     * @throws UnexpectedValueException if the given package does not provide a name or version
+     * @throws \UnexpectedValueException if the given package does not provide a name or version
      */
     public function makeFromPackage(PackageInterface $package, ?string $packageVersionOverride = null): Component
     {
         $rawName = $package->getPrettyName();
         if (empty($rawName)) {
-            throw new UnexpectedValueException('Encountered package without name:'.\PHP_EOL.print_r($package, true));
+            throw new \UnexpectedValueException('Encountered package without name:'.\PHP_EOL.print_r($package, true));
         }
 
         $version = $packageVersionOverride ?? $this->getPackageVersion($package);
         if ('' === $version) {
-            throw new UnexpectedValueException("Encountered package without version: $rawName");
+            throw new \UnexpectedValueException("Encountered package without version: $rawName");
         }
 
         $type = $this->getComponentType($package);
@@ -128,7 +126,7 @@ class ComponentBuilder
             }
             $component->setPackageUrl($purl);
             $component->setBomRefValue((string) $purl);
-        } catch (DomainException $exception) {
+        } catch (\DomainException $exception) {
             unset($exception);
         }
 

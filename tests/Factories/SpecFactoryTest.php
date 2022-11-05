@@ -28,7 +28,6 @@ use CycloneDX\Core\Spec\Spec11;
 use CycloneDX\Core\Spec\Spec12;
 use CycloneDX\Core\Spec\Spec13;
 use CycloneDX\Core\Spec\SpecInterface;
-use Generator;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -58,7 +57,7 @@ class SpecFactoryTest extends TestCase
         self::assertInstanceOf($expectedClassName, $spec);
     }
 
-    public static function dpMakeExpected(): Generator
+    public static function dpMakeExpected(): \Generator
     {
         // yield '1.0' => ['1.0', Spec10::class]; // not implemented
         yield '1.1' => ['1.1', Spec11::class];
@@ -86,7 +85,7 @@ class SpecFactoryTest extends TestCase
         self::assertSame($version, $spec->getVersion());
     }
 
-    public static function versionsOfSPECS(): Generator
+    public static function versionsOfSPECS(): \Generator
     {
         foreach (array_keys(SpecFactory::SPECS) as $version) {
             yield $version => [$version];
