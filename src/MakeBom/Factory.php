@@ -37,7 +37,6 @@ use CycloneDX\Core\Validation\Validators\JsonStrictValidator;
 use CycloneDX\Core\Validation\Validators\XmlValidator;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Output\StreamOutput;
-use UnexpectedValueException;
 
 /**
  * @internal
@@ -85,7 +84,7 @@ class Factory
     }
 
     /**
-     * @throws UnexpectedValueException if version is unknown
+     * @throws \UnexpectedValueException if version is unknown
      */
     public function makeSpecFromOptions(Options $options): SpecInterface
     {
@@ -93,7 +92,7 @@ class Factory
     }
 
     /**
-     * @throws UnexpectedValueException if SPEC version is unknown
+     * @throws \UnexpectedValueException if SPEC version is unknown
      */
     public function makeValidatorFromOptions(Options $options): ?ValidatorInterface
     {
@@ -107,7 +106,7 @@ class Factory
     }
 
     /**
-     * @throws UnexpectedValueException if SPEC version is unknown
+     * @throws \UnexpectedValueException if SPEC version is unknown
      */
     public function makeSerializerFromOptions(Options $options): SerializerInterface
     {

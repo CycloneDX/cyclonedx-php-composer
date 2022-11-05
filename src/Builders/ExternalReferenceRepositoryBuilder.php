@@ -94,7 +94,7 @@ class ExternalReferenceRepositoryBuilder
      *
      * @psalm-return Generator<ExternalReference>
      */
-    private function getSource(PackageInterface $package): Generator
+    private function getSource(PackageInterface $package): \Generator
     {
         $urls = $package->getSourceUrls();
         if (empty($urls)) {
@@ -121,7 +121,7 @@ class ExternalReferenceRepositoryBuilder
      *
      * @psalm-return Generator<ExternalReference>
      */
-    private function getDist(PackageInterface $package): Generator
+    private function getDist(PackageInterface $package): \Generator
     {
         $urls = $package->getDistUrls();
         if (empty($urls)) {
@@ -181,7 +181,7 @@ class ExternalReferenceRepositoryBuilder
      *
      * @psalm-return Generator<ExternalReference>
      */
-    private function getSupport(CompletePackageInterface $package): Generator
+    private function getSupport(CompletePackageInterface $package): \Generator
     {
         $support = $package->getSupport();
         if (empty($support)) {
@@ -214,7 +214,7 @@ class ExternalReferenceRepositoryBuilder
      *
      * @psalm-return Generator<ExternalReference>
      */
-    private function getFunding(CompletePackageInterface $package): Generator
+    private function getFunding(CompletePackageInterface $package): \Generator
     {
         $fundings = $package->getFunding();
         if (empty($fundings)) {

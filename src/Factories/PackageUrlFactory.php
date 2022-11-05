@@ -25,7 +25,6 @@ namespace CycloneDX\Composer\Factories;
 
 use CycloneDX\Core\Enums\HashAlgorithm;
 use CycloneDX\Core\Models\Component;
-use DomainException;
 use PackageUrl\PackageUrl;
 
 /**
@@ -42,7 +41,7 @@ class PackageUrlFactory
     private const PURL_TYPE = 'composer';
 
     /**
-     * @throws DomainException when packageurl could not be constructed
+     * @throws \DomainException when packageurl could not be constructed
      */
     public function makeFromComponent(Component $component): PackageUrl
     {

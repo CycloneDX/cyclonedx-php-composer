@@ -28,7 +28,6 @@ use CycloneDX\Core\Spec\Spec12;
 use CycloneDX\Core\Spec\Spec13;
 use CycloneDX\Core\Spec\SpecInterface;
 use CycloneDX\Core\Spec\Version;
-use UnexpectedValueException;
 
 /**
  * @internal
@@ -53,12 +52,12 @@ class SpecFactory
     /**
      * @psalm-assert Version::V_* $version
      *
-     * @throws UnexpectedValueException if version is unknown
+     * @throws \UnexpectedValueException if version is unknown
      */
     public function make(string $version = self::VERSION_LATEST): SpecInterface
     {
         if (false === \array_key_exists($version, self::SPECS)) {
-            throw new UnexpectedValueException("Unexpected spec-version: $version");
+            throw new \UnexpectedValueException("Unexpected spec-version: $version");
         }
         $class = self::SPECS[$version];
 
