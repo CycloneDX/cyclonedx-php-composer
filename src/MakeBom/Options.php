@@ -31,6 +31,8 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 
 /**
+ * @psalm-type TOmittable='dev'|'plugin'
+ *
  * @internal
  *
  * @author jkowalleck
@@ -50,6 +52,7 @@ class Options
     /**
      * Possible output formats.
      * First in list is the default value.
+     * @psalm-var non-empty-list<Format::*>
      */
     private const VALUES_OUTPUT_FORMAT = [
         Format::XML,
@@ -58,6 +61,10 @@ class Options
 
     public const VALUE_OUTPUT_FILE_STDOUT = '-';
 
+    /**
+     * Possible omittables.
+     * @psalm-var non-empty-list<TOmittable>
+     */
     private const VALUES_OMIT = [
         'dev',
         'plugin',
@@ -164,7 +171,7 @@ class Options
      *
      * @var string[]
      *
-     * @psalm-var list<'dev'|'plugin'>
+     * @psalm-var list<TOmittable>
      *
      * @psalm-allow-private-mutation
      */
