@@ -47,11 +47,16 @@ class Builder
     /**
      * @throws RuntimeException if loading licenses failed
      */
-    public function __construct()
-    {
+    public function __construct(
+        private bool $omitDev,
+        private bool $omitPlugin,
+    ) {
         $this->licenseFactory = new LicenseFactory(new SpdxLicenseValidator());
     }
 
+    /**
+     * @psalm-suppress MissingThrowsDocblock
+     */
     public function createBomFromComposer(Composer $composer): Models\Bom
     {
         $bom = new Models\Bom();
@@ -59,58 +64,55 @@ class Builder
         $rootPackage = $composer->getPackage();
         $rootComponent = $this->createComponentFromRootPackage($rootPackage);
         $bom->getMetadata()->setComponent($rootComponent);
+        $composerLocker = $composer->getLocker();
 
-        $withDev = true; // TODO
-        try {
-            $packagesRepo = $composer->getLocker()->getLockedRepository($withDev);
-        } catch (\Throwable) {
-            $packagesRepo = null;
+        $withDevReqs = false === $this->omitDev && isset($composerLocker->getLockData()['packages-dev']);
+        $packagesRepo = $composerLocker->getLockedRepository($withDevReqs);
+
+        $packages = array_values($packagesRepo->getCanonicalPackages());
+        /** @psalm-var array<string, Models\Component> */
+        $components = [$rootPackage->getUniqueName() => $rootComponent];
+
+        foreach ($packages as $package) {
+            $component = $this->createComponentFromPackage($package);
+            $bom->getComponents()->addItems($component);
+            $components[$package->getUniqueName()] = $component;
+            unset($component, $package);
         }
-
-        if (null !== $packagesRepo) {
-            $packages = array_values($packagesRepo->getCanonicalPackages());
-            /** @psalm-var array<string, Models\Component> */
-            $components = [$rootPackage->getUniqueName() => $rootComponent];
-
-            foreach ($packages as $package) {
-                $component = $this->createComponentFromPackage($package);
-                $bom->getComponents()->addItems($component);
-                $components[$package->getUniqueName()] = $component;
-                unset($component, $package);
-            }
-            /**
-             * @var PackageInterface $package
-             *
-             * @psalm-suppress UnnecessaryVarAnnotation -- as it is needed for some IDE
-             */
-            foreach ([$rootPackage, ...$packages] as $package) {
-                $component = $components[$package->getUniqueName()] ?? null;
-                \assert(null !== $component);
-                foreach ($package->getRequires() as $requires) {
-                    $requiredPackage = $packagesRepo->findPackage($requires->getTarget(), $requires->getConstraint());
-                    if (null === $requiredPackage) {
-                        continue;
-                    }
-                    $dependency = $components[$requiredPackage->getUniqueName()] ?? null;
-                    if (null !== $dependency) {
-                        $component->getDependencies()->addItems($dependency->getBomRef());
-                    }
+        /**
+         * @var PackageInterface $package
+         *
+         * @psalm-suppress UnnecessaryVarAnnotation -- as it is needed for some IDE
+         */
+        foreach ([$rootPackage, ...$packages] as $package) {
+            $component = $components[$package->getUniqueName()] ?? null;
+            \assert(null !== $component);
+            foreach ($package->getRequires() as $required) {
+                $requiredPackage = $packagesRepo->findPackage($required->getTarget(), $required->getConstraint());
+                if (null === $requiredPackage) {
+                    continue;
                 }
-                unset($package, $component, $requires, $dependency);
-            }
-            if ($withDev) {
-                foreach ($rootPackage->getDevRequires() as $requires) {
-                    $requiredPackage = $packagesRepo->findPackage($requires->getTarget(), $requires->getConstraint());
-                    if (null === $requiredPackage) {
-                        continue;
-                    }
-                    $dependency = $components[$requiredPackage->getUniqueName()] ?? null;
-                    if (null !== $dependency) {
-                        $rootComponent->getDependencies()->addItems($dependency->getBomRef());
-                    }
+                $dependency = $components[$requiredPackage->getUniqueName()] ?? null;
+                if (null !== $dependency) {
+                    $component->getDependencies()->addItems($dependency->getBomRef());
                 }
-                unset($requires,$requiredPackage, $dependency);
             }
+            unset($package, $component, $required, $dependency);
+        }
+        if ($withDevReqs) {
+            foreach ($rootPackage->getDevRequires() as $required) {
+                $requiredPackage = $packagesRepo->findPackage($required->getTarget(), $required->getConstraint());
+                if (null === $requiredPackage) {
+                    continue;
+                }
+                $dependency = $components[$requiredPackage->getUniqueName()] ?? null;
+                if (null !== $dependency) {
+                    $dependency->getProperties()->addItems(
+                        new Models\Property(Properties::Name_DevRequirement, Properties::Value_True));
+                    $rootComponent->getDependencies()->addItems($dependency->getBomRef());
+                }
+            }
+            unset($required,$requiredPackage, $dependency);
         }
 
         return $bom;
@@ -181,8 +183,7 @@ class Builder
         }
 
         $component->getProperties()->addItems(
-            new Models\Property(Properties::PackageType, $package->getType())
-            // TODO test whether a component was a devDependency or not
+            new Models\Property(Properties::Name_PackageType, $package->getType())
         );
 
         // TODO continue set needed information

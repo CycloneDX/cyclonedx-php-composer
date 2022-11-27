@@ -32,5 +32,9 @@ namespace CycloneDX\Composer;
  */
 abstract class Properties
 {
-    public const PackageType = 'cdx:composer:package:type';
+    public const Name_PackageType = 'cdx:composer:package:type';
+    public const Name_DevRequirement = 'cdx:composer:package:isDevRequirement';
+
+    public const Value_True = 'True';
+    public const Value_False = 'False';
 }

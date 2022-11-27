@@ -111,7 +111,10 @@ class Command extends BaseCommand
     {
         $io->writeError('<info>generate BOM...</info>', verbosity: IOInterface::VERBOSE);
 
-        $model = (new Builder())->createBomFromComposer(
+        $model = (new Builder(
+            \in_array('dev', $this->options->omit),
+            \in_array('plugin', $this->options->omit),
+        ))->createBomFromComposer(
             (new ComposerFactory())->createComposer($io, $this->options->composerFile)
         );
 
