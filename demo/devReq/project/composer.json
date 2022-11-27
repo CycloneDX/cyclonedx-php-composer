@@ -1,0 +1,37 @@
+{
+    "name": "cyclonedx-demo/cyclonedx-php-composer-devreq",
+    "description": "demo of cyclonedx/cyclonedx-php-composer with a dev dependency",
+    "type": "project",
+    "version": "dev-master",
+    "homepage": "https://cyclonedx.org/",
+    "support": {
+        "email": "support@cyclonedx.org",
+        "issues": "https://github.com/CycloneDX/cyclonedx-php-composer/issues",
+        "forum": "https://groups.io/g/CycloneDX",
+        "chat": "https://cyclonedx.org/slack/invite",
+        "docs": "https://github.com/CycloneDX/cyclonedx-php-composer/blob/master/demo/local/README.md"
+    },
+    "require": {
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9",
+        "cyclonedx/cyclonedx-php-composer": "@dev"
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../../..",
+            "symlink": true
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "config": {
+        "allow-plugins": {
+            "cyclonedx/cyclonedx-php-composer": true,
+            "ergebnis/composer-normalize": true
+        },
+        "preferred-install": "dist",
+        "sort-packages": true
+    }
+}
