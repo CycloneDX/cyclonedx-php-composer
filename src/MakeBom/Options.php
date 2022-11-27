@@ -52,6 +52,7 @@ class Options
     /**
      * Possible output formats.
      * First in list is the default value.
+     *
      * @psalm-var non-empty-list<Format::*>
      */
     private const VALUES_OUTPUT_FORMAT = [
@@ -63,6 +64,7 @@ class Options
 
     /**
      * Possible omittables.
+     *
      * @psalm-var non-empty-list<TOmittable>
      */
     private const VALUES_OMIT = [

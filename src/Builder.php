@@ -42,9 +42,6 @@ use RuntimeException;
  */
 class Builder
 {
-    // TODO register in https://github.com/CycloneDX/cyclonedx-property-taxonomy
-    private const PropertyName_PackageType = 'cdx:composer:package:type';
-
     private LicenseFactory $licenseFactory;
 
     /**
@@ -128,9 +125,7 @@ class Builder
 
         return $component
             ->setType(Enums\ComponentType::APPLICATION)
-            ->setPackageUrl(
-                $this->createPurlFromComponent($component)
-            );
+            ->setPackageUrl($this->createPurlFromComponent($component));
     }
 
     /**
@@ -186,7 +181,7 @@ class Builder
         }
 
         $component->getProperties()->addItems(
-            new Models\Property(self::PropertyName_PackageType, $package->getType())
+            new Models\Property(Properties::PackageType, $package->getType())
             // TODO test whether a component was a devDependency or not
         );
 
