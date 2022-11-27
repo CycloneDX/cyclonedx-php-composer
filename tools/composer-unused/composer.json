@@ -3,7 +3,7 @@
     "type": "metapackage",
     "description": "composer-unused",
     "require-dev": {
-        "composer/composer": "^2.1.12",
+        "composer/composer": "^2.3",
         "icanhazstring/composer-unused": "0.8.4",
         "roave/security-advisories": "dev-latest"
     },
