@@ -24,11 +24,15 @@ declare(strict_types=1);
 namespace CycloneDX\Composer;
 
 /**
+ * CDX properties' names and well-known values - specific to this very tool.
+ *
+ * @see https://github.com/CycloneDX/cyclonedx-property-taxonomy/blob/main/cdx/composer.md
+ *
+ * @todo register in https://github.com/CycloneDX/cyclonedx-property-taxonomy
+ *
  * @internal
  *
  * @author jkowalleck
- *
- * TODO register in https://github.com/CycloneDX/cyclonedx-property-taxonomy
  */
 abstract class Properties
 {
