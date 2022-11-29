@@ -69,7 +69,16 @@ class Builder
         $withDevReqs = false === $this->omitDev && isset($composerLocker->getLockData()['packages-dev']);
         $packagesRepo = $composerLocker->getLockedRepository($withDevReqs);
 
-        $packages = array_values($packagesRepo->getCanonicalPackages());
+        /**
+         * @psalm-var list<\Composer\Package\PackageInterface> $packages
+         * @psalm-suppress MixedArgument
+         */
+        $packages = array_values(
+            method_exists($packagesRepo, 'getCanonicalPackages')
+            // since composer 2.4
+            ? $packagesRepo->getCanonicalPackages()
+            : $packagesRepo->getPackages()
+        );
         /** @psalm-var array<string, Models\Component> */
         $components = [$rootPackage->getUniqueName() => $rootComponent];
 

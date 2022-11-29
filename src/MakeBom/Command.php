@@ -111,12 +111,14 @@ class Command extends BaseCommand
     {
         $io->writeError('<info>generate BOM...</info>', verbosity: IOInterface::VERBOSE);
 
+        $composer = (new ComposerFactory())->createComposer($io, $this->options->composerFile, fullLoad: true);
+        /** @psalm-suppress RedundantConditionGivenDocblockType -- as with lowest-compatible dependencies this is needed  */
+        assert($composer instanceof \Composer\Composer);
         $model = (new Builder(
             \in_array('dev', $this->options->omit),
             \in_array('plugin', $this->options->omit),
-        ))->createBomFromComposer(
-            (new ComposerFactory())->createComposer($io, $this->options->composerFile)
-        );
+        ))->createBomFromComposer($composer);
+        unset($composer);
 
         $io->writeError('<info>serialize BOM...</info>', verbosity: IOInterface::VERBOSE);
         /** @var Serialization\Serializer */
