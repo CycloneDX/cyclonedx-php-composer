@@ -1,140 +1,146 @@
 {
-    "$schema": "http://cyclonedx.org/schema/bom-1.3.schema.json",
+    "$schema": "http://cyclonedx.org/schema/bom-1.3a.schema.json",
     "bomFormat": "CycloneDX",
     "specVersion": "1.3",
     "version": 1,
     "metadata": {
-        "tools": [
-            {
-                "vendor": "cyclonedx",
-                "name": "cyclonedx-php-composer",
-                "version": "dev-master"
-            }
-        ],
         "component": {
-            "bom-ref": "pkg:composer/cyclonedx-demo/cyclonedx-php-composer-local@dev-master",
+            "bom-ref": "cyclonedx-demo/cyclonedx-php-composer-local-dev-master",
             "type": "application",
             "name": "cyclonedx-php-composer-local",
             "version": "dev-master",
             "group": "cyclonedx-demo",
             "description": "demo of cyclonedx/cyclonedx-php-composer with a local dependency",
-            "purl": "pkg:composer/cyclonedx-demo/cyclonedx-php-composer-local@dev-master",
+            "purl": "pkg:composer/cyclonedx-demo/cyclonedx-php-composer-local",
             "externalReferences": [
                 {
                     "type": "website",
                     "url": "https://cyclonedx.org/",
-                    "comment": "As set via `homepage` in composer package definition."
+                    "comment": "as detected from composer manifest \"homepage\""
                 },
                 {
                     "type": "other",
-                    "url": "mailto:support@cyclonedx.org",
-                    "comment": "As set via `support.email` in composer package definition."
+                    "url": "support@cyclonedx.org",
+                    "comment": "as detected from composer manifest 'support.email'"
                 },
                 {
                     "type": "issue-tracker",
                     "url": "https://github.com/CycloneDX/cyclonedx-php-composer/issues",
-                    "comment": "As set via `support.issues` in composer package definition."
+                    "comment": "as detected from composer manifest 'support.issues'"
                 },
                 {
-                    "type": "support",
+                    "type": "other",
                     "url": "https://groups.io/g/CycloneDX",
-                    "comment": "As set via `support.forum` in composer package definition."
+                    "comment": "as detected from composer manifest 'support.forum'"
                 },
                 {
                     "type": "chat",
                     "url": "https://cyclonedx.org/slack/invite",
-                    "comment": "As set via `support.chat` in composer package definition."
+                    "comment": "as detected from composer manifest 'support.chat'"
                 },
                 {
                     "type": "documentation",
                     "url": "https://github.com/CycloneDX/cyclonedx-php-composer/blob/master/demo/local/README.md",
-                    "comment": "As set via `support.docs` in composer package definition."
+                    "comment": "as detected from composer manifest 'support.docs'"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "cdx:composer:package:type",
+                    "value": "project"
                 }
             ]
         }
     },
     "components": [
         {
-            "bom-ref": "pkg:composer/cyclonedx-demo/local-demo-dependency@1.33.7",
+            "bom-ref": "cyclonedx-demo/local-demo-dependency-1.33.7.0",
             "type": "library",
             "name": "local-demo-dependency",
-            "version": "1.33.7",
+            "version": "1.33.7.0",
             "group": "cyclonedx-demo",
             "description": "a package that is hosted locally and required in a local demo",
-            "purl": "pkg:composer/cyclonedx-demo/local-demo-dependency@1.33.7",
             "externalReferences": [
                 {
                     "type": "distribution",
-                    "url": "packages/local-demo-dependency",
-                    "comment": "As detected by composer's `getDistUrls()` (type=path & reference=cef4d2e23e681fb587778e7e044718bce2f15c3f & sha1=UNDEFINED)"
-                },
+                    "url": "packages/local-demo-dependency"
+                }
+            ],
+            "properties": [
                 {
-                    "type": "other",
-                    "url": "https://cyclonedx.org/about/participate/",
-                    "comment": "As set via `funding` in composer package definition. (type=demo-funding-purpose)"
+                    "name": "cdx:composer:package:type",
+                    "value": "library"
                 }
             ]
         },
         {
-            "bom-ref": "pkg:composer/cyclonedx-demo/local-demo-issue-158@dev-issue-158",
+            "bom-ref": "cyclonedx-demo/local-demo-issue-158-dev-issue-158",
             "type": "library",
             "name": "local-demo-issue-158",
             "version": "dev-issue-158",
             "group": "cyclonedx-demo",
             "description": "a package that reproduces issue#158",
-            "purl": "pkg:composer/cyclonedx-demo/local-demo-issue-158@dev-issue-158",
             "externalReferences": [
                 {
                     "type": "distribution",
-                    "url": "packages/local-demo-issue-158",
-                    "comment": "As detected by composer's `getDistUrls()` (type=path & reference=b49b55826a803c5105b1b455b3fac8f5da3007f1 & sha1=UNDEFINED)"
+                    "url": "packages/local-demo-issue-158"
                 },
                 {
                     "type": "website",
                     "url": "https://github.com/CycloneDX/cyclonedx-php-composer/issues/158",
-                    "comment": "As set via `homepage` in composer package definition."
+                    "comment": "as detected from composer manifest \"homepage\""
                 },
                 {
                     "type": "issue-tracker",
                     "url": "https://pear.php.net/bugs/search.php?cmd=display&package_name[]=PEAR_Exception",
-                    "comment": "As set via `support.issues` in composer package definition."
+                    "comment": "as detected from composer manifest 'support.issues'"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "cdx:composer:package:type",
+                    "value": "library"
                 }
             ]
         },
         {
-            "bom-ref": "pkg:composer/cyclonedx-demo/local-dependency-with-minimal-setup@dev-master",
+            "bom-ref": "cyclonedx-demo/local-dependency-with-minimal-setup-dev-next-reimplement",
             "type": "library",
             "name": "local-dependency-with-minimal-setup",
-            "version": "dev-master",
+            "version": "dev-next-reimplement",
             "group": "cyclonedx-demo",
-            "purl": "pkg:composer/cyclonedx-demo/local-dependency-with-minimal-setup@dev-master",
             "externalReferences": [
                 {
                     "type": "distribution",
-                    "url": "packages/local-dependency-with-minimal-setup",
-                    "comment": "As detected by composer's `getDistUrls()` (type=path & reference=5cdadb5ab51e8009613e68c49f8d07fcd512da78 & sha1=UNDEFINED)"
+                    "url": "packages/local-dependency-with-minimal-setup"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "cdx:composer:package:type",
+                    "value": "library"
                 }
             ]
         }
     ],
     "dependencies": [
         {
-            "ref": "pkg:composer/cyclonedx-demo/local-demo-dependency@1.33.7",
+            "ref": "cyclonedx-demo/local-demo-dependency-1.33.7.0",
             "dependsOn": [
-                "pkg:composer/cyclonedx-demo/local-dependency-with-minimal-setup@dev-master"
+                "cyclonedx-demo/local-dependency-with-minimal-setup-dev-next-reimplement"
             ]
         },
         {
-            "ref": "pkg:composer/cyclonedx-demo/local-demo-issue-158@dev-issue-158"
+            "ref": "cyclonedx-demo/local-demo-issue-158-dev-issue-158"
         },
         {
-            "ref": "pkg:composer/cyclonedx-demo/local-dependency-with-minimal-setup@dev-master"
+            "ref": "cyclonedx-demo/local-dependency-with-minimal-setup-dev-next-reimplement"
         },
         {
-            "ref": "pkg:composer/cyclonedx-demo/cyclonedx-php-composer-local@dev-master",
+            "ref": "cyclonedx-demo/cyclonedx-php-composer-local-dev-master",
             "dependsOn": [
-                "pkg:composer/cyclonedx-demo/local-demo-dependency@1.33.7",
-                "pkg:composer/cyclonedx-demo/local-demo-issue-158@dev-issue-158"
+                "cyclonedx-demo/local-demo-dependency-1.33.7.0",
+                "cyclonedx-demo/local-demo-issue-158-dev-issue-158"
             ]
         }
     ]

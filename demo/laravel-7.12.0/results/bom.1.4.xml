@@ -1,7 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bom xmlns="http://cyclonedx.org/schema/bom/1.1" version="1">
+<bom xmlns="http://cyclonedx.org/schema/bom/1.4" version="1">
+  <metadata>
+    <component type="application" bom-ref="cyclonedx/cyclonedx-php-composer-demo-dev-master">
+      <group><![CDATA[cyclonedx]]></group>
+      <name><![CDATA[cyclonedx-php-composer-demo]]></name>
+      <version><![CDATA[dev-master]]></version>
+      <description><![CDATA[demo of cyclonedx/cyclonedx-php-composer with a pinned version of laravel/framework]]></description>
+      <purl><![CDATA[pkg:composer/cyclonedx/cyclonedx-php-composer-demo]]></purl>
+      <properties>
+        <property name="cdx:composer:package:type"><![CDATA[project]]></property>
+      </properties>
+    </component>
+  </metadata>
   <components>
-    <component type="library">
+    <component type="library" bom-ref="asm89/stack-cors-1.3.0.0">
       <group><![CDATA[asm89]]></group>
       <name><![CDATA[stack-cors]]></name>
       <version><![CDATA[1.3.0.0]]></version>
@@ -32,8 +44,11 @@
           <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
+      <properties>
+        <property name="cdx:composer:package:type"><![CDATA[library]]></property>
+      </properties>
     </component>
-    <component type="library">
+    <component type="library" bom-ref="brick/math-0.9.3.0">
       <group><![CDATA[brick]]></group>
       <name><![CDATA[math]]></name>
       <version><![CDATA[0.9.3.0]]></version>
@@ -60,8 +75,11 @@
           <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
+      <properties>
+        <property name="cdx:composer:package:type"><![CDATA[library]]></property>
+      </properties>
     </component>
-    <component type="library">
+    <component type="library" bom-ref="doctrine/inflector-2.0.6.0">
       <group><![CDATA[doctrine]]></group>
       <name><![CDATA[inflector]]></name>
       <version><![CDATA[2.0.6.0]]></version>
@@ -92,8 +110,11 @@
           <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
+      <properties>
+        <property name="cdx:composer:package:type"><![CDATA[library]]></property>
+      </properties>
     </component>
-    <component type="library">
+    <component type="library" bom-ref="doctrine/lexer-1.2.3.0">
       <group><![CDATA[doctrine]]></group>
       <name><![CDATA[lexer]]></name>
       <version><![CDATA[1.2.3.0]]></version>
@@ -124,8 +145,11 @@
           <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
+      <properties>
+        <property name="cdx:composer:package:type"><![CDATA[library]]></property>
+      </properties>
     </component>
-    <component type="library">
+    <component type="library" bom-ref="dragonmantank/cron-expression-2.3.1.0">
       <group><![CDATA[dragonmantank]]></group>
       <name><![CDATA[cron-expression]]></name>
       <version><![CDATA[2.3.1.0]]></version>
@@ -152,8 +176,11 @@
           <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
+      <properties>
+        <property name="cdx:composer:package:type"><![CDATA[library]]></property>
+      </properties>
     </component>
-    <component type="library">
+    <component type="library" bom-ref="egulias/email-validator-2.1.25.0">
       <group><![CDATA[egulias]]></group>
       <name><![CDATA[email-validator]]></name>
       <version><![CDATA[2.1.25.0]]></version>
@@ -184,8 +211,11 @@
           <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
+      <properties>
+        <property name="cdx:composer:package:type"><![CDATA[library]]></property>
+      </properties>
     </component>
-    <component type="library">
+    <component type="library" bom-ref="fideloper/proxy-4.4.2.0">
       <group><![CDATA[fideloper]]></group>
       <name><![CDATA[proxy]]></name>
       <version><![CDATA[4.4.2.0]]></version>
@@ -212,8 +242,11 @@
           <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
+      <properties>
+        <property name="cdx:composer:package:type"><![CDATA[library]]></property>
+      </properties>
     </component>
-    <component type="library">
+    <component type="library" bom-ref="fruitcake/laravel-cors-1.0.6.0">
       <group><![CDATA[fruitcake]]></group>
       <name><![CDATA[laravel-cors]]></name>
       <version><![CDATA[1.0.6.0]]></version>
@@ -240,8 +273,11 @@
           <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
+      <properties>
+        <property name="cdx:composer:package:type"><![CDATA[library]]></property>
+      </properties>
     </component>
-    <component type="library">
+    <component type="library" bom-ref="guzzlehttp/guzzle-6.5.8.0">
       <group><![CDATA[guzzlehttp]]></group>
       <name><![CDATA[guzzle]]></name>
       <version><![CDATA[6.5.8.0]]></version>
@@ -272,8 +308,11 @@
           <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
+      <properties>
+        <property name="cdx:composer:package:type"><![CDATA[library]]></property>
+      </properties>
     </component>
-    <component type="library">
+    <component type="library" bom-ref="guzzlehttp/promises-1.5.2.0">
       <group><![CDATA[guzzlehttp]]></group>
       <name><![CDATA[promises]]></name>
       <version><![CDATA[1.5.2.0]]></version>
@@ -300,8 +339,11 @@
           <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
+      <properties>
+        <property name="cdx:composer:package:type"><![CDATA[library]]></property>
+      </properties>
     </component>
-    <component type="library">
+    <component type="library" bom-ref="guzzlehttp/psr7-1.9.0.0">
       <group><![CDATA[guzzlehttp]]></group>
       <name><![CDATA[psr7]]></name>
       <version><![CDATA[1.9.0.0]]></version>
@@ -328,8 +370,11 @@
           <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
+      <properties>
+        <property name="cdx:composer:package:type"><![CDATA[library]]></property>
+      </properties>
     </component>
-    <component type="library">
+    <component type="library" bom-ref="laravel/framework-7.30.6.0">
       <group><![CDATA[laravel]]></group>
       <name><![CDATA[framework]]></name>
       <version><![CDATA[7.30.6.0]]></version>
@@ -360,8 +405,11 @@
           <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
+      <properties>
+        <property name="cdx:composer:package:type"><![CDATA[library]]></property>
+      </properties>
     </component>
-    <component type="library">
+    <component type="library" bom-ref="laravel/laravel-7.12.0.0">
       <group><![CDATA[laravel]]></group>
       <name><![CDATA[laravel]]></name>
       <version><![CDATA[7.12.0.0]]></version>
@@ -384,8 +432,11 @@
           <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
+      <properties>
+        <property name="cdx:composer:package:type"><![CDATA[project]]></property>
+      </properties>
     </component>
-    <component type="library">
+    <component type="library" bom-ref="laravel/tinker-2.7.3.0">
       <group><![CDATA[laravel]]></group>
       <name><![CDATA[tinker]]></name>
       <version><![CDATA[2.7.3.0]]></version>
@@ -412,8 +463,11 @@
           <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
+      <properties>
+        <property name="cdx:composer:package:type"><![CDATA[library]]></property>
+      </properties>
     </component>
-    <component type="library">
+    <component type="library" bom-ref="league/commonmark-1.6.7.0">
       <group><![CDATA[league]]></group>
       <name><![CDATA[commonmark]]></name>
       <version><![CDATA[1.6.7.0]]></version>
@@ -452,8 +506,11 @@
           <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
+      <properties>
+        <property name="cdx:composer:package:type"><![CDATA[library]]></property>
+      </properties>
     </component>
-    <component type="library">
+    <component type="library" bom-ref="league/flysystem-1.1.10.0">
       <group><![CDATA[league]]></group>
       <name><![CDATA[flysystem]]></name>
       <version><![CDATA[1.1.10.0]]></version>
@@ -480,8 +537,11 @@
           <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
+      <properties>
+        <property name="cdx:composer:package:type"><![CDATA[library]]></property>
+      </properties>
     </component>
-    <component type="library">
+    <component type="library" bom-ref="league/mime-type-detection-1.11.0.0">
       <group><![CDATA[league]]></group>
       <name><![CDATA[mime-type-detection]]></name>
       <version><![CDATA[1.11.0.0]]></version>
@@ -508,8 +568,11 @@
           <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
+      <properties>
+        <property name="cdx:composer:package:type"><![CDATA[library]]></property>
+      </properties>
     </component>
-    <component type="library">
+    <component type="library" bom-ref="monolog/monolog-2.8.0.0">
       <group><![CDATA[monolog]]></group>
       <name><![CDATA[monolog]]></name>
       <version><![CDATA[2.8.0.0]]></version>
@@ -540,8 +603,11 @@
           <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
+      <properties>
+        <property name="cdx:composer:package:type"><![CDATA[library]]></property>
+      </properties>
     </component>
-    <component type="library">
+    <component type="library" bom-ref="nesbot/carbon-2.63.0.0">
       <group><![CDATA[nesbot]]></group>
       <name><![CDATA[carbon]]></name>
       <version><![CDATA[2.63.0.0]]></version>
@@ -576,8 +642,11 @@
           <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
+      <properties>
+        <property name="cdx:composer:package:type"><![CDATA[library]]></property>
+      </properties>
     </component>
-    <component type="library">
+    <component type="library" bom-ref="nikic/php-parser-4.15.2.0">
       <group><![CDATA[nikic]]></group>
       <name><![CDATA[php-parser]]></name>
       <version><![CDATA[4.15.2.0]]></version>
@@ -604,8 +673,11 @@
           <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
+      <properties>
+        <property name="cdx:composer:package:type"><![CDATA[library]]></property>
+      </properties>
     </component>
-    <component type="library">
+    <component type="library" bom-ref="opis/closure-3.6.3.0">
       <group><![CDATA[opis]]></group>
       <name><![CDATA[closure]]></name>
       <version><![CDATA[3.6.3.0]]></version>
@@ -636,8 +708,11 @@
           <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
+      <properties>
+        <property name="cdx:composer:package:type"><![CDATA[library]]></property>
+      </properties>
     </component>
-    <component type="library">
+    <component type="library" bom-ref="phpoption/phpoption-1.9.0.0">
       <group><![CDATA[phpoption]]></group>
       <name><![CDATA[phpoption]]></name>
       <version><![CDATA[1.9.0.0]]></version>
@@ -664,8 +739,11 @@
           <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
+      <properties>
+        <property name="cdx:composer:package:type"><![CDATA[library]]></property>
+      </properties>
     </component>
-    <component type="library">
+    <component type="library" bom-ref="psr/container-1.1.1.0">
       <group><![CDATA[psr]]></group>
       <name><![CDATA[container]]></name>
       <version><![CDATA[1.1.1.0]]></version>
@@ -696,8 +774,11 @@
           <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
+      <properties>
+        <property name="cdx:composer:package:type"><![CDATA[library]]></property>
+      </properties>
     </component>
-    <component type="library">
+    <component type="library" bom-ref="psr/event-dispatcher-1.0.0.0">
       <group><![CDATA[psr]]></group>
       <name><![CDATA[event-dispatcher]]></name>
       <version><![CDATA[1.0.0.0]]></version>
@@ -724,8 +805,11 @@
           <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
+      <properties>
+        <property name="cdx:composer:package:type"><![CDATA[library]]></property>
+      </properties>
     </component>
-    <component type="library">
+    <component type="library" bom-ref="psr/http-message-1.0.1.0">
       <group><![CDATA[psr]]></group>
       <name><![CDATA[http-message]]></name>
       <version><![CDATA[1.0.1.0]]></version>
@@ -752,8 +836,11 @@
           <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
+      <properties>
+        <property name="cdx:composer:package:type"><![CDATA[library]]></property>
+      </properties>
     </component>
-    <component type="library">
+    <component type="library" bom-ref="psr/log-1.1.4.0">
       <group><![CDATA[psr]]></group>
       <name><![CDATA[log]]></name>
       <version><![CDATA[1.1.4.0]]></version>
@@ -780,8 +867,11 @@
           <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
+      <properties>
+        <property name="cdx:composer:package:type"><![CDATA[library]]></property>
+      </properties>
     </component>
-    <component type="library">
+    <component type="library" bom-ref="psr/simple-cache-1.0.1.0">
       <group><![CDATA[psr]]></group>
       <name><![CDATA[simple-cache]]></name>
       <version><![CDATA[1.0.1.0]]></version>
@@ -804,8 +894,11 @@
           <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
+      <properties>
+        <property name="cdx:composer:package:type"><![CDATA[library]]></property>
+      </properties>
     </component>
-    <component type="library">
+    <component type="library" bom-ref="psy/psysh-0.11.9.0">
       <group><![CDATA[psy]]></group>
       <name><![CDATA[psysh]]></name>
       <version><![CDATA[0.11.9.0]]></version>
@@ -836,8 +929,11 @@
           <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
+      <properties>
+        <property name="cdx:composer:package:type"><![CDATA[library]]></property>
+      </properties>
     </component>
-    <component type="library">
+    <component type="library" bom-ref="ralouphie/getallheaders-3.0.3.0">
       <group><![CDATA[ralouphie]]></group>
       <name><![CDATA[getallheaders]]></name>
       <version><![CDATA[3.0.3.0]]></version>
@@ -864,8 +960,11 @@
           <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
+      <properties>
+        <property name="cdx:composer:package:type"><![CDATA[library]]></property>
+      </properties>
     </component>
-    <component type="library">
+    <component type="library" bom-ref="ramsey/collection-1.2.2.0">
       <group><![CDATA[ramsey]]></group>
       <name><![CDATA[collection]]></name>
       <version><![CDATA[1.2.2.0]]></version>
@@ -892,8 +991,11 @@
           <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
+      <properties>
+        <property name="cdx:composer:package:type"><![CDATA[library]]></property>
+      </properties>
     </component>
-    <component type="library">
+    <component type="library" bom-ref="ramsey/uuid-4.2.3.0">
       <group><![CDATA[ramsey]]></group>
       <name><![CDATA[uuid]]></name>
       <version><![CDATA[4.2.3.0]]></version>
@@ -920,8 +1022,11 @@
           <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
+      <properties>
+        <property name="cdx:composer:package:type"><![CDATA[library]]></property>
+      </properties>
     </component>
-    <component type="library">
+    <component type="library" bom-ref="swiftmailer/swiftmailer-6.3.0.0">
       <group><![CDATA[swiftmailer]]></group>
       <name><![CDATA[swiftmailer]]></name>
       <version><![CDATA[6.3.0.0]]></version>
@@ -952,8 +1057,11 @@
           <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
+      <properties>
+        <property name="cdx:composer:package:type"><![CDATA[library]]></property>
+      </properties>
     </component>
-    <component type="library">
+    <component type="library" bom-ref="symfony/console-5.4.16.0">
       <group><![CDATA[symfony]]></group>
       <name><![CDATA[console]]></name>
       <version><![CDATA[5.4.16.0]]></version>
@@ -980,8 +1088,11 @@
           <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
+      <properties>
+        <property name="cdx:composer:package:type"><![CDATA[library]]></property>
+      </properties>
     </component>
-    <component type="library">
+    <component type="library" bom-ref="symfony/css-selector-5.4.11.0">
       <group><![CDATA[symfony]]></group>
       <name><![CDATA[css-selector]]></name>
       <version><![CDATA[5.4.11.0]]></version>
@@ -1008,8 +1119,11 @@
           <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
+      <properties>
+        <property name="cdx:composer:package:type"><![CDATA[library]]></property>
+      </properties>
     </component>
-    <component type="library">
+    <component type="library" bom-ref="symfony/deprecation-contracts-2.5.2.0">
       <group><![CDATA[symfony]]></group>
       <name><![CDATA[deprecation-contracts]]></name>
       <version><![CDATA[2.5.2.0]]></version>
@@ -1036,8 +1150,11 @@
           <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
+      <properties>
+        <property name="cdx:composer:package:type"><![CDATA[library]]></property>
+      </properties>
     </component>
-    <component type="library">
+    <component type="library" bom-ref="symfony/error-handler-5.4.15.0">
       <group><![CDATA[symfony]]></group>
       <name><![CDATA[error-handler]]></name>
       <version><![CDATA[5.4.15.0]]></version>
@@ -1064,8 +1181,11 @@
           <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
+      <properties>
+        <property name="cdx:composer:package:type"><![CDATA[library]]></property>
+      </properties>
     </component>
-    <component type="library">
+    <component type="library" bom-ref="symfony/event-dispatcher-5.4.9.0">
       <group><![CDATA[symfony]]></group>
       <name><![CDATA[event-dispatcher]]></name>
       <version><![CDATA[5.4.9.0]]></version>
@@ -1092,8 +1212,11 @@
           <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
+      <properties>
+        <property name="cdx:composer:package:type"><![CDATA[library]]></property>
+      </properties>
     </component>
-    <component type="library">
+    <component type="library" bom-ref="symfony/event-dispatcher-contracts-2.5.2.0">
       <group><![CDATA[symfony]]></group>
       <name><![CDATA[event-dispatcher-contracts]]></name>
       <version><![CDATA[2.5.2.0]]></version>
@@ -1120,8 +1243,11 @@
           <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
+      <properties>
+        <property name="cdx:composer:package:type"><![CDATA[library]]></property>
+      </properties>
     </component>
-    <component type="library">
+    <component type="library" bom-ref="symfony/finder-5.4.11.0">
       <group><![CDATA[symfony]]></group>
       <name><![CDATA[finder]]></name>
       <version><![CDATA[5.4.11.0]]></version>
@@ -1148,8 +1274,11 @@
           <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
+      <properties>
+        <property name="cdx:composer:package:type"><![CDATA[library]]></property>
+      </properties>
     </component>
-    <component type="library">
+    <component type="library" bom-ref="symfony/http-foundation-5.4.16.0">
       <group><![CDATA[symfony]]></group>
       <name><![CDATA[http-foundation]]></name>
       <version><![CDATA[5.4.16.0]]></version>
@@ -1176,8 +1305,11 @@
           <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
+      <properties>
+        <property name="cdx:composer:package:type"><![CDATA[library]]></property>
+      </properties>
     </component>
-    <component type="library">
+    <component type="library" bom-ref="symfony/http-kernel-5.4.16.0">
       <group><![CDATA[symfony]]></group>
       <name><![CDATA[http-kernel]]></name>
       <version><![CDATA[5.4.16.0]]></version>
@@ -1204,8 +1336,11 @@
           <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
+      <properties>
+        <property name="cdx:composer:package:type"><![CDATA[library]]></property>
+      </properties>
     </component>
-    <component type="library">
+    <component type="library" bom-ref="symfony/mime-5.4.16.0">
       <group><![CDATA[symfony]]></group>
       <name><![CDATA[mime]]></name>
       <version><![CDATA[5.4.16.0]]></version>
@@ -1232,8 +1367,11 @@
           <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
+      <properties>
+        <property name="cdx:composer:package:type"><![CDATA[library]]></property>
+      </properties>
     </component>
-    <component type="library">
+    <component type="library" bom-ref="symfony/polyfill-ctype-1.27.0.0">
       <group><![CDATA[symfony]]></group>
       <name><![CDATA[polyfill-ctype]]></name>
       <version><![CDATA[1.27.0.0]]></version>
@@ -1260,8 +1398,11 @@
           <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
+      <properties>
+        <property name="cdx:composer:package:type"><![CDATA[library]]></property>
+      </properties>
     </component>
-    <component type="library">
+    <component type="library" bom-ref="symfony/polyfill-iconv-1.27.0.0">
       <group><![CDATA[symfony]]></group>
       <name><![CDATA[polyfill-iconv]]></name>
       <version><![CDATA[1.27.0.0]]></version>
@@ -1288,8 +1429,11 @@
           <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
+      <properties>
+        <property name="cdx:composer:package:type"><![CDATA[library]]></property>
+      </properties>
     </component>
-    <component type="library">
+    <component type="library" bom-ref="symfony/polyfill-intl-grapheme-1.27.0.0">
       <group><![CDATA[symfony]]></group>
       <name><![CDATA[polyfill-intl-grapheme]]></name>
       <version><![CDATA[1.27.0.0]]></version>
@@ -1316,8 +1460,11 @@
           <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
+      <properties>
+        <property name="cdx:composer:package:type"><![CDATA[library]]></property>
+      </properties>
     </component>
-    <component type="library">
+    <component type="library" bom-ref="symfony/polyfill-intl-idn-1.27.0.0">
       <group><![CDATA[symfony]]></group>
       <name><![CDATA[polyfill-intl-idn]]></name>
       <version><![CDATA[1.27.0.0]]></version>
@@ -1344,8 +1491,11 @@
           <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
+      <properties>
+        <property name="cdx:composer:package:type"><![CDATA[library]]></property>
+      </properties>
     </component>
-    <component type="library">
+    <component type="library" bom-ref="symfony/polyfill-intl-normalizer-1.27.0.0">
       <group><![CDATA[symfony]]></group>
       <name><![CDATA[polyfill-intl-normalizer]]></name>
       <version><![CDATA[1.27.0.0]]></version>
@@ -1372,8 +1522,11 @@
           <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
+      <properties>
+        <property name="cdx:composer:package:type"><![CDATA[library]]></property>
+      </properties>
     </component>
-    <component type="library">
+    <component type="library" bom-ref="symfony/polyfill-mbstring-1.27.0.0">
       <group><![CDATA[symfony]]></group>
       <name><![CDATA[polyfill-mbstring]]></name>
       <version><![CDATA[1.27.0.0]]></version>
@@ -1400,8 +1553,11 @@
           <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
+      <properties>
+        <property name="cdx:composer:package:type"><![CDATA[library]]></property>
+      </properties>
     </component>
-    <component type="library">
+    <component type="library" bom-ref="symfony/polyfill-php72-1.27.0.0">
       <group><![CDATA[symfony]]></group>
       <name><![CDATA[polyfill-php72]]></name>
       <version><![CDATA[1.27.0.0]]></version>
@@ -1428,8 +1584,11 @@
           <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
+      <properties>
+        <property name="cdx:composer:package:type"><![CDATA[library]]></property>
+      </properties>
     </component>
-    <component type="library">
+    <component type="library" bom-ref="symfony/polyfill-php73-1.27.0.0">
       <group><![CDATA[symfony]]></group>
       <name><![CDATA[polyfill-php73]]></name>
       <version><![CDATA[1.27.0.0]]></version>
@@ -1456,8 +1615,11 @@
           <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
+      <properties>
+        <property name="cdx:composer:package:type"><![CDATA[library]]></property>
+      </properties>
     </component>
-    <component type="library">
+    <component type="library" bom-ref="symfony/polyfill-php80-1.27.0.0">
       <group><![CDATA[symfony]]></group>
       <name><![CDATA[polyfill-php80]]></name>
       <version><![CDATA[1.27.0.0]]></version>
@@ -1484,8 +1646,11 @@
           <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
+      <properties>
+        <property name="cdx:composer:package:type"><![CDATA[library]]></property>
+      </properties>
     </component>
-    <component type="library">
+    <component type="library" bom-ref="symfony/polyfill-php81-1.27.0.0">
       <group><![CDATA[symfony]]></group>
       <name><![CDATA[polyfill-php81]]></name>
       <version><![CDATA[1.27.0.0]]></version>
@@ -1512,8 +1677,11 @@
           <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
+      <properties>
+        <property name="cdx:composer:package:type"><![CDATA[library]]></property>
+      </properties>
     </component>
-    <component type="library">
+    <component type="library" bom-ref="symfony/process-5.4.11.0">
       <group><![CDATA[symfony]]></group>
       <name><![CDATA[process]]></name>
       <version><![CDATA[5.4.11.0]]></version>
@@ -1540,8 +1708,11 @@
           <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
+      <properties>
+        <property name="cdx:composer:package:type"><![CDATA[library]]></property>
+      </properties>
     </component>
-    <component type="library">
+    <component type="library" bom-ref="symfony/routing-5.4.15.0">
       <group><![CDATA[symfony]]></group>
       <name><![CDATA[routing]]></name>
       <version><![CDATA[5.4.15.0]]></version>
@@ -1568,8 +1739,11 @@
           <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
+      <properties>
+        <property name="cdx:composer:package:type"><![CDATA[library]]></property>
+      </properties>
     </component>
-    <component type="library">
+    <component type="library" bom-ref="symfony/service-contracts-2.5.2.0">
       <group><![CDATA[symfony]]></group>
       <name><![CDATA[service-contracts]]></name>
       <version><![CDATA[2.5.2.0]]></version>
@@ -1596,8 +1770,11 @@
           <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
+      <properties>
+        <property name="cdx:composer:package:type"><![CDATA[library]]></property>
+      </properties>
     </component>
-    <component type="library">
+    <component type="library" bom-ref="symfony/string-5.4.15.0">
       <group><![CDATA[symfony]]></group>
       <name><![CDATA[string]]></name>
       <version><![CDATA[5.4.15.0]]></version>
@@ -1624,8 +1801,11 @@
           <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
+      <properties>
+        <property name="cdx:composer:package:type"><![CDATA[library]]></property>
+      </properties>
     </component>
-    <component type="library">
+    <component type="library" bom-ref="symfony/translation-5.4.14.0">
       <group><![CDATA[symfony]]></group>
       <name><![CDATA[translation]]></name>
       <version><![CDATA[5.4.14.0]]></version>
@@ -1652,8 +1832,11 @@
           <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
+      <properties>
+        <property name="cdx:composer:package:type"><![CDATA[library]]></property>
+      </properties>
     </component>
-    <component type="library">
+    <component type="library" bom-ref="symfony/translation-contracts-2.5.2.0">
       <group><![CDATA[symfony]]></group>
       <name><![CDATA[translation-contracts]]></name>
       <version><![CDATA[2.5.2.0]]></version>
@@ -1680,8 +1863,11 @@
           <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
+      <properties>
+        <property name="cdx:composer:package:type"><![CDATA[library]]></property>
+      </properties>
     </component>
-    <component type="library">
+    <component type="library" bom-ref="symfony/var-dumper-5.4.14.0">
       <group><![CDATA[symfony]]></group>
       <name><![CDATA[var-dumper]]></name>
       <version><![CDATA[5.4.14.0]]></version>
@@ -1708,8 +1894,11 @@
           <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
+      <properties>
+        <property name="cdx:composer:package:type"><![CDATA[library]]></property>
+      </properties>
     </component>
-    <component type="library">
+    <component type="library" bom-ref="tijsverkoyen/css-to-inline-styles-2.2.5.0">
       <group><![CDATA[tijsverkoyen]]></group>
       <name><![CDATA[css-to-inline-styles]]></name>
       <version><![CDATA[2.2.5.0]]></version>
@@ -1740,8 +1929,11 @@
           <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
+      <properties>
+        <property name="cdx:composer:package:type"><![CDATA[library]]></property>
+      </properties>
     </component>
-    <component type="library">
+    <component type="library" bom-ref="vlucas/phpdotenv-4.3.0.0">
       <group><![CDATA[vlucas]]></group>
       <name><![CDATA[phpdotenv]]></name>
       <version><![CDATA[4.3.0.0]]></version>
@@ -1768,8 +1960,11 @@
           <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
+      <properties>
+        <property name="cdx:composer:package:type"><![CDATA[library]]></property>
+      </properties>
     </component>
-    <component type="library">
+    <component type="library" bom-ref="voku/portable-ascii-1.6.1.0">
       <group><![CDATA[voku]]></group>
       <name><![CDATA[portable-ascii]]></name>
       <version><![CDATA[1.6.1.0]]></version>
@@ -1800,6 +1995,221 @@
           <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
+      <properties>
+        <property name="cdx:composer:package:type"><![CDATA[library]]></property>
+      </properties>
     </component>
   </components>
+  <dependencies>
+    <dependency ref="asm89/stack-cors-1.3.0.0">
+      <dependency ref="symfony/http-foundation-5.4.16.0"/>
+      <dependency ref="symfony/http-kernel-5.4.16.0"/>
+    </dependency>
+    <dependency ref="brick/math-0.9.3.0"/>
+    <dependency ref="doctrine/inflector-2.0.6.0"/>
+    <dependency ref="doctrine/lexer-1.2.3.0"/>
+    <dependency ref="dragonmantank/cron-expression-2.3.1.0"/>
+    <dependency ref="egulias/email-validator-2.1.25.0">
+      <dependency ref="doctrine/lexer-1.2.3.0"/>
+      <dependency ref="symfony/polyfill-intl-idn-1.27.0.0"/>
+    </dependency>
+    <dependency ref="fideloper/proxy-4.4.2.0"/>
+    <dependency ref="fruitcake/laravel-cors-1.0.6.0">
+      <dependency ref="asm89/stack-cors-1.3.0.0"/>
+      <dependency ref="symfony/http-foundation-5.4.16.0"/>
+      <dependency ref="symfony/http-kernel-5.4.16.0"/>
+    </dependency>
+    <dependency ref="guzzlehttp/guzzle-6.5.8.0">
+      <dependency ref="guzzlehttp/promises-1.5.2.0"/>
+      <dependency ref="guzzlehttp/psr7-1.9.0.0"/>
+      <dependency ref="symfony/polyfill-intl-idn-1.27.0.0"/>
+    </dependency>
+    <dependency ref="guzzlehttp/promises-1.5.2.0"/>
+    <dependency ref="guzzlehttp/psr7-1.9.0.0">
+      <dependency ref="psr/http-message-1.0.1.0"/>
+      <dependency ref="ralouphie/getallheaders-3.0.3.0"/>
+    </dependency>
+    <dependency ref="laravel/framework-7.30.6.0">
+      <dependency ref="doctrine/inflector-2.0.6.0"/>
+      <dependency ref="dragonmantank/cron-expression-2.3.1.0"/>
+      <dependency ref="egulias/email-validator-2.1.25.0"/>
+      <dependency ref="league/commonmark-1.6.7.0"/>
+      <dependency ref="league/flysystem-1.1.10.0"/>
+      <dependency ref="monolog/monolog-2.8.0.0"/>
+      <dependency ref="nesbot/carbon-2.63.0.0"/>
+      <dependency ref="opis/closure-3.6.3.0"/>
+      <dependency ref="psr/container-1.1.1.0"/>
+      <dependency ref="psr/simple-cache-1.0.1.0"/>
+      <dependency ref="ramsey/uuid-4.2.3.0"/>
+      <dependency ref="swiftmailer/swiftmailer-6.3.0.0"/>
+      <dependency ref="symfony/console-5.4.16.0"/>
+      <dependency ref="symfony/error-handler-5.4.15.0"/>
+      <dependency ref="symfony/finder-5.4.11.0"/>
+      <dependency ref="symfony/http-foundation-5.4.16.0"/>
+      <dependency ref="symfony/http-kernel-5.4.16.0"/>
+      <dependency ref="symfony/mime-5.4.16.0"/>
+      <dependency ref="symfony/polyfill-php73-1.27.0.0"/>
+      <dependency ref="symfony/process-5.4.11.0"/>
+      <dependency ref="symfony/routing-5.4.15.0"/>
+      <dependency ref="symfony/var-dumper-5.4.14.0"/>
+      <dependency ref="tijsverkoyen/css-to-inline-styles-2.2.5.0"/>
+      <dependency ref="vlucas/phpdotenv-4.3.0.0"/>
+      <dependency ref="voku/portable-ascii-1.6.1.0"/>
+    </dependency>
+    <dependency ref="laravel/laravel-7.12.0.0">
+      <dependency ref="fideloper/proxy-4.4.2.0"/>
+      <dependency ref="fruitcake/laravel-cors-1.0.6.0"/>
+      <dependency ref="guzzlehttp/guzzle-6.5.8.0"/>
+      <dependency ref="laravel/framework-7.30.6.0"/>
+      <dependency ref="laravel/tinker-2.7.3.0"/>
+    </dependency>
+    <dependency ref="laravel/tinker-2.7.3.0">
+      <dependency ref="psy/psysh-0.11.9.0"/>
+      <dependency ref="symfony/var-dumper-5.4.14.0"/>
+    </dependency>
+    <dependency ref="league/commonmark-1.6.7.0"/>
+    <dependency ref="league/flysystem-1.1.10.0">
+      <dependency ref="league/mime-type-detection-1.11.0.0"/>
+    </dependency>
+    <dependency ref="league/mime-type-detection-1.11.0.0"/>
+    <dependency ref="monolog/monolog-2.8.0.0">
+      <dependency ref="psr/log-1.1.4.0"/>
+    </dependency>
+    <dependency ref="nesbot/carbon-2.63.0.0">
+      <dependency ref="symfony/polyfill-mbstring-1.27.0.0"/>
+      <dependency ref="symfony/polyfill-php80-1.27.0.0"/>
+      <dependency ref="symfony/translation-5.4.14.0"/>
+    </dependency>
+    <dependency ref="nikic/php-parser-4.15.2.0"/>
+    <dependency ref="opis/closure-3.6.3.0"/>
+    <dependency ref="phpoption/phpoption-1.9.0.0"/>
+    <dependency ref="psr/container-1.1.1.0"/>
+    <dependency ref="psr/event-dispatcher-1.0.0.0"/>
+    <dependency ref="psr/http-message-1.0.1.0"/>
+    <dependency ref="psr/log-1.1.4.0"/>
+    <dependency ref="psr/simple-cache-1.0.1.0"/>
+    <dependency ref="psy/psysh-0.11.9.0">
+      <dependency ref="nikic/php-parser-4.15.2.0"/>
+      <dependency ref="symfony/console-5.4.16.0"/>
+      <dependency ref="symfony/var-dumper-5.4.14.0"/>
+    </dependency>
+    <dependency ref="ralouphie/getallheaders-3.0.3.0"/>
+    <dependency ref="ramsey/collection-1.2.2.0">
+      <dependency ref="symfony/polyfill-php81-1.27.0.0"/>
+    </dependency>
+    <dependency ref="ramsey/uuid-4.2.3.0">
+      <dependency ref="brick/math-0.9.3.0"/>
+      <dependency ref="ramsey/collection-1.2.2.0"/>
+      <dependency ref="symfony/polyfill-ctype-1.27.0.0"/>
+      <dependency ref="symfony/polyfill-php80-1.27.0.0"/>
+    </dependency>
+    <dependency ref="swiftmailer/swiftmailer-6.3.0.0">
+      <dependency ref="egulias/email-validator-2.1.25.0"/>
+      <dependency ref="symfony/polyfill-iconv-1.27.0.0"/>
+      <dependency ref="symfony/polyfill-intl-idn-1.27.0.0"/>
+      <dependency ref="symfony/polyfill-mbstring-1.27.0.0"/>
+    </dependency>
+    <dependency ref="symfony/console-5.4.16.0">
+      <dependency ref="symfony/deprecation-contracts-2.5.2.0"/>
+      <dependency ref="symfony/polyfill-mbstring-1.27.0.0"/>
+      <dependency ref="symfony/polyfill-php73-1.27.0.0"/>
+      <dependency ref="symfony/polyfill-php80-1.27.0.0"/>
+      <dependency ref="symfony/service-contracts-2.5.2.0"/>
+      <dependency ref="symfony/string-5.4.15.0"/>
+    </dependency>
+    <dependency ref="symfony/css-selector-5.4.11.0">
+      <dependency ref="symfony/polyfill-php80-1.27.0.0"/>
+    </dependency>
+    <dependency ref="symfony/deprecation-contracts-2.5.2.0"/>
+    <dependency ref="symfony/error-handler-5.4.15.0">
+      <dependency ref="psr/log-1.1.4.0"/>
+      <dependency ref="symfony/var-dumper-5.4.14.0"/>
+    </dependency>
+    <dependency ref="symfony/event-dispatcher-5.4.9.0">
+      <dependency ref="symfony/deprecation-contracts-2.5.2.0"/>
+      <dependency ref="symfony/event-dispatcher-contracts-2.5.2.0"/>
+      <dependency ref="symfony/polyfill-php80-1.27.0.0"/>
+    </dependency>
+    <dependency ref="symfony/event-dispatcher-contracts-2.5.2.0">
+      <dependency ref="psr/event-dispatcher-1.0.0.0"/>
+    </dependency>
+    <dependency ref="symfony/finder-5.4.11.0">
+      <dependency ref="symfony/deprecation-contracts-2.5.2.0"/>
+      <dependency ref="symfony/polyfill-php80-1.27.0.0"/>
+    </dependency>
+    <dependency ref="symfony/http-foundation-5.4.16.0">
+      <dependency ref="symfony/deprecation-contracts-2.5.2.0"/>
+      <dependency ref="symfony/polyfill-mbstring-1.27.0.0"/>
+      <dependency ref="symfony/polyfill-php80-1.27.0.0"/>
+    </dependency>
+    <dependency ref="symfony/http-kernel-5.4.16.0">
+      <dependency ref="psr/log-1.1.4.0"/>
+      <dependency ref="symfony/deprecation-contracts-2.5.2.0"/>
+      <dependency ref="symfony/error-handler-5.4.15.0"/>
+      <dependency ref="symfony/event-dispatcher-5.4.9.0"/>
+      <dependency ref="symfony/http-foundation-5.4.16.0"/>
+      <dependency ref="symfony/polyfill-ctype-1.27.0.0"/>
+      <dependency ref="symfony/polyfill-php73-1.27.0.0"/>
+      <dependency ref="symfony/polyfill-php80-1.27.0.0"/>
+    </dependency>
+    <dependency ref="symfony/mime-5.4.16.0">
+      <dependency ref="symfony/deprecation-contracts-2.5.2.0"/>
+      <dependency ref="symfony/polyfill-intl-idn-1.27.0.0"/>
+      <dependency ref="symfony/polyfill-mbstring-1.27.0.0"/>
+      <dependency ref="symfony/polyfill-php80-1.27.0.0"/>
+    </dependency>
+    <dependency ref="symfony/polyfill-ctype-1.27.0.0"/>
+    <dependency ref="symfony/polyfill-iconv-1.27.0.0"/>
+    <dependency ref="symfony/polyfill-intl-grapheme-1.27.0.0"/>
+    <dependency ref="symfony/polyfill-intl-idn-1.27.0.0">
+      <dependency ref="symfony/polyfill-intl-normalizer-1.27.0.0"/>
+      <dependency ref="symfony/polyfill-php72-1.27.0.0"/>
+    </dependency>
+    <dependency ref="symfony/polyfill-intl-normalizer-1.27.0.0"/>
+    <dependency ref="symfony/polyfill-mbstring-1.27.0.0"/>
+    <dependency ref="symfony/polyfill-php72-1.27.0.0"/>
+    <dependency ref="symfony/polyfill-php73-1.27.0.0"/>
+    <dependency ref="symfony/polyfill-php80-1.27.0.0"/>
+    <dependency ref="symfony/polyfill-php81-1.27.0.0"/>
+    <dependency ref="symfony/process-5.4.11.0">
+      <dependency ref="symfony/polyfill-php80-1.27.0.0"/>
+    </dependency>
+    <dependency ref="symfony/routing-5.4.15.0">
+      <dependency ref="symfony/deprecation-contracts-2.5.2.0"/>
+      <dependency ref="symfony/polyfill-php80-1.27.0.0"/>
+    </dependency>
+    <dependency ref="symfony/service-contracts-2.5.2.0">
+      <dependency ref="psr/container-1.1.1.0"/>
+      <dependency ref="symfony/deprecation-contracts-2.5.2.0"/>
+    </dependency>
+    <dependency ref="symfony/string-5.4.15.0">
+      <dependency ref="symfony/polyfill-ctype-1.27.0.0"/>
+      <dependency ref="symfony/polyfill-intl-grapheme-1.27.0.0"/>
+      <dependency ref="symfony/polyfill-intl-normalizer-1.27.0.0"/>
+      <dependency ref="symfony/polyfill-mbstring-1.27.0.0"/>
+      <dependency ref="symfony/polyfill-php80-1.27.0.0"/>
+    </dependency>
+    <dependency ref="symfony/translation-5.4.14.0">
+      <dependency ref="symfony/deprecation-contracts-2.5.2.0"/>
+      <dependency ref="symfony/polyfill-mbstring-1.27.0.0"/>
+      <dependency ref="symfony/polyfill-php80-1.27.0.0"/>
+      <dependency ref="symfony/translation-contracts-2.5.2.0"/>
+    </dependency>
+    <dependency ref="symfony/translation-contracts-2.5.2.0"/>
+    <dependency ref="symfony/var-dumper-5.4.14.0">
+      <dependency ref="symfony/polyfill-mbstring-1.27.0.0"/>
+      <dependency ref="symfony/polyfill-php80-1.27.0.0"/>
+    </dependency>
+    <dependency ref="tijsverkoyen/css-to-inline-styles-2.2.5.0">
+      <dependency ref="symfony/css-selector-5.4.11.0"/>
+    </dependency>
+    <dependency ref="vlucas/phpdotenv-4.3.0.0">
+      <dependency ref="phpoption/phpoption-1.9.0.0"/>
+      <dependency ref="symfony/polyfill-ctype-1.27.0.0"/>
+    </dependency>
+    <dependency ref="voku/portable-ascii-1.6.1.0"/>
+    <dependency ref="cyclonedx/cyclonedx-php-composer-demo-dev-master">
+      <dependency ref="laravel/laravel-7.12.0.0"/>
+    </dependency>
+  </dependencies>
 </bom>

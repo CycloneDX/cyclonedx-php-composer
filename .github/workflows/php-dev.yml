@@ -28,7 +28,7 @@ env:
 
 jobs:
   asure-dev-setup:
-    name: DevSetup (${{ matrix.os}}, ${{ matrix.php }}, ${{ matrix.dependencies }})
+    name: DevSetup (${{ matrix.os}}, ${{ matrix.php }})
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
@@ -57,10 +57,9 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
-          key: composer-${{ github.job }}-${{ runner.os }}-${{ matrix.php }}-${{ matrix.dependencies }}-${{ hashFiles('**/composer.json') }}
+          key: composer-${{ github.job }}-${{ runner.os }}-php${{ matrix.php }}-${{ hashFiles('**/composer.json') }}
           restore-keys: |
-            composer-${{ github.job }}-${{ runner.os }}-${{ matrix.php }}-${{ matrix.dependencies }}-
-            composer-${{ github.job }}-${{ runner.os }}-${{ matrix.php }}-
+            composer-${{ github.job }}-${{ runner.os }}-php${{ matrix.php }}-
             composer-${{ github.job }}-${{ runner.os }}-
       - name: Dev-Setup
         run: >

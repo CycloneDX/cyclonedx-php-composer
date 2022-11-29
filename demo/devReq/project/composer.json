@@ -9,13 +9,11 @@
         "issues": "https://github.com/CycloneDX/cyclonedx-php-composer/issues",
         "forum": "https://groups.io/g/CycloneDX",
         "chat": "https://cyclonedx.org/slack/invite",
-        "docs": "https://github.com/CycloneDX/cyclonedx-php-composer/blob/master/demo/local/README.md"
+        "docs": "https://github.com/CycloneDX/cyclonedx-php-composer/blob/master/demo/devReq/README.md"
     },
-    "require": {
-    },
+    "require": {},
     "require-dev": {
-        "phpunit/phpunit": "^9",
-        "cyclonedx/cyclonedx-php-composer": "@dev"
+        "phpunit/phpunit": "9.5.26"
     },
     "repositories": [
         {
@@ -33,5 +31,26 @@
         },
         "preferred-install": "dist",
         "sort-packages": true
+    },
+    "scripts": {
+        "create-sbom-results": [
+            "@create-sbom-results:JSON",
+            "@create-sbom-results:XML"
+        ],
+        "create-sbom-results:JSON": [
+            "@composer -d../../.tool make-bom --spec-version=1.2 --output-format=JSON --output-file=$PWD/../results/bom.1.2.json $PWD/composer.json",
+            "@composer -d../../.tool make-bom --spec-version=1.3 --output-format=JSON --output-file=$PWD/../results/bom.1.3.json $PWD/composer.json",
+            "@composer -d../../.tool make-bom --spec-version=1.4 --output-format=JSON --output-file=$PWD/../results/bom.1.4.json $PWD/composer.json"
+        ],
+        "create-sbom-results:XML": [
+            "@composer -d../../.tool make-bom --spec-version=1.1 --output-format=XML  --output-file=$PWD/../results/bom.1.1.xml $PWD/composer.json",
+            "@composer -d../../.tool make-bom --spec-version=1.2 --output-format=XML  --output-file=$PWD/../results/bom.1.2.xml $PWD/composer.json",
+            "@composer -d../../.tool make-bom --spec-version=1.3 --output-format=XML  --output-file=$PWD/../results/bom.1.3.xml $PWD/composer.json",
+            "@composer -d../../.tool make-bom --spec-version=1.4 --output-format=XML  --output-file=$PWD/../results/bom.1.4.xml $PWD/composer.json"
+        ],
+        "setup": [
+            "@composer -d../../.tool update",
+            "@composer install"
+        ]
     }
 }

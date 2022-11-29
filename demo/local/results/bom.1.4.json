@@ -1,7 +1,7 @@
 {
-    "$schema": "http://cyclonedx.org/schema/bom-1.2b.schema.json",
+    "$schema": "http://cyclonedx.org/schema/bom-1.4.schema.json",
     "bomFormat": "CycloneDX",
-    "specVersion": "1.2",
+    "specVersion": "1.4",
     "version": 1,
     "metadata": {
         "component": {
@@ -43,6 +43,12 @@
                     "url": "https://github.com/CycloneDX/cyclonedx-php-composer/blob/master/demo/local/README.md",
                     "comment": "as detected from composer manifest 'support.docs'"
                 }
+            ],
+            "properties": [
+                {
+                    "name": "cdx:composer:package:type",
+                    "value": "project"
+                }
             ]
         }
     },
@@ -58,6 +64,12 @@
                 {
                     "type": "distribution",
                     "url": "packages/local-demo-dependency"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "cdx:composer:package:type",
+                    "value": "library"
                 }
             ]
         },
@@ -83,6 +95,12 @@
                     "url": "https://pear.php.net/bugs/search.php?cmd=display&package_name[]=PEAR_Exception",
                     "comment": "as detected from composer manifest 'support.issues'"
                 }
+            ],
+            "properties": [
+                {
+                    "name": "cdx:composer:package:type",
+                    "value": "library"
+                }
             ]
         },
         {
@@ -95,6 +113,12 @@
                 {
                     "type": "distribution",
                     "url": "packages/local-dependency-with-minimal-setup"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "cdx:composer:package:type",
+                    "value": "library"
                 }
             ]
         }

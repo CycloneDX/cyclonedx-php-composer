@@ -68,10 +68,10 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
-          key: composer-${{ github.job }}-${{ runner.os }}-${{ matrix.php }}-${{ matrix.dependencies }}-${{ hashFiles('**/composer.json') }}
+          key: composer-${{ github.job }}-${{ runner.os }}-php${{ matrix.php }}-${{ matrix.dependencies }}-${{ hashFiles('**/composer.json') }}
           restore-keys: |
-            composer-${{ github.job }}-${{ runner.os }}-${{ matrix.php }}-${{ matrix.dependencies }}-
-            composer-${{ github.job }}-${{ runner.os }}-${{ matrix.php }}-
+            composer-${{ github.job }}-${{ runner.os }}-php${{ matrix.php }}-${{ matrix.dependencies }}-
+            composer-${{ github.job }}-${{ runner.os }}-php${{ matrix.php }}-
             composer-${{ github.job }}-${{ runner.os }}-
       - name: Validate composer.json and composer.lock
         run: >
@@ -142,10 +142,10 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
-          key: composer-${{ github.job }}-${{ runner.os }}-${{ matrix.php }}-${{ matrix.dependencies }}-${{ hashFiles('**/composer.json') }}
+          key: composer-${{ github.job }}-${{ runner.os }}-php${{ matrix.php }}-${{ matrix.dependencies }}-${{ hashFiles('**/composer.json') }}
           restore-keys: |
-            composer-${{ github.job }}-${{ runner.os }}-${{ matrix.php }}-${{ matrix.dependencies }}-
-            composer-${{ github.job }}-${{ runner.os }}-${{ matrix.php }}-
+            composer-${{ github.job }}-${{ runner.os }}-php${{ matrix.php }}-${{ matrix.dependencies }}-
+            composer-${{ github.job }}-${{ runner.os }}-php${{ matrix.php }}-
             composer-${{ github.job }}-${{ runner.os }}-
       - name: Install psalm
         run: composer install --prefer-dist --no-interaction --no-progress

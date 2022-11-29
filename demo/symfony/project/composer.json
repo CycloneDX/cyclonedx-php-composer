@@ -6,7 +6,6 @@
         "symfony/symfony": "@stable"
     },
     "require-dev": {
-        "cyclonedx/cyclonedx-php-composer": "@dev",
         "roave/security-advisories": "dev-latest"
     },
     "repositories": [
@@ -16,7 +15,7 @@
             "symlink": true
         }
     ],
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "prefer-stable": true,
     "config": {
         "allow-plugins": {
@@ -25,5 +24,21 @@
         },
         "preferred-install": "dist",
         "sort-packages": true
+    },
+    "scripts": {
+        "create-sbom-results": [
+            "@create-sbom-results:JSON",
+            "@create-sbom-results:XML"
+        ],
+        "create-sbom-results:JSON": [
+            "@composer -d../../.tool make-bom --omit=dev --output-format=JSON --output-file=$PWD/../example-results/bom.json $PWD/composer.json"
+        ],
+        "create-sbom-results:XML": [
+            "@composer -d../../.tool make-bom --omit=dev --output-format=XML --output-file=$PWD/../example-results/bom.xml $PWD/composer.json"
+        ],
+        "setup": [
+            "@composer -d../../.tool update",
+            "@composer update"
+        ]
     }
 }
