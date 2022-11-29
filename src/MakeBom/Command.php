@@ -113,7 +113,7 @@ class Command extends BaseCommand
 
         $composer = (new ComposerFactory())->createComposer($io, $this->options->composerFile, fullLoad: true);
         /** @psalm-suppress RedundantConditionGivenDocblockType -- as with lowest-compatible dependencies this is needed  */
-        assert($composer instanceof \Composer\Composer);
+        \assert($composer instanceof \Composer\Composer);
         $model = (new Builder(
             \in_array('dev', $this->options->omit),
             \in_array('plugin', $this->options->omit),

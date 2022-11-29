@@ -71,6 +71,7 @@ class Builder
 
         /**
          * @psalm-var list<\Composer\Package\PackageInterface> $packages
+         *
          * @psalm-suppress MixedArgument
          */
         $packages = array_values(
