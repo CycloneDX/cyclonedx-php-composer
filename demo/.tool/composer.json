@@ -1,0 +1,26 @@
+{
+    "name": "cyclonedx/cyclonedx-php-composer-tool4demo",
+    "description": "global-like cyclonedx/cyclonedx-php-composer for usage in demos",
+    "type": "metapackage",
+    "require": {},
+    "require-dev": {
+        "cyclonedx/cyclonedx-php-composer": "@dev"
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../../",
+            "symlink": true
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "config": {
+        "allow-plugins": {
+            "cyclonedx/cyclonedx-php-composer": true,
+            "ergebnis/composer-normalize": true
+        },
+        "preferred-install": "dist",
+        "sort-packages": true
+    }
+}

@@ -35,13 +35,11 @@ jobs:
       - name: Checkout
         # see https://github.com/actions/checkout
         uses: actions/checkout@v3
-
       - name: Set the version
         id: set_version
         run: |
           VERSION=`cat semver.txt`
-          echo "##[set-output name=version;]$VERSION"
-
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
       - name: Create github release and git tag for release
         id: create_release
         # see https://github.com/actions/create-release

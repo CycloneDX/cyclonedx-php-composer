@@ -24,7 +24,15 @@ declare(strict_types=1);
 namespace CycloneDX\Composer\MakeBom;
 
 use Composer\Command\BaseCommand;
+use Composer\Factory as ComposerFactory;
 use Composer\IO\IOInterface;
+use CycloneDX\Composer\Builder;
+use CycloneDX\Core\Serialization;
+use CycloneDX\Core\Spec\Format;
+use CycloneDX\Core\Spec\Spec;
+use CycloneDX\Core\Spec\SpecFactory;
+use CycloneDX\Core\Validation\Validator;
+use CycloneDX\Core\Validation\Validators;
 use Symfony\Component\Console\Exception\LogicException;
 use Symfony\Component\Console\Formatter\OutputFormatter;
 use Symfony\Component\Console\Input\InputInterface;
@@ -43,10 +51,8 @@ class Command extends BaseCommand
     /**
      * @throws LogicException When the command name is empty
      */
-    public function __construct(
-        Options $options,
-        string $name
-    ) {
+    public function __construct(Options $options, string $name)
+    {
         $this->options = $options;
         parent::__construct($name);
     }
@@ -67,19 +73,119 @@ class Command extends BaseCommand
 
         try {
             $this->options->setFromInput($input);
-        } catch (Throwable $valueError) {
-            $io->writeErrorRaw((string) $valueError, true, IOInterface::DEBUG);
-            $io->writeError(
-                sprintf(
-                    '<error>Option Error: %s</error>',
-                    OutputFormatter::escape($valueError->getMessage())
-                )
-            );
+        } catch (Throwable $error) {
+            $io->writeErrorRaw((string) $error, true, IOInterface::DEBUG);
+            $io->writeError(sprintf(
+                '<error>InputError: %s</error>',
+                OutputFormatter::escape($error->getMessage())
+            ));
 
             return self::INVALID;
         }
-        $io->writeErrorRaw(__METHOD__.' Options: '.print_r($this->options, true), true, IOInterface::DEBUG);
+        $io->writeErrorRaw(__METHOD__.' Options: '.var_export($this->options, true), true, IOInterface::DEBUG);
 
-        return 0;
+        try {
+            $spec = SpecFactory::makeForVersion($this->options->specVersion);
+            $bom = $this->generateBom($io, $spec);
+            $this->validateBom($bom, $spec, $io);
+            $this->writeBom($bom, $io);
+        } catch (Throwable $error) {
+            $io->writeErrorRaw((string) $error, true, IOInterface::DEBUG);
+            $io->writeError(sprintf(
+                '<error>Error: %s</error>',
+                OutputFormatter::escape($error->getMessage())
+            ));
+
+            return self::FAILURE;
+        }
+
+        return self::SUCCESS;
+    }
+
+    /**
+     * @throws Throwable on error
+     *
+     * @psalm-return non-empty-string
+     */
+    private function generateBom(IOInterface $io, Spec $spec): string
+    {
+        $io->writeError('<info>generate BOM...</info>', verbosity: IOInterface::VERBOSE);
+
+        $composer = (new ComposerFactory())->createComposer($io, $this->options->composerFile, fullLoad: true);
+        /** @psalm-suppress RedundantConditionGivenDocblockType -- as with lowest-compatible dependencies this is needed  */
+        \assert($composer instanceof \Composer\Composer);
+        $model = (new Builder(
+            \in_array('dev', $this->options->omit),
+            \in_array('plugin', $this->options->omit),
+        ))->createBomFromComposer($composer);
+        unset($composer);
+
+        $io->writeError('<info>serialize BOM...</info>', verbosity: IOInterface::VERBOSE);
+        /** @var Serialization\Serializer */
+        $serializer = match ($this->options->outputFormat) {
+            Format::JSON => new Serialization\JsonSerializer(new Serialization\JSON\NormalizerFactory($spec)),
+            Format::XML => new Serialization\XmlSerializer(new Serialization\DOM\NormalizerFactory($spec)),
+        };
+        $io->writeErrorRaw('using '.$serializer::class, true, IOInterface::DEBUG);
+
+        return $serializer->serialize($model, prettyPrint: true);
+    }
+
+    /**
+     * @param non-empty-string $bom
+     *
+     * @throws Throwable on error
+     */
+    private function validateBom(string $bom, Spec $spec, IOInterface $io): void
+    {
+        if (false === $this->options->validate) {
+            $io->writeError('<info>skipped BOM validation.</info>', verbosity: IOInterface::VERBOSE);
+
+            return;
+        }
+        $io->writeError('<info>validate BOM...</info>', verbosity: IOInterface::VERBOSE);
+        /** @var Validator */
+        $validator = match ($this->options->outputFormat) {
+            Format::JSON => new Validators\JsonStrictValidator($spec),
+            Format::XML => new Validators\XmlValidator($spec),
+        };
+        $io->writeErrorRaw('using '.$validator::class, true, IOInterface::DEBUG);
+
+        $validationError = $validator->validateString($bom);
+        if (null !== $validationError) {
+            throw new Errors\ValidationError($validationError->getMessage());
+        }
+    }
+
+    /**
+     * @param non-empty-string $bom
+     *
+     * @throws Throwable on error
+     */
+    private function writeBom(string $bom, IOInterface $io): void
+    {
+        $io->writeError('<info>write BOM...</info>', verbosity: IOInterface::VERBOSE);
+
+        $outputFile = $this->options->outputFile;
+        $outputStream = Options::VALUE_OUTPUT_FILE_STDOUT === $outputFile
+            ? \STDOUT
+            : fopen($outputFile, 'wb');
+        if (false === $outputStream) {
+            throw new Errors\OutputError("failed to open output: $outputFile");
+        }
+
+        $written = fwrite($outputStream, $bom);
+        if (false === $written || 0 === $written) {
+            throw new Errors\OutputError("failed to write BOM: $outputFile");
+        }
+
+        $io->writeError(
+            sprintf(
+                '<info>wrote %d bytes to %s</info>',
+                $written,
+                OutputFormatter::escape($outputFile)
+            ),
+            verbosity: IOInterface::VERY_VERBOSE
+        );
     }
 }

@@ -13,6 +13,10 @@
 A plugin for PHP's [Composer](https://getcomposer.org/)
 that generates Software Bill of Materials (SBoM) in [CycloneDX](https://cyclonedx.org/) format.
 
+The resulting SBOM documents follow [official specifications and standards](https://github.com/CycloneDX/specification),
+and might have properties following [`cdx:npm` Namespace Taxonomy](https://github.com/CycloneDX/cyclonedx-property-taxonomy/blob/main/cdx/composer.md)
+.
+
 ## Requirements
 
 The latest version of this plugin
@@ -57,13 +61,13 @@ Arguments:
 
 Options:
       --output-format=OUTPUT-FORMAT  Which output format to use.
-                                     [choice: "XML", "JSON"] [default: "XML"]
+                                     {choices: "XML", "JSON"} [default: "XML"]
       --output-file=OUTPUT-FILE      Path to the output file.
                                      Set to "-" to write to STDOUT [default: "-"]
       --omit=OMIT                    Omit dependency types.
-                                     [choice: "dev", "plugin"] (multiple values allowed)
+                                     {choices: "dev", "plugin"} (multiple values allowed)
       --spec-version=SPEC-VERSION    Which version of CycloneDX spec to use.
-                                     [choice: "1.4", "1.3", "1.2", "1.1"] [default: "1.4"]
+                                     {choices: "1.4", "1.3", "1.2", "1.1"} [default: "1.4"]
       --validate|--no-validate       Validate the resulting output
       --mc-version=MC-VERSION        Version of the main component.
                                      This will override auto-detection.

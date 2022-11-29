@@ -25,13 +25,14 @@ namespace CycloneDX\Composer\MakeBom;
 
 use CycloneDX\Core\Spec\Format;
 use CycloneDX\Core\Spec\Version;
-use DomainException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 
 /**
+ * @psalm-type TOmittable='dev'|'plugin'
+ *
  * @internal
  *
  * @author jkowalleck
@@ -42,13 +43,18 @@ class Options
     private const OPTION_OUTPUT_FILE = 'output-file';
     private const OPTION_SPEC_VERSION = 'spec-version';
     private const OPTION_MAIN_COMPONENT_VERSION = 'mc-version';
-
     private const OPTION_OMIT = 'omit';
 
     private const SWITCH_VALIDATE = 'validate';
 
     private const ARGUMENT_COMPOSER_FILE = 'composer-file';
 
+    /**
+     * Possible output formats.
+     * First in list is the default value.
+     *
+     * @psalm-var non-empty-list<Format::*>
+     */
     private const VALUES_OUTPUT_FORMAT = [
         Format::XML,
         Format::JSON,
@@ -56,11 +62,20 @@ class Options
 
     public const VALUE_OUTPUT_FILE_STDOUT = '-';
 
+    /**
+     * Possible omittables.
+     *
+     * @psalm-var non-empty-list<TOmittable>
+     */
     private const VALUES_OMIT = [
         'dev',
         'plugin',
     ];
 
+    /**
+     * Possible spec versions.
+     * First in list is the default value.
+     */
     private const VALUE_SPEC_VERSION = [
         Version::v1dot4,
         Version::v1dot3,
@@ -73,9 +88,9 @@ class Options
      */
     private static function formatChoice(array $values): string
     {
-        return '[choice: "'.
+        return '{choices: "'.
             implode('", "', $values).
-            '"]';
+            '"}';
     }
 
     /**
@@ -139,8 +154,8 @@ class Options
                 self::ARGUMENT_COMPOSER_FILE,
                 InputArgument::OPTIONAL,
                 'Path to composer config file.'.\PHP_EOL.
-                'Defaults to "composer.json" file in working directory.',
-                $this->composerFile
+                '[default: "composer.json" file in current working directory]',
+                null
             );
     }
 
@@ -158,7 +173,7 @@ class Options
      *
      * @var string[]
      *
-     * @psalm-var list<'dev'|'plugin'>
+     * @psalm-var list<TOmittable>
      *
      * @psalm-allow-private-mutation
      */
@@ -208,6 +223,8 @@ class Options
     public ?string $mainComponentVersion = null;
 
     /**
+     * @throws Errors\OptionError
+     *
      * @return $this
      *
      * @psalm-suppress MissingThrowsDocblock
@@ -219,20 +236,20 @@ class Options
         $specVersion = $input->getOption(self::OPTION_SPEC_VERSION);
         \assert(\is_string($specVersion));
         if (false === \in_array($specVersion, self::VALUE_SPEC_VERSION, true)) {
-            throw new DomainException('Invalid value for option "'.self::OPTION_SPEC_VERSION.'": '.$specVersion);
+            throw new Errors\OptionError('Invalid value for option "'.self::OPTION_SPEC_VERSION.'": '.$specVersion);
         }
 
         $outputFormat = $input->getOption(self::OPTION_OUTPUT_FORMAT);
         \assert(\is_string($outputFormat));
         $outputFormat = strtoupper($outputFormat);
         if (false === \in_array($outputFormat, self::VALUES_OUTPUT_FORMAT, true)) {
-            throw new DomainException('Invalid value for option "'.self::OPTION_OUTPUT_FORMAT.'": '.$outputFormat);
+            throw new Errors\OptionError('Invalid value for option "'.self::OPTION_OUTPUT_FORMAT.'": '.$outputFormat);
         }
 
         $outputFile = $input->getOption(self::OPTION_OUTPUT_FILE);
         \assert(\is_string($outputFile));
         if ('' === $outputFile) {
-            throw new DomainException('Invalid value for option "'.self::OPTION_OUTPUT_FILE.'": '.$outputFile);
+            throw new Errors\OptionError('Invalid value for option "'.self::OPTION_OUTPUT_FILE.'": '.$outputFile);
         }
         // no additional restrictions to $outputFile - stuff like 'ftp://user:pass@host/path/file' is acceptable.
 

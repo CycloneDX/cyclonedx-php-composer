@@ -37,7 +37,7 @@
     },
     "require-dev": {
         "composer/composer": "^2.3.0",
-        "phpunit/phpunit": "9.5.25",
+        "phpunit/phpunit": "9.5.26",
         "roave/security-advisories": "dev-latest"
     },
     "prefer-stable": true,
@@ -90,7 +90,10 @@
             "@test:composer-normalize"
         ],
         "test:composer-normalize": "@composer -dtools/composer-normalize normalize --dry-run --diff $PWD/composer.json",
-        "test:composer-require-checker": "@php tools/composer-require-checker/vendor/maglnet/composer-require-checker/bin/composer-require-checker || :",
+        "test:composer-require-checker": [
+            "@putenv XDEBUG_MODE=off",
+            "@php tools/composer-require-checker/vendor/maglnet/composer-require-checker/bin/composer-require-checker check --config-file=.composer-require-checker.json"
+        ],
         "test:composer-unused": "@php tools/composer-unused/vendor/icanhazstring/composer-unused/bin/composer-unused --excludeDir=tools",
         "test:cs-fixer": "@php tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/php-cs-fixer fix --dry-run --diff",
         "test:phpunit": "@php -d zend.assertions=1 -d assert.exception=1 -d display_errors=On -d error_reporting=-1 -d log_errors_max_len=0 -d memory_limit=-1 vendor/phpunit/phpunit/phpunit",

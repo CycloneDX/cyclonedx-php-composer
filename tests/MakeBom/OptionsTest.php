@@ -41,7 +41,7 @@ class OptionsTest extends TestCase
     /**
      * @dataProvider dpProducesOption
      */
-    public function testProducesOption(string $inputString, array $expected): void
+    public function testProducesOption(string $inputString, array $expecteds): void
     {
         $command = new Command(__FUNCTION__);
 
@@ -54,8 +54,8 @@ class OptionsTest extends TestCase
 
         $options->setFromInput($input);
 
-        foreach ($expected as $property => $value) {
-            self::assertSame($options->{$property}, $value);
+        foreach ($expecteds as $property => $expected) {
+            self::assertSame($expected, $options->{$property});
         }
     }
 
@@ -75,7 +75,7 @@ class OptionsTest extends TestCase
         ];
         foreach ([Format::XML, Format::JSON] as $outputFormat) {
             yield "outputFormat $outputFormat" => [
-                "--output-format '$outputFormat'",
+                '--output-format '.escapeshellarg($outputFormat),
                 ['outputFormat' => $outputFormat],
             ];
             $outputFormatLC = strtolower($outputFormat);
@@ -84,13 +84,13 @@ class OptionsTest extends TestCase
                 ['outputFormat' => $outputFormat],
             ];
         }
-        $randomFile = tempnam(sys_get_temp_dir(), 'testing');
+        $randomFile = '/tmp/foo/'.uniqid('testing', true);
         yield 'outputFile' => [
-            "--output-file '$randomFile'",
+            '--output-file '.escapeshellarg($randomFile),
             ['outputFile' => $randomFile],
         ];
         yield 'omit some' => [
-            '--omit dev --omit plugin --omit invalid-value',
+            '--omit=dev --omit plugin --omit invalid-value',
             ['omit' => ['dev', 'plugin']],
         ];
         foreach ([Version::v1dot4, Version::v1dot3, Version::v1dot2, Version::v1dot1] as $specVersion) {
@@ -133,8 +133,8 @@ class OptionsTest extends TestCase
             "-- ''",
             ['composerFile' => null],
         ];
-        $randomFile = sys_get_temp_dir().\DIRECTORY_SEPARATOR.'composer.json';
-        yield 'some composerFile -> null' => [
+        $randomFile = 'foo/composer.json';
+        yield 'some composerFile' => [
             '-- '.escapeshellarg($randomFile),
             ['composerFile' => $randomFile],
         ];
