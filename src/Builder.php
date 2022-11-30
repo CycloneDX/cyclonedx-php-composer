@@ -155,12 +155,13 @@ class Builder
 
         $distUrl = $package->getDistUrl();
         $sourceUrl = $package->getSourceUrl();
+        $version = $package->getFullPrettyVersion();
 
         $component = new Models\Component(Enums\ComponentType::LIBRARY, $name);
         $component->setBomRefValue($package->getUniqueName());
         // TODO author(s)
         $component->setGroup($group);
-        $component->setVersion($package->getVersion());
+        $component->setVersion($version);
         if ($distUrl) {
             $component->getExternalReferences()->addItems(
                 new Models\ExternalReference(

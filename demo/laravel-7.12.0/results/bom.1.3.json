@@ -25,7 +25,7 @@
             "bom-ref": "asm89/stack-cors-1.3.0.0",
             "type": "library",
             "name": "stack-cors",
-            "version": "1.3.0.0",
+            "version": "1.3.0",
             "group": "asm89",
             "description": "Cross-origin resource sharing library and stack middleware",
             "licenses": [
@@ -72,7 +72,7 @@
             "bom-ref": "brick/math-0.9.3.0",
             "type": "library",
             "name": "math",
-            "version": "0.9.3.0",
+            "version": "0.9.3",
             "group": "brick",
             "description": "Arbitrary-precision arithmetic library",
             "licenses": [
@@ -114,7 +114,7 @@
             "bom-ref": "doctrine/inflector-2.0.6.0",
             "type": "library",
             "name": "inflector",
-            "version": "2.0.6.0",
+            "version": "2.0.6",
             "group": "doctrine",
             "description": "PHP Doctrine Inflector is a small library that can perform string manipulations with regard to upper/lowercase and singular/plural forms of words.",
             "licenses": [
@@ -161,7 +161,7 @@
             "bom-ref": "doctrine/lexer-1.2.3.0",
             "type": "library",
             "name": "lexer",
-            "version": "1.2.3.0",
+            "version": "1.2.3",
             "group": "doctrine",
             "description": "PHP Doctrine Lexer parser library that can be used in Top-Down, Recursive Descent Parsers.",
             "licenses": [
@@ -208,7 +208,7 @@
             "bom-ref": "dragonmantank/cron-expression-2.3.1.0",
             "type": "library",
             "name": "cron-expression",
-            "version": "2.3.1.0",
+            "version": "v2.3.1",
             "group": "dragonmantank",
             "description": "CRON for PHP: Calculate the next or previous run date and determine if a CRON expression is due",
             "licenses": [
@@ -250,7 +250,7 @@
             "bom-ref": "egulias/email-validator-2.1.25.0",
             "type": "library",
             "name": "email-validator",
-            "version": "2.1.25.0",
+            "version": "2.1.25",
             "group": "egulias",
             "description": "A library for validating emails against several RFCs",
             "licenses": [
@@ -297,7 +297,7 @@
             "bom-ref": "fideloper/proxy-4.4.2.0",
             "type": "library",
             "name": "proxy",
-            "version": "4.4.2.0",
+            "version": "4.4.2",
             "group": "fideloper",
             "description": "Set trusted proxies for Laravel",
             "licenses": [
@@ -339,7 +339,7 @@
             "bom-ref": "fruitcake/laravel-cors-1.0.6.0",
             "type": "library",
             "name": "laravel-cors",
-            "version": "1.0.6.0",
+            "version": "v1.0.6",
             "group": "fruitcake",
             "description": "Adds CORS (Cross-Origin Resource Sharing) headers support in your Laravel application",
             "licenses": [
@@ -381,7 +381,7 @@
             "bom-ref": "guzzlehttp/guzzle-6.5.8.0",
             "type": "library",
             "name": "guzzle",
-            "version": "6.5.8.0",
+            "version": "6.5.8",
             "group": "guzzlehttp",
             "description": "Guzzle is a PHP HTTP client library",
             "licenses": [
@@ -428,7 +428,7 @@
             "bom-ref": "guzzlehttp/promises-1.5.2.0",
             "type": "library",
             "name": "promises",
-            "version": "1.5.2.0",
+            "version": "1.5.2",
             "group": "guzzlehttp",
             "description": "Guzzle promises library",
             "licenses": [
@@ -470,7 +470,7 @@
             "bom-ref": "guzzlehttp/psr7-1.9.0.0",
             "type": "library",
             "name": "psr7",
-            "version": "1.9.0.0",
+            "version": "1.9.0",
             "group": "guzzlehttp",
             "description": "PSR-7 message implementation that also provides common utility methods",
             "licenses": [
@@ -512,7 +512,7 @@
             "bom-ref": "laravel/framework-7.30.6.0",
             "type": "library",
             "name": "framework",
-            "version": "7.30.6.0",
+            "version": "v7.30.6",
             "group": "laravel",
             "description": "The Laravel Framework.",
             "licenses": [
@@ -559,7 +559,7 @@
             "bom-ref": "laravel/laravel-7.12.0.0",
             "type": "library",
             "name": "laravel",
-            "version": "7.12.0.0",
+            "version": "v7.12.0",
             "group": "laravel",
             "description": "The Laravel Framework.",
             "licenses": [
@@ -596,7 +596,7 @@
             "bom-ref": "laravel/tinker-2.7.3.0",
             "type": "library",
             "name": "tinker",
-            "version": "2.7.3.0",
+            "version": "v2.7.3",
             "group": "laravel",
             "description": "Powerful REPL for the Laravel framework.",
             "licenses": [
@@ -638,7 +638,7 @@
             "bom-ref": "league/commonmark-1.6.7.0",
             "type": "library",
             "name": "commonmark",
-            "version": "1.6.7.0",
+            "version": "1.6.7",
             "group": "league",
             "description": "Highly-extensible PHP Markdown parser which fully supports the CommonMark spec and Github-Flavored Markdown (GFM)",
             "licenses": [
@@ -695,7 +695,7 @@
             "bom-ref": "league/flysystem-1.1.10.0",
             "type": "library",
             "name": "flysystem",
-            "version": "1.1.10.0",
+            "version": "1.1.10",
             "group": "league",
             "description": "Filesystem abstraction: Many filesystems, one API.",
             "licenses": [
@@ -737,7 +737,7 @@
             "bom-ref": "league/mime-type-detection-1.11.0.0",
             "type": "library",
             "name": "mime-type-detection",
-            "version": "1.11.0.0",
+            "version": "1.11.0",
             "group": "league",
             "description": "Mime-type detection for Flysystem",
             "licenses": [
@@ -779,7 +779,7 @@
             "bom-ref": "monolog/monolog-2.8.0.0",
             "type": "library",
             "name": "monolog",
-            "version": "2.8.0.0",
+            "version": "2.8.0",
             "group": "monolog",
             "description": "Sends your logs to files, sockets, inboxes, databases and various web services",
             "licenses": [
@@ -826,7 +826,7 @@
             "bom-ref": "nesbot/carbon-2.63.0.0",
             "type": "library",
             "name": "carbon",
-            "version": "2.63.0.0",
+            "version": "2.63.0",
             "group": "nesbot",
             "description": "An API extension for DateTime that supports 281 different languages.",
             "licenses": [
@@ -878,7 +878,7 @@
             "bom-ref": "nikic/php-parser-4.15.2.0",
             "type": "library",
             "name": "php-parser",
-            "version": "4.15.2.0",
+            "version": "v4.15.2",
             "group": "nikic",
             "description": "A PHP parser written in PHP",
             "licenses": [
@@ -920,7 +920,7 @@
             "bom-ref": "opis/closure-3.6.3.0",
             "type": "library",
             "name": "closure",
-            "version": "3.6.3.0",
+            "version": "3.6.3",
             "group": "opis",
             "description": "A library that can be used to serialize closures (anonymous functions) and arbitrary objects.",
             "licenses": [
@@ -967,7 +967,7 @@
             "bom-ref": "phpoption/phpoption-1.9.0.0",
             "type": "library",
             "name": "phpoption",
-            "version": "1.9.0.0",
+            "version": "1.9.0",
             "group": "phpoption",
             "description": "Option Type for PHP",
             "licenses": [
@@ -1009,7 +1009,7 @@
             "bom-ref": "psr/container-1.1.1.0",
             "type": "library",
             "name": "container",
-            "version": "1.1.1.0",
+            "version": "1.1.1",
             "group": "psr",
             "description": "Common Container Interface (PHP FIG PSR-11)",
             "licenses": [
@@ -1056,7 +1056,7 @@
             "bom-ref": "psr/event-dispatcher-1.0.0.0",
             "type": "library",
             "name": "event-dispatcher",
-            "version": "1.0.0.0",
+            "version": "1.0.0",
             "group": "psr",
             "description": "Standard interfaces for event handling.",
             "licenses": [
@@ -1098,7 +1098,7 @@
             "bom-ref": "psr/http-message-1.0.1.0",
             "type": "library",
             "name": "http-message",
-            "version": "1.0.1.0",
+            "version": "1.0.1",
             "group": "psr",
             "description": "Common interface for HTTP messages",
             "licenses": [
@@ -1140,7 +1140,7 @@
             "bom-ref": "psr/log-1.1.4.0",
             "type": "library",
             "name": "log",
-            "version": "1.1.4.0",
+            "version": "1.1.4",
             "group": "psr",
             "description": "Common interface for logging libraries",
             "licenses": [
@@ -1182,7 +1182,7 @@
             "bom-ref": "psr/simple-cache-1.0.1.0",
             "type": "library",
             "name": "simple-cache",
-            "version": "1.0.1.0",
+            "version": "1.0.1",
             "group": "psr",
             "description": "Common interfaces for simple caching",
             "licenses": [
@@ -1219,7 +1219,7 @@
             "bom-ref": "psy/psysh-0.11.9.0",
             "type": "library",
             "name": "psysh",
-            "version": "0.11.9.0",
+            "version": "v0.11.9",
             "group": "psy",
             "description": "An interactive shell for modern PHP.",
             "licenses": [
@@ -1266,7 +1266,7 @@
             "bom-ref": "ralouphie/getallheaders-3.0.3.0",
             "type": "library",
             "name": "getallheaders",
-            "version": "3.0.3.0",
+            "version": "3.0.3",
             "group": "ralouphie",
             "description": "A polyfill for getallheaders.",
             "licenses": [
@@ -1308,7 +1308,7 @@
             "bom-ref": "ramsey/collection-1.2.2.0",
             "type": "library",
             "name": "collection",
-            "version": "1.2.2.0",
+            "version": "1.2.2",
             "group": "ramsey",
             "description": "A PHP library for representing and manipulating collections.",
             "licenses": [
@@ -1350,7 +1350,7 @@
             "bom-ref": "ramsey/uuid-4.2.3.0",
             "type": "library",
             "name": "uuid",
-            "version": "4.2.3.0",
+            "version": "4.2.3",
             "group": "ramsey",
             "description": "A PHP library for generating and working with universally unique identifiers (UUIDs).",
             "licenses": [
@@ -1392,7 +1392,7 @@
             "bom-ref": "swiftmailer/swiftmailer-6.3.0.0",
             "type": "library",
             "name": "swiftmailer",
-            "version": "6.3.0.0",
+            "version": "v6.3.0",
             "group": "swiftmailer",
             "description": "Swiftmailer, free feature-rich PHP mailer",
             "licenses": [
@@ -1439,7 +1439,7 @@
             "bom-ref": "symfony/console-5.4.16.0",
             "type": "library",
             "name": "console",
-            "version": "5.4.16.0",
+            "version": "v5.4.16",
             "group": "symfony",
             "description": "Eases the creation of beautiful and testable command line interfaces",
             "licenses": [
@@ -1481,7 +1481,7 @@
             "bom-ref": "symfony/css-selector-5.4.11.0",
             "type": "library",
             "name": "css-selector",
-            "version": "5.4.11.0",
+            "version": "v5.4.11",
             "group": "symfony",
             "description": "Converts CSS selectors to XPath expressions",
             "licenses": [
@@ -1523,7 +1523,7 @@
             "bom-ref": "symfony/deprecation-contracts-2.5.2.0",
             "type": "library",
             "name": "deprecation-contracts",
-            "version": "2.5.2.0",
+            "version": "v2.5.2",
             "group": "symfony",
             "description": "A generic function and convention to trigger deprecation notices",
             "licenses": [
@@ -1565,7 +1565,7 @@
             "bom-ref": "symfony/error-handler-5.4.15.0",
             "type": "library",
             "name": "error-handler",
-            "version": "5.4.15.0",
+            "version": "v5.4.15",
             "group": "symfony",
             "description": "Provides tools to manage errors and ease debugging PHP code",
             "licenses": [
@@ -1607,7 +1607,7 @@
             "bom-ref": "symfony/event-dispatcher-5.4.9.0",
             "type": "library",
             "name": "event-dispatcher",
-            "version": "5.4.9.0",
+            "version": "v5.4.9",
             "group": "symfony",
             "description": "Provides tools that allow your application components to communicate with each other by dispatching events and listening to them",
             "licenses": [
@@ -1649,7 +1649,7 @@
             "bom-ref": "symfony/event-dispatcher-contracts-2.5.2.0",
             "type": "library",
             "name": "event-dispatcher-contracts",
-            "version": "2.5.2.0",
+            "version": "v2.5.2",
             "group": "symfony",
             "description": "Generic abstractions related to dispatching event",
             "licenses": [
@@ -1691,7 +1691,7 @@
             "bom-ref": "symfony/finder-5.4.11.0",
             "type": "library",
             "name": "finder",
-            "version": "5.4.11.0",
+            "version": "v5.4.11",
             "group": "symfony",
             "description": "Finds files and directories via an intuitive fluent interface",
             "licenses": [
@@ -1733,7 +1733,7 @@
             "bom-ref": "symfony/http-foundation-5.4.16.0",
             "type": "library",
             "name": "http-foundation",
-            "version": "5.4.16.0",
+            "version": "v5.4.16",
             "group": "symfony",
             "description": "Defines an object-oriented layer for the HTTP specification",
             "licenses": [
@@ -1775,7 +1775,7 @@
             "bom-ref": "symfony/http-kernel-5.4.16.0",
             "type": "library",
             "name": "http-kernel",
-            "version": "5.4.16.0",
+            "version": "v5.4.16",
             "group": "symfony",
             "description": "Provides a structured process for converting a Request into a Response",
             "licenses": [
@@ -1817,7 +1817,7 @@
             "bom-ref": "symfony/mime-5.4.16.0",
             "type": "library",
             "name": "mime",
-            "version": "5.4.16.0",
+            "version": "v5.4.16",
             "group": "symfony",
             "description": "Allows manipulating MIME messages",
             "licenses": [
@@ -1859,7 +1859,7 @@
             "bom-ref": "symfony/polyfill-ctype-1.27.0.0",
             "type": "library",
             "name": "polyfill-ctype",
-            "version": "1.27.0.0",
+            "version": "v1.27.0",
             "group": "symfony",
             "description": "Symfony polyfill for ctype functions",
             "licenses": [
@@ -1901,7 +1901,7 @@
             "bom-ref": "symfony/polyfill-iconv-1.27.0.0",
             "type": "library",
             "name": "polyfill-iconv",
-            "version": "1.27.0.0",
+            "version": "v1.27.0",
             "group": "symfony",
             "description": "Symfony polyfill for the Iconv extension",
             "licenses": [
@@ -1943,7 +1943,7 @@
             "bom-ref": "symfony/polyfill-intl-grapheme-1.27.0.0",
             "type": "library",
             "name": "polyfill-intl-grapheme",
-            "version": "1.27.0.0",
+            "version": "v1.27.0",
             "group": "symfony",
             "description": "Symfony polyfill for intl's grapheme_* functions",
             "licenses": [
@@ -1985,7 +1985,7 @@
             "bom-ref": "symfony/polyfill-intl-idn-1.27.0.0",
             "type": "library",
             "name": "polyfill-intl-idn",
-            "version": "1.27.0.0",
+            "version": "v1.27.0",
             "group": "symfony",
             "description": "Symfony polyfill for intl's idn_to_ascii and idn_to_utf8 functions",
             "licenses": [
@@ -2027,7 +2027,7 @@
             "bom-ref": "symfony/polyfill-intl-normalizer-1.27.0.0",
             "type": "library",
             "name": "polyfill-intl-normalizer",
-            "version": "1.27.0.0",
+            "version": "v1.27.0",
             "group": "symfony",
             "description": "Symfony polyfill for intl's Normalizer class and related functions",
             "licenses": [
@@ -2069,7 +2069,7 @@
             "bom-ref": "symfony/polyfill-mbstring-1.27.0.0",
             "type": "library",
             "name": "polyfill-mbstring",
-            "version": "1.27.0.0",
+            "version": "v1.27.0",
             "group": "symfony",
             "description": "Symfony polyfill for the Mbstring extension",
             "licenses": [
@@ -2111,7 +2111,7 @@
             "bom-ref": "symfony/polyfill-php72-1.27.0.0",
             "type": "library",
             "name": "polyfill-php72",
-            "version": "1.27.0.0",
+            "version": "v1.27.0",
             "group": "symfony",
             "description": "Symfony polyfill backporting some PHP 7.2+ features to lower PHP versions",
             "licenses": [
@@ -2153,7 +2153,7 @@
             "bom-ref": "symfony/polyfill-php73-1.27.0.0",
             "type": "library",
             "name": "polyfill-php73",
-            "version": "1.27.0.0",
+            "version": "v1.27.0",
             "group": "symfony",
             "description": "Symfony polyfill backporting some PHP 7.3+ features to lower PHP versions",
             "licenses": [
@@ -2195,7 +2195,7 @@
             "bom-ref": "symfony/polyfill-php80-1.27.0.0",
             "type": "library",
             "name": "polyfill-php80",
-            "version": "1.27.0.0",
+            "version": "v1.27.0",
             "group": "symfony",
             "description": "Symfony polyfill backporting some PHP 8.0+ features to lower PHP versions",
             "licenses": [
@@ -2237,7 +2237,7 @@
             "bom-ref": "symfony/polyfill-php81-1.27.0.0",
             "type": "library",
             "name": "polyfill-php81",
-            "version": "1.27.0.0",
+            "version": "v1.27.0",
             "group": "symfony",
             "description": "Symfony polyfill backporting some PHP 8.1+ features to lower PHP versions",
             "licenses": [
@@ -2279,7 +2279,7 @@
             "bom-ref": "symfony/process-5.4.11.0",
             "type": "library",
             "name": "process",
-            "version": "5.4.11.0",
+            "version": "v5.4.11",
             "group": "symfony",
             "description": "Executes commands in sub-processes",
             "licenses": [
@@ -2321,7 +2321,7 @@
             "bom-ref": "symfony/routing-5.4.15.0",
             "type": "library",
             "name": "routing",
-            "version": "5.4.15.0",
+            "version": "v5.4.15",
             "group": "symfony",
             "description": "Maps an HTTP request to a set of configuration variables",
             "licenses": [
@@ -2363,7 +2363,7 @@
             "bom-ref": "symfony/service-contracts-2.5.2.0",
             "type": "library",
             "name": "service-contracts",
-            "version": "2.5.2.0",
+            "version": "v2.5.2",
             "group": "symfony",
             "description": "Generic abstractions related to writing services",
             "licenses": [
@@ -2405,7 +2405,7 @@
             "bom-ref": "symfony/string-5.4.15.0",
             "type": "library",
             "name": "string",
-            "version": "5.4.15.0",
+            "version": "v5.4.15",
             "group": "symfony",
             "description": "Provides an object-oriented API to strings and deals with bytes, UTF-8 code points and grapheme clusters in a unified way",
             "licenses": [
@@ -2447,7 +2447,7 @@
             "bom-ref": "symfony/translation-5.4.14.0",
             "type": "library",
             "name": "translation",
-            "version": "5.4.14.0",
+            "version": "v5.4.14",
             "group": "symfony",
             "description": "Provides tools to internationalize your application",
             "licenses": [
@@ -2489,7 +2489,7 @@
             "bom-ref": "symfony/translation-contracts-2.5.2.0",
             "type": "library",
             "name": "translation-contracts",
-            "version": "2.5.2.0",
+            "version": "v2.5.2",
             "group": "symfony",
             "description": "Generic abstractions related to translation",
             "licenses": [
@@ -2531,7 +2531,7 @@
             "bom-ref": "symfony/var-dumper-5.4.14.0",
             "type": "library",
             "name": "var-dumper",
-            "version": "5.4.14.0",
+            "version": "v5.4.14",
             "group": "symfony",
             "description": "Provides mechanisms for walking through any arbitrary PHP variable",
             "licenses": [
@@ -2573,7 +2573,7 @@
             "bom-ref": "tijsverkoyen/css-to-inline-styles-2.2.5.0",
             "type": "library",
             "name": "css-to-inline-styles",
-            "version": "2.2.5.0",
+            "version": "2.2.5",
             "group": "tijsverkoyen",
             "description": "CssToInlineStyles is a class that enables you to convert HTML-pages/files into HTML-pages/files with inline styles. This is very useful when you're sending emails.",
             "licenses": [
@@ -2620,7 +2620,7 @@
             "bom-ref": "vlucas/phpdotenv-4.3.0.0",
             "type": "library",
             "name": "phpdotenv",
-            "version": "4.3.0.0",
+            "version": "v4.3.0",
             "group": "vlucas",
             "description": "Loads environment variables from `.env` to `getenv()`, `$_ENV` and `$_SERVER` automagically.",
             "licenses": [
@@ -2662,7 +2662,7 @@
             "bom-ref": "voku/portable-ascii-1.6.1.0",
             "type": "library",
             "name": "portable-ascii",
-            "version": "1.6.1.0",
+            "version": "1.6.1",
             "group": "voku",
             "description": "Portable ASCII library - performance optimized (ascii) string functions for php.",
             "licenses": [

@@ -16,7 +16,7 @@
     <component type="library" bom-ref="doctrine/event-manager-2.0.0.0">
       <group><![CDATA[doctrine]]></group>
       <name><![CDATA[event-manager]]></name>
-      <version><![CDATA[2.0.0.0]]></version>
+      <version><![CDATA[2.0.0]]></version>
       <description><![CDATA[The Doctrine Event Manager is a simple PHP event system that was built to be used with the various Doctrine projects.]]></description>
       <hashes/>
       <licenses>
@@ -51,7 +51,7 @@
     <component type="library" bom-ref="doctrine/persistence-3.1.0.0">
       <group><![CDATA[doctrine]]></group>
       <name><![CDATA[persistence]]></name>
-      <version><![CDATA[3.1.0.0]]></version>
+      <version><![CDATA[3.1.0]]></version>
       <description><![CDATA[The Doctrine Persistence project is a set of shared interfaces and functionality that the different Doctrine object mappers share.]]></description>
       <hashes/>
       <licenses>
@@ -86,7 +86,7 @@
     <component type="library" bom-ref="friendsofphp/proxy-manager-lts-1.0.13.0">
       <group><![CDATA[friendsofphp]]></group>
       <name><![CDATA[proxy-manager-lts]]></name>
-      <version><![CDATA[1.0.13.0]]></version>
+      <version><![CDATA[v1.0.13]]></version>
       <description><![CDATA[Adding support for a wider range of PHP versions to ocramius/proxy-manager]]></description>
       <hashes/>
       <licenses>
@@ -121,7 +121,7 @@
     <component type="library" bom-ref="laminas/laminas-code-4.7.1.0">
       <group><![CDATA[laminas]]></group>
       <name><![CDATA[laminas-code]]></name>
-      <version><![CDATA[4.7.1.0]]></version>
+      <version><![CDATA[4.7.1]]></version>
       <description><![CDATA[Extensions to the PHP Reflection API, static code scanning, and code generation]]></description>
       <hashes/>
       <licenses>
@@ -172,7 +172,7 @@
     <component type="library" bom-ref="psr/cache-3.0.0.0">
       <group><![CDATA[psr]]></group>
       <name><![CDATA[cache]]></name>
-      <version><![CDATA[3.0.0.0]]></version>
+      <version><![CDATA[3.0.0]]></version>
       <description><![CDATA[Common interface for caching libraries]]></description>
       <hashes/>
       <licenses>
@@ -199,7 +199,7 @@
     <component type="library" bom-ref="psr/clock-1.0.0.0">
       <group><![CDATA[psr]]></group>
       <name><![CDATA[clock]]></name>
-      <version><![CDATA[1.0.0.0]]></version>
+      <version><![CDATA[1.0.0]]></version>
       <description><![CDATA[Common interface for reading the clock.]]></description>
       <hashes/>
       <licenses>
@@ -234,7 +234,7 @@
     <component type="library" bom-ref="psr/container-2.0.2.0">
       <group><![CDATA[psr]]></group>
       <name><![CDATA[container]]></name>
-      <version><![CDATA[2.0.2.0]]></version>
+      <version><![CDATA[2.0.2]]></version>
       <description><![CDATA[Common Container Interface (PHP FIG PSR-11)]]></description>
       <hashes/>
       <licenses>
@@ -269,7 +269,7 @@
     <component type="library" bom-ref="psr/event-dispatcher-1.0.0.0">
       <group><![CDATA[psr]]></group>
       <name><![CDATA[event-dispatcher]]></name>
-      <version><![CDATA[1.0.0.0]]></version>
+      <version><![CDATA[1.0.0]]></version>
       <description><![CDATA[Standard interfaces for event handling.]]></description>
       <hashes/>
       <licenses>
@@ -300,7 +300,7 @@
     <component type="library" bom-ref="psr/link-2.0.1.0">
       <group><![CDATA[psr]]></group>
       <name><![CDATA[link]]></name>
-      <version><![CDATA[2.0.1.0]]></version>
+      <version><![CDATA[2.0.1]]></version>
       <description><![CDATA[Common interfaces for HTTP links]]></description>
       <hashes/>
       <licenses>
@@ -331,7 +331,7 @@
     <component type="library" bom-ref="psr/log-3.0.0.0">
       <group><![CDATA[psr]]></group>
       <name><![CDATA[log]]></name>
-      <version><![CDATA[3.0.0.0]]></version>
+      <version><![CDATA[3.0.0]]></version>
       <description><![CDATA[Common interface for logging libraries]]></description>
       <hashes/>
       <licenses>
@@ -362,7 +362,7 @@
     <component type="library" bom-ref="symfony/contracts-3.1.1.0">
       <group><![CDATA[symfony]]></group>
       <name><![CDATA[contracts]]></name>
-      <version><![CDATA[3.1.1.0]]></version>
+      <version><![CDATA[v3.1.1]]></version>
       <description><![CDATA[A set of abstractions extracted out of the Symfony components]]></description>
       <hashes/>
       <licenses>
@@ -393,7 +393,7 @@
     <component type="library" bom-ref="symfony/polyfill-ctype-1.27.0.0">
       <group><![CDATA[symfony]]></group>
       <name><![CDATA[polyfill-ctype]]></name>
-      <version><![CDATA[1.27.0.0]]></version>
+      <version><![CDATA[v1.27.0]]></version>
       <description><![CDATA[Symfony polyfill for ctype functions]]></description>
       <hashes/>
       <licenses>
@@ -424,7 +424,7 @@
     <component type="library" bom-ref="symfony/polyfill-intl-grapheme-1.27.0.0">
       <group><![CDATA[symfony]]></group>
       <name><![CDATA[polyfill-intl-grapheme]]></name>
-      <version><![CDATA[1.27.0.0]]></version>
+      <version><![CDATA[v1.27.0]]></version>
       <description><![CDATA[Symfony polyfill for intl's grapheme_* functions]]></description>
       <hashes/>
       <licenses>
@@ -455,7 +455,7 @@
     <component type="library" bom-ref="symfony/polyfill-intl-icu-1.27.0.0">
       <group><![CDATA[symfony]]></group>
       <name><![CDATA[polyfill-intl-icu]]></name>
-      <version><![CDATA[1.27.0.0]]></version>
+      <version><![CDATA[v1.27.0]]></version>
       <description><![CDATA[Symfony polyfill for intl's ICU-related data and classes]]></description>
       <hashes/>
       <licenses>
@@ -486,7 +486,7 @@
     <component type="library" bom-ref="symfony/polyfill-intl-idn-1.27.0.0">
       <group><![CDATA[symfony]]></group>
       <name><![CDATA[polyfill-intl-idn]]></name>
-      <version><![CDATA[1.27.0.0]]></version>
+      <version><![CDATA[v1.27.0]]></version>
       <description><![CDATA[Symfony polyfill for intl's idn_to_ascii and idn_to_utf8 functions]]></description>
       <hashes/>
       <licenses>
@@ -517,7 +517,7 @@
     <component type="library" bom-ref="symfony/polyfill-intl-normalizer-1.27.0.0">
       <group><![CDATA[symfony]]></group>
       <name><![CDATA[polyfill-intl-normalizer]]></name>
-      <version><![CDATA[1.27.0.0]]></version>
+      <version><![CDATA[v1.27.0]]></version>
       <description><![CDATA[Symfony polyfill for intl's Normalizer class and related functions]]></description>
       <hashes/>
       <licenses>
@@ -548,7 +548,7 @@
     <component type="library" bom-ref="symfony/polyfill-mbstring-1.27.0.0">
       <group><![CDATA[symfony]]></group>
       <name><![CDATA[polyfill-mbstring]]></name>
-      <version><![CDATA[1.27.0.0]]></version>
+      <version><![CDATA[v1.27.0]]></version>
       <description><![CDATA[Symfony polyfill for the Mbstring extension]]></description>
       <hashes/>
       <licenses>
@@ -579,7 +579,7 @@
     <component type="library" bom-ref="symfony/polyfill-php72-1.27.0.0">
       <group><![CDATA[symfony]]></group>
       <name><![CDATA[polyfill-php72]]></name>
-      <version><![CDATA[1.27.0.0]]></version>
+      <version><![CDATA[v1.27.0]]></version>
       <description><![CDATA[Symfony polyfill backporting some PHP 7.2+ features to lower PHP versions]]></description>
       <hashes/>
       <licenses>
@@ -610,7 +610,7 @@
     <component type="library" bom-ref="symfony/polyfill-uuid-1.27.0.0">
       <group><![CDATA[symfony]]></group>
       <name><![CDATA[polyfill-uuid]]></name>
-      <version><![CDATA[1.27.0.0]]></version>
+      <version><![CDATA[v1.27.0]]></version>
       <description><![CDATA[Symfony polyfill for uuid functions]]></description>
       <hashes/>
       <licenses>
@@ -641,7 +641,7 @@
     <component type="library" bom-ref="symfony/symfony-6.2.0.0">
       <group><![CDATA[symfony]]></group>
       <name><![CDATA[symfony]]></name>
-      <version><![CDATA[6.2.0.0]]></version>
+      <version><![CDATA[v6.2.0]]></version>
       <description><![CDATA[The Symfony PHP framework]]></description>
       <hashes/>
       <licenses>
@@ -676,7 +676,7 @@
     <component type="library" bom-ref="twig/twig-3.4.3.0">
       <group><![CDATA[twig]]></group>
       <name><![CDATA[twig]]></name>
-      <version><![CDATA[3.4.3.0]]></version>
+      <version><![CDATA[v3.4.3]]></version>
       <description><![CDATA[Twig, the flexible, fast, and secure template language for PHP]]></description>
       <hashes/>
       <licenses>
