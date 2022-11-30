@@ -8,7 +8,7 @@ All notable changes to this project will be documented in this file.
   * Removed support for PHP `<8.0` ([#91] via [#250])
   * Removed support for Composer `<2.3` ([#153] via [#250])
   * CLI
-    * Changed option `output-fil` to default to `-` now, which causes to print to STDOUT (via [#250])
+    * Changed option `output-file` to default to `-` now, which causes to print to STDOUT (via [#250])
     * Removed option `exclude-dev` in favour of new option `omit` (via [#250])
     * Removed option `exclude-plugins` in favour of new option `omit` (via [#250])
   * Dependencies
@@ -18,11 +18,15 @@ All notable changes to this project will be documented in this file.
   * CLI:
     * New option `omit` (via [#250])
     * New switch `validate` to override `no-validate` (via [#250])
+* Misc
+  * Added demo and reproducible continuous integration test "devReq" that is dedicated to composer's `require-dev` feature. (via [#254])
+  * Reworked demo setups to be more global-install like. (via [#254])
 
 [#91]:  https://github.com/CycloneDX/cyclonedx-php-composer/issues/91
 [#128]: https://github.com/CycloneDX/cyclonedx-php-composer/issues/128
 [#153]: https://github.com/CycloneDX/cyclonedx-php-composer/issues/153
 [#250]: https://github.com/CycloneDX/cyclonedx-php-composer/pull/250
+[#254]: https://github.com/CycloneDX/cyclonedx-php-composer/pull/254
 
 ## 3.10.2 - 2022-09-15
 
