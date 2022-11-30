@@ -11,7 +11,7 @@
             "version": "dev-next",
             "group": "cyclonedx",
             "description": "demo of cyclonedx/cyclonedx-php-composer with symfony/symfony",
-            "purl": "pkg:composer/cyclonedx/cyclonedx-php-composer-demo",
+            "purl": "pkg:composer/cyclonedx/cyclonedx-php-composer-demo@dev-next",
             "properties": [
                 {
                     "name": "cdx:composer:package:type",

@@ -6,7 +6,7 @@
       <name><![CDATA[cyclonedx-php-composer-devreq]]></name>
       <version><![CDATA[dev-master]]></version>
       <description><![CDATA[demo of cyclonedx/cyclonedx-php-composer with a dev dependency]]></description>
-      <purl><![CDATA[pkg:composer/cyclonedx-demo/cyclonedx-php-composer-devreq]]></purl>
+      <purl><![CDATA[pkg:composer/cyclonedx-demo/cyclonedx-php-composer-devreq@dev-master]]></purl>
       <externalReferences>
         <reference type="website">
           <url><![CDATA[https://cyclonedx.org/]]></url>

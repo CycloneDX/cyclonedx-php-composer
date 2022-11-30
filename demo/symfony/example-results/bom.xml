@@ -6,7 +6,7 @@
       <name><![CDATA[cyclonedx-php-composer-demo]]></name>
       <version><![CDATA[dev-next]]></version>
       <description><![CDATA[demo of cyclonedx/cyclonedx-php-composer with symfony/symfony]]></description>
-      <purl><![CDATA[pkg:composer/cyclonedx/cyclonedx-php-composer-demo]]></purl>
+      <purl><![CDATA[pkg:composer/cyclonedx/cyclonedx-php-composer-demo@dev-next]]></purl>
       <properties>
         <property name="cdx:composer:package:type"><![CDATA[project]]></property>
       </properties>

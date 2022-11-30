@@ -11,7 +11,7 @@
             "version": "dev-master",
             "group": "cyclonedx-demo",
             "description": "demo of cyclonedx/cyclonedx-php-composer with a dev dependency",
-            "purl": "pkg:composer/cyclonedx-demo/cyclonedx-php-composer-devreq",
+            "purl": "pkg:composer/cyclonedx-demo/cyclonedx-php-composer-devreq@dev-master",
             "externalReferences": [
                 {
                     "type": "website",

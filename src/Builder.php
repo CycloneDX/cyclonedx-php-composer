@@ -212,6 +212,7 @@ class Builder
         }
 
         $purl->setNamespace($component->getGroup());
+        $purl->setVersion($component->getVersion());
 
         $sha1Sum = $component->getHashes()->get(Enums\HashAlgorithm::SHA_1);
         if (null !== $sha1Sum) {

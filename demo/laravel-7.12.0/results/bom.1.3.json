@@ -11,7 +11,7 @@
             "version": "dev-master",
             "group": "cyclonedx",
             "description": "demo of cyclonedx/cyclonedx-php-composer with a pinned version of laravel/framework",
-            "purl": "pkg:composer/cyclonedx/cyclonedx-php-composer-demo",
+            "purl": "pkg:composer/cyclonedx/cyclonedx-php-composer-demo@dev-master",
             "properties": [
                 {
                     "name": "cdx:composer:package:type",
