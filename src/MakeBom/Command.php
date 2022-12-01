@@ -117,6 +117,7 @@ class Command extends BaseCommand
         $model = (new Builder(
             \in_array('dev', $this->options->omit),
             \in_array('plugin', $this->options->omit),
+            $this->options->mainComponentVersion,
         ))->createBomFromComposer($composer);
         unset($composer);
 

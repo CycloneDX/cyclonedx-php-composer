@@ -68,10 +68,10 @@ Options:
                                      {choices: "dev", "plugin"} (multiple values allowed)
       --spec-version=SPEC-VERSION    Which version of CycloneDX spec to use.
                                      {choices: "1.4", "1.3", "1.2", "1.1"} [default: "1.4"]
-      --validate|--no-validate       Validate the resulting output
+      --validate|--no-validate       Validate the resulting output.
       --mc-version=MC-VERSION        Version of the main component.
                                      This will override auto-detection.
-  -h, --help                         Display help for the given command. When no command is given display help for the list command
+  -h, --help                         Display help for the given command.
 ```
 
 ## Demo

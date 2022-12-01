@@ -4,7 +4,7 @@
     <component type="library">
       <group><![CDATA[cyclonedx-demo]]></group>
       <name><![CDATA[local-demo-dependency]]></name>
-      <version><![CDATA[1.33.7.0]]></version>
+      <version><![CDATA[1.33.7]]></version>
       <description><![CDATA[a package that is hosted locally and required in a local demo]]></description>
       <externalReferences>
         <reference type="distribution">

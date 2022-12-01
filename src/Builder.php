@@ -50,6 +50,7 @@ class Builder
     public function __construct(
         private bool $omitDev,
         private bool $omitPlugin,
+        private ?string $mainComponentVersion
     ) {
         $this->licenseFactory = new LicenseFactory(new SpdxLicenseValidator());
     }
@@ -133,7 +134,7 @@ class Builder
      */
     private function createComponentFromRootPackage(RootPackageInterface $package): Models\Component
     {
-        $component = $this->createComponentFromPackage($package);
+        $component = $this->createComponentFromPackage($package, $this->mainComponentVersion);
 
         return $component
             ->setType(Enums\ComponentType::APPLICATION)
@@ -143,7 +144,7 @@ class Builder
     /**
      * @psalm-suppress MissingThrowsDocblock
      */
-    private function createComponentFromPackage(PackageInterface $package): Models\Component
+    private function createComponentFromPackage(PackageInterface $package, ?string $versionOverride = null): Models\Component
     {
         $groupAndName = explode('/', $package->getName(), 2);
         [$group, $name] = 2 === \count($groupAndName)
@@ -155,12 +156,13 @@ class Builder
 
         $distUrl = $package->getDistUrl();
         $sourceUrl = $package->getSourceUrl();
+        $version = $versionOverride ?? $package->getFullPrettyVersion();
 
         $component = new Models\Component(Enums\ComponentType::LIBRARY, $name);
         $component->setBomRefValue($package->getUniqueName());
         // TODO author(s)
         $component->setGroup($group);
-        $component->setVersion($package->getVersion());
+        $component->setVersion($version);
         if ($distUrl) {
             $component->getExternalReferences()->addItems(
                 new Models\ExternalReference(
@@ -212,6 +214,7 @@ class Builder
         }
 
         $purl->setNamespace($component->getGroup());
+        $purl->setVersion($component->getVersion());
 
         $sha1Sum = $component->getHashes()->get(Enums\HashAlgorithm::SHA_1);
         if (null !== $sha1Sum) {

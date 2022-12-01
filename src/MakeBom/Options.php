@@ -139,7 +139,7 @@ class Options
                 self::SWITCH_VALIDATE,
                 null,
                 InputOption::VALUE_NEGATABLE,
-                'Validate the resulting output',
+                'Validate the resulting output.',
                 $this->validate
             )
             ->addOption(

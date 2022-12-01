@@ -11,7 +11,7 @@
             "version": "dev-master",
             "group": "cyclonedx-demo",
             "description": "demo of cyclonedx/cyclonedx-php-composer with a local dependency",
-            "purl": "pkg:composer/cyclonedx-demo/cyclonedx-php-composer-local",
+            "purl": "pkg:composer/cyclonedx-demo/cyclonedx-php-composer-local@dev-master",
             "externalReferences": [
                 {
                     "type": "website",
@@ -57,7 +57,7 @@
             "bom-ref": "cyclonedx-demo/local-demo-dependency-1.33.7.0",
             "type": "library",
             "name": "local-demo-dependency",
-            "version": "1.33.7.0",
+            "version": "1.33.7",
             "group": "cyclonedx-demo",
             "description": "a package that is hosted locally and required in a local demo",
             "externalReferences": [
