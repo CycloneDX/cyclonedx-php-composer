@@ -144,7 +144,7 @@ class Builder
     /**
      * @psalm-suppress MissingThrowsDocblock
      */
-    private function createComponentFromPackage(PackageInterface $package, ?string $versionOverride=null): Models\Component
+    private function createComponentFromPackage(PackageInterface $package, ?string $versionOverride = null): Models\Component
     {
         $groupAndName = explode('/', $package->getName(), 2);
         [$group, $name] = 2 === \count($groupAndName)
