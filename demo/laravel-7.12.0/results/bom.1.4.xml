@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bom xmlns="http://cyclonedx.org/schema/bom/1.4" version="1">
   <metadata>
+    <tools>
+      <tool>
+        <vendor><![CDATA[cyclonedx]]></vendor>
+        <name><![CDATA[cyclonedx-php-composer]]></name>
+        <version><![CDATA[in-dev]]></version>
+      </tool>
+    </tools>
     <component type="application" bom-ref="cyclonedx/cyclonedx-php-composer-demo-dev-master">
       <group><![CDATA[cyclonedx]]></group>
       <name><![CDATA[cyclonedx-php-composer-demo]]></name>

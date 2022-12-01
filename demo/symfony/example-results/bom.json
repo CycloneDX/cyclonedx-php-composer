@@ -4,6 +4,13 @@
     "specVersion": "1.4",
     "version": 1,
     "metadata": {
+        "tools": [
+            {
+                "vendor": "cyclonedx",
+                "name": "cyclonedx-php-composer",
+                "version": "4.0.0-beta.0"
+            }
+        ],
         "component": {
             "bom-ref": "cyclonedx/cyclonedx-php-composer-demo-dev-next",
             "type": "application",
@@ -882,7 +889,7 @@
             "externalReferences": [
                 {
                     "type": "distribution",
-                    "url": "https://api.github.com/repos/symfony/symfony/zipball/eafb456f373677627db8a53d31d70daf13bc3cb6"
+                    "url": "https://api.github.com/repos/symfony/symfony/zipball/ed9b9e7795c3e30c6d70c6ecf013a28910f6e15e"
                 },
                 {
                     "type": "distribution",

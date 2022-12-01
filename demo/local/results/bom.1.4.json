@@ -4,6 +4,13 @@
     "specVersion": "1.4",
     "version": 1,
     "metadata": {
+        "tools": [
+            {
+                "vendor": "cyclonedx",
+                "name": "cyclonedx-php-composer",
+                "version": "in-dev"
+            }
+        ],
         "component": {
             "bom-ref": "cyclonedx-demo/cyclonedx-php-composer-local-dev-master",
             "type": "application",
