@@ -86,6 +86,9 @@ class Builder
         /** @psalm-var array<string, Models\Component> */
         $components = [$rootPackage->getUniqueName() => $rootComponent];
         foreach ($packages as $package) {
+            if ($this->omitPlugin && 'composer-plugin' === $package->getType()) {
+                continue;
+            }
             $component = $this->createComponentFromPackage($package);
             $bom->getComponents()->addItems($component);
             $components[$package->getUniqueName()] = $component;
