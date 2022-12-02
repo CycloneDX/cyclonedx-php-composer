@@ -111,15 +111,21 @@ class Command extends BaseCommand
     {
         $io->writeError('<info>generate BOM...</info>', verbosity: IOInterface::VERBOSE);
 
-        $composer = (new ComposerFactory())->createComposer($io, $this->options->composerFile, fullLoad: true);
-        /** @psalm-suppress RedundantConditionGivenDocblockType -- as with lowest-compatible dependencies this is needed  */
-        \assert($composer instanceof \Composer\Composer);
-        $model = (new Builder(
+        $builder = new Builder(
             \in_array('dev', $this->options->omit),
             \in_array('plugin', $this->options->omit),
             $this->options->mainComponentVersion,
-        ))->createBomFromComposer($composer);
+        );
+
+        $composer = (new ComposerFactory())->createComposer($io, $this->options->composerFile, fullLoad: true);
+        /** @psalm-suppress RedundantConditionGivenDocblockType -- as with lowest-compatible dependencies this is needed  */
+        \assert($composer instanceof \Composer\Composer);
+        $bom = $builder->createBomFromComposer($composer);
         unset($composer);
+
+        $bom->getMetadata()->getTools()->addItems(
+            $builder->createThisTool($this->options->getToolVersionOverride())
+        );
 
         $io->writeError('<info>serialize BOM...</info>', verbosity: IOInterface::VERBOSE);
         /** @var Serialization\Serializer */
@@ -129,7 +135,7 @@ class Command extends BaseCommand
         };
         $io->writeErrorRaw('using '.$serializer::class, true, IOInterface::DEBUG);
 
-        return $serializer->serialize($model, prettyPrint: true);
+        return $serializer->serialize($bom, prettyPrint: true);
     }
 
     /**

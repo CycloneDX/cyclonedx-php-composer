@@ -39,6 +39,12 @@ use Symfony\Component\Console\Input\InputOption;
  */
 class Options
 {
+    /**
+     * Env var to control whether to set self as `sbom.metadata.tools.tool`.
+     * Non-documented private env vars usage, because this is not public API.
+     */
+    private const ENV_TOOL_VERSION_OVERRIDE = 'CDX_CP_TOOL_VERSION_OVERRIDE';
+
     private const OPTION_OUTPUT_FORMAT = 'output-format';
     private const OPTION_OUTPUT_FILE = 'output-file';
     private const OPTION_SPEC_VERSION = 'spec-version';
@@ -221,6 +227,18 @@ class Options
      * @psalm-var null|non-empty-string
      */
     public ?string $mainComponentVersion = null;
+
+    /**
+     * @psalm-return null|non-empty-string
+     */
+    public function getToolVersionOverride(): ?string
+    {
+        $version = getenv(self::ENV_TOOL_VERSION_OVERRIDE);
+
+        return \is_string($version) && '' !== $version
+        ? $version
+        : null;
+    }
 
     /**
      * @throws Errors\OptionError

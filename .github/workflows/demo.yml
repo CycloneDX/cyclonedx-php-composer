@@ -28,6 +28,7 @@ env:
   PHP_PROJECT_EXT: dom,filter,json,libxml # via `composer info -pt` and removed dev req
   REPORTS_DIR: CI_reports
   DEMO_TOOL_PATH: demo/.tool
+  CDX_CP_TOOL_VERSION_OVERRIDE: in-dev
 
 jobs:
   reproducible:
