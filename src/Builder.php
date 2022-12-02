@@ -71,6 +71,7 @@ class Builder
         $withDevReqs = false === $this->omitDev && isset($composerLocker->getLockData()['packages-dev']);
         $packagesRepo = $composerLocker->getLockedRepository($withDevReqs);
 
+        // region packages & components
         /**
          * @psalm-var list<\Composer\Package\PackageInterface> $packages
          *
@@ -84,13 +85,15 @@ class Builder
         );
         /** @psalm-var array<string, Models\Component> */
         $components = [$rootPackage->getUniqueName() => $rootComponent];
-
         foreach ($packages as $package) {
             $component = $this->createComponentFromPackage($package);
             $bom->getComponents()->addItems($component);
             $components[$package->getUniqueName()] = $component;
             unset($component, $package);
         }
+        // endregion packages & components
+
+        // region dependency graph
         /**
          * @var PackageInterface $package
          *
@@ -98,7 +101,9 @@ class Builder
          */
         foreach ([$rootPackage, ...$packages] as $package) {
             $component = $components[$package->getUniqueName()] ?? null;
-            \assert(null !== $component);
+            if (null === $component) {
+                continue;
+            }
             foreach ($package->getRequires() as $required) {
                 $requiredPackage = $packagesRepo->findPackage($required->getTarget(), $required->getConstraint());
                 if (null === $requiredPackage) {
@@ -111,6 +116,9 @@ class Builder
             }
             unset($package, $component, $required, $dependency);
         }
+        // endregion dependency graph
+
+        // region mark dev-dependencies
         if ($withDevReqs) {
             foreach ($rootPackage->getDevRequires() as $required) {
                 $requiredPackage = $packagesRepo->findPackage($required->getTarget(), $required->getConstraint());
@@ -126,6 +134,7 @@ class Builder
             }
             unset($required,$requiredPackage, $dependency);
         }
+        // endregion mark dev-dependencies
 
         return $bom;
     }
