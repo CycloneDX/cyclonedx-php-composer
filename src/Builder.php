@@ -73,9 +73,10 @@ class Builder
 
         // region packages & components
         /**
-         * @psalm-var list<\Composer\Package\PackageInterface> $packages
+         * @psalm-var list<\Composer\Package\PackageInterface>
          *
          * @psalm-suppress MixedArgument
+         * @psalm-suppress UnnecessaryVarAnnotation
          */
         $packages = array_values(
             method_exists($packagesRepo, 'getCanonicalPackages')
