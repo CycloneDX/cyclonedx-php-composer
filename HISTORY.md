@@ -20,9 +20,11 @@ All notable changes to this project will be documented in this file.
   * Root component's versions is unset, if version detection fails. ([#154] via [#250])
 * Added
   * Support for CycloneDX Spec v1.4 (via [#250])
+  * Result will have `bom.metadata.timestamp` populated. (via [#])
   * CLI
     * New option `omit` (via [#250])
     * New switch `validate` to override `no-validate` (via [#250])
+    * New option `reproducible` (via [#])
 * Misc
   * Added demo and reproducible continuous integration test "devReq" that is dedicated to composer's `require-dev` feature. (via [#254])
   * Reworked demo setups to be more global-install like. (via [#250])
