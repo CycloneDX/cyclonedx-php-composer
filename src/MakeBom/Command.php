@@ -123,6 +123,9 @@ class Command extends BaseCommand
         $bom = $builder->createBomFromComposer($composer);
         unset($composer);
 
+        if (!$this->options->reproducibleOutput) {
+            $bom->getMetadata()->setTimestamp(new \DateTime());
+        }
         $bom->getMetadata()->getTools()->addItems(
             $builder->createThisTool($this->options->getToolVersionOverride())
         );

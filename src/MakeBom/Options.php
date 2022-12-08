@@ -229,6 +229,11 @@ class Options
     public ?string $mainComponentVersion = null;
 
     /**
+     * @TODO setter ....
+     */
+    public bool $reproducibleOutput = false;
+
+    /**
      * @psalm-return null|non-empty-string
      */
     public function getToolVersionOverride(): ?string
