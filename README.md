@@ -48,6 +48,10 @@ composer require --dev cyclonedx/cyclonedx-php-composer
 After successful installation, the composer command `make-bom` is available.
 
 ```text
+$ composer make-bom --help
+Description:
+  Generate a CycloneDX Bill of Materials from a PHP composer project.
+
 Usage:
   make-bom [options] [--] [<composer-file>]
 
