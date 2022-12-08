@@ -69,7 +69,7 @@ Options:
       --validate|--no-validate                        Validate the resulting output.
       --mc-version=MC-VERSION                         Version of the main component.
                                                       This will override auto-detection.
-  -h, --help                                          Display help for the given command. When no command is given display help for the list command
+  -h, --help                                          Display help for the given command.
 ```
 
 ## Demo
