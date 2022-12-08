@@ -16,6 +16,8 @@ All notable changes to this project will be documented in this file.
     * Components' version is no longer artificially normalized ([#102] via [#250])
   * Dependencies
     * Requires `cyclonedx/cyclonedx-library:^2.0`, was `:^1.4.2` ([#128] via [#250])
+* Changed
+  * Root component's versions is unset, if version detection fails. ([#154] via [#250])
 * Added
   * Support for CycloneDX Spec v1.4 (via [#250])
   * CLI
@@ -29,6 +31,7 @@ All notable changes to this project will be documented in this file.
 [#102]: https://github.com/CycloneDX/cyclonedx-php-composer/issues/102
 [#128]: https://github.com/CycloneDX/cyclonedx-php-composer/issues/128
 [#153]: https://github.com/CycloneDX/cyclonedx-php-composer/issues/153
+[#154]: https://github.com/CycloneDX/cyclonedx-php-composer/issues/154
 [#250]: https://github.com/CycloneDX/cyclonedx-php-composer/pull/250
 
 ## 3.10.2 - 2022-09-15

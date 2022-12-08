@@ -26,6 +26,7 @@ namespace CycloneDX\Composer;
 use Composer\Composer;
 use Composer\Package\CompletePackageInterface;
 use Composer\Package\PackageInterface;
+use Composer\Package\RootPackage;
 use Composer\Package\RootPackageInterface;
 use CycloneDX\Core\Enums;
 use CycloneDX\Core\Factories\LicenseFactory;
@@ -149,6 +150,10 @@ class Builder
     private function createComponentFromRootPackage(RootPackageInterface $package): Models\Component
     {
         $component = $this->createComponentFromPackage($package, $this->mainComponentVersion);
+
+        if (RootPackage::DEFAULT_PRETTY_VERSION === $component->getVersion()) {
+            $component->setVersion(null);
+        }
 
         return $component
             ->setType(Enums\ComponentType::APPLICATION)
