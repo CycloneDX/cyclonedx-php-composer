@@ -103,6 +103,22 @@ class OptionsTest extends TestCase
             '--mc-version ""',
             ['mainComponentVersion' => null],
         ];
+        yield 'output-reproducible:true' => [
+            '--output-reproducible',
+            ['outputReproducible' => true],
+        ];
+        yield 'no-output-reproducible' => [
+            '--no-output-reproducible',
+            ['outputReproducible' => false],
+        ];
+        yield 'no-output-reproducible but output-reproducible' => [
+            '--no-output-reproducible --output-reproducible',
+            ['outputReproducible' => true],
+        ];
+        yield 'output-reproducible but no-output-reproducible' => [
+            '--output-reproducible --no-output-reproducible',
+            ['outputReproducible' => false],
+        ];
         yield 'validate:true' => [
             '--validate',
             ['validate' => true],
@@ -111,9 +127,13 @@ class OptionsTest extends TestCase
             '--no-validate',
             ['validate' => false],
         ];
-        yield 'no-validate but validate ' => [
+        yield 'no-validate but validate' => [
             '--no-validate --validate',
             ['validate' => true],
+        ];
+        yield 'validate but no-validate' => [
+            '--validate --no-validate',
+            ['validate' => false],
         ];
         $randVersion = uniqid('v', true);
         yield 'mainComponentVersion some' => [

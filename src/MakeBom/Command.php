@@ -33,6 +33,7 @@ use CycloneDX\Core\Spec\Spec;
 use CycloneDX\Core\Spec\SpecFactory;
 use CycloneDX\Core\Validation\Validator;
 use CycloneDX\Core\Validation\Validators;
+use DateTime;
 use Symfony\Component\Console\Exception\LogicException;
 use Symfony\Component\Console\Formatter\OutputFormatter;
 use Symfony\Component\Console\Input\InputInterface;
@@ -123,6 +124,9 @@ class Command extends BaseCommand
         $bom = $builder->createBomFromComposer($composer);
         unset($composer);
 
+        if (!$this->options->outputReproducible) {
+            $bom->getMetadata()->setTimestamp(new DateTime());
+        }
         $bom->getMetadata()->getTools()->addItems(
             $builder->createThisTool($this->options->getToolVersionOverride())
         );

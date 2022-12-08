@@ -20,15 +20,18 @@ All notable changes to this project will be documented in this file.
   * Root component's versions is unset, if version detection fails. ([#154] via [#250])
 * Added
   * Support for CycloneDX Spec v1.4 (via [#250])
+  * Result will have `metadata.timestamp` populated. ([#112] via [#250])
   * CLI
     * New option `omit` (via [#250])
     * New switch `validate` to override `no-validate` (via [#250])
+    * New switches `output-reproducible` and `no-output-reproducible` (via [#250])
 * Misc
   * Added demo and reproducible continuous integration test "devReq" that is dedicated to composer's `require-dev` feature. (via [#254])
   * Reworked demo setups to be more global-install like. (via [#250])
 
 [#91]:  https://github.com/CycloneDX/cyclonedx-php-composer/issues/91
 [#102]: https://github.com/CycloneDX/cyclonedx-php-composer/issues/102
+[#112]: https://github.com/CycloneDX/cyclonedx-php-composer/issues/112
 [#128]: https://github.com/CycloneDX/cyclonedx-php-composer/issues/128
 [#153]: https://github.com/CycloneDX/cyclonedx-php-composer/issues/153
 [#154]: https://github.com/CycloneDX/cyclonedx-php-composer/issues/154

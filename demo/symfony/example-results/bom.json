@@ -4,6 +4,7 @@
     "specVersion": "1.4",
     "version": 1,
     "metadata": {
+        "timestamp": "2022-12-08T21:06:42Z",
         "tools": [
             {
                 "vendor": "cyclonedx",
@@ -170,10 +171,10 @@
             ]
         },
         {
-            "bom-ref": "laminas/laminas-code-4.7.1.0",
+            "bom-ref": "laminas/laminas-code-4.8.0.0",
             "type": "library",
             "name": "laminas-code",
-            "version": "4.7.1",
+            "version": "4.8.0",
             "group": "laminas",
             "description": "Extensions to the PHP Reflection API, static code scanning, and code generation",
             "licenses": [
@@ -187,7 +188,7 @@
             "externalReferences": [
                 {
                     "type": "distribution",
-                    "url": "https://api.github.com/repos/laminas/laminas-code/zipball/91aabc066d5620428120800c0eafc0411e441a62"
+                    "url": "https://api.github.com/repos/laminas/laminas-code/zipball/dd19fe8e07cc3f374308565667eecd4958c22106"
                 },
                 {
                     "type": "distribution",
@@ -494,10 +495,10 @@
             ]
         },
         {
-            "bom-ref": "symfony/contracts-3.1.1.0",
+            "bom-ref": "symfony/contracts-3.2.0.0",
             "type": "library",
             "name": "contracts",
-            "version": "v3.1.1",
+            "version": "v3.2.0",
             "group": "symfony",
             "description": "A set of abstractions extracted out of the Symfony components",
             "licenses": [
@@ -511,7 +512,7 @@
             "externalReferences": [
                 {
                     "type": "distribution",
-                    "url": "https://api.github.com/repos/symfony/contracts/zipball/8656c9e7f44435eaf428f2aa7f083c65297fb22f"
+                    "url": "https://api.github.com/repos/symfony/contracts/zipball/c47da22960a1eb5e39c1ad84120734e680265610"
                 },
                 {
                     "type": "distribution",
@@ -524,7 +525,7 @@
                 },
                 {
                     "type": "vcs",
-                    "url": "https://github.com/symfony/contracts/tree/v3.1.1",
+                    "url": "https://github.com/symfony/contracts/tree/v3.2.0",
                     "comment": "as detected from composer manifest 'support.source'"
                 }
             ],
@@ -872,10 +873,10 @@
             ]
         },
         {
-            "bom-ref": "symfony/symfony-6.2.0.0",
+            "bom-ref": "symfony/symfony-6.2.1.0",
             "type": "library",
             "name": "symfony",
-            "version": "v6.2.0",
+            "version": "v6.2.1",
             "group": "symfony",
             "description": "The Symfony PHP framework",
             "licenses": [
@@ -889,7 +890,7 @@
             "externalReferences": [
                 {
                     "type": "distribution",
-                    "url": "https://api.github.com/repos/symfony/symfony/zipball/ed9b9e7795c3e30c6d70c6ecf013a28910f6e15e"
+                    "url": "https://api.github.com/repos/symfony/symfony/zipball/1b68abc15644b1a83f9bb5d18512ade7bb51ecd7"
                 },
                 {
                     "type": "distribution",
@@ -907,7 +908,7 @@
                 },
                 {
                     "type": "vcs",
-                    "url": "https://github.com/symfony/symfony/tree/v6.2.0",
+                    "url": "https://github.com/symfony/symfony/tree/v6.2.1",
                     "comment": "as detected from composer manifest 'support.source'"
                 }
             ],
@@ -980,11 +981,11 @@
         {
             "ref": "friendsofphp/proxy-manager-lts-1.0.13.0",
             "dependsOn": [
-                "laminas/laminas-code-4.7.1.0"
+                "laminas/laminas-code-4.8.0.0"
             ]
         },
         {
-            "ref": "laminas/laminas-code-4.7.1.0"
+            "ref": "laminas/laminas-code-4.8.0.0"
         },
         {
             "ref": "psr/cache-3.0.0.0"
@@ -1005,7 +1006,7 @@
             "ref": "psr/log-3.0.0.0"
         },
         {
-            "ref": "symfony/contracts-3.1.1.0",
+            "ref": "symfony/contracts-3.2.0.0",
             "dependsOn": [
                 "psr/cache-3.0.0.0",
                 "psr/container-2.0.2.0",
@@ -1041,7 +1042,7 @@
             "ref": "symfony/polyfill-uuid-1.27.0.0"
         },
         {
-            "ref": "symfony/symfony-6.2.0.0",
+            "ref": "symfony/symfony-6.2.1.0",
             "dependsOn": [
                 "doctrine/event-manager-2.0.0.0",
                 "doctrine/persistence-3.1.0.0",
@@ -1052,7 +1053,7 @@
                 "psr/event-dispatcher-1.0.0.0",
                 "psr/link-2.0.1.0",
                 "psr/log-3.0.0.0",
-                "symfony/contracts-3.1.1.0",
+                "symfony/contracts-3.2.0.0",
                 "symfony/polyfill-ctype-1.27.0.0",
                 "symfony/polyfill-intl-grapheme-1.27.0.0",
                 "symfony/polyfill-intl-icu-1.27.0.0",
@@ -1073,7 +1074,7 @@
         {
             "ref": "cyclonedx/cyclonedx-php-composer-demo-dev-next",
             "dependsOn": [
-                "symfony/symfony-6.2.0.0"
+                "symfony/symfony-6.2.1.0"
             ]
         }
     ]

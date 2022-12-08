@@ -56,22 +56,24 @@ Usage:
   make-bom [options] [--] [<composer-file>]
 
 Arguments:
-  composer-file                      Path to composer config file.
-                                     Defaults to "composer.json" file in working directory.
+  composer-file                                       Path to composer config file.
+                                                      [default: "composer.json" file in current working directory]
 
 Options:
-      --output-format=OUTPUT-FORMAT  Which output format to use.
-                                     {choices: "XML", "JSON"} [default: "XML"]
-      --output-file=OUTPUT-FILE      Path to the output file.
-                                     Set to "-" to write to STDOUT [default: "-"]
-      --omit=OMIT                    Omit dependency types.
-                                     {choices: "dev", "plugin"} (multiple values allowed)
-      --spec-version=SPEC-VERSION    Which version of CycloneDX spec to use.
-                                     {choices: "1.4", "1.3", "1.2", "1.1"} [default: "1.4"]
-      --validate|--no-validate       Validate the resulting output.
-      --mc-version=MC-VERSION        Version of the main component.
-                                     This will override auto-detection.
-  -h, --help                         Display help for the given command.
+      --output-format=OUTPUT-FORMAT                   Which output format to use.
+                                                      {choices: "XML", "JSON"} [default: "XML"]
+      --output-file=OUTPUT-FILE                       Path to the output file.
+                                                      Set to "-" to write to STDOUT [default: "-"]
+      --omit=OMIT                                     Omit dependency types.
+                                                      {choices: "dev", "plugin"} (multiple values allowed)
+      --spec-version=SPEC-VERSION                     Which version of CycloneDX spec to use.
+                                                      {choices: "1.4", "1.3", "1.2", "1.1"} [default: "1.4"]
+      --output-reproducible|--no-output-reproducible  Whether to go the extra mile and make the output reproducible.
+                                                      This might result in loss of time- and random-based-values.
+      --validate|--no-validate                        Validate the resulting output.
+      --mc-version=MC-VERSION                         Version of the main component.
+                                                      This will override auto-detection.
+  -h, --help                                          Display help for the given command.
 ```
 
 ## Demo

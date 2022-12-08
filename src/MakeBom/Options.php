@@ -51,6 +51,7 @@ class Options
     private const OPTION_MAIN_COMPONENT_VERSION = 'mc-version';
     private const OPTION_OMIT = 'omit';
 
+    private const SWITCH_OUTPUT_REPRODUCIBLE = 'output-reproducible';
     private const SWITCH_VALIDATE = 'validate';
 
     private const ARGUMENT_COMPOSER_FILE = 'composer-file';
@@ -142,6 +143,14 @@ class Options
                 self::VALUE_SPEC_VERSION
             )
             ->addOption(
+                self::SWITCH_OUTPUT_REPRODUCIBLE,
+                null,
+                InputOption::VALUE_NEGATABLE,
+                'Whether to go the extra mile and make the output reproducible.'.\PHP_EOL.
+                'This might result in loss of time- and random-based-values.',
+                $this->outputReproducible
+            )
+            ->addOption(
                 self::SWITCH_VALIDATE,
                 null,
                 InputOption::VALUE_NEGATABLE,
@@ -193,6 +202,13 @@ class Options
      * @psalm-var Format::*
      */
     public string $outputFormat = self::VALUES_OUTPUT_FORMAT[0];
+
+    /**
+     * @readonly
+     *
+     * @psalm-allow-private-mutation
+     */
+    public bool $outputReproducible = false;
 
     /**
      * @readonly
@@ -273,6 +289,7 @@ class Options
 
         $omit = $input->getOption(self::OPTION_OMIT);
         \assert(\is_array($omit));
+        $outputReproducible = false !== $input->getOption(self::SWITCH_OUTPUT_REPRODUCIBLE);
         $validate = false !== $input->getOption(self::SWITCH_VALIDATE);
         $composerFile = $input->getArgument(self::ARGUMENT_COMPOSER_FILE);
         \assert(null === $composerFile || \is_string($composerFile));
@@ -290,6 +307,7 @@ class Options
         $this->specVersion = $specVersion;
         $this->omit = array_values(array_intersect(self::VALUES_OMIT, $omit));
         $this->outputFormat = $outputFormat;
+        $this->outputReproducible = $outputReproducible;
         $this->validate = $validate;
         $this->outputFile = $outputFile;
         $this->mainComponentVersion = '' !== $mainComponentVersion
