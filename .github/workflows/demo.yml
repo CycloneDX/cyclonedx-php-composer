@@ -146,6 +146,7 @@ jobs:
           -vvv
           $OMIT_RULES
           --spec-version=${{ matrix.spec-version }}
+          --output-reproducible
           --output-format=${{ matrix.output-format }}
           --output-file="$OUT_FILE_PATH"
           --
@@ -158,6 +159,7 @@ jobs:
           -vvv
           $OMIT_RULES
           --spec-version=${{ matrix.spec-version }}
+          --output-reproducible
           --output-format=${{ matrix.output-format }}
           --output-file=-
           --
