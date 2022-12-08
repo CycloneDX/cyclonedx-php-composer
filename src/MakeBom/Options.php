@@ -146,9 +146,9 @@ class Options
                 self::SWITCH_OUTPUT_REPRODUCIBLE,
                 null,
                 InputOption::VALUE_NEGATABLE,
-                'Whether to go the extra mile and make the output reproducible.'. \PHP_EOL.
+                'Whether to go the extra mile and make the output reproducible.'.\PHP_EOL.
                 'This might result in loss of time- and random-based-values.',
-                $this->reproducibleOutput
+                $this->outputReproducible
             )
             ->addOption(
                 self::SWITCH_VALIDATE,
@@ -208,7 +208,7 @@ class Options
      *
      * @psalm-allow-private-mutation
      */
-    public bool $reproducibleOutput = false;
+    public bool $outputReproducible = false;
 
     /**
      * @readonly
@@ -289,7 +289,7 @@ class Options
 
         $omit = $input->getOption(self::OPTION_OMIT);
         \assert(\is_array($omit));
-        $reproducibleOutput = false !== $input->getOption(self::SWITCH_OUTPUT_REPRODUCIBLE);
+        $outputReproducible = false !== $input->getOption(self::SWITCH_OUTPUT_REPRODUCIBLE);
         $validate = false !== $input->getOption(self::SWITCH_VALIDATE);
         $composerFile = $input->getArgument(self::ARGUMENT_COMPOSER_FILE);
         \assert(null === $composerFile || \is_string($composerFile));
@@ -307,7 +307,7 @@ class Options
         $this->specVersion = $specVersion;
         $this->omit = array_values(array_intersect(self::VALUES_OMIT, $omit));
         $this->outputFormat = $outputFormat;
-        $this->reproducibleOutput = $reproducibleOutput;
+        $this->outputReproducible = $outputReproducible;
         $this->validate = $validate;
         $this->outputFile = $outputFile;
         $this->mainComponentVersion = '' !== $mainComponentVersion

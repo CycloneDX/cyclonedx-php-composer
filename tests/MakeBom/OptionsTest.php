@@ -105,19 +105,19 @@ class OptionsTest extends TestCase
         ];
         yield 'output-reproducible:true' => [
             '--output-reproducible',
-            ['reproducibleOutput' => true],
+            ['outputReproducible' => true],
         ];
         yield 'no-output-reproducible' => [
-            '--no-validate',
-            ['reproducibleOutput' => false],
+            '--no-output-reproducible',
+            ['outputReproducible' => false],
         ];
         yield 'no-output-reproducible but output-reproducible' => [
             '--no-output-reproducible --output-reproducible',
-            ['reproducibleOutput' => true],
+            ['outputReproducible' => true],
         ];
         yield 'output-reproducible but no-output-reproducible' => [
             '--output-reproducible --no-output-reproducible',
-            ['reproducibleOutput' => false],
+            ['outputReproducible' => false],
         ];
         yield 'validate:true' => [
             '--validate',
