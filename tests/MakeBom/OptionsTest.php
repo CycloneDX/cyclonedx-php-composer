@@ -127,11 +127,11 @@ class OptionsTest extends TestCase
             '--no-validate',
             ['validate' => false],
         ];
-        yield 'no-validate but validate ' => [
+        yield 'no-validate but validate' => [
             '--no-validate --validate',
             ['validate' => true],
         ];
-        yield 'validate but no-validate ' => [
+        yield 'validate but no-validate' => [
             '--validate --no-validate',
             ['validate' => false],
         ];
