@@ -24,7 +24,7 @@ All notable changes to this project will be documented in this file.
   * CLI
     * New option `omit` (via [#250])
     * New switch `validate` to override `no-validate` (via [#250])
-    * New option `reproducible-output` and `no-reproducible-output` (via [#250])
+    * New option `output-reproducible` and `no-output-reproducible` (via [#250])
 * Misc
   * Added demo and reproducible continuous integration test "devReq" that is dedicated to composer's `require-dev` feature. (via [#254])
   * Reworked demo setups to be more global-install like. (via [#250])
