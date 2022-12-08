@@ -51,6 +51,7 @@ class Options
     private const OPTION_MAIN_COMPONENT_VERSION = 'mc-version';
     private const OPTION_OMIT = 'omit';
 
+    private const SWITCH_OUTPUT_REPRODUCIBLE = 'output-reproducible';
     private const SWITCH_VALIDATE = 'validate';
 
     private const ARGUMENT_COMPOSER_FILE = 'composer-file';
@@ -142,6 +143,14 @@ class Options
                 self::VALUE_SPEC_VERSION
             )
             ->addOption(
+                self::SWITCH_OUTPUT_REPRODUCIBLE,
+                null,
+                InputOption::VALUE_NEGATABLE,
+                'Whether to go the extra mile and make the output reproducible.'. \PHP_EOL.
+                'This might result in loss of time- and random-based-values.',
+                $this->reproducibleOutput
+            )
+            ->addOption(
                 self::SWITCH_VALIDATE,
                 null,
                 InputOption::VALUE_NEGATABLE,
@@ -199,6 +208,13 @@ class Options
      *
      * @psalm-allow-private-mutation
      */
+    public bool $reproducibleOutput = false;
+
+    /**
+     * @readonly
+     *
+     * @psalm-allow-private-mutation
+     */
     public bool $validate = true;
 
     /**
@@ -227,11 +243,6 @@ class Options
      * @psalm-var null|non-empty-string
      */
     public ?string $mainComponentVersion = null;
-
-    /**
-     * @TODO setter ....
-     */
-    public bool $reproducibleOutput = false;
 
     /**
      * @psalm-return null|non-empty-string
@@ -278,6 +289,7 @@ class Options
 
         $omit = $input->getOption(self::OPTION_OMIT);
         \assert(\is_array($omit));
+        $reproducibleOutput = false !== $input->getOption(self::SWITCH_OUTPUT_REPRODUCIBLE);
         $validate = false !== $input->getOption(self::SWITCH_VALIDATE);
         $composerFile = $input->getArgument(self::ARGUMENT_COMPOSER_FILE);
         \assert(null === $composerFile || \is_string($composerFile));
@@ -295,6 +307,7 @@ class Options
         $this->specVersion = $specVersion;
         $this->omit = array_values(array_intersect(self::VALUES_OMIT, $omit));
         $this->outputFormat = $outputFormat;
+        $this->reproducibleOutput = $reproducibleOutput;
         $this->validate = $validate;
         $this->outputFile = $outputFile;
         $this->mainComponentVersion = '' !== $mainComponentVersion
