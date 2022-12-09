@@ -26,7 +26,7 @@ All notable changes to this project will be documented in this file.
     * New switch `validate` to override `no-validate` (via [#250])
     * New switches `output-reproducible` and `no-output-reproducible` (via [#250])
 * Misc
-  * Added demo and reproducible continuous integration test "devReq" that is dedicated to composer's `require-dev` feature. (via [#254])
+  * Added demo and reproducible continuous integration test "devReq" that is dedicated to composer's `require-dev` feature. (via [#250])
   * Reworked demo setups to be more global-install like. (via [#250])
 
 [#91]:  https://github.com/CycloneDX/cyclonedx-php-composer/issues/91
