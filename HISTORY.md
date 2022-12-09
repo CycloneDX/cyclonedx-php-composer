@@ -17,17 +17,17 @@ All notable changes to this project will be documented in this file.
   * Dependencies
     * Requires `cyclonedx/cyclonedx-library:^2.0`, was `:^1.4.2` ([#128] via [#250])
 * Changed
-  * Root component's versions is unset, if version detection fails. ([#154] via [#250])
+  * Root component's versions is unset, if version detection fails ([#154] via [#250])
 * Added
   * Support for CycloneDX Spec v1.4 (via [#250])
-  * SBOM results might have `metadata.timestamp` populated. ([#112] via [#250])
+  * SBOM results might have `metadata.timestamp` populated ([#112] via [#250])
   * CLI
     * New option `omit` (via [#250])
     * New switch `validate` to override `no-validate` (via [#250])
     * New switches `output-reproducible` and `no-output-reproducible` (via [#250])
 * Misc
-  * Added demo and reproducible continuous integration test "devReq" that is dedicated to composer's `require-dev` feature. (via [#250])
-  * Reworked demo setups to be more global-install like. (via [#250])
+  * Added demo and reproducible continuous integration test "devReq" that is dedicated to composer's `require-dev` feature (via [#250])
+  * Reworked demo setups to be more global-install like (via [#250])
 
 [#91]:  https://github.com/CycloneDX/cyclonedx-php-composer/issues/91
 [#102]: https://github.com/CycloneDX/cyclonedx-php-composer/issues/102
