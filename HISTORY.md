@@ -20,7 +20,7 @@ All notable changes to this project will be documented in this file.
   * Root component's versions is unset, if version detection fails. ([#154] via [#250])
 * Added
   * Support for CycloneDX Spec v1.4 (via [#250])
-  * Result will have `metadata.timestamp` populated. ([#112] via [#250])
+  * SBOM results might have `metadata.timestamp` populated. ([#112] via [#250])
   * CLI
     * New option `omit` (via [#250])
     * New switch `validate` to override `no-validate` (via [#250])
