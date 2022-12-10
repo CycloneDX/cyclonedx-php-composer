@@ -92,7 +92,7 @@
         "test:composer-normalize": "@composer -dtools/composer-normalize normalize --dry-run --diff $PWD/composer.json",
         "test:composer-require-checker": [
             "@putenv XDEBUG_MODE=off",
-            "@php tools/composer-require-checker/vendor/maglnet/composer-require-checker/bin/composer-require-checker check --config-file=.composer-require-checker.json"
+            "@php tools/composer-require-checker/vendor/maglnet/composer-require-checker/bin/composer-require-checker check"
         ],
         "test:composer-unused": "@php tools/composer-unused/vendor/icanhazstring/composer-unused/bin/composer-unused --excludeDir=tools",
         "test:cs-fixer": "@php tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/php-cs-fixer fix --dry-run --diff",
