@@ -20,7 +20,9 @@ All notable changes to this project will be documented in this file.
   * Root component's versions is unset, if version detection fails ([#154] via [#250])
 * Added
   * Support for CycloneDX Spec v1.4 (via [#250])
-  * SBOM results might have `metadata.timestamp` populated ([#112] via [#250])
+  * SBOM results
+    * might have `metadata.timestamp` populated ([#112] via [#250])
+    * might have `component.author` populated ([#261] via [#250])
   * CLI
     * New option `omit` (via [#250])
     * New switch `validate` to override `no-validate` (via [#250])
@@ -36,6 +38,7 @@ All notable changes to this project will be documented in this file.
 [#153]: https://github.com/CycloneDX/cyclonedx-php-composer/issues/153
 [#154]: https://github.com/CycloneDX/cyclonedx-php-composer/issues/154
 [#250]: https://github.com/CycloneDX/cyclonedx-php-composer/pull/250
+[#261]: https://github.com/CycloneDX/cyclonedx-php-composer/issues/261
 
 ## 3.10.2 - 2022-09-15
 
