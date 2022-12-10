@@ -2,6 +2,11 @@
     "name": "cyclonedx/cyclonedx-php-composer-tool4demo",
     "description": "global-like cyclonedx/cyclonedx-php-composer for usage in demos",
     "type": "metapackage",
+    "authors": [
+        {
+            "name": "Jan Kowalleck"
+        }
+    ],
     "require": {},
     "require-dev": {
         "cyclonedx/cyclonedx-php-composer": "@dev"

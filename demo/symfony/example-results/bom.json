@@ -4,7 +4,7 @@
     "specVersion": "1.4",
     "version": 1,
     "metadata": {
-        "timestamp": "2022-12-10T09:57:16Z",
+        "timestamp": "2022-12-10T10:14:40Z",
         "tools": [
             {
                 "vendor": "cyclonedx",
@@ -19,6 +19,7 @@
             "version": "dev-next",
             "group": "cyclonedx",
             "description": "demo of cyclonedx/cyclonedx-php-composer with symfony/symfony",
+            "author": "Jan Kowalleck",
             "purl": "pkg:composer/cyclonedx/cyclonedx-php-composer-demo@dev-next",
             "properties": [
                 {

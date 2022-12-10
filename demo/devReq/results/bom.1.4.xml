@@ -9,6 +9,7 @@
       </tool>
     </tools>
     <component type="application" bom-ref="cyclonedx-demo/cyclonedx-php-composer-devreq-dev-master">
+      <author><![CDATA[Jan Kowalleck]]></author>
       <group><![CDATA[cyclonedx-demo]]></group>
       <name><![CDATA[cyclonedx-php-composer-devreq]]></name>
       <version><![CDATA[dev-master]]></version>

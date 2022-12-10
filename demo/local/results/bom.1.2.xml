@@ -9,6 +9,7 @@
       </tool>
     </tools>
     <component type="application" bom-ref="cyclonedx-demo/cyclonedx-php-composer-local-dev-master">
+      <author><![CDATA[Jan Kowalleck]]></author>
       <group><![CDATA[cyclonedx-demo]]></group>
       <name><![CDATA[cyclonedx-php-composer-local]]></name>
       <version><![CDATA[dev-master]]></version>
@@ -44,6 +45,7 @@
   </metadata>
   <components>
     <component type="library" bom-ref="cyclonedx-demo/local-demo-dependency-1.33.7.0">
+      <author><![CDATA[Jan Kowalleck]]></author>
       <group><![CDATA[cyclonedx-demo]]></group>
       <name><![CDATA[local-demo-dependency]]></name>
       <version><![CDATA[1.33.7]]></version>
@@ -55,6 +57,7 @@
       </externalReferences>
     </component>
     <component type="library" bom-ref="cyclonedx-demo/local-demo-issue-158-dev-issue-158">
+      <author><![CDATA[Jan Kowalleck]]></author>
       <group><![CDATA[cyclonedx-demo]]></group>
       <name><![CDATA[local-demo-issue-158]]></name>
       <version><![CDATA[dev-issue-158]]></version>
@@ -73,10 +76,10 @@
         </reference>
       </externalReferences>
     </component>
-    <component type="library" bom-ref="cyclonedx-demo/local-dependency-with-minimal-setup-dev-next-reimplement">
+    <component type="library" bom-ref="cyclonedx-demo/local-dependency-with-minimal-setup-dev-component-author">
       <group><![CDATA[cyclonedx-demo]]></group>
       <name><![CDATA[local-dependency-with-minimal-setup]]></name>
-      <version><![CDATA[dev-next-reimplement]]></version>
+      <version><![CDATA[dev-component-author]]></version>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[packages/local-dependency-with-minimal-setup]]></url>
@@ -86,10 +89,10 @@
   </components>
   <dependencies>
     <dependency ref="cyclonedx-demo/local-demo-dependency-1.33.7.0">
-      <dependency ref="cyclonedx-demo/local-dependency-with-minimal-setup-dev-next-reimplement"/>
+      <dependency ref="cyclonedx-demo/local-dependency-with-minimal-setup-dev-component-author"/>
     </dependency>
     <dependency ref="cyclonedx-demo/local-demo-issue-158-dev-issue-158"/>
-    <dependency ref="cyclonedx-demo/local-dependency-with-minimal-setup-dev-next-reimplement"/>
+    <dependency ref="cyclonedx-demo/local-dependency-with-minimal-setup-dev-component-author"/>
     <dependency ref="cyclonedx-demo/cyclonedx-php-composer-local-dev-master">
       <dependency ref="cyclonedx-demo/local-demo-dependency-1.33.7.0"/>
       <dependency ref="cyclonedx-demo/local-demo-issue-158-dev-issue-158"/>

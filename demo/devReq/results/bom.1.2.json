@@ -18,6 +18,7 @@
             "version": "dev-master",
             "group": "cyclonedx-demo",
             "description": "demo of cyclonedx/cyclonedx-php-composer with a dev dependency",
+            "author": "Jan Kowalleck",
             "purl": "pkg:composer/cyclonedx-demo/cyclonedx-php-composer-devreq@dev-master",
             "externalReferences": [
                 {

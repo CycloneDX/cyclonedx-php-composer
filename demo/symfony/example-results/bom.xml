@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bom xmlns="http://cyclonedx.org/schema/bom/1.4" version="1">
   <metadata>
-    <timestamp><![CDATA[2022-12-10T09:57:16Z]]></timestamp>
+    <timestamp><![CDATA[2022-12-10T10:14:41Z]]></timestamp>
     <tools>
       <tool>
         <vendor><![CDATA[cyclonedx]]></vendor>
@@ -10,6 +10,7 @@
       </tool>
     </tools>
     <component type="application" bom-ref="cyclonedx/cyclonedx-php-composer-demo-dev-next">
+      <author><![CDATA[Jan Kowalleck]]></author>
       <group><![CDATA[cyclonedx]]></group>
       <name><![CDATA[cyclonedx-php-composer-demo]]></name>
       <version><![CDATA[dev-next]]></version>

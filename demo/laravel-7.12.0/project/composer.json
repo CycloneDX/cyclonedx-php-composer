@@ -3,6 +3,11 @@
     "description": "demo of cyclonedx/cyclonedx-php-composer with a pinned version of laravel/framework",
     "type": "project",
     "version": "dev-master",
+    "authors": [
+        {
+            "name": "Jan Kowalleck"
+        }
+    ],
     "require": {
         "laravel/laravel": "7.12.0"
     },

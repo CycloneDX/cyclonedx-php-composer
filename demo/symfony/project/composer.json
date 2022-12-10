@@ -2,6 +2,11 @@
     "name": "cyclonedx/cyclonedx-php-composer-demo",
     "description": "demo of cyclonedx/cyclonedx-php-composer with symfony/symfony",
     "type": "project",
+    "authors": [
+        {
+            "name": "Jan Kowalleck"
+        }
+    ],
     "require": {
         "symfony/symfony": "@stable"
     },
