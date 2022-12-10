@@ -9,6 +9,7 @@
       </tool>
     </tools>
     <component type="application" bom-ref="cyclonedx-demo/cyclonedx-php-composer-devreq-dev-master">
+      <author><![CDATA[Jan Kowalleck]]></author>
       <group><![CDATA[cyclonedx-demo]]></group>
       <name><![CDATA[cyclonedx-php-composer-devreq]]></name>
       <version><![CDATA[dev-master]]></version>
@@ -47,6 +48,7 @@
   </metadata>
   <components>
     <component type="library" bom-ref="doctrine/instantiator-1.4.1.0">
+      <author><![CDATA[Marco Pivetta]]></author>
       <group><![CDATA[doctrine]]></group>
       <name><![CDATA[instantiator]]></name>
       <version><![CDATA[1.4.1]]></version>
@@ -113,6 +115,7 @@
       </properties>
     </component>
     <component type="library" bom-ref="nikic/php-parser-4.15.2.0">
+      <author><![CDATA[Nikita Popov]]></author>
       <group><![CDATA[nikic]]></group>
       <name><![CDATA[php-parser]]></name>
       <version><![CDATA[v4.15.2]]></version>
@@ -144,6 +147,7 @@
       </properties>
     </component>
     <component type="library" bom-ref="phar-io/manifest-2.0.3.0">
+      <author><![CDATA[Arne Blankerts, Sebastian Heuer, Sebastian Bergmann]]></author>
       <group><![CDATA[phar-io]]></group>
       <name><![CDATA[manifest]]></name>
       <version><![CDATA[2.0.3]]></version>
@@ -175,6 +179,7 @@
       </properties>
     </component>
     <component type="library" bom-ref="phar-io/version-3.2.1.0">
+      <author><![CDATA[Arne Blankerts, Sebastian Heuer, Sebastian Bergmann]]></author>
       <group><![CDATA[phar-io]]></group>
       <name><![CDATA[version]]></name>
       <version><![CDATA[3.2.1]]></version>
@@ -206,6 +211,7 @@
       </properties>
     </component>
     <component type="library" bom-ref="phpunit/php-code-coverage-9.2.19.0">
+      <author><![CDATA[Sebastian Bergmann]]></author>
       <group><![CDATA[phpunit]]></group>
       <name><![CDATA[php-code-coverage]]></name>
       <version><![CDATA[9.2.19]]></version>
@@ -241,6 +247,7 @@
       </properties>
     </component>
     <component type="library" bom-ref="phpunit/php-file-iterator-3.0.6.0">
+      <author><![CDATA[Sebastian Bergmann]]></author>
       <group><![CDATA[phpunit]]></group>
       <name><![CDATA[php-file-iterator]]></name>
       <version><![CDATA[3.0.6]]></version>
@@ -276,6 +283,7 @@
       </properties>
     </component>
     <component type="library" bom-ref="phpunit/php-invoker-3.1.1.0">
+      <author><![CDATA[Sebastian Bergmann]]></author>
       <group><![CDATA[phpunit]]></group>
       <name><![CDATA[php-invoker]]></name>
       <version><![CDATA[3.1.1]]></version>
@@ -311,6 +319,7 @@
       </properties>
     </component>
     <component type="library" bom-ref="phpunit/php-text-template-2.0.4.0">
+      <author><![CDATA[Sebastian Bergmann]]></author>
       <group><![CDATA[phpunit]]></group>
       <name><![CDATA[php-text-template]]></name>
       <version><![CDATA[2.0.4]]></version>
@@ -346,6 +355,7 @@
       </properties>
     </component>
     <component type="library" bom-ref="phpunit/php-timer-5.0.3.0">
+      <author><![CDATA[Sebastian Bergmann]]></author>
       <group><![CDATA[phpunit]]></group>
       <name><![CDATA[php-timer]]></name>
       <version><![CDATA[5.0.3]]></version>
@@ -381,6 +391,7 @@
       </properties>
     </component>
     <component type="library" bom-ref="phpunit/phpunit-9.5.26.0">
+      <author><![CDATA[Sebastian Bergmann]]></author>
       <group><![CDATA[phpunit]]></group>
       <name><![CDATA[phpunit]]></name>
       <version><![CDATA[9.5.26]]></version>
@@ -417,6 +428,7 @@
       </properties>
     </component>
     <component type="library" bom-ref="sebastian/cli-parser-1.0.1.0">
+      <author><![CDATA[Sebastian Bergmann]]></author>
       <group><![CDATA[sebastian]]></group>
       <name><![CDATA[cli-parser]]></name>
       <version><![CDATA[1.0.1]]></version>
@@ -452,6 +464,7 @@
       </properties>
     </component>
     <component type="library" bom-ref="sebastian/code-unit-1.0.8.0">
+      <author><![CDATA[Sebastian Bergmann]]></author>
       <group><![CDATA[sebastian]]></group>
       <name><![CDATA[code-unit]]></name>
       <version><![CDATA[1.0.8]]></version>
@@ -487,6 +500,7 @@
       </properties>
     </component>
     <component type="library" bom-ref="sebastian/code-unit-reverse-lookup-2.0.3.0">
+      <author><![CDATA[Sebastian Bergmann]]></author>
       <group><![CDATA[sebastian]]></group>
       <name><![CDATA[code-unit-reverse-lookup]]></name>
       <version><![CDATA[2.0.3]]></version>
@@ -522,6 +536,7 @@
       </properties>
     </component>
     <component type="library" bom-ref="sebastian/comparator-4.0.8.0">
+      <author><![CDATA[Sebastian Bergmann, Jeff Welch, Volker Dusch, Bernhard Schussek]]></author>
       <group><![CDATA[sebastian]]></group>
       <name><![CDATA[comparator]]></name>
       <version><![CDATA[4.0.8]]></version>
@@ -557,6 +572,7 @@
       </properties>
     </component>
     <component type="library" bom-ref="sebastian/complexity-2.0.2.0">
+      <author><![CDATA[Sebastian Bergmann]]></author>
       <group><![CDATA[sebastian]]></group>
       <name><![CDATA[complexity]]></name>
       <version><![CDATA[2.0.2]]></version>
@@ -592,6 +608,7 @@
       </properties>
     </component>
     <component type="library" bom-ref="sebastian/diff-4.0.4.0">
+      <author><![CDATA[Sebastian Bergmann, Kore Nordmann]]></author>
       <group><![CDATA[sebastian]]></group>
       <name><![CDATA[diff]]></name>
       <version><![CDATA[4.0.4]]></version>
@@ -627,6 +644,7 @@
       </properties>
     </component>
     <component type="library" bom-ref="sebastian/environment-5.1.4.0">
+      <author><![CDATA[Sebastian Bergmann]]></author>
       <group><![CDATA[sebastian]]></group>
       <name><![CDATA[environment]]></name>
       <version><![CDATA[5.1.4]]></version>
@@ -662,6 +680,7 @@
       </properties>
     </component>
     <component type="library" bom-ref="sebastian/exporter-4.0.5.0">
+      <author><![CDATA[Sebastian Bergmann, Jeff Welch, Volker Dusch, Adam Harvey, Bernhard Schussek]]></author>
       <group><![CDATA[sebastian]]></group>
       <name><![CDATA[exporter]]></name>
       <version><![CDATA[4.0.5]]></version>
@@ -697,6 +716,7 @@
       </properties>
     </component>
     <component type="library" bom-ref="sebastian/global-state-5.0.5.0">
+      <author><![CDATA[Sebastian Bergmann]]></author>
       <group><![CDATA[sebastian]]></group>
       <name><![CDATA[global-state]]></name>
       <version><![CDATA[5.0.5]]></version>
@@ -732,6 +752,7 @@
       </properties>
     </component>
     <component type="library" bom-ref="sebastian/lines-of-code-1.0.3.0">
+      <author><![CDATA[Sebastian Bergmann]]></author>
       <group><![CDATA[sebastian]]></group>
       <name><![CDATA[lines-of-code]]></name>
       <version><![CDATA[1.0.3]]></version>
@@ -767,6 +788,7 @@
       </properties>
     </component>
     <component type="library" bom-ref="sebastian/object-enumerator-4.0.4.0">
+      <author><![CDATA[Sebastian Bergmann]]></author>
       <group><![CDATA[sebastian]]></group>
       <name><![CDATA[object-enumerator]]></name>
       <version><![CDATA[4.0.4]]></version>
@@ -802,6 +824,7 @@
       </properties>
     </component>
     <component type="library" bom-ref="sebastian/object-reflector-2.0.4.0">
+      <author><![CDATA[Sebastian Bergmann]]></author>
       <group><![CDATA[sebastian]]></group>
       <name><![CDATA[object-reflector]]></name>
       <version><![CDATA[2.0.4]]></version>
@@ -837,6 +860,7 @@
       </properties>
     </component>
     <component type="library" bom-ref="sebastian/recursion-context-4.0.4.0">
+      <author><![CDATA[Sebastian Bergmann, Jeff Welch, Adam Harvey]]></author>
       <group><![CDATA[sebastian]]></group>
       <name><![CDATA[recursion-context]]></name>
       <version><![CDATA[4.0.4]]></version>
@@ -872,6 +896,7 @@
       </properties>
     </component>
     <component type="library" bom-ref="sebastian/resource-operations-3.0.3.0">
+      <author><![CDATA[Sebastian Bergmann]]></author>
       <group><![CDATA[sebastian]]></group>
       <name><![CDATA[resource-operations]]></name>
       <version><![CDATA[3.0.3]]></version>
@@ -907,6 +932,7 @@
       </properties>
     </component>
     <component type="library" bom-ref="sebastian/type-3.2.0.0">
+      <author><![CDATA[Sebastian Bergmann]]></author>
       <group><![CDATA[sebastian]]></group>
       <name><![CDATA[type]]></name>
       <version><![CDATA[3.2.0]]></version>
@@ -942,6 +968,7 @@
       </properties>
     </component>
     <component type="library" bom-ref="sebastian/version-3.0.2.0">
+      <author><![CDATA[Sebastian Bergmann]]></author>
       <group><![CDATA[sebastian]]></group>
       <name><![CDATA[version]]></name>
       <version><![CDATA[3.0.2]]></version>
@@ -977,6 +1004,7 @@
       </properties>
     </component>
     <component type="library" bom-ref="theseer/tokenizer-1.2.1.0">
+      <author><![CDATA[Arne Blankerts]]></author>
       <group><![CDATA[theseer]]></group>
       <name><![CDATA[tokenizer]]></name>
       <version><![CDATA[1.2.1]]></version>

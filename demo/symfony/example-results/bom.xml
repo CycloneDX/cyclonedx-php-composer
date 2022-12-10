@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bom xmlns="http://cyclonedx.org/schema/bom/1.4" version="1">
   <metadata>
-    <timestamp><![CDATA[2022-12-08T21:06:43Z]]></timestamp>
+    <timestamp><![CDATA[2022-12-10T10:14:41Z]]></timestamp>
     <tools>
       <tool>
         <vendor><![CDATA[cyclonedx]]></vendor>
@@ -10,6 +10,7 @@
       </tool>
     </tools>
     <component type="application" bom-ref="cyclonedx/cyclonedx-php-composer-demo-dev-next">
+      <author><![CDATA[Jan Kowalleck]]></author>
       <group><![CDATA[cyclonedx]]></group>
       <name><![CDATA[cyclonedx-php-composer-demo]]></name>
       <version><![CDATA[dev-next]]></version>
@@ -22,6 +23,7 @@
   </metadata>
   <components>
     <component type="library" bom-ref="doctrine/event-manager-2.0.0.0">
+      <author><![CDATA[Guilherme Blanco, Roman Borschel, Benjamin Eberlei, Jonathan Wage, Johannes Schmitt, Marco Pivetta]]></author>
       <group><![CDATA[doctrine]]></group>
       <name><![CDATA[event-manager]]></name>
       <version><![CDATA[2.0.0]]></version>
@@ -57,6 +59,7 @@
       </properties>
     </component>
     <component type="library" bom-ref="doctrine/persistence-3.1.0.0">
+      <author><![CDATA[Guilherme Blanco, Roman Borschel, Benjamin Eberlei, Jonathan Wage, Johannes Schmitt, Marco Pivetta]]></author>
       <group><![CDATA[doctrine]]></group>
       <name><![CDATA[persistence]]></name>
       <version><![CDATA[3.1.0]]></version>
@@ -92,6 +95,7 @@
       </properties>
     </component>
     <component type="library" bom-ref="friendsofphp/proxy-manager-lts-1.0.13.0">
+      <author><![CDATA[Marco Pivetta, Nicolas Grekas]]></author>
       <group><![CDATA[friendsofphp]]></group>
       <name><![CDATA[proxy-manager-lts]]></name>
       <version><![CDATA[v1.0.13]]></version>
@@ -178,6 +182,7 @@
       </properties>
     </component>
     <component type="library" bom-ref="psr/cache-3.0.0.0">
+      <author><![CDATA[PHP-FIG]]></author>
       <group><![CDATA[psr]]></group>
       <name><![CDATA[cache]]></name>
       <version><![CDATA[3.0.0]]></version>
@@ -205,6 +210,7 @@
       </properties>
     </component>
     <component type="library" bom-ref="psr/clock-1.0.0.0">
+      <author><![CDATA[PHP-FIG]]></author>
       <group><![CDATA[psr]]></group>
       <name><![CDATA[clock]]></name>
       <version><![CDATA[1.0.0]]></version>
@@ -240,6 +246,7 @@
       </properties>
     </component>
     <component type="library" bom-ref="psr/container-2.0.2.0">
+      <author><![CDATA[PHP-FIG]]></author>
       <group><![CDATA[psr]]></group>
       <name><![CDATA[container]]></name>
       <version><![CDATA[2.0.2]]></version>
@@ -275,6 +282,7 @@
       </properties>
     </component>
     <component type="library" bom-ref="psr/event-dispatcher-1.0.0.0">
+      <author><![CDATA[PHP-FIG]]></author>
       <group><![CDATA[psr]]></group>
       <name><![CDATA[event-dispatcher]]></name>
       <version><![CDATA[1.0.0]]></version>
@@ -306,6 +314,7 @@
       </properties>
     </component>
     <component type="library" bom-ref="psr/link-2.0.1.0">
+      <author><![CDATA[PHP-FIG]]></author>
       <group><![CDATA[psr]]></group>
       <name><![CDATA[link]]></name>
       <version><![CDATA[2.0.1]]></version>
@@ -337,6 +346,7 @@
       </properties>
     </component>
     <component type="library" bom-ref="psr/log-3.0.0.0">
+      <author><![CDATA[PHP-FIG]]></author>
       <group><![CDATA[psr]]></group>
       <name><![CDATA[log]]></name>
       <version><![CDATA[3.0.0]]></version>
@@ -368,6 +378,7 @@
       </properties>
     </component>
     <component type="library" bom-ref="symfony/contracts-3.2.0.0">
+      <author><![CDATA[Nicolas Grekas, Symfony Community]]></author>
       <group><![CDATA[symfony]]></group>
       <name><![CDATA[contracts]]></name>
       <version><![CDATA[v3.2.0]]></version>
@@ -399,6 +410,7 @@
       </properties>
     </component>
     <component type="library" bom-ref="symfony/polyfill-ctype-1.27.0.0">
+      <author><![CDATA[Gert de Pagter, Symfony Community]]></author>
       <group><![CDATA[symfony]]></group>
       <name><![CDATA[polyfill-ctype]]></name>
       <version><![CDATA[v1.27.0]]></version>
@@ -430,6 +442,7 @@
       </properties>
     </component>
     <component type="library" bom-ref="symfony/polyfill-intl-grapheme-1.27.0.0">
+      <author><![CDATA[Nicolas Grekas, Symfony Community]]></author>
       <group><![CDATA[symfony]]></group>
       <name><![CDATA[polyfill-intl-grapheme]]></name>
       <version><![CDATA[v1.27.0]]></version>
@@ -461,6 +474,7 @@
       </properties>
     </component>
     <component type="library" bom-ref="symfony/polyfill-intl-icu-1.27.0.0">
+      <author><![CDATA[Nicolas Grekas, Symfony Community]]></author>
       <group><![CDATA[symfony]]></group>
       <name><![CDATA[polyfill-intl-icu]]></name>
       <version><![CDATA[v1.27.0]]></version>
@@ -492,6 +506,7 @@
       </properties>
     </component>
     <component type="library" bom-ref="symfony/polyfill-intl-idn-1.27.0.0">
+      <author><![CDATA[Laurent Bassin, Trevor Rowbotham, Symfony Community]]></author>
       <group><![CDATA[symfony]]></group>
       <name><![CDATA[polyfill-intl-idn]]></name>
       <version><![CDATA[v1.27.0]]></version>
@@ -523,6 +538,7 @@
       </properties>
     </component>
     <component type="library" bom-ref="symfony/polyfill-intl-normalizer-1.27.0.0">
+      <author><![CDATA[Nicolas Grekas, Symfony Community]]></author>
       <group><![CDATA[symfony]]></group>
       <name><![CDATA[polyfill-intl-normalizer]]></name>
       <version><![CDATA[v1.27.0]]></version>
@@ -554,6 +570,7 @@
       </properties>
     </component>
     <component type="library" bom-ref="symfony/polyfill-mbstring-1.27.0.0">
+      <author><![CDATA[Nicolas Grekas, Symfony Community]]></author>
       <group><![CDATA[symfony]]></group>
       <name><![CDATA[polyfill-mbstring]]></name>
       <version><![CDATA[v1.27.0]]></version>
@@ -585,6 +602,7 @@
       </properties>
     </component>
     <component type="library" bom-ref="symfony/polyfill-php72-1.27.0.0">
+      <author><![CDATA[Nicolas Grekas, Symfony Community]]></author>
       <group><![CDATA[symfony]]></group>
       <name><![CDATA[polyfill-php72]]></name>
       <version><![CDATA[v1.27.0]]></version>
@@ -616,6 +634,7 @@
       </properties>
     </component>
     <component type="library" bom-ref="symfony/polyfill-uuid-1.27.0.0">
+      <author><![CDATA[Grégoire Pineau, Symfony Community]]></author>
       <group><![CDATA[symfony]]></group>
       <name><![CDATA[polyfill-uuid]]></name>
       <version><![CDATA[v1.27.0]]></version>
@@ -647,6 +666,7 @@
       </properties>
     </component>
     <component type="library" bom-ref="symfony/symfony-6.2.1.0">
+      <author><![CDATA[Fabien Potencier, Symfony Community]]></author>
       <group><![CDATA[symfony]]></group>
       <name><![CDATA[symfony]]></name>
       <version><![CDATA[v6.2.1]]></version>
@@ -682,6 +702,7 @@
       </properties>
     </component>
     <component type="library" bom-ref="twig/twig-3.4.3.0">
+      <author><![CDATA[Fabien Potencier, Twig Team, Armin Ronacher]]></author>
       <group><![CDATA[twig]]></group>
       <name><![CDATA[twig]]></name>
       <version><![CDATA[v3.4.3]]></version>

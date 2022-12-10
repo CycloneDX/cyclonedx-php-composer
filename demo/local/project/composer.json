@@ -3,6 +3,11 @@
     "description": "demo of cyclonedx/cyclonedx-php-composer with a local dependency",
     "type": "project",
     "version": "dev-master",
+    "authors": [
+        {
+            "name": "Jan Kowalleck"
+        }
+    ],
     "homepage": "https://cyclonedx.org/",
     "support": {
         "email": "support@cyclonedx.org",

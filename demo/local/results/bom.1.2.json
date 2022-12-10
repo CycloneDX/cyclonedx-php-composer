@@ -18,6 +18,7 @@
             "version": "dev-master",
             "group": "cyclonedx-demo",
             "description": "demo of cyclonedx/cyclonedx-php-composer with a local dependency",
+            "author": "Jan Kowalleck",
             "purl": "pkg:composer/cyclonedx-demo/cyclonedx-php-composer-local@dev-master",
             "externalReferences": [
                 {
@@ -61,6 +62,7 @@
             "version": "1.33.7",
             "group": "cyclonedx-demo",
             "description": "a package that is hosted locally and required in a local demo",
+            "author": "Jan Kowalleck",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -75,6 +77,7 @@
             "version": "dev-issue-158",
             "group": "cyclonedx-demo",
             "description": "a package that reproduces issue#158",
+            "author": "Jan Kowalleck",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -93,10 +96,10 @@
             ]
         },
         {
-            "bom-ref": "cyclonedx-demo/local-dependency-with-minimal-setup-dev-next-reimplement",
+            "bom-ref": "cyclonedx-demo/local-dependency-with-minimal-setup-dev-component-author",
             "type": "library",
             "name": "local-dependency-with-minimal-setup",
-            "version": "dev-next-reimplement",
+            "version": "dev-component-author",
             "group": "cyclonedx-demo",
             "externalReferences": [
                 {
@@ -110,14 +113,14 @@
         {
             "ref": "cyclonedx-demo/local-demo-dependency-1.33.7.0",
             "dependsOn": [
-                "cyclonedx-demo/local-dependency-with-minimal-setup-dev-next-reimplement"
+                "cyclonedx-demo/local-dependency-with-minimal-setup-dev-component-author"
             ]
         },
         {
             "ref": "cyclonedx-demo/local-demo-issue-158-dev-issue-158"
         },
         {
-            "ref": "cyclonedx-demo/local-dependency-with-minimal-setup-dev-next-reimplement"
+            "ref": "cyclonedx-demo/local-dependency-with-minimal-setup-dev-component-author"
         },
         {
             "ref": "cyclonedx-demo/cyclonedx-php-composer-local-dev-master",

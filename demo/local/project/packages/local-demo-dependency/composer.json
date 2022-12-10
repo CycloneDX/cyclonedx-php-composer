@@ -1,15 +1,20 @@
 {
     "name": "cyclonedx-demo/local-demo-dependency",
-    "type": "library",
     "description": "a package that is hosted locally and required in a local demo",
+    "type": "library",
     "version": "1.33.7",
-    "require": {
-        "cyclonedx-demo/local-dependency-with-minimal-setup": "@dev"
-    },
+    "authors": [
+        {
+            "name": "Jan Kowalleck"
+        }
+    ],
     "funding": [
         {
             "type": "demo-funding-purpose",
             "url": "https://cyclonedx.org/about/participate/"
         }
-    ]
+    ],
+    "require": {
+        "cyclonedx-demo/local-dependency-with-minimal-setup": "@dev"
+    }
 }

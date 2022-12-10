@@ -34,7 +34,7 @@
     <component type="library">
       <group><![CDATA[cyclonedx-demo]]></group>
       <name><![CDATA[local-dependency-with-minimal-setup]]></name>
-      <version><![CDATA[dev-next-reimplement]]></version>
+      <version><![CDATA[dev-component-author]]></version>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[packages/local-dependency-with-minimal-setup]]></url>

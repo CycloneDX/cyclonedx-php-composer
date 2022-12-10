@@ -209,6 +209,7 @@ class Builder
 
         if ($package instanceof CompletePackageInterface) {
             $component->setDescription($package->getDescription());
+            $component->setAuthor($this->createAuthorString($package));
             $component->getLicenses()->addItems(
                 ...array_map(
                     [$this->licenseFactory, 'makeFromString'],
@@ -350,5 +351,15 @@ class Builder
         }
 
         return $tool;
+    }
+
+    private function createAuthorString(CompletePackageInterface $package): string
+    {
+        return implode(', ', array_filter(
+            array_map(
+                static fn (array $a): string => trim($a['name'] ?? ''),
+                $package->getAuthors()
+            )
+        ));
     }
 }
