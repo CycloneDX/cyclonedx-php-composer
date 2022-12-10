@@ -35,7 +35,6 @@ use CycloneDX\Core\Spdx\LicenseValidator as SpdxLicenseValidator;
 use Generator;
 use PackageUrl\PackageUrl;
 use RuntimeException;
-use stdClass;
 
 /**
  * @internal
@@ -283,44 +282,9 @@ class Builder
     }
 
     /**
-     * @psalm-param null|non-empty-string $versionOverride
-     *
      * @psalm-suppress MissingThrowsDocblock
      */
-    public function createThisTool(?string $versionOverride): Models\Tool
-    {
-        // TODO load from actual package ... if available and locked
-        // use $this->createToolFromPackage()
-
-        /** @var stdClass */
-        $thisPackageManifest = json_decode(file_get_contents(__DIR__.'/../composer.json'), false, 512, \JSON_THROW_ON_ERROR);
-
-        $thisPackageManifest->version = $versionOverride
-            ?? trim(file_get_contents(__DIR__.'/../semver.txt'));
-
-        return $this->createToolFromManifest($thisPackageManifest);
-    }
-
-    private function createToolFromManifest(stdClass $package): Models\Tool
-    {
-        \assert(\is_string($package->name));
-        \assert(null === $package->version || \is_string($package->version));
-
-        [$group, $name] = $this->getGroupAndName($package->name);
-
-        $tool = new Models\Tool();
-        $tool->setName($name);
-        $tool->setVendor($group);
-        $tool->setVersion($package->version);
-        $tool->getExternalReferences()->addItems();
-
-        return $tool;
-    }
-
-    /**
-     * @psalm-suppress MissingThrowsDocblock
-     */
-    private function createToolFromPackage(PackageInterface $package): Models\Tool
+    public function createToolFromPackage(PackageInterface $package): Models\Tool
     {
         [$group, $name] = $this->getGroupAndName($package->getName());
         $distUrl = $package->getDistUrl();
@@ -331,7 +295,11 @@ class Builder
         $tool->setName($name);
         $tool->setVendor($group);
         $tool->setVersion($package->getFullPrettyVersion());
-        $tool->getExternalReferences()->addItems();
+        if ($package instanceof CompletePackageInterface) {
+            $tool->getExternalReferences()->addItems(
+                ...iterator_to_array($this->createExternalReferencesFromPackage($package))
+            );
+        }
         if ($distUrl) {
             $tool->getExternalReferences()->addItems(
                 new Models\ExternalReference(

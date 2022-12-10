@@ -118,18 +118,29 @@ class Command extends BaseCommand
             $this->options->mainComponentVersion,
         );
 
-        $composer = (new ComposerFactory())->createComposer($io, $this->options->composerFile, fullLoad: true);
+        $subjectComposer = (new ComposerFactory())->createComposer($io, $this->options->composerFile, fullLoad: true);
         /** @psalm-suppress RedundantConditionGivenDocblockType -- as with lowest-compatible dependencies this is needed  */
-        \assert($composer instanceof \Composer\Composer);
-        $bom = $builder->createBomFromComposer($composer);
-        unset($composer);
+        \assert($subjectComposer instanceof \Composer\Composer);
+        $bom = $builder->createBomFromComposer($subjectComposer);
+        unset($subjectComposer);
 
         if (!$this->options->outputReproducible) {
             $bom->getMetadata()->setTimestamp(new DateTime());
         }
+
+        $selfComposer = (new ComposerFactory())->createComposer($io, __DIR__.'/../../composer.json',
+            fullLoad: false, disablePlugins: true, disableScripts: true);
+        /** @psalm-suppress RedundantConditionGivenDocblockType -- as with lowest-compatible dependencies this is needed  */
+        \assert($selfComposer instanceof \Composer\PartialComposer);
         $bom->getMetadata()->getTools()->addItems(
-            $builder->createThisTool($this->options->getToolVersionOverride())
+            $builder->createToolFromPackage(
+                $selfComposer->getPackage()
+            )->setVersion(
+                $this->options->getToolVersionOverride()
+                    ?? trim(file_get_contents(__DIR__.'/../../semver.txt')
+                    ))
         );
+        unset($selfComposer);
 
         $io->writeError('<info>serialize BOM...</info>', verbosity: IOInterface::VERBOSE);
         /** @var Serialization\Serializer */
