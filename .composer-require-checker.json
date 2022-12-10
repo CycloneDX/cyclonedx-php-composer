@@ -9,6 +9,7 @@
     "Composer\\Package\\PackageInterface",
     "Composer\\Package\\RootPackage",
     "Composer\\Package\\RootPackageInterface",
+    "Composer\\PartialComposer",
     "Composer\\Plugin\\Capability\\CommandProvider",
     "Composer\\Plugin\\Capable",
     "Composer\\Plugin\\PluginInterface",
