@@ -61,6 +61,7 @@
             "version": "1.4.1",
             "group": "doctrine",
             "description": "A small, lightweight utility to instantiate objects in PHP without invoking their constructors",
+            "author": "Marco Pivetta",
             "licenses": [
                 {
                     "license": {
@@ -138,6 +139,7 @@
             "version": "v4.15.2",
             "group": "nikic",
             "description": "A PHP parser written in PHP",
+            "author": "Nikita Popov",
             "licenses": [
                 {
                     "license": {
@@ -174,6 +176,7 @@
             "version": "2.0.3",
             "group": "phar-io",
             "description": "Component for reading phar.io manifest information from a PHP Archive (PHAR)",
+            "author": "Arne Blankerts, Sebastian Heuer, Sebastian Bergmann",
             "licenses": [
                 {
                     "license": {
@@ -210,6 +213,7 @@
             "version": "3.2.1",
             "group": "phar-io",
             "description": "Library for handling version information and constraints",
+            "author": "Arne Blankerts, Sebastian Heuer, Sebastian Bergmann",
             "licenses": [
                 {
                     "license": {
@@ -246,6 +250,7 @@
             "version": "9.2.19",
             "group": "phpunit",
             "description": "Library that provides collection, processing, and rendering functionality for PHP code coverage information.",
+            "author": "Sebastian Bergmann",
             "licenses": [
                 {
                     "license": {
@@ -287,6 +292,7 @@
             "version": "3.0.6",
             "group": "phpunit",
             "description": "FilterIterator implementation that filters files based on a list of suffixes.",
+            "author": "Sebastian Bergmann",
             "licenses": [
                 {
                     "license": {
@@ -328,6 +334,7 @@
             "version": "3.1.1",
             "group": "phpunit",
             "description": "Invoke callables with a timeout",
+            "author": "Sebastian Bergmann",
             "licenses": [
                 {
                     "license": {
@@ -369,6 +376,7 @@
             "version": "2.0.4",
             "group": "phpunit",
             "description": "Simple template engine.",
+            "author": "Sebastian Bergmann",
             "licenses": [
                 {
                     "license": {
@@ -410,6 +418,7 @@
             "version": "5.0.3",
             "group": "phpunit",
             "description": "Utility class for timing",
+            "author": "Sebastian Bergmann",
             "licenses": [
                 {
                     "license": {
@@ -451,6 +460,7 @@
             "version": "9.5.26",
             "group": "phpunit",
             "description": "The PHP Unit Testing framework.",
+            "author": "Sebastian Bergmann",
             "licenses": [
                 {
                     "license": {
@@ -492,6 +502,7 @@
             "version": "1.0.1",
             "group": "sebastian",
             "description": "Library for parsing CLI options",
+            "author": "Sebastian Bergmann",
             "licenses": [
                 {
                     "license": {
@@ -533,6 +544,7 @@
             "version": "1.0.8",
             "group": "sebastian",
             "description": "Collection of value objects that represent the PHP code units",
+            "author": "Sebastian Bergmann",
             "licenses": [
                 {
                     "license": {
@@ -574,6 +586,7 @@
             "version": "2.0.3",
             "group": "sebastian",
             "description": "Looks up which function or method a line of code belongs to",
+            "author": "Sebastian Bergmann",
             "licenses": [
                 {
                     "license": {
@@ -615,6 +628,7 @@
             "version": "4.0.8",
             "group": "sebastian",
             "description": "Provides the functionality to compare PHP values for equality",
+            "author": "Sebastian Bergmann, Jeff Welch, Volker Dusch, Bernhard Schussek",
             "licenses": [
                 {
                     "license": {
@@ -656,6 +670,7 @@
             "version": "2.0.2",
             "group": "sebastian",
             "description": "Library for calculating the complexity of PHP code units",
+            "author": "Sebastian Bergmann",
             "licenses": [
                 {
                     "license": {
@@ -697,6 +712,7 @@
             "version": "4.0.4",
             "group": "sebastian",
             "description": "Diff implementation",
+            "author": "Sebastian Bergmann, Kore Nordmann",
             "licenses": [
                 {
                     "license": {
@@ -738,6 +754,7 @@
             "version": "5.1.4",
             "group": "sebastian",
             "description": "Provides functionality to handle HHVM/PHP environments",
+            "author": "Sebastian Bergmann",
             "licenses": [
                 {
                     "license": {
@@ -779,6 +796,7 @@
             "version": "4.0.5",
             "group": "sebastian",
             "description": "Provides the functionality to export PHP variables for visualization",
+            "author": "Sebastian Bergmann, Jeff Welch, Volker Dusch, Adam Harvey, Bernhard Schussek",
             "licenses": [
                 {
                     "license": {
@@ -820,6 +838,7 @@
             "version": "5.0.5",
             "group": "sebastian",
             "description": "Snapshotting of global state",
+            "author": "Sebastian Bergmann",
             "licenses": [
                 {
                     "license": {
@@ -861,6 +880,7 @@
             "version": "1.0.3",
             "group": "sebastian",
             "description": "Library for counting the lines of code in PHP source code",
+            "author": "Sebastian Bergmann",
             "licenses": [
                 {
                     "license": {
@@ -902,6 +922,7 @@
             "version": "4.0.4",
             "group": "sebastian",
             "description": "Traverses array structures and object graphs to enumerate all referenced objects",
+            "author": "Sebastian Bergmann",
             "licenses": [
                 {
                     "license": {
@@ -943,6 +964,7 @@
             "version": "2.0.4",
             "group": "sebastian",
             "description": "Allows reflection of object attributes, including inherited and non-public ones",
+            "author": "Sebastian Bergmann",
             "licenses": [
                 {
                     "license": {
@@ -984,6 +1006,7 @@
             "version": "4.0.4",
             "group": "sebastian",
             "description": "Provides functionality to recursively process PHP variables",
+            "author": "Sebastian Bergmann, Jeff Welch, Adam Harvey",
             "licenses": [
                 {
                     "license": {
@@ -1025,6 +1048,7 @@
             "version": "3.0.3",
             "group": "sebastian",
             "description": "Provides a list of PHP built-in functions that operate on resources",
+            "author": "Sebastian Bergmann",
             "licenses": [
                 {
                     "license": {
@@ -1066,6 +1090,7 @@
             "version": "3.2.0",
             "group": "sebastian",
             "description": "Collection of value objects that represent the types of the PHP type system",
+            "author": "Sebastian Bergmann",
             "licenses": [
                 {
                     "license": {
@@ -1107,6 +1132,7 @@
             "version": "3.0.2",
             "group": "sebastian",
             "description": "Library that helps with managing the version number of Git-hosted PHP projects",
+            "author": "Sebastian Bergmann",
             "licenses": [
                 {
                     "license": {
@@ -1148,6 +1174,7 @@
             "version": "1.2.1",
             "group": "theseer",
             "description": "A small library for converting tokenized PHP source code into XML and potentially other formats",
+            "author": "Arne Blankerts",
             "licenses": [
                 {
                     "license": {

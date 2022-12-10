@@ -35,6 +35,7 @@
             "version": "1.3.0",
             "group": "asm89",
             "description": "Cross-origin resource sharing library and stack middleware",
+            "author": "Alexander",
             "licenses": [
                 {
                     "license": {
@@ -124,6 +125,7 @@
             "version": "2.0.6",
             "group": "doctrine",
             "description": "PHP Doctrine Inflector is a small library that can perform string manipulations with regard to upper/lowercase and singular/plural forms of words.",
+            "author": "Guilherme Blanco, Roman Borschel, Benjamin Eberlei, Jonathan Wage, Johannes Schmitt",
             "licenses": [
                 {
                     "license": {
@@ -171,6 +173,7 @@
             "version": "1.2.3",
             "group": "doctrine",
             "description": "PHP Doctrine Lexer parser library that can be used in Top-Down, Recursive Descent Parsers.",
+            "author": "Guilherme Blanco, Roman Borschel, Johannes Schmitt",
             "licenses": [
                 {
                     "license": {
@@ -218,6 +221,7 @@
             "version": "v2.3.1",
             "group": "dragonmantank",
             "description": "CRON for PHP: Calculate the next or previous run date and determine if a CRON expression is due",
+            "author": "Michael Dowling, Chris Tankersley",
             "licenses": [
                 {
                     "license": {
@@ -260,6 +264,7 @@
             "version": "2.1.25",
             "group": "egulias",
             "description": "A library for validating emails against several RFCs",
+            "author": "Eduardo Gulias Davis",
             "licenses": [
                 {
                     "license": {
@@ -307,6 +312,7 @@
             "version": "4.4.2",
             "group": "fideloper",
             "description": "Set trusted proxies for Laravel",
+            "author": "Chris Fidao",
             "licenses": [
                 {
                     "license": {
@@ -349,6 +355,7 @@
             "version": "v1.0.6",
             "group": "fruitcake",
             "description": "Adds CORS (Cross-Origin Resource Sharing) headers support in your Laravel application",
+            "author": "Fruitcake, Barry vd. Heuvel",
             "licenses": [
                 {
                     "license": {
@@ -391,6 +398,7 @@
             "version": "6.5.8",
             "group": "guzzlehttp",
             "description": "Guzzle is a PHP HTTP client library",
+            "author": "Graham Campbell, Michael Dowling, Jeremy Lindblom, George Mponos, Tobias Nyholm, M\u00e1rk S\u00e1gi-Kaz\u00e1r, Tobias Schultze",
             "licenses": [
                 {
                     "license": {
@@ -438,6 +446,7 @@
             "version": "1.5.2",
             "group": "guzzlehttp",
             "description": "Guzzle promises library",
+            "author": "Graham Campbell, Michael Dowling, Tobias Nyholm, Tobias Schultze",
             "licenses": [
                 {
                     "license": {
@@ -480,6 +489,7 @@
             "version": "1.9.0",
             "group": "guzzlehttp",
             "description": "PSR-7 message implementation that also provides common utility methods",
+            "author": "Graham Campbell, Michael Dowling, George Mponos, Tobias Nyholm, M\u00e1rk S\u00e1gi-Kaz\u00e1r, Tobias Schultze",
             "licenses": [
                 {
                     "license": {
@@ -522,6 +532,7 @@
             "version": "v7.30.6",
             "group": "laravel",
             "description": "The Laravel Framework.",
+            "author": "Taylor Otwell",
             "licenses": [
                 {
                     "license": {
@@ -606,6 +617,7 @@
             "version": "v2.7.3",
             "group": "laravel",
             "description": "Powerful REPL for the Laravel framework.",
+            "author": "Taylor Otwell",
             "licenses": [
                 {
                     "license": {
@@ -648,6 +660,7 @@
             "version": "1.6.7",
             "group": "league",
             "description": "Highly-extensible PHP Markdown parser which fully supports the CommonMark spec and Github-Flavored Markdown (GFM)",
+            "author": "Colin O'Dell",
             "licenses": [
                 {
                     "license": {
@@ -705,6 +718,7 @@
             "version": "1.1.10",
             "group": "league",
             "description": "Filesystem abstraction: Many filesystems, one API.",
+            "author": "Frank de Jonge",
             "licenses": [
                 {
                     "license": {
@@ -747,6 +761,7 @@
             "version": "1.11.0",
             "group": "league",
             "description": "Mime-type detection for Flysystem",
+            "author": "Frank de Jonge",
             "licenses": [
                 {
                     "license": {
@@ -789,6 +804,7 @@
             "version": "2.8.0",
             "group": "monolog",
             "description": "Sends your logs to files, sockets, inboxes, databases and various web services",
+            "author": "Jordi Boggiano",
             "licenses": [
                 {
                     "license": {
@@ -836,6 +852,7 @@
             "version": "2.63.0",
             "group": "nesbot",
             "description": "An API extension for DateTime that supports 281 different languages.",
+            "author": "Brian Nesbitt, kylekatarnls",
             "licenses": [
                 {
                     "license": {
@@ -888,6 +905,7 @@
             "version": "v4.15.2",
             "group": "nikic",
             "description": "A PHP parser written in PHP",
+            "author": "Nikita Popov",
             "licenses": [
                 {
                     "license": {
@@ -930,6 +948,7 @@
             "version": "3.6.3",
             "group": "opis",
             "description": "A library that can be used to serialize closures (anonymous functions) and arbitrary objects.",
+            "author": "Marius Sarca, Sorin Sarca",
             "licenses": [
                 {
                     "license": {
@@ -977,6 +996,7 @@
             "version": "1.9.0",
             "group": "phpoption",
             "description": "Option Type for PHP",
+            "author": "Johannes M. Schmitt, Graham Campbell",
             "licenses": [
                 {
                     "license": {
@@ -1019,6 +1039,7 @@
             "version": "1.1.1",
             "group": "psr",
             "description": "Common Container Interface (PHP FIG PSR-11)",
+            "author": "PHP-FIG",
             "licenses": [
                 {
                     "license": {
@@ -1066,6 +1087,7 @@
             "version": "1.0.0",
             "group": "psr",
             "description": "Standard interfaces for event handling.",
+            "author": "PHP-FIG",
             "licenses": [
                 {
                     "license": {
@@ -1108,6 +1130,7 @@
             "version": "1.0.1",
             "group": "psr",
             "description": "Common interface for HTTP messages",
+            "author": "PHP-FIG",
             "licenses": [
                 {
                     "license": {
@@ -1150,6 +1173,7 @@
             "version": "1.1.4",
             "group": "psr",
             "description": "Common interface for logging libraries",
+            "author": "PHP-FIG",
             "licenses": [
                 {
                     "license": {
@@ -1192,6 +1216,7 @@
             "version": "1.0.1",
             "group": "psr",
             "description": "Common interfaces for simple caching",
+            "author": "PHP-FIG",
             "licenses": [
                 {
                     "license": {
@@ -1229,6 +1254,7 @@
             "version": "v0.11.9",
             "group": "psy",
             "description": "An interactive shell for modern PHP.",
+            "author": "Justin Hileman",
             "licenses": [
                 {
                     "license": {
@@ -1276,6 +1302,7 @@
             "version": "3.0.3",
             "group": "ralouphie",
             "description": "A polyfill for getallheaders.",
+            "author": "Ralph Khattar",
             "licenses": [
                 {
                     "license": {
@@ -1318,6 +1345,7 @@
             "version": "1.2.2",
             "group": "ramsey",
             "description": "A PHP library for representing and manipulating collections.",
+            "author": "Ben Ramsey",
             "licenses": [
                 {
                     "license": {
@@ -1402,6 +1430,7 @@
             "version": "v6.3.0",
             "group": "swiftmailer",
             "description": "Swiftmailer, free feature-rich PHP mailer",
+            "author": "Chris Corbyn, Fabien Potencier",
             "licenses": [
                 {
                     "license": {
@@ -1449,6 +1478,7 @@
             "version": "v5.4.16",
             "group": "symfony",
             "description": "Eases the creation of beautiful and testable command line interfaces",
+            "author": "Fabien Potencier, Symfony Community",
             "licenses": [
                 {
                     "license": {
@@ -1491,6 +1521,7 @@
             "version": "v5.4.11",
             "group": "symfony",
             "description": "Converts CSS selectors to XPath expressions",
+            "author": "Fabien Potencier, Jean-Fran\u00e7ois Simon, Symfony Community",
             "licenses": [
                 {
                     "license": {
@@ -1533,6 +1564,7 @@
             "version": "v2.5.2",
             "group": "symfony",
             "description": "A generic function and convention to trigger deprecation notices",
+            "author": "Nicolas Grekas, Symfony Community",
             "licenses": [
                 {
                     "license": {
@@ -1575,6 +1607,7 @@
             "version": "v5.4.15",
             "group": "symfony",
             "description": "Provides tools to manage errors and ease debugging PHP code",
+            "author": "Fabien Potencier, Symfony Community",
             "licenses": [
                 {
                     "license": {
@@ -1617,6 +1650,7 @@
             "version": "v5.4.9",
             "group": "symfony",
             "description": "Provides tools that allow your application components to communicate with each other by dispatching events and listening to them",
+            "author": "Fabien Potencier, Symfony Community",
             "licenses": [
                 {
                     "license": {
@@ -1659,6 +1693,7 @@
             "version": "v2.5.2",
             "group": "symfony",
             "description": "Generic abstractions related to dispatching event",
+            "author": "Nicolas Grekas, Symfony Community",
             "licenses": [
                 {
                     "license": {
@@ -1701,6 +1736,7 @@
             "version": "v5.4.11",
             "group": "symfony",
             "description": "Finds files and directories via an intuitive fluent interface",
+            "author": "Fabien Potencier, Symfony Community",
             "licenses": [
                 {
                     "license": {
@@ -1743,6 +1779,7 @@
             "version": "v5.4.16",
             "group": "symfony",
             "description": "Defines an object-oriented layer for the HTTP specification",
+            "author": "Fabien Potencier, Symfony Community",
             "licenses": [
                 {
                     "license": {
@@ -1785,6 +1822,7 @@
             "version": "v5.4.16",
             "group": "symfony",
             "description": "Provides a structured process for converting a Request into a Response",
+            "author": "Fabien Potencier, Symfony Community",
             "licenses": [
                 {
                     "license": {
@@ -1827,6 +1865,7 @@
             "version": "v5.4.16",
             "group": "symfony",
             "description": "Allows manipulating MIME messages",
+            "author": "Fabien Potencier, Symfony Community",
             "licenses": [
                 {
                     "license": {
@@ -1869,6 +1908,7 @@
             "version": "v1.27.0",
             "group": "symfony",
             "description": "Symfony polyfill for ctype functions",
+            "author": "Gert de Pagter, Symfony Community",
             "licenses": [
                 {
                     "license": {
@@ -1911,6 +1951,7 @@
             "version": "v1.27.0",
             "group": "symfony",
             "description": "Symfony polyfill for the Iconv extension",
+            "author": "Nicolas Grekas, Symfony Community",
             "licenses": [
                 {
                     "license": {
@@ -1953,6 +1994,7 @@
             "version": "v1.27.0",
             "group": "symfony",
             "description": "Symfony polyfill for intl's grapheme_* functions",
+            "author": "Nicolas Grekas, Symfony Community",
             "licenses": [
                 {
                     "license": {
@@ -1995,6 +2037,7 @@
             "version": "v1.27.0",
             "group": "symfony",
             "description": "Symfony polyfill for intl's idn_to_ascii and idn_to_utf8 functions",
+            "author": "Laurent Bassin, Trevor Rowbotham, Symfony Community",
             "licenses": [
                 {
                     "license": {
@@ -2037,6 +2080,7 @@
             "version": "v1.27.0",
             "group": "symfony",
             "description": "Symfony polyfill for intl's Normalizer class and related functions",
+            "author": "Nicolas Grekas, Symfony Community",
             "licenses": [
                 {
                     "license": {
@@ -2079,6 +2123,7 @@
             "version": "v1.27.0",
             "group": "symfony",
             "description": "Symfony polyfill for the Mbstring extension",
+            "author": "Nicolas Grekas, Symfony Community",
             "licenses": [
                 {
                     "license": {
@@ -2121,6 +2166,7 @@
             "version": "v1.27.0",
             "group": "symfony",
             "description": "Symfony polyfill backporting some PHP 7.2+ features to lower PHP versions",
+            "author": "Nicolas Grekas, Symfony Community",
             "licenses": [
                 {
                     "license": {
@@ -2163,6 +2209,7 @@
             "version": "v1.27.0",
             "group": "symfony",
             "description": "Symfony polyfill backporting some PHP 7.3+ features to lower PHP versions",
+            "author": "Nicolas Grekas, Symfony Community",
             "licenses": [
                 {
                     "license": {
@@ -2205,6 +2252,7 @@
             "version": "v1.27.0",
             "group": "symfony",
             "description": "Symfony polyfill backporting some PHP 8.0+ features to lower PHP versions",
+            "author": "Ion Bazan, Nicolas Grekas, Symfony Community",
             "licenses": [
                 {
                     "license": {
@@ -2247,6 +2295,7 @@
             "version": "v1.27.0",
             "group": "symfony",
             "description": "Symfony polyfill backporting some PHP 8.1+ features to lower PHP versions",
+            "author": "Nicolas Grekas, Symfony Community",
             "licenses": [
                 {
                     "license": {
@@ -2289,6 +2338,7 @@
             "version": "v5.4.11",
             "group": "symfony",
             "description": "Executes commands in sub-processes",
+            "author": "Fabien Potencier, Symfony Community",
             "licenses": [
                 {
                     "license": {
@@ -2331,6 +2381,7 @@
             "version": "v5.4.15",
             "group": "symfony",
             "description": "Maps an HTTP request to a set of configuration variables",
+            "author": "Fabien Potencier, Symfony Community",
             "licenses": [
                 {
                     "license": {
@@ -2373,6 +2424,7 @@
             "version": "v2.5.2",
             "group": "symfony",
             "description": "Generic abstractions related to writing services",
+            "author": "Nicolas Grekas, Symfony Community",
             "licenses": [
                 {
                     "license": {
@@ -2415,6 +2467,7 @@
             "version": "v5.4.15",
             "group": "symfony",
             "description": "Provides an object-oriented API to strings and deals with bytes, UTF-8 code points and grapheme clusters in a unified way",
+            "author": "Nicolas Grekas, Symfony Community",
             "licenses": [
                 {
                     "license": {
@@ -2457,6 +2510,7 @@
             "version": "v5.4.14",
             "group": "symfony",
             "description": "Provides tools to internationalize your application",
+            "author": "Fabien Potencier, Symfony Community",
             "licenses": [
                 {
                     "license": {
@@ -2499,6 +2553,7 @@
             "version": "v2.5.2",
             "group": "symfony",
             "description": "Generic abstractions related to translation",
+            "author": "Nicolas Grekas, Symfony Community",
             "licenses": [
                 {
                     "license": {
@@ -2541,6 +2596,7 @@
             "version": "v5.4.14",
             "group": "symfony",
             "description": "Provides mechanisms for walking through any arbitrary PHP variable",
+            "author": "Nicolas Grekas, Symfony Community",
             "licenses": [
                 {
                     "license": {
@@ -2583,6 +2639,7 @@
             "version": "2.2.5",
             "group": "tijsverkoyen",
             "description": "CssToInlineStyles is a class that enables you to convert HTML-pages/files into HTML-pages/files with inline styles. This is very useful when you're sending emails.",
+            "author": "Tijs Verkoyen",
             "licenses": [
                 {
                     "license": {
@@ -2630,6 +2687,7 @@
             "version": "v4.3.0",
             "group": "vlucas",
             "description": "Loads environment variables from `.env` to `getenv()`, `$_ENV` and `$_SERVER` automagically.",
+            "author": "Graham Campbell, Vance Lucas",
             "licenses": [
                 {
                     "license": {
@@ -2672,6 +2730,7 @@
             "version": "1.6.1",
             "group": "voku",
             "description": "Portable ASCII library - performance optimized (ascii) string functions for php.",
+            "author": "Lars Moelleken",
             "licenses": [
                 {
                     "license": {

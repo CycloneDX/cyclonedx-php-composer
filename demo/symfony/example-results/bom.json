@@ -4,7 +4,7 @@
     "specVersion": "1.4",
     "version": 1,
     "metadata": {
-        "timestamp": "2022-12-08T21:06:42Z",
+        "timestamp": "2022-12-10T09:57:16Z",
         "tools": [
             {
                 "vendor": "cyclonedx",
@@ -36,6 +36,7 @@
             "version": "2.0.0",
             "group": "doctrine",
             "description": "The Doctrine Event Manager is a simple PHP event system that was built to be used with the various Doctrine projects.",
+            "author": "Guilherme Blanco, Roman Borschel, Benjamin Eberlei, Jonathan Wage, Johannes Schmitt, Marco Pivetta",
             "licenses": [
                 {
                     "license": {
@@ -83,6 +84,7 @@
             "version": "3.1.0",
             "group": "doctrine",
             "description": "The Doctrine Persistence project is a set of shared interfaces and functionality that the different Doctrine object mappers share.",
+            "author": "Guilherme Blanco, Roman Borschel, Benjamin Eberlei, Jonathan Wage, Johannes Schmitt, Marco Pivetta",
             "licenses": [
                 {
                     "license": {
@@ -130,6 +132,7 @@
             "version": "v1.0.13",
             "group": "friendsofphp",
             "description": "Adding support for a wider range of PHP versions to ocramius/proxy-manager",
+            "author": "Marco Pivetta, Nicolas Grekas",
             "licenses": [
                 {
                     "license": {
@@ -244,6 +247,7 @@
             "version": "3.0.0",
             "group": "psr",
             "description": "Common interface for caching libraries",
+            "author": "PHP-FIG",
             "licenses": [
                 {
                     "license": {
@@ -281,6 +285,7 @@
             "version": "1.0.0",
             "group": "psr",
             "description": "Common interface for reading the clock.",
+            "author": "PHP-FIG",
             "licenses": [
                 {
                     "license": {
@@ -328,6 +333,7 @@
             "version": "2.0.2",
             "group": "psr",
             "description": "Common Container Interface (PHP FIG PSR-11)",
+            "author": "PHP-FIG",
             "licenses": [
                 {
                     "license": {
@@ -375,6 +381,7 @@
             "version": "1.0.0",
             "group": "psr",
             "description": "Standard interfaces for event handling.",
+            "author": "PHP-FIG",
             "licenses": [
                 {
                     "license": {
@@ -417,6 +424,7 @@
             "version": "2.0.1",
             "group": "psr",
             "description": "Common interfaces for HTTP links",
+            "author": "PHP-FIG",
             "licenses": [
                 {
                     "license": {
@@ -459,6 +467,7 @@
             "version": "3.0.0",
             "group": "psr",
             "description": "Common interface for logging libraries",
+            "author": "PHP-FIG",
             "licenses": [
                 {
                     "license": {
@@ -501,6 +510,7 @@
             "version": "v3.2.0",
             "group": "symfony",
             "description": "A set of abstractions extracted out of the Symfony components",
+            "author": "Nicolas Grekas, Symfony Community",
             "licenses": [
                 {
                     "license": {
@@ -543,6 +553,7 @@
             "version": "v1.27.0",
             "group": "symfony",
             "description": "Symfony polyfill for ctype functions",
+            "author": "Gert de Pagter, Symfony Community",
             "licenses": [
                 {
                     "license": {
@@ -585,6 +596,7 @@
             "version": "v1.27.0",
             "group": "symfony",
             "description": "Symfony polyfill for intl's grapheme_* functions",
+            "author": "Nicolas Grekas, Symfony Community",
             "licenses": [
                 {
                     "license": {
@@ -627,6 +639,7 @@
             "version": "v1.27.0",
             "group": "symfony",
             "description": "Symfony polyfill for intl's ICU-related data and classes",
+            "author": "Nicolas Grekas, Symfony Community",
             "licenses": [
                 {
                     "license": {
@@ -669,6 +682,7 @@
             "version": "v1.27.0",
             "group": "symfony",
             "description": "Symfony polyfill for intl's idn_to_ascii and idn_to_utf8 functions",
+            "author": "Laurent Bassin, Trevor Rowbotham, Symfony Community",
             "licenses": [
                 {
                     "license": {
@@ -711,6 +725,7 @@
             "version": "v1.27.0",
             "group": "symfony",
             "description": "Symfony polyfill for intl's Normalizer class and related functions",
+            "author": "Nicolas Grekas, Symfony Community",
             "licenses": [
                 {
                     "license": {
@@ -753,6 +768,7 @@
             "version": "v1.27.0",
             "group": "symfony",
             "description": "Symfony polyfill for the Mbstring extension",
+            "author": "Nicolas Grekas, Symfony Community",
             "licenses": [
                 {
                     "license": {
@@ -795,6 +811,7 @@
             "version": "v1.27.0",
             "group": "symfony",
             "description": "Symfony polyfill backporting some PHP 7.2+ features to lower PHP versions",
+            "author": "Nicolas Grekas, Symfony Community",
             "licenses": [
                 {
                     "license": {
@@ -837,6 +854,7 @@
             "version": "v1.27.0",
             "group": "symfony",
             "description": "Symfony polyfill for uuid functions",
+            "author": "Gr\u00e9goire Pineau, Symfony Community",
             "licenses": [
                 {
                     "license": {
@@ -879,6 +897,7 @@
             "version": "v6.2.1",
             "group": "symfony",
             "description": "The Symfony PHP framework",
+            "author": "Fabien Potencier, Symfony Community",
             "licenses": [
                 {
                     "license": {
@@ -926,6 +945,7 @@
             "version": "v3.4.3",
             "group": "twig",
             "description": "Twig, the flexible, fast, and secure template language for PHP",
+            "author": "Fabien Potencier, Twig Team, Armin Ronacher",
             "licenses": [
                 {
                     "license": {
