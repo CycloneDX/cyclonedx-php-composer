@@ -13,7 +13,7 @@
                     {
                         "type": "website",
                         "url": "https://github.com/CycloneDX/cyclonedx-php-composer/#readme",
-                        "comment": "as detected from composer manifest \"homepage\""
+                        "comment": "as detected from composer manifest 'homepage'"
                     },
                     {
                         "type": "issue-tracker",
@@ -41,7 +41,7 @@
                 {
                     "type": "website",
                     "url": "https://cyclonedx.org/",
-                    "comment": "as detected from composer manifest \"homepage\""
+                    "comment": "as detected from composer manifest 'homepage'"
                 },
                 {
                     "type": "other",
@@ -115,7 +115,7 @@
                 {
                     "type": "website",
                     "url": "https://github.com/CycloneDX/cyclonedx-php-composer/issues/158",
-                    "comment": "as detected from composer manifest \"homepage\""
+                    "comment": "as detected from composer manifest 'homepage'"
                 },
                 {
                     "type": "issue-tracker",

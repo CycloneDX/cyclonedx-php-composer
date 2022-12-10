@@ -18,7 +18,7 @@
       <externalReferences>
         <reference type="website">
           <url><![CDATA[https://cyclonedx.org/]]></url>
-          <comment><![CDATA[as detected from composer manifest "homepage"]]></comment>
+          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
         </reference>
         <reference type="other">
           <url><![CDATA[support@cyclonedx.org]]></url>
@@ -65,7 +65,7 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://www.doctrine-project.org/projects/instantiator.html]]></url>
-          <comment><![CDATA[as detected from composer manifest "homepage"]]></comment>
+          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
         </reference>
         <reference type="issue-tracker">
           <url><![CDATA[https://github.com/doctrine/instantiator/issues]]></url>
@@ -213,7 +213,7 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://github.com/sebastianbergmann/php-code-coverage]]></url>
-          <comment><![CDATA[as detected from composer manifest "homepage"]]></comment>
+          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
         </reference>
         <reference type="issue-tracker">
           <url><![CDATA[https://github.com/sebastianbergmann/php-code-coverage/issues]]></url>
@@ -246,7 +246,7 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://github.com/sebastianbergmann/php-file-iterator/]]></url>
-          <comment><![CDATA[as detected from composer manifest "homepage"]]></comment>
+          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
         </reference>
         <reference type="issue-tracker">
           <url><![CDATA[https://github.com/sebastianbergmann/php-file-iterator/issues]]></url>
@@ -279,7 +279,7 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://github.com/sebastianbergmann/php-invoker/]]></url>
-          <comment><![CDATA[as detected from composer manifest "homepage"]]></comment>
+          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
         </reference>
         <reference type="issue-tracker">
           <url><![CDATA[https://github.com/sebastianbergmann/php-invoker/issues]]></url>
@@ -312,7 +312,7 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://github.com/sebastianbergmann/php-text-template/]]></url>
-          <comment><![CDATA[as detected from composer manifest "homepage"]]></comment>
+          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
         </reference>
         <reference type="issue-tracker">
           <url><![CDATA[https://github.com/sebastianbergmann/php-text-template/issues]]></url>
@@ -345,7 +345,7 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://github.com/sebastianbergmann/php-timer/]]></url>
-          <comment><![CDATA[as detected from composer manifest "homepage"]]></comment>
+          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
         </reference>
         <reference type="issue-tracker">
           <url><![CDATA[https://github.com/sebastianbergmann/php-timer/issues]]></url>
@@ -378,7 +378,7 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://phpunit.de/]]></url>
-          <comment><![CDATA[as detected from composer manifest "homepage"]]></comment>
+          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
         </reference>
         <reference type="issue-tracker">
           <url><![CDATA[https://github.com/sebastianbergmann/phpunit/issues]]></url>
@@ -411,7 +411,7 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://github.com/sebastianbergmann/cli-parser]]></url>
-          <comment><![CDATA[as detected from composer manifest "homepage"]]></comment>
+          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
         </reference>
         <reference type="issue-tracker">
           <url><![CDATA[https://github.com/sebastianbergmann/cli-parser/issues]]></url>
@@ -444,7 +444,7 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://github.com/sebastianbergmann/code-unit]]></url>
-          <comment><![CDATA[as detected from composer manifest "homepage"]]></comment>
+          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
         </reference>
         <reference type="issue-tracker">
           <url><![CDATA[https://github.com/sebastianbergmann/code-unit/issues]]></url>
@@ -477,7 +477,7 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://github.com/sebastianbergmann/code-unit-reverse-lookup/]]></url>
-          <comment><![CDATA[as detected from composer manifest "homepage"]]></comment>
+          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
         </reference>
         <reference type="issue-tracker">
           <url><![CDATA[https://github.com/sebastianbergmann/code-unit-reverse-lookup/issues]]></url>
@@ -510,7 +510,7 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://github.com/sebastianbergmann/comparator]]></url>
-          <comment><![CDATA[as detected from composer manifest "homepage"]]></comment>
+          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
         </reference>
         <reference type="issue-tracker">
           <url><![CDATA[https://github.com/sebastianbergmann/comparator/issues]]></url>
@@ -543,7 +543,7 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://github.com/sebastianbergmann/complexity]]></url>
-          <comment><![CDATA[as detected from composer manifest "homepage"]]></comment>
+          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
         </reference>
         <reference type="issue-tracker">
           <url><![CDATA[https://github.com/sebastianbergmann/complexity/issues]]></url>
@@ -576,7 +576,7 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://github.com/sebastianbergmann/diff]]></url>
-          <comment><![CDATA[as detected from composer manifest "homepage"]]></comment>
+          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
         </reference>
         <reference type="issue-tracker">
           <url><![CDATA[https://github.com/sebastianbergmann/diff/issues]]></url>
@@ -609,7 +609,7 @@
         </reference>
         <reference type="website">
           <url><![CDATA[http://www.github.com/sebastianbergmann/environment]]></url>
-          <comment><![CDATA[as detected from composer manifest "homepage"]]></comment>
+          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
         </reference>
         <reference type="issue-tracker">
           <url><![CDATA[https://github.com/sebastianbergmann/environment/issues]]></url>
@@ -642,7 +642,7 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://www.github.com/sebastianbergmann/exporter]]></url>
-          <comment><![CDATA[as detected from composer manifest "homepage"]]></comment>
+          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
         </reference>
         <reference type="issue-tracker">
           <url><![CDATA[https://github.com/sebastianbergmann/exporter/issues]]></url>
@@ -675,7 +675,7 @@
         </reference>
         <reference type="website">
           <url><![CDATA[http://www.github.com/sebastianbergmann/global-state]]></url>
-          <comment><![CDATA[as detected from composer manifest "homepage"]]></comment>
+          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
         </reference>
         <reference type="issue-tracker">
           <url><![CDATA[https://github.com/sebastianbergmann/global-state/issues]]></url>
@@ -708,7 +708,7 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://github.com/sebastianbergmann/lines-of-code]]></url>
-          <comment><![CDATA[as detected from composer manifest "homepage"]]></comment>
+          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
         </reference>
         <reference type="issue-tracker">
           <url><![CDATA[https://github.com/sebastianbergmann/lines-of-code/issues]]></url>
@@ -741,7 +741,7 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://github.com/sebastianbergmann/object-enumerator/]]></url>
-          <comment><![CDATA[as detected from composer manifest "homepage"]]></comment>
+          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
         </reference>
         <reference type="issue-tracker">
           <url><![CDATA[https://github.com/sebastianbergmann/object-enumerator/issues]]></url>
@@ -774,7 +774,7 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://github.com/sebastianbergmann/object-reflector/]]></url>
-          <comment><![CDATA[as detected from composer manifest "homepage"]]></comment>
+          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
         </reference>
         <reference type="issue-tracker">
           <url><![CDATA[https://github.com/sebastianbergmann/object-reflector/issues]]></url>
@@ -807,7 +807,7 @@
         </reference>
         <reference type="website">
           <url><![CDATA[http://www.github.com/sebastianbergmann/recursion-context]]></url>
-          <comment><![CDATA[as detected from composer manifest "homepage"]]></comment>
+          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
         </reference>
         <reference type="issue-tracker">
           <url><![CDATA[https://github.com/sebastianbergmann/recursion-context/issues]]></url>
@@ -840,7 +840,7 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://www.github.com/sebastianbergmann/resource-operations]]></url>
-          <comment><![CDATA[as detected from composer manifest "homepage"]]></comment>
+          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
         </reference>
         <reference type="issue-tracker">
           <url><![CDATA[https://github.com/sebastianbergmann/resource-operations/issues]]></url>
@@ -873,7 +873,7 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://github.com/sebastianbergmann/type]]></url>
-          <comment><![CDATA[as detected from composer manifest "homepage"]]></comment>
+          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
         </reference>
         <reference type="issue-tracker">
           <url><![CDATA[https://github.com/sebastianbergmann/type/issues]]></url>
@@ -906,7 +906,7 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://github.com/sebastianbergmann/version]]></url>
-          <comment><![CDATA[as detected from composer manifest "homepage"]]></comment>
+          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
         </reference>
         <reference type="issue-tracker">
           <url><![CDATA[https://github.com/sebastianbergmann/version/issues]]></url>

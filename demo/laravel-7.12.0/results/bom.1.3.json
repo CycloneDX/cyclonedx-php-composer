@@ -57,7 +57,7 @@
                 {
                     "type": "website",
                     "url": "https://github.com/asm89/stack-cors",
-                    "comment": "as detected from composer manifest \"homepage\""
+                    "comment": "as detected from composer manifest 'homepage'"
                 },
                 {
                     "type": "issue-tracker",
@@ -147,7 +147,7 @@
                 {
                     "type": "website",
                     "url": "https://www.doctrine-project.org/projects/inflector.html",
-                    "comment": "as detected from composer manifest \"homepage\""
+                    "comment": "as detected from composer manifest 'homepage'"
                 },
                 {
                     "type": "issue-tracker",
@@ -195,7 +195,7 @@
                 {
                     "type": "website",
                     "url": "https://www.doctrine-project.org/projects/lexer.html",
-                    "comment": "as detected from composer manifest \"homepage\""
+                    "comment": "as detected from composer manifest 'homepage'"
                 },
                 {
                     "type": "issue-tracker",
@@ -286,7 +286,7 @@
                 {
                     "type": "website",
                     "url": "https://github.com/egulias/EmailValidator",
-                    "comment": "as detected from composer manifest \"homepage\""
+                    "comment": "as detected from composer manifest 'homepage'"
                 },
                 {
                     "type": "issue-tracker",
@@ -420,7 +420,7 @@
                 {
                     "type": "website",
                     "url": "http://guzzlephp.org/",
-                    "comment": "as detected from composer manifest \"homepage\""
+                    "comment": "as detected from composer manifest 'homepage'"
                 },
                 {
                     "type": "issue-tracker",
@@ -554,7 +554,7 @@
                 {
                     "type": "website",
                     "url": "https://laravel.com",
-                    "comment": "as detected from composer manifest \"homepage\""
+                    "comment": "as detected from composer manifest 'homepage'"
                 },
                 {
                     "type": "issue-tracker",
@@ -682,7 +682,7 @@
                 {
                     "type": "website",
                     "url": "https://commonmark.thephpleague.com",
-                    "comment": "as detected from composer manifest \"homepage\""
+                    "comment": "as detected from composer manifest 'homepage'"
                 },
                 {
                     "type": "documentation",
@@ -826,7 +826,7 @@
                 {
                     "type": "website",
                     "url": "https://github.com/Seldaek/monolog",
-                    "comment": "as detected from composer manifest \"homepage\""
+                    "comment": "as detected from composer manifest 'homepage'"
                 },
                 {
                     "type": "issue-tracker",
@@ -874,7 +874,7 @@
                 {
                     "type": "website",
                     "url": "https://carbon.nesbot.com",
-                    "comment": "as detected from composer manifest \"homepage\""
+                    "comment": "as detected from composer manifest 'homepage'"
                 },
                 {
                     "type": "documentation",
@@ -970,7 +970,7 @@
                 {
                     "type": "website",
                     "url": "https://opis.io/closure",
-                    "comment": "as detected from composer manifest \"homepage\""
+                    "comment": "as detected from composer manifest 'homepage'"
                 },
                 {
                     "type": "issue-tracker",
@@ -1061,7 +1061,7 @@
                 {
                     "type": "website",
                     "url": "https://github.com/php-fig/container",
-                    "comment": "as detected from composer manifest \"homepage\""
+                    "comment": "as detected from composer manifest 'homepage'"
                 },
                 {
                     "type": "issue-tracker",
@@ -1152,7 +1152,7 @@
                 {
                     "type": "website",
                     "url": "https://github.com/php-fig/http-message",
-                    "comment": "as detected from composer manifest \"homepage\""
+                    "comment": "as detected from composer manifest 'homepage'"
                 },
                 {
                     "type": "vcs",
@@ -1195,7 +1195,7 @@
                 {
                     "type": "website",
                     "url": "https://github.com/php-fig/log",
-                    "comment": "as detected from composer manifest \"homepage\""
+                    "comment": "as detected from composer manifest 'homepage'"
                 },
                 {
                     "type": "vcs",
@@ -1276,7 +1276,7 @@
                 {
                     "type": "website",
                     "url": "http://psysh.org",
-                    "comment": "as detected from composer manifest \"homepage\""
+                    "comment": "as detected from composer manifest 'homepage'"
                 },
                 {
                     "type": "issue-tracker",
@@ -1452,7 +1452,7 @@
                 {
                     "type": "website",
                     "url": "https://swiftmailer.symfony.com",
-                    "comment": "as detected from composer manifest \"homepage\""
+                    "comment": "as detected from composer manifest 'homepage'"
                 },
                 {
                     "type": "issue-tracker",
@@ -1500,7 +1500,7 @@
                 {
                     "type": "website",
                     "url": "https://symfony.com",
-                    "comment": "as detected from composer manifest \"homepage\""
+                    "comment": "as detected from composer manifest 'homepage'"
                 },
                 {
                     "type": "vcs",
@@ -1543,7 +1543,7 @@
                 {
                     "type": "website",
                     "url": "https://symfony.com",
-                    "comment": "as detected from composer manifest \"homepage\""
+                    "comment": "as detected from composer manifest 'homepage'"
                 },
                 {
                     "type": "vcs",
@@ -1586,7 +1586,7 @@
                 {
                     "type": "website",
                     "url": "https://symfony.com",
-                    "comment": "as detected from composer manifest \"homepage\""
+                    "comment": "as detected from composer manifest 'homepage'"
                 },
                 {
                     "type": "vcs",
@@ -1629,7 +1629,7 @@
                 {
                     "type": "website",
                     "url": "https://symfony.com",
-                    "comment": "as detected from composer manifest \"homepage\""
+                    "comment": "as detected from composer manifest 'homepage'"
                 },
                 {
                     "type": "vcs",
@@ -1672,7 +1672,7 @@
                 {
                     "type": "website",
                     "url": "https://symfony.com",
-                    "comment": "as detected from composer manifest \"homepage\""
+                    "comment": "as detected from composer manifest 'homepage'"
                 },
                 {
                     "type": "vcs",
@@ -1715,7 +1715,7 @@
                 {
                     "type": "website",
                     "url": "https://symfony.com",
-                    "comment": "as detected from composer manifest \"homepage\""
+                    "comment": "as detected from composer manifest 'homepage'"
                 },
                 {
                     "type": "vcs",
@@ -1758,7 +1758,7 @@
                 {
                     "type": "website",
                     "url": "https://symfony.com",
-                    "comment": "as detected from composer manifest \"homepage\""
+                    "comment": "as detected from composer manifest 'homepage'"
                 },
                 {
                     "type": "vcs",
@@ -1801,7 +1801,7 @@
                 {
                     "type": "website",
                     "url": "https://symfony.com",
-                    "comment": "as detected from composer manifest \"homepage\""
+                    "comment": "as detected from composer manifest 'homepage'"
                 },
                 {
                     "type": "vcs",
@@ -1844,7 +1844,7 @@
                 {
                     "type": "website",
                     "url": "https://symfony.com",
-                    "comment": "as detected from composer manifest \"homepage\""
+                    "comment": "as detected from composer manifest 'homepage'"
                 },
                 {
                     "type": "vcs",
@@ -1887,7 +1887,7 @@
                 {
                     "type": "website",
                     "url": "https://symfony.com",
-                    "comment": "as detected from composer manifest \"homepage\""
+                    "comment": "as detected from composer manifest 'homepage'"
                 },
                 {
                     "type": "vcs",
@@ -1930,7 +1930,7 @@
                 {
                     "type": "website",
                     "url": "https://symfony.com",
-                    "comment": "as detected from composer manifest \"homepage\""
+                    "comment": "as detected from composer manifest 'homepage'"
                 },
                 {
                     "type": "vcs",
@@ -1973,7 +1973,7 @@
                 {
                     "type": "website",
                     "url": "https://symfony.com",
-                    "comment": "as detected from composer manifest \"homepage\""
+                    "comment": "as detected from composer manifest 'homepage'"
                 },
                 {
                     "type": "vcs",
@@ -2016,7 +2016,7 @@
                 {
                     "type": "website",
                     "url": "https://symfony.com",
-                    "comment": "as detected from composer manifest \"homepage\""
+                    "comment": "as detected from composer manifest 'homepage'"
                 },
                 {
                     "type": "vcs",
@@ -2059,7 +2059,7 @@
                 {
                     "type": "website",
                     "url": "https://symfony.com",
-                    "comment": "as detected from composer manifest \"homepage\""
+                    "comment": "as detected from composer manifest 'homepage'"
                 },
                 {
                     "type": "vcs",
@@ -2102,7 +2102,7 @@
                 {
                     "type": "website",
                     "url": "https://symfony.com",
-                    "comment": "as detected from composer manifest \"homepage\""
+                    "comment": "as detected from composer manifest 'homepage'"
                 },
                 {
                     "type": "vcs",
@@ -2145,7 +2145,7 @@
                 {
                     "type": "website",
                     "url": "https://symfony.com",
-                    "comment": "as detected from composer manifest \"homepage\""
+                    "comment": "as detected from composer manifest 'homepage'"
                 },
                 {
                     "type": "vcs",
@@ -2188,7 +2188,7 @@
                 {
                     "type": "website",
                     "url": "https://symfony.com",
-                    "comment": "as detected from composer manifest \"homepage\""
+                    "comment": "as detected from composer manifest 'homepage'"
                 },
                 {
                     "type": "vcs",
@@ -2231,7 +2231,7 @@
                 {
                     "type": "website",
                     "url": "https://symfony.com",
-                    "comment": "as detected from composer manifest \"homepage\""
+                    "comment": "as detected from composer manifest 'homepage'"
                 },
                 {
                     "type": "vcs",
@@ -2274,7 +2274,7 @@
                 {
                     "type": "website",
                     "url": "https://symfony.com",
-                    "comment": "as detected from composer manifest \"homepage\""
+                    "comment": "as detected from composer manifest 'homepage'"
                 },
                 {
                     "type": "vcs",
@@ -2317,7 +2317,7 @@
                 {
                     "type": "website",
                     "url": "https://symfony.com",
-                    "comment": "as detected from composer manifest \"homepage\""
+                    "comment": "as detected from composer manifest 'homepage'"
                 },
                 {
                     "type": "vcs",
@@ -2360,7 +2360,7 @@
                 {
                     "type": "website",
                     "url": "https://symfony.com",
-                    "comment": "as detected from composer manifest \"homepage\""
+                    "comment": "as detected from composer manifest 'homepage'"
                 },
                 {
                     "type": "vcs",
@@ -2403,7 +2403,7 @@
                 {
                     "type": "website",
                     "url": "https://symfony.com",
-                    "comment": "as detected from composer manifest \"homepage\""
+                    "comment": "as detected from composer manifest 'homepage'"
                 },
                 {
                     "type": "vcs",
@@ -2446,7 +2446,7 @@
                 {
                     "type": "website",
                     "url": "https://symfony.com",
-                    "comment": "as detected from composer manifest \"homepage\""
+                    "comment": "as detected from composer manifest 'homepage'"
                 },
                 {
                     "type": "vcs",
@@ -2489,7 +2489,7 @@
                 {
                     "type": "website",
                     "url": "https://symfony.com",
-                    "comment": "as detected from composer manifest \"homepage\""
+                    "comment": "as detected from composer manifest 'homepage'"
                 },
                 {
                     "type": "vcs",
@@ -2532,7 +2532,7 @@
                 {
                     "type": "website",
                     "url": "https://symfony.com",
-                    "comment": "as detected from composer manifest \"homepage\""
+                    "comment": "as detected from composer manifest 'homepage'"
                 },
                 {
                     "type": "vcs",
@@ -2575,7 +2575,7 @@
                 {
                     "type": "website",
                     "url": "https://symfony.com",
-                    "comment": "as detected from composer manifest \"homepage\""
+                    "comment": "as detected from composer manifest 'homepage'"
                 },
                 {
                     "type": "vcs",
@@ -2618,7 +2618,7 @@
                 {
                     "type": "website",
                     "url": "https://symfony.com",
-                    "comment": "as detected from composer manifest \"homepage\""
+                    "comment": "as detected from composer manifest 'homepage'"
                 },
                 {
                     "type": "vcs",
@@ -2661,7 +2661,7 @@
                 {
                     "type": "website",
                     "url": "https://github.com/tijsverkoyen/CssToInlineStyles",
-                    "comment": "as detected from composer manifest \"homepage\""
+                    "comment": "as detected from composer manifest 'homepage'"
                 },
                 {
                     "type": "issue-tracker",
@@ -2752,7 +2752,7 @@
                 {
                     "type": "website",
                     "url": "https://github.com/voku/portable-ascii",
-                    "comment": "as detected from composer manifest \"homepage\""
+                    "comment": "as detected from composer manifest 'homepage'"
                 },
                 {
                     "type": "issue-tracker",

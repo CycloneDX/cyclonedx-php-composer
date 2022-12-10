@@ -262,14 +262,13 @@ class Builder
             yield (new Models\ExternalReference(
                 Enums\ExternalReferenceType::WEBSITE,
                 $homepage
-            ))->setComment('as detected from composer manifest "homepage"');
+            ))->setComment("as detected from composer manifest 'homepage'");
         }
 
         foreach ($package->getSupport() as $supportType => $supportUrl) {
             $extRefType = match ($supportType) {
-                'chat' => Enums\ExternalReferenceType::CHAT,
+                'chat', 'irc' => Enums\ExternalReferenceType::CHAT,
                 'docs' => Enums\ExternalReferenceType::DOCUMENTATION,
-                'irc' => Enums\ExternalReferenceType::CHAT,
                 'issues' => Enums\ExternalReferenceType::ISSUE_TRACKER,
                 'source' => Enums\ExternalReferenceType::VCS,
                 default => Enums\ExternalReferenceType::OTHER,

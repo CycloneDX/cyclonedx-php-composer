@@ -18,7 +18,7 @@
       <externalReferences>
         <reference type="website">
           <url><![CDATA[https://cyclonedx.org/]]></url>
-          <comment><![CDATA[as detected from composer manifest "homepage"]]></comment>
+          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
         </reference>
         <reference type="other">
           <url><![CDATA[support@cyclonedx.org]]></url>
@@ -74,7 +74,7 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://github.com/CycloneDX/cyclonedx-php-composer/issues/158]]></url>
-          <comment><![CDATA[as detected from composer manifest "homepage"]]></comment>
+          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
         </reference>
         <reference type="issue-tracker">
           <url><![CDATA[https://pear.php.net/bugs/search.php?cmd=display&package_name%5B%5D=PEAR_Exception]]></url>

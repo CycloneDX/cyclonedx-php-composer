@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bom xmlns="http://cyclonedx.org/schema/bom/1.4" version="1">
   <metadata>
-    <timestamp><![CDATA[2022-12-10T11:03:54Z]]></timestamp>
+    <timestamp><![CDATA[2022-12-10T11:17:07Z]]></timestamp>
     <tools>
       <tool>
         <vendor><![CDATA[cyclonedx]]></vendor>
@@ -10,7 +10,7 @@
         <externalReferences>
           <reference type="website">
             <url><![CDATA[https://github.com/CycloneDX/cyclonedx-php-composer/#readme]]></url>
-            <comment><![CDATA[as detected from composer manifest "homepage"]]></comment>
+            <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
           </reference>
           <reference type="issue-tracker">
             <url><![CDATA[https://github.com/CycloneDX/cyclonedx-php-composer/issues]]></url>
@@ -57,7 +57,7 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://www.doctrine-project.org/projects/event-manager.html]]></url>
-          <comment><![CDATA[as detected from composer manifest "homepage"]]></comment>
+          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
         </reference>
         <reference type="issue-tracker">
           <url><![CDATA[https://github.com/doctrine/event-manager/issues]]></url>
@@ -93,7 +93,7 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://www.doctrine-project.org/projects/persistence.html]]></url>
-          <comment><![CDATA[as detected from composer manifest "homepage"]]></comment>
+          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
         </reference>
         <reference type="issue-tracker">
           <url><![CDATA[https://github.com/doctrine/persistence/issues]]></url>
@@ -129,7 +129,7 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://github.com/FriendsOfPHP/proxy-manager-lts]]></url>
-          <comment><![CDATA[as detected from composer manifest "homepage"]]></comment>
+          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
         </reference>
         <reference type="issue-tracker">
           <url><![CDATA[https://github.com/FriendsOfPHP/proxy-manager-lts/issues]]></url>
@@ -164,7 +164,7 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://laminas.dev]]></url>
-          <comment><![CDATA[as detected from composer manifest "homepage"]]></comment>
+          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
         </reference>
         <reference type="chat">
           <url><![CDATA[https://laminas.dev/chat]]></url>
@@ -244,7 +244,7 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://github.com/php-fig/clock]]></url>
-          <comment><![CDATA[as detected from composer manifest "homepage"]]></comment>
+          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
         </reference>
         <reference type="issue-tracker">
           <url><![CDATA[https://github.com/php-fig/clock/issues]]></url>
@@ -280,7 +280,7 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://github.com/php-fig/container]]></url>
-          <comment><![CDATA[as detected from composer manifest "homepage"]]></comment>
+          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
         </reference>
         <reference type="issue-tracker">
           <url><![CDATA[https://github.com/php-fig/container/issues]]></url>
@@ -348,7 +348,7 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://github.com/php-fig/link]]></url>
-          <comment><![CDATA[as detected from composer manifest "homepage"]]></comment>
+          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/php-fig/link/tree/2.0.1]]></url>
@@ -380,7 +380,7 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://github.com/php-fig/log]]></url>
-          <comment><![CDATA[as detected from composer manifest "homepage"]]></comment>
+          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/php-fig/log/tree/3.0.0]]></url>
@@ -412,7 +412,7 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://symfony.com]]></url>
-          <comment><![CDATA[as detected from composer manifest "homepage"]]></comment>
+          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/symfony/contracts/tree/v3.2.0]]></url>
@@ -444,7 +444,7 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://symfony.com]]></url>
-          <comment><![CDATA[as detected from composer manifest "homepage"]]></comment>
+          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/symfony/polyfill-ctype/tree/v1.27.0]]></url>
@@ -476,7 +476,7 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://symfony.com]]></url>
-          <comment><![CDATA[as detected from composer manifest "homepage"]]></comment>
+          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/symfony/polyfill-intl-grapheme/tree/v1.27.0]]></url>
@@ -508,7 +508,7 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://symfony.com]]></url>
-          <comment><![CDATA[as detected from composer manifest "homepage"]]></comment>
+          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/symfony/polyfill-intl-icu/tree/v1.27.0]]></url>
@@ -540,7 +540,7 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://symfony.com]]></url>
-          <comment><![CDATA[as detected from composer manifest "homepage"]]></comment>
+          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/symfony/polyfill-intl-idn/tree/v1.27.0]]></url>
@@ -572,7 +572,7 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://symfony.com]]></url>
-          <comment><![CDATA[as detected from composer manifest "homepage"]]></comment>
+          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/symfony/polyfill-intl-normalizer/tree/v1.27.0]]></url>
@@ -604,7 +604,7 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://symfony.com]]></url>
-          <comment><![CDATA[as detected from composer manifest "homepage"]]></comment>
+          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/symfony/polyfill-mbstring/tree/v1.27.0]]></url>
@@ -636,7 +636,7 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://symfony.com]]></url>
-          <comment><![CDATA[as detected from composer manifest "homepage"]]></comment>
+          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/symfony/polyfill-php72/tree/v1.27.0]]></url>
@@ -668,7 +668,7 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://symfony.com]]></url>
-          <comment><![CDATA[as detected from composer manifest "homepage"]]></comment>
+          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/symfony/polyfill-uuid/tree/v1.27.0]]></url>
@@ -700,7 +700,7 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://symfony.com]]></url>
-          <comment><![CDATA[as detected from composer manifest "homepage"]]></comment>
+          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
         </reference>
         <reference type="issue-tracker">
           <url><![CDATA[https://github.com/symfony/symfony/issues]]></url>
@@ -736,7 +736,7 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://twig.symfony.com]]></url>
-          <comment><![CDATA[as detected from composer manifest "homepage"]]></comment>
+          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
         </reference>
         <reference type="issue-tracker">
           <url><![CDATA[https://github.com/twigphp/Twig/issues]]></url>

@@ -24,7 +24,7 @@
                 {
                     "type": "website",
                     "url": "https://cyclonedx.org/",
-                    "comment": "as detected from composer manifest \"homepage\""
+                    "comment": "as detected from composer manifest 'homepage'"
                 },
                 {
                     "type": "other",
@@ -89,7 +89,7 @@
                 {
                     "type": "website",
                     "url": "https://www.doctrine-project.org/projects/instantiator.html",
-                    "comment": "as detected from composer manifest \"homepage\""
+                    "comment": "as detected from composer manifest 'homepage'"
                 },
                 {
                     "type": "issue-tracker",
@@ -308,7 +308,7 @@
                 {
                     "type": "website",
                     "url": "https://github.com/sebastianbergmann/php-code-coverage",
-                    "comment": "as detected from composer manifest \"homepage\""
+                    "comment": "as detected from composer manifest 'homepage'"
                 },
                 {
                     "type": "issue-tracker",
@@ -356,7 +356,7 @@
                 {
                     "type": "website",
                     "url": "https://github.com/sebastianbergmann/php-file-iterator/",
-                    "comment": "as detected from composer manifest \"homepage\""
+                    "comment": "as detected from composer manifest 'homepage'"
                 },
                 {
                     "type": "issue-tracker",
@@ -404,7 +404,7 @@
                 {
                     "type": "website",
                     "url": "https://github.com/sebastianbergmann/php-invoker/",
-                    "comment": "as detected from composer manifest \"homepage\""
+                    "comment": "as detected from composer manifest 'homepage'"
                 },
                 {
                     "type": "issue-tracker",
@@ -452,7 +452,7 @@
                 {
                     "type": "website",
                     "url": "https://github.com/sebastianbergmann/php-text-template/",
-                    "comment": "as detected from composer manifest \"homepage\""
+                    "comment": "as detected from composer manifest 'homepage'"
                 },
                 {
                     "type": "issue-tracker",
@@ -500,7 +500,7 @@
                 {
                     "type": "website",
                     "url": "https://github.com/sebastianbergmann/php-timer/",
-                    "comment": "as detected from composer manifest \"homepage\""
+                    "comment": "as detected from composer manifest 'homepage'"
                 },
                 {
                     "type": "issue-tracker",
@@ -548,7 +548,7 @@
                 {
                     "type": "website",
                     "url": "https://phpunit.de/",
-                    "comment": "as detected from composer manifest \"homepage\""
+                    "comment": "as detected from composer manifest 'homepage'"
                 },
                 {
                     "type": "issue-tracker",
@@ -600,7 +600,7 @@
                 {
                     "type": "website",
                     "url": "https://github.com/sebastianbergmann/cli-parser",
-                    "comment": "as detected from composer manifest \"homepage\""
+                    "comment": "as detected from composer manifest 'homepage'"
                 },
                 {
                     "type": "issue-tracker",
@@ -648,7 +648,7 @@
                 {
                     "type": "website",
                     "url": "https://github.com/sebastianbergmann/code-unit",
-                    "comment": "as detected from composer manifest \"homepage\""
+                    "comment": "as detected from composer manifest 'homepage'"
                 },
                 {
                     "type": "issue-tracker",
@@ -696,7 +696,7 @@
                 {
                     "type": "website",
                     "url": "https://github.com/sebastianbergmann/code-unit-reverse-lookup/",
-                    "comment": "as detected from composer manifest \"homepage\""
+                    "comment": "as detected from composer manifest 'homepage'"
                 },
                 {
                     "type": "issue-tracker",
@@ -744,7 +744,7 @@
                 {
                     "type": "website",
                     "url": "https://github.com/sebastianbergmann/comparator",
-                    "comment": "as detected from composer manifest \"homepage\""
+                    "comment": "as detected from composer manifest 'homepage'"
                 },
                 {
                     "type": "issue-tracker",
@@ -792,7 +792,7 @@
                 {
                     "type": "website",
                     "url": "https://github.com/sebastianbergmann/complexity",
-                    "comment": "as detected from composer manifest \"homepage\""
+                    "comment": "as detected from composer manifest 'homepage'"
                 },
                 {
                     "type": "issue-tracker",
@@ -840,7 +840,7 @@
                 {
                     "type": "website",
                     "url": "https://github.com/sebastianbergmann/diff",
-                    "comment": "as detected from composer manifest \"homepage\""
+                    "comment": "as detected from composer manifest 'homepage'"
                 },
                 {
                     "type": "issue-tracker",
@@ -888,7 +888,7 @@
                 {
                     "type": "website",
                     "url": "http://www.github.com/sebastianbergmann/environment",
-                    "comment": "as detected from composer manifest \"homepage\""
+                    "comment": "as detected from composer manifest 'homepage'"
                 },
                 {
                     "type": "issue-tracker",
@@ -936,7 +936,7 @@
                 {
                     "type": "website",
                     "url": "https://www.github.com/sebastianbergmann/exporter",
-                    "comment": "as detected from composer manifest \"homepage\""
+                    "comment": "as detected from composer manifest 'homepage'"
                 },
                 {
                     "type": "issue-tracker",
@@ -984,7 +984,7 @@
                 {
                     "type": "website",
                     "url": "http://www.github.com/sebastianbergmann/global-state",
-                    "comment": "as detected from composer manifest \"homepage\""
+                    "comment": "as detected from composer manifest 'homepage'"
                 },
                 {
                     "type": "issue-tracker",
@@ -1032,7 +1032,7 @@
                 {
                     "type": "website",
                     "url": "https://github.com/sebastianbergmann/lines-of-code",
-                    "comment": "as detected from composer manifest \"homepage\""
+                    "comment": "as detected from composer manifest 'homepage'"
                 },
                 {
                     "type": "issue-tracker",
@@ -1080,7 +1080,7 @@
                 {
                     "type": "website",
                     "url": "https://github.com/sebastianbergmann/object-enumerator/",
-                    "comment": "as detected from composer manifest \"homepage\""
+                    "comment": "as detected from composer manifest 'homepage'"
                 },
                 {
                     "type": "issue-tracker",
@@ -1128,7 +1128,7 @@
                 {
                     "type": "website",
                     "url": "https://github.com/sebastianbergmann/object-reflector/",
-                    "comment": "as detected from composer manifest \"homepage\""
+                    "comment": "as detected from composer manifest 'homepage'"
                 },
                 {
                     "type": "issue-tracker",
@@ -1176,7 +1176,7 @@
                 {
                     "type": "website",
                     "url": "http://www.github.com/sebastianbergmann/recursion-context",
-                    "comment": "as detected from composer manifest \"homepage\""
+                    "comment": "as detected from composer manifest 'homepage'"
                 },
                 {
                     "type": "issue-tracker",
@@ -1224,7 +1224,7 @@
                 {
                     "type": "website",
                     "url": "https://www.github.com/sebastianbergmann/resource-operations",
-                    "comment": "as detected from composer manifest \"homepage\""
+                    "comment": "as detected from composer manifest 'homepage'"
                 },
                 {
                     "type": "issue-tracker",
@@ -1272,7 +1272,7 @@
                 {
                     "type": "website",
                     "url": "https://github.com/sebastianbergmann/type",
-                    "comment": "as detected from composer manifest \"homepage\""
+                    "comment": "as detected from composer manifest 'homepage'"
                 },
                 {
                     "type": "issue-tracker",
@@ -1320,7 +1320,7 @@
                 {
                     "type": "website",
                     "url": "https://github.com/sebastianbergmann/version",
-                    "comment": "as detected from composer manifest \"homepage\""
+                    "comment": "as detected from composer manifest 'homepage'"
                 },
                 {
                     "type": "issue-tracker",

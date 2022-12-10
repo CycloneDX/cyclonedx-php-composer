@@ -9,7 +9,7 @@
         <externalReferences>
           <reference type="website">
             <url><![CDATA[https://github.com/CycloneDX/cyclonedx-php-composer/#readme]]></url>
-            <comment><![CDATA[as detected from composer manifest "homepage"]]></comment>
+            <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
           </reference>
           <reference type="issue-tracker">
             <url><![CDATA[https://github.com/CycloneDX/cyclonedx-php-composer/issues]]></url>
@@ -56,7 +56,7 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://github.com/asm89/stack-cors]]></url>
-          <comment><![CDATA[as detected from composer manifest "homepage"]]></comment>
+          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
         </reference>
         <reference type="issue-tracker">
           <url><![CDATA[https://github.com/asm89/stack-cors/issues]]></url>
@@ -123,7 +123,7 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://www.doctrine-project.org/projects/inflector.html]]></url>
-          <comment><![CDATA[as detected from composer manifest "homepage"]]></comment>
+          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
         </reference>
         <reference type="issue-tracker">
           <url><![CDATA[https://github.com/doctrine/inflector/issues]]></url>
@@ -159,7 +159,7 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://www.doctrine-project.org/projects/lexer.html]]></url>
-          <comment><![CDATA[as detected from composer manifest "homepage"]]></comment>
+          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
         </reference>
         <reference type="issue-tracker">
           <url><![CDATA[https://github.com/doctrine/lexer/issues]]></url>
@@ -227,7 +227,7 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://github.com/egulias/EmailValidator]]></url>
-          <comment><![CDATA[as detected from composer manifest "homepage"]]></comment>
+          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
         </reference>
         <reference type="issue-tracker">
           <url><![CDATA[https://github.com/egulias/EmailValidator/issues]]></url>
@@ -327,7 +327,7 @@
         </reference>
         <reference type="website">
           <url><![CDATA[http://guzzlephp.org/]]></url>
-          <comment><![CDATA[as detected from composer manifest "homepage"]]></comment>
+          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
         </reference>
         <reference type="issue-tracker">
           <url><![CDATA[https://github.com/guzzle/guzzle/issues]]></url>
@@ -427,7 +427,7 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://laravel.com]]></url>
-          <comment><![CDATA[as detected from composer manifest "homepage"]]></comment>
+          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
         </reference>
         <reference type="issue-tracker">
           <url><![CDATA[https://github.com/laravel/framework/issues]]></url>
@@ -522,7 +522,7 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://commonmark.thephpleague.com]]></url>
-          <comment><![CDATA[as detected from composer manifest "homepage"]]></comment>
+          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
         </reference>
         <reference type="documentation">
           <url><![CDATA[https://commonmark.thephpleague.com/]]></url>
@@ -630,7 +630,7 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://github.com/Seldaek/monolog]]></url>
-          <comment><![CDATA[as detected from composer manifest "homepage"]]></comment>
+          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
         </reference>
         <reference type="issue-tracker">
           <url><![CDATA[https://github.com/Seldaek/monolog/issues]]></url>
@@ -666,7 +666,7 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://carbon.nesbot.com]]></url>
-          <comment><![CDATA[as detected from composer manifest "homepage"]]></comment>
+          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
         </reference>
         <reference type="documentation">
           <url><![CDATA[https://carbon.nesbot.com/docs]]></url>
@@ -738,7 +738,7 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://opis.io/closure]]></url>
-          <comment><![CDATA[as detected from composer manifest "homepage"]]></comment>
+          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
         </reference>
         <reference type="issue-tracker">
           <url><![CDATA[https://github.com/opis/closure/issues]]></url>
@@ -806,7 +806,7 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://github.com/php-fig/container]]></url>
-          <comment><![CDATA[as detected from composer manifest "homepage"]]></comment>
+          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
         </reference>
         <reference type="issue-tracker">
           <url><![CDATA[https://github.com/php-fig/container/issues]]></url>
@@ -874,7 +874,7 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://github.com/php-fig/http-message]]></url>
-          <comment><![CDATA[as detected from composer manifest "homepage"]]></comment>
+          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/php-fig/http-message/tree/master]]></url>
@@ -906,7 +906,7 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://github.com/php-fig/log]]></url>
-          <comment><![CDATA[as detected from composer manifest "homepage"]]></comment>
+          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/php-fig/log/tree/1.1.4]]></url>
@@ -966,7 +966,7 @@
         </reference>
         <reference type="website">
           <url><![CDATA[http://psysh.org]]></url>
-          <comment><![CDATA[as detected from composer manifest "homepage"]]></comment>
+          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
         </reference>
         <reference type="issue-tracker">
           <url><![CDATA[https://github.com/bobthecow/psysh/issues]]></url>
@@ -1097,7 +1097,7 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://swiftmailer.symfony.com]]></url>
-          <comment><![CDATA[as detected from composer manifest "homepage"]]></comment>
+          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
         </reference>
         <reference type="issue-tracker">
           <url><![CDATA[https://github.com/swiftmailer/swiftmailer/issues]]></url>
@@ -1133,7 +1133,7 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://symfony.com]]></url>
-          <comment><![CDATA[as detected from composer manifest "homepage"]]></comment>
+          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/symfony/console/tree/v5.4.16]]></url>
@@ -1165,7 +1165,7 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://symfony.com]]></url>
-          <comment><![CDATA[as detected from composer manifest "homepage"]]></comment>
+          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/symfony/css-selector/tree/v5.4.11]]></url>
@@ -1197,7 +1197,7 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://symfony.com]]></url>
-          <comment><![CDATA[as detected from composer manifest "homepage"]]></comment>
+          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/symfony/deprecation-contracts/tree/v2.5.2]]></url>
@@ -1229,7 +1229,7 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://symfony.com]]></url>
-          <comment><![CDATA[as detected from composer manifest "homepage"]]></comment>
+          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/symfony/error-handler/tree/v5.4.15]]></url>
@@ -1261,7 +1261,7 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://symfony.com]]></url>
-          <comment><![CDATA[as detected from composer manifest "homepage"]]></comment>
+          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/symfony/event-dispatcher/tree/v5.4.9]]></url>
@@ -1293,7 +1293,7 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://symfony.com]]></url>
-          <comment><![CDATA[as detected from composer manifest "homepage"]]></comment>
+          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/symfony/event-dispatcher-contracts/tree/v2.5.2]]></url>
@@ -1325,7 +1325,7 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://symfony.com]]></url>
-          <comment><![CDATA[as detected from composer manifest "homepage"]]></comment>
+          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/symfony/finder/tree/v5.4.11]]></url>
@@ -1357,7 +1357,7 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://symfony.com]]></url>
-          <comment><![CDATA[as detected from composer manifest "homepage"]]></comment>
+          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/symfony/http-foundation/tree/v5.4.16]]></url>
@@ -1389,7 +1389,7 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://symfony.com]]></url>
-          <comment><![CDATA[as detected from composer manifest "homepage"]]></comment>
+          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/symfony/http-kernel/tree/v5.4.16]]></url>
@@ -1421,7 +1421,7 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://symfony.com]]></url>
-          <comment><![CDATA[as detected from composer manifest "homepage"]]></comment>
+          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/symfony/mime/tree/v5.4.16]]></url>
@@ -1453,7 +1453,7 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://symfony.com]]></url>
-          <comment><![CDATA[as detected from composer manifest "homepage"]]></comment>
+          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/symfony/polyfill-ctype/tree/v1.27.0]]></url>
@@ -1485,7 +1485,7 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://symfony.com]]></url>
-          <comment><![CDATA[as detected from composer manifest "homepage"]]></comment>
+          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/symfony/polyfill-iconv/tree/v1.27.0]]></url>
@@ -1517,7 +1517,7 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://symfony.com]]></url>
-          <comment><![CDATA[as detected from composer manifest "homepage"]]></comment>
+          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/symfony/polyfill-intl-grapheme/tree/v1.27.0]]></url>
@@ -1549,7 +1549,7 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://symfony.com]]></url>
-          <comment><![CDATA[as detected from composer manifest "homepage"]]></comment>
+          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/symfony/polyfill-intl-idn/tree/v1.27.0]]></url>
@@ -1581,7 +1581,7 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://symfony.com]]></url>
-          <comment><![CDATA[as detected from composer manifest "homepage"]]></comment>
+          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/symfony/polyfill-intl-normalizer/tree/v1.27.0]]></url>
@@ -1613,7 +1613,7 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://symfony.com]]></url>
-          <comment><![CDATA[as detected from composer manifest "homepage"]]></comment>
+          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/symfony/polyfill-mbstring/tree/v1.27.0]]></url>
@@ -1645,7 +1645,7 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://symfony.com]]></url>
-          <comment><![CDATA[as detected from composer manifest "homepage"]]></comment>
+          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/symfony/polyfill-php72/tree/v1.27.0]]></url>
@@ -1677,7 +1677,7 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://symfony.com]]></url>
-          <comment><![CDATA[as detected from composer manifest "homepage"]]></comment>
+          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/symfony/polyfill-php73/tree/v1.27.0]]></url>
@@ -1709,7 +1709,7 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://symfony.com]]></url>
-          <comment><![CDATA[as detected from composer manifest "homepage"]]></comment>
+          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/symfony/polyfill-php80/tree/v1.27.0]]></url>
@@ -1741,7 +1741,7 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://symfony.com]]></url>
-          <comment><![CDATA[as detected from composer manifest "homepage"]]></comment>
+          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/symfony/polyfill-php81/tree/v1.27.0]]></url>
@@ -1773,7 +1773,7 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://symfony.com]]></url>
-          <comment><![CDATA[as detected from composer manifest "homepage"]]></comment>
+          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/symfony/process/tree/v5.4.11]]></url>
@@ -1805,7 +1805,7 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://symfony.com]]></url>
-          <comment><![CDATA[as detected from composer manifest "homepage"]]></comment>
+          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/symfony/routing/tree/v5.4.15]]></url>
@@ -1837,7 +1837,7 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://symfony.com]]></url>
-          <comment><![CDATA[as detected from composer manifest "homepage"]]></comment>
+          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/symfony/service-contracts/tree/v2.5.2]]></url>
@@ -1869,7 +1869,7 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://symfony.com]]></url>
-          <comment><![CDATA[as detected from composer manifest "homepage"]]></comment>
+          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/symfony/string/tree/v5.4.15]]></url>
@@ -1901,7 +1901,7 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://symfony.com]]></url>
-          <comment><![CDATA[as detected from composer manifest "homepage"]]></comment>
+          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/symfony/translation/tree/v5.4.14]]></url>
@@ -1933,7 +1933,7 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://symfony.com]]></url>
-          <comment><![CDATA[as detected from composer manifest "homepage"]]></comment>
+          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/symfony/translation-contracts/tree/v2.5.2]]></url>
@@ -1965,7 +1965,7 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://symfony.com]]></url>
-          <comment><![CDATA[as detected from composer manifest "homepage"]]></comment>
+          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/symfony/var-dumper/tree/v5.4.14]]></url>
@@ -1997,7 +1997,7 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://github.com/tijsverkoyen/CssToInlineStyles]]></url>
-          <comment><![CDATA[as detected from composer manifest "homepage"]]></comment>
+          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
         </reference>
         <reference type="issue-tracker">
           <url><![CDATA[https://github.com/tijsverkoyen/CssToInlineStyles/issues]]></url>
@@ -2065,7 +2065,7 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://github.com/voku/portable-ascii]]></url>
-          <comment><![CDATA[as detected from composer manifest "homepage"]]></comment>
+          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
         </reference>
         <reference type="issue-tracker">
           <url><![CDATA[https://github.com/voku/portable-ascii/issues]]></url>
