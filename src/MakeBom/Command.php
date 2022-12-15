@@ -125,6 +125,7 @@ class Command extends BaseCommand
         unset($subjectComposer);
 
         if (!$this->options->outputReproducible) {
+            $bom->setSerialNumber(Builder::createRandomBomSerialNumber());
             $bom->getMetadata()->setTimestamp(new DateTime());
         }
 
