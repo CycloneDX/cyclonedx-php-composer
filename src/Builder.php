@@ -338,14 +338,16 @@ class Builder
     {
         return sprintf(
             'urn:uuid:%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
-            random_int(0, 65536),
-            random_int(0, 65536),
-            random_int(0, 65536),
-            random_int(0, 65536),
-            random_int(0, 65536),
-            random_int(0, 65536),
-            random_int(0, 65536),
-            random_int(0, 65536),
+            random_int(0, 0xFFFF),
+            random_int(0, 0xFFFF),
+            random_int(0, 0xFFFF),
+            // UUID version 4
+            random_int(0, 0xFFFF) & 0x0FFF | 0x4000,
+            // UUID version 4 variant 1
+            random_int(0, 0xFFFF) & 0x3FFF | 0x8000,
+            random_int(0, 0xFFFF),
+            random_int(0, 0xFFFF),
+            random_int(0, 0xFFFF),
         );
     }
 }
