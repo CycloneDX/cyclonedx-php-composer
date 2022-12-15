@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bom xmlns="http://cyclonedx.org/schema/bom/1.4" version="1">
+<bom xmlns="http://cyclonedx.org/schema/bom/1.4" version="1" serialNumber="urn:uuid:1470f3ba-a790-dfc6-889f-586d353c65b2">
   <metadata>
-    <timestamp><![CDATA[2022-12-10T11:17:07Z]]></timestamp>
+    <timestamp><![CDATA[2022-12-15T10:19:59Z]]></timestamp>
     <tools>
       <tool>
         <vendor><![CDATA[cyclonedx]]></vendor>
@@ -72,11 +72,11 @@
         <property name="cdx:composer:package:type"><![CDATA[library]]></property>
       </properties>
     </component>
-    <component type="library" bom-ref="doctrine/persistence-3.1.0.0">
+    <component type="library" bom-ref="doctrine/persistence-3.1.1.0">
       <author><![CDATA[Guilherme Blanco, Roman Borschel, Benjamin Eberlei, Jonathan Wage, Johannes Schmitt, Marco Pivetta]]></author>
       <group><![CDATA[doctrine]]></group>
       <name><![CDATA[persistence]]></name>
-      <version><![CDATA[3.1.0]]></version>
+      <version><![CDATA[3.1.1]]></version>
       <description><![CDATA[The Doctrine Persistence project is a set of shared interfaces and functionality that the different Doctrine object mappers share.]]></description>
       <hashes/>
       <licenses>
@@ -86,7 +86,7 @@
       </licenses>
       <externalReferences>
         <reference type="distribution">
-          <url><![CDATA[https://api.github.com/repos/doctrine/persistence/zipball/2a9c70a5e21f8968c5a46b79f819ea52f322080b]]></url>
+          <url><![CDATA[https://api.github.com/repos/doctrine/persistence/zipball/d87426f07dd66f97cfdcf5210925e483b6c993b5]]></url>
         </reference>
         <reference type="distribution">
           <url><![CDATA[https://github.com/doctrine/persistence.git]]></url>
@@ -100,7 +100,7 @@
           <comment><![CDATA[as detected from composer manifest 'support.issues']]></comment>
         </reference>
         <reference type="vcs">
-          <url><![CDATA[https://github.com/doctrine/persistence/tree/3.1.0]]></url>
+          <url><![CDATA[https://github.com/doctrine/persistence/tree/3.1.1]]></url>
           <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
@@ -754,7 +754,7 @@
   </components>
   <dependencies>
     <dependency ref="doctrine/event-manager-2.0.0.0"/>
-    <dependency ref="doctrine/persistence-3.1.0.0">
+    <dependency ref="doctrine/persistence-3.1.1.0">
       <dependency ref="doctrine/event-manager-2.0.0.0"/>
       <dependency ref="psr/cache-3.0.0.0"/>
     </dependency>
@@ -786,7 +786,7 @@
     <dependency ref="symfony/polyfill-uuid-1.27.0.0"/>
     <dependency ref="symfony/symfony-6.2.1.0">
       <dependency ref="doctrine/event-manager-2.0.0.0"/>
-      <dependency ref="doctrine/persistence-3.1.0.0"/>
+      <dependency ref="doctrine/persistence-3.1.1.0"/>
       <dependency ref="friendsofphp/proxy-manager-lts-1.0.13.0"/>
       <dependency ref="psr/cache-3.0.0.0"/>
       <dependency ref="psr/clock-1.0.0.0"/>

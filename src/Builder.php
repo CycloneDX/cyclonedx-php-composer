@@ -32,6 +32,7 @@ use CycloneDX\Core\Enums;
 use CycloneDX\Core\Factories\LicenseFactory;
 use CycloneDX\Core\Models;
 use CycloneDX\Core\Spdx\LicenseValidator as SpdxLicenseValidator;
+use Exception;
 use Generator;
 use PackageUrl\PackageUrl;
 use RuntimeException;
@@ -328,5 +329,23 @@ class Builder
                 $package->getAuthors()
             )
         ));
+    }
+
+    /**
+     * @throws Exception
+     */
+    public static function createRandomBomSerialNumber(): string
+    {
+        return sprintf(
+            'urn:uuid:%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
+            random_int(0, 65536),
+            random_int(0, 65536),
+            random_int(0, 65536),
+            random_int(0, 65536),
+            random_int(0, 65536),
+            random_int(0, 65536),
+            random_int(0, 65536),
+            random_int(0, 65536),
+        );
     }
 }

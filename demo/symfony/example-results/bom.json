@@ -2,9 +2,10 @@
     "$schema": "http://cyclonedx.org/schema/bom-1.4.schema.json",
     "bomFormat": "CycloneDX",
     "specVersion": "1.4",
+    "serialNumber": "urn:uuid:d551b94c-3227-16b9-09cc-b597d544255d",
     "version": 1,
     "metadata": {
-        "timestamp": "2022-12-10T11:17:07Z",
+        "timestamp": "2022-12-15T10:19:59Z",
         "tools": [
             {
                 "vendor": "cyclonedx",
@@ -96,10 +97,10 @@
             ]
         },
         {
-            "bom-ref": "doctrine/persistence-3.1.0.0",
+            "bom-ref": "doctrine/persistence-3.1.1.0",
             "type": "library",
             "name": "persistence",
-            "version": "3.1.0",
+            "version": "3.1.1",
             "group": "doctrine",
             "description": "The Doctrine Persistence project is a set of shared interfaces and functionality that the different Doctrine object mappers share.",
             "author": "Guilherme Blanco, Roman Borschel, Benjamin Eberlei, Jonathan Wage, Johannes Schmitt, Marco Pivetta",
@@ -114,7 +115,7 @@
             "externalReferences": [
                 {
                     "type": "distribution",
-                    "url": "https://api.github.com/repos/doctrine/persistence/zipball/2a9c70a5e21f8968c5a46b79f819ea52f322080b"
+                    "url": "https://api.github.com/repos/doctrine/persistence/zipball/d87426f07dd66f97cfdcf5210925e483b6c993b5"
                 },
                 {
                     "type": "distribution",
@@ -132,7 +133,7 @@
                 },
                 {
                     "type": "vcs",
-                    "url": "https://github.com/doctrine/persistence/tree/3.1.0",
+                    "url": "https://github.com/doctrine/persistence/tree/3.1.1",
                     "comment": "as detected from composer manifest 'support.source'"
                 }
             ],
@@ -1010,7 +1011,7 @@
             "ref": "doctrine/event-manager-2.0.0.0"
         },
         {
-            "ref": "doctrine/persistence-3.1.0.0",
+            "ref": "doctrine/persistence-3.1.1.0",
             "dependsOn": [
                 "doctrine/event-manager-2.0.0.0",
                 "psr/cache-3.0.0.0"
@@ -1083,7 +1084,7 @@
             "ref": "symfony/symfony-6.2.1.0",
             "dependsOn": [
                 "doctrine/event-manager-2.0.0.0",
-                "doctrine/persistence-3.1.0.0",
+                "doctrine/persistence-3.1.1.0",
                 "friendsofphp/proxy-manager-lts-1.0.13.0",
                 "psr/cache-3.0.0.0",
                 "psr/clock-1.0.0.0",

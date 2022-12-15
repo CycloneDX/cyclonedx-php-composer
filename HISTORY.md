@@ -21,8 +21,9 @@ All notable changes to this project will be documented in this file.
 * Added
   * Support for CycloneDX Spec v1.4 (via [#250])
   * SBOM results
+    * might have `serialnumber` populated ([#279] via [#250])
     * might have `metadata.timestamp` populated ([#112] via [#250])
-    * might have `metadata.tools.tool.eexternalReferences` populated ([#171] via [#250])
+    * might have `metadata.tools.tool.externalReferences` populated ([#171] via [#250])
     * might have `component.author` populated ([#261] via [#250])
   * CLI
     * New option `omit` (via [#250])
@@ -41,6 +42,7 @@ All notable changes to this project will be documented in this file.
 [#171]: https://github.com/CycloneDX/cyclonedx-php-composer/issues/171
 [#250]: https://github.com/CycloneDX/cyclonedx-php-composer/pull/250
 [#261]: https://github.com/CycloneDX/cyclonedx-php-composer/issues/261
+[#279]: https://github.com/CycloneDX/cyclonedx-php-composer/issues/279
 
 ## 3.10.2 - 2022-09-15
 
