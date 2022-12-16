@@ -19,9 +19,9 @@ Make sure
 * to run `composer run-script cs-fix` to have the coding standards applied.
 * to run `composer run-script test` and pass all tests.
 
-## Sign your commits
+## Sign off your commits
 
-Please sign your commits,
+Please sign off your commits,
 to show that you agree to publish your changes under the current terms and licenses of the project.
 
 ```shell
