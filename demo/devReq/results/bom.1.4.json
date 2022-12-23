@@ -585,7 +585,7 @@
                 },
                 {
                     "name": "cdx:composer:package:isDevRequirement",
-                    "value": "True"
+                    "value": "true"
                 }
             ]
         },

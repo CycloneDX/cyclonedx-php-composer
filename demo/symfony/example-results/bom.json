@@ -2,10 +2,10 @@
     "$schema": "http://cyclonedx.org/schema/bom-1.4.schema.json",
     "bomFormat": "CycloneDX",
     "specVersion": "1.4",
-    "serialNumber": "urn:uuid:d551b94c-3227-16b9-09cc-b597d544255d",
+    "serialNumber": "urn:uuid:ea37fa18-2a8e-4233-be0f-32d3eb0e2526",
     "version": 1,
     "metadata": {
-        "timestamp": "2022-12-15T10:19:59Z",
+        "timestamp": "2022-12-23T11:07:42Z",
         "tools": [
             {
                 "vendor": "cyclonedx",
@@ -97,10 +97,10 @@
             ]
         },
         {
-            "bom-ref": "doctrine/persistence-3.1.1.0",
+            "bom-ref": "doctrine/persistence-3.1.2.0",
             "type": "library",
             "name": "persistence",
-            "version": "3.1.1",
+            "version": "3.1.2",
             "group": "doctrine",
             "description": "The Doctrine Persistence project is a set of shared interfaces and functionality that the different Doctrine object mappers share.",
             "author": "Guilherme Blanco, Roman Borschel, Benjamin Eberlei, Jonathan Wage, Johannes Schmitt, Marco Pivetta",
@@ -115,7 +115,7 @@
             "externalReferences": [
                 {
                     "type": "distribution",
-                    "url": "https://api.github.com/repos/doctrine/persistence/zipball/d87426f07dd66f97cfdcf5210925e483b6c993b5"
+                    "url": "https://api.github.com/repos/doctrine/persistence/zipball/b44d128311af55275dbed6a4558ca59a2b9f9387"
                 },
                 {
                     "type": "distribution",
@@ -133,7 +133,7 @@
                 },
                 {
                     "type": "vcs",
-                    "url": "https://github.com/doctrine/persistence/tree/3.1.1",
+                    "url": "https://github.com/doctrine/persistence/tree/3.1.2",
                     "comment": "as detected from composer manifest 'support.source'"
                 }
             ],
@@ -910,10 +910,10 @@
             ]
         },
         {
-            "bom-ref": "symfony/symfony-6.2.1.0",
+            "bom-ref": "symfony/symfony-6.2.2.0",
             "type": "library",
             "name": "symfony",
-            "version": "v6.2.1",
+            "version": "v6.2.2",
             "group": "symfony",
             "description": "The Symfony PHP framework",
             "author": "Fabien Potencier, Symfony Community",
@@ -928,7 +928,7 @@
             "externalReferences": [
                 {
                     "type": "distribution",
-                    "url": "https://api.github.com/repos/symfony/symfony/zipball/1b68abc15644b1a83f9bb5d18512ade7bb51ecd7"
+                    "url": "https://api.github.com/repos/symfony/symfony/zipball/a9eed32579b0706d84aa67c72d7c879a387c73de"
                 },
                 {
                     "type": "distribution",
@@ -946,7 +946,7 @@
                 },
                 {
                     "type": "vcs",
-                    "url": "https://github.com/symfony/symfony/tree/v6.2.1",
+                    "url": "https://github.com/symfony/symfony/tree/v6.2.2",
                     "comment": "as detected from composer manifest 'support.source'"
                 }
             ],
@@ -1011,7 +1011,7 @@
             "ref": "doctrine/event-manager-2.0.0.0"
         },
         {
-            "ref": "doctrine/persistence-3.1.1.0",
+            "ref": "doctrine/persistence-3.1.2.0",
             "dependsOn": [
                 "doctrine/event-manager-2.0.0.0",
                 "psr/cache-3.0.0.0"
@@ -1081,10 +1081,10 @@
             "ref": "symfony/polyfill-uuid-1.27.0.0"
         },
         {
-            "ref": "symfony/symfony-6.2.1.0",
+            "ref": "symfony/symfony-6.2.2.0",
             "dependsOn": [
                 "doctrine/event-manager-2.0.0.0",
-                "doctrine/persistence-3.1.1.0",
+                "doctrine/persistence-3.1.2.0",
                 "friendsofphp/proxy-manager-lts-1.0.13.0",
                 "psr/cache-3.0.0.0",
                 "psr/clock-1.0.0.0",
@@ -1113,7 +1113,7 @@
         {
             "ref": "cyclonedx/cyclonedx-php-composer-demo-dev-next",
             "dependsOn": [
-                "symfony/symfony-6.2.1.0"
+                "symfony/symfony-6.2.2.0"
             ]
         }
     ]

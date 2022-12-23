@@ -438,7 +438,7 @@
       </externalReferences>
       <properties>
         <property name="cdx:composer:package:type"><![CDATA[library]]></property>
-        <property name="cdx:composer:package:isDevRequirement"><![CDATA[True]]></property>
+        <property name="cdx:composer:package:isDevRequirement"><![CDATA[true]]></property>
       </properties>
     </component>
     <component type="library" bom-ref="sebastian/cli-parser-1.0.1.0">
