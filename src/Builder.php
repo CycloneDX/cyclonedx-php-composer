@@ -161,7 +161,7 @@ class Builder
     }
 
     /**
-     * return tuple: [$group, $name].
+     * return tuple: ($group:?string, $name:string).
      *
      * @psalm-return array{0:null|string, 1:string}
      */
@@ -186,7 +186,6 @@ class Builder
 
         $component = new Models\Component(Enums\ComponentType::LIBRARY, $name);
         $component->setBomRefValue($package->getUniqueName());
-        // TODO author(s)
         $component->setGroup($group);
         $component->setVersion($version);
         if ($distUrl) {
@@ -252,7 +251,7 @@ class Builder
     }
 
     /**
-     * @return Generator<Models\ExternalReference>
+     * @psalm-return Generator<Models\ExternalReference>
      *
      * @psalm-suppress MissingThrowsDocblock
      */
