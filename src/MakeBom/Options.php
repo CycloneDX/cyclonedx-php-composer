@@ -31,7 +31,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 
 /**
- * @psalm-type TOmittable='dev'|'plugin'
+ * @psalm-type TOmittable = "dev"|"plugin"
  *
  * @internal
  *
