@@ -28,7 +28,7 @@ namespace CycloneDX\Composer;
  *
  * @see https://github.com/CycloneDX/cyclonedx-property-taxonomy/blob/main/cdx/composer.md
  *
- * @todo register in https://github.com/CycloneDX/cyclonedx-property-taxonomy
+ * @todo have https://github.com/CycloneDX/cyclonedx-property-taxonomy/pull/37 merged
  *
  * @internal
  *
