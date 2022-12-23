@@ -332,7 +332,7 @@ class Builder
     }
 
     /**
-     * @throws Exception
+     * @throws Exception if an appropriate source of randomness cannot be found
      */
     public static function createRandomBomSerialNumber(): string
     {
