@@ -3,7 +3,7 @@
     "type": "metapackage",
     "description": "psalm and plugins",
     "require-dev": {
-        "vimeo/psalm": "4.30.0",
+        "vimeo/psalm": "5.4.0",
         "roave/security-advisories": "dev-latest"
     },
     "config": {
