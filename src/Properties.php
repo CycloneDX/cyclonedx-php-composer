@@ -26,9 +26,7 @@ namespace CycloneDX\Composer;
 /**
  * CDX properties' names and well-known values - specific to this very tool.
  *
- * @see https://github.com/CycloneDX/cyclonedx-property-taxonomy/blob/main/cdx/composer.md
- *
- * @todo have https://github.com/CycloneDX/cyclonedx-property-taxonomy/pull/37 merged
+ * Based on {@link https://github.com/CycloneDX/cyclonedx-property-taxonomy/blob/main/cdx/composer.md `cdx:composer` Namespace Taxonomy}
  *
  * @internal
  *
