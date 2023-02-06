@@ -73,13 +73,13 @@ class OptionsTest extends TestCase
                 'composerFile' => null,
             ],
         ];
-        foreach ([Format::XML, Format::JSON] as $outputFormat) {
-            yield "outputFormat $outputFormat" => [
-                '--output-format '.escapeshellarg($outputFormat),
+        foreach (['XML' => Format::XML, 'JSON' => Format::JSON] as $outputFormatIn => $outputFormat) {
+            yield "outputFormat $outputFormatIn" => [
+                '--output-format '.escapeshellarg($outputFormatIn),
                 ['outputFormat' => $outputFormat],
             ];
-            $outputFormatLC = strtolower($outputFormat);
-            yield "outputFormat $outputFormatLC -> $outputFormat" => [
+            $outputFormatLC = strtolower($outputFormatIn);
+            yield "outputFormat $outputFormatLC -> $outputFormatIn" => [
                 '--output-format '.escapeshellarg($outputFormatLC),
                 ['outputFormat' => $outputFormat],
             ];
@@ -93,9 +93,14 @@ class OptionsTest extends TestCase
             '--omit=dev --omit plugin --omit invalid-value',
             ['omit' => ['dev', 'plugin']],
         ];
-        foreach ([Version::v1dot4, Version::v1dot3, Version::v1dot2, Version::v1dot1] as $specVersion) {
-            yield "specVersion '$specVersion'" => [
-                '--spec-version '.escapeshellarg($specVersion),
+        foreach ([
+            '1.4' => Version::v1dot4,
+                     '1.3' => Version::v1dot3,
+                     '1.2' => Version::v1dot2,
+                     '1.1' => Version::v1dot1,
+                 ] as $specVersionIn => $specVersion) {
+            yield "specVersion '$specVersionIn'" => [
+                '--spec-version '.escapeshellarg($specVersionIn),
                 ['specVersion' => $specVersion],
             ];
         }

@@ -34,6 +34,7 @@ use CycloneDX\Core\Spec\SpecFactory;
 use CycloneDX\Core\Validation\Validator;
 use CycloneDX\Core\Validation\Validators;
 use DateTime;
+use DomainException;
 use Symfony\Component\Console\Exception\LogicException;
 use Symfony\Component\Console\Formatter\OutputFormatter;
 use Symfony\Component\Console\Input\InputInterface;
@@ -152,6 +153,7 @@ class Command extends BaseCommand
         $serializer = match ($this->options->outputFormat) {
             Format::JSON => new Serialization\JsonSerializer(new Serialization\JSON\NormalizerFactory($spec)),
             Format::XML => new Serialization\XmlSerializer(new Serialization\DOM\NormalizerFactory($spec)),
+            default => throw new DomainException("unsupported format: {$this->options->outputFormat->name}"),
         };
         $io->writeErrorRaw('using '.$serializer::class, true, IOInterface::DEBUG);
 
@@ -175,6 +177,7 @@ class Command extends BaseCommand
         $validator = match ($this->options->outputFormat) {
             Format::JSON => new Validators\JsonStrictValidator($spec),
             Format::XML => new Validators\XmlValidator($spec),
+            default => throw new DomainException("unsupported format: {$this->options->outputFormat->name}"),
         };
         $io->writeErrorRaw('using '.$validator::class, true, IOInterface::DEBUG);
 
