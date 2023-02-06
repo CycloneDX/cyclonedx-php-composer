@@ -106,9 +106,9 @@ class Options
      * @psalm-suppress MissingThrowsDocblock
      * @psalm-suppress TooManyArguments as there is an optional 6th param of {@see Command::addOption()}
      */
-    public function configureCommand(Command $command): Command
+    public function configureCommand(Command $command): void
     {
-        return $command
+        $command
             ->addOption(
                 self::OPTION_OUTPUT_FORMAT,
                 null,

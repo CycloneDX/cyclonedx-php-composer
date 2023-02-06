@@ -33,6 +33,8 @@ use Composer\Plugin\PluginInterface;
  * @internal
  *
  * @author jkowalleck
+ *
+ * @psalm-suppress UnusedClass
  */
 class Plugin implements PluginInterface, Capable, CommandProvider
 {
