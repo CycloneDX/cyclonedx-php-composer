@@ -36,8 +36,7 @@ jobs:
         os: [ "ubuntu-latest", "macos-latest", "windows-latest" ]
         php:
           - "8.2" # highest supported
-          - "8.1"
-          - "8.0" # lowest supported
+          - "8.1" # lowest supported
     timeout-minutes: 30
     steps:
       - name: Checkout

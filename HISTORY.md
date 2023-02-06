@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 
 * BREAKING changes
   * Removed support for PHP `<8.0` ([#91] via [#250])
+  * Removed support for PHP `<8.1` (via [#250])
   * Removed support for Composer `<2.3` ([#153] via [#250])
   * CLI
     * Changed option `output-file` to default to `-` now, which causes to print to STDOUT (via [#250])

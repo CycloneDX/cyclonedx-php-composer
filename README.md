@@ -19,10 +19,8 @@ and might have properties following [`cdx:npm` Namespace Taxonomy](https://githu
 
 ## Requirements
 
-The latest version of this plugin
-supports PHP `^8.0`
-with Composer `^2.3`
-.
+*  PHP `^8.1`
+* Composer `^2.3`
 
 There are older versions of this plugin available, which
 support PHP `^5.5||^7.0||^8.0`

@@ -28,10 +28,12 @@ $finder = PhpCsFixer\Finder::create()
 return (new PhpCsFixer\Config())
     ->setUsingCache(true)
     ->setRules(
-    // docs: https://github.com/FriendsOfPHP/PHP-CS-Fixer/blob/master/doc/rules/index.rst
-    // assistance via tool: https://mlocati.github.io/php-cs-fixer-configurator/
+    /* docs: https://github.com/FriendsOfPHP/PHP-CS-Fixer/blob/master/doc/rules/index.rst
+     * docs: https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/blob/master/doc/ruleSets/index.rst
+     * assistance via tool: https://mlocati.github.io/php-cs-fixer-configurator/
+     */
         [
-            '@PHP80Migration' => true,
+            '@PHP81Migration' => true,
             '@PHP80Migration:risky' => true,
             '@Symfony' => true,
             '@Symfony:risky' => true,

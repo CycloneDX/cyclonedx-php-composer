@@ -30,7 +30,7 @@
         "source": "https://github.com/CycloneDX/cyclonedx-php-composer/"
     },
     "require": {
-        "php": "^8.0",
+        "php": "^8.1",
         "composer-plugin-api": "^2.3",
         "cyclonedx/cyclonedx-library": "2.x-dev",
         "package-url/packageurl-php": "^1.0"
