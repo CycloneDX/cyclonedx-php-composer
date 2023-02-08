@@ -28,6 +28,7 @@ use Composer\Package\CompletePackageInterface;
 use Composer\Package\PackageInterface;
 use Composer\Package\RootPackage;
 use Composer\Package\RootPackageInterface;
+use Composer\Semver\Constraint\MatchAllConstraint;
 use CycloneDX\Core\Enums;
 use CycloneDX\Core\Factories\LicenseFactory;
 use CycloneDX\Core\Models;
@@ -36,6 +37,7 @@ use Exception;
 use Generator;
 use PackageUrl\PackageUrl;
 use RuntimeException;
+use ValueError;
 
 /**
  * @internal
@@ -282,8 +284,41 @@ class Builder
 
     /**
      * @psalm-suppress MissingThrowsDocblock
+     *
+     * @psalm-return Generator<int, Models\Tool>
      */
-    public function createToolFromPackage(PackageInterface $package): Models\Tool
+    public function createToolsFromComposer(
+        Composer $composer,
+        ?string $versionOverride = null, bool $excludeLibs = false
+    ): Generator {
+        $packageNames = [
+            'cyclonedx/cyclonedx-php-composer',
+        ];
+        if (!$excludeLibs) {
+            $packageNames[] = 'cyclonedx/cyclonedx-library';
+        }
+
+        $composerLocker = $composer->getLocker();
+        $withDevReqs = isset($composerLocker->getLockData()['packages-dev']);
+        $packagesRepo = $composerLocker->getLockedRepository($withDevReqs);
+
+        foreach ($packageNames as $packageName) {
+            try {
+                yield $this->createToolFromPackage(
+                    $packagesRepo->findPackage($packageName, new MatchAllConstraint())
+                    ?? throw new ValueError("package not found: $packageName"),
+                    $versionOverride
+                );
+            } catch (\Throwable) {
+                /* pass */
+            }
+        }
+    }
+
+    /**
+     * @psalm-suppress MissingThrowsDocblock
+     */
+    private function createToolFromPackage(PackageInterface $package, ?string $versionOverride = null): Models\Tool
     {
         [$group, $name] = $this->getGroupAndName($package->getName());
         $distUrl = $package->getDistUrl();
@@ -293,7 +328,7 @@ class Builder
 
         $tool->setName($name);
         $tool->setVendor($group);
-        $tool->setVersion($package->getFullPrettyVersion());
+        $tool->setVersion($versionOverride ?? $package->getFullPrettyVersion());
         if ($package instanceof CompletePackageInterface) {
             $tool->getExternalReferences()->addItems(
                 ...iterator_to_array($this->createExternalReferencesFromPackage($package))

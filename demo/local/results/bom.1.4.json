@@ -24,6 +24,10 @@
                         "type": "vcs",
                         "url": "https://github.com/CycloneDX/cyclonedx-php-composer/",
                         "comment": "as detected from composer manifest 'support.source'"
+                    },
+                    {
+                        "type": "distribution",
+                        "url": "../.."
                     }
                 ]
             }

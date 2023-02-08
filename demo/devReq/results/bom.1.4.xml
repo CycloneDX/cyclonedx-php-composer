@@ -19,6 +19,9 @@
             <url><![CDATA[https://github.com/CycloneDX/cyclonedx-php-composer/]]></url>
             <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
           </reference>
+          <reference type="distribution">
+            <url><![CDATA[../..]]></url>
+          </reference>
         </externalReferences>
       </tool>
     </tools>
