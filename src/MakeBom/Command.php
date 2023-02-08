@@ -48,14 +48,13 @@ use Throwable;
  */
 class Command extends BaseCommand
 {
-    private Options $options;
-
     /**
      * @throws LogicException When the command name is empty
      */
-    public function __construct(Options $options, string $name)
-    {
-        $this->options = $options;
+    public function __construct(
+        private readonly Options $options,
+        string $name
+    ) {
         parent::__construct($name);
     }
 
