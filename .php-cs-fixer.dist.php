@@ -35,6 +35,7 @@ return (new PhpCsFixer\Config())
         [
             '@PHP81Migration' => true,
             '@PHP80Migration:risky' => true,
+            '@PHPUnit100Migration:risky' => true,
             '@Symfony' => true,
             '@Symfony:risky' => true,
             'declare_strict_types' => true,

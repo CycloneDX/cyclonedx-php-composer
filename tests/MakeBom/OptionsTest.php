@@ -59,7 +59,7 @@ class OptionsTest extends TestCase
         }
     }
 
-    public function dpProducesOption(): Generator
+    public static function dpProducesOption(): Generator
     {
         yield 'defaults' => [
             '',
@@ -190,7 +190,7 @@ class OptionsTest extends TestCase
         $options->setFromInput($input);
     }
 
-    public function dpProducesOptionError(): Generator
+    public static function dpProducesOptionError(): Generator
     {
         yield 'unexpected option' => [
             '--unexpected-option foo',
