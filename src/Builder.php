@@ -218,7 +218,7 @@ class Builder
                 )
             );
             $component->getExternalReferences()->addItems(
-                ...iterator_to_array($this->createExternalReferencesFromPackage($package))
+                ...$this->createExternalReferencesFromPackage($package)
             );
         }
 
@@ -253,7 +253,7 @@ class Builder
     }
 
     /**
-     * @psalm-return Generator<Models\ExternalReference>
+     * @psalm-return Generator<int,Models\ExternalReference>
      *
      * @psalm-suppress MissingThrowsDocblock
      */
@@ -283,9 +283,9 @@ class Builder
     }
 
     /**
-     * @psalm-suppress MissingThrowsDocblock
+     * @psalm-return Generator<int,Models\Tool>
      *
-     * @psalm-return Generator<int, Models\Tool>
+     * @psalm-suppress MissingThrowsDocblock
      */
     public function createToolsFromComposer(
         Composer $composer,
@@ -331,7 +331,7 @@ class Builder
         $tool->setVersion($versionOverride ?? $package->getFullPrettyVersion());
         if ($package instanceof CompletePackageInterface) {
             $tool->getExternalReferences()->addItems(
-                ...iterator_to_array($this->createExternalReferencesFromPackage($package))
+                ...$this->createExternalReferencesFromPackage($package)
             );
         }
         if ($distUrl) {
