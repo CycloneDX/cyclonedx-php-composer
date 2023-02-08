@@ -18,8 +18,26 @@ env:
   REPORTS_DIR: CI_reports
 
 jobs:
-  tests:
-    name: Tests (${{ matrix.os}}, ${{ matrix.php }}, ${{ matrix.dependencies }})
+  composer-validate:
+    name: Composer Validate
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        # see https://github.com/actions/checkout
+        uses: actions/checkout@v3
+      - name: Setup PHP
+        # see https://github.com/shivammathur/setup-php
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ env.PHP_VERSION_LATEST }}
+          extensions: ${{ env.PHP_PROJECT_EXT }}
+          tools: composer:v2
+          coverage: none
+      - name: Validate composer.json and composer.lock
+        run: composer validate --no-interaction
+  phpunit:
+    name: PHPUnit (${{ matrix.os}}, ${{ matrix.php }}, ${{ matrix.dependencies }})
     runs-on: ${{ matrix.os }}
     env:
       REPORTS_ARTIFACT: tests-reports
@@ -76,10 +94,6 @@ jobs:
             composer-${{ github.job }}-${{ runner.os }}-php${{ matrix.php }}-${{ matrix.dependencies }}-
             composer-${{ github.job }}-${{ runner.os }}-php${{ matrix.php }}-
             composer-${{ github.job }}-${{ runner.os }}-
-      - name: Validate composer.json and composer.lock
-        run: >
-          composer validate
-          --no-interaction
       - name: Install lowest dependencies
         if: ${{ matrix.dependencies == 'lowest' }}
         run: |
@@ -97,7 +111,7 @@ jobs:
           -d error_reporting=-1
           -d log_errors_max_len=0
           -d memory_limit=-1
-          vendor/phpunit/phpunit/phpunit
+          tools/phpunit/vendor/phpunit/phpunit/phpunit
           --log-junit=${{ env.REPORTS_DIR }}/tests.${{ matrix.os }}_php${{ matrix.php }}_${{ matrix.dependencies }}.junit.xml
           --coverage-clover=${{ env.REPORTS_DIR }}/coverage.${{ matrix.os}}_php${{ matrix.php }}_${{ matrix.dependencies }}.clover.xml
       - name: Artifact reports
