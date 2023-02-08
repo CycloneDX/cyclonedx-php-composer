@@ -54,7 +54,6 @@ final class PluginTest extends TestCase
     /**
      * assert the correct setup as described in
      * {@link https://getcomposer.org/doc/articles/plugins.md#plugin-package the docs}.
-     *
      */
     #[\PHPUnit\Framework\Attributes\CoversNothing]
     public function testPluginIsRegistered(): string
@@ -89,7 +88,6 @@ final class PluginTest extends TestCase
         return new $pluginClass();
     }
 
-
     #[\PHPUnit\Framework\Attributes\Depends('testPluginImplementsRequiredInterfaces')]
     public function testPluginIsCapableOfCommand(Capable $plugin): CommandProvider
     {
@@ -102,7 +100,6 @@ final class PluginTest extends TestCase
 
         return $commandProvider;
     }
-
 
     #[\PHPUnit\Framework\Attributes\Depends('testPluginIsCapableOfCommand')]
     public function testMakeBomCommandIsRegistered(CommandProvider $commandProvider): void
@@ -126,10 +123,8 @@ final class PluginTest extends TestCase
             $this->createMock(\Composer\IO\IOInterface::class),
         );
 
-
         return $plugin;
     }
-
 
     #[\PHPUnit\Framework\Attributes\Depends('testActivatePlugin')]
     #[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
@@ -139,7 +134,6 @@ final class PluginTest extends TestCase
             $this->createMock(\Composer\Composer::class),
             $this->createMock(\Composer\IO\IOInterface::class),
         );
-
 
         return $plugin;
     }

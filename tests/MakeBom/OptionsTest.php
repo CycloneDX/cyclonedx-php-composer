@@ -33,11 +33,9 @@ use RuntimeException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\StringInput;
 
-
 #[\PHPUnit\Framework\Attributes\CoversClass(\CycloneDX\Composer\MakeBom\Options::class)]
 final class OptionsTest extends TestCase
 {
-
     #[\PHPUnit\Framework\Attributes\DataProvider('dpProducesOption')]
     public function testProducesOption(string $inputString, array $expecteds): void
     {
