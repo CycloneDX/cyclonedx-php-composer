@@ -79,7 +79,7 @@ jobs:
           php-version: ${{ matrix.php }}
           extensions: ${{ env.PHP_PROJECT_EXT }}
           tools: composer:v2
-          coverage: pcov,xdebug
+          coverage: pcov
       - name: Get composer cache directory
         id: composer-cache
         shell: bash
