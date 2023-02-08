@@ -39,10 +39,10 @@ final class OptionsTest extends TestCase
     #[\PHPUnit\Framework\Attributes\DataProvider('dpProducesOption')]
     public function testProducesOption(string $inputString, array $expecteds): void
     {
+        $options = new Options();
         $command = new Command(__FUNCTION__);
 
-        $options = new Options();
-        $options->configureCommand($command);
+        $command->setDefinition($options->getDefinition());
 
         $input = new StringInput($inputString);
         $input->setInteractive(false);
@@ -170,10 +170,10 @@ final class OptionsTest extends TestCase
     #[\PHPUnit\Framework\Attributes\DataProvider('dpProducesOptionError')]
     public function testProducesOptionError(string $inputString, string $exception, string $exceptionErrorMessage): void
     {
+        $options = new Options();
         $command = new Command(__FUNCTION__);
 
-        $options = new Options();
-        $options->configureCommand($command);
+        $command->setDefinition($options->getDefinition());
 
         $this->expectException($exception);
         $this->expectExceptionMessageMatches($exceptionErrorMessage);
