@@ -112,6 +112,7 @@ jobs:
           -d log_errors_max_len=0
           -d memory_limit=-1
           tools/phpunit/vendor/phpunit/phpunit/phpunit
+          --no-progress
           --log-junit=${{ env.REPORTS_DIR }}/tests.${{ matrix.os }}_php${{ matrix.php }}_${{ matrix.dependencies }}.junit.xml
           --coverage-clover=${{ env.REPORTS_DIR }}/coverage.${{ matrix.os}}_php${{ matrix.php }}_${{ matrix.dependencies }}.clover.xml
       - name: Artifact reports
