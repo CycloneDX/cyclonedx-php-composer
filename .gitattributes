@@ -20,7 +20,7 @@ composer.lock   text eol=lf diff=json
 /tools                          export-ignore
 /composer-require-checker.json  export-ignore
 /.php-cs-fixer.dist.php         export-ignore
-/phpunit.xml.dist               export-ignore
+/phpunit.dist.xml               export-ignore
 /psalm.xml.dist                 export-ignore
 /.psalm                         export-ignore
 /HISTORY.md                     export-ignore
@@ -29,7 +29,7 @@ composer.lock   text eol=lf diff=json
 /demo                           export-ignore
 /docs/dev                       export-ignore
 
-# files that are forced to be exported in "dist" releaes
+# files that are forced to be exported in "dist" releases
 /NOTICE         -export-ignore
 /LICENSE        -export-ignore
 /semver.txt     -export-ignore

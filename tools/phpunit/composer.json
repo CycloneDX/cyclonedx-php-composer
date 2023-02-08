@@ -1,0 +1,17 @@
+{
+    "name": "tools/phpunit",
+    "type": "metapackage",
+    "description": "phpunit",
+    "require-dev": {
+        "phpunit/phpunit": "10.0.5",
+        "roave/security-advisories": "dev-latest"
+    },
+    "config": {
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "allow-plugins": {
+            "composer/package-versions-deprecated": false
+        }
+    },
+    "prefer-stable": true
+}

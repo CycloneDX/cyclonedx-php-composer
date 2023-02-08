@@ -87,6 +87,20 @@ updates:
       prefix: 'tools'
       include: 'scope'
     open-pull-requests-limit: 999
+  - directory: '/tools/phpunit'
+    package-ecosystem: 'composer'
+    schedule:
+      interval: 'weekly'
+      day: 'saturday'
+    allow:
+      - dependency-type: 'all'
+    versioning-strategy: 'auto'
+    labels: [ 'dependencies', 'tools' ]
+    commit-message:
+      ## prefix maximum string length of 15
+      prefix: 'tools'
+      include: 'scope'
+    open-pull-requests-limit: 999
 
   - package-ecosystem: 'github-actions'
     directory: '/'
