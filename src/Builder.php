@@ -46,17 +46,15 @@ use ValueError;
  */
 class Builder
 {
-    private LicenseFactory $licenseFactory;
-
     /**
      * @throws RuntimeException if loading licenses failed
      */
     public function __construct(
-        private bool $omitDev,
-        private bool $omitPlugin,
-        private ?string $mainComponentVersion
+        private readonly bool $omitDev,
+        private readonly bool $omitPlugin,
+        private readonly ?string $mainComponentVersion,
+        private readonly LicenseFactory $licenseFactory = new LicenseFactory(new SpdxLicenseValidator())
     ) {
-        $this->licenseFactory = new LicenseFactory(new SpdxLicenseValidator());
     }
 
     /**
