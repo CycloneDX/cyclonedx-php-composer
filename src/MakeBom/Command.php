@@ -137,7 +137,8 @@ class Command extends BaseCommand
         $bom->getMetadata()->getTools()->addItems(
             ...$builder->createToolsFromComposer(
                 $this->requireComposer(),
-                $this->options->getToolVersionOverride()
+                $this->options->getToolsVersionOverride(),
+                $this->options->getToolsExcludeLibs()
             ));
 
         $io->writeError('<info>serialize BOM...</info>', verbosity: IOInterface::VERBOSE);

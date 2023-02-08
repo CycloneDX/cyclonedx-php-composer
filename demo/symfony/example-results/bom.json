@@ -2,15 +2,15 @@
     "$schema": "http://cyclonedx.org/schema/bom-1.4.schema.json",
     "bomFormat": "CycloneDX",
     "specVersion": "1.4",
-    "serialNumber": "urn:uuid:ba2a30b2-cd28-4180-85b3-d8fc0bd5c3ad",
+    "serialNumber": "urn:uuid:cd3d3adf-7594-4ea0-bf05-b37bb65268be",
     "version": 1,
     "metadata": {
-        "timestamp": "2023-02-08T09:29:11Z",
+        "timestamp": "2023-02-08T12:25:24Z",
         "tools": [
             {
                 "vendor": "cyclonedx",
                 "name": "cyclonedx-php-composer",
-                "version": "4.0.0-beta.0",
+                "version": "dev-tools-true-source",
                 "externalReferences": [
                     {
                         "type": "website",
@@ -26,6 +26,40 @@
                         "type": "vcs",
                         "url": "https://github.com/CycloneDX/cyclonedx-php-composer/",
                         "comment": "as detected from composer manifest 'support.source'"
+                    },
+                    {
+                        "type": "distribution",
+                        "url": "../.."
+                    }
+                ]
+            },
+            {
+                "vendor": "cyclonedx",
+                "name": "cyclonedx-library",
+                "version": "2.x-dev 3d74aae",
+                "externalReferences": [
+                    {
+                        "type": "website",
+                        "url": "https://github.com/CycloneDX/cyclonedx-php-library/#readme",
+                        "comment": "as detected from composer manifest 'homepage'"
+                    },
+                    {
+                        "type": "issue-tracker",
+                        "url": "https://github.com/CycloneDX/cyclonedx-php-library/issues",
+                        "comment": "as detected from composer manifest 'support.issues'"
+                    },
+                    {
+                        "type": "vcs",
+                        "url": "https://github.com/CycloneDX/cyclonedx-php-library/",
+                        "comment": "as detected from composer manifest 'support.source'"
+                    },
+                    {
+                        "type": "distribution",
+                        "url": "https://api.github.com/repos/CycloneDX/cyclonedx-php-library/zipball/3d74aaeaa30dcf278edfd3434fb79e8069bb3558"
+                    },
+                    {
+                        "type": "distribution",
+                        "url": "https://github.com/CycloneDX/cyclonedx-php-library.git"
                     }
                 ]
             }

@@ -287,12 +287,16 @@ class Builder
      *
      * @psalm-return Generator<int, Models\Tool>
      */
-    public function createToolsFromComposer(Composer $composer, ?string $versionOverride = null): Generator
-    {
+    public function createToolsFromComposer(
+        Composer $composer,
+        ?string $versionOverride = null, bool $excludeLibs = false
+    ): Generator {
         $packageNames = [
             'cyclonedx/cyclonedx-php-composer',
-            // 'cyclonedx/cyclonedx-library' ,
         ];
+        if (!$excludeLibs) {
+            $packageNames[] = 'cyclonedx/cyclonedx-library';
+        }
 
         $composerLocker = $composer->getLocker();
         $withDevReqs = isset($composerLocker->getLockData()['packages-dev']);

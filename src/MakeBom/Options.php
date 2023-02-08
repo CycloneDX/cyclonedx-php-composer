@@ -40,10 +40,16 @@ use Symfony\Component\Console\Input\InputOption;
 class Options
 {
     /**
-     * Env var to control whether to set self as `sbom.metadata.tools.tool`.
+     * Env var to control `bom.metadata.tools.tool.version`.
      * Non-documented private env vars usage, because this is not public API.
      */
-    private const ENV_TOOL_VERSION_OVERRIDE = 'CDX_CP_TOOL_VERSION_OVERRIDE';
+    private const ENV_TOOLS_VERSION_OVERRIDE = 'CDX_CP_TOOLS_VERSION_OVERRIDE';
+
+    /**
+     * Env var to control whether to all own libs to `bom.metadata.tools.tool`.
+     * Non-documented private env vars usage, because this is not public API.
+     */
+    private const ENV_TOOLS_EXCLUDE_LIBS = 'CDX_CP_TOOLS_EXCLUDE_LIBS';
 
     private const OPTION_OUTPUT_FORMAT = 'output-format';
     private const OPTION_OUTPUT_FILE = 'output-file';
@@ -251,13 +257,18 @@ class Options
     /**
      * @psalm-return null|non-empty-string
      */
-    public function getToolVersionOverride(): ?string
+    public function getToolsVersionOverride(): ?string
     {
-        $version = getenv(self::ENV_TOOL_VERSION_OVERRIDE);
+        $version = getenv(self::ENV_TOOLS_VERSION_OVERRIDE);
 
         return \is_string($version) && '' !== $version
         ? $version
         : null;
+    }
+
+    public function getToolsExcludeLibs(): bool
+    {
+        return (bool) getenv(self::ENV_TOOLS_EXCLUDE_LIBS);
     }
 
     /**
