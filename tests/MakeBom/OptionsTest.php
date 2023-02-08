@@ -30,7 +30,6 @@ use DomainException;
 use Generator;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
-use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\StringInput;
 
 #[\PHPUnit\Framework\Attributes\CoversClass(\CycloneDX\Composer\MakeBom\Options::class)]
@@ -39,14 +38,11 @@ final class OptionsTest extends TestCase
     #[\PHPUnit\Framework\Attributes\DataProvider('dpProducesOption')]
     public function testProducesOption(string $inputString, array $expecteds): void
     {
-        $command = new Command(__FUNCTION__);
-
         $options = new Options();
-        $options->configureCommand($command);
 
         $input = new StringInput($inputString);
         $input->setInteractive(false);
-        $input->bind($command->getDefinition());
+        $input->bind($options->getDefinition());
 
         $options->setFromInput($input);
 
@@ -170,17 +166,14 @@ final class OptionsTest extends TestCase
     #[\PHPUnit\Framework\Attributes\DataProvider('dpProducesOptionError')]
     public function testProducesOptionError(string $inputString, string $exception, string $exceptionErrorMessage): void
     {
-        $command = new Command(__FUNCTION__);
-
         $options = new Options();
-        $options->configureCommand($command);
 
         $this->expectException($exception);
         $this->expectExceptionMessageMatches($exceptionErrorMessage);
 
         $input = new StringInput($inputString);
         $input->setInteractive(false);
-        $input->bind($command->getDefinition());
+        $input->bind($options->getDefinition());
 
         $options->setFromInput($input);
     }

@@ -27,6 +27,7 @@ use CycloneDX\Core\Spec\Format;
 use CycloneDX\Core\Spec\Version;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputDefinition;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 
@@ -112,10 +113,10 @@ class Options
      * @psalm-suppress MissingThrowsDocblock
      * @psalm-suppress TooManyArguments as there is an optional 6th param of {@see Command::addOption()}
      */
-    public function configureCommand(Command $command): void
+    public function getDefinition(): InputDefinition
     {
-        $command
-            ->addOption(
+        return new InputDefinition([
+            new InputOption(
                 self::OPTION_OUTPUT_FORMAT,
                 null,
                 InputOption::VALUE_REQUIRED,
@@ -123,16 +124,16 @@ class Options
                 self::formatChoice(array_keys(self::VALUES_OUTPUT_FORMAT_MAP)),
                 array_search($this->outputFormat, self::VALUES_OUTPUT_FORMAT_MAP, true),
                 array_keys(self::VALUES_OUTPUT_FORMAT_MAP)
-            )
-            ->addOption(
+            ),
+            new InputOption(
                 self::OPTION_OUTPUT_FILE,
                 null,
                 InputOption::VALUE_REQUIRED,
                 'Path to the output file.'.\PHP_EOL.
                 'Set to "'.self::VALUE_OUTPUT_FILE_STDOUT.'" to write to STDOUT',
                 $this->outputFile
-            )
-            ->addOption(
+            ),
+            new InputOption(
                 self::OPTION_OMIT,
                 null,
                 InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY,
@@ -140,8 +141,8 @@ class Options
                 self::formatChoice(self::VALUES_OMIT),
                 $this->omit,
                 self::VALUES_OMIT
-            )
-            ->addOption(
+            ),
+            new InputOption(
                 self::OPTION_SPEC_VERSION,
                 null,
                 InputOption::VALUE_REQUIRED,
@@ -149,37 +150,38 @@ class Options
                 self::formatChoice(array_keys(self::VALUE_SPEC_VERSION_MAP)),
                 array_search($this->specVersion, self::VALUE_SPEC_VERSION_MAP, true),
                 array_keys(self::VALUE_SPEC_VERSION_MAP)
-            )
-            ->addOption(
+            ),
+            new InputOption(
                 self::SWITCH_OUTPUT_REPRODUCIBLE,
                 null,
                 InputOption::VALUE_NEGATABLE,
                 'Whether to go the extra mile and make the output reproducible.'.\PHP_EOL.
                 'This might result in loss of time- and random-based-values.',
                 $this->outputReproducible
-            )
-            ->addOption(
+            ),
+            new InputOption(
                 self::SWITCH_VALIDATE,
                 null,
                 InputOption::VALUE_NEGATABLE,
                 'Validate the resulting output.',
                 $this->validate
-            )
-            ->addOption(
+            ),
+            new InputOption(
                 self::OPTION_MAIN_COMPONENT_VERSION,
                 null,
                 InputOption::VALUE_REQUIRED,
                 'Version of the main component.'.\PHP_EOL.
                 'This will override auto-detection.',
                 $this->mainComponentVersion
-            )
-            ->addArgument(
+            ),
+            new InputArgument(
                 self::ARGUMENT_COMPOSER_FILE,
                 InputArgument::OPTIONAL,
                 'Path to composer config file.'.\PHP_EOL.
                 '[default: "composer.json" file in current working directory]',
                 null
-            );
+            ),
+        ]);
     }
 
     /**
