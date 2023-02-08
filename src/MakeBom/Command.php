@@ -134,19 +134,11 @@ class Command extends BaseCommand
             $bom->getMetadata()->setTimestamp(new DateTime());
         }
 
-        $selfComposer = (new ComposerFactory())->createComposer($io, __DIR__.'/../../composer.json',
-            fullLoad: false, disablePlugins: true, disableScripts: true);
-        /** @psalm-suppress RedundantConditionGivenDocblockType -- as with lowest-compatible dependencies this is needed  */
-        \assert($selfComposer instanceof \Composer\PartialComposer);
         $bom->getMetadata()->getTools()->addItems(
-            $builder->createToolFromPackage(
-                $selfComposer->getPackage()
-            )->setVersion(
+            ...$builder->createToolsFromComposer(
+                $this->requireComposer(),
                 $this->options->getToolVersionOverride()
-                    ?? trim(file_get_contents(__DIR__.'/../../semver.txt')
-                    ))
-        );
-        unset($selfComposer);
+            ));
 
         $io->writeError('<info>serialize BOM...</info>', verbosity: IOInterface::VERBOSE);
         /** @var Serialization\Serializer */

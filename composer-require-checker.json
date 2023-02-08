@@ -13,6 +13,7 @@
     "Composer\\Plugin\\Capability\\CommandProvider",
     "Composer\\Plugin\\Capable",
     "Composer\\Plugin\\PluginInterface",
+    "Composer\\Semver\\Constraint\\MatchAllConstraint",
     "Symfony\\Component\\Console\\Command\\Command",
     "Symfony\\Component\\Console\\Formatter\\OutputFormatter",
     "Symfony\\Component\\Console\\Input\\InputArgument",
