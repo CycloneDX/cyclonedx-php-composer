@@ -37,7 +37,6 @@
     },
     "require-dev": {
         "composer/composer": "^2.3.0",
-        "phpunit/phpunit": "9.5.28",
         "roave/security-advisories": "dev-latest"
     },
     "prefer-stable": true,
@@ -72,11 +71,12 @@
     "scripts": {
         "cs-fix": "@php tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/php-cs-fixer fix --diff",
         "dev-setup": [
-            "@composer -dtools/composer-normalize update",
-            "@composer -dtools/composer-require-checker update",
-            "@composer -dtools/composer-unused update",
-            "@composer -dtools/php-cs-fixer update",
-            "@composer -dtools/psalm update",
+            "@composer -d tools/composer-normalize update",
+            "@composer -d tools/composer-require-checker update",
+            "@composer -d tools/composer-unused update",
+            "@composer -d tools/php-cs-fixer update",
+            "@composer -d tools/psalm update",
+            "@composer -d tools/phpunit update",
             "@composer update"
         ],
         "normalize": "@composer -dtools/composer-normalize normalize --diff $PWD/composer.json",
@@ -96,7 +96,7 @@
         ],
         "test:composer-unused": "@php tools/composer-unused/vendor/icanhazstring/composer-unused/bin/composer-unused --excludeDir=tools",
         "test:cs-fixer": "@php tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/php-cs-fixer fix --dry-run --diff",
-        "test:phpunit": "@php -d zend.assertions=1 -d assert.exception=1 -d display_errors=On -d error_reporting=-1 -d log_errors_max_len=0 -d memory_limit=-1 vendor/phpunit/phpunit/phpunit",
+        "test:phpunit": "@php -d zend.assertions=1 -d assert.exception=1 -d display_errors=On -d error_reporting=-1 -d log_errors_max_len=0 -d memory_limit=-1 tools/phpunit/vendor/phpunit/phpunit/phpunit",
         "test:psalm": "@php tools/psalm/vendor/vimeo/psalm/psalm"
     },
     "scripts-descriptions": {

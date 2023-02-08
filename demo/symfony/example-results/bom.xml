@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bom xmlns="http://cyclonedx.org/schema/bom/1.4" version="1" serialNumber="urn:uuid:cc0a7581-b6df-41e7-8b18-856c73c56d30">
+<bom xmlns="http://cyclonedx.org/schema/bom/1.4" version="1" serialNumber="urn:uuid:86f9aad9-3642-4e79-9853-1a0c8dc95fc6">
   <metadata>
-    <timestamp><![CDATA[2022-12-23T11:07:43Z]]></timestamp>
+    <timestamp><![CDATA[2023-02-08T09:29:13Z]]></timestamp>
     <tools>
       <tool>
         <vendor><![CDATA[cyclonedx]]></vendor>
@@ -42,7 +42,6 @@
       <name><![CDATA[event-manager]]></name>
       <version><![CDATA[2.0.0]]></version>
       <description><![CDATA[The Doctrine Event Manager is a simple PHP event system that was built to be used with the various Doctrine projects.]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -72,13 +71,12 @@
         <property name="cdx:composer:package:type"><![CDATA[library]]></property>
       </properties>
     </component>
-    <component type="library" bom-ref="doctrine/persistence-3.1.2.0">
+    <component type="library" bom-ref="doctrine/persistence-3.1.4.0">
       <author><![CDATA[Guilherme Blanco, Roman Borschel, Benjamin Eberlei, Jonathan Wage, Johannes Schmitt, Marco Pivetta]]></author>
       <group><![CDATA[doctrine]]></group>
       <name><![CDATA[persistence]]></name>
-      <version><![CDATA[3.1.2]]></version>
+      <version><![CDATA[3.1.4]]></version>
       <description><![CDATA[The Doctrine Persistence project is a set of shared interfaces and functionality that the different Doctrine object mappers share.]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -86,7 +84,7 @@
       </licenses>
       <externalReferences>
         <reference type="distribution">
-          <url><![CDATA[https://api.github.com/repos/doctrine/persistence/zipball/b44d128311af55275dbed6a4558ca59a2b9f9387]]></url>
+          <url><![CDATA[https://api.github.com/repos/doctrine/persistence/zipball/8bf8ab15960787f1a49d405f6eb8c787b4841119]]></url>
         </reference>
         <reference type="distribution">
           <url><![CDATA[https://github.com/doctrine/persistence.git]]></url>
@@ -100,7 +98,7 @@
           <comment><![CDATA[as detected from composer manifest 'support.issues']]></comment>
         </reference>
         <reference type="vcs">
-          <url><![CDATA[https://github.com/doctrine/persistence/tree/3.1.2]]></url>
+          <url><![CDATA[https://github.com/doctrine/persistence/tree/3.1.4]]></url>
           <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
@@ -108,13 +106,12 @@
         <property name="cdx:composer:package:type"><![CDATA[library]]></property>
       </properties>
     </component>
-    <component type="library" bom-ref="friendsofphp/proxy-manager-lts-1.0.13.0">
+    <component type="library" bom-ref="friendsofphp/proxy-manager-lts-1.0.14.0">
       <author><![CDATA[Marco Pivetta, Nicolas Grekas]]></author>
       <group><![CDATA[friendsofphp]]></group>
       <name><![CDATA[proxy-manager-lts]]></name>
-      <version><![CDATA[v1.0.13]]></version>
+      <version><![CDATA[v1.0.14]]></version>
       <description><![CDATA[Adding support for a wider range of PHP versions to ocramius/proxy-manager]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -122,7 +119,7 @@
       </licenses>
       <externalReferences>
         <reference type="distribution">
-          <url><![CDATA[https://api.github.com/repos/FriendsOfPHP/proxy-manager-lts/zipball/88354616f4cf4f6620910fd035e282173ba453e8]]></url>
+          <url><![CDATA[https://api.github.com/repos/FriendsOfPHP/proxy-manager-lts/zipball/a527c9d9d5348e012bd24482d83a5cd643bcbc9e]]></url>
         </reference>
         <reference type="distribution">
           <url><![CDATA[https://github.com/FriendsOfPHP/proxy-manager-lts.git]]></url>
@@ -136,7 +133,7 @@
           <comment><![CDATA[as detected from composer manifest 'support.issues']]></comment>
         </reference>
         <reference type="vcs">
-          <url><![CDATA[https://github.com/FriendsOfPHP/proxy-manager-lts/tree/v1.0.13]]></url>
+          <url><![CDATA[https://github.com/FriendsOfPHP/proxy-manager-lts/tree/v1.0.14]]></url>
           <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
@@ -149,7 +146,6 @@
       <name><![CDATA[laminas-code]]></name>
       <version><![CDATA[4.8.0]]></version>
       <description><![CDATA[Extensions to the PHP Reflection API, static code scanning, and code generation]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[BSD-3-Clause]]></id>
@@ -201,7 +197,6 @@
       <name><![CDATA[cache]]></name>
       <version><![CDATA[3.0.0]]></version>
       <description><![CDATA[Common interface for caching libraries]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -229,7 +224,6 @@
       <name><![CDATA[clock]]></name>
       <version><![CDATA[1.0.0]]></version>
       <description><![CDATA[Common interface for reading the clock.]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -265,7 +259,6 @@
       <name><![CDATA[container]]></name>
       <version><![CDATA[2.0.2]]></version>
       <description><![CDATA[Common Container Interface (PHP FIG PSR-11)]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -301,7 +294,6 @@
       <name><![CDATA[event-dispatcher]]></name>
       <version><![CDATA[1.0.0]]></version>
       <description><![CDATA[Standard interfaces for event handling.]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -333,7 +325,6 @@
       <name><![CDATA[link]]></name>
       <version><![CDATA[2.0.1]]></version>
       <description><![CDATA[Common interfaces for HTTP links]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -365,7 +356,6 @@
       <name><![CDATA[log]]></name>
       <version><![CDATA[3.0.0]]></version>
       <description><![CDATA[Common interface for logging libraries]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -397,7 +387,6 @@
       <name><![CDATA[contracts]]></name>
       <version><![CDATA[v3.2.0]]></version>
       <description><![CDATA[A set of abstractions extracted out of the Symfony components]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -429,7 +418,6 @@
       <name><![CDATA[polyfill-ctype]]></name>
       <version><![CDATA[v1.27.0]]></version>
       <description><![CDATA[Symfony polyfill for ctype functions]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -461,7 +449,6 @@
       <name><![CDATA[polyfill-intl-grapheme]]></name>
       <version><![CDATA[v1.27.0]]></version>
       <description><![CDATA[Symfony polyfill for intl's grapheme_* functions]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -493,7 +480,6 @@
       <name><![CDATA[polyfill-intl-icu]]></name>
       <version><![CDATA[v1.27.0]]></version>
       <description><![CDATA[Symfony polyfill for intl's ICU-related data and classes]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -525,7 +511,6 @@
       <name><![CDATA[polyfill-intl-idn]]></name>
       <version><![CDATA[v1.27.0]]></version>
       <description><![CDATA[Symfony polyfill for intl's idn_to_ascii and idn_to_utf8 functions]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -557,7 +542,6 @@
       <name><![CDATA[polyfill-intl-normalizer]]></name>
       <version><![CDATA[v1.27.0]]></version>
       <description><![CDATA[Symfony polyfill for intl's Normalizer class and related functions]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -589,7 +573,6 @@
       <name><![CDATA[polyfill-mbstring]]></name>
       <version><![CDATA[v1.27.0]]></version>
       <description><![CDATA[Symfony polyfill for the Mbstring extension]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -621,7 +604,6 @@
       <name><![CDATA[polyfill-php72]]></name>
       <version><![CDATA[v1.27.0]]></version>
       <description><![CDATA[Symfony polyfill backporting some PHP 7.2+ features to lower PHP versions]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -653,7 +635,6 @@
       <name><![CDATA[polyfill-uuid]]></name>
       <version><![CDATA[v1.27.0]]></version>
       <description><![CDATA[Symfony polyfill for uuid functions]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -679,13 +660,12 @@
         <property name="cdx:composer:package:type"><![CDATA[library]]></property>
       </properties>
     </component>
-    <component type="library" bom-ref="symfony/symfony-6.2.2.0">
+    <component type="library" bom-ref="symfony/symfony-6.2.6.0">
       <author><![CDATA[Fabien Potencier, Symfony Community]]></author>
       <group><![CDATA[symfony]]></group>
       <name><![CDATA[symfony]]></name>
-      <version><![CDATA[v6.2.2]]></version>
+      <version><![CDATA[v6.2.6]]></version>
       <description><![CDATA[The Symfony PHP framework]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -693,7 +673,7 @@
       </licenses>
       <externalReferences>
         <reference type="distribution">
-          <url><![CDATA[https://api.github.com/repos/symfony/symfony/zipball/a9eed32579b0706d84aa67c72d7c879a387c73de]]></url>
+          <url><![CDATA[https://api.github.com/repos/symfony/symfony/zipball/008d9ac6cd61dd64d273bf5328857c7f97d9d7f6]]></url>
         </reference>
         <reference type="distribution">
           <url><![CDATA[https://github.com/symfony/symfony.git]]></url>
@@ -707,7 +687,7 @@
           <comment><![CDATA[as detected from composer manifest 'support.issues']]></comment>
         </reference>
         <reference type="vcs">
-          <url><![CDATA[https://github.com/symfony/symfony/tree/v6.2.2]]></url>
+          <url><![CDATA[https://github.com/symfony/symfony/tree/v6.2.6]]></url>
           <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
@@ -715,13 +695,12 @@
         <property name="cdx:composer:package:type"><![CDATA[library]]></property>
       </properties>
     </component>
-    <component type="library" bom-ref="twig/twig-3.4.3.0">
+    <component type="library" bom-ref="twig/twig-3.5.1.0">
       <author><![CDATA[Fabien Potencier, Twig Team, Armin Ronacher]]></author>
       <group><![CDATA[twig]]></group>
       <name><![CDATA[twig]]></name>
-      <version><![CDATA[v3.4.3]]></version>
+      <version><![CDATA[v3.5.1]]></version>
       <description><![CDATA[Twig, the flexible, fast, and secure template language for PHP]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[BSD-3-Clause]]></id>
@@ -729,7 +708,7 @@
       </licenses>
       <externalReferences>
         <reference type="distribution">
-          <url><![CDATA[https://api.github.com/repos/twigphp/Twig/zipball/c38fd6b0b7f370c198db91ffd02e23b517426b58]]></url>
+          <url><![CDATA[https://api.github.com/repos/twigphp/Twig/zipball/a6e0510cc793912b451fd40ab983a1d28f611c15]]></url>
         </reference>
         <reference type="distribution">
           <url><![CDATA[https://github.com/twigphp/Twig.git]]></url>
@@ -743,7 +722,7 @@
           <comment><![CDATA[as detected from composer manifest 'support.issues']]></comment>
         </reference>
         <reference type="vcs">
-          <url><![CDATA[https://github.com/twigphp/Twig/tree/v3.4.3]]></url>
+          <url><![CDATA[https://github.com/twigphp/Twig/tree/v3.5.1]]></url>
           <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
@@ -754,11 +733,11 @@
   </components>
   <dependencies>
     <dependency ref="doctrine/event-manager-2.0.0.0"/>
-    <dependency ref="doctrine/persistence-3.1.2.0">
+    <dependency ref="doctrine/persistence-3.1.4.0">
       <dependency ref="doctrine/event-manager-2.0.0.0"/>
       <dependency ref="psr/cache-3.0.0.0"/>
     </dependency>
-    <dependency ref="friendsofphp/proxy-manager-lts-1.0.13.0">
+    <dependency ref="friendsofphp/proxy-manager-lts-1.0.14.0">
       <dependency ref="laminas/laminas-code-4.8.0.0"/>
     </dependency>
     <dependency ref="laminas/laminas-code-4.8.0.0"/>
@@ -784,10 +763,10 @@
     <dependency ref="symfony/polyfill-mbstring-1.27.0.0"/>
     <dependency ref="symfony/polyfill-php72-1.27.0.0"/>
     <dependency ref="symfony/polyfill-uuid-1.27.0.0"/>
-    <dependency ref="symfony/symfony-6.2.2.0">
+    <dependency ref="symfony/symfony-6.2.6.0">
       <dependency ref="doctrine/event-manager-2.0.0.0"/>
-      <dependency ref="doctrine/persistence-3.1.2.0"/>
-      <dependency ref="friendsofphp/proxy-manager-lts-1.0.13.0"/>
+      <dependency ref="doctrine/persistence-3.1.4.0"/>
+      <dependency ref="friendsofphp/proxy-manager-lts-1.0.14.0"/>
       <dependency ref="psr/cache-3.0.0.0"/>
       <dependency ref="psr/clock-1.0.0.0"/>
       <dependency ref="psr/container-2.0.2.0"/>
@@ -802,14 +781,14 @@
       <dependency ref="symfony/polyfill-intl-normalizer-1.27.0.0"/>
       <dependency ref="symfony/polyfill-mbstring-1.27.0.0"/>
       <dependency ref="symfony/polyfill-uuid-1.27.0.0"/>
-      <dependency ref="twig/twig-3.4.3.0"/>
+      <dependency ref="twig/twig-3.5.1.0"/>
     </dependency>
-    <dependency ref="twig/twig-3.4.3.0">
+    <dependency ref="twig/twig-3.5.1.0">
       <dependency ref="symfony/polyfill-ctype-1.27.0.0"/>
       <dependency ref="symfony/polyfill-mbstring-1.27.0.0"/>
     </dependency>
     <dependency ref="cyclonedx/cyclonedx-php-composer-demo-dev-next">
-      <dependency ref="symfony/symfony-6.2.2.0"/>
+      <dependency ref="symfony/symfony-6.2.6.0"/>
     </dependency>
   </dependencies>
 </bom>

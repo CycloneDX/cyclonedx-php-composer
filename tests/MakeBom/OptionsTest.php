@@ -33,14 +33,10 @@ use RuntimeException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\StringInput;
 
-/**
- * @covers \CycloneDX\Composer\MakeBom\Options
- */
-class OptionsTest extends TestCase
+#[\PHPUnit\Framework\Attributes\CoversClass(\CycloneDX\Composer\MakeBom\Options::class)]
+final class OptionsTest extends TestCase
 {
-    /**
-     * @dataProvider dpProducesOption
-     */
+    #[\PHPUnit\Framework\Attributes\DataProvider('dpProducesOption')]
     public function testProducesOption(string $inputString, array $expecteds): void
     {
         $command = new Command(__FUNCTION__);
@@ -59,7 +55,7 @@ class OptionsTest extends TestCase
         }
     }
 
-    public function dpProducesOption(): Generator
+    public static function dpProducesOption(): Generator
     {
         yield 'defaults' => [
             '',
@@ -170,9 +166,8 @@ class OptionsTest extends TestCase
 
     /**
      * @psalm-param class-string<\Throwable> $exception
-     *
-     * @dataProvider dpProducesOptionError
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('dpProducesOptionError')]
     public function testProducesOptionError(string $inputString, string $exception, string $exceptionErrorMessage): void
     {
         $command = new Command(__FUNCTION__);
@@ -190,7 +185,7 @@ class OptionsTest extends TestCase
         $options->setFromInput($input);
     }
 
-    public function dpProducesOptionError(): Generator
+    public static function dpProducesOptionError(): Generator
     {
         yield 'unexpected option' => [
             '--unexpected-option foo',

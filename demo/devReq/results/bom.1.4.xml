@@ -67,7 +67,6 @@
       <name><![CDATA[instantiator]]></name>
       <version><![CDATA[1.4.1]]></version>
       <description><![CDATA[A small, lightweight utility to instantiate objects in PHP without invoking their constructors]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -102,7 +101,6 @@
       <name><![CDATA[deep-copy]]></name>
       <version><![CDATA[1.11.0]]></version>
       <description><![CDATA[Create deep copies (clones) of your objects]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -134,7 +132,6 @@
       <name><![CDATA[php-parser]]></name>
       <version><![CDATA[v4.15.2]]></version>
       <description><![CDATA[A PHP parser written in PHP]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[BSD-3-Clause]]></id>
@@ -166,7 +163,6 @@
       <name><![CDATA[manifest]]></name>
       <version><![CDATA[2.0.3]]></version>
       <description><![CDATA[Component for reading phar.io manifest information from a PHP Archive (PHAR)]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[BSD-3-Clause]]></id>
@@ -198,7 +194,6 @@
       <name><![CDATA[version]]></name>
       <version><![CDATA[3.2.1]]></version>
       <description><![CDATA[Library for handling version information and constraints]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[BSD-3-Clause]]></id>
@@ -230,7 +225,6 @@
       <name><![CDATA[php-code-coverage]]></name>
       <version><![CDATA[9.2.19]]></version>
       <description><![CDATA[Library that provides collection, processing, and rendering functionality for PHP code coverage information.]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[BSD-3-Clause]]></id>
@@ -266,7 +260,6 @@
       <name><![CDATA[php-file-iterator]]></name>
       <version><![CDATA[3.0.6]]></version>
       <description><![CDATA[FilterIterator implementation that filters files based on a list of suffixes.]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[BSD-3-Clause]]></id>
@@ -302,7 +295,6 @@
       <name><![CDATA[php-invoker]]></name>
       <version><![CDATA[3.1.1]]></version>
       <description><![CDATA[Invoke callables with a timeout]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[BSD-3-Clause]]></id>
@@ -338,7 +330,6 @@
       <name><![CDATA[php-text-template]]></name>
       <version><![CDATA[2.0.4]]></version>
       <description><![CDATA[Simple template engine.]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[BSD-3-Clause]]></id>
@@ -374,7 +365,6 @@
       <name><![CDATA[php-timer]]></name>
       <version><![CDATA[5.0.3]]></version>
       <description><![CDATA[Utility class for timing]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[BSD-3-Clause]]></id>
@@ -410,7 +400,6 @@
       <name><![CDATA[phpunit]]></name>
       <version><![CDATA[9.5.26]]></version>
       <description><![CDATA[The PHP Unit Testing framework.]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[BSD-3-Clause]]></id>
@@ -447,7 +436,6 @@
       <name><![CDATA[cli-parser]]></name>
       <version><![CDATA[1.0.1]]></version>
       <description><![CDATA[Library for parsing CLI options]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[BSD-3-Clause]]></id>
@@ -483,7 +471,6 @@
       <name><![CDATA[code-unit]]></name>
       <version><![CDATA[1.0.8]]></version>
       <description><![CDATA[Collection of value objects that represent the PHP code units]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[BSD-3-Clause]]></id>
@@ -519,7 +506,6 @@
       <name><![CDATA[code-unit-reverse-lookup]]></name>
       <version><![CDATA[2.0.3]]></version>
       <description><![CDATA[Looks up which function or method a line of code belongs to]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[BSD-3-Clause]]></id>
@@ -555,7 +541,6 @@
       <name><![CDATA[comparator]]></name>
       <version><![CDATA[4.0.8]]></version>
       <description><![CDATA[Provides the functionality to compare PHP values for equality]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[BSD-3-Clause]]></id>
@@ -591,7 +576,6 @@
       <name><![CDATA[complexity]]></name>
       <version><![CDATA[2.0.2]]></version>
       <description><![CDATA[Library for calculating the complexity of PHP code units]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[BSD-3-Clause]]></id>
@@ -627,7 +611,6 @@
       <name><![CDATA[diff]]></name>
       <version><![CDATA[4.0.4]]></version>
       <description><![CDATA[Diff implementation]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[BSD-3-Clause]]></id>
@@ -663,7 +646,6 @@
       <name><![CDATA[environment]]></name>
       <version><![CDATA[5.1.4]]></version>
       <description><![CDATA[Provides functionality to handle HHVM/PHP environments]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[BSD-3-Clause]]></id>
@@ -699,7 +681,6 @@
       <name><![CDATA[exporter]]></name>
       <version><![CDATA[4.0.5]]></version>
       <description><![CDATA[Provides the functionality to export PHP variables for visualization]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[BSD-3-Clause]]></id>
@@ -735,7 +716,6 @@
       <name><![CDATA[global-state]]></name>
       <version><![CDATA[5.0.5]]></version>
       <description><![CDATA[Snapshotting of global state]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[BSD-3-Clause]]></id>
@@ -771,7 +751,6 @@
       <name><![CDATA[lines-of-code]]></name>
       <version><![CDATA[1.0.3]]></version>
       <description><![CDATA[Library for counting the lines of code in PHP source code]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[BSD-3-Clause]]></id>
@@ -807,7 +786,6 @@
       <name><![CDATA[object-enumerator]]></name>
       <version><![CDATA[4.0.4]]></version>
       <description><![CDATA[Traverses array structures and object graphs to enumerate all referenced objects]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[BSD-3-Clause]]></id>
@@ -843,7 +821,6 @@
       <name><![CDATA[object-reflector]]></name>
       <version><![CDATA[2.0.4]]></version>
       <description><![CDATA[Allows reflection of object attributes, including inherited and non-public ones]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[BSD-3-Clause]]></id>
@@ -879,7 +856,6 @@
       <name><![CDATA[recursion-context]]></name>
       <version><![CDATA[4.0.4]]></version>
       <description><![CDATA[Provides functionality to recursively process PHP variables]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[BSD-3-Clause]]></id>
@@ -915,7 +891,6 @@
       <name><![CDATA[resource-operations]]></name>
       <version><![CDATA[3.0.3]]></version>
       <description><![CDATA[Provides a list of PHP built-in functions that operate on resources]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[BSD-3-Clause]]></id>
@@ -951,7 +926,6 @@
       <name><![CDATA[type]]></name>
       <version><![CDATA[3.2.0]]></version>
       <description><![CDATA[Collection of value objects that represent the types of the PHP type system]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[BSD-3-Clause]]></id>
@@ -987,7 +961,6 @@
       <name><![CDATA[version]]></name>
       <version><![CDATA[3.0.2]]></version>
       <description><![CDATA[Library that helps with managing the version number of Git-hosted PHP projects]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[BSD-3-Clause]]></id>
@@ -1023,7 +996,6 @@
       <name><![CDATA[tokenizer]]></name>
       <version><![CDATA[1.2.1]]></version>
       <description><![CDATA[A small library for converting tokenized PHP source code into XML and potentially other formats]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[BSD-3-Clause]]></id>

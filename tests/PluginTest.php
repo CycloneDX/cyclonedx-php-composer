@@ -30,10 +30,10 @@ use CycloneDX\Composer\MakeBom\Command;
 use CycloneDX\Composer\Plugin;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \CycloneDX\Composer\Plugin
- */
-class PluginTest extends TestCase
+#[\PHPUnit\Framework\Attributes\CoversClass(\CycloneDX\Composer\Plugin::class)]
+#[\PHPUnit\Framework\Attributes\UsesClass(\CycloneDX\Composer\MakeBom\Command::class)]
+#[\PHPUnit\Framework\Attributes\UsesClass(\CycloneDX\Composer\MakeBom\Options::class)]
+final class PluginTest extends TestCase
 {
     /**
      * path to composer.json file.
@@ -43,9 +43,8 @@ class PluginTest extends TestCase
     /**
      * assert the correct setup as described in
      * {@link https://getcomposer.org/doc/articles/plugins.md#plugin-package the docs}.
-     *
-     * @coversNothing
      */
+    #[\PHPUnit\Framework\Attributes\CoversNothing]
     public function testPackageIsComposerPlugin(): void
     {
         $composerJson = $this->getComposerJson();
@@ -55,15 +54,14 @@ class PluginTest extends TestCase
     /**
      * assert the correct setup as described in
      * {@link https://getcomposer.org/doc/articles/plugins.md#plugin-package the docs}.
-     *
-     * @coversNothing
      */
+    #[\PHPUnit\Framework\Attributes\CoversNothing]
     public function testPluginIsRegistered(): string
     {
         $composerJson = $this->getComposerJson();
         $pluginClass = $composerJson['extra']['class'];
 
-        self::assertTrue(class_exists($pluginClass));
+        self::assertTrue(class_exists($pluginClass), "class does not exist: $pluginClass");
         self::assertSame(Plugin::class, $pluginClass);
 
         return $pluginClass;
@@ -79,14 +77,8 @@ class PluginTest extends TestCase
         );
     }
 
-    /**
-     * @depends testPluginIsRegistered
-     *
-     * @return PluginInterface|Capable
-     *
-     * @psalm-return PluginInterface&Capable
-     */
-    public function testPluginImplementsRequiredInterfaces(string $pluginClass)
+    #[\PHPUnit\Framework\Attributes\Depends('testPluginIsRegistered')]
+    public function testPluginImplementsRequiredInterfaces(string $pluginClass): PluginInterface&Capable
     {
         $implements = class_implements($pluginClass);
 
@@ -96,9 +88,7 @@ class PluginTest extends TestCase
         return new $pluginClass();
     }
 
-    /**
-     * @depends testPluginImplementsRequiredInterfaces
-     */
+    #[\PHPUnit\Framework\Attributes\Depends('testPluginImplementsRequiredInterfaces')]
     public function testPluginIsCapableOfCommand(Capable $plugin): CommandProvider
     {
         $capabilities = $plugin->getCapabilities();
@@ -111,12 +101,7 @@ class PluginTest extends TestCase
         return $commandProvider;
     }
 
-    /**
-     * @depends testPluginIsCapableOfCommand
-     *
-     * @covers  \CycloneDX\Composer\MakeBom\Command
-     * @covers  \CycloneDX\Composer\MakeBom\Options
-     */
+    #[\PHPUnit\Framework\Attributes\Depends('testPluginIsCapableOfCommand')]
     public function testMakeBomCommandIsRegistered(CommandProvider $commandProvider): void
     {
         $commands = $commandProvider->getCommands();
@@ -129,9 +114,8 @@ class PluginTest extends TestCase
         self::assertSame('make-bom', $command->getName());
     }
 
-    /**
-     * @depends testPluginImplementsRequiredInterfaces
-     */
+    #[\PHPUnit\Framework\Attributes\Depends('testPluginImplementsRequiredInterfaces')]
+    #[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
     public function testActivatePlugin(PluginInterface $plugin): PluginInterface
     {
         $plugin->activate(
@@ -139,14 +123,11 @@ class PluginTest extends TestCase
             $this->createMock(\Composer\IO\IOInterface::class),
         );
 
-        self::assertTrue(true, 'no tests at the moment');
-
         return $plugin;
     }
 
-    /**
-     * @depends testActivatePlugin
-     */
+    #[\PHPUnit\Framework\Attributes\Depends('testActivatePlugin')]
+    #[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
     public function testDeactivatePlugin(PluginInterface $plugin): PluginInterface
     {
         $plugin->deactivate(
@@ -154,22 +135,17 @@ class PluginTest extends TestCase
             $this->createMock(\Composer\IO\IOInterface::class),
         );
 
-        self::assertTrue(true, 'no tests at the moment');
-
         return $plugin;
     }
 
-    /**
-     * @depends testDeactivatePlugin
-     */
+    #[\PHPUnit\Framework\Attributes\Depends('testDeactivatePlugin')]
+    #[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
     public function testUninstallPlugin(PluginInterface $plugin): PluginInterface
     {
         $plugin->uninstall(
             $this->createMock(\Composer\Composer::class),
             $this->createMock(\Composer\IO\IOInterface::class),
         );
-
-        self::assertTrue(true, 'no tests at the moment');
 
         return $plugin;
     }

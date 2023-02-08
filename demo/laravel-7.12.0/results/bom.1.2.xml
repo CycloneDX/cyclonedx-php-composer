@@ -24,7 +24,6 @@
       <name><![CDATA[stack-cors]]></name>
       <version><![CDATA[1.3.0]]></version>
       <description><![CDATA[Cross-origin resource sharing library and stack middleware]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -56,7 +55,6 @@
       <name><![CDATA[math]]></name>
       <version><![CDATA[0.9.3]]></version>
       <description><![CDATA[Arbitrary-precision arithmetic library]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -85,7 +83,6 @@
       <name><![CDATA[inflector]]></name>
       <version><![CDATA[2.0.6]]></version>
       <description><![CDATA[PHP Doctrine Inflector is a small library that can perform string manipulations with regard to upper/lowercase and singular/plural forms of words.]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -118,7 +115,6 @@
       <name><![CDATA[lexer]]></name>
       <version><![CDATA[1.2.3]]></version>
       <description><![CDATA[PHP Doctrine Lexer parser library that can be used in Top-Down, Recursive Descent Parsers.]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -151,7 +147,6 @@
       <name><![CDATA[cron-expression]]></name>
       <version><![CDATA[v2.3.1]]></version>
       <description><![CDATA[CRON for PHP: Calculate the next or previous run date and determine if a CRON expression is due]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -180,7 +175,6 @@
       <name><![CDATA[email-validator]]></name>
       <version><![CDATA[2.1.25]]></version>
       <description><![CDATA[A library for validating emails against several RFCs]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -213,7 +207,6 @@
       <name><![CDATA[proxy]]></name>
       <version><![CDATA[4.4.2]]></version>
       <description><![CDATA[Set trusted proxies for Laravel]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -242,7 +235,6 @@
       <name><![CDATA[laravel-cors]]></name>
       <version><![CDATA[v1.0.6]]></version>
       <description><![CDATA[Adds CORS (Cross-Origin Resource Sharing) headers support in your Laravel application]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -271,7 +263,6 @@
       <name><![CDATA[guzzle]]></name>
       <version><![CDATA[6.5.8]]></version>
       <description><![CDATA[Guzzle is a PHP HTTP client library]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -304,7 +295,6 @@
       <name><![CDATA[promises]]></name>
       <version><![CDATA[1.5.2]]></version>
       <description><![CDATA[Guzzle promises library]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -333,7 +323,6 @@
       <name><![CDATA[psr7]]></name>
       <version><![CDATA[1.9.0]]></version>
       <description><![CDATA[PSR-7 message implementation that also provides common utility methods]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -362,7 +351,6 @@
       <name><![CDATA[framework]]></name>
       <version><![CDATA[v7.30.6]]></version>
       <description><![CDATA[The Laravel Framework.]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -394,7 +382,6 @@
       <name><![CDATA[laravel]]></name>
       <version><![CDATA[v7.12.0]]></version>
       <description><![CDATA[The Laravel Framework.]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -419,7 +406,6 @@
       <name><![CDATA[tinker]]></name>
       <version><![CDATA[v2.7.3]]></version>
       <description><![CDATA[Powerful REPL for the Laravel framework.]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -448,7 +434,6 @@
       <name><![CDATA[commonmark]]></name>
       <version><![CDATA[1.6.7]]></version>
       <description><![CDATA[Highly-extensible PHP Markdown parser which fully supports the CommonMark spec and Github-Flavored Markdown (GFM)]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[BSD-3-Clause]]></id>
@@ -489,7 +474,6 @@
       <name><![CDATA[flysystem]]></name>
       <version><![CDATA[1.1.10]]></version>
       <description><![CDATA[Filesystem abstraction: Many filesystems, one API.]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -518,7 +502,6 @@
       <name><![CDATA[mime-type-detection]]></name>
       <version><![CDATA[1.11.0]]></version>
       <description><![CDATA[Mime-type detection for Flysystem]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -547,7 +530,6 @@
       <name><![CDATA[monolog]]></name>
       <version><![CDATA[2.8.0]]></version>
       <description><![CDATA[Sends your logs to files, sockets, inboxes, databases and various web services]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -580,7 +562,6 @@
       <name><![CDATA[carbon]]></name>
       <version><![CDATA[2.63.0]]></version>
       <description><![CDATA[An API extension for DateTime that supports 281 different languages.]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -617,7 +598,6 @@
       <name><![CDATA[php-parser]]></name>
       <version><![CDATA[v4.15.2]]></version>
       <description><![CDATA[A PHP parser written in PHP]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[BSD-3-Clause]]></id>
@@ -646,7 +626,6 @@
       <name><![CDATA[closure]]></name>
       <version><![CDATA[3.6.3]]></version>
       <description><![CDATA[A library that can be used to serialize closures (anonymous functions) and arbitrary objects.]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -679,7 +658,6 @@
       <name><![CDATA[phpoption]]></name>
       <version><![CDATA[1.9.0]]></version>
       <description><![CDATA[Option Type for PHP]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[Apache-2.0]]></id>
@@ -708,7 +686,6 @@
       <name><![CDATA[container]]></name>
       <version><![CDATA[1.1.1]]></version>
       <description><![CDATA[Common Container Interface (PHP FIG PSR-11)]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -741,7 +718,6 @@
       <name><![CDATA[event-dispatcher]]></name>
       <version><![CDATA[1.0.0]]></version>
       <description><![CDATA[Standard interfaces for event handling.]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -770,7 +746,6 @@
       <name><![CDATA[http-message]]></name>
       <version><![CDATA[1.0.1]]></version>
       <description><![CDATA[Common interface for HTTP messages]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -799,7 +774,6 @@
       <name><![CDATA[log]]></name>
       <version><![CDATA[1.1.4]]></version>
       <description><![CDATA[Common interface for logging libraries]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -828,7 +802,6 @@
       <name><![CDATA[simple-cache]]></name>
       <version><![CDATA[1.0.1]]></version>
       <description><![CDATA[Common interfaces for simple caching]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -853,7 +826,6 @@
       <name><![CDATA[psysh]]></name>
       <version><![CDATA[v0.11.9]]></version>
       <description><![CDATA[An interactive shell for modern PHP.]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -886,7 +858,6 @@
       <name><![CDATA[getallheaders]]></name>
       <version><![CDATA[3.0.3]]></version>
       <description><![CDATA[A polyfill for getallheaders.]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -915,7 +886,6 @@
       <name><![CDATA[collection]]></name>
       <version><![CDATA[1.2.2]]></version>
       <description><![CDATA[A PHP library for representing and manipulating collections.]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -943,7 +913,6 @@
       <name><![CDATA[uuid]]></name>
       <version><![CDATA[4.2.3]]></version>
       <description><![CDATA[A PHP library for generating and working with universally unique identifiers (UUIDs).]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -972,7 +941,6 @@
       <name><![CDATA[swiftmailer]]></name>
       <version><![CDATA[v6.3.0]]></version>
       <description><![CDATA[Swiftmailer, free feature-rich PHP mailer]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -1005,7 +973,6 @@
       <name><![CDATA[console]]></name>
       <version><![CDATA[v5.4.16]]></version>
       <description><![CDATA[Eases the creation of beautiful and testable command line interfaces]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -1034,7 +1001,6 @@
       <name><![CDATA[css-selector]]></name>
       <version><![CDATA[v5.4.11]]></version>
       <description><![CDATA[Converts CSS selectors to XPath expressions]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -1063,7 +1029,6 @@
       <name><![CDATA[deprecation-contracts]]></name>
       <version><![CDATA[v2.5.2]]></version>
       <description><![CDATA[A generic function and convention to trigger deprecation notices]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -1092,7 +1057,6 @@
       <name><![CDATA[error-handler]]></name>
       <version><![CDATA[v5.4.15]]></version>
       <description><![CDATA[Provides tools to manage errors and ease debugging PHP code]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -1121,7 +1085,6 @@
       <name><![CDATA[event-dispatcher]]></name>
       <version><![CDATA[v5.4.9]]></version>
       <description><![CDATA[Provides tools that allow your application components to communicate with each other by dispatching events and listening to them]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -1150,7 +1113,6 @@
       <name><![CDATA[event-dispatcher-contracts]]></name>
       <version><![CDATA[v2.5.2]]></version>
       <description><![CDATA[Generic abstractions related to dispatching event]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -1179,7 +1141,6 @@
       <name><![CDATA[finder]]></name>
       <version><![CDATA[v5.4.11]]></version>
       <description><![CDATA[Finds files and directories via an intuitive fluent interface]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -1208,7 +1169,6 @@
       <name><![CDATA[http-foundation]]></name>
       <version><![CDATA[v5.4.16]]></version>
       <description><![CDATA[Defines an object-oriented layer for the HTTP specification]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -1237,7 +1197,6 @@
       <name><![CDATA[http-kernel]]></name>
       <version><![CDATA[v5.4.16]]></version>
       <description><![CDATA[Provides a structured process for converting a Request into a Response]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -1266,7 +1225,6 @@
       <name><![CDATA[mime]]></name>
       <version><![CDATA[v5.4.16]]></version>
       <description><![CDATA[Allows manipulating MIME messages]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -1295,7 +1253,6 @@
       <name><![CDATA[polyfill-ctype]]></name>
       <version><![CDATA[v1.27.0]]></version>
       <description><![CDATA[Symfony polyfill for ctype functions]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -1324,7 +1281,6 @@
       <name><![CDATA[polyfill-iconv]]></name>
       <version><![CDATA[v1.27.0]]></version>
       <description><![CDATA[Symfony polyfill for the Iconv extension]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -1353,7 +1309,6 @@
       <name><![CDATA[polyfill-intl-grapheme]]></name>
       <version><![CDATA[v1.27.0]]></version>
       <description><![CDATA[Symfony polyfill for intl's grapheme_* functions]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -1382,7 +1337,6 @@
       <name><![CDATA[polyfill-intl-idn]]></name>
       <version><![CDATA[v1.27.0]]></version>
       <description><![CDATA[Symfony polyfill for intl's idn_to_ascii and idn_to_utf8 functions]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -1411,7 +1365,6 @@
       <name><![CDATA[polyfill-intl-normalizer]]></name>
       <version><![CDATA[v1.27.0]]></version>
       <description><![CDATA[Symfony polyfill for intl's Normalizer class and related functions]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -1440,7 +1393,6 @@
       <name><![CDATA[polyfill-mbstring]]></name>
       <version><![CDATA[v1.27.0]]></version>
       <description><![CDATA[Symfony polyfill for the Mbstring extension]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -1469,7 +1421,6 @@
       <name><![CDATA[polyfill-php72]]></name>
       <version><![CDATA[v1.27.0]]></version>
       <description><![CDATA[Symfony polyfill backporting some PHP 7.2+ features to lower PHP versions]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -1498,7 +1449,6 @@
       <name><![CDATA[polyfill-php73]]></name>
       <version><![CDATA[v1.27.0]]></version>
       <description><![CDATA[Symfony polyfill backporting some PHP 7.3+ features to lower PHP versions]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -1527,7 +1477,6 @@
       <name><![CDATA[polyfill-php80]]></name>
       <version><![CDATA[v1.27.0]]></version>
       <description><![CDATA[Symfony polyfill backporting some PHP 8.0+ features to lower PHP versions]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -1556,7 +1505,6 @@
       <name><![CDATA[polyfill-php81]]></name>
       <version><![CDATA[v1.27.0]]></version>
       <description><![CDATA[Symfony polyfill backporting some PHP 8.1+ features to lower PHP versions]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -1585,7 +1533,6 @@
       <name><![CDATA[process]]></name>
       <version><![CDATA[v5.4.11]]></version>
       <description><![CDATA[Executes commands in sub-processes]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -1614,7 +1561,6 @@
       <name><![CDATA[routing]]></name>
       <version><![CDATA[v5.4.15]]></version>
       <description><![CDATA[Maps an HTTP request to a set of configuration variables]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -1643,7 +1589,6 @@
       <name><![CDATA[service-contracts]]></name>
       <version><![CDATA[v2.5.2]]></version>
       <description><![CDATA[Generic abstractions related to writing services]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -1672,7 +1617,6 @@
       <name><![CDATA[string]]></name>
       <version><![CDATA[v5.4.15]]></version>
       <description><![CDATA[Provides an object-oriented API to strings and deals with bytes, UTF-8 code points and grapheme clusters in a unified way]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -1701,7 +1645,6 @@
       <name><![CDATA[translation]]></name>
       <version><![CDATA[v5.4.14]]></version>
       <description><![CDATA[Provides tools to internationalize your application]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -1730,7 +1673,6 @@
       <name><![CDATA[translation-contracts]]></name>
       <version><![CDATA[v2.5.2]]></version>
       <description><![CDATA[Generic abstractions related to translation]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -1759,7 +1701,6 @@
       <name><![CDATA[var-dumper]]></name>
       <version><![CDATA[v5.4.14]]></version>
       <description><![CDATA[Provides mechanisms for walking through any arbitrary PHP variable]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>
@@ -1788,7 +1729,6 @@
       <name><![CDATA[css-to-inline-styles]]></name>
       <version><![CDATA[2.2.5]]></version>
       <description><![CDATA[CssToInlineStyles is a class that enables you to convert HTML-pages/files into HTML-pages/files with inline styles. This is very useful when you're sending emails.]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[BSD-3-Clause]]></id>
@@ -1821,7 +1761,6 @@
       <name><![CDATA[phpdotenv]]></name>
       <version><![CDATA[v4.3.0]]></version>
       <description><![CDATA[Loads environment variables from `.env` to `getenv()`, `$_ENV` and `$_SERVER` automagically.]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[BSD-3-Clause]]></id>
@@ -1850,7 +1789,6 @@
       <name><![CDATA[portable-ascii]]></name>
       <version><![CDATA[1.6.1]]></version>
       <description><![CDATA[Portable ASCII library - performance optimized (ascii) string functions for php.]]></description>
-      <hashes/>
       <licenses>
         <license>
           <id><![CDATA[MIT]]></id>

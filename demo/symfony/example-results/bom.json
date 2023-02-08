@@ -2,10 +2,10 @@
     "$schema": "http://cyclonedx.org/schema/bom-1.4.schema.json",
     "bomFormat": "CycloneDX",
     "specVersion": "1.4",
-    "serialNumber": "urn:uuid:ea37fa18-2a8e-4233-be0f-32d3eb0e2526",
+    "serialNumber": "urn:uuid:ba2a30b2-cd28-4180-85b3-d8fc0bd5c3ad",
     "version": 1,
     "metadata": {
-        "timestamp": "2022-12-23T11:07:42Z",
+        "timestamp": "2023-02-08T09:29:11Z",
         "tools": [
             {
                 "vendor": "cyclonedx",
@@ -63,7 +63,6 @@
                     }
                 }
             ],
-            "hashes": [],
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -97,10 +96,10 @@
             ]
         },
         {
-            "bom-ref": "doctrine/persistence-3.1.2.0",
+            "bom-ref": "doctrine/persistence-3.1.4.0",
             "type": "library",
             "name": "persistence",
-            "version": "3.1.2",
+            "version": "3.1.4",
             "group": "doctrine",
             "description": "The Doctrine Persistence project is a set of shared interfaces and functionality that the different Doctrine object mappers share.",
             "author": "Guilherme Blanco, Roman Borschel, Benjamin Eberlei, Jonathan Wage, Johannes Schmitt, Marco Pivetta",
@@ -111,11 +110,10 @@
                     }
                 }
             ],
-            "hashes": [],
             "externalReferences": [
                 {
                     "type": "distribution",
-                    "url": "https://api.github.com/repos/doctrine/persistence/zipball/b44d128311af55275dbed6a4558ca59a2b9f9387"
+                    "url": "https://api.github.com/repos/doctrine/persistence/zipball/8bf8ab15960787f1a49d405f6eb8c787b4841119"
                 },
                 {
                     "type": "distribution",
@@ -133,7 +131,7 @@
                 },
                 {
                     "type": "vcs",
-                    "url": "https://github.com/doctrine/persistence/tree/3.1.2",
+                    "url": "https://github.com/doctrine/persistence/tree/3.1.4",
                     "comment": "as detected from composer manifest 'support.source'"
                 }
             ],
@@ -145,10 +143,10 @@
             ]
         },
         {
-            "bom-ref": "friendsofphp/proxy-manager-lts-1.0.13.0",
+            "bom-ref": "friendsofphp/proxy-manager-lts-1.0.14.0",
             "type": "library",
             "name": "proxy-manager-lts",
-            "version": "v1.0.13",
+            "version": "v1.0.14",
             "group": "friendsofphp",
             "description": "Adding support for a wider range of PHP versions to ocramius/proxy-manager",
             "author": "Marco Pivetta, Nicolas Grekas",
@@ -159,11 +157,10 @@
                     }
                 }
             ],
-            "hashes": [],
             "externalReferences": [
                 {
                     "type": "distribution",
-                    "url": "https://api.github.com/repos/FriendsOfPHP/proxy-manager-lts/zipball/88354616f4cf4f6620910fd035e282173ba453e8"
+                    "url": "https://api.github.com/repos/FriendsOfPHP/proxy-manager-lts/zipball/a527c9d9d5348e012bd24482d83a5cd643bcbc9e"
                 },
                 {
                     "type": "distribution",
@@ -181,7 +178,7 @@
                 },
                 {
                     "type": "vcs",
-                    "url": "https://github.com/FriendsOfPHP/proxy-manager-lts/tree/v1.0.13",
+                    "url": "https://github.com/FriendsOfPHP/proxy-manager-lts/tree/v1.0.14",
                     "comment": "as detected from composer manifest 'support.source'"
                 }
             ],
@@ -206,7 +203,6 @@
                     }
                 }
             ],
-            "hashes": [],
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -274,7 +270,6 @@
                     }
                 }
             ],
-            "hashes": [],
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -312,7 +307,6 @@
                     }
                 }
             ],
-            "hashes": [],
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -360,7 +354,6 @@
                     }
                 }
             ],
-            "hashes": [],
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -408,7 +401,6 @@
                     }
                 }
             ],
-            "hashes": [],
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -451,7 +443,6 @@
                     }
                 }
             ],
-            "hashes": [],
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -494,7 +485,6 @@
                     }
                 }
             ],
-            "hashes": [],
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -537,7 +527,6 @@
                     }
                 }
             ],
-            "hashes": [],
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -580,7 +569,6 @@
                     }
                 }
             ],
-            "hashes": [],
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -623,7 +611,6 @@
                     }
                 }
             ],
-            "hashes": [],
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -666,7 +653,6 @@
                     }
                 }
             ],
-            "hashes": [],
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -709,7 +695,6 @@
                     }
                 }
             ],
-            "hashes": [],
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -752,7 +737,6 @@
                     }
                 }
             ],
-            "hashes": [],
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -795,7 +779,6 @@
                     }
                 }
             ],
-            "hashes": [],
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -838,7 +821,6 @@
                     }
                 }
             ],
-            "hashes": [],
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -881,7 +863,6 @@
                     }
                 }
             ],
-            "hashes": [],
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -910,10 +891,10 @@
             ]
         },
         {
-            "bom-ref": "symfony/symfony-6.2.2.0",
+            "bom-ref": "symfony/symfony-6.2.6.0",
             "type": "library",
             "name": "symfony",
-            "version": "v6.2.2",
+            "version": "v6.2.6",
             "group": "symfony",
             "description": "The Symfony PHP framework",
             "author": "Fabien Potencier, Symfony Community",
@@ -924,11 +905,10 @@
                     }
                 }
             ],
-            "hashes": [],
             "externalReferences": [
                 {
                     "type": "distribution",
-                    "url": "https://api.github.com/repos/symfony/symfony/zipball/a9eed32579b0706d84aa67c72d7c879a387c73de"
+                    "url": "https://api.github.com/repos/symfony/symfony/zipball/008d9ac6cd61dd64d273bf5328857c7f97d9d7f6"
                 },
                 {
                     "type": "distribution",
@@ -946,7 +926,7 @@
                 },
                 {
                     "type": "vcs",
-                    "url": "https://github.com/symfony/symfony/tree/v6.2.2",
+                    "url": "https://github.com/symfony/symfony/tree/v6.2.6",
                     "comment": "as detected from composer manifest 'support.source'"
                 }
             ],
@@ -958,10 +938,10 @@
             ]
         },
         {
-            "bom-ref": "twig/twig-3.4.3.0",
+            "bom-ref": "twig/twig-3.5.1.0",
             "type": "library",
             "name": "twig",
-            "version": "v3.4.3",
+            "version": "v3.5.1",
             "group": "twig",
             "description": "Twig, the flexible, fast, and secure template language for PHP",
             "author": "Fabien Potencier, Twig Team, Armin Ronacher",
@@ -972,11 +952,10 @@
                     }
                 }
             ],
-            "hashes": [],
             "externalReferences": [
                 {
                     "type": "distribution",
-                    "url": "https://api.github.com/repos/twigphp/Twig/zipball/c38fd6b0b7f370c198db91ffd02e23b517426b58"
+                    "url": "https://api.github.com/repos/twigphp/Twig/zipball/a6e0510cc793912b451fd40ab983a1d28f611c15"
                 },
                 {
                     "type": "distribution",
@@ -994,7 +973,7 @@
                 },
                 {
                     "type": "vcs",
-                    "url": "https://github.com/twigphp/Twig/tree/v3.4.3",
+                    "url": "https://github.com/twigphp/Twig/tree/v3.5.1",
                     "comment": "as detected from composer manifest 'support.source'"
                 }
             ],
@@ -1011,14 +990,14 @@
             "ref": "doctrine/event-manager-2.0.0.0"
         },
         {
-            "ref": "doctrine/persistence-3.1.2.0",
+            "ref": "doctrine/persistence-3.1.4.0",
             "dependsOn": [
                 "doctrine/event-manager-2.0.0.0",
                 "psr/cache-3.0.0.0"
             ]
         },
         {
-            "ref": "friendsofphp/proxy-manager-lts-1.0.13.0",
+            "ref": "friendsofphp/proxy-manager-lts-1.0.14.0",
             "dependsOn": [
                 "laminas/laminas-code-4.8.0.0"
             ]
@@ -1081,11 +1060,11 @@
             "ref": "symfony/polyfill-uuid-1.27.0.0"
         },
         {
-            "ref": "symfony/symfony-6.2.2.0",
+            "ref": "symfony/symfony-6.2.6.0",
             "dependsOn": [
                 "doctrine/event-manager-2.0.0.0",
-                "doctrine/persistence-3.1.2.0",
-                "friendsofphp/proxy-manager-lts-1.0.13.0",
+                "doctrine/persistence-3.1.4.0",
+                "friendsofphp/proxy-manager-lts-1.0.14.0",
                 "psr/cache-3.0.0.0",
                 "psr/clock-1.0.0.0",
                 "psr/container-2.0.2.0",
@@ -1100,11 +1079,11 @@
                 "symfony/polyfill-intl-normalizer-1.27.0.0",
                 "symfony/polyfill-mbstring-1.27.0.0",
                 "symfony/polyfill-uuid-1.27.0.0",
-                "twig/twig-3.4.3.0"
+                "twig/twig-3.5.1.0"
             ]
         },
         {
-            "ref": "twig/twig-3.4.3.0",
+            "ref": "twig/twig-3.5.1.0",
             "dependsOn": [
                 "symfony/polyfill-ctype-1.27.0.0",
                 "symfony/polyfill-mbstring-1.27.0.0"
@@ -1113,7 +1092,7 @@
         {
             "ref": "cyclonedx/cyclonedx-php-composer-demo-dev-next",
             "dependsOn": [
-                "symfony/symfony-6.2.2.0"
+                "symfony/symfony-6.2.6.0"
             ]
         }
     ]

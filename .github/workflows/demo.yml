@@ -52,8 +52,7 @@ jobs:
           - local
         php:
           - "8.2" # latest
-          - "8.1"
-          - "8.0" # lowest supported
+          - "8.1" # lowest supported
         composer:
           - "2"     # latest 2.x
           - "2.3"   # latest 2.3 = lowest supported
@@ -76,7 +75,7 @@ jobs:
             spec-version: "1.1"
         include:
           - # test with lowest combination
-            php: "8.0"          # lowest
+            php: "8.1"          # lowest
             composer: "2.3.0"   # lowest
             # any other props
             spec-version: "1.4"
