@@ -14,7 +14,7 @@ on:
 
 env:
   PHP_VERSION_LATEST: "8.2"
-  PHP_PROJECT_EXT: dom,filter,json,libxml,simplexml  # via `composer info -pt`
+  PHP_PROJECT_EXT: dom,json,libxml  # via `composer info -pt`
   REPORTS_DIR: CI_reports
 
 jobs:
