@@ -19,6 +19,7 @@ All notable changes to this project will be documented in this file.
     * Requires `cyclonedx/cyclonedx-library:^2.0`, was `:^1.4.2` ([#128] via [#250])
 * Changed
   * Root component's versions is unset, if version detection fails ([#154] via [#250])
+  * Composer packages of type "composer-installer" are treated as composer plugins (via [#250])
 * Added
   * Support for CycloneDX Spec v1.4 (via [#250])
   * SBOM results
