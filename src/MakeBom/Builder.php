@@ -181,31 +181,16 @@ class Builder
     private function createComponentFromPackage(PackageInterface $package, ?string $versionOverride = null): Models\Component
     {
         [$group, $name] = $this->getGroupAndName($package->getName());
-        $distUrl = $package->getDistUrl();
-        $sourceUrl = $package->getSourceUrl();
         $version = $versionOverride ?? $package->getFullPrettyVersion();
 
         $component = new Models\Component(Enums\ComponentType::LIBRARY, $name);
         $component->setBomRefValue($package->getUniqueName());
         $component->setGroup($group);
         $component->setVersion($version);
-        if ($distUrl) {
-            $component->getExternalReferences()->addItems(
-                new Models\ExternalReference(
-                    Enums\ExternalReferenceType::DISTRIBUTION,
-                    $distUrl
-                )
-            );
-            $component->getHashes()->set(Enums\HashAlgorithm::SHA_1, $package->getDistSha1Checksum());
-        }
-        if ($sourceUrl) {
-            $component->getExternalReferences()->addItems(
-                new Models\ExternalReference(
-                    Enums\ExternalReferenceType::DISTRIBUTION,
-                    $sourceUrl
-                )
-            );
-        }
+        $component->getHashes()->set(Enums\HashAlgorithm::SHA_1, $package->getDistSha1Checksum());
+        $component->getExternalReferences()->addItems(
+            ...$this->createExternalReferencesFromPackage($package)
+        );
 
         if ($package instanceof CompletePackageInterface) {
             $component->setDescription($package->getDescription());
@@ -215,9 +200,6 @@ class Builder
                     [$this->licenseFactory, 'makeFromString'],
                     $package->getLicense()
                 )
-            );
-            $component->getExternalReferences()->addItems(
-                ...$this->createExternalReferencesFromPackage($package)
             );
         }
 
@@ -256,28 +238,44 @@ class Builder
      *
      * @psalm-suppress MissingThrowsDocblock
      */
-    private function createExternalReferencesFromPackage(CompletePackageInterface $package): Generator
+    private function createExternalReferencesFromPackage(PackageInterface $package): Generator
     {
-        $homepage = $package->getHomepage();
-        if (null !== $homepage) {
-            yield (new Models\ExternalReference(
-                Enums\ExternalReferenceType::WEBSITE,
-                $homepage
-            ))->setComment("as detected from composer manifest 'homepage'");
+        foreach ($package->getDistUrls() as $distUrl) {
+            yield new Models\ExternalReference(
+                Enums\ExternalReferenceType::DISTRIBUTION,
+                $distUrl
+            );
         }
 
-        foreach ($package->getSupport() as $supportType => $supportUrl) {
-            $extRefType = match ($supportType) {
-                'chat', 'irc' => Enums\ExternalReferenceType::CHAT,
-                'docs' => Enums\ExternalReferenceType::DOCUMENTATION,
-                'issues' => Enums\ExternalReferenceType::ISSUE_TRACKER,
-                'source' => Enums\ExternalReferenceType::VCS,
-                default => Enums\ExternalReferenceType::OTHER,
-            };
-            yield (new Models\ExternalReference(
-                $extRefType,
-                $supportUrl
-            ))->setComment("as detected from composer manifest 'support.$supportType'");
+        foreach ($package->getSourceUrls() as $sourceUrl) {
+            yield new Models\ExternalReference(
+                Enums\ExternalReferenceType::VCS,
+                $sourceUrl
+            );
+        }
+
+        if ($package instanceof CompletePackageInterface) {
+            $homepage = $package->getHomepage();
+            if (null !== $homepage) {
+                yield (new Models\ExternalReference(
+                    Enums\ExternalReferenceType::WEBSITE,
+                    $homepage
+                ))->setComment("as detected from composer manifest 'homepage'");
+            }
+
+            foreach ($package->getSupport() as $supportType => $supportUrl) {
+                $extRefType = match ($supportType) {
+                    'chat', 'irc' => Enums\ExternalReferenceType::CHAT,
+                    'docs' => Enums\ExternalReferenceType::DOCUMENTATION,
+                    'issues' => Enums\ExternalReferenceType::ISSUE_TRACKER,
+                    'source' => Enums\ExternalReferenceType::VCS,
+                    default => Enums\ExternalReferenceType::OTHER,
+                };
+                yield (new Models\ExternalReference(
+                    $extRefType,
+                    $supportUrl
+                ))->setComment("as detected from composer manifest 'support.$supportType'");
+            }
         }
     }
 
@@ -320,36 +318,15 @@ class Builder
     private function createToolFromPackage(PackageInterface $package, ?string $versionOverride = null): Models\Tool
     {
         [$group, $name] = $this->getGroupAndName($package->getName());
-        $distUrl = $package->getDistUrl();
-        $sourceUrl = $package->getSourceUrl();
 
         $tool = new Models\Tool();
-
         $tool->setName($name);
         $tool->setVendor($group);
         $tool->setVersion($versionOverride ?? $package->getFullPrettyVersion());
-        if ($package instanceof CompletePackageInterface) {
-            $tool->getExternalReferences()->addItems(
-                ...$this->createExternalReferencesFromPackage($package)
-            );
-        }
-        if ($distUrl) {
-            $tool->getExternalReferences()->addItems(
-                new Models\ExternalReference(
-                    Enums\ExternalReferenceType::DISTRIBUTION,
-                    $distUrl
-                )
-            );
-            $tool->getHashes()->set(Enums\HashAlgorithm::SHA_1, $package->getDistSha1Checksum());
-        }
-        if ($sourceUrl) {
-            $tool->getExternalReferences()->addItems(
-                new Models\ExternalReference(
-                    Enums\ExternalReferenceType::DISTRIBUTION,
-                    $sourceUrl
-                )
-            );
-        }
+        $tool->getHashes()->set(Enums\HashAlgorithm::SHA_1, $package->getDistSha1Checksum());
+        $tool->getExternalReferences()->addItems(
+            ...$this->createExternalReferencesFromPackage($package)
+        );
 
         return $tool;
     }
