@@ -116,7 +116,7 @@ class Command extends BaseCommand
         $builder = new Builder(
             \in_array('dev', $this->options->omit),
             \in_array('plugin', $this->options->omit),
-            $this->options->mainComponentVersion,
+            $this->options->mainComponentVersion
         );
 
         $subjectComposer = (new ComposerFactory())->createComposer($io, $this->options->composerFile, fullLoad: true);
