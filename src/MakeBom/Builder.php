@@ -202,7 +202,7 @@ class Builder
             $component->setAuthor($this->createAuthorString($package));
             $component->getLicenses()->addItems(
                 ...array_map(
-                    [$this->licenseFactory, 'makeFromString'],
+                    $this->licenseFactory->makeFromString(...),
                     $package->getLicense()
                 )
             );
