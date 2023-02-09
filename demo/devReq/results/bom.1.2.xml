@@ -59,7 +59,7 @@
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/doctrine/instantiator/zipball/10dcfce151b967d20fde1b34ae6640712c3891bc]]></url>
         </reference>
-        <reference type="distribution">
+        <reference type="vcs">
           <url><![CDATA[https://github.com/doctrine/instantiator.git]]></url>
         </reference>
         <reference type="website">
@@ -90,7 +90,7 @@
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/myclabs/DeepCopy/zipball/14daed4296fae74d9e3201d2c4925d1acb7aa614]]></url>
         </reference>
-        <reference type="distribution">
+        <reference type="vcs">
           <url><![CDATA[https://github.com/myclabs/DeepCopy.git]]></url>
         </reference>
         <reference type="issue-tracker">
@@ -118,7 +118,7 @@
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/nikic/PHP-Parser/zipball/f59bbe44bf7d96f24f3e2b4ddc21cd52c1d2adbc]]></url>
         </reference>
-        <reference type="distribution">
+        <reference type="vcs">
           <url><![CDATA[https://github.com/nikic/PHP-Parser.git]]></url>
         </reference>
         <reference type="issue-tracker">
@@ -146,7 +146,7 @@
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/phar-io/manifest/zipball/97803eca37d319dfa7826cc2437fc020857acb53]]></url>
         </reference>
-        <reference type="distribution">
+        <reference type="vcs">
           <url><![CDATA[https://github.com/phar-io/manifest.git]]></url>
         </reference>
         <reference type="issue-tracker">
@@ -174,7 +174,7 @@
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/phar-io/version/zipball/4f7fd7836c6f332bb2933569e566a0d6c4cbed74]]></url>
         </reference>
-        <reference type="distribution">
+        <reference type="vcs">
           <url><![CDATA[https://github.com/phar-io/version.git]]></url>
         </reference>
         <reference type="issue-tracker">
@@ -202,7 +202,7 @@
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/c77b56b63e3d2031bd8997fcec43c1925ae46559]]></url>
         </reference>
-        <reference type="distribution">
+        <reference type="vcs">
           <url><![CDATA[https://github.com/sebastianbergmann/php-code-coverage.git]]></url>
         </reference>
         <reference type="website">
@@ -234,7 +234,7 @@
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/sebastianbergmann/php-file-iterator/zipball/cf1c2e7c203ac650e352f4cc675a7021e7d1b3cf]]></url>
         </reference>
-        <reference type="distribution">
+        <reference type="vcs">
           <url><![CDATA[https://github.com/sebastianbergmann/php-file-iterator.git]]></url>
         </reference>
         <reference type="website">
@@ -266,7 +266,7 @@
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/sebastianbergmann/php-invoker/zipball/5a10147d0aaf65b58940a0b72f71c9ac0423cc67]]></url>
         </reference>
-        <reference type="distribution">
+        <reference type="vcs">
           <url><![CDATA[https://github.com/sebastianbergmann/php-invoker.git]]></url>
         </reference>
         <reference type="website">
@@ -298,7 +298,7 @@
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/sebastianbergmann/php-text-template/zipball/5da5f67fc95621df9ff4c4e5a84d6a8a2acf7c28]]></url>
         </reference>
-        <reference type="distribution">
+        <reference type="vcs">
           <url><![CDATA[https://github.com/sebastianbergmann/php-text-template.git]]></url>
         </reference>
         <reference type="website">
@@ -330,7 +330,7 @@
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/sebastianbergmann/php-timer/zipball/5a63ce20ed1b5bf577850e2c4e87f4aa902afbd2]]></url>
         </reference>
-        <reference type="distribution">
+        <reference type="vcs">
           <url><![CDATA[https://github.com/sebastianbergmann/php-timer.git]]></url>
         </reference>
         <reference type="website">
@@ -362,7 +362,7 @@
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/sebastianbergmann/phpunit/zipball/851867efcbb6a1b992ec515c71cdcf20d895e9d2]]></url>
         </reference>
-        <reference type="distribution">
+        <reference type="vcs">
           <url><![CDATA[https://github.com/sebastianbergmann/phpunit.git]]></url>
         </reference>
         <reference type="website">
@@ -394,7 +394,7 @@
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/sebastianbergmann/cli-parser/zipball/442e7c7e687e42adc03470c7b668bc4b2402c0b2]]></url>
         </reference>
-        <reference type="distribution">
+        <reference type="vcs">
           <url><![CDATA[https://github.com/sebastianbergmann/cli-parser.git]]></url>
         </reference>
         <reference type="website">
@@ -426,7 +426,7 @@
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/sebastianbergmann/code-unit/zipball/1fc9f64c0927627ef78ba436c9b17d967e68e120]]></url>
         </reference>
-        <reference type="distribution">
+        <reference type="vcs">
           <url><![CDATA[https://github.com/sebastianbergmann/code-unit.git]]></url>
         </reference>
         <reference type="website">
@@ -458,7 +458,7 @@
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/sebastianbergmann/code-unit-reverse-lookup/zipball/ac91f01ccec49fb77bdc6fd1e548bc70f7faa3e5]]></url>
         </reference>
-        <reference type="distribution">
+        <reference type="vcs">
           <url><![CDATA[https://github.com/sebastianbergmann/code-unit-reverse-lookup.git]]></url>
         </reference>
         <reference type="website">
@@ -490,7 +490,7 @@
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/sebastianbergmann/comparator/zipball/fa0f136dd2334583309d32b62544682ee972b51a]]></url>
         </reference>
-        <reference type="distribution">
+        <reference type="vcs">
           <url><![CDATA[https://github.com/sebastianbergmann/comparator.git]]></url>
         </reference>
         <reference type="website">
@@ -522,7 +522,7 @@
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/sebastianbergmann/complexity/zipball/739b35e53379900cc9ac327b2147867b8b6efd88]]></url>
         </reference>
-        <reference type="distribution">
+        <reference type="vcs">
           <url><![CDATA[https://github.com/sebastianbergmann/complexity.git]]></url>
         </reference>
         <reference type="website">
@@ -554,7 +554,7 @@
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/sebastianbergmann/diff/zipball/3461e3fccc7cfdfc2720be910d3bd73c69be590d]]></url>
         </reference>
-        <reference type="distribution">
+        <reference type="vcs">
           <url><![CDATA[https://github.com/sebastianbergmann/diff.git]]></url>
         </reference>
         <reference type="website">
@@ -586,7 +586,7 @@
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/sebastianbergmann/environment/zipball/1b5dff7bb151a4db11d49d90e5408e4e938270f7]]></url>
         </reference>
-        <reference type="distribution">
+        <reference type="vcs">
           <url><![CDATA[https://github.com/sebastianbergmann/environment.git]]></url>
         </reference>
         <reference type="website">
@@ -618,7 +618,7 @@
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/sebastianbergmann/exporter/zipball/ac230ed27f0f98f597c8a2b6eb7ac563af5e5b9d]]></url>
         </reference>
-        <reference type="distribution">
+        <reference type="vcs">
           <url><![CDATA[https://github.com/sebastianbergmann/exporter.git]]></url>
         </reference>
         <reference type="website">
@@ -650,7 +650,7 @@
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/sebastianbergmann/global-state/zipball/0ca8db5a5fc9c8646244e629625ac486fa286bf2]]></url>
         </reference>
-        <reference type="distribution">
+        <reference type="vcs">
           <url><![CDATA[https://github.com/sebastianbergmann/global-state.git]]></url>
         </reference>
         <reference type="website">
@@ -682,7 +682,7 @@
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/sebastianbergmann/lines-of-code/zipball/c1c2e997aa3146983ed888ad08b15470a2e22ecc]]></url>
         </reference>
-        <reference type="distribution">
+        <reference type="vcs">
           <url><![CDATA[https://github.com/sebastianbergmann/lines-of-code.git]]></url>
         </reference>
         <reference type="website">
@@ -714,7 +714,7 @@
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/sebastianbergmann/object-enumerator/zipball/5c9eeac41b290a3712d88851518825ad78f45c71]]></url>
         </reference>
-        <reference type="distribution">
+        <reference type="vcs">
           <url><![CDATA[https://github.com/sebastianbergmann/object-enumerator.git]]></url>
         </reference>
         <reference type="website">
@@ -746,7 +746,7 @@
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/sebastianbergmann/object-reflector/zipball/b4f479ebdbf63ac605d183ece17d8d7fe49c15c7]]></url>
         </reference>
-        <reference type="distribution">
+        <reference type="vcs">
           <url><![CDATA[https://github.com/sebastianbergmann/object-reflector.git]]></url>
         </reference>
         <reference type="website">
@@ -778,7 +778,7 @@
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/sebastianbergmann/recursion-context/zipball/cd9d8cf3c5804de4341c283ed787f099f5506172]]></url>
         </reference>
-        <reference type="distribution">
+        <reference type="vcs">
           <url><![CDATA[https://github.com/sebastianbergmann/recursion-context.git]]></url>
         </reference>
         <reference type="website">
@@ -810,7 +810,7 @@
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/sebastianbergmann/resource-operations/zipball/0f4443cb3a1d92ce809899753bc0d5d5a8dd19a8]]></url>
         </reference>
-        <reference type="distribution">
+        <reference type="vcs">
           <url><![CDATA[https://github.com/sebastianbergmann/resource-operations.git]]></url>
         </reference>
         <reference type="website">
@@ -842,7 +842,7 @@
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/sebastianbergmann/type/zipball/fb3fe09c5f0bae6bc27ef3ce933a1e0ed9464b6e]]></url>
         </reference>
-        <reference type="distribution">
+        <reference type="vcs">
           <url><![CDATA[https://github.com/sebastianbergmann/type.git]]></url>
         </reference>
         <reference type="website">
@@ -874,7 +874,7 @@
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/sebastianbergmann/version/zipball/c6c1022351a901512170118436c764e473f6de8c]]></url>
         </reference>
-        <reference type="distribution">
+        <reference type="vcs">
           <url><![CDATA[https://github.com/sebastianbergmann/version.git]]></url>
         </reference>
         <reference type="website">
@@ -906,7 +906,7 @@
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/theseer/tokenizer/zipball/34a41e998c2183e22995f158c581e7b5e755ab9e]]></url>
         </reference>
-        <reference type="distribution">
+        <reference type="vcs">
           <url><![CDATA[https://github.com/theseer/tokenizer.git]]></url>
         </reference>
         <reference type="issue-tracker">

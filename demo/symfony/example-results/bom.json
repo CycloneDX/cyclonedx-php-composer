@@ -2,16 +2,20 @@
     "$schema": "http://cyclonedx.org/schema/bom-1.4.schema.json",
     "bomFormat": "CycloneDX",
     "specVersion": "1.4",
-    "serialNumber": "urn:uuid:cd3d3adf-7594-4ea0-bf05-b37bb65268be",
+    "serialNumber": "urn:uuid:6052c95f-86e0-47c4-9fc4-bf8ef0a5158e",
     "version": 1,
     "metadata": {
-        "timestamp": "2023-02-08T12:25:24Z",
+        "timestamp": "2023-02-09T09:54:09Z",
         "tools": [
             {
                 "vendor": "cyclonedx",
                 "name": "cyclonedx-php-composer",
-                "version": "dev-tools-true-source",
+                "version": "dev-mode-ext-refs",
                 "externalReferences": [
+                    {
+                        "type": "distribution",
+                        "url": "../.."
+                    },
                     {
                         "type": "website",
                         "url": "https://github.com/CycloneDX/cyclonedx-php-composer/#readme",
@@ -26,10 +30,6 @@
                         "type": "vcs",
                         "url": "https://github.com/CycloneDX/cyclonedx-php-composer/",
                         "comment": "as detected from composer manifest 'support.source'"
-                    },
-                    {
-                        "type": "distribution",
-                        "url": "../.."
                     }
                 ]
             },
@@ -38,6 +38,14 @@
                 "name": "cyclonedx-library",
                 "version": "2.x-dev 3d74aae",
                 "externalReferences": [
+                    {
+                        "type": "distribution",
+                        "url": "https://api.github.com/repos/CycloneDX/cyclonedx-php-library/zipball/3d74aaeaa30dcf278edfd3434fb79e8069bb3558"
+                    },
+                    {
+                        "type": "vcs",
+                        "url": "https://github.com/CycloneDX/cyclonedx-php-library.git"
+                    },
                     {
                         "type": "website",
                         "url": "https://github.com/CycloneDX/cyclonedx-php-library/#readme",
@@ -52,14 +60,6 @@
                         "type": "vcs",
                         "url": "https://github.com/CycloneDX/cyclonedx-php-library/",
                         "comment": "as detected from composer manifest 'support.source'"
-                    },
-                    {
-                        "type": "distribution",
-                        "url": "https://api.github.com/repos/CycloneDX/cyclonedx-php-library/zipball/3d74aaeaa30dcf278edfd3434fb79e8069bb3558"
-                    },
-                    {
-                        "type": "distribution",
-                        "url": "https://github.com/CycloneDX/cyclonedx-php-library.git"
                     }
                 ]
             }
@@ -103,7 +103,7 @@
                     "url": "https://api.github.com/repos/doctrine/event-manager/zipball/750671534e0241a7c50ea5b43f67e23eb5c96f32"
                 },
                 {
-                    "type": "distribution",
+                    "type": "vcs",
                     "url": "https://github.com/doctrine/event-manager.git"
                 },
                 {
@@ -150,7 +150,7 @@
                     "url": "https://api.github.com/repos/doctrine/persistence/zipball/8bf8ab15960787f1a49d405f6eb8c787b4841119"
                 },
                 {
-                    "type": "distribution",
+                    "type": "vcs",
                     "url": "https://github.com/doctrine/persistence.git"
                 },
                 {
@@ -197,7 +197,7 @@
                     "url": "https://api.github.com/repos/FriendsOfPHP/proxy-manager-lts/zipball/a527c9d9d5348e012bd24482d83a5cd643bcbc9e"
                 },
                 {
-                    "type": "distribution",
+                    "type": "vcs",
                     "url": "https://github.com/FriendsOfPHP/proxy-manager-lts.git"
                 },
                 {
@@ -243,7 +243,7 @@
                     "url": "https://api.github.com/repos/laminas/laminas-code/zipball/dd19fe8e07cc3f374308565667eecd4958c22106"
                 },
                 {
-                    "type": "distribution",
+                    "type": "vcs",
                     "url": "https://github.com/laminas/laminas-code.git"
                 },
                 {
@@ -310,7 +310,7 @@
                     "url": "https://api.github.com/repos/php-fig/cache/zipball/aa5030cfa5405eccfdcb1083ce040c2cb8d253bf"
                 },
                 {
-                    "type": "distribution",
+                    "type": "vcs",
                     "url": "https://github.com/php-fig/cache.git"
                 },
                 {
@@ -347,7 +347,7 @@
                     "url": "https://api.github.com/repos/php-fig/clock/zipball/e41a24703d4560fd0acb709162f73b8adfc3aa0d"
                 },
                 {
-                    "type": "distribution",
+                    "type": "vcs",
                     "url": "https://github.com/php-fig/clock.git"
                 },
                 {
@@ -394,7 +394,7 @@
                     "url": "https://api.github.com/repos/php-fig/container/zipball/c71ecc56dfe541dbd90c5360474fbc405f8d5963"
                 },
                 {
-                    "type": "distribution",
+                    "type": "vcs",
                     "url": "https://github.com/php-fig/container.git"
                 },
                 {
@@ -441,7 +441,7 @@
                     "url": "https://api.github.com/repos/php-fig/event-dispatcher/zipball/dbefd12671e8a14ec7f180cab83036ed26714bb0"
                 },
                 {
-                    "type": "distribution",
+                    "type": "vcs",
                     "url": "https://github.com/php-fig/event-dispatcher.git"
                 },
                 {
@@ -483,7 +483,7 @@
                     "url": "https://api.github.com/repos/php-fig/link/zipball/84b159194ecfd7eaa472280213976e96415433f7"
                 },
                 {
-                    "type": "distribution",
+                    "type": "vcs",
                     "url": "https://github.com/php-fig/link.git"
                 },
                 {
@@ -525,7 +525,7 @@
                     "url": "https://api.github.com/repos/php-fig/log/zipball/fe5ea303b0887d5caefd3d431c3e61ad47037001"
                 },
                 {
-                    "type": "distribution",
+                    "type": "vcs",
                     "url": "https://github.com/php-fig/log.git"
                 },
                 {
@@ -567,7 +567,7 @@
                     "url": "https://api.github.com/repos/symfony/contracts/zipball/c47da22960a1eb5e39c1ad84120734e680265610"
                 },
                 {
-                    "type": "distribution",
+                    "type": "vcs",
                     "url": "https://github.com/symfony/contracts.git"
                 },
                 {
@@ -609,7 +609,7 @@
                     "url": "https://api.github.com/repos/symfony/polyfill-ctype/zipball/5bbc823adecdae860bb64756d639ecfec17b050a"
                 },
                 {
-                    "type": "distribution",
+                    "type": "vcs",
                     "url": "https://github.com/symfony/polyfill-ctype.git"
                 },
                 {
@@ -651,7 +651,7 @@
                     "url": "https://api.github.com/repos/symfony/polyfill-intl-grapheme/zipball/511a08c03c1960e08a883f4cffcacd219b758354"
                 },
                 {
-                    "type": "distribution",
+                    "type": "vcs",
                     "url": "https://github.com/symfony/polyfill-intl-grapheme.git"
                 },
                 {
@@ -693,7 +693,7 @@
                     "url": "https://api.github.com/repos/symfony/polyfill-intl-icu/zipball/a3d9148e2c363588e05abbdd4ee4f971f0a5330c"
                 },
                 {
-                    "type": "distribution",
+                    "type": "vcs",
                     "url": "https://github.com/symfony/polyfill-intl-icu.git"
                 },
                 {
@@ -735,7 +735,7 @@
                     "url": "https://api.github.com/repos/symfony/polyfill-intl-idn/zipball/639084e360537a19f9ee352433b84ce831f3d2da"
                 },
                 {
-                    "type": "distribution",
+                    "type": "vcs",
                     "url": "https://github.com/symfony/polyfill-intl-idn.git"
                 },
                 {
@@ -777,7 +777,7 @@
                     "url": "https://api.github.com/repos/symfony/polyfill-intl-normalizer/zipball/19bd1e4fcd5b91116f14d8533c57831ed00571b6"
                 },
                 {
-                    "type": "distribution",
+                    "type": "vcs",
                     "url": "https://github.com/symfony/polyfill-intl-normalizer.git"
                 },
                 {
@@ -819,7 +819,7 @@
                     "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/8ad114f6b39e2c98a8b0e3bd907732c207c2b534"
                 },
                 {
-                    "type": "distribution",
+                    "type": "vcs",
                     "url": "https://github.com/symfony/polyfill-mbstring.git"
                 },
                 {
@@ -861,7 +861,7 @@
                     "url": "https://api.github.com/repos/symfony/polyfill-php72/zipball/869329b1e9894268a8a61dabb69153029b7a8c97"
                 },
                 {
-                    "type": "distribution",
+                    "type": "vcs",
                     "url": "https://github.com/symfony/polyfill-php72.git"
                 },
                 {
@@ -903,7 +903,7 @@
                     "url": "https://api.github.com/repos/symfony/polyfill-uuid/zipball/f3cf1a645c2734236ed1e2e671e273eeb3586166"
                 },
                 {
-                    "type": "distribution",
+                    "type": "vcs",
                     "url": "https://github.com/symfony/polyfill-uuid.git"
                 },
                 {
@@ -945,7 +945,7 @@
                     "url": "https://api.github.com/repos/symfony/symfony/zipball/008d9ac6cd61dd64d273bf5328857c7f97d9d7f6"
                 },
                 {
-                    "type": "distribution",
+                    "type": "vcs",
                     "url": "https://github.com/symfony/symfony.git"
                 },
                 {
@@ -992,7 +992,7 @@
                     "url": "https://api.github.com/repos/twigphp/Twig/zipball/a6e0510cc793912b451fd40ab983a1d28f611c15"
                 },
                 {
-                    "type": "distribution",
+                    "type": "vcs",
                     "url": "https://github.com/twigphp/Twig.git"
                 },
                 {
