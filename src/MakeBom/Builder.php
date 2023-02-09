@@ -21,7 +21,7 @@ declare(strict_types=1);
  * Copyright (c) OWASP Foundation. All Rights Reserved.
  */
 
-namespace CycloneDX\Composer;
+namespace CycloneDX\Composer\MakeBom;
 
 use Composer\Composer;
 use Composer\Package\CompletePackageInterface;
@@ -29,6 +29,7 @@ use Composer\Package\PackageInterface;
 use Composer\Package\RootPackage;
 use Composer\Package\RootPackageInterface;
 use Composer\Semver\Constraint\MatchAllConstraint;
+use CycloneDX\Composer\Properties;
 use CycloneDX\Core\Enums;
 use CycloneDX\Core\Factories\LicenseFactory;
 use CycloneDX\Core\Models;
@@ -74,7 +75,7 @@ class Builder
 
         // region packages & components
         /**
-         * @psalm-var list<\Composer\Package\PackageInterface>
+         * @psalm-var list<PackageInterface> $packages
          *
          * @psalm-suppress MixedArgument
          * @psalm-suppress UnnecessaryVarAnnotation
