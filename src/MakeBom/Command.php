@@ -26,7 +26,6 @@ namespace CycloneDX\Composer\MakeBom;
 use Composer\Command\BaseCommand;
 use Composer\Factory as ComposerFactory;
 use Composer\IO\IOInterface;
-use CycloneDX\Composer\Builder;
 use CycloneDX\Core\Serialization;
 use CycloneDX\Core\Spec\Format;
 use CycloneDX\Core\Spec\Spec;
