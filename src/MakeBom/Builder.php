@@ -47,6 +47,11 @@ use ValueError;
  */
 class Builder
 {
+    private const ComposerPackageType_Plugin = [
+        'composer-plugin',
+        'composer-installer',
+    ];
+
     /**
      * @throws RuntimeException if loading licenses failed
      */
@@ -89,7 +94,7 @@ class Builder
         /** @psalm-var array<string, Models\Component> */
         $components = [$rootPackage->getUniqueName() => $rootComponent];
         foreach ($packages as $package) {
-            if ($this->omitPlugin && 'composer-plugin' === $package->getType()) {
+            if ($this->omitPlugin && \in_array($package->getType(), self::ComposerPackageType_Plugin)) {
                 continue;
             }
             $component = $this->createComponentFromPackage($package);
