@@ -68,7 +68,7 @@ class Plugin implements PluginInterface, Capable, CommandProvider
         return [
             new MakeBom\Command(
                 new MakeBom\Options(),
-                'make-bom'
+                'CycloneDX:make-sbom'
             ),
         ];
     }
