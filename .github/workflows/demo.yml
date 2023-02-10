@@ -138,7 +138,7 @@ jobs:
         if: ${{ ! matrix.stdout }}
         working-directory: ${{ env.DEMO_RUN_DIR }}/project
         run: >
-          composer make-bom
+          composer CycloneDX:make-sbom
           -vvv
           --exclude-dev
           --spec-version=${{ matrix.spec-version }}
@@ -148,7 +148,7 @@ jobs:
         if: ${{ matrix.stdout }}
         working-directory: ${{ env.DEMO_RUN_DIR }}/project
         run: >
-          composer make-bom
+          composer CycloneDX:make-sbom
           -vvv
           --exclude-dev
           --spec-version=${{ matrix.spec-version }}

@@ -66,6 +66,13 @@ class Command extends BaseCommand
     private $toolUpdater;
 
     /**
+     * alternative command, if this one os deprecated.
+     *
+     * @var string|null
+     */
+    private $deprecatedAlternative;
+
+    /**
      * @throws \LogicException When the command name is empty
      */
     public function __construct(
@@ -80,6 +87,16 @@ class Command extends BaseCommand
         $this->bomBuilder = $bomFactory;
         $this->toolUpdater = $toolUpdater;
         parent::__construct($name);
+    }
+
+    /**
+     * @return $this
+     */
+    public function setDeprecated(?string $alternative): self
+    {
+        $this->deprecatedAlternative = $alternative;
+
+        return $this;
     }
 
     protected function configure(): void
@@ -103,6 +120,17 @@ class Command extends BaseCommand
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = $this->getIO();
+
+        if (!empty($this->deprecatedAlternative)) {
+            $io->writeError([
+                ' ', // leading blank line
+                sprintf(
+                    '<warning>This command is deprecated; use "%s" instead.</warning>',
+                    $this->deprecatedAlternative
+                ),
+                ' ', // trailing blank line
+            ]);
+        }
 
         try {
             $this->options->setFromInput($input);

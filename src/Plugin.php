@@ -74,20 +74,31 @@ class Plugin implements PluginInterface, Capable, CommandProvider
             new Builders\ExternalReferenceRepositoryBuilder()
         );
 
-        return [
-            new MakeBom\Command(
-                new MakeBom\Options(),
-                new MakeBom\Factory(
-                    new ComposerFactory(),
-                    new SpecFactory()
-                ),
-                new Builders\BomBuilder(
-                    $componentBuilder,
-                    $this->makeTool()
-                ),
-                new ToolUpdater($componentBuilder),
-                'make-bom'
+        $command = new MakeBom\Command(
+            new MakeBom\Options(),
+            new MakeBom\Factory(
+                new ComposerFactory(),
+                new SpecFactory()
             ),
+            new Builders\BomBuilder(
+                $componentBuilder,
+                $this->makeTool()
+            ),
+            new ToolUpdater($componentBuilder),
+            'CycloneDX:make-sbom'
+        );
+
+        $deprecatedCommand = (clone $command)
+            ->setName('make-bom')
+            ->setDeprecated($command->getName())
+            ->setDescription(
+                $command->getDescription().
+                ". This command is <warning>deprecated</warning>; use '{$command->getName()}' instead."
+            );
+
+        return [
+            $command,
+            $deprecatedCommand,
         ];
     }
 

@@ -41,12 +41,12 @@ composer require --dev cyclonedx/cyclonedx-php-composer
 
 ## Usage
 
-After successful installation, the composer command `make-bom` is available.
+After successful installation, the composer command `CycloneDX:make-sbom` is available.
 
 ```text
-$ composer make-bom -h
+$ composer CycloneDX:make-sbom -h
 Usage:
-  make-bom [options] [--] [<composer-file>]
+  CycloneDX:make-sbom [options] [--] [<composer-file>]
 
 Arguments:
   composer-file                      Path to composer config file.
