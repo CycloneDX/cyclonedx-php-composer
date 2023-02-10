@@ -280,7 +280,7 @@ class Options
      *
      * @psalm-suppress MissingThrowsDocblock
      */
-    public function setFromInput(InputInterface $input): self
+    public function setFromInput(InputInterface $input): static
     {
         // region get from input
 
