@@ -49,13 +49,6 @@ jobs:
           - "8.2" # highest supported
           - "8.1" # lowest supported
         dependencies: [ "lowest", "highest" ]
-        exclude:
-          - # unstable combinations: throws PHP Deprecated warnings
-            php: "8.2"
-            dependencies: "lowest"
-          - # unstable combinations: throws PHP Deprecated warnings
-            php: "8.1"
-            dependencies: "lowest"
         include:
           - # Windows highest
             os: windows-latest
