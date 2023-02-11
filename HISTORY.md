@@ -9,6 +9,7 @@ All notable changes to this project will be documented in this file.
   * Removed support for PHP `<8.1` (via [#250])
   * Removed support for Composer `<2.3` ([#153] via [#250])
   * CLI
+    * Removed deprecated composer command `make-bom`, call `composer CycloneDX:make-sbom` instead ([#293] via [#309])
     * Changed option `output-file` to default to `-` now, which causes to print to STDOUT (via [#250])
     * Removed option `exclude-dev` in favour of new option `omit` (via [#250])
     * Removed option `exclude-plugins` in favour of new option `omit` (via [#250])
@@ -45,6 +46,8 @@ All notable changes to this project will be documented in this file.
 [#250]: https://github.com/CycloneDX/cyclonedx-php-composer/pull/250
 [#261]: https://github.com/CycloneDX/cyclonedx-php-composer/issues/261
 [#279]: https://github.com/CycloneDX/cyclonedx-php-composer/issues/279
+[#293]: https://github.com/CycloneDX/cyclonedx-php-composer/issues/293
+[#309]: https://github.com/CycloneDX/cyclonedx-php-composer/pull/309
 
 
 ## 3.11.0 - 2023-02-11
