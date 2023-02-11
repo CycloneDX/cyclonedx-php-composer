@@ -4,18 +4,16 @@ name: Assure PHP Dev Setup
 
 on:
   push:
-    branches: ["master"]
+    branches: ["master", "next"]
     paths:
       - '.github/workflows/php-dev.yml'
       - 'tools/**'
-      - 'composer.json'
-      - 'composer.lock'
+      - 'composer.*'
   pull_request:
     paths:
       - '.github/workflows/php-dev.yml'
       - 'tools/**'
-      - 'composer.json'
-      - 'composer.lock'
+      - 'composer.*'
   workflow_dispatch:
   schedule:
     # schedule weekly tests, since dependencies are not intended to be pinned
@@ -48,7 +46,7 @@ jobs:
         with:
           php-version: ${{ matrix.php }}
           extensions: ${{ env.PHP_PROJECT_EXT }}
-          tools: composer:v2
+          tools: 'composer:v2'
       - name: Get composer cache directory
         id: composer-cache
         run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
@@ -58,7 +56,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
-          key: composer-${{ github.job }}-${{ runner.os }}-php${{ matrix.php }}-${{ hashFiles('**/composer.json') }}
+          key: composer-${{ github.job }}-${{ runner.os }}-php${{ matrix.php }}-${{ hashFiles('composer.*', 'tools/*/composer.*') }}
           restore-keys: |
             composer-${{ github.job }}-${{ runner.os }}-php${{ matrix.php }}-
             composer-${{ github.job }}-${{ runner.os }}-

@@ -7,16 +7,18 @@ name: DEMO
 
 on:
   push:
-    branches: ["master"]
-    paths-ignore:
-      - 'docs/**'
-      - 'tests/**'
-      - 'tools/**'
+    branches: ["master", "next"]
+    paths:
+      - '.github/workflows/demo.yml'
+      - 'src/**'
+      - 'demo/**'
+      - 'composer.*'
   pull_request:
-    paths-ignore:
-      - 'docs/**'
-      - 'tests/**'
-      - 'tools/**'
+    paths:
+      - '.github/workflows/demo.yml'
+      - 'src/**'
+      - 'demo/**'
+      - 'composer.*'
   workflow_dispatch:
   schedule:
     # schedule weekly tests, since dependencies are not intended to be pinned
@@ -37,11 +39,11 @@ jobs:
       Reproducible "${{ matrix.subject }}"
       (${{ matrix.spec-version }}
       ${{ matrix.output-format }},
-      composer${{ matrix.composer }}
-      php${{ matrix.php }},
+      c${{ matrix.composer }}
+      p${{ matrix.php }},
       stdout:${{ matrix.stdout }})
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 10
     env:
       REPORTS_ARTIFACT: demo-reproducible
     strategy:
@@ -52,11 +54,11 @@ jobs:
           - laravel-7.12.0
           - local
         php:
-          - "8.2" # latest
-          - "8.1" # lowest supported
+          - "8.2"  # latest
+          - "8.1"  # lowest supported
         composer:
-          - "2"     # latest 2.x
-          - "2.3"   # latest 2.3 = lowest supported
+          - "v2"   # latest 2.x
+          - "2.3"  # latest 2.3 = lowest supported
         output-format:
           # lowercase the format, since it is also used as a file extension when searching the original file
           - xml
@@ -85,9 +87,9 @@ jobs:
             stdout: false
           - # test if STDOUT receives no data except the SBOM
             stdout: true  # << the subject of this test-case
-            php: "8.2"            # latest
-            composer: "2"         # latest
-            spec-version: "1.4"   # latest
+            php: "8.2"           # latest
+            composer: "v2"       # latest
+            spec-version: "1.4"  # latest
             # any other props
             subject: laravel-7.12.0
             output-format: xml
@@ -120,7 +122,7 @@ jobs:
         with:
           php-version: ${{ matrix.php }}
           extensions: ${{ env.PHP_PROJECT_EXT }}
-          tools: composer:v${{ matrix.composer }}
+          tools: composer:${{ matrix.composer }}
           coverage: none
       - name: Get composer cache directory
         id: composer-cache
@@ -132,7 +134,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
-          key: composer-${{ github.job }}-${{ matrix.subject }}-php${{ matrix.php }}-${{ hashFiles('demo/**/composer.lock') }}
+          key: composer-${{ github.job }}-${{ matrix.subject }}-php${{ matrix.php }}-${{ hashFiles('composer.*', 'demo/*/project/composer.*') }}
           restore-keys: |
             composer-${{ github.job }}-${{ matrix.subject }}-php${{ matrix.php }}-
             composer-${{ github.job }}-${{ matrix.subject }}-
