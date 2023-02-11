@@ -14,14 +14,9 @@
     ],
     "authors": [
         {
-            "name": "nscuro",
-            "email": "nscuro@protonmail.com",
-            "role": "Developer"
-        },
-        {
             "name": "Jan Kowalleck",
             "email": "jan.kowalleck@gmail.com",
-            "role": "Developer"
+            "homepage": "https://github.com/jkowalleck"
         }
     ],
     "homepage": "https://github.com/CycloneDX/cyclonedx-php-composer/#readme",
