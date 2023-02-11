@@ -4,7 +4,10 @@ All notable changes to this project will be documented in this file.
 
 ## unreleased
 
-* Changes
+
+## 3.11.0 - 2023-02-11
+
+* Changed
   * CLI via `composer make-bom` became deprecated, use `composer CycloneDX:make-sbom` instead. ([#293] via [#308])  
     The composer command `make-bom` will be removed in the next major version.
 
@@ -15,7 +18,7 @@ All notable changes to this project will be documented in this file.
 
 Maintenance Release.
 
-* Legal:
+* Legal
   * Transferred copyright to OWASP Foundation. (via [#244])
 
 [#244]: https://github.com/CycloneDX/cyclonedx-php-composer/pull/244
