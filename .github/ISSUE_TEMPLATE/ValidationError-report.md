@@ -12,7 +12,7 @@ assignees: ''
 Steps to reproduce the behavior:
 
 1. How was _cyclonedx-php-composer_  called?
-   <!-- e.g. `composer make-bom --exclude-dev ...` -->
+   <!-- e.g. `composer CycloneDX:make-sbom --exclude-dev ...` -->
 2. What `composer.lock` file was processed?
    <!-- upload it to this issue, or a pastebin of you choice and put the link here. -->
 3. Error report:
