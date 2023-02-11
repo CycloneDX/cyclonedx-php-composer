@@ -10,19 +10,19 @@
 
 # CycloneDX PHP Composer Plugin
 
-A plugin for PHP's [Composer](https://getcomposer.org/)
-that generates Software Bill of Materials (SBoM) in [CycloneDX](https://cyclonedx.org/) format.
+A plugin for PHP's _[Composer](https://getcomposer.org/)_
+that generates Software Bill of Materials (SBOM) in _[CycloneDX](https://cyclonedx.org/)_ format.
 
 The resulting SBOM documents follow [official specifications and standards](https://github.com/CycloneDX/specification),
-and might have properties following [`cdx:npm` Namespace Taxonomy](https://github.com/CycloneDX/cyclonedx-property-taxonomy/blob/main/cdx/composer.md)
+and might have properties following [`cdx:composer` Namespace Taxonomy](https://github.com/CycloneDX/cyclonedx-property-taxonomy/blob/main/cdx/composer.md)
 .
 
 ## Requirements
 
-*  PHP `^8.1`
+* PHP `^8.1`
 * Composer `^2.3`
 
-There are older versions of this plugin available, which
+However, there are older versions of this plugin available, which
 support PHP `^5.5||^7.0||^8.0`
 with Composer `^1.0||^2.0`
 .
@@ -76,7 +76,7 @@ Options:
 
 ## Demo
 
-For a demo of _cyclonedx-php-composer_ see the [demo project][demo_readme].
+For a demo of _cyclonedx-php-composer_ see the [demo projects][demo_readme].
 
 ## Internals
 
