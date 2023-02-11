@@ -109,9 +109,10 @@ final class PluginTest extends TestCase
         self::assertContainsOnlyInstancesOf(\Composer\Command\BaseCommand::class, $commands);
 
         self::assertCount(1, $commands);
-        $command = reset($commands);
+
+        $command = $commands[0];
         self::assertInstanceOf(Command::class, $command);
-        self::assertSame('make-bom', $command->getName());
+        self::assertSame('CycloneDX:make-sbom', $command->getName());
     }
 
     #[\PHPUnit\Framework\Attributes\Depends('testPluginImplementsRequiredInterfaces')]
