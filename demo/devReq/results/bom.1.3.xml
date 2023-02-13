@@ -79,6 +79,8 @@
         </reference>
       </externalReferences>
       <properties>
+        <property name="cdx:composer:package:distReference"><![CDATA[10dcfce151b967d20fde1b34ae6640712c3891bc]]></property>
+        <property name="cdx:composer:package:sourceReference"><![CDATA[10dcfce151b967d20fde1b34ae6640712c3891bc]]></property>
         <property name="cdx:composer:package:type"><![CDATA[library]]></property>
       </properties>
     </component>
@@ -109,6 +111,8 @@
         </reference>
       </externalReferences>
       <properties>
+        <property name="cdx:composer:package:distReference"><![CDATA[14daed4296fae74d9e3201d2c4925d1acb7aa614]]></property>
+        <property name="cdx:composer:package:sourceReference"><![CDATA[14daed4296fae74d9e3201d2c4925d1acb7aa614]]></property>
         <property name="cdx:composer:package:type"><![CDATA[library]]></property>
       </properties>
     </component>
@@ -140,6 +144,8 @@
         </reference>
       </externalReferences>
       <properties>
+        <property name="cdx:composer:package:distReference"><![CDATA[f59bbe44bf7d96f24f3e2b4ddc21cd52c1d2adbc]]></property>
+        <property name="cdx:composer:package:sourceReference"><![CDATA[f59bbe44bf7d96f24f3e2b4ddc21cd52c1d2adbc]]></property>
         <property name="cdx:composer:package:type"><![CDATA[library]]></property>
       </properties>
     </component>
@@ -171,6 +177,8 @@
         </reference>
       </externalReferences>
       <properties>
+        <property name="cdx:composer:package:distReference"><![CDATA[97803eca37d319dfa7826cc2437fc020857acb53]]></property>
+        <property name="cdx:composer:package:sourceReference"><![CDATA[97803eca37d319dfa7826cc2437fc020857acb53]]></property>
         <property name="cdx:composer:package:type"><![CDATA[library]]></property>
       </properties>
     </component>
@@ -202,6 +210,8 @@
         </reference>
       </externalReferences>
       <properties>
+        <property name="cdx:composer:package:distReference"><![CDATA[4f7fd7836c6f332bb2933569e566a0d6c4cbed74]]></property>
+        <property name="cdx:composer:package:sourceReference"><![CDATA[4f7fd7836c6f332bb2933569e566a0d6c4cbed74]]></property>
         <property name="cdx:composer:package:type"><![CDATA[library]]></property>
       </properties>
     </component>
@@ -237,6 +247,8 @@
         </reference>
       </externalReferences>
       <properties>
+        <property name="cdx:composer:package:distReference"><![CDATA[c77b56b63e3d2031bd8997fcec43c1925ae46559]]></property>
+        <property name="cdx:composer:package:sourceReference"><![CDATA[c77b56b63e3d2031bd8997fcec43c1925ae46559]]></property>
         <property name="cdx:composer:package:type"><![CDATA[library]]></property>
       </properties>
     </component>
@@ -272,6 +284,8 @@
         </reference>
       </externalReferences>
       <properties>
+        <property name="cdx:composer:package:distReference"><![CDATA[cf1c2e7c203ac650e352f4cc675a7021e7d1b3cf]]></property>
+        <property name="cdx:composer:package:sourceReference"><![CDATA[cf1c2e7c203ac650e352f4cc675a7021e7d1b3cf]]></property>
         <property name="cdx:composer:package:type"><![CDATA[library]]></property>
       </properties>
     </component>
@@ -307,6 +321,8 @@
         </reference>
       </externalReferences>
       <properties>
+        <property name="cdx:composer:package:distReference"><![CDATA[5a10147d0aaf65b58940a0b72f71c9ac0423cc67]]></property>
+        <property name="cdx:composer:package:sourceReference"><![CDATA[5a10147d0aaf65b58940a0b72f71c9ac0423cc67]]></property>
         <property name="cdx:composer:package:type"><![CDATA[library]]></property>
       </properties>
     </component>
@@ -342,6 +358,8 @@
         </reference>
       </externalReferences>
       <properties>
+        <property name="cdx:composer:package:distReference"><![CDATA[5da5f67fc95621df9ff4c4e5a84d6a8a2acf7c28]]></property>
+        <property name="cdx:composer:package:sourceReference"><![CDATA[5da5f67fc95621df9ff4c4e5a84d6a8a2acf7c28]]></property>
         <property name="cdx:composer:package:type"><![CDATA[library]]></property>
       </properties>
     </component>
@@ -377,6 +395,8 @@
         </reference>
       </externalReferences>
       <properties>
+        <property name="cdx:composer:package:distReference"><![CDATA[5a63ce20ed1b5bf577850e2c4e87f4aa902afbd2]]></property>
+        <property name="cdx:composer:package:sourceReference"><![CDATA[5a63ce20ed1b5bf577850e2c4e87f4aa902afbd2]]></property>
         <property name="cdx:composer:package:type"><![CDATA[library]]></property>
       </properties>
     </component>
@@ -412,6 +432,8 @@
         </reference>
       </externalReferences>
       <properties>
+        <property name="cdx:composer:package:distReference"><![CDATA[851867efcbb6a1b992ec515c71cdcf20d895e9d2]]></property>
+        <property name="cdx:composer:package:sourceReference"><![CDATA[851867efcbb6a1b992ec515c71cdcf20d895e9d2]]></property>
         <property name="cdx:composer:package:type"><![CDATA[library]]></property>
         <property name="cdx:composer:package:isDevRequirement"><![CDATA[true]]></property>
       </properties>
@@ -448,6 +470,8 @@
         </reference>
       </externalReferences>
       <properties>
+        <property name="cdx:composer:package:distReference"><![CDATA[442e7c7e687e42adc03470c7b668bc4b2402c0b2]]></property>
+        <property name="cdx:composer:package:sourceReference"><![CDATA[442e7c7e687e42adc03470c7b668bc4b2402c0b2]]></property>
         <property name="cdx:composer:package:type"><![CDATA[library]]></property>
       </properties>
     </component>
@@ -483,6 +507,8 @@
         </reference>
       </externalReferences>
       <properties>
+        <property name="cdx:composer:package:distReference"><![CDATA[1fc9f64c0927627ef78ba436c9b17d967e68e120]]></property>
+        <property name="cdx:composer:package:sourceReference"><![CDATA[1fc9f64c0927627ef78ba436c9b17d967e68e120]]></property>
         <property name="cdx:composer:package:type"><![CDATA[library]]></property>
       </properties>
     </component>
@@ -518,6 +544,8 @@
         </reference>
       </externalReferences>
       <properties>
+        <property name="cdx:composer:package:distReference"><![CDATA[ac91f01ccec49fb77bdc6fd1e548bc70f7faa3e5]]></property>
+        <property name="cdx:composer:package:sourceReference"><![CDATA[ac91f01ccec49fb77bdc6fd1e548bc70f7faa3e5]]></property>
         <property name="cdx:composer:package:type"><![CDATA[library]]></property>
       </properties>
     </component>
@@ -553,6 +581,8 @@
         </reference>
       </externalReferences>
       <properties>
+        <property name="cdx:composer:package:distReference"><![CDATA[fa0f136dd2334583309d32b62544682ee972b51a]]></property>
+        <property name="cdx:composer:package:sourceReference"><![CDATA[fa0f136dd2334583309d32b62544682ee972b51a]]></property>
         <property name="cdx:composer:package:type"><![CDATA[library]]></property>
       </properties>
     </component>
@@ -588,6 +618,8 @@
         </reference>
       </externalReferences>
       <properties>
+        <property name="cdx:composer:package:distReference"><![CDATA[739b35e53379900cc9ac327b2147867b8b6efd88]]></property>
+        <property name="cdx:composer:package:sourceReference"><![CDATA[739b35e53379900cc9ac327b2147867b8b6efd88]]></property>
         <property name="cdx:composer:package:type"><![CDATA[library]]></property>
       </properties>
     </component>
@@ -623,6 +655,8 @@
         </reference>
       </externalReferences>
       <properties>
+        <property name="cdx:composer:package:distReference"><![CDATA[3461e3fccc7cfdfc2720be910d3bd73c69be590d]]></property>
+        <property name="cdx:composer:package:sourceReference"><![CDATA[3461e3fccc7cfdfc2720be910d3bd73c69be590d]]></property>
         <property name="cdx:composer:package:type"><![CDATA[library]]></property>
       </properties>
     </component>
@@ -658,6 +692,8 @@
         </reference>
       </externalReferences>
       <properties>
+        <property name="cdx:composer:package:distReference"><![CDATA[1b5dff7bb151a4db11d49d90e5408e4e938270f7]]></property>
+        <property name="cdx:composer:package:sourceReference"><![CDATA[1b5dff7bb151a4db11d49d90e5408e4e938270f7]]></property>
         <property name="cdx:composer:package:type"><![CDATA[library]]></property>
       </properties>
     </component>
@@ -693,6 +729,8 @@
         </reference>
       </externalReferences>
       <properties>
+        <property name="cdx:composer:package:distReference"><![CDATA[ac230ed27f0f98f597c8a2b6eb7ac563af5e5b9d]]></property>
+        <property name="cdx:composer:package:sourceReference"><![CDATA[ac230ed27f0f98f597c8a2b6eb7ac563af5e5b9d]]></property>
         <property name="cdx:composer:package:type"><![CDATA[library]]></property>
       </properties>
     </component>
@@ -728,6 +766,8 @@
         </reference>
       </externalReferences>
       <properties>
+        <property name="cdx:composer:package:distReference"><![CDATA[0ca8db5a5fc9c8646244e629625ac486fa286bf2]]></property>
+        <property name="cdx:composer:package:sourceReference"><![CDATA[0ca8db5a5fc9c8646244e629625ac486fa286bf2]]></property>
         <property name="cdx:composer:package:type"><![CDATA[library]]></property>
       </properties>
     </component>
@@ -763,6 +803,8 @@
         </reference>
       </externalReferences>
       <properties>
+        <property name="cdx:composer:package:distReference"><![CDATA[c1c2e997aa3146983ed888ad08b15470a2e22ecc]]></property>
+        <property name="cdx:composer:package:sourceReference"><![CDATA[c1c2e997aa3146983ed888ad08b15470a2e22ecc]]></property>
         <property name="cdx:composer:package:type"><![CDATA[library]]></property>
       </properties>
     </component>
@@ -798,6 +840,8 @@
         </reference>
       </externalReferences>
       <properties>
+        <property name="cdx:composer:package:distReference"><![CDATA[5c9eeac41b290a3712d88851518825ad78f45c71]]></property>
+        <property name="cdx:composer:package:sourceReference"><![CDATA[5c9eeac41b290a3712d88851518825ad78f45c71]]></property>
         <property name="cdx:composer:package:type"><![CDATA[library]]></property>
       </properties>
     </component>
@@ -833,6 +877,8 @@
         </reference>
       </externalReferences>
       <properties>
+        <property name="cdx:composer:package:distReference"><![CDATA[b4f479ebdbf63ac605d183ece17d8d7fe49c15c7]]></property>
+        <property name="cdx:composer:package:sourceReference"><![CDATA[b4f479ebdbf63ac605d183ece17d8d7fe49c15c7]]></property>
         <property name="cdx:composer:package:type"><![CDATA[library]]></property>
       </properties>
     </component>
@@ -868,6 +914,8 @@
         </reference>
       </externalReferences>
       <properties>
+        <property name="cdx:composer:package:distReference"><![CDATA[cd9d8cf3c5804de4341c283ed787f099f5506172]]></property>
+        <property name="cdx:composer:package:sourceReference"><![CDATA[cd9d8cf3c5804de4341c283ed787f099f5506172]]></property>
         <property name="cdx:composer:package:type"><![CDATA[library]]></property>
       </properties>
     </component>
@@ -903,6 +951,8 @@
         </reference>
       </externalReferences>
       <properties>
+        <property name="cdx:composer:package:distReference"><![CDATA[0f4443cb3a1d92ce809899753bc0d5d5a8dd19a8]]></property>
+        <property name="cdx:composer:package:sourceReference"><![CDATA[0f4443cb3a1d92ce809899753bc0d5d5a8dd19a8]]></property>
         <property name="cdx:composer:package:type"><![CDATA[library]]></property>
       </properties>
     </component>
@@ -938,6 +988,8 @@
         </reference>
       </externalReferences>
       <properties>
+        <property name="cdx:composer:package:distReference"><![CDATA[fb3fe09c5f0bae6bc27ef3ce933a1e0ed9464b6e]]></property>
+        <property name="cdx:composer:package:sourceReference"><![CDATA[fb3fe09c5f0bae6bc27ef3ce933a1e0ed9464b6e]]></property>
         <property name="cdx:composer:package:type"><![CDATA[library]]></property>
       </properties>
     </component>
@@ -973,6 +1025,8 @@
         </reference>
       </externalReferences>
       <properties>
+        <property name="cdx:composer:package:distReference"><![CDATA[c6c1022351a901512170118436c764e473f6de8c]]></property>
+        <property name="cdx:composer:package:sourceReference"><![CDATA[c6c1022351a901512170118436c764e473f6de8c]]></property>
         <property name="cdx:composer:package:type"><![CDATA[library]]></property>
       </properties>
     </component>
@@ -1004,6 +1058,8 @@
         </reference>
       </externalReferences>
       <properties>
+        <property name="cdx:composer:package:distReference"><![CDATA[34a41e998c2183e22995f158c581e7b5e755ab9e]]></property>
+        <property name="cdx:composer:package:sourceReference"><![CDATA[34a41e998c2183e22995f158c581e7b5e755ab9e]]></property>
         <property name="cdx:composer:package:type"><![CDATA[library]]></property>
       </properties>
     </component>

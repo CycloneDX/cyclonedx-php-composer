@@ -2,15 +2,15 @@
     "$schema": "http://cyclonedx.org/schema/bom-1.4.schema.json",
     "bomFormat": "CycloneDX",
     "specVersion": "1.4",
-    "serialNumber": "urn:uuid:6052c95f-86e0-47c4-9fc4-bf8ef0a5158e",
+    "serialNumber": "urn:uuid:fc566029-e15e-4eba-b53f-0beba43dad2f",
     "version": 1,
     "metadata": {
-        "timestamp": "2023-02-09T09:54:09Z",
+        "timestamp": "2023-02-13T13:07:50Z",
         "tools": [
             {
                 "vendor": "cyclonedx",
                 "name": "cyclonedx-php-composer",
-                "version": "dev-mode-ext-refs",
+                "version": "dev-dist-source-reference",
                 "externalReferences": [
                     {
                         "type": "distribution",
@@ -36,11 +36,11 @@
             {
                 "vendor": "cyclonedx",
                 "name": "cyclonedx-library",
-                "version": "2.x-dev 3d74aae",
+                "version": "2.x-dev 2f76986",
                 "externalReferences": [
                     {
                         "type": "distribution",
-                        "url": "https://api.github.com/repos/CycloneDX/cyclonedx-php-library/zipball/3d74aaeaa30dcf278edfd3434fb79e8069bb3558"
+                        "url": "https://api.github.com/repos/CycloneDX/cyclonedx-php-library/zipball/2f769869be9bab5aaa124446486769b3b6a7a82e"
                     },
                     {
                         "type": "vcs",
@@ -74,6 +74,14 @@
             "author": "Jan Kowalleck",
             "purl": "pkg:composer/cyclonedx/cyclonedx-php-composer-demo@dev-next",
             "properties": [
+                {
+                    "name": "cdx:composer:package:distReference",
+                    "value": "ba2f5d5f2defd1111967a4e8ff0f3192fc88b185"
+                },
+                {
+                    "name": "cdx:composer:package:sourceReference",
+                    "value": "ba2f5d5f2defd1111967a4e8ff0f3192fc88b185"
+                },
                 {
                     "name": "cdx:composer:package:type",
                     "value": "project"
@@ -124,6 +132,14 @@
             ],
             "properties": [
                 {
+                    "name": "cdx:composer:package:distReference",
+                    "value": "750671534e0241a7c50ea5b43f67e23eb5c96f32"
+                },
+                {
+                    "name": "cdx:composer:package:sourceReference",
+                    "value": "750671534e0241a7c50ea5b43f67e23eb5c96f32"
+                },
+                {
                     "name": "cdx:composer:package:type",
                     "value": "library"
                 }
@@ -171,6 +187,14 @@
             ],
             "properties": [
                 {
+                    "name": "cdx:composer:package:distReference",
+                    "value": "8bf8ab15960787f1a49d405f6eb8c787b4841119"
+                },
+                {
+                    "name": "cdx:composer:package:sourceReference",
+                    "value": "8bf8ab15960787f1a49d405f6eb8c787b4841119"
+                },
+                {
                     "name": "cdx:composer:package:type",
                     "value": "library"
                 }
@@ -217,6 +241,14 @@
                 }
             ],
             "properties": [
+                {
+                    "name": "cdx:composer:package:distReference",
+                    "value": "a527c9d9d5348e012bd24482d83a5cd643bcbc9e"
+                },
+                {
+                    "name": "cdx:composer:package:sourceReference",
+                    "value": "a527c9d9d5348e012bd24482d83a5cd643bcbc9e"
+                },
                 {
                     "name": "cdx:composer:package:type",
                     "value": "library"
@@ -284,6 +316,14 @@
             ],
             "properties": [
                 {
+                    "name": "cdx:composer:package:distReference",
+                    "value": "dd19fe8e07cc3f374308565667eecd4958c22106"
+                },
+                {
+                    "name": "cdx:composer:package:sourceReference",
+                    "value": "dd19fe8e07cc3f374308565667eecd4958c22106"
+                },
+                {
                     "name": "cdx:composer:package:type",
                     "value": "library"
                 }
@@ -320,6 +360,14 @@
                 }
             ],
             "properties": [
+                {
+                    "name": "cdx:composer:package:distReference",
+                    "value": "aa5030cfa5405eccfdcb1083ce040c2cb8d253bf"
+                },
+                {
+                    "name": "cdx:composer:package:sourceReference",
+                    "value": "aa5030cfa5405eccfdcb1083ce040c2cb8d253bf"
+                },
                 {
                     "name": "cdx:composer:package:type",
                     "value": "library"
@@ -368,6 +416,14 @@
             ],
             "properties": [
                 {
+                    "name": "cdx:composer:package:distReference",
+                    "value": "e41a24703d4560fd0acb709162f73b8adfc3aa0d"
+                },
+                {
+                    "name": "cdx:composer:package:sourceReference",
+                    "value": "e41a24703d4560fd0acb709162f73b8adfc3aa0d"
+                },
+                {
                     "name": "cdx:composer:package:type",
                     "value": "library"
                 }
@@ -415,6 +471,14 @@
             ],
             "properties": [
                 {
+                    "name": "cdx:composer:package:distReference",
+                    "value": "c71ecc56dfe541dbd90c5360474fbc405f8d5963"
+                },
+                {
+                    "name": "cdx:composer:package:sourceReference",
+                    "value": "c71ecc56dfe541dbd90c5360474fbc405f8d5963"
+                },
+                {
                     "name": "cdx:composer:package:type",
                     "value": "library"
                 }
@@ -456,6 +520,14 @@
                 }
             ],
             "properties": [
+                {
+                    "name": "cdx:composer:package:distReference",
+                    "value": "dbefd12671e8a14ec7f180cab83036ed26714bb0"
+                },
+                {
+                    "name": "cdx:composer:package:sourceReference",
+                    "value": "dbefd12671e8a14ec7f180cab83036ed26714bb0"
+                },
                 {
                     "name": "cdx:composer:package:type",
                     "value": "library"
@@ -499,6 +571,14 @@
             ],
             "properties": [
                 {
+                    "name": "cdx:composer:package:distReference",
+                    "value": "84b159194ecfd7eaa472280213976e96415433f7"
+                },
+                {
+                    "name": "cdx:composer:package:sourceReference",
+                    "value": "84b159194ecfd7eaa472280213976e96415433f7"
+                },
+                {
                     "name": "cdx:composer:package:type",
                     "value": "library"
                 }
@@ -540,6 +620,14 @@
                 }
             ],
             "properties": [
+                {
+                    "name": "cdx:composer:package:distReference",
+                    "value": "fe5ea303b0887d5caefd3d431c3e61ad47037001"
+                },
+                {
+                    "name": "cdx:composer:package:sourceReference",
+                    "value": "fe5ea303b0887d5caefd3d431c3e61ad47037001"
+                },
                 {
                     "name": "cdx:composer:package:type",
                     "value": "library"
@@ -583,6 +671,14 @@
             ],
             "properties": [
                 {
+                    "name": "cdx:composer:package:distReference",
+                    "value": "c47da22960a1eb5e39c1ad84120734e680265610"
+                },
+                {
+                    "name": "cdx:composer:package:sourceReference",
+                    "value": "c47da22960a1eb5e39c1ad84120734e680265610"
+                },
+                {
                     "name": "cdx:composer:package:type",
                     "value": "library"
                 }
@@ -624,6 +720,14 @@
                 }
             ],
             "properties": [
+                {
+                    "name": "cdx:composer:package:distReference",
+                    "value": "5bbc823adecdae860bb64756d639ecfec17b050a"
+                },
+                {
+                    "name": "cdx:composer:package:sourceReference",
+                    "value": "5bbc823adecdae860bb64756d639ecfec17b050a"
+                },
                 {
                     "name": "cdx:composer:package:type",
                     "value": "library"
@@ -667,6 +771,14 @@
             ],
             "properties": [
                 {
+                    "name": "cdx:composer:package:distReference",
+                    "value": "511a08c03c1960e08a883f4cffcacd219b758354"
+                },
+                {
+                    "name": "cdx:composer:package:sourceReference",
+                    "value": "511a08c03c1960e08a883f4cffcacd219b758354"
+                },
+                {
                     "name": "cdx:composer:package:type",
                     "value": "library"
                 }
@@ -708,6 +820,14 @@
                 }
             ],
             "properties": [
+                {
+                    "name": "cdx:composer:package:distReference",
+                    "value": "a3d9148e2c363588e05abbdd4ee4f971f0a5330c"
+                },
+                {
+                    "name": "cdx:composer:package:sourceReference",
+                    "value": "a3d9148e2c363588e05abbdd4ee4f971f0a5330c"
+                },
                 {
                     "name": "cdx:composer:package:type",
                     "value": "library"
@@ -751,6 +871,14 @@
             ],
             "properties": [
                 {
+                    "name": "cdx:composer:package:distReference",
+                    "value": "639084e360537a19f9ee352433b84ce831f3d2da"
+                },
+                {
+                    "name": "cdx:composer:package:sourceReference",
+                    "value": "639084e360537a19f9ee352433b84ce831f3d2da"
+                },
+                {
                     "name": "cdx:composer:package:type",
                     "value": "library"
                 }
@@ -792,6 +920,14 @@
                 }
             ],
             "properties": [
+                {
+                    "name": "cdx:composer:package:distReference",
+                    "value": "19bd1e4fcd5b91116f14d8533c57831ed00571b6"
+                },
+                {
+                    "name": "cdx:composer:package:sourceReference",
+                    "value": "19bd1e4fcd5b91116f14d8533c57831ed00571b6"
+                },
                 {
                     "name": "cdx:composer:package:type",
                     "value": "library"
@@ -835,6 +971,14 @@
             ],
             "properties": [
                 {
+                    "name": "cdx:composer:package:distReference",
+                    "value": "8ad114f6b39e2c98a8b0e3bd907732c207c2b534"
+                },
+                {
+                    "name": "cdx:composer:package:sourceReference",
+                    "value": "8ad114f6b39e2c98a8b0e3bd907732c207c2b534"
+                },
+                {
                     "name": "cdx:composer:package:type",
                     "value": "library"
                 }
@@ -877,6 +1021,14 @@
             ],
             "properties": [
                 {
+                    "name": "cdx:composer:package:distReference",
+                    "value": "869329b1e9894268a8a61dabb69153029b7a8c97"
+                },
+                {
+                    "name": "cdx:composer:package:sourceReference",
+                    "value": "869329b1e9894268a8a61dabb69153029b7a8c97"
+                },
+                {
                     "name": "cdx:composer:package:type",
                     "value": "library"
                 }
@@ -918,6 +1070,14 @@
                 }
             ],
             "properties": [
+                {
+                    "name": "cdx:composer:package:distReference",
+                    "value": "f3cf1a645c2734236ed1e2e671e273eeb3586166"
+                },
+                {
+                    "name": "cdx:composer:package:sourceReference",
+                    "value": "f3cf1a645c2734236ed1e2e671e273eeb3586166"
+                },
                 {
                     "name": "cdx:composer:package:type",
                     "value": "library"
@@ -966,6 +1126,14 @@
             ],
             "properties": [
                 {
+                    "name": "cdx:composer:package:distReference",
+                    "value": "008d9ac6cd61dd64d273bf5328857c7f97d9d7f6"
+                },
+                {
+                    "name": "cdx:composer:package:sourceReference",
+                    "value": "008d9ac6cd61dd64d273bf5328857c7f97d9d7f6"
+                },
+                {
                     "name": "cdx:composer:package:type",
                     "value": "library"
                 }
@@ -1012,6 +1180,14 @@
                 }
             ],
             "properties": [
+                {
+                    "name": "cdx:composer:package:distReference",
+                    "value": "a6e0510cc793912b451fd40ab983a1d28f611c15"
+                },
+                {
+                    "name": "cdx:composer:package:sourceReference",
+                    "value": "a6e0510cc793912b451fd40ab983a1d28f611c15"
+                },
                 {
                     "name": "cdx:composer:package:type",
                     "value": "library"
