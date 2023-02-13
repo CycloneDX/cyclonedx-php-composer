@@ -29,7 +29,7 @@ so the current code is symlinked and taken into action.
 To get the setup up and running, run from this demo directory:
 
 ```shell
-composer -dproject setup
+composer -d project setup
 ```
 
 ## Usage examples
@@ -39,17 +39,17 @@ Run one of these from the demo directory:
 * See *cyclonedx-php-composer* help page:
 
   ```shell
-  composer -dproject make-bom --help 
+  composer -d project CycloneDX:make-sbom--help 
   ```
 
 * Make XML sbom via composer script:
 
   ```shell
-  composer -dproject create-sbom-results:XML
+  composer -d project create-sbom-results:XML
   ```
 
 * Make JSON sbom via composer script:
 
   ```shell
-  composer -dproject create-sbom-results:JSON
+  composer -d project create-sbom-results:JSON
   ```
