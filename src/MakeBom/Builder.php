@@ -187,6 +187,8 @@ class Builder
     {
         [$group, $name] = $this->getGroupAndName($package->getName());
         $version = $versionOverride ?? $package->getFullPrettyVersion();
+        $distReference = $package->getDistReference();
+        $sourceReference = $package->getSourceReference();
 
         $component = new Models\Component(Enums\ComponentType::LIBRARY, $name);
         $component->setBomRefValue($package->getUniqueName());
@@ -196,6 +198,17 @@ class Builder
         $component->getExternalReferences()->addItems(
             ...$this->createExternalReferencesFromPackage($package)
         );
+
+        if (null !== $distReference) {
+            $component->getProperties()->addItems(
+                new Models\Property(Properties::Name_DistReference, $distReference)
+            );
+        }
+        if (null !== $sourceReference) {
+            $component->getProperties()->addItems(
+                new Models\Property(Properties::Name_SourceReference, $sourceReference)
+            );
+        }
 
         if ($package instanceof CompletePackageInterface) {
             $component->setDescription($package->getDescription());

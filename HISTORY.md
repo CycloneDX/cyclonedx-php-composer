@@ -26,8 +26,9 @@ All notable changes to this project will be documented in this file.
   * SBOM results
     * might have `serialnumber` populated ([#279] via [#250])
     * might have `metadata.timestamp` populated ([#112] via [#250])
-    * might have `metadata.tools.tool.externalReferences` populated ([#171] via [#250])
-    * might have `component.author` populated ([#261] via [#250])
+    * might have `metadata.tools[].tool.externalReferences` populated ([#171] via [#250])
+    * might have `components[].component.author` populated ([#261] via [#250])
+    * might have `components[].component.properties` populated according to [`cdx:composer` Namespace Taxonomy](https://github.com/CycloneDX/cyclonedx-property-taxonomy/blob/main/cdx/composer.md) (via [#250])
   * CLI
     * New option `omit` (via [#250])
     * New switch `validate` to override `no-validate` (via [#250])
@@ -48,7 +49,7 @@ All notable changes to this project will be documented in this file.
 [#279]: https://github.com/CycloneDX/cyclonedx-php-composer/issues/279
 [#293]: https://github.com/CycloneDX/cyclonedx-php-composer/issues/293
 [#309]: https://github.com/CycloneDX/cyclonedx-php-composer/pull/309
-
+[#313]: https://github.com/CycloneDX/cyclonedx-php-composer/issues/313
 
 ## 3.11.0 - 2023-02-11
 
@@ -58,7 +59,6 @@ All notable changes to this project will be documented in this file.
 
 [#293]: https://github.com/CycloneDX/cyclonedx-php-composer/issues/293
 [#308]: https://github.com/CycloneDX/cyclonedx-php-composer/pull/308
-
 
 ## 3.11.0 - 2023-02-11
 
