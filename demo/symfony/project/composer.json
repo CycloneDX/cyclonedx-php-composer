@@ -36,10 +36,10 @@
             "@create-sbom-results:XML"
         ],
         "create-sbom-results:JSON": [
-            "@composer -d ../../.tool make-bom --omit=dev --output-format=JSON --output-file=$PWD/../example-results/bom.json $PWD/composer.json"
+            "@composer -d ../../.tool CycloneDX:make-sbom --omit=dev --output-format=JSON --output-file=$PWD/../example-results/bom.json $PWD/composer.json"
         ],
         "create-sbom-results:XML": [
-            "@composer -d ../../.tool make-bom --omit=dev --output-format=XML --output-file=$PWD/../example-results/bom.xml $PWD/composer.json"
+            "@composer -d ../../.tool CycloneDX:make-sbom --omit=dev --output-format=XML --output-file=$PWD/../example-results/bom.xml $PWD/composer.json"
         ],
         "setup": [
             "@composer -d ../../.tool update",
