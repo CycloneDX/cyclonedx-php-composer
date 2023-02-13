@@ -199,12 +199,12 @@ class Builder
             ...$this->createExternalReferencesFromPackage($package)
         );
 
-        if (null !== $distReference) {
+        if (null !== $distReference && '' !== $distReference) {
             $component->getProperties()->addItems(
                 new Models\Property(Properties::Name_DistReference, $distReference)
             );
         }
-        if (null !== $sourceReference) {
+        if (null !== $sourceReference && '' !== $sourceReference) {
             $component->getProperties()->addItems(
                 new Models\Property(Properties::Name_SourceReference, $sourceReference)
             );
