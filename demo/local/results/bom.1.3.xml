@@ -59,6 +59,7 @@
         </reference>
       </externalReferences>
       <properties>
+        <property name="cdx:composer:package:distReference"><![CDATA[6166868f2e7db756aa6c51f466d267232a74b702]]></property>
         <property name="cdx:composer:package:type"><![CDATA[library]]></property>
       </properties>
     </component>
@@ -82,6 +83,7 @@
         </reference>
       </externalReferences>
       <properties>
+        <property name="cdx:composer:package:distReference"><![CDATA[189236989b5f92038f280867115ac65185ba92df]]></property>
         <property name="cdx:composer:package:type"><![CDATA[library]]></property>
       </properties>
     </component>
@@ -95,6 +97,7 @@
         </reference>
       </externalReferences>
       <properties>
+        <property name="cdx:composer:package:distReference"><![CDATA[5cdadb5ab51e8009613e68c49f8d07fcd512da78]]></property>
         <property name="cdx:composer:package:type"><![CDATA[library]]></property>
       </properties>
     </component>

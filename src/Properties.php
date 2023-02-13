@@ -37,6 +37,9 @@ abstract class Properties
     public const Name_PackageType = 'cdx:composer:package:type';
     public const Name_DevRequirement = 'cdx:composer:package:isDevRequirement';
 
+    public const Name_SourceReference = 'cdx:composer:package:sourceReference';
+    public const Name_DistReference = 'cdx:composer:package:distReference';
+
     public const Value_True = 'true';
     public const Value_False = 'false';
 }

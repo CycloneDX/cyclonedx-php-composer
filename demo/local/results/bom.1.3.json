@@ -77,6 +77,10 @@
             ],
             "properties": [
                 {
+                    "name": "cdx:composer:package:distReference",
+                    "value": "6166868f2e7db756aa6c51f466d267232a74b702"
+                },
+                {
                     "name": "cdx:composer:package:type",
                     "value": "library"
                 }
@@ -108,6 +112,10 @@
             ],
             "properties": [
                 {
+                    "name": "cdx:composer:package:distReference",
+                    "value": "189236989b5f92038f280867115ac65185ba92df"
+                },
+                {
                     "name": "cdx:composer:package:type",
                     "value": "library"
                 }
@@ -126,6 +134,10 @@
                 }
             ],
             "properties": [
+                {
+                    "name": "cdx:composer:package:distReference",
+                    "value": "5cdadb5ab51e8009613e68c49f8d07fcd512da78"
+                },
                 {
                     "name": "cdx:composer:package:type",
                     "value": "library"
