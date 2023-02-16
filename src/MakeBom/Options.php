@@ -177,7 +177,7 @@ class Options
             new InputArgument(
                 self::ARGUMENT_COMPOSER_FILE,
                 InputArgument::OPTIONAL,
-                'Path to composer config file.'.\PHP_EOL.
+                'Path to Composer config file.'.\PHP_EOL.
                 '[default: "composer.json" file in current working directory]',
                 null
             ),

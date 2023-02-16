@@ -24,32 +24,32 @@
                 {
                     "type": "website",
                     "url": "https://cyclonedx.org/",
-                    "comment": "as detected from composer manifest 'homepage'"
+                    "comment": "as detected from Composer manifest 'homepage'"
                 },
                 {
                     "type": "other",
                     "url": "support@cyclonedx.org",
-                    "comment": "as detected from composer manifest 'support.email'"
+                    "comment": "as detected from Composer manifest 'support.email'"
                 },
                 {
                     "type": "issue-tracker",
                     "url": "https://github.com/CycloneDX/cyclonedx-php-composer/issues",
-                    "comment": "as detected from composer manifest 'support.issues'"
+                    "comment": "as detected from Composer manifest 'support.issues'"
                 },
                 {
                     "type": "other",
                     "url": "https://groups.io/g/CycloneDX",
-                    "comment": "as detected from composer manifest 'support.forum'"
+                    "comment": "as detected from Composer manifest 'support.forum'"
                 },
                 {
                     "type": "chat",
                     "url": "https://cyclonedx.org/slack/invite",
-                    "comment": "as detected from composer manifest 'support.chat'"
+                    "comment": "as detected from Composer manifest 'support.chat'"
                 },
                 {
                     "type": "documentation",
                     "url": "https://github.com/CycloneDX/cyclonedx-php-composer/blob/master/demo/local/README.md",
-                    "comment": "as detected from composer manifest 'support.docs'"
+                    "comment": "as detected from Composer manifest 'support.docs'"
                 }
             ]
         }
@@ -86,12 +86,12 @@
                 {
                     "type": "website",
                     "url": "https://github.com/CycloneDX/cyclonedx-php-composer/issues/158",
-                    "comment": "as detected from composer manifest 'homepage'"
+                    "comment": "as detected from Composer manifest 'homepage'"
                 },
                 {
                     "type": "issue-tracker",
                     "url": "https://pear.php.net/bugs/search.php?cmd=display&package_name[]=PEAR_Exception",
-                    "comment": "as detected from composer manifest 'support.issues'"
+                    "comment": "as detected from Composer manifest 'support.issues'"
                 }
             ]
         },

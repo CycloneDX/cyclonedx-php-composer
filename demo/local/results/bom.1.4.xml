@@ -12,15 +12,15 @@
           </reference>
           <reference type="website">
             <url><![CDATA[https://github.com/CycloneDX/cyclonedx-php-composer/#readme]]></url>
-            <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
+            <comment><![CDATA[as detected from Composer manifest 'homepage']]></comment>
           </reference>
           <reference type="issue-tracker">
             <url><![CDATA[https://github.com/CycloneDX/cyclonedx-php-composer/issues]]></url>
-            <comment><![CDATA[as detected from composer manifest 'support.issues']]></comment>
+            <comment><![CDATA[as detected from Composer manifest 'support.issues']]></comment>
           </reference>
           <reference type="vcs">
             <url><![CDATA[https://github.com/CycloneDX/cyclonedx-php-composer/]]></url>
-            <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
+            <comment><![CDATA[as detected from Composer manifest 'support.source']]></comment>
           </reference>
         </externalReferences>
       </tool>
@@ -35,27 +35,27 @@
       <externalReferences>
         <reference type="website">
           <url><![CDATA[https://cyclonedx.org/]]></url>
-          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'homepage']]></comment>
         </reference>
         <reference type="other">
           <url><![CDATA[support@cyclonedx.org]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.email']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.email']]></comment>
         </reference>
         <reference type="issue-tracker">
           <url><![CDATA[https://github.com/CycloneDX/cyclonedx-php-composer/issues]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.issues']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.issues']]></comment>
         </reference>
         <reference type="other">
           <url><![CDATA[https://groups.io/g/CycloneDX]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.forum']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.forum']]></comment>
         </reference>
         <reference type="chat">
           <url><![CDATA[https://cyclonedx.org/slack/invite]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.chat']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.chat']]></comment>
         </reference>
         <reference type="documentation">
           <url><![CDATA[https://github.com/CycloneDX/cyclonedx-php-composer/blob/master/demo/local/README.md]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.docs']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.docs']]></comment>
         </reference>
       </externalReferences>
       <properties>
@@ -92,11 +92,11 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://github.com/CycloneDX/cyclonedx-php-composer/issues/158]]></url>
-          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'homepage']]></comment>
         </reference>
         <reference type="issue-tracker">
           <url><![CDATA[https://pear.php.net/bugs/search.php?cmd=display&package_name%5B%5D=PEAR_Exception]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.issues']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.issues']]></comment>
         </reference>
       </externalReferences>
       <properties>
