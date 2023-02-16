@@ -61,7 +61,7 @@ class Command extends BaseCommand
     {
         $this
             ->setDefinition($this->options->getDefinition())
-            ->setDescription('Generate a CycloneDX Bill of Materials from a PHP composer project.')
+            ->setDescription('Generate a CycloneDX Bill of Materials from a PHP Composer project.')
         ;
     }
 

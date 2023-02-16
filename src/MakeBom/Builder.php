@@ -278,7 +278,7 @@ class Builder
                 yield (new Models\ExternalReference(
                     Enums\ExternalReferenceType::WEBSITE,
                     $homepage
-                ))->setComment("as detected from composer manifest 'homepage'");
+                ))->setComment("as detected from Composer manifest 'homepage'");
             }
 
             foreach ($package->getSupport() as $supportType => $supportUrl) {
@@ -292,7 +292,7 @@ class Builder
                 yield (new Models\ExternalReference(
                     $extRefType,
                     $supportUrl
-                ))->setComment("as detected from composer manifest 'support.$supportType'");
+                ))->setComment("as detected from Composer manifest 'support.$supportType'");
             }
         }
     }

@@ -29,7 +29,7 @@ with Composer `^1.0||^2.0`
 
 ## Installation
 
-As a global composer plugin:
+As a global _Composer_ plugin:
 
 ```shell
 composer global require cyclonedx/cyclonedx-php-composer
@@ -43,18 +43,18 @@ composer require --dev cyclonedx/cyclonedx-php-composer
 
 ## Usage
 
-After successful installation, the composer command `CycloneDX:make-sbom` is available.
+After successful installation, the _Composer_ command `CycloneDX:make-sbom` is available.
 
 ```text
 $ composer CycloneDX:make-sbom --help
 Description:
-  Generate a CycloneDX Bill of Materials from a PHP composer project.
+  Generate a CycloneDX Bill of Materials from a PHP Composer project.
 
 Usage:
   CycloneDX:make-sbom [options] [--] [<composer-file>]
 
 Arguments:
-  composer-file                                       Path to composer config file.
+  composer-file                                       Path to Composer config file.
                                                       [default: "composer.json" file in current working directory]
 
 Options:
@@ -80,9 +80,9 @@ For a demo of _cyclonedx-php-composer_ see the [demo projects][demo_readme].
 
 ## Internals
 
-This Composer-Plugin utilizes the [CycloneDX library][cyclonedx-library] to generate the actual data structures.
+This _Composer_ plugin utilizes the [CycloneDX library][cyclonedx-library] to generate the actual data structures.
 
-This Composer-Plugin does **not** expose any additional _public_ api or classes - all code is marked as `@internal` and might change without any notice during version upgrades.
+This _Composer_ plugin does **not** expose any additional _public_ API or classes - all code is marked as `@internal` and might change without any notice during version upgrades.
 
 ## Contributing
 

@@ -20,15 +20,15 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://github.com/asm89/stack-cors]]></url>
-          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'homepage']]></comment>
         </reference>
         <reference type="issue-tracker">
           <url><![CDATA[https://github.com/asm89/stack-cors/issues]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.issues']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.issues']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/asm89/stack-cors/tree/1.3.0]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
     </component>
@@ -51,11 +51,11 @@
         </reference>
         <reference type="issue-tracker">
           <url><![CDATA[https://github.com/brick/math/issues]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.issues']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.issues']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/brick/math/tree/0.9.3]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
     </component>
@@ -78,15 +78,15 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://www.doctrine-project.org/projects/inflector.html]]></url>
-          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'homepage']]></comment>
         </reference>
         <reference type="issue-tracker">
           <url><![CDATA[https://github.com/doctrine/inflector/issues]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.issues']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.issues']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/doctrine/inflector/tree/2.0.6]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
     </component>
@@ -109,15 +109,15 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://www.doctrine-project.org/projects/lexer.html]]></url>
-          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'homepage']]></comment>
         </reference>
         <reference type="issue-tracker">
           <url><![CDATA[https://github.com/doctrine/lexer/issues]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.issues']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.issues']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/doctrine/lexer/tree/1.2.3]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
     </component>
@@ -140,11 +140,11 @@
         </reference>
         <reference type="issue-tracker">
           <url><![CDATA[https://github.com/dragonmantank/cron-expression/issues]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.issues']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.issues']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/dragonmantank/cron-expression/tree/v2.3.1]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
     </component>
@@ -167,15 +167,15 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://github.com/egulias/EmailValidator]]></url>
-          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'homepage']]></comment>
         </reference>
         <reference type="issue-tracker">
           <url><![CDATA[https://github.com/egulias/EmailValidator/issues]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.issues']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.issues']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/egulias/EmailValidator/tree/2.1.25]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
     </component>
@@ -198,11 +198,11 @@
         </reference>
         <reference type="issue-tracker">
           <url><![CDATA[https://github.com/fideloper/TrustedProxy/issues]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.issues']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.issues']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/fideloper/TrustedProxy/tree/4.4.2]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
     </component>
@@ -225,11 +225,11 @@
         </reference>
         <reference type="issue-tracker">
           <url><![CDATA[https://github.com/fruitcake/laravel-cors/issues]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.issues']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.issues']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/fruitcake/laravel-cors/tree/1.0]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
     </component>
@@ -252,15 +252,15 @@
         </reference>
         <reference type="website">
           <url><![CDATA[http://guzzlephp.org/]]></url>
-          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'homepage']]></comment>
         </reference>
         <reference type="issue-tracker">
           <url><![CDATA[https://github.com/guzzle/guzzle/issues]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.issues']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.issues']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/guzzle/guzzle/tree/6.5.8]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
     </component>
@@ -283,11 +283,11 @@
         </reference>
         <reference type="issue-tracker">
           <url><![CDATA[https://github.com/guzzle/promises/issues]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.issues']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.issues']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/guzzle/promises/tree/1.5.2]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
     </component>
@@ -310,11 +310,11 @@
         </reference>
         <reference type="issue-tracker">
           <url><![CDATA[https://github.com/guzzle/psr7/issues]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.issues']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.issues']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/guzzle/psr7/tree/1.9.0]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
     </component>
@@ -337,15 +337,15 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://laravel.com]]></url>
-          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'homepage']]></comment>
         </reference>
         <reference type="issue-tracker">
           <url><![CDATA[https://github.com/laravel/framework/issues]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.issues']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.issues']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/laravel/framework]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
     </component>
@@ -368,7 +368,7 @@
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/laravel/laravel/tree/master]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
     </component>
@@ -391,11 +391,11 @@
         </reference>
         <reference type="issue-tracker">
           <url><![CDATA[https://github.com/laravel/tinker/issues]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.issues']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.issues']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/laravel/tinker/tree/v2.7.3]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
     </component>
@@ -418,23 +418,23 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://commonmark.thephpleague.com]]></url>
-          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'homepage']]></comment>
         </reference>
         <reference type="documentation">
           <url><![CDATA[https://commonmark.thephpleague.com/]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.docs']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.docs']]></comment>
         </reference>
         <reference type="issue-tracker">
           <url><![CDATA[https://github.com/thephpleague/commonmark/issues]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.issues']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.issues']]></comment>
         </reference>
         <reference type="other">
           <url><![CDATA[https://github.com/thephpleague/commonmark/releases.atom]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.rss']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.rss']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/thephpleague/commonmark]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
     </component>
@@ -457,11 +457,11 @@
         </reference>
         <reference type="issue-tracker">
           <url><![CDATA[https://github.com/thephpleague/flysystem/issues]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.issues']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.issues']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/thephpleague/flysystem/tree/1.1.10]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
     </component>
@@ -484,11 +484,11 @@
         </reference>
         <reference type="issue-tracker">
           <url><![CDATA[https://github.com/thephpleague/mime-type-detection/issues]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.issues']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.issues']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/thephpleague/mime-type-detection/tree/1.11.0]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
     </component>
@@ -511,15 +511,15 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://github.com/Seldaek/monolog]]></url>
-          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'homepage']]></comment>
         </reference>
         <reference type="issue-tracker">
           <url><![CDATA[https://github.com/Seldaek/monolog/issues]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.issues']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.issues']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/Seldaek/monolog/tree/2.8.0]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
     </component>
@@ -542,19 +542,19 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://carbon.nesbot.com]]></url>
-          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'homepage']]></comment>
         </reference>
         <reference type="documentation">
           <url><![CDATA[https://carbon.nesbot.com/docs]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.docs']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.docs']]></comment>
         </reference>
         <reference type="issue-tracker">
           <url><![CDATA[https://github.com/briannesbitt/Carbon/issues]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.issues']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.issues']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/briannesbitt/Carbon]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
     </component>
@@ -577,11 +577,11 @@
         </reference>
         <reference type="issue-tracker">
           <url><![CDATA[https://github.com/nikic/PHP-Parser/issues]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.issues']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.issues']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/nikic/PHP-Parser/tree/v4.15.2]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
     </component>
@@ -604,15 +604,15 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://opis.io/closure]]></url>
-          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'homepage']]></comment>
         </reference>
         <reference type="issue-tracker">
           <url><![CDATA[https://github.com/opis/closure/issues]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.issues']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.issues']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/opis/closure/tree/3.6.3]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
     </component>
@@ -635,11 +635,11 @@
         </reference>
         <reference type="issue-tracker">
           <url><![CDATA[https://github.com/schmittjoh/php-option/issues]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.issues']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.issues']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/schmittjoh/php-option/tree/1.9.0]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
     </component>
@@ -662,15 +662,15 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://github.com/php-fig/container]]></url>
-          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'homepage']]></comment>
         </reference>
         <reference type="issue-tracker">
           <url><![CDATA[https://github.com/php-fig/container/issues]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.issues']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.issues']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/php-fig/container/tree/1.1.1]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
     </component>
@@ -693,11 +693,11 @@
         </reference>
         <reference type="issue-tracker">
           <url><![CDATA[https://github.com/php-fig/event-dispatcher/issues]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.issues']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.issues']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/php-fig/event-dispatcher/tree/1.0.0]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
     </component>
@@ -720,11 +720,11 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://github.com/php-fig/http-message]]></url>
-          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'homepage']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/php-fig/http-message/tree/master]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
     </component>
@@ -747,11 +747,11 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://github.com/php-fig/log]]></url>
-          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'homepage']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/php-fig/log/tree/1.1.4]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
     </component>
@@ -774,7 +774,7 @@
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/php-fig/simple-cache/tree/master]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
     </component>
@@ -797,15 +797,15 @@
         </reference>
         <reference type="website">
           <url><![CDATA[http://psysh.org]]></url>
-          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'homepage']]></comment>
         </reference>
         <reference type="issue-tracker">
           <url><![CDATA[https://github.com/bobthecow/psysh/issues]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.issues']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.issues']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/bobthecow/psysh/tree/v0.11.9]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
     </component>
@@ -828,11 +828,11 @@
         </reference>
         <reference type="issue-tracker">
           <url><![CDATA[https://github.com/ralouphie/getallheaders/issues]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.issues']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.issues']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/ralouphie/getallheaders/tree/develop]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
     </component>
@@ -855,11 +855,11 @@
         </reference>
         <reference type="issue-tracker">
           <url><![CDATA[https://github.com/ramsey/collection/issues]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.issues']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.issues']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/ramsey/collection/tree/1.2.2]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
     </component>
@@ -882,11 +882,11 @@
         </reference>
         <reference type="issue-tracker">
           <url><![CDATA[https://github.com/ramsey/uuid/issues]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.issues']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.issues']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/ramsey/uuid/tree/4.2.3]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
     </component>
@@ -909,15 +909,15 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://swiftmailer.symfony.com]]></url>
-          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'homepage']]></comment>
         </reference>
         <reference type="issue-tracker">
           <url><![CDATA[https://github.com/swiftmailer/swiftmailer/issues]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.issues']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.issues']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/swiftmailer/swiftmailer/tree/v6.3.0]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
     </component>
@@ -940,11 +940,11 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://symfony.com]]></url>
-          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'homepage']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/symfony/console/tree/v5.4.16]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
     </component>
@@ -967,11 +967,11 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://symfony.com]]></url>
-          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'homepage']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/symfony/css-selector/tree/v5.4.11]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
     </component>
@@ -994,11 +994,11 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://symfony.com]]></url>
-          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'homepage']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/symfony/deprecation-contracts/tree/v2.5.2]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
     </component>
@@ -1021,11 +1021,11 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://symfony.com]]></url>
-          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'homepage']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/symfony/error-handler/tree/v5.4.15]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
     </component>
@@ -1048,11 +1048,11 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://symfony.com]]></url>
-          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'homepage']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/symfony/event-dispatcher/tree/v5.4.9]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
     </component>
@@ -1075,11 +1075,11 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://symfony.com]]></url>
-          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'homepage']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/symfony/event-dispatcher-contracts/tree/v2.5.2]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
     </component>
@@ -1102,11 +1102,11 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://symfony.com]]></url>
-          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'homepage']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/symfony/finder/tree/v5.4.11]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
     </component>
@@ -1129,11 +1129,11 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://symfony.com]]></url>
-          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'homepage']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/symfony/http-foundation/tree/v5.4.16]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
     </component>
@@ -1156,11 +1156,11 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://symfony.com]]></url>
-          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'homepage']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/symfony/http-kernel/tree/v5.4.16]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
     </component>
@@ -1183,11 +1183,11 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://symfony.com]]></url>
-          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'homepage']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/symfony/mime/tree/v5.4.16]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
     </component>
@@ -1210,11 +1210,11 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://symfony.com]]></url>
-          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'homepage']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/symfony/polyfill-ctype/tree/v1.27.0]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
     </component>
@@ -1237,11 +1237,11 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://symfony.com]]></url>
-          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'homepage']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/symfony/polyfill-iconv/tree/v1.27.0]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
     </component>
@@ -1264,11 +1264,11 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://symfony.com]]></url>
-          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'homepage']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/symfony/polyfill-intl-grapheme/tree/v1.27.0]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
     </component>
@@ -1291,11 +1291,11 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://symfony.com]]></url>
-          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'homepage']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/symfony/polyfill-intl-idn/tree/v1.27.0]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
     </component>
@@ -1318,11 +1318,11 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://symfony.com]]></url>
-          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'homepage']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/symfony/polyfill-intl-normalizer/tree/v1.27.0]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
     </component>
@@ -1345,11 +1345,11 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://symfony.com]]></url>
-          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'homepage']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/symfony/polyfill-mbstring/tree/v1.27.0]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
     </component>
@@ -1372,11 +1372,11 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://symfony.com]]></url>
-          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'homepage']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/symfony/polyfill-php72/tree/v1.27.0]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
     </component>
@@ -1399,11 +1399,11 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://symfony.com]]></url>
-          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'homepage']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/symfony/polyfill-php73/tree/v1.27.0]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
     </component>
@@ -1426,11 +1426,11 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://symfony.com]]></url>
-          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'homepage']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/symfony/polyfill-php80/tree/v1.27.0]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
     </component>
@@ -1453,11 +1453,11 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://symfony.com]]></url>
-          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'homepage']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/symfony/polyfill-php81/tree/v1.27.0]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
     </component>
@@ -1480,11 +1480,11 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://symfony.com]]></url>
-          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'homepage']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/symfony/process/tree/v5.4.11]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
     </component>
@@ -1507,11 +1507,11 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://symfony.com]]></url>
-          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'homepage']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/symfony/routing/tree/v5.4.15]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
     </component>
@@ -1534,11 +1534,11 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://symfony.com]]></url>
-          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'homepage']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/symfony/service-contracts/tree/v2.5.2]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
     </component>
@@ -1561,11 +1561,11 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://symfony.com]]></url>
-          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'homepage']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/symfony/string/tree/v5.4.15]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
     </component>
@@ -1588,11 +1588,11 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://symfony.com]]></url>
-          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'homepage']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/symfony/translation/tree/v5.4.14]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
     </component>
@@ -1615,11 +1615,11 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://symfony.com]]></url>
-          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'homepage']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/symfony/translation-contracts/tree/v2.5.2]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
     </component>
@@ -1642,11 +1642,11 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://symfony.com]]></url>
-          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'homepage']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/symfony/var-dumper/tree/v5.4.14]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
     </component>
@@ -1669,15 +1669,15 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://github.com/tijsverkoyen/CssToInlineStyles]]></url>
-          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'homepage']]></comment>
         </reference>
         <reference type="issue-tracker">
           <url><![CDATA[https://github.com/tijsverkoyen/CssToInlineStyles/issues]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.issues']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.issues']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/tijsverkoyen/CssToInlineStyles/tree/2.2.5]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
     </component>
@@ -1700,11 +1700,11 @@
         </reference>
         <reference type="issue-tracker">
           <url><![CDATA[https://github.com/vlucas/phpdotenv/issues]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.issues']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.issues']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/vlucas/phpdotenv/tree/v4.3.0]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
     </component>
@@ -1727,15 +1727,15 @@
         </reference>
         <reference type="website">
           <url><![CDATA[https://github.com/voku/portable-ascii]]></url>
-          <comment><![CDATA[as detected from composer manifest 'homepage']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'homepage']]></comment>
         </reference>
         <reference type="issue-tracker">
           <url><![CDATA[https://github.com/voku/portable-ascii/issues]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.issues']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.issues']]></comment>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/voku/portable-ascii/tree/1.6.1]]></url>
-          <comment><![CDATA[as detected from composer manifest 'support.source']]></comment>
+          <comment><![CDATA[as detected from Composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
     </component>

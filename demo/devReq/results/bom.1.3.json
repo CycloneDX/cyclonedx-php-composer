@@ -24,32 +24,32 @@
                 {
                     "type": "website",
                     "url": "https://cyclonedx.org/",
-                    "comment": "as detected from composer manifest 'homepage'"
+                    "comment": "as detected from Composer manifest 'homepage'"
                 },
                 {
                     "type": "other",
                     "url": "support@cyclonedx.org",
-                    "comment": "as detected from composer manifest 'support.email'"
+                    "comment": "as detected from Composer manifest 'support.email'"
                 },
                 {
                     "type": "issue-tracker",
                     "url": "https://github.com/CycloneDX/cyclonedx-php-composer/issues",
-                    "comment": "as detected from composer manifest 'support.issues'"
+                    "comment": "as detected from Composer manifest 'support.issues'"
                 },
                 {
                     "type": "other",
                     "url": "https://groups.io/g/CycloneDX",
-                    "comment": "as detected from composer manifest 'support.forum'"
+                    "comment": "as detected from Composer manifest 'support.forum'"
                 },
                 {
                     "type": "chat",
                     "url": "https://cyclonedx.org/slack/invite",
-                    "comment": "as detected from composer manifest 'support.chat'"
+                    "comment": "as detected from Composer manifest 'support.chat'"
                 },
                 {
                     "type": "documentation",
                     "url": "https://github.com/CycloneDX/cyclonedx-php-composer/blob/master/demo/devReq/README.md",
-                    "comment": "as detected from composer manifest 'support.docs'"
+                    "comment": "as detected from Composer manifest 'support.docs'"
                 }
             ],
             "properties": [
@@ -88,17 +88,17 @@
                 {
                     "type": "website",
                     "url": "https://www.doctrine-project.org/projects/instantiator.html",
-                    "comment": "as detected from composer manifest 'homepage'"
+                    "comment": "as detected from Composer manifest 'homepage'"
                 },
                 {
                     "type": "issue-tracker",
                     "url": "https://github.com/doctrine/instantiator/issues",
-                    "comment": "as detected from composer manifest 'support.issues'"
+                    "comment": "as detected from Composer manifest 'support.issues'"
                 },
                 {
                     "type": "vcs",
                     "url": "https://github.com/doctrine/instantiator/tree/1.4.1",
-                    "comment": "as detected from composer manifest 'support.source'"
+                    "comment": "as detected from Composer manifest 'support.source'"
                 }
             ],
             "properties": [
@@ -142,12 +142,12 @@
                 {
                     "type": "issue-tracker",
                     "url": "https://github.com/myclabs/DeepCopy/issues",
-                    "comment": "as detected from composer manifest 'support.issues'"
+                    "comment": "as detected from Composer manifest 'support.issues'"
                 },
                 {
                     "type": "vcs",
                     "url": "https://github.com/myclabs/DeepCopy/tree/1.11.0",
-                    "comment": "as detected from composer manifest 'support.source'"
+                    "comment": "as detected from Composer manifest 'support.source'"
                 }
             ],
             "properties": [
@@ -192,12 +192,12 @@
                 {
                     "type": "issue-tracker",
                     "url": "https://github.com/nikic/PHP-Parser/issues",
-                    "comment": "as detected from composer manifest 'support.issues'"
+                    "comment": "as detected from Composer manifest 'support.issues'"
                 },
                 {
                     "type": "vcs",
                     "url": "https://github.com/nikic/PHP-Parser/tree/v4.15.2",
-                    "comment": "as detected from composer manifest 'support.source'"
+                    "comment": "as detected from Composer manifest 'support.source'"
                 }
             ],
             "properties": [
@@ -242,12 +242,12 @@
                 {
                     "type": "issue-tracker",
                     "url": "https://github.com/phar-io/manifest/issues",
-                    "comment": "as detected from composer manifest 'support.issues'"
+                    "comment": "as detected from Composer manifest 'support.issues'"
                 },
                 {
                     "type": "vcs",
                     "url": "https://github.com/phar-io/manifest/tree/2.0.3",
-                    "comment": "as detected from composer manifest 'support.source'"
+                    "comment": "as detected from Composer manifest 'support.source'"
                 }
             ],
             "properties": [
@@ -292,12 +292,12 @@
                 {
                     "type": "issue-tracker",
                     "url": "https://github.com/phar-io/version/issues",
-                    "comment": "as detected from composer manifest 'support.issues'"
+                    "comment": "as detected from Composer manifest 'support.issues'"
                 },
                 {
                     "type": "vcs",
                     "url": "https://github.com/phar-io/version/tree/3.2.1",
-                    "comment": "as detected from composer manifest 'support.source'"
+                    "comment": "as detected from Composer manifest 'support.source'"
                 }
             ],
             "properties": [
@@ -342,17 +342,17 @@
                 {
                     "type": "website",
                     "url": "https://github.com/sebastianbergmann/php-code-coverage",
-                    "comment": "as detected from composer manifest 'homepage'"
+                    "comment": "as detected from Composer manifest 'homepage'"
                 },
                 {
                     "type": "issue-tracker",
                     "url": "https://github.com/sebastianbergmann/php-code-coverage/issues",
-                    "comment": "as detected from composer manifest 'support.issues'"
+                    "comment": "as detected from Composer manifest 'support.issues'"
                 },
                 {
                     "type": "vcs",
                     "url": "https://github.com/sebastianbergmann/php-code-coverage/tree/9.2.19",
-                    "comment": "as detected from composer manifest 'support.source'"
+                    "comment": "as detected from Composer manifest 'support.source'"
                 }
             ],
             "properties": [
@@ -397,17 +397,17 @@
                 {
                     "type": "website",
                     "url": "https://github.com/sebastianbergmann/php-file-iterator/",
-                    "comment": "as detected from composer manifest 'homepage'"
+                    "comment": "as detected from Composer manifest 'homepage'"
                 },
                 {
                     "type": "issue-tracker",
                     "url": "https://github.com/sebastianbergmann/php-file-iterator/issues",
-                    "comment": "as detected from composer manifest 'support.issues'"
+                    "comment": "as detected from Composer manifest 'support.issues'"
                 },
                 {
                     "type": "vcs",
                     "url": "https://github.com/sebastianbergmann/php-file-iterator/tree/3.0.6",
-                    "comment": "as detected from composer manifest 'support.source'"
+                    "comment": "as detected from Composer manifest 'support.source'"
                 }
             ],
             "properties": [
@@ -452,17 +452,17 @@
                 {
                     "type": "website",
                     "url": "https://github.com/sebastianbergmann/php-invoker/",
-                    "comment": "as detected from composer manifest 'homepage'"
+                    "comment": "as detected from Composer manifest 'homepage'"
                 },
                 {
                     "type": "issue-tracker",
                     "url": "https://github.com/sebastianbergmann/php-invoker/issues",
-                    "comment": "as detected from composer manifest 'support.issues'"
+                    "comment": "as detected from Composer manifest 'support.issues'"
                 },
                 {
                     "type": "vcs",
                     "url": "https://github.com/sebastianbergmann/php-invoker/tree/3.1.1",
-                    "comment": "as detected from composer manifest 'support.source'"
+                    "comment": "as detected from Composer manifest 'support.source'"
                 }
             ],
             "properties": [
@@ -507,17 +507,17 @@
                 {
                     "type": "website",
                     "url": "https://github.com/sebastianbergmann/php-text-template/",
-                    "comment": "as detected from composer manifest 'homepage'"
+                    "comment": "as detected from Composer manifest 'homepage'"
                 },
                 {
                     "type": "issue-tracker",
                     "url": "https://github.com/sebastianbergmann/php-text-template/issues",
-                    "comment": "as detected from composer manifest 'support.issues'"
+                    "comment": "as detected from Composer manifest 'support.issues'"
                 },
                 {
                     "type": "vcs",
                     "url": "https://github.com/sebastianbergmann/php-text-template/tree/2.0.4",
-                    "comment": "as detected from composer manifest 'support.source'"
+                    "comment": "as detected from Composer manifest 'support.source'"
                 }
             ],
             "properties": [
@@ -562,17 +562,17 @@
                 {
                     "type": "website",
                     "url": "https://github.com/sebastianbergmann/php-timer/",
-                    "comment": "as detected from composer manifest 'homepage'"
+                    "comment": "as detected from Composer manifest 'homepage'"
                 },
                 {
                     "type": "issue-tracker",
                     "url": "https://github.com/sebastianbergmann/php-timer/issues",
-                    "comment": "as detected from composer manifest 'support.issues'"
+                    "comment": "as detected from Composer manifest 'support.issues'"
                 },
                 {
                     "type": "vcs",
                     "url": "https://github.com/sebastianbergmann/php-timer/tree/5.0.3",
-                    "comment": "as detected from composer manifest 'support.source'"
+                    "comment": "as detected from Composer manifest 'support.source'"
                 }
             ],
             "properties": [
@@ -617,17 +617,17 @@
                 {
                     "type": "website",
                     "url": "https://phpunit.de/",
-                    "comment": "as detected from composer manifest 'homepage'"
+                    "comment": "as detected from Composer manifest 'homepage'"
                 },
                 {
                     "type": "issue-tracker",
                     "url": "https://github.com/sebastianbergmann/phpunit/issues",
-                    "comment": "as detected from composer manifest 'support.issues'"
+                    "comment": "as detected from Composer manifest 'support.issues'"
                 },
                 {
                     "type": "vcs",
                     "url": "https://github.com/sebastianbergmann/phpunit/tree/9.5.26",
-                    "comment": "as detected from composer manifest 'support.source'"
+                    "comment": "as detected from Composer manifest 'support.source'"
                 }
             ],
             "properties": [
@@ -676,17 +676,17 @@
                 {
                     "type": "website",
                     "url": "https://github.com/sebastianbergmann/cli-parser",
-                    "comment": "as detected from composer manifest 'homepage'"
+                    "comment": "as detected from Composer manifest 'homepage'"
                 },
                 {
                     "type": "issue-tracker",
                     "url": "https://github.com/sebastianbergmann/cli-parser/issues",
-                    "comment": "as detected from composer manifest 'support.issues'"
+                    "comment": "as detected from Composer manifest 'support.issues'"
                 },
                 {
                     "type": "vcs",
                     "url": "https://github.com/sebastianbergmann/cli-parser/tree/1.0.1",
-                    "comment": "as detected from composer manifest 'support.source'"
+                    "comment": "as detected from Composer manifest 'support.source'"
                 }
             ],
             "properties": [
@@ -731,17 +731,17 @@
                 {
                     "type": "website",
                     "url": "https://github.com/sebastianbergmann/code-unit",
-                    "comment": "as detected from composer manifest 'homepage'"
+                    "comment": "as detected from Composer manifest 'homepage'"
                 },
                 {
                     "type": "issue-tracker",
                     "url": "https://github.com/sebastianbergmann/code-unit/issues",
-                    "comment": "as detected from composer manifest 'support.issues'"
+                    "comment": "as detected from Composer manifest 'support.issues'"
                 },
                 {
                     "type": "vcs",
                     "url": "https://github.com/sebastianbergmann/code-unit/tree/1.0.8",
-                    "comment": "as detected from composer manifest 'support.source'"
+                    "comment": "as detected from Composer manifest 'support.source'"
                 }
             ],
             "properties": [
@@ -786,17 +786,17 @@
                 {
                     "type": "website",
                     "url": "https://github.com/sebastianbergmann/code-unit-reverse-lookup/",
-                    "comment": "as detected from composer manifest 'homepage'"
+                    "comment": "as detected from Composer manifest 'homepage'"
                 },
                 {
                     "type": "issue-tracker",
                     "url": "https://github.com/sebastianbergmann/code-unit-reverse-lookup/issues",
-                    "comment": "as detected from composer manifest 'support.issues'"
+                    "comment": "as detected from Composer manifest 'support.issues'"
                 },
                 {
                     "type": "vcs",
                     "url": "https://github.com/sebastianbergmann/code-unit-reverse-lookup/tree/2.0.3",
-                    "comment": "as detected from composer manifest 'support.source'"
+                    "comment": "as detected from Composer manifest 'support.source'"
                 }
             ],
             "properties": [
@@ -841,17 +841,17 @@
                 {
                     "type": "website",
                     "url": "https://github.com/sebastianbergmann/comparator",
-                    "comment": "as detected from composer manifest 'homepage'"
+                    "comment": "as detected from Composer manifest 'homepage'"
                 },
                 {
                     "type": "issue-tracker",
                     "url": "https://github.com/sebastianbergmann/comparator/issues",
-                    "comment": "as detected from composer manifest 'support.issues'"
+                    "comment": "as detected from Composer manifest 'support.issues'"
                 },
                 {
                     "type": "vcs",
                     "url": "https://github.com/sebastianbergmann/comparator/tree/4.0.8",
-                    "comment": "as detected from composer manifest 'support.source'"
+                    "comment": "as detected from Composer manifest 'support.source'"
                 }
             ],
             "properties": [
@@ -896,17 +896,17 @@
                 {
                     "type": "website",
                     "url": "https://github.com/sebastianbergmann/complexity",
-                    "comment": "as detected from composer manifest 'homepage'"
+                    "comment": "as detected from Composer manifest 'homepage'"
                 },
                 {
                     "type": "issue-tracker",
                     "url": "https://github.com/sebastianbergmann/complexity/issues",
-                    "comment": "as detected from composer manifest 'support.issues'"
+                    "comment": "as detected from Composer manifest 'support.issues'"
                 },
                 {
                     "type": "vcs",
                     "url": "https://github.com/sebastianbergmann/complexity/tree/2.0.2",
-                    "comment": "as detected from composer manifest 'support.source'"
+                    "comment": "as detected from Composer manifest 'support.source'"
                 }
             ],
             "properties": [
@@ -951,17 +951,17 @@
                 {
                     "type": "website",
                     "url": "https://github.com/sebastianbergmann/diff",
-                    "comment": "as detected from composer manifest 'homepage'"
+                    "comment": "as detected from Composer manifest 'homepage'"
                 },
                 {
                     "type": "issue-tracker",
                     "url": "https://github.com/sebastianbergmann/diff/issues",
-                    "comment": "as detected from composer manifest 'support.issues'"
+                    "comment": "as detected from Composer manifest 'support.issues'"
                 },
                 {
                     "type": "vcs",
                     "url": "https://github.com/sebastianbergmann/diff/tree/4.0.4",
-                    "comment": "as detected from composer manifest 'support.source'"
+                    "comment": "as detected from Composer manifest 'support.source'"
                 }
             ],
             "properties": [
@@ -1006,17 +1006,17 @@
                 {
                     "type": "website",
                     "url": "http://www.github.com/sebastianbergmann/environment",
-                    "comment": "as detected from composer manifest 'homepage'"
+                    "comment": "as detected from Composer manifest 'homepage'"
                 },
                 {
                     "type": "issue-tracker",
                     "url": "https://github.com/sebastianbergmann/environment/issues",
-                    "comment": "as detected from composer manifest 'support.issues'"
+                    "comment": "as detected from Composer manifest 'support.issues'"
                 },
                 {
                     "type": "vcs",
                     "url": "https://github.com/sebastianbergmann/environment/tree/5.1.4",
-                    "comment": "as detected from composer manifest 'support.source'"
+                    "comment": "as detected from Composer manifest 'support.source'"
                 }
             ],
             "properties": [
@@ -1061,17 +1061,17 @@
                 {
                     "type": "website",
                     "url": "https://www.github.com/sebastianbergmann/exporter",
-                    "comment": "as detected from composer manifest 'homepage'"
+                    "comment": "as detected from Composer manifest 'homepage'"
                 },
                 {
                     "type": "issue-tracker",
                     "url": "https://github.com/sebastianbergmann/exporter/issues",
-                    "comment": "as detected from composer manifest 'support.issues'"
+                    "comment": "as detected from Composer manifest 'support.issues'"
                 },
                 {
                     "type": "vcs",
                     "url": "https://github.com/sebastianbergmann/exporter/tree/4.0.5",
-                    "comment": "as detected from composer manifest 'support.source'"
+                    "comment": "as detected from Composer manifest 'support.source'"
                 }
             ],
             "properties": [
@@ -1116,17 +1116,17 @@
                 {
                     "type": "website",
                     "url": "http://www.github.com/sebastianbergmann/global-state",
-                    "comment": "as detected from composer manifest 'homepage'"
+                    "comment": "as detected from Composer manifest 'homepage'"
                 },
                 {
                     "type": "issue-tracker",
                     "url": "https://github.com/sebastianbergmann/global-state/issues",
-                    "comment": "as detected from composer manifest 'support.issues'"
+                    "comment": "as detected from Composer manifest 'support.issues'"
                 },
                 {
                     "type": "vcs",
                     "url": "https://github.com/sebastianbergmann/global-state/tree/5.0.5",
-                    "comment": "as detected from composer manifest 'support.source'"
+                    "comment": "as detected from Composer manifest 'support.source'"
                 }
             ],
             "properties": [
@@ -1171,17 +1171,17 @@
                 {
                     "type": "website",
                     "url": "https://github.com/sebastianbergmann/lines-of-code",
-                    "comment": "as detected from composer manifest 'homepage'"
+                    "comment": "as detected from Composer manifest 'homepage'"
                 },
                 {
                     "type": "issue-tracker",
                     "url": "https://github.com/sebastianbergmann/lines-of-code/issues",
-                    "comment": "as detected from composer manifest 'support.issues'"
+                    "comment": "as detected from Composer manifest 'support.issues'"
                 },
                 {
                     "type": "vcs",
                     "url": "https://github.com/sebastianbergmann/lines-of-code/tree/1.0.3",
-                    "comment": "as detected from composer manifest 'support.source'"
+                    "comment": "as detected from Composer manifest 'support.source'"
                 }
             ],
             "properties": [
@@ -1226,17 +1226,17 @@
                 {
                     "type": "website",
                     "url": "https://github.com/sebastianbergmann/object-enumerator/",
-                    "comment": "as detected from composer manifest 'homepage'"
+                    "comment": "as detected from Composer manifest 'homepage'"
                 },
                 {
                     "type": "issue-tracker",
                     "url": "https://github.com/sebastianbergmann/object-enumerator/issues",
-                    "comment": "as detected from composer manifest 'support.issues'"
+                    "comment": "as detected from Composer manifest 'support.issues'"
                 },
                 {
                     "type": "vcs",
                     "url": "https://github.com/sebastianbergmann/object-enumerator/tree/4.0.4",
-                    "comment": "as detected from composer manifest 'support.source'"
+                    "comment": "as detected from Composer manifest 'support.source'"
                 }
             ],
             "properties": [
@@ -1281,17 +1281,17 @@
                 {
                     "type": "website",
                     "url": "https://github.com/sebastianbergmann/object-reflector/",
-                    "comment": "as detected from composer manifest 'homepage'"
+                    "comment": "as detected from Composer manifest 'homepage'"
                 },
                 {
                     "type": "issue-tracker",
                     "url": "https://github.com/sebastianbergmann/object-reflector/issues",
-                    "comment": "as detected from composer manifest 'support.issues'"
+                    "comment": "as detected from Composer manifest 'support.issues'"
                 },
                 {
                     "type": "vcs",
                     "url": "https://github.com/sebastianbergmann/object-reflector/tree/2.0.4",
-                    "comment": "as detected from composer manifest 'support.source'"
+                    "comment": "as detected from Composer manifest 'support.source'"
                 }
             ],
             "properties": [
@@ -1336,17 +1336,17 @@
                 {
                     "type": "website",
                     "url": "http://www.github.com/sebastianbergmann/recursion-context",
-                    "comment": "as detected from composer manifest 'homepage'"
+                    "comment": "as detected from Composer manifest 'homepage'"
                 },
                 {
                     "type": "issue-tracker",
                     "url": "https://github.com/sebastianbergmann/recursion-context/issues",
-                    "comment": "as detected from composer manifest 'support.issues'"
+                    "comment": "as detected from Composer manifest 'support.issues'"
                 },
                 {
                     "type": "vcs",
                     "url": "https://github.com/sebastianbergmann/recursion-context/tree/4.0.4",
-                    "comment": "as detected from composer manifest 'support.source'"
+                    "comment": "as detected from Composer manifest 'support.source'"
                 }
             ],
             "properties": [
@@ -1391,17 +1391,17 @@
                 {
                     "type": "website",
                     "url": "https://www.github.com/sebastianbergmann/resource-operations",
-                    "comment": "as detected from composer manifest 'homepage'"
+                    "comment": "as detected from Composer manifest 'homepage'"
                 },
                 {
                     "type": "issue-tracker",
                     "url": "https://github.com/sebastianbergmann/resource-operations/issues",
-                    "comment": "as detected from composer manifest 'support.issues'"
+                    "comment": "as detected from Composer manifest 'support.issues'"
                 },
                 {
                     "type": "vcs",
                     "url": "https://github.com/sebastianbergmann/resource-operations/tree/3.0.3",
-                    "comment": "as detected from composer manifest 'support.source'"
+                    "comment": "as detected from Composer manifest 'support.source'"
                 }
             ],
             "properties": [
@@ -1446,17 +1446,17 @@
                 {
                     "type": "website",
                     "url": "https://github.com/sebastianbergmann/type",
-                    "comment": "as detected from composer manifest 'homepage'"
+                    "comment": "as detected from Composer manifest 'homepage'"
                 },
                 {
                     "type": "issue-tracker",
                     "url": "https://github.com/sebastianbergmann/type/issues",
-                    "comment": "as detected from composer manifest 'support.issues'"
+                    "comment": "as detected from Composer manifest 'support.issues'"
                 },
                 {
                     "type": "vcs",
                     "url": "https://github.com/sebastianbergmann/type/tree/3.2.0",
-                    "comment": "as detected from composer manifest 'support.source'"
+                    "comment": "as detected from Composer manifest 'support.source'"
                 }
             ],
             "properties": [
@@ -1501,17 +1501,17 @@
                 {
                     "type": "website",
                     "url": "https://github.com/sebastianbergmann/version",
-                    "comment": "as detected from composer manifest 'homepage'"
+                    "comment": "as detected from Composer manifest 'homepage'"
                 },
                 {
                     "type": "issue-tracker",
                     "url": "https://github.com/sebastianbergmann/version/issues",
-                    "comment": "as detected from composer manifest 'support.issues'"
+                    "comment": "as detected from Composer manifest 'support.issues'"
                 },
                 {
                     "type": "vcs",
                     "url": "https://github.com/sebastianbergmann/version/tree/3.0.2",
-                    "comment": "as detected from composer manifest 'support.source'"
+                    "comment": "as detected from Composer manifest 'support.source'"
                 }
             ],
             "properties": [
@@ -1556,12 +1556,12 @@
                 {
                     "type": "issue-tracker",
                     "url": "https://github.com/theseer/tokenizer/issues",
-                    "comment": "as detected from composer manifest 'support.issues'"
+                    "comment": "as detected from Composer manifest 'support.issues'"
                 },
                 {
                     "type": "vcs",
                     "url": "https://github.com/theseer/tokenizer/tree/1.2.1",
-                    "comment": "as detected from composer manifest 'support.source'"
+                    "comment": "as detected from Composer manifest 'support.source'"
                 }
             ],
             "properties": [

@@ -2,15 +2,15 @@
     "$schema": "http://cyclonedx.org/schema/bom-1.4.schema.json",
     "bomFormat": "CycloneDX",
     "specVersion": "1.4",
-    "serialNumber": "urn:uuid:fc566029-e15e-4eba-b53f-0beba43dad2f",
+    "serialNumber": "urn:uuid:53767870-e922-4e8f-b961-30ba101650f4",
     "version": 1,
     "metadata": {
-        "timestamp": "2023-02-13T13:07:50Z",
+        "timestamp": "2023-02-16T10:57:40Z",
         "tools": [
             {
                 "vendor": "cyclonedx",
                 "name": "cyclonedx-php-composer",
-                "version": "dev-dist-source-reference",
+                "version": "dev-next-typos-Composer",
                 "externalReferences": [
                     {
                         "type": "distribution",
@@ -19,17 +19,17 @@
                     {
                         "type": "website",
                         "url": "https://github.com/CycloneDX/cyclonedx-php-composer/#readme",
-                        "comment": "as detected from composer manifest 'homepage'"
+                        "comment": "as detected from Composer manifest 'homepage'"
                     },
                     {
                         "type": "issue-tracker",
                         "url": "https://github.com/CycloneDX/cyclonedx-php-composer/issues",
-                        "comment": "as detected from composer manifest 'support.issues'"
+                        "comment": "as detected from Composer manifest 'support.issues'"
                     },
                     {
                         "type": "vcs",
                         "url": "https://github.com/CycloneDX/cyclonedx-php-composer/",
-                        "comment": "as detected from composer manifest 'support.source'"
+                        "comment": "as detected from Composer manifest 'support.source'"
                     }
                 ]
             },
@@ -49,17 +49,17 @@
                     {
                         "type": "website",
                         "url": "https://github.com/CycloneDX/cyclonedx-php-library/#readme",
-                        "comment": "as detected from composer manifest 'homepage'"
+                        "comment": "as detected from Composer manifest 'homepage'"
                     },
                     {
                         "type": "issue-tracker",
                         "url": "https://github.com/CycloneDX/cyclonedx-php-library/issues",
-                        "comment": "as detected from composer manifest 'support.issues'"
+                        "comment": "as detected from Composer manifest 'support.issues'"
                     },
                     {
                         "type": "vcs",
                         "url": "https://github.com/CycloneDX/cyclonedx-php-library/",
-                        "comment": "as detected from composer manifest 'support.source'"
+                        "comment": "as detected from Composer manifest 'support.source'"
                     }
                 ]
             }
@@ -76,11 +76,11 @@
             "properties": [
                 {
                     "name": "cdx:composer:package:distReference",
-                    "value": "ba2f5d5f2defd1111967a4e8ff0f3192fc88b185"
+                    "value": "277230f525445d4b7d487143b74e1072b0daa0f2"
                 },
                 {
                     "name": "cdx:composer:package:sourceReference",
-                    "value": "ba2f5d5f2defd1111967a4e8ff0f3192fc88b185"
+                    "value": "277230f525445d4b7d487143b74e1072b0daa0f2"
                 },
                 {
                     "name": "cdx:composer:package:type",
@@ -117,17 +117,17 @@
                 {
                     "type": "website",
                     "url": "https://www.doctrine-project.org/projects/event-manager.html",
-                    "comment": "as detected from composer manifest 'homepage'"
+                    "comment": "as detected from Composer manifest 'homepage'"
                 },
                 {
                     "type": "issue-tracker",
                     "url": "https://github.com/doctrine/event-manager/issues",
-                    "comment": "as detected from composer manifest 'support.issues'"
+                    "comment": "as detected from Composer manifest 'support.issues'"
                 },
                 {
                     "type": "vcs",
                     "url": "https://github.com/doctrine/event-manager/tree/2.0.0",
-                    "comment": "as detected from composer manifest 'support.source'"
+                    "comment": "as detected from Composer manifest 'support.source'"
                 }
             ],
             "properties": [
@@ -172,17 +172,17 @@
                 {
                     "type": "website",
                     "url": "https://www.doctrine-project.org/projects/persistence.html",
-                    "comment": "as detected from composer manifest 'homepage'"
+                    "comment": "as detected from Composer manifest 'homepage'"
                 },
                 {
                     "type": "issue-tracker",
                     "url": "https://github.com/doctrine/persistence/issues",
-                    "comment": "as detected from composer manifest 'support.issues'"
+                    "comment": "as detected from Composer manifest 'support.issues'"
                 },
                 {
                     "type": "vcs",
                     "url": "https://github.com/doctrine/persistence/tree/3.1.4",
-                    "comment": "as detected from composer manifest 'support.source'"
+                    "comment": "as detected from Composer manifest 'support.source'"
                 }
             ],
             "properties": [
@@ -227,17 +227,17 @@
                 {
                     "type": "website",
                     "url": "https://github.com/FriendsOfPHP/proxy-manager-lts",
-                    "comment": "as detected from composer manifest 'homepage'"
+                    "comment": "as detected from Composer manifest 'homepage'"
                 },
                 {
                     "type": "issue-tracker",
                     "url": "https://github.com/FriendsOfPHP/proxy-manager-lts/issues",
-                    "comment": "as detected from composer manifest 'support.issues'"
+                    "comment": "as detected from Composer manifest 'support.issues'"
                 },
                 {
                     "type": "vcs",
                     "url": "https://github.com/FriendsOfPHP/proxy-manager-lts/tree/v1.0.14",
-                    "comment": "as detected from composer manifest 'support.source'"
+                    "comment": "as detected from Composer manifest 'support.source'"
                 }
             ],
             "properties": [
@@ -281,37 +281,37 @@
                 {
                     "type": "website",
                     "url": "https://laminas.dev",
-                    "comment": "as detected from composer manifest 'homepage'"
+                    "comment": "as detected from Composer manifest 'homepage'"
                 },
                 {
                     "type": "chat",
                     "url": "https://laminas.dev/chat",
-                    "comment": "as detected from composer manifest 'support.chat'"
+                    "comment": "as detected from Composer manifest 'support.chat'"
                 },
                 {
                     "type": "documentation",
                     "url": "https://docs.laminas.dev/laminas-code/",
-                    "comment": "as detected from composer manifest 'support.docs'"
+                    "comment": "as detected from Composer manifest 'support.docs'"
                 },
                 {
                     "type": "other",
                     "url": "https://discourse.laminas.dev",
-                    "comment": "as detected from composer manifest 'support.forum'"
+                    "comment": "as detected from Composer manifest 'support.forum'"
                 },
                 {
                     "type": "issue-tracker",
                     "url": "https://github.com/laminas/laminas-code/issues",
-                    "comment": "as detected from composer manifest 'support.issues'"
+                    "comment": "as detected from Composer manifest 'support.issues'"
                 },
                 {
                     "type": "other",
                     "url": "https://github.com/laminas/laminas-code/releases.atom",
-                    "comment": "as detected from composer manifest 'support.rss'"
+                    "comment": "as detected from Composer manifest 'support.rss'"
                 },
                 {
                     "type": "vcs",
                     "url": "https://github.com/laminas/laminas-code",
-                    "comment": "as detected from composer manifest 'support.source'"
+                    "comment": "as detected from Composer manifest 'support.source'"
                 }
             ],
             "properties": [
@@ -356,7 +356,7 @@
                 {
                     "type": "vcs",
                     "url": "https://github.com/php-fig/cache/tree/3.0.0",
-                    "comment": "as detected from composer manifest 'support.source'"
+                    "comment": "as detected from Composer manifest 'support.source'"
                 }
             ],
             "properties": [
@@ -401,17 +401,17 @@
                 {
                     "type": "website",
                     "url": "https://github.com/php-fig/clock",
-                    "comment": "as detected from composer manifest 'homepage'"
+                    "comment": "as detected from Composer manifest 'homepage'"
                 },
                 {
                     "type": "issue-tracker",
                     "url": "https://github.com/php-fig/clock/issues",
-                    "comment": "as detected from composer manifest 'support.issues'"
+                    "comment": "as detected from Composer manifest 'support.issues'"
                 },
                 {
                     "type": "vcs",
                     "url": "https://github.com/php-fig/clock/tree/1.0.0",
-                    "comment": "as detected from composer manifest 'support.source'"
+                    "comment": "as detected from Composer manifest 'support.source'"
                 }
             ],
             "properties": [
@@ -456,17 +456,17 @@
                 {
                     "type": "website",
                     "url": "https://github.com/php-fig/container",
-                    "comment": "as detected from composer manifest 'homepage'"
+                    "comment": "as detected from Composer manifest 'homepage'"
                 },
                 {
                     "type": "issue-tracker",
                     "url": "https://github.com/php-fig/container/issues",
-                    "comment": "as detected from composer manifest 'support.issues'"
+                    "comment": "as detected from Composer manifest 'support.issues'"
                 },
                 {
                     "type": "vcs",
                     "url": "https://github.com/php-fig/container/tree/2.0.2",
-                    "comment": "as detected from composer manifest 'support.source'"
+                    "comment": "as detected from Composer manifest 'support.source'"
                 }
             ],
             "properties": [
@@ -511,12 +511,12 @@
                 {
                     "type": "issue-tracker",
                     "url": "https://github.com/php-fig/event-dispatcher/issues",
-                    "comment": "as detected from composer manifest 'support.issues'"
+                    "comment": "as detected from Composer manifest 'support.issues'"
                 },
                 {
                     "type": "vcs",
                     "url": "https://github.com/php-fig/event-dispatcher/tree/1.0.0",
-                    "comment": "as detected from composer manifest 'support.source'"
+                    "comment": "as detected from Composer manifest 'support.source'"
                 }
             ],
             "properties": [
@@ -561,12 +561,12 @@
                 {
                     "type": "website",
                     "url": "https://github.com/php-fig/link",
-                    "comment": "as detected from composer manifest 'homepage'"
+                    "comment": "as detected from Composer manifest 'homepage'"
                 },
                 {
                     "type": "vcs",
                     "url": "https://github.com/php-fig/link/tree/2.0.1",
-                    "comment": "as detected from composer manifest 'support.source'"
+                    "comment": "as detected from Composer manifest 'support.source'"
                 }
             ],
             "properties": [
@@ -611,12 +611,12 @@
                 {
                     "type": "website",
                     "url": "https://github.com/php-fig/log",
-                    "comment": "as detected from composer manifest 'homepage'"
+                    "comment": "as detected from Composer manifest 'homepage'"
                 },
                 {
                     "type": "vcs",
                     "url": "https://github.com/php-fig/log/tree/3.0.0",
-                    "comment": "as detected from composer manifest 'support.source'"
+                    "comment": "as detected from Composer manifest 'support.source'"
                 }
             ],
             "properties": [
@@ -661,12 +661,12 @@
                 {
                     "type": "website",
                     "url": "https://symfony.com",
-                    "comment": "as detected from composer manifest 'homepage'"
+                    "comment": "as detected from Composer manifest 'homepage'"
                 },
                 {
                     "type": "vcs",
                     "url": "https://github.com/symfony/contracts/tree/v3.2.0",
-                    "comment": "as detected from composer manifest 'support.source'"
+                    "comment": "as detected from Composer manifest 'support.source'"
                 }
             ],
             "properties": [
@@ -711,12 +711,12 @@
                 {
                     "type": "website",
                     "url": "https://symfony.com",
-                    "comment": "as detected from composer manifest 'homepage'"
+                    "comment": "as detected from Composer manifest 'homepage'"
                 },
                 {
                     "type": "vcs",
                     "url": "https://github.com/symfony/polyfill-ctype/tree/v1.27.0",
-                    "comment": "as detected from composer manifest 'support.source'"
+                    "comment": "as detected from Composer manifest 'support.source'"
                 }
             ],
             "properties": [
@@ -761,12 +761,12 @@
                 {
                     "type": "website",
                     "url": "https://symfony.com",
-                    "comment": "as detected from composer manifest 'homepage'"
+                    "comment": "as detected from Composer manifest 'homepage'"
                 },
                 {
                     "type": "vcs",
                     "url": "https://github.com/symfony/polyfill-intl-grapheme/tree/v1.27.0",
-                    "comment": "as detected from composer manifest 'support.source'"
+                    "comment": "as detected from Composer manifest 'support.source'"
                 }
             ],
             "properties": [
@@ -811,12 +811,12 @@
                 {
                     "type": "website",
                     "url": "https://symfony.com",
-                    "comment": "as detected from composer manifest 'homepage'"
+                    "comment": "as detected from Composer manifest 'homepage'"
                 },
                 {
                     "type": "vcs",
                     "url": "https://github.com/symfony/polyfill-intl-icu/tree/v1.27.0",
-                    "comment": "as detected from composer manifest 'support.source'"
+                    "comment": "as detected from Composer manifest 'support.source'"
                 }
             ],
             "properties": [
@@ -861,12 +861,12 @@
                 {
                     "type": "website",
                     "url": "https://symfony.com",
-                    "comment": "as detected from composer manifest 'homepage'"
+                    "comment": "as detected from Composer manifest 'homepage'"
                 },
                 {
                     "type": "vcs",
                     "url": "https://github.com/symfony/polyfill-intl-idn/tree/v1.27.0",
-                    "comment": "as detected from composer manifest 'support.source'"
+                    "comment": "as detected from Composer manifest 'support.source'"
                 }
             ],
             "properties": [
@@ -911,12 +911,12 @@
                 {
                     "type": "website",
                     "url": "https://symfony.com",
-                    "comment": "as detected from composer manifest 'homepage'"
+                    "comment": "as detected from Composer manifest 'homepage'"
                 },
                 {
                     "type": "vcs",
                     "url": "https://github.com/symfony/polyfill-intl-normalizer/tree/v1.27.0",
-                    "comment": "as detected from composer manifest 'support.source'"
+                    "comment": "as detected from Composer manifest 'support.source'"
                 }
             ],
             "properties": [
@@ -961,12 +961,12 @@
                 {
                     "type": "website",
                     "url": "https://symfony.com",
-                    "comment": "as detected from composer manifest 'homepage'"
+                    "comment": "as detected from Composer manifest 'homepage'"
                 },
                 {
                     "type": "vcs",
                     "url": "https://github.com/symfony/polyfill-mbstring/tree/v1.27.0",
-                    "comment": "as detected from composer manifest 'support.source'"
+                    "comment": "as detected from Composer manifest 'support.source'"
                 }
             ],
             "properties": [
@@ -1011,12 +1011,12 @@
                 {
                     "type": "website",
                     "url": "https://symfony.com",
-                    "comment": "as detected from composer manifest 'homepage'"
+                    "comment": "as detected from Composer manifest 'homepage'"
                 },
                 {
                     "type": "vcs",
                     "url": "https://github.com/symfony/polyfill-php72/tree/v1.27.0",
-                    "comment": "as detected from composer manifest 'support.source'"
+                    "comment": "as detected from Composer manifest 'support.source'"
                 }
             ],
             "properties": [
@@ -1061,12 +1061,12 @@
                 {
                     "type": "website",
                     "url": "https://symfony.com",
-                    "comment": "as detected from composer manifest 'homepage'"
+                    "comment": "as detected from Composer manifest 'homepage'"
                 },
                 {
                     "type": "vcs",
                     "url": "https://github.com/symfony/polyfill-uuid/tree/v1.27.0",
-                    "comment": "as detected from composer manifest 'support.source'"
+                    "comment": "as detected from Composer manifest 'support.source'"
                 }
             ],
             "properties": [
@@ -1111,17 +1111,17 @@
                 {
                     "type": "website",
                     "url": "https://symfony.com",
-                    "comment": "as detected from composer manifest 'homepage'"
+                    "comment": "as detected from Composer manifest 'homepage'"
                 },
                 {
                     "type": "issue-tracker",
                     "url": "https://github.com/symfony/symfony/issues",
-                    "comment": "as detected from composer manifest 'support.issues'"
+                    "comment": "as detected from Composer manifest 'support.issues'"
                 },
                 {
                     "type": "vcs",
                     "url": "https://github.com/symfony/symfony/tree/v6.2.6",
-                    "comment": "as detected from composer manifest 'support.source'"
+                    "comment": "as detected from Composer manifest 'support.source'"
                 }
             ],
             "properties": [
@@ -1166,17 +1166,17 @@
                 {
                     "type": "website",
                     "url": "https://twig.symfony.com",
-                    "comment": "as detected from composer manifest 'homepage'"
+                    "comment": "as detected from Composer manifest 'homepage'"
                 },
                 {
                     "type": "issue-tracker",
                     "url": "https://github.com/twigphp/Twig/issues",
-                    "comment": "as detected from composer manifest 'support.issues'"
+                    "comment": "as detected from Composer manifest 'support.issues'"
                 },
                 {
                     "type": "vcs",
                     "url": "https://github.com/twigphp/Twig/tree/v3.5.1",
-                    "comment": "as detected from composer manifest 'support.source'"
+                    "comment": "as detected from Composer manifest 'support.source'"
                 }
             ],
             "properties": [
