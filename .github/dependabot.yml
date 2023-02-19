@@ -73,7 +73,7 @@ updates:
       prefix: 'tools'
       include: 'scope'
     open-pull-requests-limit: 999
-  - directory: '/tools/psalm'
+  - directory: '/tools/phpunit'
     package-ecosystem: 'composer'
     schedule:
       interval: 'weekly'
@@ -87,7 +87,7 @@ updates:
       prefix: 'tools'
       include: 'scope'
     open-pull-requests-limit: 999
-  - directory: '/tools/phpunit'
+  - directory: '/tools/psalm'
     package-ecosystem: 'composer'
     schedule:
       interval: 'weekly'
