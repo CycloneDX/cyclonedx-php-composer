@@ -27,12 +27,18 @@ use Composer\Plugin\Capability\CommandProvider;
 use Composer\Plugin\Capable;
 use Composer\Plugin\PluginInterface;
 use CycloneDX\Composer\MakeBom\Command;
+use CycloneDX\Composer\MakeBom\Options;
 use CycloneDX\Composer\Plugin;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\CoversNothing;
+use PHPUnit\Framework\Attributes\Depends;
+use PHPUnit\Framework\Attributes\DoesNotPerformAssertions;
+use PHPUnit\Framework\Attributes\UsesClass;
 use PHPUnit\Framework\TestCase;
 
-#[\PHPUnit\Framework\Attributes\CoversClass(\CycloneDX\Composer\Plugin::class)]
-#[\PHPUnit\Framework\Attributes\UsesClass(\CycloneDX\Composer\MakeBom\Command::class)]
-#[\PHPUnit\Framework\Attributes\UsesClass(\CycloneDX\Composer\MakeBom\Options::class)]
+#[CoversClass(Plugin::class)]
+#[UsesClass(Command::class)]
+#[UsesClass(Options::class)]
 final class PluginTest extends TestCase
 {
     /**
@@ -44,7 +50,7 @@ final class PluginTest extends TestCase
      * assert the correct setup as described in
      * {@link https://getcomposer.org/doc/articles/plugins.md#plugin-package the docs}.
      */
-    #[\PHPUnit\Framework\Attributes\CoversNothing]
+    #[CoversNothing]
     public function testPackageIsComposerPlugin(): void
     {
         $composerJson = $this->getComposerJson();
@@ -55,7 +61,7 @@ final class PluginTest extends TestCase
      * assert the correct setup as described in
      * {@link https://getcomposer.org/doc/articles/plugins.md#plugin-package the docs}.
      */
-    #[\PHPUnit\Framework\Attributes\CoversNothing]
+    #[CoversNothing]
     public function testPluginIsRegistered(): string
     {
         $composerJson = $this->getComposerJson();
@@ -77,7 +83,7 @@ final class PluginTest extends TestCase
         );
     }
 
-    #[\PHPUnit\Framework\Attributes\Depends('testPluginIsRegistered')]
+    #[Depends('testPluginIsRegistered')]
     public function testPluginImplementsRequiredInterfaces(string $pluginClass): PluginInterface&Capable
     {
         $implements = class_implements($pluginClass);
@@ -88,7 +94,7 @@ final class PluginTest extends TestCase
         return new $pluginClass();
     }
 
-    #[\PHPUnit\Framework\Attributes\Depends('testPluginImplementsRequiredInterfaces')]
+    #[Depends('testPluginImplementsRequiredInterfaces')]
     public function testPluginIsCapableOfCommand(Capable $plugin): CommandProvider
     {
         $capabilities = $plugin->getCapabilities();
@@ -101,7 +107,7 @@ final class PluginTest extends TestCase
         return $commandProvider;
     }
 
-    #[\PHPUnit\Framework\Attributes\Depends('testPluginIsCapableOfCommand')]
+    #[Depends('testPluginIsCapableOfCommand')]
     public function testMakeBomCommandIsRegistered(CommandProvider $commandProvider): void
     {
         $commands = $commandProvider->getCommands();
@@ -115,8 +121,8 @@ final class PluginTest extends TestCase
         self::assertSame('CycloneDX:make-sbom', $command->getName());
     }
 
-    #[\PHPUnit\Framework\Attributes\Depends('testPluginImplementsRequiredInterfaces')]
-    #[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
+    #[Depends('testPluginImplementsRequiredInterfaces')]
+    #[DoesNotPerformAssertions]
     public function testActivatePlugin(PluginInterface $plugin): PluginInterface
     {
         $plugin->activate(
@@ -127,8 +133,8 @@ final class PluginTest extends TestCase
         return $plugin;
     }
 
-    #[\PHPUnit\Framework\Attributes\Depends('testActivatePlugin')]
-    #[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
+    #[Depends('testActivatePlugin')]
+    #[DoesNotPerformAssertions]
     public function testDeactivatePlugin(PluginInterface $plugin): PluginInterface
     {
         $plugin->deactivate(
@@ -139,8 +145,8 @@ final class PluginTest extends TestCase
         return $plugin;
     }
 
-    #[\PHPUnit\Framework\Attributes\Depends('testDeactivatePlugin')]
-    #[\PHPUnit\Framework\Attributes\DoesNotPerformAssertions]
+    #[Depends('testDeactivatePlugin')]
+    #[DoesNotPerformAssertions]
     public function testUninstallPlugin(PluginInterface $plugin): PluginInterface
     {
         $plugin->uninstall(

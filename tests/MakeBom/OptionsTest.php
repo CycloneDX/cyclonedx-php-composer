@@ -28,14 +28,16 @@ use CycloneDX\Core\Spec\Format;
 use CycloneDX\Core\Spec\Version;
 use DomainException;
 use Generator;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 use Symfony\Component\Console\Input\StringInput;
 
-#[\PHPUnit\Framework\Attributes\CoversClass(\CycloneDX\Composer\MakeBom\Options::class)]
+#[CoversClass(Options::class)]
 final class OptionsTest extends TestCase
 {
-    #[\PHPUnit\Framework\Attributes\DataProvider('dpProducesOption')]
+    #[DataProvider('dpProducesOption')]
     public function testProducesOption(string $inputString, array $expecteds): void
     {
         $options = new Options();
@@ -163,7 +165,7 @@ final class OptionsTest extends TestCase
     /**
      * @psalm-param class-string<\Throwable> $exception
      */
-    #[\PHPUnit\Framework\Attributes\DataProvider('dpProducesOptionError')]
+    #[DataProvider('dpProducesOptionError')]
     public function testProducesOptionError(string $inputString, string $exception, string $exceptionErrorMessage): void
     {
         $options = new Options();
