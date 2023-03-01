@@ -45,8 +45,9 @@ composer require --dev cyclonedx/cyclonedx-php-composer
 
 After successful installation, the _Composer_ command `CycloneDX:make-sbom` is available.
 
-```text
+```ShellSession
 $ composer CycloneDX:make-sbom --help
+
 Description:
   Generate a CycloneDX Bill of Materials from a PHP Composer project.
 
