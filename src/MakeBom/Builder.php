@@ -40,6 +40,7 @@ use Exception;
 use Generator;
 use PackageUrl\PackageUrl;
 use RuntimeException;
+use Throwable;
 use ValueError;
 
 /**
@@ -322,7 +323,7 @@ class Builder
     }
 
     /**
-     * @psalm-suppress MissingThrowsDocblock
+     * @throws Throwable when the repo could not be fetched
      */
     private function getPackageRepo(Composer $composer, bool $withDevReqs): InstalledRepositoryInterface|LockArrayRepository
     {
@@ -353,7 +354,11 @@ class Builder
             $packageNames[] = 'cyclonedx/cyclonedx-library';
         }
 
-        $packagesRepo = $this->getPackageRepo($composer, true);
+        try {
+            $packagesRepo = $this->getPackageRepo($composer, true);
+        } catch (\Throwable) {
+            return;
+        }
 
         foreach ($packageNames as $packageName) {
             try {
