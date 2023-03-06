@@ -23,6 +23,13 @@
     "require-dev": {
         "roave/security-advisories": "dev-latest"
     },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "packages/*",
+            "symlink": true
+        }
+    ],
     "minimum-stability": "dev",
     "prefer-stable": true,
     "config": {

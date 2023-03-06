@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bom xmlns="http://cyclonedx.org/schema/bom/1.4" version="1" serialNumber="urn:uuid:32090a00-e8a2-4f5d-a8d9-1e946ed48a02">
+<bom xmlns="http://cyclonedx.org/schema/bom/1.4" version="1" serialNumber="urn:uuid:21c5ddff-1320-421e-9acd-d7096e7c8459">
   <metadata>
-    <timestamp><![CDATA[2023-03-06T17:36:16Z]]></timestamp>
+    <timestamp><![CDATA[2023-03-06T18:02:25Z]]></timestamp>
     <tools>
       <tool>
         <vendor><![CDATA[cyclonedx]]></vendor>
@@ -59,8 +59,8 @@
       <description><![CDATA[demo of cyclonedx/cyclonedx-php-composer with symfony/symfony]]></description>
       <purl><![CDATA[pkg:composer/cyclonedx/cyclonedx-php-composer-demo@dev-next]]></purl>
       <properties>
-        <property name="cdx:composer:package:distReference"><![CDATA[19685e2810462a7bee03c2781411f9688b6d2703]]></property>
-        <property name="cdx:composer:package:sourceReference"><![CDATA[19685e2810462a7bee03c2781411f9688b6d2703]]></property>
+        <property name="cdx:composer:package:distReference"><![CDATA[bfc18cdc2683d837fbf6f16d586d5bb98382138c]]></property>
+        <property name="cdx:composer:package:sourceReference"><![CDATA[bfc18cdc2683d837fbf6f16d586d5bb98382138c]]></property>
         <property name="cdx:composer:package:type"><![CDATA[project]]></property>
       </properties>
     </component>
