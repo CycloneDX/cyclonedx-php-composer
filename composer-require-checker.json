@@ -14,6 +14,7 @@
     "Composer\\Plugin\\Capable",
     "Composer\\Plugin\\PluginInterface",
     "Composer\\Repository\\InstalledRepositoryInterface",
+    "Composer\\Repository\\LockArrayRepository",
     "Composer\\Semver\\Constraint\\MatchAllConstraint",
     "Symfony\\Component\\Console\\Command\\Command",
     "Symfony\\Component\\Console\\Formatter\\OutputFormatter",

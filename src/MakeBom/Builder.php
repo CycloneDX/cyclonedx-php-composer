@@ -357,7 +357,7 @@ class Builder
         try {
             $packagesRepo = $this->getPackageRepo($composer, true);
         } catch (\Throwable) {
-            return;
+            $packagesRepo = new LockArrayRepository();
         }
 
         foreach ($packageNames as $packageName) {
@@ -368,7 +368,7 @@ class Builder
                     $versionOverride
                 );
             } catch (\Throwable) {
-                /* pass */
+                yield (new Models\Tool())->setName($packageName);
             }
         }
     }
