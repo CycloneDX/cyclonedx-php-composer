@@ -28,6 +28,8 @@ use Composer\Package\CompletePackageInterface;
 use Composer\Package\PackageInterface;
 use Composer\Package\RootPackage;
 use Composer\Package\RootPackageInterface;
+use Composer\Repository\InstalledRepositoryInterface;
+use Composer\Repository\LockArrayRepository;
 use Composer\Semver\Constraint\MatchAllConstraint;
 use CycloneDX\Composer\Properties;
 use CycloneDX\Core\Enums;
@@ -66,17 +68,13 @@ class Builder
     /**
      * @psalm-suppress MissingThrowsDocblock
      */
-    public function createBomFromComposer(Composer $composer): Models\Bom
+    public function createSbomFromComposer(Composer $composer): Models\Bom
     {
-        $bom = new Models\Bom();
-
         $rootPackage = $composer->getPackage();
         $rootComponent = $this->createComponentFromRootPackage($rootPackage);
-        $bom->getMetadata()->setComponent($rootComponent);
-        $composerLocker = $composer->getLocker();
 
-        $withDevReqs = false === $this->omitDev && isset($composerLocker->getLockData()['packages-dev']);
-        $packagesRepo = $composerLocker->getLockedRepository($withDevReqs);
+        $withDevReqs = false === $this->omitDev;
+        $packagesRepo = $this->getPackageRepo($composer, $withDevReqs);
 
         // region packages & components
         /**
@@ -92,26 +90,53 @@ class Builder
             : $packagesRepo->getPackages()
         );
         /** @psalm-var array<string, Models\Component> */
-        $components = [$rootPackage->getUniqueName() => $rootComponent];
+        $components = [];
         foreach ($packages as $package) {
             if ($this->omitPlugin && \in_array($package->getType(), self::ComposerPackageType_Plugin)) {
                 continue;
             }
-            $component = $this->createComponentFromPackage($package);
-            $bom->getComponents()->addItems($component);
-            $components[$package->getUniqueName()] = $component;
-            unset($component, $package);
+            $components[$package->getName()] = $this->createComponentFromPackage($package);
         }
+        unset($package);
         // endregion packages & components
 
+        // region mark/omit dev-dependencies
+        $devDependencies = $packagesRepo instanceof InstalledRepositoryInterface
+            ? $packagesRepo->getDevPackageNames()
+            : $composer->getLocker()->getDevPackageNames();
+        foreach ($rootPackage->getDevRequires() as $required) {
+            $requiredPackage = $packagesRepo->findPackage($required->getTarget(), $required->getConstraint());
+            if (null === $requiredPackage) {
+                continue;
+            }
+            $devDependencies[] = $requiredPackage->getName();
+            unset($required, $requiredPackage);
+        }
+        if ($withDevReqs) {
+            foreach (array_unique($devDependencies) as $packageName) {
+                if (isset($components[$packageName])) {
+                    $components[$packageName]->getProperties()->addItems(
+                        new Models\Property(Properties::Name_DevRequirement, Properties::Value_True));
+                }
+            }
+        } else {
+            foreach ($devDependencies as $packageName) {
+                unset($components[$packageName]);
+            }
+        }
+        unset($devDependencies, $packageName);
+        // endregion mark dev-dependencies
+
         // region dependency graph
+        /** ALL Components, also the RootComponent, to make circular dependencies visible */
+        $allComponents = [$rootPackage->getName() => $rootComponent] + $components;
         /**
          * @var PackageInterface $package
          *
          * @psalm-suppress UnnecessaryVarAnnotation -- as it is needed for some IDE
          */
-        foreach ([$rootPackage, ...$packages] as $package) {
-            $component = $components[$package->getUniqueName()] ?? null;
+        foreach ($packages as $package) {
+            $component = $allComponents[$package->getName()] ?? null;
             if (null === $component) {
                 continue;
             }
@@ -120,32 +145,31 @@ class Builder
                 if (null === $requiredPackage) {
                     continue;
                 }
-                $dependency = $components[$requiredPackage->getUniqueName()] ?? null;
+                $dependency = $allComponents[$requiredPackage->getName()] ?? null;
                 if (null !== $dependency) {
                     $component->getDependencies()->addItems($dependency->getBomRef());
                 }
             }
             unset($package, $component, $required, $dependency);
         }
+        foreach ([...$rootPackage->getRequires(), ...$rootPackage->getDevRequires()] as $required) {
+            $requiredPackage = $packagesRepo->findPackage($required->getTarget(), $required->getConstraint());
+            if (null === $requiredPackage) {
+                continue;
+            }
+            $dependency = $allComponents[$requiredPackage->getName()] ?? null;
+            if (null !== $dependency) {
+                $rootComponent->getDependencies()->addItems($dependency->getBomRef());
+            }
+        }
+        unset($allComponents);
         // endregion dependency graph
 
-        // region mark dev-dependencies
-        if ($withDevReqs) {
-            foreach ($rootPackage->getDevRequires() as $required) {
-                $requiredPackage = $packagesRepo->findPackage($required->getTarget(), $required->getConstraint());
-                if (null === $requiredPackage) {
-                    continue;
-                }
-                $dependency = $components[$requiredPackage->getUniqueName()] ?? null;
-                if (null !== $dependency) {
-                    $dependency->getProperties()->addItems(
-                        new Models\Property(Properties::Name_DevRequirement, Properties::Value_True));
-                    $rootComponent->getDependencies()->addItems($dependency->getBomRef());
-                }
-            }
-            unset($required,$requiredPackage, $dependency);
-        }
-        // endregion mark dev-dependencies
+        // region finalize components
+        $bom = new Models\Bom();
+        $bom->getMetadata()->setComponent($rootComponent);
+        $bom->getComponents()->addItems(...$components);
+        // endregion finalize components
 
         return $bom;
     }
@@ -298,6 +322,22 @@ class Builder
     }
 
     /**
+     * @psalm-suppress MissingThrowsDocblock
+     */
+    private function getPackageRepo(Composer $composer, bool $withDevReqs): InstalledRepositoryInterface|LockArrayRepository
+    {
+        $packagesRepo = $composer->getRepositoryManager()->getLocalRepository();
+        if (!$packagesRepo->isFresh()) {
+            return $packagesRepo;
+        }
+
+        $composerLocker = $composer->getLocker();
+        $withDevReqs = $withDevReqs && isset($composerLocker->getLockData()['packages-dev']);
+
+        return $composerLocker->getLockedRepository($withDevReqs);
+    }
+
+    /**
      * @psalm-return Generator<int,Models\Tool>
      *
      * @psalm-suppress MissingThrowsDocblock
@@ -313,9 +353,7 @@ class Builder
             $packageNames[] = 'cyclonedx/cyclonedx-library';
         }
 
-        $composerLocker = $composer->getLocker();
-        $withDevReqs = isset($composerLocker->getLockData()['packages-dev']);
-        $packagesRepo = $composerLocker->getLockedRepository($withDevReqs);
+        $packagesRepo = $this->getPackageRepo($composer, true);
 
         foreach ($packageNames as $packageName) {
             try {

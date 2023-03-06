@@ -52,7 +52,8 @@ class Command extends BaseCommand
      */
     public function __construct(
         private readonly Options $options,
-        string $name
+        string $name,
+        private readonly ComposerFactory $composerFactory,
     ) {
         parent::__construct($name);
     }
@@ -119,10 +120,11 @@ class Command extends BaseCommand
             $this->options->mainComponentVersion
         );
 
-        $subjectComposer = (new ComposerFactory())->createComposer($io, $this->options->composerFile, fullLoad: true);
+        $subjectComposer = $this->composerFactory->createComposer($io, $this->options->composerFile, fullLoad: true);
         /** @psalm-suppress RedundantConditionGivenDocblockType -- as with lowest-compatible dependencies this is needed  */
         \assert($subjectComposer instanceof \Composer\Composer);
-        $bom = $builder->createBomFromComposer($subjectComposer);
+        $io->writeError('<info>generate base SBOM from compoers\'s evidences...</info>', verbosity: IOInterface::VERBOSE);
+        $bom = $builder->createSbomFromComposer($subjectComposer);
         unset($subjectComposer);
 
         if (!$this->options->outputReproducible) {
@@ -134,6 +136,7 @@ class Command extends BaseCommand
             $bom->getMetadata()->setTimestamp(new DateTime());
         }
 
+        $io->writeError('<info>fetch tools...</info>', verbosity: IOInterface::VERBOSE);
         $bom->getMetadata()->getTools()->addItems(
             ...$builder->createToolsFromComposer(
                 $this->requireComposer(),
