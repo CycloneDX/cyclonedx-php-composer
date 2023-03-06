@@ -20,13 +20,6 @@
     "require-dev": {
         "phpunit/phpunit": "9.5.26"
     },
-    "repositories": [
-        {
-            "type": "path",
-            "url": "../../..",
-            "symlink": true
-        }
-    ],
     "minimum-stability": "dev",
     "prefer-stable": true,
     "config": {
