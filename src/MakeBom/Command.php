@@ -120,7 +120,12 @@ class Command extends BaseCommand
             $this->options->mainComponentVersion
         );
 
-        $subjectComposer = $this->composerFactory->createComposer($io, $this->options->composerFile, fullLoad: true);
+        $composerFile = $this->options->composerFile;
+        $projectDir = null === $composerFile
+             ? null
+             : \dirname($composerFile);
+        $io->writeError(sprintf('<info>composerFile=%s projectDir=%s</info>', OutputFormatter::escape($composerFile ?? ''), OutputFormatter::escape($projectDir ?? '')), verbosity: IOInterface::DEBUG);
+        $subjectComposer = $this->composerFactory->createComposer($io, $composerFile, cwd: $projectDir, fullLoad: true);
         /** @psalm-suppress RedundantConditionGivenDocblockType -- as with lowest-compatible dependencies this is needed  */
         \assert($subjectComposer instanceof \Composer\Composer);
         $io->writeError('<info>generate base SBOM from compoers\'s evidences...</info>', verbosity: IOInterface::VERBOSE);
