@@ -2,15 +2,15 @@
     "$schema": "http://cyclonedx.org/schema/bom-1.4.schema.json",
     "bomFormat": "CycloneDX",
     "specVersion": "1.4",
-    "serialNumber": "urn:uuid:53767870-e922-4e8f-b961-30ba101650f4",
+    "serialNumber": "urn:uuid:53cb08fb-6ea0-48f8-bfed-312f264eb2d3",
     "version": 1,
     "metadata": {
-        "timestamp": "2023-02-16T10:57:40Z",
+        "timestamp": "2023-03-06T18:02:25Z",
         "tools": [
             {
                 "vendor": "cyclonedx",
                 "name": "cyclonedx-php-composer",
-                "version": "dev-next-typos-Composer",
+                "version": "dev-prevere-sinstalled-setups",
                 "externalReferences": [
                     {
                         "type": "distribution",
@@ -36,11 +36,11 @@
             {
                 "vendor": "cyclonedx",
                 "name": "cyclonedx-library",
-                "version": "2.x-dev 2f76986",
+                "version": "2.x-dev 52aba2b",
                 "externalReferences": [
                     {
                         "type": "distribution",
-                        "url": "https://api.github.com/repos/CycloneDX/cyclonedx-php-library/zipball/2f769869be9bab5aaa124446486769b3b6a7a82e"
+                        "url": "https://api.github.com/repos/CycloneDX/cyclonedx-php-library/zipball/52aba2b3279d9b224f93c53aedc9b1272529bf93"
                     },
                     {
                         "type": "vcs",
@@ -76,11 +76,11 @@
             "properties": [
                 {
                     "name": "cdx:composer:package:distReference",
-                    "value": "277230f525445d4b7d487143b74e1072b0daa0f2"
+                    "value": "bfc18cdc2683d837fbf6f16d586d5bb98382138c"
                 },
                 {
                     "name": "cdx:composer:package:sourceReference",
-                    "value": "277230f525445d4b7d487143b74e1072b0daa0f2"
+                    "value": "bfc18cdc2683d837fbf6f16d586d5bb98382138c"
                 },
                 {
                     "name": "cdx:composer:package:type",
@@ -256,10 +256,10 @@
             ]
         },
         {
-            "bom-ref": "laminas/laminas-code-4.8.0.0",
+            "bom-ref": "laminas/laminas-code-4.9.0.0",
             "type": "library",
             "name": "laminas-code",
-            "version": "4.8.0",
+            "version": "4.9.0",
             "group": "laminas",
             "description": "Extensions to the PHP Reflection API, static code scanning, and code generation",
             "licenses": [
@@ -272,7 +272,7 @@
             "externalReferences": [
                 {
                     "type": "distribution",
-                    "url": "https://api.github.com/repos/laminas/laminas-code/zipball/dd19fe8e07cc3f374308565667eecd4958c22106"
+                    "url": "https://api.github.com/repos/laminas/laminas-code/zipball/c1706ecde17f87ae8bab169c4b88006c9253d3a5"
                 },
                 {
                     "type": "vcs",
@@ -317,11 +317,11 @@
             "properties": [
                 {
                     "name": "cdx:composer:package:distReference",
-                    "value": "dd19fe8e07cc3f374308565667eecd4958c22106"
+                    "value": "c1706ecde17f87ae8bab169c4b88006c9253d3a5"
                 },
                 {
                     "name": "cdx:composer:package:sourceReference",
-                    "value": "dd19fe8e07cc3f374308565667eecd4958c22106"
+                    "value": "c1706ecde17f87ae8bab169c4b88006c9253d3a5"
                 },
                 {
                     "name": "cdx:composer:package:type",
@@ -635,10 +635,10 @@
             ]
         },
         {
-            "bom-ref": "symfony/contracts-3.2.0.0",
+            "bom-ref": "symfony/contracts-3.2.1.0",
             "type": "library",
             "name": "contracts",
-            "version": "v3.2.0",
+            "version": "v3.2.1",
             "group": "symfony",
             "description": "A set of abstractions extracted out of the Symfony components",
             "author": "Nicolas Grekas, Symfony Community",
@@ -652,7 +652,7 @@
             "externalReferences": [
                 {
                     "type": "distribution",
-                    "url": "https://api.github.com/repos/symfony/contracts/zipball/c47da22960a1eb5e39c1ad84120734e680265610"
+                    "url": "https://api.github.com/repos/symfony/contracts/zipball/8ec95320f72fd012bf6335498c8f6c8d64957346"
                 },
                 {
                     "type": "vcs",
@@ -665,18 +665,18 @@
                 },
                 {
                     "type": "vcs",
-                    "url": "https://github.com/symfony/contracts/tree/v3.2.0",
+                    "url": "https://github.com/symfony/contracts/tree/v3.2.1",
                     "comment": "as detected from Composer manifest 'support.source'"
                 }
             ],
             "properties": [
                 {
                     "name": "cdx:composer:package:distReference",
-                    "value": "c47da22960a1eb5e39c1ad84120734e680265610"
+                    "value": "8ec95320f72fd012bf6335498c8f6c8d64957346"
                 },
                 {
                     "name": "cdx:composer:package:sourceReference",
-                    "value": "c47da22960a1eb5e39c1ad84120734e680265610"
+                    "value": "8ec95320f72fd012bf6335498c8f6c8d64957346"
                 },
                 {
                     "name": "cdx:composer:package:type",
@@ -1085,10 +1085,10 @@
             ]
         },
         {
-            "bom-ref": "symfony/symfony-6.2.6.0",
+            "bom-ref": "symfony/symfony-6.2.7.0",
             "type": "library",
             "name": "symfony",
-            "version": "v6.2.6",
+            "version": "v6.2.7",
             "group": "symfony",
             "description": "The Symfony PHP framework",
             "author": "Fabien Potencier, Symfony Community",
@@ -1102,7 +1102,7 @@
             "externalReferences": [
                 {
                     "type": "distribution",
-                    "url": "https://api.github.com/repos/symfony/symfony/zipball/008d9ac6cd61dd64d273bf5328857c7f97d9d7f6"
+                    "url": "https://api.github.com/repos/symfony/symfony/zipball/80cac46a31d4561804c17d101591a4f59e6db3a2"
                 },
                 {
                     "type": "vcs",
@@ -1120,18 +1120,18 @@
                 },
                 {
                     "type": "vcs",
-                    "url": "https://github.com/symfony/symfony/tree/v6.2.6",
+                    "url": "https://github.com/symfony/symfony/tree/v6.2.7",
                     "comment": "as detected from Composer manifest 'support.source'"
                 }
             ],
             "properties": [
                 {
                     "name": "cdx:composer:package:distReference",
-                    "value": "008d9ac6cd61dd64d273bf5328857c7f97d9d7f6"
+                    "value": "80cac46a31d4561804c17d101591a4f59e6db3a2"
                 },
                 {
                     "name": "cdx:composer:package:sourceReference",
-                    "value": "008d9ac6cd61dd64d273bf5328857c7f97d9d7f6"
+                    "value": "80cac46a31d4561804c17d101591a4f59e6db3a2"
                 },
                 {
                     "name": "cdx:composer:package:type",
@@ -1209,11 +1209,11 @@
         {
             "ref": "friendsofphp/proxy-manager-lts-1.0.14.0",
             "dependsOn": [
-                "laminas/laminas-code-4.8.0.0"
+                "laminas/laminas-code-4.9.0.0"
             ]
         },
         {
-            "ref": "laminas/laminas-code-4.8.0.0"
+            "ref": "laminas/laminas-code-4.9.0.0"
         },
         {
             "ref": "psr/cache-3.0.0.0"
@@ -1234,7 +1234,7 @@
             "ref": "psr/log-3.0.0.0"
         },
         {
-            "ref": "symfony/contracts-3.2.0.0",
+            "ref": "symfony/contracts-3.2.1.0",
             "dependsOn": [
                 "psr/cache-3.0.0.0",
                 "psr/container-2.0.2.0",
@@ -1270,7 +1270,7 @@
             "ref": "symfony/polyfill-uuid-1.27.0.0"
         },
         {
-            "ref": "symfony/symfony-6.2.6.0",
+            "ref": "symfony/symfony-6.2.7.0",
             "dependsOn": [
                 "doctrine/event-manager-2.0.0.0",
                 "doctrine/persistence-3.1.4.0",
@@ -1281,7 +1281,7 @@
                 "psr/event-dispatcher-1.0.0.0",
                 "psr/link-2.0.1.0",
                 "psr/log-3.0.0.0",
-                "symfony/contracts-3.2.0.0",
+                "symfony/contracts-3.2.1.0",
                 "symfony/polyfill-ctype-1.27.0.0",
                 "symfony/polyfill-intl-grapheme-1.27.0.0",
                 "symfony/polyfill-intl-icu-1.27.0.0",
@@ -1302,7 +1302,7 @@
         {
             "ref": "cyclonedx/cyclonedx-php-composer-demo-dev-next",
             "dependsOn": [
-                "symfony/symfony-6.2.6.0"
+                "symfony/symfony-6.2.7.0"
             ]
         }
     ]

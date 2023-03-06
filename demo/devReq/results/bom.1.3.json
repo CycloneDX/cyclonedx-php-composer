@@ -62,10 +62,10 @@
     },
     "components": [
         {
-            "bom-ref": "doctrine/instantiator-1.4.1.0",
+            "bom-ref": "doctrine/instantiator-1.5.0.0",
             "type": "library",
             "name": "instantiator",
-            "version": "1.4.1",
+            "version": "1.5.0",
             "group": "doctrine",
             "description": "A small, lightweight utility to instantiate objects in PHP without invoking their constructors",
             "author": "Marco Pivetta",
@@ -79,7 +79,7 @@
             "externalReferences": [
                 {
                     "type": "distribution",
-                    "url": "https://api.github.com/repos/doctrine/instantiator/zipball/10dcfce151b967d20fde1b34ae6640712c3891bc"
+                    "url": "https://api.github.com/repos/doctrine/instantiator/zipball/0a0fa9780f5d4e507415a065172d26a98d02047b"
                 },
                 {
                     "type": "vcs",
@@ -97,22 +97,26 @@
                 },
                 {
                     "type": "vcs",
-                    "url": "https://github.com/doctrine/instantiator/tree/1.4.1",
+                    "url": "https://github.com/doctrine/instantiator/tree/1.5.0",
                     "comment": "as detected from Composer manifest 'support.source'"
                 }
             ],
             "properties": [
                 {
                     "name": "cdx:composer:package:distReference",
-                    "value": "10dcfce151b967d20fde1b34ae6640712c3891bc"
+                    "value": "0a0fa9780f5d4e507415a065172d26a98d02047b"
                 },
                 {
                     "name": "cdx:composer:package:sourceReference",
-                    "value": "10dcfce151b967d20fde1b34ae6640712c3891bc"
+                    "value": "0a0fa9780f5d4e507415a065172d26a98d02047b"
                 },
                 {
                     "name": "cdx:composer:package:type",
                     "value": "library"
+                },
+                {
+                    "name": "cdx:composer:package:isDevRequirement",
+                    "value": "true"
                 }
             ]
         },
@@ -162,14 +166,18 @@
                 {
                     "name": "cdx:composer:package:type",
                     "value": "library"
+                },
+                {
+                    "name": "cdx:composer:package:isDevRequirement",
+                    "value": "true"
                 }
             ]
         },
         {
-            "bom-ref": "nikic/php-parser-4.15.2.0",
+            "bom-ref": "nikic/php-parser-4.15.4.0",
             "type": "library",
             "name": "php-parser",
-            "version": "v4.15.2",
+            "version": "v4.15.4",
             "group": "nikic",
             "description": "A PHP parser written in PHP",
             "author": "Nikita Popov",
@@ -183,7 +191,7 @@
             "externalReferences": [
                 {
                     "type": "distribution",
-                    "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/f59bbe44bf7d96f24f3e2b4ddc21cd52c1d2adbc"
+                    "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/6bb5176bc4af8bcb7d926f88718db9b96a2d4290"
                 },
                 {
                     "type": "vcs",
@@ -196,22 +204,26 @@
                 },
                 {
                     "type": "vcs",
-                    "url": "https://github.com/nikic/PHP-Parser/tree/v4.15.2",
+                    "url": "https://github.com/nikic/PHP-Parser/tree/v4.15.4",
                     "comment": "as detected from Composer manifest 'support.source'"
                 }
             ],
             "properties": [
                 {
                     "name": "cdx:composer:package:distReference",
-                    "value": "f59bbe44bf7d96f24f3e2b4ddc21cd52c1d2adbc"
+                    "value": "6bb5176bc4af8bcb7d926f88718db9b96a2d4290"
                 },
                 {
                     "name": "cdx:composer:package:sourceReference",
-                    "value": "f59bbe44bf7d96f24f3e2b4ddc21cd52c1d2adbc"
+                    "value": "6bb5176bc4af8bcb7d926f88718db9b96a2d4290"
                 },
                 {
                     "name": "cdx:composer:package:type",
                     "value": "library"
+                },
+                {
+                    "name": "cdx:composer:package:isDevRequirement",
+                    "value": "true"
                 }
             ]
         },
@@ -262,6 +274,10 @@
                 {
                     "name": "cdx:composer:package:type",
                     "value": "library"
+                },
+                {
+                    "name": "cdx:composer:package:isDevRequirement",
+                    "value": "true"
                 }
             ]
         },
@@ -312,14 +328,18 @@
                 {
                     "name": "cdx:composer:package:type",
                     "value": "library"
+                },
+                {
+                    "name": "cdx:composer:package:isDevRequirement",
+                    "value": "true"
                 }
             ]
         },
         {
-            "bom-ref": "phpunit/php-code-coverage-9.2.19.0",
+            "bom-ref": "phpunit/php-code-coverage-9.2.26.0",
             "type": "library",
             "name": "php-code-coverage",
-            "version": "9.2.19",
+            "version": "9.2.26",
             "group": "phpunit",
             "description": "Library that provides collection, processing, and rendering functionality for PHP code coverage information.",
             "author": "Sebastian Bergmann",
@@ -333,7 +353,7 @@
             "externalReferences": [
                 {
                     "type": "distribution",
-                    "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/c77b56b63e3d2031bd8997fcec43c1925ae46559"
+                    "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/443bc6912c9bd5b409254a40f4b0f4ced7c80ea1"
                 },
                 {
                     "type": "vcs",
@@ -351,22 +371,26 @@
                 },
                 {
                     "type": "vcs",
-                    "url": "https://github.com/sebastianbergmann/php-code-coverage/tree/9.2.19",
+                    "url": "https://github.com/sebastianbergmann/php-code-coverage/tree/9.2.26",
                     "comment": "as detected from Composer manifest 'support.source'"
                 }
             ],
             "properties": [
                 {
                     "name": "cdx:composer:package:distReference",
-                    "value": "c77b56b63e3d2031bd8997fcec43c1925ae46559"
+                    "value": "443bc6912c9bd5b409254a40f4b0f4ced7c80ea1"
                 },
                 {
                     "name": "cdx:composer:package:sourceReference",
-                    "value": "c77b56b63e3d2031bd8997fcec43c1925ae46559"
+                    "value": "443bc6912c9bd5b409254a40f4b0f4ced7c80ea1"
                 },
                 {
                     "name": "cdx:composer:package:type",
                     "value": "library"
+                },
+                {
+                    "name": "cdx:composer:package:isDevRequirement",
+                    "value": "true"
                 }
             ]
         },
@@ -422,6 +446,10 @@
                 {
                     "name": "cdx:composer:package:type",
                     "value": "library"
+                },
+                {
+                    "name": "cdx:composer:package:isDevRequirement",
+                    "value": "true"
                 }
             ]
         },
@@ -477,6 +505,10 @@
                 {
                     "name": "cdx:composer:package:type",
                     "value": "library"
+                },
+                {
+                    "name": "cdx:composer:package:isDevRequirement",
+                    "value": "true"
                 }
             ]
         },
@@ -532,6 +564,10 @@
                 {
                     "name": "cdx:composer:package:type",
                     "value": "library"
+                },
+                {
+                    "name": "cdx:composer:package:isDevRequirement",
+                    "value": "true"
                 }
             ]
         },
@@ -587,6 +623,10 @@
                 {
                     "name": "cdx:composer:package:type",
                     "value": "library"
+                },
+                {
+                    "name": "cdx:composer:package:isDevRequirement",
+                    "value": "true"
                 }
             ]
         },
@@ -701,6 +741,10 @@
                 {
                     "name": "cdx:composer:package:type",
                     "value": "library"
+                },
+                {
+                    "name": "cdx:composer:package:isDevRequirement",
+                    "value": "true"
                 }
             ]
         },
@@ -756,6 +800,10 @@
                 {
                     "name": "cdx:composer:package:type",
                     "value": "library"
+                },
+                {
+                    "name": "cdx:composer:package:isDevRequirement",
+                    "value": "true"
                 }
             ]
         },
@@ -811,6 +859,10 @@
                 {
                     "name": "cdx:composer:package:type",
                     "value": "library"
+                },
+                {
+                    "name": "cdx:composer:package:isDevRequirement",
+                    "value": "true"
                 }
             ]
         },
@@ -866,6 +918,10 @@
                 {
                     "name": "cdx:composer:package:type",
                     "value": "library"
+                },
+                {
+                    "name": "cdx:composer:package:isDevRequirement",
+                    "value": "true"
                 }
             ]
         },
@@ -921,6 +977,10 @@
                 {
                     "name": "cdx:composer:package:type",
                     "value": "library"
+                },
+                {
+                    "name": "cdx:composer:package:isDevRequirement",
+                    "value": "true"
                 }
             ]
         },
@@ -976,14 +1036,18 @@
                 {
                     "name": "cdx:composer:package:type",
                     "value": "library"
+                },
+                {
+                    "name": "cdx:composer:package:isDevRequirement",
+                    "value": "true"
                 }
             ]
         },
         {
-            "bom-ref": "sebastian/environment-5.1.4.0",
+            "bom-ref": "sebastian/environment-5.1.5.0",
             "type": "library",
             "name": "environment",
-            "version": "5.1.4",
+            "version": "5.1.5",
             "group": "sebastian",
             "description": "Provides functionality to handle HHVM/PHP environments",
             "author": "Sebastian Bergmann",
@@ -997,7 +1061,7 @@
             "externalReferences": [
                 {
                     "type": "distribution",
-                    "url": "https://api.github.com/repos/sebastianbergmann/environment/zipball/1b5dff7bb151a4db11d49d90e5408e4e938270f7"
+                    "url": "https://api.github.com/repos/sebastianbergmann/environment/zipball/830c43a844f1f8d5b7a1f6d6076b784454d8b7ed"
                 },
                 {
                     "type": "vcs",
@@ -1015,22 +1079,26 @@
                 },
                 {
                     "type": "vcs",
-                    "url": "https://github.com/sebastianbergmann/environment/tree/5.1.4",
+                    "url": "https://github.com/sebastianbergmann/environment/tree/5.1.5",
                     "comment": "as detected from Composer manifest 'support.source'"
                 }
             ],
             "properties": [
                 {
                     "name": "cdx:composer:package:distReference",
-                    "value": "1b5dff7bb151a4db11d49d90e5408e4e938270f7"
+                    "value": "830c43a844f1f8d5b7a1f6d6076b784454d8b7ed"
                 },
                 {
                     "name": "cdx:composer:package:sourceReference",
-                    "value": "1b5dff7bb151a4db11d49d90e5408e4e938270f7"
+                    "value": "830c43a844f1f8d5b7a1f6d6076b784454d8b7ed"
                 },
                 {
                     "name": "cdx:composer:package:type",
                     "value": "library"
+                },
+                {
+                    "name": "cdx:composer:package:isDevRequirement",
+                    "value": "true"
                 }
             ]
         },
@@ -1086,6 +1154,10 @@
                 {
                     "name": "cdx:composer:package:type",
                     "value": "library"
+                },
+                {
+                    "name": "cdx:composer:package:isDevRequirement",
+                    "value": "true"
                 }
             ]
         },
@@ -1141,6 +1213,10 @@
                 {
                     "name": "cdx:composer:package:type",
                     "value": "library"
+                },
+                {
+                    "name": "cdx:composer:package:isDevRequirement",
+                    "value": "true"
                 }
             ]
         },
@@ -1196,6 +1272,10 @@
                 {
                     "name": "cdx:composer:package:type",
                     "value": "library"
+                },
+                {
+                    "name": "cdx:composer:package:isDevRequirement",
+                    "value": "true"
                 }
             ]
         },
@@ -1251,6 +1331,10 @@
                 {
                     "name": "cdx:composer:package:type",
                     "value": "library"
+                },
+                {
+                    "name": "cdx:composer:package:isDevRequirement",
+                    "value": "true"
                 }
             ]
         },
@@ -1306,14 +1390,18 @@
                 {
                     "name": "cdx:composer:package:type",
                     "value": "library"
+                },
+                {
+                    "name": "cdx:composer:package:isDevRequirement",
+                    "value": "true"
                 }
             ]
         },
         {
-            "bom-ref": "sebastian/recursion-context-4.0.4.0",
+            "bom-ref": "sebastian/recursion-context-4.0.5.0",
             "type": "library",
             "name": "recursion-context",
-            "version": "4.0.4",
+            "version": "4.0.5",
             "group": "sebastian",
             "description": "Provides functionality to recursively process PHP variables",
             "author": "Sebastian Bergmann, Jeff Welch, Adam Harvey",
@@ -1327,7 +1415,7 @@
             "externalReferences": [
                 {
                     "type": "distribution",
-                    "url": "https://api.github.com/repos/sebastianbergmann/recursion-context/zipball/cd9d8cf3c5804de4341c283ed787f099f5506172"
+                    "url": "https://api.github.com/repos/sebastianbergmann/recursion-context/zipball/e75bd0f07204fec2a0af9b0f3cfe97d05f92efc1"
                 },
                 {
                     "type": "vcs",
@@ -1335,7 +1423,7 @@
                 },
                 {
                     "type": "website",
-                    "url": "http://www.github.com/sebastianbergmann/recursion-context",
+                    "url": "https://github.com/sebastianbergmann/recursion-context",
                     "comment": "as detected from Composer manifest 'homepage'"
                 },
                 {
@@ -1345,22 +1433,26 @@
                 },
                 {
                     "type": "vcs",
-                    "url": "https://github.com/sebastianbergmann/recursion-context/tree/4.0.4",
+                    "url": "https://github.com/sebastianbergmann/recursion-context/tree/4.0.5",
                     "comment": "as detected from Composer manifest 'support.source'"
                 }
             ],
             "properties": [
                 {
                     "name": "cdx:composer:package:distReference",
-                    "value": "cd9d8cf3c5804de4341c283ed787f099f5506172"
+                    "value": "e75bd0f07204fec2a0af9b0f3cfe97d05f92efc1"
                 },
                 {
                     "name": "cdx:composer:package:sourceReference",
-                    "value": "cd9d8cf3c5804de4341c283ed787f099f5506172"
+                    "value": "e75bd0f07204fec2a0af9b0f3cfe97d05f92efc1"
                 },
                 {
                     "name": "cdx:composer:package:type",
                     "value": "library"
+                },
+                {
+                    "name": "cdx:composer:package:isDevRequirement",
+                    "value": "true"
                 }
             ]
         },
@@ -1416,14 +1508,18 @@
                 {
                     "name": "cdx:composer:package:type",
                     "value": "library"
+                },
+                {
+                    "name": "cdx:composer:package:isDevRequirement",
+                    "value": "true"
                 }
             ]
         },
         {
-            "bom-ref": "sebastian/type-3.2.0.0",
+            "bom-ref": "sebastian/type-3.2.1.0",
             "type": "library",
             "name": "type",
-            "version": "3.2.0",
+            "version": "3.2.1",
             "group": "sebastian",
             "description": "Collection of value objects that represent the types of the PHP type system",
             "author": "Sebastian Bergmann",
@@ -1437,7 +1533,7 @@
             "externalReferences": [
                 {
                     "type": "distribution",
-                    "url": "https://api.github.com/repos/sebastianbergmann/type/zipball/fb3fe09c5f0bae6bc27ef3ce933a1e0ed9464b6e"
+                    "url": "https://api.github.com/repos/sebastianbergmann/type/zipball/75e2c2a32f5e0b3aef905b9ed0b179b953b3d7c7"
                 },
                 {
                     "type": "vcs",
@@ -1455,22 +1551,26 @@
                 },
                 {
                     "type": "vcs",
-                    "url": "https://github.com/sebastianbergmann/type/tree/3.2.0",
+                    "url": "https://github.com/sebastianbergmann/type/tree/3.2.1",
                     "comment": "as detected from Composer manifest 'support.source'"
                 }
             ],
             "properties": [
                 {
                     "name": "cdx:composer:package:distReference",
-                    "value": "fb3fe09c5f0bae6bc27ef3ce933a1e0ed9464b6e"
+                    "value": "75e2c2a32f5e0b3aef905b9ed0b179b953b3d7c7"
                 },
                 {
                     "name": "cdx:composer:package:sourceReference",
-                    "value": "fb3fe09c5f0bae6bc27ef3ce933a1e0ed9464b6e"
+                    "value": "75e2c2a32f5e0b3aef905b9ed0b179b953b3d7c7"
                 },
                 {
                     "name": "cdx:composer:package:type",
                     "value": "library"
+                },
+                {
+                    "name": "cdx:composer:package:isDevRequirement",
+                    "value": "true"
                 }
             ]
         },
@@ -1526,6 +1626,10 @@
                 {
                     "name": "cdx:composer:package:type",
                     "value": "library"
+                },
+                {
+                    "name": "cdx:composer:package:isDevRequirement",
+                    "value": "true"
                 }
             ]
         },
@@ -1576,19 +1680,23 @@
                 {
                     "name": "cdx:composer:package:type",
                     "value": "library"
+                },
+                {
+                    "name": "cdx:composer:package:isDevRequirement",
+                    "value": "true"
                 }
             ]
         }
     ],
     "dependencies": [
         {
-            "ref": "doctrine/instantiator-1.4.1.0"
+            "ref": "doctrine/instantiator-1.5.0.0"
         },
         {
             "ref": "myclabs/deep-copy-1.11.0.0"
         },
         {
-            "ref": "nikic/php-parser-4.15.2.0"
+            "ref": "nikic/php-parser-4.15.4.0"
         },
         {
             "ref": "phar-io/manifest-2.0.3.0",
@@ -1600,14 +1708,14 @@
             "ref": "phar-io/version-3.2.1.0"
         },
         {
-            "ref": "phpunit/php-code-coverage-9.2.19.0",
+            "ref": "phpunit/php-code-coverage-9.2.26.0",
             "dependsOn": [
-                "nikic/php-parser-4.15.2.0",
+                "nikic/php-parser-4.15.4.0",
                 "phpunit/php-file-iterator-3.0.6.0",
                 "phpunit/php-text-template-2.0.4.0",
                 "sebastian/code-unit-reverse-lookup-2.0.3.0",
                 "sebastian/complexity-2.0.2.0",
-                "sebastian/environment-5.1.4.0",
+                "sebastian/environment-5.1.5.0",
                 "sebastian/lines-of-code-1.0.3.0",
                 "sebastian/version-3.0.2.0",
                 "theseer/tokenizer-1.2.1.0"
@@ -1628,11 +1736,11 @@
         {
             "ref": "phpunit/phpunit-9.5.26.0",
             "dependsOn": [
-                "doctrine/instantiator-1.4.1.0",
+                "doctrine/instantiator-1.5.0.0",
                 "myclabs/deep-copy-1.11.0.0",
                 "phar-io/manifest-2.0.3.0",
                 "phar-io/version-3.2.1.0",
-                "phpunit/php-code-coverage-9.2.19.0",
+                "phpunit/php-code-coverage-9.2.26.0",
                 "phpunit/php-file-iterator-3.0.6.0",
                 "phpunit/php-invoker-3.1.1.0",
                 "phpunit/php-text-template-2.0.4.0",
@@ -1641,12 +1749,12 @@
                 "sebastian/code-unit-1.0.8.0",
                 "sebastian/comparator-4.0.8.0",
                 "sebastian/diff-4.0.4.0",
-                "sebastian/environment-5.1.4.0",
+                "sebastian/environment-5.1.5.0",
                 "sebastian/exporter-4.0.5.0",
                 "sebastian/global-state-5.0.5.0",
                 "sebastian/object-enumerator-4.0.4.0",
                 "sebastian/resource-operations-3.0.3.0",
-                "sebastian/type-3.2.0.0",
+                "sebastian/type-3.2.1.0",
                 "sebastian/version-3.0.2.0"
             ]
         },
@@ -1669,52 +1777,52 @@
         {
             "ref": "sebastian/complexity-2.0.2.0",
             "dependsOn": [
-                "nikic/php-parser-4.15.2.0"
+                "nikic/php-parser-4.15.4.0"
             ]
         },
         {
             "ref": "sebastian/diff-4.0.4.0"
         },
         {
-            "ref": "sebastian/environment-5.1.4.0"
+            "ref": "sebastian/environment-5.1.5.0"
         },
         {
             "ref": "sebastian/exporter-4.0.5.0",
             "dependsOn": [
-                "sebastian/recursion-context-4.0.4.0"
+                "sebastian/recursion-context-4.0.5.0"
             ]
         },
         {
             "ref": "sebastian/global-state-5.0.5.0",
             "dependsOn": [
                 "sebastian/object-reflector-2.0.4.0",
-                "sebastian/recursion-context-4.0.4.0"
+                "sebastian/recursion-context-4.0.5.0"
             ]
         },
         {
             "ref": "sebastian/lines-of-code-1.0.3.0",
             "dependsOn": [
-                "nikic/php-parser-4.15.2.0"
+                "nikic/php-parser-4.15.4.0"
             ]
         },
         {
             "ref": "sebastian/object-enumerator-4.0.4.0",
             "dependsOn": [
                 "sebastian/object-reflector-2.0.4.0",
-                "sebastian/recursion-context-4.0.4.0"
+                "sebastian/recursion-context-4.0.5.0"
             ]
         },
         {
             "ref": "sebastian/object-reflector-2.0.4.0"
         },
         {
-            "ref": "sebastian/recursion-context-4.0.4.0"
+            "ref": "sebastian/recursion-context-4.0.5.0"
         },
         {
             "ref": "sebastian/resource-operations-3.0.3.0"
         },
         {
-            "ref": "sebastian/type-3.2.0.0"
+            "ref": "sebastian/type-3.2.1.0"
         },
         {
             "ref": "sebastian/version-3.0.2.0"

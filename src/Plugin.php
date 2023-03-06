@@ -24,6 +24,7 @@ declare(strict_types=1);
 namespace CycloneDX\Composer;
 
 use Composer\Composer;
+use Composer\Factory;
 use Composer\IO\IOInterface;
 use Composer\Plugin\Capability\CommandProvider;
 use Composer\Plugin\Capable;
@@ -68,7 +69,8 @@ class Plugin implements PluginInterface, Capable, CommandProvider
         return [
             new MakeBom\Command(
                 new MakeBom\Options(),
-                'CycloneDX:make-sbom'
+                'CycloneDX:make-sbom',
+                new Factory()
             ),
         ];
     }

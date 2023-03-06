@@ -79,6 +79,16 @@ Options:
 
 For a demo of _cyclonedx-php-composer_ see the [demo projects][demo_readme].
 
+## How it works
+
+This composer plugin actually utilizes composer itself, to collect evidence for installed composer packages.  
+In terms of evidence collection, actually installed setups are preferred over pure lock file analysis.  
+Required  evidence:
+- composer config/manifest file (e.g. `composer.json` file)
+- any of:
+  - an actual composer setup (e.g. `vendor` directory, after running `composer install` on your project)
+  - a working composer lock file (e.g. `composer.lock` file)
+
 ## Internals
 
 This _Composer_ plugin utilizes the [CycloneDX library][cyclonedx-library] to generate the actual data structures.
