@@ -19,10 +19,12 @@ All notable changes to this project will be documented in this file.
   * Dependencies
     * Requires `cyclonedx/cyclonedx-library:^2.0`, was `:^1.4.2` ([#128] via [#250])
 * Changed
+  * Evidence analysis prefers actually installed packages over lock file ([#122] via [#250])
   * Root component's versions is unset, if version detection fails ([#154] via [#250])
   * Composer packages of type "composer-installer" are treated as composer plugins (via [#250])
 * Added
   * Support for CycloneDX Spec v1.4 (via [#250])
+  * Evidence collection knows installed packages ([#122] via [#250])
   * SBOM results
     * might have `serialnumber` populated ([#279] via [#250])
     * might have `metadata.timestamp` populated ([#112] via [#250])
@@ -40,6 +42,7 @@ All notable changes to this project will be documented in this file.
 [#91]:  https://github.com/CycloneDX/cyclonedx-php-composer/issues/91
 [#102]: https://github.com/CycloneDX/cyclonedx-php-composer/issues/102
 [#112]: https://github.com/CycloneDX/cyclonedx-php-composer/issues/112
+[#122]: https://github.com/CycloneDX/cyclonedx-php-composer/issues/122
 [#128]: https://github.com/CycloneDX/cyclonedx-php-composer/issues/128
 [#153]: https://github.com/CycloneDX/cyclonedx-php-composer/issues/153
 [#154]: https://github.com/CycloneDX/cyclonedx-php-composer/issues/154
