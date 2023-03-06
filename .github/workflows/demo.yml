@@ -36,7 +36,7 @@ env:
 jobs:
   reproducible:
     name: >
-      Reproducible "${{ matrix.subject }}"
+      R: "${{ matrix.subject }}"
       (${{ matrix.spec-version }}
       ${{ matrix.output-format }},
       c${{ matrix.composer }}
@@ -140,12 +140,15 @@ jobs:
           restore-keys: |
             composer-${{ github.job }}-${{ matrix.subject }}-php${{ matrix.php }}-
             composer-${{ github.job }}-${{ matrix.subject }}-
-      - name: Install dependencies & kick lockfile
-        if: ${ matrix.install }
+      - name: Install composer plugin
+        working-directory: ${{ env.DEMO_TOOL_PATH }}
+        run: composer install
+      - name: Install project dependencies & kick lockfile
+        if: ${{ matrix.install }}
         working-directory: ${{ env.DEMO_PROJECT_DIR }}
         run: |
           composer setup
-          rm -rf composer.json
+          rm composer.lock
       - name: Make SBOM to file
         if: ${{ ! matrix.stdout }}
         working-directory: ${{ env.DEMO_TOOL_PATH }}
