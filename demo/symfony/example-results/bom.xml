@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bom xmlns="http://cyclonedx.org/schema/bom/1.4" version="1" serialNumber="urn:uuid:3d9b966d-70b2-4432-a4bf-27825054447f">
+<bom xmlns="http://cyclonedx.org/schema/bom/1.4" version="1" serialNumber="urn:uuid:5bf4f271-0aab-4d39-a346-763414050f37">
   <metadata>
-    <timestamp><![CDATA[2023-02-16T10:57:41Z]]></timestamp>
+    <timestamp><![CDATA[2023-03-06T17:09:22Z]]></timestamp>
     <tools>
       <tool>
         <vendor><![CDATA[cyclonedx]]></vendor>
         <name><![CDATA[cyclonedx-php-composer]]></name>
-        <version><![CDATA[dev-next-typos-Composer]]></version>
+        <version><![CDATA[dev-next]]></version>
         <externalReferences>
           <reference type="distribution">
             <url><![CDATA[../..]]></url>
@@ -28,10 +28,10 @@
       <tool>
         <vendor><![CDATA[cyclonedx]]></vendor>
         <name><![CDATA[cyclonedx-library]]></name>
-        <version><![CDATA[2.x-dev 2f76986]]></version>
+        <version><![CDATA[2.x-dev 52aba2b]]></version>
         <externalReferences>
           <reference type="distribution">
-            <url><![CDATA[https://api.github.com/repos/CycloneDX/cyclonedx-php-library/zipball/2f769869be9bab5aaa124446486769b3b6a7a82e]]></url>
+            <url><![CDATA[https://api.github.com/repos/CycloneDX/cyclonedx-php-library/zipball/52aba2b3279d9b224f93c53aedc9b1272529bf93]]></url>
           </reference>
           <reference type="vcs">
             <url><![CDATA[https://github.com/CycloneDX/cyclonedx-php-library.git]]></url>
@@ -59,8 +59,8 @@
       <description><![CDATA[demo of cyclonedx/cyclonedx-php-composer with symfony/symfony]]></description>
       <purl><![CDATA[pkg:composer/cyclonedx/cyclonedx-php-composer-demo@dev-next]]></purl>
       <properties>
-        <property name="cdx:composer:package:distReference"><![CDATA[277230f525445d4b7d487143b74e1072b0daa0f2]]></property>
-        <property name="cdx:composer:package:sourceReference"><![CDATA[277230f525445d4b7d487143b74e1072b0daa0f2]]></property>
+        <property name="cdx:composer:package:distReference"><![CDATA[74e6b72317308d775e8450ed7ed7b172464c5d23]]></property>
+        <property name="cdx:composer:package:sourceReference"><![CDATA[74e6b72317308d775e8450ed7ed7b172464c5d23]]></property>
         <property name="cdx:composer:package:type"><![CDATA[project]]></property>
       </properties>
     </component>
@@ -177,10 +177,10 @@
         <property name="cdx:composer:package:type"><![CDATA[library]]></property>
       </properties>
     </component>
-    <component type="library" bom-ref="laminas/laminas-code-4.8.0.0">
+    <component type="library" bom-ref="laminas/laminas-code-4.9.0.0">
       <group><![CDATA[laminas]]></group>
       <name><![CDATA[laminas-code]]></name>
-      <version><![CDATA[4.8.0]]></version>
+      <version><![CDATA[4.9.0]]></version>
       <description><![CDATA[Extensions to the PHP Reflection API, static code scanning, and code generation]]></description>
       <licenses>
         <license>
@@ -189,7 +189,7 @@
       </licenses>
       <externalReferences>
         <reference type="distribution">
-          <url><![CDATA[https://api.github.com/repos/laminas/laminas-code/zipball/dd19fe8e07cc3f374308565667eecd4958c22106]]></url>
+          <url><![CDATA[https://api.github.com/repos/laminas/laminas-code/zipball/c1706ecde17f87ae8bab169c4b88006c9253d3a5]]></url>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/laminas/laminas-code.git]]></url>
@@ -224,8 +224,8 @@
         </reference>
       </externalReferences>
       <properties>
-        <property name="cdx:composer:package:distReference"><![CDATA[dd19fe8e07cc3f374308565667eecd4958c22106]]></property>
-        <property name="cdx:composer:package:sourceReference"><![CDATA[dd19fe8e07cc3f374308565667eecd4958c22106]]></property>
+        <property name="cdx:composer:package:distReference"><![CDATA[c1706ecde17f87ae8bab169c4b88006c9253d3a5]]></property>
+        <property name="cdx:composer:package:sourceReference"><![CDATA[c1706ecde17f87ae8bab169c4b88006c9253d3a5]]></property>
         <property name="cdx:composer:package:type"><![CDATA[library]]></property>
       </properties>
     </component>
@@ -431,11 +431,11 @@
         <property name="cdx:composer:package:type"><![CDATA[library]]></property>
       </properties>
     </component>
-    <component type="library" bom-ref="symfony/contracts-3.2.0.0">
+    <component type="library" bom-ref="symfony/contracts-3.2.1.0">
       <author><![CDATA[Nicolas Grekas, Symfony Community]]></author>
       <group><![CDATA[symfony]]></group>
       <name><![CDATA[contracts]]></name>
-      <version><![CDATA[v3.2.0]]></version>
+      <version><![CDATA[v3.2.1]]></version>
       <description><![CDATA[A set of abstractions extracted out of the Symfony components]]></description>
       <licenses>
         <license>
@@ -444,7 +444,7 @@
       </licenses>
       <externalReferences>
         <reference type="distribution">
-          <url><![CDATA[https://api.github.com/repos/symfony/contracts/zipball/c47da22960a1eb5e39c1ad84120734e680265610]]></url>
+          <url><![CDATA[https://api.github.com/repos/symfony/contracts/zipball/8ec95320f72fd012bf6335498c8f6c8d64957346]]></url>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/symfony/contracts.git]]></url>
@@ -454,13 +454,13 @@
           <comment><![CDATA[as detected from Composer manifest 'homepage']]></comment>
         </reference>
         <reference type="vcs">
-          <url><![CDATA[https://github.com/symfony/contracts/tree/v3.2.0]]></url>
+          <url><![CDATA[https://github.com/symfony/contracts/tree/v3.2.1]]></url>
           <comment><![CDATA[as detected from Composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
       <properties>
-        <property name="cdx:composer:package:distReference"><![CDATA[c47da22960a1eb5e39c1ad84120734e680265610]]></property>
-        <property name="cdx:composer:package:sourceReference"><![CDATA[c47da22960a1eb5e39c1ad84120734e680265610]]></property>
+        <property name="cdx:composer:package:distReference"><![CDATA[8ec95320f72fd012bf6335498c8f6c8d64957346]]></property>
+        <property name="cdx:composer:package:sourceReference"><![CDATA[8ec95320f72fd012bf6335498c8f6c8d64957346]]></property>
         <property name="cdx:composer:package:type"><![CDATA[library]]></property>
       </properties>
     </component>
@@ -728,11 +728,11 @@
         <property name="cdx:composer:package:type"><![CDATA[library]]></property>
       </properties>
     </component>
-    <component type="library" bom-ref="symfony/symfony-6.2.6.0">
+    <component type="library" bom-ref="symfony/symfony-6.2.7.0">
       <author><![CDATA[Fabien Potencier, Symfony Community]]></author>
       <group><![CDATA[symfony]]></group>
       <name><![CDATA[symfony]]></name>
-      <version><![CDATA[v6.2.6]]></version>
+      <version><![CDATA[v6.2.7]]></version>
       <description><![CDATA[The Symfony PHP framework]]></description>
       <licenses>
         <license>
@@ -741,7 +741,7 @@
       </licenses>
       <externalReferences>
         <reference type="distribution">
-          <url><![CDATA[https://api.github.com/repos/symfony/symfony/zipball/008d9ac6cd61dd64d273bf5328857c7f97d9d7f6]]></url>
+          <url><![CDATA[https://api.github.com/repos/symfony/symfony/zipball/80cac46a31d4561804c17d101591a4f59e6db3a2]]></url>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/symfony/symfony.git]]></url>
@@ -755,13 +755,13 @@
           <comment><![CDATA[as detected from Composer manifest 'support.issues']]></comment>
         </reference>
         <reference type="vcs">
-          <url><![CDATA[https://github.com/symfony/symfony/tree/v6.2.6]]></url>
+          <url><![CDATA[https://github.com/symfony/symfony/tree/v6.2.7]]></url>
           <comment><![CDATA[as detected from Composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
       <properties>
-        <property name="cdx:composer:package:distReference"><![CDATA[008d9ac6cd61dd64d273bf5328857c7f97d9d7f6]]></property>
-        <property name="cdx:composer:package:sourceReference"><![CDATA[008d9ac6cd61dd64d273bf5328857c7f97d9d7f6]]></property>
+        <property name="cdx:composer:package:distReference"><![CDATA[80cac46a31d4561804c17d101591a4f59e6db3a2]]></property>
+        <property name="cdx:composer:package:sourceReference"><![CDATA[80cac46a31d4561804c17d101591a4f59e6db3a2]]></property>
         <property name="cdx:composer:package:type"><![CDATA[library]]></property>
       </properties>
     </component>
@@ -810,16 +810,16 @@
       <dependency ref="psr/cache-3.0.0.0"/>
     </dependency>
     <dependency ref="friendsofphp/proxy-manager-lts-1.0.14.0">
-      <dependency ref="laminas/laminas-code-4.8.0.0"/>
+      <dependency ref="laminas/laminas-code-4.9.0.0"/>
     </dependency>
-    <dependency ref="laminas/laminas-code-4.8.0.0"/>
+    <dependency ref="laminas/laminas-code-4.9.0.0"/>
     <dependency ref="psr/cache-3.0.0.0"/>
     <dependency ref="psr/clock-1.0.0.0"/>
     <dependency ref="psr/container-2.0.2.0"/>
     <dependency ref="psr/event-dispatcher-1.0.0.0"/>
     <dependency ref="psr/link-2.0.1.0"/>
     <dependency ref="psr/log-3.0.0.0"/>
-    <dependency ref="symfony/contracts-3.2.0.0">
+    <dependency ref="symfony/contracts-3.2.1.0">
       <dependency ref="psr/cache-3.0.0.0"/>
       <dependency ref="psr/container-2.0.2.0"/>
       <dependency ref="psr/event-dispatcher-1.0.0.0"/>
@@ -835,7 +835,7 @@
     <dependency ref="symfony/polyfill-mbstring-1.27.0.0"/>
     <dependency ref="symfony/polyfill-php72-1.27.0.0"/>
     <dependency ref="symfony/polyfill-uuid-1.27.0.0"/>
-    <dependency ref="symfony/symfony-6.2.6.0">
+    <dependency ref="symfony/symfony-6.2.7.0">
       <dependency ref="doctrine/event-manager-2.0.0.0"/>
       <dependency ref="doctrine/persistence-3.1.4.0"/>
       <dependency ref="friendsofphp/proxy-manager-lts-1.0.14.0"/>
@@ -845,7 +845,7 @@
       <dependency ref="psr/event-dispatcher-1.0.0.0"/>
       <dependency ref="psr/link-2.0.1.0"/>
       <dependency ref="psr/log-3.0.0.0"/>
-      <dependency ref="symfony/contracts-3.2.0.0"/>
+      <dependency ref="symfony/contracts-3.2.1.0"/>
       <dependency ref="symfony/polyfill-ctype-1.27.0.0"/>
       <dependency ref="symfony/polyfill-intl-grapheme-1.27.0.0"/>
       <dependency ref="symfony/polyfill-intl-icu-1.27.0.0"/>
@@ -860,7 +860,7 @@
       <dependency ref="symfony/polyfill-mbstring-1.27.0.0"/>
     </dependency>
     <dependency ref="cyclonedx/cyclonedx-php-composer-demo-dev-next">
-      <dependency ref="symfony/symfony-6.2.6.0"/>
+      <dependency ref="symfony/symfony-6.2.7.0"/>
     </dependency>
   </dependencies>
 </bom>

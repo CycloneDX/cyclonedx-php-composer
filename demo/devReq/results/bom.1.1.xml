@@ -4,7 +4,7 @@
     <component type="library">
       <group><![CDATA[doctrine]]></group>
       <name><![CDATA[instantiator]]></name>
-      <version><![CDATA[1.4.1]]></version>
+      <version><![CDATA[1.5.0]]></version>
       <description><![CDATA[A small, lightweight utility to instantiate objects in PHP without invoking their constructors]]></description>
       <licenses>
         <license>
@@ -13,7 +13,7 @@
       </licenses>
       <externalReferences>
         <reference type="distribution">
-          <url><![CDATA[https://api.github.com/repos/doctrine/instantiator/zipball/10dcfce151b967d20fde1b34ae6640712c3891bc]]></url>
+          <url><![CDATA[https://api.github.com/repos/doctrine/instantiator/zipball/0a0fa9780f5d4e507415a065172d26a98d02047b]]></url>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/doctrine/instantiator.git]]></url>
@@ -27,7 +27,7 @@
           <comment><![CDATA[as detected from Composer manifest 'support.issues']]></comment>
         </reference>
         <reference type="vcs">
-          <url><![CDATA[https://github.com/doctrine/instantiator/tree/1.4.1]]></url>
+          <url><![CDATA[https://github.com/doctrine/instantiator/tree/1.5.0]]></url>
           <comment><![CDATA[as detected from Composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
@@ -62,7 +62,7 @@
     <component type="library">
       <group><![CDATA[nikic]]></group>
       <name><![CDATA[php-parser]]></name>
-      <version><![CDATA[v4.15.2]]></version>
+      <version><![CDATA[v4.15.4]]></version>
       <description><![CDATA[A PHP parser written in PHP]]></description>
       <licenses>
         <license>
@@ -71,7 +71,7 @@
       </licenses>
       <externalReferences>
         <reference type="distribution">
-          <url><![CDATA[https://api.github.com/repos/nikic/PHP-Parser/zipball/f59bbe44bf7d96f24f3e2b4ddc21cd52c1d2adbc]]></url>
+          <url><![CDATA[https://api.github.com/repos/nikic/PHP-Parser/zipball/6bb5176bc4af8bcb7d926f88718db9b96a2d4290]]></url>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/nikic/PHP-Parser.git]]></url>
@@ -81,7 +81,7 @@
           <comment><![CDATA[as detected from Composer manifest 'support.issues']]></comment>
         </reference>
         <reference type="vcs">
-          <url><![CDATA[https://github.com/nikic/PHP-Parser/tree/v4.15.2]]></url>
+          <url><![CDATA[https://github.com/nikic/PHP-Parser/tree/v4.15.4]]></url>
           <comment><![CDATA[as detected from Composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
@@ -143,7 +143,7 @@
     <component type="library">
       <group><![CDATA[phpunit]]></group>
       <name><![CDATA[php-code-coverage]]></name>
-      <version><![CDATA[9.2.19]]></version>
+      <version><![CDATA[9.2.26]]></version>
       <description><![CDATA[Library that provides collection, processing, and rendering functionality for PHP code coverage information.]]></description>
       <licenses>
         <license>
@@ -152,7 +152,7 @@
       </licenses>
       <externalReferences>
         <reference type="distribution">
-          <url><![CDATA[https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/c77b56b63e3d2031bd8997fcec43c1925ae46559]]></url>
+          <url><![CDATA[https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/443bc6912c9bd5b409254a40f4b0f4ced7c80ea1]]></url>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/sebastianbergmann/php-code-coverage.git]]></url>
@@ -166,7 +166,7 @@
           <comment><![CDATA[as detected from Composer manifest 'support.issues']]></comment>
         </reference>
         <reference type="vcs">
-          <url><![CDATA[https://github.com/sebastianbergmann/php-code-coverage/tree/9.2.19]]></url>
+          <url><![CDATA[https://github.com/sebastianbergmann/php-code-coverage/tree/9.2.26]]></url>
           <comment><![CDATA[as detected from Composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
@@ -515,7 +515,7 @@
     <component type="library">
       <group><![CDATA[sebastian]]></group>
       <name><![CDATA[environment]]></name>
-      <version><![CDATA[5.1.4]]></version>
+      <version><![CDATA[5.1.5]]></version>
       <description><![CDATA[Provides functionality to handle HHVM/PHP environments]]></description>
       <licenses>
         <license>
@@ -524,7 +524,7 @@
       </licenses>
       <externalReferences>
         <reference type="distribution">
-          <url><![CDATA[https://api.github.com/repos/sebastianbergmann/environment/zipball/1b5dff7bb151a4db11d49d90e5408e4e938270f7]]></url>
+          <url><![CDATA[https://api.github.com/repos/sebastianbergmann/environment/zipball/830c43a844f1f8d5b7a1f6d6076b784454d8b7ed]]></url>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/sebastianbergmann/environment.git]]></url>
@@ -538,7 +538,7 @@
           <comment><![CDATA[as detected from Composer manifest 'support.issues']]></comment>
         </reference>
         <reference type="vcs">
-          <url><![CDATA[https://github.com/sebastianbergmann/environment/tree/5.1.4]]></url>
+          <url><![CDATA[https://github.com/sebastianbergmann/environment/tree/5.1.5]]></url>
           <comment><![CDATA[as detected from Composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
@@ -701,7 +701,7 @@
     <component type="library">
       <group><![CDATA[sebastian]]></group>
       <name><![CDATA[recursion-context]]></name>
-      <version><![CDATA[4.0.4]]></version>
+      <version><![CDATA[4.0.5]]></version>
       <description><![CDATA[Provides functionality to recursively process PHP variables]]></description>
       <licenses>
         <license>
@@ -710,13 +710,13 @@
       </licenses>
       <externalReferences>
         <reference type="distribution">
-          <url><![CDATA[https://api.github.com/repos/sebastianbergmann/recursion-context/zipball/cd9d8cf3c5804de4341c283ed787f099f5506172]]></url>
+          <url><![CDATA[https://api.github.com/repos/sebastianbergmann/recursion-context/zipball/e75bd0f07204fec2a0af9b0f3cfe97d05f92efc1]]></url>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/sebastianbergmann/recursion-context.git]]></url>
         </reference>
         <reference type="website">
-          <url><![CDATA[http://www.github.com/sebastianbergmann/recursion-context]]></url>
+          <url><![CDATA[https://github.com/sebastianbergmann/recursion-context]]></url>
           <comment><![CDATA[as detected from Composer manifest 'homepage']]></comment>
         </reference>
         <reference type="issue-tracker">
@@ -724,7 +724,7 @@
           <comment><![CDATA[as detected from Composer manifest 'support.issues']]></comment>
         </reference>
         <reference type="vcs">
-          <url><![CDATA[https://github.com/sebastianbergmann/recursion-context/tree/4.0.4]]></url>
+          <url><![CDATA[https://github.com/sebastianbergmann/recursion-context/tree/4.0.5]]></url>
           <comment><![CDATA[as detected from Composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
@@ -763,7 +763,7 @@
     <component type="library">
       <group><![CDATA[sebastian]]></group>
       <name><![CDATA[type]]></name>
-      <version><![CDATA[3.2.0]]></version>
+      <version><![CDATA[3.2.1]]></version>
       <description><![CDATA[Collection of value objects that represent the types of the PHP type system]]></description>
       <licenses>
         <license>
@@ -772,7 +772,7 @@
       </licenses>
       <externalReferences>
         <reference type="distribution">
-          <url><![CDATA[https://api.github.com/repos/sebastianbergmann/type/zipball/fb3fe09c5f0bae6bc27ef3ce933a1e0ed9464b6e]]></url>
+          <url><![CDATA[https://api.github.com/repos/sebastianbergmann/type/zipball/75e2c2a32f5e0b3aef905b9ed0b179b953b3d7c7]]></url>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/sebastianbergmann/type.git]]></url>
@@ -786,7 +786,7 @@
           <comment><![CDATA[as detected from Composer manifest 'support.issues']]></comment>
         </reference>
         <reference type="vcs">
-          <url><![CDATA[https://github.com/sebastianbergmann/type/tree/3.2.0]]></url>
+          <url><![CDATA[https://github.com/sebastianbergmann/type/tree/3.2.1]]></url>
           <comment><![CDATA[as detected from Composer manifest 'support.source']]></comment>
         </reference>
       </externalReferences>
