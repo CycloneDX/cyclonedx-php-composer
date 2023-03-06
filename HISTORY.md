@@ -23,9 +23,9 @@ All notable changes to this project will be documented in this file.
   * Root component's versions is unset, if version detection fails ([#154] via [#250])
   * Composer packages of type "composer-installer" are treated as composer plugins (via [#250])
 * Added
-  * Support for CycloneDX Spec v1.4 (via [#250])
-  * Evidence collection knows installed packages ([#122] via [#250])
+  * Evidence collection knows actually installed packages ([#122] via [#250])
   * SBOM results
+    * Support for CycloneDX Spec v1.4 (via [#250])
     * might have `serialnumber` populated ([#279] via [#250])
     * might have `metadata.timestamp` populated ([#112] via [#250])
     * might have `metadata.tools[].tool.externalReferences` populated ([#171] via [#250])
