@@ -2,15 +2,15 @@
     "$schema": "http://cyclonedx.org/schema/bom-1.4.schema.json",
     "bomFormat": "CycloneDX",
     "specVersion": "1.4",
-    "serialNumber": "urn:uuid:a7c24083-3992-4147-a5b9-2174d51d2cee",
+    "serialNumber": "urn:uuid:146702e2-ee6e-48ee-b5bc-7d8c7f23d2f0",
     "version": 1,
     "metadata": {
-        "timestamp": "2023-03-06T17:09:22Z",
+        "timestamp": "2023-03-06T17:36:15Z",
         "tools": [
             {
                 "vendor": "cyclonedx",
                 "name": "cyclonedx-php-composer",
-                "version": "dev-next",
+                "version": "dev-prevere-sinstalled-setups",
                 "externalReferences": [
                     {
                         "type": "distribution",
@@ -76,11 +76,11 @@
             "properties": [
                 {
                     "name": "cdx:composer:package:distReference",
-                    "value": "74e6b72317308d775e8450ed7ed7b172464c5d23"
+                    "value": "19685e2810462a7bee03c2781411f9688b6d2703"
                 },
                 {
                     "name": "cdx:composer:package:sourceReference",
-                    "value": "74e6b72317308d775e8450ed7ed7b172464c5d23"
+                    "value": "19685e2810462a7bee03c2781411f9688b6d2703"
                 },
                 {
                     "name": "cdx:composer:package:type",
