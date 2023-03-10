@@ -186,7 +186,7 @@ class Builder
         }
 
         return $component
-            ->setType(Enums\ComponentType::APPLICATION)
+            ->setType(Enums\ComponentType::Application)
             ->setPackageUrl($this->createPurlFromComponent($component));
     }
 
@@ -214,7 +214,7 @@ class Builder
         $distReference = $package->getDistReference();
         $sourceReference = $package->getSourceReference();
 
-        $component = new Models\Component(Enums\ComponentType::LIBRARY, $name);
+        $component = new Models\Component(Enums\ComponentType::Library, $name);
         $component->setBomRefValue($package->getUniqueName());
         $component->setGroup($group);
         $component->setVersion($version);
@@ -284,7 +284,7 @@ class Builder
     {
         foreach ($package->getDistUrls() as $distUrl) {
             yield new Models\ExternalReference(
-                Enums\ExternalReferenceType::DISTRIBUTION,
+                Enums\ExternalReferenceType::Distribution,
                 $distUrl
             );
         }
@@ -300,18 +300,18 @@ class Builder
             $homepage = $package->getHomepage();
             if (null !== $homepage) {
                 yield (new Models\ExternalReference(
-                    Enums\ExternalReferenceType::WEBSITE,
+                    Enums\ExternalReferenceType::Website,
                     $homepage
                 ))->setComment("as detected from Composer manifest 'homepage'");
             }
 
             foreach ($package->getSupport() as $supportType => $supportUrl) {
                 $extRefType = match ($supportType) {
-                    'chat', 'irc' => Enums\ExternalReferenceType::CHAT,
-                    'docs' => Enums\ExternalReferenceType::DOCUMENTATION,
-                    'issues' => Enums\ExternalReferenceType::ISSUE_TRACKER,
+                    'chat', 'irc' => Enums\ExternalReferenceType::Chat,
+                    'docs' => Enums\ExternalReferenceType::Documentation,
+                    'issues' => Enums\ExternalReferenceType::IssueTracker,
                     'source' => Enums\ExternalReferenceType::VCS,
-                    default => Enums\ExternalReferenceType::OTHER,
+                    default => Enums\ExternalReferenceType::Other,
                 };
                 yield (new Models\ExternalReference(
                     $extRefType,
