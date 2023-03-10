@@ -2,15 +2,15 @@
     "$schema": "http://cyclonedx.org/schema/bom-1.4.schema.json",
     "bomFormat": "CycloneDX",
     "specVersion": "1.4",
-    "serialNumber": "urn:uuid:53cb08fb-6ea0-48f8-bfed-312f264eb2d3",
+    "serialNumber": "urn:uuid:1c9f87d4-818a-48cc-904b-5e892d6c312d",
     "version": 1,
     "metadata": {
-        "timestamp": "2023-03-06T18:02:25Z",
+        "timestamp": "2023-03-10T08:54:03Z",
         "tools": [
             {
                 "vendor": "cyclonedx",
                 "name": "cyclonedx-php-composer",
-                "version": "dev-prevere-sinstalled-setups",
+                "version": "dev-next",
                 "externalReferences": [
                     {
                         "type": "distribution",
@@ -36,11 +36,11 @@
             {
                 "vendor": "cyclonedx",
                 "name": "cyclonedx-library",
-                "version": "2.x-dev 52aba2b",
+                "version": "2.x-dev 5187a0c",
                 "externalReferences": [
                     {
                         "type": "distribution",
-                        "url": "https://api.github.com/repos/CycloneDX/cyclonedx-php-library/zipball/52aba2b3279d9b224f93c53aedc9b1272529bf93"
+                        "url": "https://api.github.com/repos/CycloneDX/cyclonedx-php-library/zipball/5187a0c268a07c084196e6ceee973053dc717021"
                     },
                     {
                         "type": "vcs",
@@ -76,11 +76,11 @@
             "properties": [
                 {
                     "name": "cdx:composer:package:distReference",
-                    "value": "bfc18cdc2683d837fbf6f16d586d5bb98382138c"
+                    "value": "7d0ff5fbe72e6e861cb106a54b2646f3a26f74b5"
                 },
                 {
                     "name": "cdx:composer:package:sourceReference",
-                    "value": "bfc18cdc2683d837fbf6f16d586d5bb98382138c"
+                    "value": "7d0ff5fbe72e6e861cb106a54b2646f3a26f74b5"
                 },
                 {
                     "name": "cdx:composer:package:type",
@@ -256,10 +256,10 @@
             ]
         },
         {
-            "bom-ref": "laminas/laminas-code-4.9.0.0",
+            "bom-ref": "laminas/laminas-code-4.10.0.0",
             "type": "library",
             "name": "laminas-code",
-            "version": "4.9.0",
+            "version": "4.10.0",
             "group": "laminas",
             "description": "Extensions to the PHP Reflection API, static code scanning, and code generation",
             "licenses": [
@@ -272,7 +272,7 @@
             "externalReferences": [
                 {
                     "type": "distribution",
-                    "url": "https://api.github.com/repos/laminas/laminas-code/zipball/c1706ecde17f87ae8bab169c4b88006c9253d3a5"
+                    "url": "https://api.github.com/repos/laminas/laminas-code/zipball/ad8b36073f9ac792716478befadca0798cc15635"
                 },
                 {
                     "type": "vcs",
@@ -317,11 +317,11 @@
             "properties": [
                 {
                     "name": "cdx:composer:package:distReference",
-                    "value": "c1706ecde17f87ae8bab169c4b88006c9253d3a5"
+                    "value": "ad8b36073f9ac792716478befadca0798cc15635"
                 },
                 {
                     "name": "cdx:composer:package:sourceReference",
-                    "value": "c1706ecde17f87ae8bab169c4b88006c9253d3a5"
+                    "value": "ad8b36073f9ac792716478befadca0798cc15635"
                 },
                 {
                     "name": "cdx:composer:package:type",
@@ -1209,11 +1209,11 @@
         {
             "ref": "friendsofphp/proxy-manager-lts-1.0.14.0",
             "dependsOn": [
-                "laminas/laminas-code-4.9.0.0"
+                "laminas/laminas-code-4.10.0.0"
             ]
         },
         {
-            "ref": "laminas/laminas-code-4.9.0.0"
+            "ref": "laminas/laminas-code-4.10.0.0"
         },
         {
             "ref": "psr/cache-3.0.0.0"
