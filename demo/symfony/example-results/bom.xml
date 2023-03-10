@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bom xmlns="http://cyclonedx.org/schema/bom/1.4" version="1" serialNumber="urn:uuid:21c5ddff-1320-421e-9acd-d7096e7c8459">
+<bom xmlns="http://cyclonedx.org/schema/bom/1.4" version="1" serialNumber="urn:uuid:a1701527-0d0f-4ad7-b672-f7a87a009e27">
   <metadata>
-    <timestamp><![CDATA[2023-03-06T18:02:25Z]]></timestamp>
+    <timestamp><![CDATA[2023-03-10T08:54:04Z]]></timestamp>
     <tools>
       <tool>
         <vendor><![CDATA[cyclonedx]]></vendor>
         <name><![CDATA[cyclonedx-php-composer]]></name>
-        <version><![CDATA[dev-prevere-sinstalled-setups]]></version>
+        <version><![CDATA[dev-next]]></version>
         <externalReferences>
           <reference type="distribution">
             <url><![CDATA[../..]]></url>
@@ -28,10 +28,10 @@
       <tool>
         <vendor><![CDATA[cyclonedx]]></vendor>
         <name><![CDATA[cyclonedx-library]]></name>
-        <version><![CDATA[2.x-dev 52aba2b]]></version>
+        <version><![CDATA[2.x-dev 5187a0c]]></version>
         <externalReferences>
           <reference type="distribution">
-            <url><![CDATA[https://api.github.com/repos/CycloneDX/cyclonedx-php-library/zipball/52aba2b3279d9b224f93c53aedc9b1272529bf93]]></url>
+            <url><![CDATA[https://api.github.com/repos/CycloneDX/cyclonedx-php-library/zipball/5187a0c268a07c084196e6ceee973053dc717021]]></url>
           </reference>
           <reference type="vcs">
             <url><![CDATA[https://github.com/CycloneDX/cyclonedx-php-library.git]]></url>
@@ -59,8 +59,8 @@
       <description><![CDATA[demo of cyclonedx/cyclonedx-php-composer with symfony/symfony]]></description>
       <purl><![CDATA[pkg:composer/cyclonedx/cyclonedx-php-composer-demo@dev-next]]></purl>
       <properties>
-        <property name="cdx:composer:package:distReference"><![CDATA[bfc18cdc2683d837fbf6f16d586d5bb98382138c]]></property>
-        <property name="cdx:composer:package:sourceReference"><![CDATA[bfc18cdc2683d837fbf6f16d586d5bb98382138c]]></property>
+        <property name="cdx:composer:package:distReference"><![CDATA[7d0ff5fbe72e6e861cb106a54b2646f3a26f74b5]]></property>
+        <property name="cdx:composer:package:sourceReference"><![CDATA[7d0ff5fbe72e6e861cb106a54b2646f3a26f74b5]]></property>
         <property name="cdx:composer:package:type"><![CDATA[project]]></property>
       </properties>
     </component>
@@ -177,10 +177,10 @@
         <property name="cdx:composer:package:type"><![CDATA[library]]></property>
       </properties>
     </component>
-    <component type="library" bom-ref="laminas/laminas-code-4.9.0.0">
+    <component type="library" bom-ref="laminas/laminas-code-4.10.0.0">
       <group><![CDATA[laminas]]></group>
       <name><![CDATA[laminas-code]]></name>
-      <version><![CDATA[4.9.0]]></version>
+      <version><![CDATA[4.10.0]]></version>
       <description><![CDATA[Extensions to the PHP Reflection API, static code scanning, and code generation]]></description>
       <licenses>
         <license>
@@ -189,7 +189,7 @@
       </licenses>
       <externalReferences>
         <reference type="distribution">
-          <url><![CDATA[https://api.github.com/repos/laminas/laminas-code/zipball/c1706ecde17f87ae8bab169c4b88006c9253d3a5]]></url>
+          <url><![CDATA[https://api.github.com/repos/laminas/laminas-code/zipball/ad8b36073f9ac792716478befadca0798cc15635]]></url>
         </reference>
         <reference type="vcs">
           <url><![CDATA[https://github.com/laminas/laminas-code.git]]></url>
@@ -224,8 +224,8 @@
         </reference>
       </externalReferences>
       <properties>
-        <property name="cdx:composer:package:distReference"><![CDATA[c1706ecde17f87ae8bab169c4b88006c9253d3a5]]></property>
-        <property name="cdx:composer:package:sourceReference"><![CDATA[c1706ecde17f87ae8bab169c4b88006c9253d3a5]]></property>
+        <property name="cdx:composer:package:distReference"><![CDATA[ad8b36073f9ac792716478befadca0798cc15635]]></property>
+        <property name="cdx:composer:package:sourceReference"><![CDATA[ad8b36073f9ac792716478befadca0798cc15635]]></property>
         <property name="cdx:composer:package:type"><![CDATA[library]]></property>
       </properties>
     </component>
@@ -810,9 +810,9 @@
       <dependency ref="psr/cache-3.0.0.0"/>
     </dependency>
     <dependency ref="friendsofphp/proxy-manager-lts-1.0.14.0">
-      <dependency ref="laminas/laminas-code-4.9.0.0"/>
+      <dependency ref="laminas/laminas-code-4.10.0.0"/>
     </dependency>
-    <dependency ref="laminas/laminas-code-4.9.0.0"/>
+    <dependency ref="laminas/laminas-code-4.10.0.0"/>
     <dependency ref="psr/cache-3.0.0.0"/>
     <dependency ref="psr/clock-1.0.0.0"/>
     <dependency ref="psr/container-2.0.2.0"/>

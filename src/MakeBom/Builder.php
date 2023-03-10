@@ -35,7 +35,6 @@ use CycloneDX\Composer\Properties;
 use CycloneDX\Core\Enums;
 use CycloneDX\Core\Factories\LicenseFactory;
 use CycloneDX\Core\Models;
-use CycloneDX\Core\Spdx\LicenseValidator as SpdxLicenseValidator;
 use Exception;
 use Generator;
 use PackageUrl\PackageUrl;
@@ -62,7 +61,7 @@ class Builder
         private readonly bool $omitDev,
         private readonly bool $omitPlugin,
         private readonly ?string $mainComponentVersion,
-        private readonly LicenseFactory $licenseFactory = new LicenseFactory(new SpdxLicenseValidator())
+        private readonly LicenseFactory $licenseFactory = new LicenseFactory()
     ) {
     }
 
