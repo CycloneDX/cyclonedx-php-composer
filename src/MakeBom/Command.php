@@ -107,8 +107,6 @@ class Command extends BaseCommand
 
     /**
      * @throws Throwable on error
-     *
-     * @psalm-return non-empty-string
      */
     private function generateBom(IOInterface $io, Spec $spec): string
     {
@@ -162,8 +160,6 @@ class Command extends BaseCommand
     }
 
     /**
-     * @param non-empty-string $bom
-     *
      * @throws Throwable on error
      */
     private function validateBom(string $bom, Spec $spec, IOInterface $io): void
@@ -189,8 +185,6 @@ class Command extends BaseCommand
     }
 
     /**
-     * @param non-empty-string $bom
-     *
      * @throws Throwable on error
      */
     private function writeBom(string $bom, IOInterface $io): void
@@ -206,7 +200,7 @@ class Command extends BaseCommand
         }
 
         $written = fwrite($outputStream, $bom);
-        if (false === $written || 0 === $written) {
+        if (false === $written) {
             throw new Errors\OutputError("failed to write BOM: $outputFile");
         }
 
