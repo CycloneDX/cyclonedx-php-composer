@@ -17,6 +17,13 @@ The resulting SBOM documents follow [official specifications and standards](http
 and might have properties following [`cdx:composer` Namespace Taxonomy](https://github.com/CycloneDX/cyclonedx-property-taxonomy/blob/main/cdx/composer.md)
 .
 
+## !! ATTENTION - v4-dev state
+
+The branch "master" is currently in the transition to next major version: v4.
+See the progress in the [milestone "v4"](https://github.com/CycloneDX/cyclonedx-php-composer/milestone/5)
+
+Code of v3 is in branch "[3.x](https://github.com/CycloneDX/cyclonedx-php-composer/tree/3.x)"
+
 ## Requirements
 
 * PHP `^8.1`
