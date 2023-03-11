@@ -24,15 +24,21 @@ declare(strict_types=1);
 namespace CycloneDX\Composer\MakeBom;
 
 use Composer\Command\BaseCommand;
-use Composer\Composer;
+use Composer\Factory as ComposerFactory;
 use Composer\IO\IOInterface;
-use CycloneDX\Composer\Builders\BomBuilder;
-use CycloneDX\Composer\MakeBom\Exceptions\ValueError;
-use CycloneDX\Composer\ToolUpdater;
-use CycloneDX\Core\Models\Bom;
+use CycloneDX\Core\Serialization;
+use CycloneDX\Core\Spec\Format;
+use CycloneDX\Core\Spec\Spec;
+use CycloneDX\Core\Spec\SpecFactory;
+use CycloneDX\Core\Validation\Validator;
+use CycloneDX\Core\Validation\Validators;
+use DateTime;
+use DomainException;
+use Symfony\Component\Console\Exception\LogicException;
 use Symfony\Component\Console\Formatter\OutputFormatter;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Throwable;
 
 /**
  * @internal
@@ -41,296 +47,170 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class Command extends BaseCommand
 {
-    public const SUCCESS = 0;
-    public const FAILURE = 1;
-    public const INVALID = 2;
-
     /**
-     * @var Options
-     */
-    private $options;
-
-    /**
-     * @var Factory
-     */
-    private $factory;
-
-    /**
-     * @var \CycloneDX\Composer\Builders\BomBuilder
-     */
-    private $bomBuilder;
-
-    /**
-     * @var ToolUpdater|null
-     */
-    private $toolUpdater;
-
-    /**
-     * alternative command, if this one os deprecated.
-     *
-     * @var string|null
-     */
-    private $deprecatedAlternative;
-
-    /**
-     * @throws \LogicException When the command name is empty
+     * @throws LogicException When the command name is empty
      */
     public function __construct(
-        Options $options,
-        Factory $factory,
-        BomBuilder $bomFactory,
-        ?ToolUpdater $toolUpdater,
-        ?string $name = null
+        private readonly Options $options,
+        string $name,
+        private readonly ComposerFactory $composerFactory,
     ) {
-        $this->options = $options;
-        $this->factory = $factory;
-        $this->bomBuilder = $bomFactory;
-        $this->toolUpdater = $toolUpdater;
         parent::__construct($name);
-    }
-
-    /**
-     * @return $this
-     */
-    public function setDeprecated(?string $alternative): self
-    {
-        $this->deprecatedAlternative = $alternative;
-
-        return $this;
     }
 
     protected function configure(): void
     {
-        $this->options->configureCommand($this);
-        $this->setDescription('Generate a CycloneDX Bill of Materials');
+        $this
+            ->setDefinition($this->options->getDefinition())
+            ->setDescription('Generate a CycloneDX Bill of Materials from a PHP Composer project.')
+        ;
     }
 
     /*
      * ALL LOG OUTPUT MUST BE WRITTEN AS ERROR, SO OUTPUT REDIRECT/PIPE OF RESULT WORKS PROPERLY
      */
 
-    /**
-     * @throws \InvalidArgumentException
-     * @throws \UnexpectedValueException
-     * @throws \DomainException
-     * @throws \RuntimeException
-     *
-     * @psalm-return self::SUCCESS|self::FAILURE|self::INVALID
-     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = $this->getIO();
 
-        if (!empty($this->deprecatedAlternative)) {
-            $io->writeError([
-                ' ', // leading blank line
-                sprintf(
-                    '<warning>This command is deprecated; use "%s" instead.</warning>',
-                    $this->deprecatedAlternative
-                ),
-                ' ', // trailing blank line
-            ]);
-        }
-
         try {
             $this->options->setFromInput($input);
-        } catch (ValueError $valueError) {
-            $io->writeErrorRaw((string) $valueError, true, IOInterface::DEBUG);
-            $io->writeError(
-                sprintf(
-                    '<error>Option Error: %s</error>',
-                    OutputFormatter::escape($valueError->getMessage())
-                )
-            );
+        } catch (Throwable $error) {
+            $io->writeErrorRaw((string) $error, true, IOInterface::DEBUG);
+            $io->writeError(sprintf(
+                '<error>InputError: %s</error>',
+                OutputFormatter::escape($error->getMessage())
+            ));
 
             return self::INVALID;
         }
-        $io->writeErrorRaw(__METHOD__.' Options: '.print_r($this->options, true), true, IOInterface::DEBUG);
+        $io->writeErrorRaw(__METHOD__.' Options: '.var_export($this->options, true), true, IOInterface::DEBUG);
 
-        $this->bomBuilder->getComponentBuilder()->setVersionNormalization(
-            false === $this->options->omitVersionNormalization
-        );
-
-        $this->updateTool();
-
-        $bomString = $this->makeBomString(
-            $this->makeBom(
-                $this->factory->makeComposer($this->options, $io)
-            )
-        );
-
-        if (false === $this->validateBomString($bomString)) {
-            $io->writeError(
-                [
-                    '<error>Failed to generate valid output.</error>',
-                    '<warning>Please report the issue and provide the composer lock file of the current project to:</warning>',
-                    '<warning>https://github.com/CycloneDX/cyclonedx-php-composer/issues/new?template=ValidationError-report.md&labels=ValidationError&title=%5BValidationError%5D</warning>',
-                ]
-            );
+        try {
+            $spec = SpecFactory::makeForVersion($this->options->specVersion);
+            $bom = $this->generateBom($io, $spec);
+            $this->validateBom($bom, $spec, $io);
+            $this->writeBom($bom, $io);
+        } catch (Throwable $error) {
+            $io->writeErrorRaw((string) $error, true, IOInterface::DEBUG);
+            $io->writeError(sprintf(
+                '<error>Error: %s</error>',
+                OutputFormatter::escape($error->getMessage())
+            ));
 
             return self::FAILURE;
         }
-
-        $io->writeError(
-            sprintf(
-                '<info>Write output to: %s</info>',
-                OutputFormatter::escape($this->options->outputFile)
-            ),
-            true,
-            IOInterface::NORMAL
-        );
-        ($this->factory->makeBomOutput($this->options) ?? $output)
-            ->write($bomString, false, OutputInterface::OUTPUT_RAW | OutputInterface::VERBOSITY_NORMAL);
 
         return self::SUCCESS;
     }
 
     /**
-     * @throws \RuntimeException
-     * @throws \DomainException
+     * @throws Throwable on error
      */
-    private function makeBom(Composer $composer): Bom
+    private function generateBom(IOInterface $io, Spec $spec): string
     {
-        $io = $this->getIO();
-        $io->writeError('<info>Generate BOM</info>', true, IOInterface::VERBOSE);
+        $io->writeError('<info>generate BOM...</info>', verbosity: IOInterface::VERBOSE);
 
-        $rootPackage = $composer->getPackage();
-        $components = $this->factory->makeLockerFromComposerForOptions($composer, $this->options);
-        $rootComponentVersionOverride = $this->options->mainComponentVersion;
-
-        $bom = $this->bomBuilder->makeForPackageWithRequires($rootPackage, $components, $rootComponentVersionOverride);
-
-        $io->writeErrorRaw('Bom: '.print_r($bom, true), true, IOInterface::DEBUG);
-
-        return $bom;
-    }
-
-    /**
-     * @throws \UnexpectedValueException if SPEC version is unknown
-     *
-     * @psalm-return non-empty-string
-     */
-    private function makeBomString(Bom $bom): string
-    {
-        $io = $this->getIO();
-        $io->writeError('<info>Generate BomString</info>', true, IOInterface::VERBOSE);
-
-        $bomWriter = $this->factory->makeSerializerFromOptions($this->options);
-        $io->writeError(
-            sprintf(
-                '<info>Serialize BOM with %s</info>',
-                OutputFormatter::escape(\get_class($bomWriter))
-            ),
-            true,
-            IOInterface::VERY_VERBOSE
+        $builder = new Builder(
+            \in_array('dev', $this->options->omit),
+            \in_array('plugin', $this->options->omit),
+            $this->options->mainComponentVersion
         );
 
-        return $bomWriter->serialize($bom);
-    }
+        $composerFile = $this->options->composerFile;
+        $projectDir = null === $composerFile
+             ? null
+             : \dirname($composerFile);
+        $io->writeError(sprintf('<info>composerFile=%s projectDir=%s</info>', OutputFormatter::escape($composerFile ?? ''), OutputFormatter::escape($projectDir ?? '')), verbosity: IOInterface::DEBUG);
+        $subjectComposer = $this->composerFactory->createComposer($io, $composerFile, cwd: $projectDir, fullLoad: true);
+        /** @psalm-suppress RedundantConditionGivenDocblockType -- as with lowest-compatible dependencies this is needed  */
+        \assert($subjectComposer instanceof \Composer\Composer);
+        $io->writeError('<info>generate base SBOM from compoers\'s evidences...</info>', verbosity: IOInterface::VERBOSE);
+        $bom = $builder->createSbomFromComposer($subjectComposer);
+        unset($subjectComposer);
 
-    /**
-     * @psalm-param  non-empty-string $bom
-     *
-     * @throws \UnexpectedValueException if SPEC version is unknown
-     */
-    private function validateBomString(string $bom): ?bool
-    {
-        $io = $this->getIO();
-
-        $validator = $this->factory->makeValidatorFromOptions($this->options);
-        if (null === $validator) {
-            $io->writeError('<info>Skip BomString validation</info>', true, IOInterface::VERY_VERBOSE);
-
-            return null;
+        if (!$this->options->outputReproducible) {
+            try {
+                $bom->setSerialNumber(Builder::createRandomBomSerialNumber());
+            } catch (\Exception) {
+                /* pass */
+            }
+            $bom->getMetadata()->setTimestamp(new DateTime());
         }
-        $io->writeError('<info>Validate BomString</info>', true, IOInterface::VERBOSE);
 
-        $io->writeError(
-            sprintf(
-                '<info>Validate BOM with %s for %s</info>',
-                OutputFormatter::escape(\get_class($validator)),
-                OutputFormatter::escape($validator->getSpec()->getVersion())
-            ),
-            true,
-            IOInterface::VERY_VERBOSE
-        );
+        $io->writeError('<info>fetch tools...</info>', verbosity: IOInterface::VERBOSE);
+        $bom->getMetadata()->getTools()->addItems(
+            ...$builder->createToolsFromComposer(
+                $this->requireComposer(),
+                $this->options->getToolsVersionOverride(),
+                $this->options->getToolsExcludeLibs()
+            ));
+
+        $io->writeError('<info>serialize BOM...</info>', verbosity: IOInterface::VERBOSE);
+        /** @var Serialization\Serializer */
+        $serializer = match ($this->options->outputFormat) {
+            Format::JSON => new Serialization\JsonSerializer(new Serialization\JSON\NormalizerFactory($spec)),
+            Format::XML => new Serialization\XmlSerializer(new Serialization\DOM\NormalizerFactory($spec)),
+            default => throw new DomainException("unsupported format: {$this->options->outputFormat->name}"),
+        };
+        $io->writeErrorRaw('using '.$serializer::class, true, IOInterface::DEBUG);
+
+        return $serializer->serialize($bom, prettyPrint: true);
+    }
+
+    /**
+     * @throws Throwable on error
+     */
+    private function validateBom(string $bom, Spec $spec, IOInterface $io): void
+    {
+        if (false === $this->options->validate) {
+            $io->writeError('<info>skipped BOM validation.</info>', verbosity: IOInterface::VERBOSE);
+
+            return;
+        }
+        $io->writeError('<info>validate BOM...</info>', verbosity: IOInterface::VERBOSE);
+        /** @var Validator */
+        $validator = match ($this->options->outputFormat) {
+            Format::JSON => new Validators\JsonStrictValidator($spec),
+            Format::XML => new Validators\XmlValidator($spec),
+            default => throw new DomainException("unsupported format: {$this->options->outputFormat->name}"),
+        };
+        $io->writeErrorRaw('using '.$validator::class, true, IOInterface::DEBUG);
 
         $validationError = $validator->validateString($bom);
-        if (null === $validationError) {
-            return true;
-        }
-
-        $io->writeErrorRaw('ValidationError: '.print_r($validationError->getError(), true), true, IOInterface::DEBUG);
-        $io->writeError(
-            sprintf(
-                '<error>ValidationError: %s</error>',
-                OutputFormatter::escape($validationError->getMessage())
-            ),
-            true,
-            IOInterface::VERY_VERBOSE
-        );
-
-        return false;
-    }
-
-    private function updateTool(): ?bool
-    {
-        $updater = $this->toolUpdater;
-        if (null === $updater) {
-            return null;
-        }
-
-        try {
-            $composer = $this->compat_getComposer();
-
-            /**
-             * Composer <  2.1.7 -> nullable, but type hint was wrong
-             * Composer >= 2.1.7 -> nullable.
-             * Composer >= 2.3   -> not nullable.
-             *
-             * @var \Composer\Package\Locker|null $locker
-             *
-             * @psalm-suppress UnnecessaryVarAnnotation
-             */
-            $locker = $composer->getLocker();
-            if (null === $locker) {
-                throw new \UnexpectedValueException('empty locker');
-            }
-
-            $withDevReqs = isset($locker->getLockData()['packages-dev']);
-            $lockerRepo = $locker->getLockedRepository($withDevReqs);
-
-            // @TODO better use the installed-repo than the lockerRepo - as of milestone v4
-            return $updater->updateTool($this->bomBuilder->getTool(), $lockerRepo);
-        } catch (\Exception $exception) {
-            return false;
+        if (null !== $validationError) {
+            throw new Errors\ValidationError($validationError->getMessage());
         }
     }
 
     /**
-     * @throws \UnexpectedValueException if composer could not be fetched
+     * @throws Throwable on error
      */
-    private function compat_getComposer(): Composer
+    private function writeBom(string $bom, IOInterface $io): void
     {
-        $err = null;
-        try {
-            /**
-             * @psalm-suppress DeprecatedMethod as it was handled
-             *
-             * @var mixed $composer
-             */
-            $composer = method_exists($this, 'requireComposer')
-                ? $this->requireComposer()
-                : ( // method was marked as deprecated in Composer 2.3
-                    method_exists($this, 'getComposer')
-                    ? $this->getComposer()
-                    : null);
-        } catch (\Exception $err) {
-            $composer = null;
+        $io->writeError('<info>write BOM...</info>', verbosity: IOInterface::VERBOSE);
+
+        $outputFile = $this->options->outputFile;
+        $outputStream = Options::VALUE_OUTPUT_FILE_STDOUT === $outputFile
+            ? \STDOUT
+            : fopen($outputFile, 'wb');
+        if (false === $outputStream) {
+            throw new Errors\OutputError("failed to open output: $outputFile");
         }
-        if ($composer instanceof Composer) {
-            return $composer;
+
+        $written = fwrite($outputStream, $bom);
+        if (false === $written) {
+            throw new Errors\OutputError("failed to write BOM: $outputFile");
         }
-        throw new \UnexpectedValueException('empty composer', 0, $err);
+
+        $io->writeError(
+            sprintf(
+                '<info>wrote %d bytes to %s</info>',
+                $written,
+                OutputFormatter::escape($outputFile)
+            ),
+            verbosity: IOInterface::VERY_VERBOSE
+        );
     }
 }

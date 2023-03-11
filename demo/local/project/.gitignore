@@ -5,4 +5,5 @@
 !/composer.json
 !/composer.lock
 
-!/packages/
+!/packages
+!/packages/*/composer.json

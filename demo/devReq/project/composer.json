@@ -1,0 +1,58 @@
+{
+    "name": "cyclonedx-demo/cyclonedx-php-composer-devreq",
+    "description": "demo of cyclonedx/cyclonedx-php-composer with a dev dependency",
+    "type": "project",
+    "version": "dev-master",
+    "authors": [
+        {
+            "name": "Jan Kowalleck"
+        }
+    ],
+    "homepage": "https://cyclonedx.org/",
+    "support": {
+        "email": "support@cyclonedx.org",
+        "issues": "https://github.com/CycloneDX/cyclonedx-php-composer/issues",
+        "forum": "https://groups.io/g/CycloneDX",
+        "chat": "https://cyclonedx.org/slack/invite",
+        "docs": "https://github.com/CycloneDX/cyclonedx-php-composer/blob/master/demo/devReq/README.md"
+    },
+    "require": {},
+    "require-dev": {
+        "phpunit/phpunit": "9.5.26"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "config": {
+        "allow-plugins": {
+            "cyclonedx/cyclonedx-php-composer": true,
+            "ergebnis/composer-normalize": true
+        },
+        "preferred-install": "dist",
+        "sort-packages": true
+    },
+    "scripts": {
+        "create-sbom-results": [
+            "@create-sbom-results:JSON",
+            "@create-sbom-results:XML"
+        ],
+        "create-sbom-results:JSON": [
+            "@putenv CDX_CP_TOOLS_VERSION_OVERRIDE=in-dev",
+            "@putenv CDX_CP_TOOLS_EXCLUDE_LIBS=1",
+            "@composer -d ../../.tool CycloneDX:make-sbom --spec-version=1.2 --output-reproducible --output-format=JSON --output-file=$PWD/../results/bom.1.2.json $PWD/composer.json",
+            "@composer -d ../../.tool CycloneDX:make-sbom --spec-version=1.3 --output-reproducible --output-format=JSON --output-file=$PWD/../results/bom.1.3.json $PWD/composer.json",
+            "@composer -d ../../.tool CycloneDX:make-sbom --spec-version=1.4 --output-reproducible --output-format=JSON --output-file=$PWD/../results/bom.1.4.json $PWD/composer.json"
+        ],
+        "create-sbom-results:XML": [
+            "@putenv CDX_CP_TOOLS_VERSION_OVERRIDE=in-dev",
+            "@putenv CDX_CP_TOOLS_EXCLUDE_LIBS=1",
+            "@composer -d ../../.tool CycloneDX:make-sbom --spec-version=1.1 --output-reproducible --output-format=XML  --output-file=$PWD/../results/bom.1.1.xml $PWD/composer.json",
+            "@composer -d ../../.tool CycloneDX:make-sbom --spec-version=1.2 --output-reproducible --output-format=XML  --output-file=$PWD/../results/bom.1.2.xml $PWD/composer.json",
+            "@composer -d ../../.tool CycloneDX:make-sbom --spec-version=1.3 --output-reproducible --output-format=XML  --output-file=$PWD/../results/bom.1.3.xml $PWD/composer.json",
+            "@composer -d ../../.tool CycloneDX:make-sbom --spec-version=1.4 --output-reproducible --output-format=XML  --output-file=$PWD/../results/bom.1.4.xml $PWD/composer.json"
+        ],
+        "setup": [
+            "@composer -d ../../.tool update",
+            "@composer install"
+        ]
+    }
+}

@@ -1,0 +1,1840 @@
+{
+    "$schema": "http://cyclonedx.org/schema/bom-1.3a.schema.json",
+    "bomFormat": "CycloneDX",
+    "specVersion": "1.3",
+    "version": 1,
+    "metadata": {
+        "tools": [
+            {
+                "vendor": "cyclonedx",
+                "name": "cyclonedx-php-composer",
+                "version": "in-dev"
+            }
+        ],
+        "component": {
+            "bom-ref": "cyclonedx-demo/cyclonedx-php-composer-devreq-dev-master",
+            "type": "application",
+            "name": "cyclonedx-php-composer-devreq",
+            "version": "dev-master",
+            "group": "cyclonedx-demo",
+            "description": "demo of cyclonedx/cyclonedx-php-composer with a dev dependency",
+            "author": "Jan Kowalleck",
+            "purl": "pkg:composer/cyclonedx-demo/cyclonedx-php-composer-devreq@dev-master",
+            "externalReferences": [
+                {
+                    "type": "website",
+                    "url": "https://cyclonedx.org/",
+                    "comment": "as detected from Composer manifest 'homepage'"
+                },
+                {
+                    "type": "other",
+                    "url": "support@cyclonedx.org",
+                    "comment": "as detected from Composer manifest 'support.email'"
+                },
+                {
+                    "type": "issue-tracker",
+                    "url": "https://github.com/CycloneDX/cyclonedx-php-composer/issues",
+                    "comment": "as detected from Composer manifest 'support.issues'"
+                },
+                {
+                    "type": "other",
+                    "url": "https://groups.io/g/CycloneDX",
+                    "comment": "as detected from Composer manifest 'support.forum'"
+                },
+                {
+                    "type": "chat",
+                    "url": "https://cyclonedx.org/slack/invite",
+                    "comment": "as detected from Composer manifest 'support.chat'"
+                },
+                {
+                    "type": "documentation",
+                    "url": "https://github.com/CycloneDX/cyclonedx-php-composer/blob/master/demo/devReq/README.md",
+                    "comment": "as detected from Composer manifest 'support.docs'"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "cdx:composer:package:type",
+                    "value": "project"
+                }
+            ]
+        }
+    },
+    "components": [
+        {
+            "bom-ref": "doctrine/instantiator-1.5.0.0",
+            "type": "library",
+            "name": "instantiator",
+            "version": "1.5.0",
+            "group": "doctrine",
+            "description": "A small, lightweight utility to instantiate objects in PHP without invoking their constructors",
+            "author": "Marco Pivetta",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "MIT"
+                    }
+                }
+            ],
+            "externalReferences": [
+                {
+                    "type": "distribution",
+                    "url": "https://api.github.com/repos/doctrine/instantiator/zipball/0a0fa9780f5d4e507415a065172d26a98d02047b"
+                },
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/doctrine/instantiator.git"
+                },
+                {
+                    "type": "website",
+                    "url": "https://www.doctrine-project.org/projects/instantiator.html",
+                    "comment": "as detected from Composer manifest 'homepage'"
+                },
+                {
+                    "type": "issue-tracker",
+                    "url": "https://github.com/doctrine/instantiator/issues",
+                    "comment": "as detected from Composer manifest 'support.issues'"
+                },
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/doctrine/instantiator/tree/1.5.0",
+                    "comment": "as detected from Composer manifest 'support.source'"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "cdx:composer:package:distReference",
+                    "value": "0a0fa9780f5d4e507415a065172d26a98d02047b"
+                },
+                {
+                    "name": "cdx:composer:package:sourceReference",
+                    "value": "0a0fa9780f5d4e507415a065172d26a98d02047b"
+                },
+                {
+                    "name": "cdx:composer:package:type",
+                    "value": "library"
+                },
+                {
+                    "name": "cdx:composer:package:isDevRequirement",
+                    "value": "true"
+                }
+            ]
+        },
+        {
+            "bom-ref": "myclabs/deep-copy-1.11.0.0",
+            "type": "library",
+            "name": "deep-copy",
+            "version": "1.11.0",
+            "group": "myclabs",
+            "description": "Create deep copies (clones) of your objects",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "MIT"
+                    }
+                }
+            ],
+            "externalReferences": [
+                {
+                    "type": "distribution",
+                    "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/14daed4296fae74d9e3201d2c4925d1acb7aa614"
+                },
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/myclabs/DeepCopy.git"
+                },
+                {
+                    "type": "issue-tracker",
+                    "url": "https://github.com/myclabs/DeepCopy/issues",
+                    "comment": "as detected from Composer manifest 'support.issues'"
+                },
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/myclabs/DeepCopy/tree/1.11.0",
+                    "comment": "as detected from Composer manifest 'support.source'"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "cdx:composer:package:distReference",
+                    "value": "14daed4296fae74d9e3201d2c4925d1acb7aa614"
+                },
+                {
+                    "name": "cdx:composer:package:sourceReference",
+                    "value": "14daed4296fae74d9e3201d2c4925d1acb7aa614"
+                },
+                {
+                    "name": "cdx:composer:package:type",
+                    "value": "library"
+                },
+                {
+                    "name": "cdx:composer:package:isDevRequirement",
+                    "value": "true"
+                }
+            ]
+        },
+        {
+            "bom-ref": "nikic/php-parser-4.15.4.0",
+            "type": "library",
+            "name": "php-parser",
+            "version": "v4.15.4",
+            "group": "nikic",
+            "description": "A PHP parser written in PHP",
+            "author": "Nikita Popov",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "BSD-3-Clause"
+                    }
+                }
+            ],
+            "externalReferences": [
+                {
+                    "type": "distribution",
+                    "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/6bb5176bc4af8bcb7d926f88718db9b96a2d4290"
+                },
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/nikic/PHP-Parser.git"
+                },
+                {
+                    "type": "issue-tracker",
+                    "url": "https://github.com/nikic/PHP-Parser/issues",
+                    "comment": "as detected from Composer manifest 'support.issues'"
+                },
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/nikic/PHP-Parser/tree/v4.15.4",
+                    "comment": "as detected from Composer manifest 'support.source'"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "cdx:composer:package:distReference",
+                    "value": "6bb5176bc4af8bcb7d926f88718db9b96a2d4290"
+                },
+                {
+                    "name": "cdx:composer:package:sourceReference",
+                    "value": "6bb5176bc4af8bcb7d926f88718db9b96a2d4290"
+                },
+                {
+                    "name": "cdx:composer:package:type",
+                    "value": "library"
+                },
+                {
+                    "name": "cdx:composer:package:isDevRequirement",
+                    "value": "true"
+                }
+            ]
+        },
+        {
+            "bom-ref": "phar-io/manifest-2.0.3.0",
+            "type": "library",
+            "name": "manifest",
+            "version": "2.0.3",
+            "group": "phar-io",
+            "description": "Component for reading phar.io manifest information from a PHP Archive (PHAR)",
+            "author": "Arne Blankerts, Sebastian Heuer, Sebastian Bergmann",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "BSD-3-Clause"
+                    }
+                }
+            ],
+            "externalReferences": [
+                {
+                    "type": "distribution",
+                    "url": "https://api.github.com/repos/phar-io/manifest/zipball/97803eca37d319dfa7826cc2437fc020857acb53"
+                },
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/phar-io/manifest.git"
+                },
+                {
+                    "type": "issue-tracker",
+                    "url": "https://github.com/phar-io/manifest/issues",
+                    "comment": "as detected from Composer manifest 'support.issues'"
+                },
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/phar-io/manifest/tree/2.0.3",
+                    "comment": "as detected from Composer manifest 'support.source'"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "cdx:composer:package:distReference",
+                    "value": "97803eca37d319dfa7826cc2437fc020857acb53"
+                },
+                {
+                    "name": "cdx:composer:package:sourceReference",
+                    "value": "97803eca37d319dfa7826cc2437fc020857acb53"
+                },
+                {
+                    "name": "cdx:composer:package:type",
+                    "value": "library"
+                },
+                {
+                    "name": "cdx:composer:package:isDevRequirement",
+                    "value": "true"
+                }
+            ]
+        },
+        {
+            "bom-ref": "phar-io/version-3.2.1.0",
+            "type": "library",
+            "name": "version",
+            "version": "3.2.1",
+            "group": "phar-io",
+            "description": "Library for handling version information and constraints",
+            "author": "Arne Blankerts, Sebastian Heuer, Sebastian Bergmann",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "BSD-3-Clause"
+                    }
+                }
+            ],
+            "externalReferences": [
+                {
+                    "type": "distribution",
+                    "url": "https://api.github.com/repos/phar-io/version/zipball/4f7fd7836c6f332bb2933569e566a0d6c4cbed74"
+                },
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/phar-io/version.git"
+                },
+                {
+                    "type": "issue-tracker",
+                    "url": "https://github.com/phar-io/version/issues",
+                    "comment": "as detected from Composer manifest 'support.issues'"
+                },
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/phar-io/version/tree/3.2.1",
+                    "comment": "as detected from Composer manifest 'support.source'"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "cdx:composer:package:distReference",
+                    "value": "4f7fd7836c6f332bb2933569e566a0d6c4cbed74"
+                },
+                {
+                    "name": "cdx:composer:package:sourceReference",
+                    "value": "4f7fd7836c6f332bb2933569e566a0d6c4cbed74"
+                },
+                {
+                    "name": "cdx:composer:package:type",
+                    "value": "library"
+                },
+                {
+                    "name": "cdx:composer:package:isDevRequirement",
+                    "value": "true"
+                }
+            ]
+        },
+        {
+            "bom-ref": "phpunit/php-code-coverage-9.2.26.0",
+            "type": "library",
+            "name": "php-code-coverage",
+            "version": "9.2.26",
+            "group": "phpunit",
+            "description": "Library that provides collection, processing, and rendering functionality for PHP code coverage information.",
+            "author": "Sebastian Bergmann",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "BSD-3-Clause"
+                    }
+                }
+            ],
+            "externalReferences": [
+                {
+                    "type": "distribution",
+                    "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/443bc6912c9bd5b409254a40f4b0f4ced7c80ea1"
+                },
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/sebastianbergmann/php-code-coverage.git"
+                },
+                {
+                    "type": "website",
+                    "url": "https://github.com/sebastianbergmann/php-code-coverage",
+                    "comment": "as detected from Composer manifest 'homepage'"
+                },
+                {
+                    "type": "issue-tracker",
+                    "url": "https://github.com/sebastianbergmann/php-code-coverage/issues",
+                    "comment": "as detected from Composer manifest 'support.issues'"
+                },
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/sebastianbergmann/php-code-coverage/tree/9.2.26",
+                    "comment": "as detected from Composer manifest 'support.source'"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "cdx:composer:package:distReference",
+                    "value": "443bc6912c9bd5b409254a40f4b0f4ced7c80ea1"
+                },
+                {
+                    "name": "cdx:composer:package:sourceReference",
+                    "value": "443bc6912c9bd5b409254a40f4b0f4ced7c80ea1"
+                },
+                {
+                    "name": "cdx:composer:package:type",
+                    "value": "library"
+                },
+                {
+                    "name": "cdx:composer:package:isDevRequirement",
+                    "value": "true"
+                }
+            ]
+        },
+        {
+            "bom-ref": "phpunit/php-file-iterator-3.0.6.0",
+            "type": "library",
+            "name": "php-file-iterator",
+            "version": "3.0.6",
+            "group": "phpunit",
+            "description": "FilterIterator implementation that filters files based on a list of suffixes.",
+            "author": "Sebastian Bergmann",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "BSD-3-Clause"
+                    }
+                }
+            ],
+            "externalReferences": [
+                {
+                    "type": "distribution",
+                    "url": "https://api.github.com/repos/sebastianbergmann/php-file-iterator/zipball/cf1c2e7c203ac650e352f4cc675a7021e7d1b3cf"
+                },
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/sebastianbergmann/php-file-iterator.git"
+                },
+                {
+                    "type": "website",
+                    "url": "https://github.com/sebastianbergmann/php-file-iterator/",
+                    "comment": "as detected from Composer manifest 'homepage'"
+                },
+                {
+                    "type": "issue-tracker",
+                    "url": "https://github.com/sebastianbergmann/php-file-iterator/issues",
+                    "comment": "as detected from Composer manifest 'support.issues'"
+                },
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/sebastianbergmann/php-file-iterator/tree/3.0.6",
+                    "comment": "as detected from Composer manifest 'support.source'"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "cdx:composer:package:distReference",
+                    "value": "cf1c2e7c203ac650e352f4cc675a7021e7d1b3cf"
+                },
+                {
+                    "name": "cdx:composer:package:sourceReference",
+                    "value": "cf1c2e7c203ac650e352f4cc675a7021e7d1b3cf"
+                },
+                {
+                    "name": "cdx:composer:package:type",
+                    "value": "library"
+                },
+                {
+                    "name": "cdx:composer:package:isDevRequirement",
+                    "value": "true"
+                }
+            ]
+        },
+        {
+            "bom-ref": "phpunit/php-invoker-3.1.1.0",
+            "type": "library",
+            "name": "php-invoker",
+            "version": "3.1.1",
+            "group": "phpunit",
+            "description": "Invoke callables with a timeout",
+            "author": "Sebastian Bergmann",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "BSD-3-Clause"
+                    }
+                }
+            ],
+            "externalReferences": [
+                {
+                    "type": "distribution",
+                    "url": "https://api.github.com/repos/sebastianbergmann/php-invoker/zipball/5a10147d0aaf65b58940a0b72f71c9ac0423cc67"
+                },
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/sebastianbergmann/php-invoker.git"
+                },
+                {
+                    "type": "website",
+                    "url": "https://github.com/sebastianbergmann/php-invoker/",
+                    "comment": "as detected from Composer manifest 'homepage'"
+                },
+                {
+                    "type": "issue-tracker",
+                    "url": "https://github.com/sebastianbergmann/php-invoker/issues",
+                    "comment": "as detected from Composer manifest 'support.issues'"
+                },
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/sebastianbergmann/php-invoker/tree/3.1.1",
+                    "comment": "as detected from Composer manifest 'support.source'"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "cdx:composer:package:distReference",
+                    "value": "5a10147d0aaf65b58940a0b72f71c9ac0423cc67"
+                },
+                {
+                    "name": "cdx:composer:package:sourceReference",
+                    "value": "5a10147d0aaf65b58940a0b72f71c9ac0423cc67"
+                },
+                {
+                    "name": "cdx:composer:package:type",
+                    "value": "library"
+                },
+                {
+                    "name": "cdx:composer:package:isDevRequirement",
+                    "value": "true"
+                }
+            ]
+        },
+        {
+            "bom-ref": "phpunit/php-text-template-2.0.4.0",
+            "type": "library",
+            "name": "php-text-template",
+            "version": "2.0.4",
+            "group": "phpunit",
+            "description": "Simple template engine.",
+            "author": "Sebastian Bergmann",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "BSD-3-Clause"
+                    }
+                }
+            ],
+            "externalReferences": [
+                {
+                    "type": "distribution",
+                    "url": "https://api.github.com/repos/sebastianbergmann/php-text-template/zipball/5da5f67fc95621df9ff4c4e5a84d6a8a2acf7c28"
+                },
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/sebastianbergmann/php-text-template.git"
+                },
+                {
+                    "type": "website",
+                    "url": "https://github.com/sebastianbergmann/php-text-template/",
+                    "comment": "as detected from Composer manifest 'homepage'"
+                },
+                {
+                    "type": "issue-tracker",
+                    "url": "https://github.com/sebastianbergmann/php-text-template/issues",
+                    "comment": "as detected from Composer manifest 'support.issues'"
+                },
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/sebastianbergmann/php-text-template/tree/2.0.4",
+                    "comment": "as detected from Composer manifest 'support.source'"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "cdx:composer:package:distReference",
+                    "value": "5da5f67fc95621df9ff4c4e5a84d6a8a2acf7c28"
+                },
+                {
+                    "name": "cdx:composer:package:sourceReference",
+                    "value": "5da5f67fc95621df9ff4c4e5a84d6a8a2acf7c28"
+                },
+                {
+                    "name": "cdx:composer:package:type",
+                    "value": "library"
+                },
+                {
+                    "name": "cdx:composer:package:isDevRequirement",
+                    "value": "true"
+                }
+            ]
+        },
+        {
+            "bom-ref": "phpunit/php-timer-5.0.3.0",
+            "type": "library",
+            "name": "php-timer",
+            "version": "5.0.3",
+            "group": "phpunit",
+            "description": "Utility class for timing",
+            "author": "Sebastian Bergmann",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "BSD-3-Clause"
+                    }
+                }
+            ],
+            "externalReferences": [
+                {
+                    "type": "distribution",
+                    "url": "https://api.github.com/repos/sebastianbergmann/php-timer/zipball/5a63ce20ed1b5bf577850e2c4e87f4aa902afbd2"
+                },
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/sebastianbergmann/php-timer.git"
+                },
+                {
+                    "type": "website",
+                    "url": "https://github.com/sebastianbergmann/php-timer/",
+                    "comment": "as detected from Composer manifest 'homepage'"
+                },
+                {
+                    "type": "issue-tracker",
+                    "url": "https://github.com/sebastianbergmann/php-timer/issues",
+                    "comment": "as detected from Composer manifest 'support.issues'"
+                },
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/sebastianbergmann/php-timer/tree/5.0.3",
+                    "comment": "as detected from Composer manifest 'support.source'"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "cdx:composer:package:distReference",
+                    "value": "5a63ce20ed1b5bf577850e2c4e87f4aa902afbd2"
+                },
+                {
+                    "name": "cdx:composer:package:sourceReference",
+                    "value": "5a63ce20ed1b5bf577850e2c4e87f4aa902afbd2"
+                },
+                {
+                    "name": "cdx:composer:package:type",
+                    "value": "library"
+                },
+                {
+                    "name": "cdx:composer:package:isDevRequirement",
+                    "value": "true"
+                }
+            ]
+        },
+        {
+            "bom-ref": "phpunit/phpunit-9.5.26.0",
+            "type": "library",
+            "name": "phpunit",
+            "version": "9.5.26",
+            "group": "phpunit",
+            "description": "The PHP Unit Testing framework.",
+            "author": "Sebastian Bergmann",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "BSD-3-Clause"
+                    }
+                }
+            ],
+            "externalReferences": [
+                {
+                    "type": "distribution",
+                    "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/851867efcbb6a1b992ec515c71cdcf20d895e9d2"
+                },
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/sebastianbergmann/phpunit.git"
+                },
+                {
+                    "type": "website",
+                    "url": "https://phpunit.de/",
+                    "comment": "as detected from Composer manifest 'homepage'"
+                },
+                {
+                    "type": "issue-tracker",
+                    "url": "https://github.com/sebastianbergmann/phpunit/issues",
+                    "comment": "as detected from Composer manifest 'support.issues'"
+                },
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/sebastianbergmann/phpunit/tree/9.5.26",
+                    "comment": "as detected from Composer manifest 'support.source'"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "cdx:composer:package:distReference",
+                    "value": "851867efcbb6a1b992ec515c71cdcf20d895e9d2"
+                },
+                {
+                    "name": "cdx:composer:package:sourceReference",
+                    "value": "851867efcbb6a1b992ec515c71cdcf20d895e9d2"
+                },
+                {
+                    "name": "cdx:composer:package:type",
+                    "value": "library"
+                },
+                {
+                    "name": "cdx:composer:package:isDevRequirement",
+                    "value": "true"
+                }
+            ]
+        },
+        {
+            "bom-ref": "sebastian/cli-parser-1.0.1.0",
+            "type": "library",
+            "name": "cli-parser",
+            "version": "1.0.1",
+            "group": "sebastian",
+            "description": "Library for parsing CLI options",
+            "author": "Sebastian Bergmann",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "BSD-3-Clause"
+                    }
+                }
+            ],
+            "externalReferences": [
+                {
+                    "type": "distribution",
+                    "url": "https://api.github.com/repos/sebastianbergmann/cli-parser/zipball/442e7c7e687e42adc03470c7b668bc4b2402c0b2"
+                },
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/sebastianbergmann/cli-parser.git"
+                },
+                {
+                    "type": "website",
+                    "url": "https://github.com/sebastianbergmann/cli-parser",
+                    "comment": "as detected from Composer manifest 'homepage'"
+                },
+                {
+                    "type": "issue-tracker",
+                    "url": "https://github.com/sebastianbergmann/cli-parser/issues",
+                    "comment": "as detected from Composer manifest 'support.issues'"
+                },
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/sebastianbergmann/cli-parser/tree/1.0.1",
+                    "comment": "as detected from Composer manifest 'support.source'"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "cdx:composer:package:distReference",
+                    "value": "442e7c7e687e42adc03470c7b668bc4b2402c0b2"
+                },
+                {
+                    "name": "cdx:composer:package:sourceReference",
+                    "value": "442e7c7e687e42adc03470c7b668bc4b2402c0b2"
+                },
+                {
+                    "name": "cdx:composer:package:type",
+                    "value": "library"
+                },
+                {
+                    "name": "cdx:composer:package:isDevRequirement",
+                    "value": "true"
+                }
+            ]
+        },
+        {
+            "bom-ref": "sebastian/code-unit-1.0.8.0",
+            "type": "library",
+            "name": "code-unit",
+            "version": "1.0.8",
+            "group": "sebastian",
+            "description": "Collection of value objects that represent the PHP code units",
+            "author": "Sebastian Bergmann",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "BSD-3-Clause"
+                    }
+                }
+            ],
+            "externalReferences": [
+                {
+                    "type": "distribution",
+                    "url": "https://api.github.com/repos/sebastianbergmann/code-unit/zipball/1fc9f64c0927627ef78ba436c9b17d967e68e120"
+                },
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/sebastianbergmann/code-unit.git"
+                },
+                {
+                    "type": "website",
+                    "url": "https://github.com/sebastianbergmann/code-unit",
+                    "comment": "as detected from Composer manifest 'homepage'"
+                },
+                {
+                    "type": "issue-tracker",
+                    "url": "https://github.com/sebastianbergmann/code-unit/issues",
+                    "comment": "as detected from Composer manifest 'support.issues'"
+                },
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/sebastianbergmann/code-unit/tree/1.0.8",
+                    "comment": "as detected from Composer manifest 'support.source'"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "cdx:composer:package:distReference",
+                    "value": "1fc9f64c0927627ef78ba436c9b17d967e68e120"
+                },
+                {
+                    "name": "cdx:composer:package:sourceReference",
+                    "value": "1fc9f64c0927627ef78ba436c9b17d967e68e120"
+                },
+                {
+                    "name": "cdx:composer:package:type",
+                    "value": "library"
+                },
+                {
+                    "name": "cdx:composer:package:isDevRequirement",
+                    "value": "true"
+                }
+            ]
+        },
+        {
+            "bom-ref": "sebastian/code-unit-reverse-lookup-2.0.3.0",
+            "type": "library",
+            "name": "code-unit-reverse-lookup",
+            "version": "2.0.3",
+            "group": "sebastian",
+            "description": "Looks up which function or method a line of code belongs to",
+            "author": "Sebastian Bergmann",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "BSD-3-Clause"
+                    }
+                }
+            ],
+            "externalReferences": [
+                {
+                    "type": "distribution",
+                    "url": "https://api.github.com/repos/sebastianbergmann/code-unit-reverse-lookup/zipball/ac91f01ccec49fb77bdc6fd1e548bc70f7faa3e5"
+                },
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/sebastianbergmann/code-unit-reverse-lookup.git"
+                },
+                {
+                    "type": "website",
+                    "url": "https://github.com/sebastianbergmann/code-unit-reverse-lookup/",
+                    "comment": "as detected from Composer manifest 'homepage'"
+                },
+                {
+                    "type": "issue-tracker",
+                    "url": "https://github.com/sebastianbergmann/code-unit-reverse-lookup/issues",
+                    "comment": "as detected from Composer manifest 'support.issues'"
+                },
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/sebastianbergmann/code-unit-reverse-lookup/tree/2.0.3",
+                    "comment": "as detected from Composer manifest 'support.source'"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "cdx:composer:package:distReference",
+                    "value": "ac91f01ccec49fb77bdc6fd1e548bc70f7faa3e5"
+                },
+                {
+                    "name": "cdx:composer:package:sourceReference",
+                    "value": "ac91f01ccec49fb77bdc6fd1e548bc70f7faa3e5"
+                },
+                {
+                    "name": "cdx:composer:package:type",
+                    "value": "library"
+                },
+                {
+                    "name": "cdx:composer:package:isDevRequirement",
+                    "value": "true"
+                }
+            ]
+        },
+        {
+            "bom-ref": "sebastian/comparator-4.0.8.0",
+            "type": "library",
+            "name": "comparator",
+            "version": "4.0.8",
+            "group": "sebastian",
+            "description": "Provides the functionality to compare PHP values for equality",
+            "author": "Sebastian Bergmann, Jeff Welch, Volker Dusch, Bernhard Schussek",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "BSD-3-Clause"
+                    }
+                }
+            ],
+            "externalReferences": [
+                {
+                    "type": "distribution",
+                    "url": "https://api.github.com/repos/sebastianbergmann/comparator/zipball/fa0f136dd2334583309d32b62544682ee972b51a"
+                },
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/sebastianbergmann/comparator.git"
+                },
+                {
+                    "type": "website",
+                    "url": "https://github.com/sebastianbergmann/comparator",
+                    "comment": "as detected from Composer manifest 'homepage'"
+                },
+                {
+                    "type": "issue-tracker",
+                    "url": "https://github.com/sebastianbergmann/comparator/issues",
+                    "comment": "as detected from Composer manifest 'support.issues'"
+                },
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/sebastianbergmann/comparator/tree/4.0.8",
+                    "comment": "as detected from Composer manifest 'support.source'"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "cdx:composer:package:distReference",
+                    "value": "fa0f136dd2334583309d32b62544682ee972b51a"
+                },
+                {
+                    "name": "cdx:composer:package:sourceReference",
+                    "value": "fa0f136dd2334583309d32b62544682ee972b51a"
+                },
+                {
+                    "name": "cdx:composer:package:type",
+                    "value": "library"
+                },
+                {
+                    "name": "cdx:composer:package:isDevRequirement",
+                    "value": "true"
+                }
+            ]
+        },
+        {
+            "bom-ref": "sebastian/complexity-2.0.2.0",
+            "type": "library",
+            "name": "complexity",
+            "version": "2.0.2",
+            "group": "sebastian",
+            "description": "Library for calculating the complexity of PHP code units",
+            "author": "Sebastian Bergmann",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "BSD-3-Clause"
+                    }
+                }
+            ],
+            "externalReferences": [
+                {
+                    "type": "distribution",
+                    "url": "https://api.github.com/repos/sebastianbergmann/complexity/zipball/739b35e53379900cc9ac327b2147867b8b6efd88"
+                },
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/sebastianbergmann/complexity.git"
+                },
+                {
+                    "type": "website",
+                    "url": "https://github.com/sebastianbergmann/complexity",
+                    "comment": "as detected from Composer manifest 'homepage'"
+                },
+                {
+                    "type": "issue-tracker",
+                    "url": "https://github.com/sebastianbergmann/complexity/issues",
+                    "comment": "as detected from Composer manifest 'support.issues'"
+                },
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/sebastianbergmann/complexity/tree/2.0.2",
+                    "comment": "as detected from Composer manifest 'support.source'"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "cdx:composer:package:distReference",
+                    "value": "739b35e53379900cc9ac327b2147867b8b6efd88"
+                },
+                {
+                    "name": "cdx:composer:package:sourceReference",
+                    "value": "739b35e53379900cc9ac327b2147867b8b6efd88"
+                },
+                {
+                    "name": "cdx:composer:package:type",
+                    "value": "library"
+                },
+                {
+                    "name": "cdx:composer:package:isDevRequirement",
+                    "value": "true"
+                }
+            ]
+        },
+        {
+            "bom-ref": "sebastian/diff-4.0.4.0",
+            "type": "library",
+            "name": "diff",
+            "version": "4.0.4",
+            "group": "sebastian",
+            "description": "Diff implementation",
+            "author": "Sebastian Bergmann, Kore Nordmann",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "BSD-3-Clause"
+                    }
+                }
+            ],
+            "externalReferences": [
+                {
+                    "type": "distribution",
+                    "url": "https://api.github.com/repos/sebastianbergmann/diff/zipball/3461e3fccc7cfdfc2720be910d3bd73c69be590d"
+                },
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/sebastianbergmann/diff.git"
+                },
+                {
+                    "type": "website",
+                    "url": "https://github.com/sebastianbergmann/diff",
+                    "comment": "as detected from Composer manifest 'homepage'"
+                },
+                {
+                    "type": "issue-tracker",
+                    "url": "https://github.com/sebastianbergmann/diff/issues",
+                    "comment": "as detected from Composer manifest 'support.issues'"
+                },
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/sebastianbergmann/diff/tree/4.0.4",
+                    "comment": "as detected from Composer manifest 'support.source'"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "cdx:composer:package:distReference",
+                    "value": "3461e3fccc7cfdfc2720be910d3bd73c69be590d"
+                },
+                {
+                    "name": "cdx:composer:package:sourceReference",
+                    "value": "3461e3fccc7cfdfc2720be910d3bd73c69be590d"
+                },
+                {
+                    "name": "cdx:composer:package:type",
+                    "value": "library"
+                },
+                {
+                    "name": "cdx:composer:package:isDevRequirement",
+                    "value": "true"
+                }
+            ]
+        },
+        {
+            "bom-ref": "sebastian/environment-5.1.5.0",
+            "type": "library",
+            "name": "environment",
+            "version": "5.1.5",
+            "group": "sebastian",
+            "description": "Provides functionality to handle HHVM/PHP environments",
+            "author": "Sebastian Bergmann",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "BSD-3-Clause"
+                    }
+                }
+            ],
+            "externalReferences": [
+                {
+                    "type": "distribution",
+                    "url": "https://api.github.com/repos/sebastianbergmann/environment/zipball/830c43a844f1f8d5b7a1f6d6076b784454d8b7ed"
+                },
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/sebastianbergmann/environment.git"
+                },
+                {
+                    "type": "website",
+                    "url": "http://www.github.com/sebastianbergmann/environment",
+                    "comment": "as detected from Composer manifest 'homepage'"
+                },
+                {
+                    "type": "issue-tracker",
+                    "url": "https://github.com/sebastianbergmann/environment/issues",
+                    "comment": "as detected from Composer manifest 'support.issues'"
+                },
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/sebastianbergmann/environment/tree/5.1.5",
+                    "comment": "as detected from Composer manifest 'support.source'"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "cdx:composer:package:distReference",
+                    "value": "830c43a844f1f8d5b7a1f6d6076b784454d8b7ed"
+                },
+                {
+                    "name": "cdx:composer:package:sourceReference",
+                    "value": "830c43a844f1f8d5b7a1f6d6076b784454d8b7ed"
+                },
+                {
+                    "name": "cdx:composer:package:type",
+                    "value": "library"
+                },
+                {
+                    "name": "cdx:composer:package:isDevRequirement",
+                    "value": "true"
+                }
+            ]
+        },
+        {
+            "bom-ref": "sebastian/exporter-4.0.5.0",
+            "type": "library",
+            "name": "exporter",
+            "version": "4.0.5",
+            "group": "sebastian",
+            "description": "Provides the functionality to export PHP variables for visualization",
+            "author": "Sebastian Bergmann, Jeff Welch, Volker Dusch, Adam Harvey, Bernhard Schussek",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "BSD-3-Clause"
+                    }
+                }
+            ],
+            "externalReferences": [
+                {
+                    "type": "distribution",
+                    "url": "https://api.github.com/repos/sebastianbergmann/exporter/zipball/ac230ed27f0f98f597c8a2b6eb7ac563af5e5b9d"
+                },
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/sebastianbergmann/exporter.git"
+                },
+                {
+                    "type": "website",
+                    "url": "https://www.github.com/sebastianbergmann/exporter",
+                    "comment": "as detected from Composer manifest 'homepage'"
+                },
+                {
+                    "type": "issue-tracker",
+                    "url": "https://github.com/sebastianbergmann/exporter/issues",
+                    "comment": "as detected from Composer manifest 'support.issues'"
+                },
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/sebastianbergmann/exporter/tree/4.0.5",
+                    "comment": "as detected from Composer manifest 'support.source'"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "cdx:composer:package:distReference",
+                    "value": "ac230ed27f0f98f597c8a2b6eb7ac563af5e5b9d"
+                },
+                {
+                    "name": "cdx:composer:package:sourceReference",
+                    "value": "ac230ed27f0f98f597c8a2b6eb7ac563af5e5b9d"
+                },
+                {
+                    "name": "cdx:composer:package:type",
+                    "value": "library"
+                },
+                {
+                    "name": "cdx:composer:package:isDevRequirement",
+                    "value": "true"
+                }
+            ]
+        },
+        {
+            "bom-ref": "sebastian/global-state-5.0.5.0",
+            "type": "library",
+            "name": "global-state",
+            "version": "5.0.5",
+            "group": "sebastian",
+            "description": "Snapshotting of global state",
+            "author": "Sebastian Bergmann",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "BSD-3-Clause"
+                    }
+                }
+            ],
+            "externalReferences": [
+                {
+                    "type": "distribution",
+                    "url": "https://api.github.com/repos/sebastianbergmann/global-state/zipball/0ca8db5a5fc9c8646244e629625ac486fa286bf2"
+                },
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/sebastianbergmann/global-state.git"
+                },
+                {
+                    "type": "website",
+                    "url": "http://www.github.com/sebastianbergmann/global-state",
+                    "comment": "as detected from Composer manifest 'homepage'"
+                },
+                {
+                    "type": "issue-tracker",
+                    "url": "https://github.com/sebastianbergmann/global-state/issues",
+                    "comment": "as detected from Composer manifest 'support.issues'"
+                },
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/sebastianbergmann/global-state/tree/5.0.5",
+                    "comment": "as detected from Composer manifest 'support.source'"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "cdx:composer:package:distReference",
+                    "value": "0ca8db5a5fc9c8646244e629625ac486fa286bf2"
+                },
+                {
+                    "name": "cdx:composer:package:sourceReference",
+                    "value": "0ca8db5a5fc9c8646244e629625ac486fa286bf2"
+                },
+                {
+                    "name": "cdx:composer:package:type",
+                    "value": "library"
+                },
+                {
+                    "name": "cdx:composer:package:isDevRequirement",
+                    "value": "true"
+                }
+            ]
+        },
+        {
+            "bom-ref": "sebastian/lines-of-code-1.0.3.0",
+            "type": "library",
+            "name": "lines-of-code",
+            "version": "1.0.3",
+            "group": "sebastian",
+            "description": "Library for counting the lines of code in PHP source code",
+            "author": "Sebastian Bergmann",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "BSD-3-Clause"
+                    }
+                }
+            ],
+            "externalReferences": [
+                {
+                    "type": "distribution",
+                    "url": "https://api.github.com/repos/sebastianbergmann/lines-of-code/zipball/c1c2e997aa3146983ed888ad08b15470a2e22ecc"
+                },
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/sebastianbergmann/lines-of-code.git"
+                },
+                {
+                    "type": "website",
+                    "url": "https://github.com/sebastianbergmann/lines-of-code",
+                    "comment": "as detected from Composer manifest 'homepage'"
+                },
+                {
+                    "type": "issue-tracker",
+                    "url": "https://github.com/sebastianbergmann/lines-of-code/issues",
+                    "comment": "as detected from Composer manifest 'support.issues'"
+                },
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/sebastianbergmann/lines-of-code/tree/1.0.3",
+                    "comment": "as detected from Composer manifest 'support.source'"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "cdx:composer:package:distReference",
+                    "value": "c1c2e997aa3146983ed888ad08b15470a2e22ecc"
+                },
+                {
+                    "name": "cdx:composer:package:sourceReference",
+                    "value": "c1c2e997aa3146983ed888ad08b15470a2e22ecc"
+                },
+                {
+                    "name": "cdx:composer:package:type",
+                    "value": "library"
+                },
+                {
+                    "name": "cdx:composer:package:isDevRequirement",
+                    "value": "true"
+                }
+            ]
+        },
+        {
+            "bom-ref": "sebastian/object-enumerator-4.0.4.0",
+            "type": "library",
+            "name": "object-enumerator",
+            "version": "4.0.4",
+            "group": "sebastian",
+            "description": "Traverses array structures and object graphs to enumerate all referenced objects",
+            "author": "Sebastian Bergmann",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "BSD-3-Clause"
+                    }
+                }
+            ],
+            "externalReferences": [
+                {
+                    "type": "distribution",
+                    "url": "https://api.github.com/repos/sebastianbergmann/object-enumerator/zipball/5c9eeac41b290a3712d88851518825ad78f45c71"
+                },
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/sebastianbergmann/object-enumerator.git"
+                },
+                {
+                    "type": "website",
+                    "url": "https://github.com/sebastianbergmann/object-enumerator/",
+                    "comment": "as detected from Composer manifest 'homepage'"
+                },
+                {
+                    "type": "issue-tracker",
+                    "url": "https://github.com/sebastianbergmann/object-enumerator/issues",
+                    "comment": "as detected from Composer manifest 'support.issues'"
+                },
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/sebastianbergmann/object-enumerator/tree/4.0.4",
+                    "comment": "as detected from Composer manifest 'support.source'"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "cdx:composer:package:distReference",
+                    "value": "5c9eeac41b290a3712d88851518825ad78f45c71"
+                },
+                {
+                    "name": "cdx:composer:package:sourceReference",
+                    "value": "5c9eeac41b290a3712d88851518825ad78f45c71"
+                },
+                {
+                    "name": "cdx:composer:package:type",
+                    "value": "library"
+                },
+                {
+                    "name": "cdx:composer:package:isDevRequirement",
+                    "value": "true"
+                }
+            ]
+        },
+        {
+            "bom-ref": "sebastian/object-reflector-2.0.4.0",
+            "type": "library",
+            "name": "object-reflector",
+            "version": "2.0.4",
+            "group": "sebastian",
+            "description": "Allows reflection of object attributes, including inherited and non-public ones",
+            "author": "Sebastian Bergmann",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "BSD-3-Clause"
+                    }
+                }
+            ],
+            "externalReferences": [
+                {
+                    "type": "distribution",
+                    "url": "https://api.github.com/repos/sebastianbergmann/object-reflector/zipball/b4f479ebdbf63ac605d183ece17d8d7fe49c15c7"
+                },
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/sebastianbergmann/object-reflector.git"
+                },
+                {
+                    "type": "website",
+                    "url": "https://github.com/sebastianbergmann/object-reflector/",
+                    "comment": "as detected from Composer manifest 'homepage'"
+                },
+                {
+                    "type": "issue-tracker",
+                    "url": "https://github.com/sebastianbergmann/object-reflector/issues",
+                    "comment": "as detected from Composer manifest 'support.issues'"
+                },
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/sebastianbergmann/object-reflector/tree/2.0.4",
+                    "comment": "as detected from Composer manifest 'support.source'"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "cdx:composer:package:distReference",
+                    "value": "b4f479ebdbf63ac605d183ece17d8d7fe49c15c7"
+                },
+                {
+                    "name": "cdx:composer:package:sourceReference",
+                    "value": "b4f479ebdbf63ac605d183ece17d8d7fe49c15c7"
+                },
+                {
+                    "name": "cdx:composer:package:type",
+                    "value": "library"
+                },
+                {
+                    "name": "cdx:composer:package:isDevRequirement",
+                    "value": "true"
+                }
+            ]
+        },
+        {
+            "bom-ref": "sebastian/recursion-context-4.0.5.0",
+            "type": "library",
+            "name": "recursion-context",
+            "version": "4.0.5",
+            "group": "sebastian",
+            "description": "Provides functionality to recursively process PHP variables",
+            "author": "Sebastian Bergmann, Jeff Welch, Adam Harvey",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "BSD-3-Clause"
+                    }
+                }
+            ],
+            "externalReferences": [
+                {
+                    "type": "distribution",
+                    "url": "https://api.github.com/repos/sebastianbergmann/recursion-context/zipball/e75bd0f07204fec2a0af9b0f3cfe97d05f92efc1"
+                },
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/sebastianbergmann/recursion-context.git"
+                },
+                {
+                    "type": "website",
+                    "url": "https://github.com/sebastianbergmann/recursion-context",
+                    "comment": "as detected from Composer manifest 'homepage'"
+                },
+                {
+                    "type": "issue-tracker",
+                    "url": "https://github.com/sebastianbergmann/recursion-context/issues",
+                    "comment": "as detected from Composer manifest 'support.issues'"
+                },
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/sebastianbergmann/recursion-context/tree/4.0.5",
+                    "comment": "as detected from Composer manifest 'support.source'"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "cdx:composer:package:distReference",
+                    "value": "e75bd0f07204fec2a0af9b0f3cfe97d05f92efc1"
+                },
+                {
+                    "name": "cdx:composer:package:sourceReference",
+                    "value": "e75bd0f07204fec2a0af9b0f3cfe97d05f92efc1"
+                },
+                {
+                    "name": "cdx:composer:package:type",
+                    "value": "library"
+                },
+                {
+                    "name": "cdx:composer:package:isDevRequirement",
+                    "value": "true"
+                }
+            ]
+        },
+        {
+            "bom-ref": "sebastian/resource-operations-3.0.3.0",
+            "type": "library",
+            "name": "resource-operations",
+            "version": "3.0.3",
+            "group": "sebastian",
+            "description": "Provides a list of PHP built-in functions that operate on resources",
+            "author": "Sebastian Bergmann",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "BSD-3-Clause"
+                    }
+                }
+            ],
+            "externalReferences": [
+                {
+                    "type": "distribution",
+                    "url": "https://api.github.com/repos/sebastianbergmann/resource-operations/zipball/0f4443cb3a1d92ce809899753bc0d5d5a8dd19a8"
+                },
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/sebastianbergmann/resource-operations.git"
+                },
+                {
+                    "type": "website",
+                    "url": "https://www.github.com/sebastianbergmann/resource-operations",
+                    "comment": "as detected from Composer manifest 'homepage'"
+                },
+                {
+                    "type": "issue-tracker",
+                    "url": "https://github.com/sebastianbergmann/resource-operations/issues",
+                    "comment": "as detected from Composer manifest 'support.issues'"
+                },
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/sebastianbergmann/resource-operations/tree/3.0.3",
+                    "comment": "as detected from Composer manifest 'support.source'"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "cdx:composer:package:distReference",
+                    "value": "0f4443cb3a1d92ce809899753bc0d5d5a8dd19a8"
+                },
+                {
+                    "name": "cdx:composer:package:sourceReference",
+                    "value": "0f4443cb3a1d92ce809899753bc0d5d5a8dd19a8"
+                },
+                {
+                    "name": "cdx:composer:package:type",
+                    "value": "library"
+                },
+                {
+                    "name": "cdx:composer:package:isDevRequirement",
+                    "value": "true"
+                }
+            ]
+        },
+        {
+            "bom-ref": "sebastian/type-3.2.1.0",
+            "type": "library",
+            "name": "type",
+            "version": "3.2.1",
+            "group": "sebastian",
+            "description": "Collection of value objects that represent the types of the PHP type system",
+            "author": "Sebastian Bergmann",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "BSD-3-Clause"
+                    }
+                }
+            ],
+            "externalReferences": [
+                {
+                    "type": "distribution",
+                    "url": "https://api.github.com/repos/sebastianbergmann/type/zipball/75e2c2a32f5e0b3aef905b9ed0b179b953b3d7c7"
+                },
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/sebastianbergmann/type.git"
+                },
+                {
+                    "type": "website",
+                    "url": "https://github.com/sebastianbergmann/type",
+                    "comment": "as detected from Composer manifest 'homepage'"
+                },
+                {
+                    "type": "issue-tracker",
+                    "url": "https://github.com/sebastianbergmann/type/issues",
+                    "comment": "as detected from Composer manifest 'support.issues'"
+                },
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/sebastianbergmann/type/tree/3.2.1",
+                    "comment": "as detected from Composer manifest 'support.source'"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "cdx:composer:package:distReference",
+                    "value": "75e2c2a32f5e0b3aef905b9ed0b179b953b3d7c7"
+                },
+                {
+                    "name": "cdx:composer:package:sourceReference",
+                    "value": "75e2c2a32f5e0b3aef905b9ed0b179b953b3d7c7"
+                },
+                {
+                    "name": "cdx:composer:package:type",
+                    "value": "library"
+                },
+                {
+                    "name": "cdx:composer:package:isDevRequirement",
+                    "value": "true"
+                }
+            ]
+        },
+        {
+            "bom-ref": "sebastian/version-3.0.2.0",
+            "type": "library",
+            "name": "version",
+            "version": "3.0.2",
+            "group": "sebastian",
+            "description": "Library that helps with managing the version number of Git-hosted PHP projects",
+            "author": "Sebastian Bergmann",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "BSD-3-Clause"
+                    }
+                }
+            ],
+            "externalReferences": [
+                {
+                    "type": "distribution",
+                    "url": "https://api.github.com/repos/sebastianbergmann/version/zipball/c6c1022351a901512170118436c764e473f6de8c"
+                },
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/sebastianbergmann/version.git"
+                },
+                {
+                    "type": "website",
+                    "url": "https://github.com/sebastianbergmann/version",
+                    "comment": "as detected from Composer manifest 'homepage'"
+                },
+                {
+                    "type": "issue-tracker",
+                    "url": "https://github.com/sebastianbergmann/version/issues",
+                    "comment": "as detected from Composer manifest 'support.issues'"
+                },
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/sebastianbergmann/version/tree/3.0.2",
+                    "comment": "as detected from Composer manifest 'support.source'"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "cdx:composer:package:distReference",
+                    "value": "c6c1022351a901512170118436c764e473f6de8c"
+                },
+                {
+                    "name": "cdx:composer:package:sourceReference",
+                    "value": "c6c1022351a901512170118436c764e473f6de8c"
+                },
+                {
+                    "name": "cdx:composer:package:type",
+                    "value": "library"
+                },
+                {
+                    "name": "cdx:composer:package:isDevRequirement",
+                    "value": "true"
+                }
+            ]
+        },
+        {
+            "bom-ref": "theseer/tokenizer-1.2.1.0",
+            "type": "library",
+            "name": "tokenizer",
+            "version": "1.2.1",
+            "group": "theseer",
+            "description": "A small library for converting tokenized PHP source code into XML and potentially other formats",
+            "author": "Arne Blankerts",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "BSD-3-Clause"
+                    }
+                }
+            ],
+            "externalReferences": [
+                {
+                    "type": "distribution",
+                    "url": "https://api.github.com/repos/theseer/tokenizer/zipball/34a41e998c2183e22995f158c581e7b5e755ab9e"
+                },
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/theseer/tokenizer.git"
+                },
+                {
+                    "type": "issue-tracker",
+                    "url": "https://github.com/theseer/tokenizer/issues",
+                    "comment": "as detected from Composer manifest 'support.issues'"
+                },
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/theseer/tokenizer/tree/1.2.1",
+                    "comment": "as detected from Composer manifest 'support.source'"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "cdx:composer:package:distReference",
+                    "value": "34a41e998c2183e22995f158c581e7b5e755ab9e"
+                },
+                {
+                    "name": "cdx:composer:package:sourceReference",
+                    "value": "34a41e998c2183e22995f158c581e7b5e755ab9e"
+                },
+                {
+                    "name": "cdx:composer:package:type",
+                    "value": "library"
+                },
+                {
+                    "name": "cdx:composer:package:isDevRequirement",
+                    "value": "true"
+                }
+            ]
+        }
+    ],
+    "dependencies": [
+        {
+            "ref": "doctrine/instantiator-1.5.0.0"
+        },
+        {
+            "ref": "myclabs/deep-copy-1.11.0.0"
+        },
+        {
+            "ref": "nikic/php-parser-4.15.4.0"
+        },
+        {
+            "ref": "phar-io/manifest-2.0.3.0",
+            "dependsOn": [
+                "phar-io/version-3.2.1.0"
+            ]
+        },
+        {
+            "ref": "phar-io/version-3.2.1.0"
+        },
+        {
+            "ref": "phpunit/php-code-coverage-9.2.26.0",
+            "dependsOn": [
+                "nikic/php-parser-4.15.4.0",
+                "phpunit/php-file-iterator-3.0.6.0",
+                "phpunit/php-text-template-2.0.4.0",
+                "sebastian/code-unit-reverse-lookup-2.0.3.0",
+                "sebastian/complexity-2.0.2.0",
+                "sebastian/environment-5.1.5.0",
+                "sebastian/lines-of-code-1.0.3.0",
+                "sebastian/version-3.0.2.0",
+                "theseer/tokenizer-1.2.1.0"
+            ]
+        },
+        {
+            "ref": "phpunit/php-file-iterator-3.0.6.0"
+        },
+        {
+            "ref": "phpunit/php-invoker-3.1.1.0"
+        },
+        {
+            "ref": "phpunit/php-text-template-2.0.4.0"
+        },
+        {
+            "ref": "phpunit/php-timer-5.0.3.0"
+        },
+        {
+            "ref": "phpunit/phpunit-9.5.26.0",
+            "dependsOn": [
+                "doctrine/instantiator-1.5.0.0",
+                "myclabs/deep-copy-1.11.0.0",
+                "phar-io/manifest-2.0.3.0",
+                "phar-io/version-3.2.1.0",
+                "phpunit/php-code-coverage-9.2.26.0",
+                "phpunit/php-file-iterator-3.0.6.0",
+                "phpunit/php-invoker-3.1.1.0",
+                "phpunit/php-text-template-2.0.4.0",
+                "phpunit/php-timer-5.0.3.0",
+                "sebastian/cli-parser-1.0.1.0",
+                "sebastian/code-unit-1.0.8.0",
+                "sebastian/comparator-4.0.8.0",
+                "sebastian/diff-4.0.4.0",
+                "sebastian/environment-5.1.5.0",
+                "sebastian/exporter-4.0.5.0",
+                "sebastian/global-state-5.0.5.0",
+                "sebastian/object-enumerator-4.0.4.0",
+                "sebastian/resource-operations-3.0.3.0",
+                "sebastian/type-3.2.1.0",
+                "sebastian/version-3.0.2.0"
+            ]
+        },
+        {
+            "ref": "sebastian/cli-parser-1.0.1.0"
+        },
+        {
+            "ref": "sebastian/code-unit-1.0.8.0"
+        },
+        {
+            "ref": "sebastian/code-unit-reverse-lookup-2.0.3.0"
+        },
+        {
+            "ref": "sebastian/comparator-4.0.8.0",
+            "dependsOn": [
+                "sebastian/diff-4.0.4.0",
+                "sebastian/exporter-4.0.5.0"
+            ]
+        },
+        {
+            "ref": "sebastian/complexity-2.0.2.0",
+            "dependsOn": [
+                "nikic/php-parser-4.15.4.0"
+            ]
+        },
+        {
+            "ref": "sebastian/diff-4.0.4.0"
+        },
+        {
+            "ref": "sebastian/environment-5.1.5.0"
+        },
+        {
+            "ref": "sebastian/exporter-4.0.5.0",
+            "dependsOn": [
+                "sebastian/recursion-context-4.0.5.0"
+            ]
+        },
+        {
+            "ref": "sebastian/global-state-5.0.5.0",
+            "dependsOn": [
+                "sebastian/object-reflector-2.0.4.0",
+                "sebastian/recursion-context-4.0.5.0"
+            ]
+        },
+        {
+            "ref": "sebastian/lines-of-code-1.0.3.0",
+            "dependsOn": [
+                "nikic/php-parser-4.15.4.0"
+            ]
+        },
+        {
+            "ref": "sebastian/object-enumerator-4.0.4.0",
+            "dependsOn": [
+                "sebastian/object-reflector-2.0.4.0",
+                "sebastian/recursion-context-4.0.5.0"
+            ]
+        },
+        {
+            "ref": "sebastian/object-reflector-2.0.4.0"
+        },
+        {
+            "ref": "sebastian/recursion-context-4.0.5.0"
+        },
+        {
+            "ref": "sebastian/resource-operations-3.0.3.0"
+        },
+        {
+            "ref": "sebastian/type-3.2.1.0"
+        },
+        {
+            "ref": "sebastian/version-3.0.2.0"
+        },
+        {
+            "ref": "theseer/tokenizer-1.2.1.0"
+        },
+        {
+            "ref": "cyclonedx-demo/cyclonedx-php-composer-devreq-dev-master",
+            "dependsOn": [
+                "phpunit/phpunit-9.5.26.0"
+            ]
+        }
+    ]
+}

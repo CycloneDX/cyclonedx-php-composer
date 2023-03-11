@@ -23,129 +23,195 @@ declare(strict_types=1);
 
 namespace CycloneDX\Tests\MakeBom;
 
-use CycloneDX\Composer\Factories\SpecFactory;
-use CycloneDX\Composer\MakeBom\Exceptions\ValueError;
 use CycloneDX\Composer\MakeBom\Options;
+use CycloneDX\Core\Spec\Format;
 use CycloneDX\Core\Spec\Version;
+use DomainException;
+use Generator;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputInterface;
+use RuntimeException;
 use Symfony\Component\Console\Input\StringInput;
 
-/**
- * @covers \CycloneDX\Composer\MakeBom\Options
- */
-class OptionsTest extends TestCase
+#[CoversClass(Options::class)]
+final class OptionsTest extends TestCase
 {
-    // region configureCommand
-
-    public function testConfigureCommand(): void
+    #[DataProvider('dpProducesOption')]
+    public function testProducesOption(string $inputString, array $expecteds): void
     {
-        $command = $this->createMock(Command::class);
+        $options = new Options();
 
-        $command->expects(self::atLeastOnce())->method('addOption')
-            ->willReturnSelf();
+        $input = new StringInput($inputString);
+        $input->setInteractive(false);
+        $input->bind($options->getDefinition());
 
-        (new Options())->configureCommand($command);
-    }
+        $options->setFromInput($input);
 
-    // endregion configureCommand
-
-    // region setFromInput
-
-    /**
-     * @dataProvider dpSetFromInput
-     */
-    public function testSetFromInput(InputInterface $input, string $property, $expected): void
-    {
-        $options = (new Options())->setFromInput($input);
-        $value = $options->{$property};
-        self::assertSame($expected, $value, "property: $property");
-    }
-
-    public static function dpSetFromInput(): \Generator
-    {
-        $data = [
-            /* @see \CycloneDX\Composer\MakeBom\Options::$outputFormat */
-            'bomFormat default XML' => ['', 'outputFormat', 'XML'],
-            ['--output-format=XML', 'outputFormat', 'XML'],
-            ['--output-format=JSON', 'outputFormat', 'JSON'],
-            /* @see \CycloneDX\Composer\MakeBom\Options::$skipOutputValidation */
-            'skipOutputValidation default false' => ['', 'skipOutputValidation', false],
-            ['--no-validate', 'skipOutputValidation', true],
-            /* @see \CycloneDX\Composer\MakeBom\Options::$outputFile */
-            'outputFile default XML' => ['', 'outputFile', 'bom.xml'],
-            ['--output-format=XML', 'outputFile', 'bom.xml'],
-            ['--output-format=JSON', 'outputFile', 'bom.json'],
-            ['--output-file=fooBar', 'outputFile', 'fooBar'],
-            ['--output-file=-', 'outputFile', '-'],
-            /* @see \CycloneDX\Composer\MakeBom\Options::$excludeDev */
-            'excludeDev default disabled' => ['', 'excludeDev', false],
-            ['--exclude-dev', 'excludeDev', true],
-            /* @see \CycloneDX\Composer\MakeBom\Options::$excludePlugins */
-            'excludePlugins default disabled' => ['', 'excludePlugins', false],
-            ['--exclude-plugins', 'excludePlugins', true],
-            /* @see \CycloneDX\Composer\MakeBom\Options::$specVersion */
-            'specVersion default latest' => ['', 'specVersion', SpecFactory::VERSION_LATEST],
-            ['--spec-version=1.1', 'specVersion', Version::V_1_1],
-            ['--spec-version=1.2', 'specVersion', Version::V_1_2],
-            ['--spec-version=1.3', 'specVersion', Version::V_1_3],
-            /* @see \CycloneDX\Composer\MakeBom\Options::$omitVersionNormalization */
-            'omitVersionNormalization default' => ['', 'omitVersionNormalization', false],
-            ['--no-version-normalization', 'omitVersionNormalization', true],
-            /* @see \CycloneDX\Composer\MakeBom\Options::$composerFile */
-            'composerFile default to null' => ['', 'composerFile', null],
-            ['my/project/composer.json', 'composerFile', 'my/project/composer.json'],
-        ];
-
-        $command = new Command('dummy');
-        (new Options())->configureCommand($command);
-
-        foreach ($data as $title => [$inputString, $property, $expected]) {
-            $input = new StringInput($inputString);
-            $input->setInteractive(false);
-            $input->bind($command->getDefinition());
-            yield (
-                \is_int($title)
-                    ? "$inputString -> $property=".var_export($expected, true)
-                    : $title
-            ) => [$input, $property, $expected];
+        foreach ($expecteds as $property => $expected) {
+            self::assertSame($expected, $options->{$property});
         }
     }
 
-    public function testSetFromInputThrowsOnInvalidSpec(): void
+    public static function dpProducesOption(): Generator
     {
-        $input = $this->createMock(InputInterface::class);
-        $input->method('getOption')
-            ->willReturnMap(
-                [
-                    ['spec-version', 'FOO'], // test object
-                    ['output-format', 'XML'],
-                ]
-            );
-
-        $this->expectException(ValueError::class);
-        $this->expectExceptionMessageMatches('/invalid value for option "spec-version"/i');
-
-        (new Options())->setFromInput($input);
+        yield 'defaults' => [
+            '',
+            [
+                'outputFormat' => Format::XML,
+                'outputFile' => Options::VALUE_OUTPUT_FILE_STDOUT,
+                'omit' => [],
+                'specVersion' => Version::v1dot4,
+                'validate' => true,
+                'mainComponentVersion' => null,
+                'composerFile' => null,
+            ],
+        ];
+        foreach ([
+            'XML' => Format::XML,
+            'JSON' => Format::JSON,
+         ] as $outputFormatIn => $outputFormat) {
+            yield "outputFormat $outputFormatIn" => [
+                '--output-format '.escapeshellarg($outputFormatIn),
+                ['outputFormat' => $outputFormat],
+            ];
+            $outputFormatLC = strtolower($outputFormatIn);
+            yield "outputFormat $outputFormatLC -> $outputFormatIn" => [
+                '--output-format '.escapeshellarg($outputFormatLC),
+                ['outputFormat' => $outputFormat],
+            ];
+        }
+        $randomFile = '/tmp/foo/'.uniqid('testing', true);
+        yield 'outputFile' => [
+            '--output-file '.escapeshellarg($randomFile),
+            ['outputFile' => $randomFile],
+        ];
+        yield 'omit some' => [
+            '--omit=dev --omit plugin --omit invalid-value',
+            ['omit' => ['dev', 'plugin']],
+        ];
+        foreach ([
+            '1.4' => Version::v1dot4,
+            '1.3' => Version::v1dot3,
+            '1.2' => Version::v1dot2,
+            '1.1' => Version::v1dot1,
+         ] as $specVersionIn => $specVersion) {
+            yield "specVersion '$specVersionIn'" => [
+                '--spec-version '.escapeshellarg($specVersionIn),
+                ['specVersion' => $specVersion],
+            ];
+        }
+        yield 'mainComponentVersion EmptyString -> null' => [
+            '--mc-version ""',
+            ['mainComponentVersion' => null],
+        ];
+        yield 'output-reproducible:true' => [
+            '--output-reproducible',
+            ['outputReproducible' => true],
+        ];
+        yield 'no-output-reproducible' => [
+            '--no-output-reproducible',
+            ['outputReproducible' => false],
+        ];
+        yield 'no-output-reproducible but output-reproducible' => [
+            '--no-output-reproducible --output-reproducible',
+            ['outputReproducible' => true],
+        ];
+        yield 'output-reproducible but no-output-reproducible' => [
+            '--output-reproducible --no-output-reproducible',
+            ['outputReproducible' => false],
+        ];
+        yield 'validate:true' => [
+            '--validate',
+            ['validate' => true],
+        ];
+        yield 'no-validate' => [
+            '--no-validate',
+            ['validate' => false],
+        ];
+        yield 'no-validate but validate' => [
+            '--no-validate --validate',
+            ['validate' => true],
+        ];
+        yield 'validate but no-validate' => [
+            '--validate --no-validate',
+            ['validate' => false],
+        ];
+        $randVersion = uniqid('v', true);
+        yield 'mainComponentVersion some' => [
+            '--mc-version '.escapeshellarg($randVersion),
+            ['mainComponentVersion' => $randVersion],
+        ];
+        $randVersion = uniqid('v', true);
+        yield 'mainComponentVersion NonEmptyString' => [
+            '--mc-version '.escapeshellarg($randVersion),
+            ['mainComponentVersion' => $randVersion],
+        ];
+        yield 'no composerFile -> null' => [
+            '--',
+            ['composerFile' => null],
+        ];
+        yield 'empty composerFile -> null' => [
+            "-- ''",
+            ['composerFile' => null],
+        ];
+        $randomFile = 'foo/composer.json';
+        yield 'some composerFile' => [
+            '-- '.escapeshellarg($randomFile),
+            ['composerFile' => $randomFile],
+        ];
     }
 
-    public function testSetFromInputThrowsOnInvalidOutputFormat(): void
+    /**
+     * @psalm-param class-string<\Throwable> $exception
+     */
+    #[DataProvider('dpProducesOptionError')]
+    public function testProducesOptionError(string $inputString, string $exception, string $exceptionErrorMessage): void
     {
-        $input = $this->createMock(InputInterface::class);
-        $input->method('getOption')
-            ->willReturnMap(
-                [
-                    ['spec-version', '1.2'],
-                    ['output-format', 'Foo'], // test object
-                ]
-            );
+        $options = new Options();
 
-        $this->expectException(ValueError::class);
-        $this->expectExceptionMessageMatches('/invalid value for option "output-format"/i');
+        $this->expectException($exception);
+        $this->expectExceptionMessageMatches($exceptionErrorMessage);
 
-        (new Options())->setFromInput($input);
+        $input = new StringInput($inputString);
+        $input->setInteractive(false);
+        $input->bind($options->getDefinition());
+
+        $options->setFromInput($input);
     }
 
-    // endregion setFromInput
+    public static function dpProducesOptionError(): Generator
+    {
+        yield 'unexpected option' => [
+            '--unexpected-option foo',
+            RuntimeException::class,
+            '/option does not exist/i',
+        ];
+        $randomString = uniqid('', true);
+        yield 'unexpected output-format' => [
+            '--output-format '.escapeshellarg($randomString),
+            DomainException::class,
+            '/invalid value/i',
+        ];
+        yield 'empty output-file' => [
+            '--output-file ""',
+            DomainException::class,
+            '/invalid value/i',
+        ];
+        yield 'unexpected spec-version' => [
+            '--spec-version '.escapeshellarg($randomString),
+            DomainException::class,
+            '/invalid value/i',
+        ];
+        yield 'empty omit' => [
+            '--omit',
+            RuntimeException::class,
+            '/option requires a value/i',
+        ];
+        yield 'empty mainComponentVersion' => [
+            '--mc-version',
+            RuntimeException::class,
+            '/option requires a value/i',
+        ];
+    }
 }

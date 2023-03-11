@@ -10,24 +10,33 @@
 
 # CycloneDX PHP Composer Plugin
 
-A plugin for PHP's [Composer](https://getcomposer.org/)
-that generates Software Bill of Materials (SBoM) in [CycloneDX](https://cyclonedx.org/) format.
+A plugin for PHP's _[Composer](https://getcomposer.org/)_
+that generates Software Bill of Materials (SBOM) in _[CycloneDX](https://cyclonedx.org/)_ format.
+
+The resulting SBOM documents follow [official specifications and standards](https://github.com/CycloneDX/specification),
+and might have properties following [`cdx:composer` Namespace Taxonomy](https://github.com/CycloneDX/cyclonedx-property-taxonomy/blob/main/cdx/composer.md)
+.
+
+## !! ATTENTION - v4-dev state
+
+The branch "master" is currently in the transition to next major version: v4.
+See the progress in the [milestone "v4"](https://github.com/CycloneDX/cyclonedx-php-composer/milestone/5)
+
+Code of v3 is in branch "[3.x](https://github.com/CycloneDX/cyclonedx-php-composer/tree/3.x)"
 
 ## Requirements
 
-The latest version of this plugin
-supports PHP `^7.3||^8.0`
-with Composer `^2.0`
-.
+* PHP `^8.1`
+* Composer `^2.3`
 
-There are older versions of this plugin available, which
+However, there are older versions of this plugin available, which
 support PHP `^5.5||^7.0||^8.0`
 with Composer `^1.0||^2.0`
 .
 
 ## Installation
 
-As a global composer plugin:
+As a global _Composer_ plugin:
 
 ```shell
 composer global require cyclonedx/cyclonedx-php-composer
@@ -41,58 +50,57 @@ composer require --dev cyclonedx/cyclonedx-php-composer
 
 ## Usage
 
-After successful installation, the composer command `CycloneDX:make-sbom` is available.
+After successful installation, the _Composer_ command `CycloneDX:make-sbom` is available.
 
-```text
-$ composer CycloneDX:make-sbom -h
+```ShellSession
+$ composer CycloneDX:make-sbom --help
+
+Description:
+  Generate a CycloneDX Bill of Materials from a PHP Composer project.
+
 Usage:
   CycloneDX:make-sbom [options] [--] [<composer-file>]
 
 Arguments:
-  composer-file                      Path to composer config file.
-                                     Defaults to "composer.json" file in working directory.
+  composer-file                                       Path to Composer config file.
+                                                      [default: "composer.json" file in current working directory]
 
 Options:
-      --output-format=OUTPUT-FORMAT  Which output format to use.
-                                     Values: "XML", "JSON" [default: "XML"]
-      --output-file=OUTPUT-FILE      Path to the output file.
-                                     Set to "-" to write to STDOUT.
-                                     Depending on the output-format, default is one of: "bom.xml", "bom.json"
-      --exclude-dev                  Exclude dev dependencies
-      --exclude-plugins              Exclude composer plugins
-      --spec-version=SPEC-VERSION    Which version of CycloneDX spec to use.
-                                     Values: "1.1", "1.2", "1.3" [default: "1.3"]
-      --no-validate                  Don't validate the resulting output
-      --mc-version=MC-VERSION        Version of the main component.
-                                     This will override auto-detection.
-      --no-version-normalization     Don't normalize component version strings.
-                                     Per default this plugin will normalize version strings by stripping leading "v".
-                                     This is a compatibility-switch. The next major-version of this plugin will not modify component versions.
-  -h, --help                         Display this help message
-  -q, --quiet                        Do not output any message
-  -V, --version                      Display this application version
-      --ansi                         Force ANSI output
-      --no-ansi                      Disable ANSI output
-  -n, --no-interaction               Do not ask any interactive question
-      --profile                      Display timing and memory usage information
-      --no-plugins                   Whether to disable plugins.
-  -d, --working-dir=WORKING-DIR      If specified, use the given directory as working directory.
-      --no-cache                     Prevent use of the cache
-  -v|vv|vvv, --verbose               Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug
-
-Help:
-  Generate a CycloneDX Bill of Materials
+      --output-format=OUTPUT-FORMAT                   Which output format to use.
+                                                      {choices: "XML", "JSON"} [default: "XML"]
+      --output-file=OUTPUT-FILE                       Path to the output file.
+                                                      Set to "-" to write to STDOUT [default: "-"]
+      --omit=OMIT                                     Omit dependency types.
+                                                      {choices: "dev", "plugin"} (multiple values allowed)
+      --spec-version=SPEC-VERSION                     Which version of CycloneDX spec to use.
+                                                      {choices: "1.4", "1.3", "1.2", "1.1"} [default: "1.4"]
+      --output-reproducible|--no-output-reproducible  Whether to go the extra mile and make the output reproducible.
+                                                      This might result in loss of time- and random-based-values.
+      --validate|--no-validate                        Validate the resulting output.
+      --mc-version=MC-VERSION                         Version of the main component.
+                                                      This will override auto-detection.
+  -h, --help                                          Display help for the given command.
 ```
 
 ## Demo
 
-For a demo of _cyclonedx-php-composer_ see the [demo project][demo_readme].
+For a demo of _cyclonedx-php-composer_ see the [demo projects][demo_readme].
+
+## How it works
+
+This composer plugin actually utilizes composer itself, to collect evidence for installed composer packages.  
+In terms of evidence collection, actually installed setups are preferred over pure lock file analysis.  
+Required  evidence:
+- composer config/manifest file (e.g. `composer.json` file)
+- any of:
+  - an actual composer setup (e.g. `vendor` directory, after running `composer install` on your project)
+  - a working composer lock file (e.g. `composer.lock` file)
 
 ## Internals
 
-This Composer-Plugin utilizes the [CycloneDX library][cyclonedx-library] to generate the actual data structures.
+This _Composer_ plugin utilizes the [CycloneDX library][cyclonedx-library] to generate the actual data structures.
 
-This Composer-Plugin does **not** expose any additional _public_ api or classes - all code is marked as `@internal` and might change without any notice during version upgrades.
+This _Composer_ plugin does **not** expose any additional _public_ API or classes - all code is marked as `@internal` and might change without any notice during version upgrades.
 
 ## Contributing
 

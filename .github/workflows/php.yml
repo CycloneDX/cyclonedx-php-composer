@@ -4,7 +4,7 @@ name: PHP CI
 
 on:
   push:
-    branches: ["master"]
+    branches: ["master", "next"]
   pull_request:
   workflow_dispatch:
   schedule:
@@ -14,12 +14,30 @@ on:
 
 env:
   PHP_VERSION_LATEST: "8.2"
-  PHP_PROJECT_EXT: dom,filter,json,libxml,simplexml  # via `composer info -pt`
+  PHP_PROJECT_EXT: dom,json,libxml  # via `composer info -pt`
   REPORTS_DIR: CI_reports
 
 jobs:
-  tests:
-    name: Tests (${{ matrix.os}}, ${{ matrix.php }}, ${{ matrix.dependencies }})
+  composer-validate:
+    name: Composer Validate
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        # see https://github.com/actions/checkout
+        uses: actions/checkout@v3
+      - name: Setup PHP
+        # see https://github.com/shivammathur/setup-php
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ env.PHP_VERSION_LATEST }}
+          extensions: ${{ env.PHP_PROJECT_EXT }}
+          tools: 'composer:v2'
+          coverage: none
+      - name: Validate composer.json and composer.lock
+        run: composer validate --no-interaction
+  phpunit:
+    name: PHPUnit (${{ matrix.os}}, ${{ matrix.php }}, ${{ matrix.dependencies }})
     runs-on: ${{ matrix.os }}
     env:
       REPORTS_ARTIFACT: tests-reports
@@ -29,18 +47,8 @@ jobs:
         os: [ "ubuntu-latest" ]
         php:
           - "8.2" # highest supported
-          - "8.1"
-          - "8.0"
-          - "7.4"
-          - "7.3" # lowest supported
+          - "8.1" # lowest supported
         dependencies: [ "lowest", "highest" ]
-        exclude:
-          - # unstable combinations: throws PHP Deprecated warnings
-            php: "8.2"
-            dependencies: "lowest"
-          - # unstable combinations: throws PHP Deprecated warnings
-            php: "8.1"
-            dependencies: "lowest"
         include:
           - # Windows highest
             os: windows-latest
@@ -63,25 +71,25 @@ jobs:
         with:
           php-version: ${{ matrix.php }}
           extensions: ${{ env.PHP_PROJECT_EXT }}
-          tools: composer:v2
-          coverage: pcov,xdebug
+          tools: 'composer:v2'
+          coverage: pcov
       - name: Get composer cache directory
         id: composer-cache
-        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+        shell: bash
+        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
       - name: Cache dependencies
         # see https://github.com/actions/cache
         uses: actions/cache@v3
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
-          key: composer-${{ github.job }}-${{ runner.os }}-${{ matrix.php }}-${{ matrix.dependencies }}-${{ hashFiles('**/composer.json') }}
+          key: composer-${{ github.job }}-${{ runner.os }}-php${{ matrix.php }}-${{ matrix.dependencies }}-${{ hashFiles('composer.*', 'tools/phpunit/composer.*') }}
           restore-keys: |
-            composer-${{ github.job }}-${{ runner.os }}-${{ matrix.php }}-${{ matrix.dependencies }}-
-            composer-${{ github.job }}-${{ runner.os }}-${{ matrix.php }}-
+            composer-${{ github.job }}-${{ runner.os }}-php${{ matrix.php }}-${{ matrix.dependencies }}-
+            composer-${{ github.job }}-${{ runner.os }}-php${{ matrix.php }}-
             composer-${{ github.job }}-${{ runner.os }}-
-      - name: Validate composer.json and composer.lock
-        run: >
-          composer validate
-          --no-interaction
+      - name: Install PHPUnit
+        run: composer install --prefer-dist --no-interaction --no-progress
+        working-directory: tools/phpunit
       - name: Install lowest dependencies
         if: ${{ matrix.dependencies == 'lowest' }}
         run: |
@@ -99,7 +107,8 @@ jobs:
           -d error_reporting=-1
           -d log_errors_max_len=0
           -d memory_limit=-1
-          vendor/phpunit/phpunit/phpunit
+          tools/phpunit/vendor/phpunit/phpunit/phpunit
+          --no-progress
           --log-junit=${{ env.REPORTS_DIR }}/tests.${{ matrix.os }}_php${{ matrix.php }}_${{ matrix.dependencies }}.junit.xml
           --coverage-clover=${{ env.REPORTS_DIR }}/coverage.${{ matrix.os}}_php${{ matrix.php }}_${{ matrix.dependencies }}.clover.xml
       - name: Artifact reports
@@ -121,13 +130,11 @@ jobs:
       matrix:
         php:
           - "8.2"  # highest supported
-          - "8.1"
-          - "8.0"
-          - "7.4"
+          - "8.1"  # lowest supported
         dependencies: [ "highest" ]
         include:
           - # lowest supported
-            php: "7.3"
+            php: "8.1"
             dependencies: "lowest"
     steps:
       - name: Checkout
@@ -139,20 +146,20 @@ jobs:
         with:
           php-version: ${{ matrix.php }}
           extensions: ${{ env.PHP_PROJECT_EXT }}
-          tools: composer:v2
+          tools: 'composer:v2'
           coverage: none
       - name: Get composer cache directory
         id: composer-cache
-        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
       - name: Cache dependencies
         # see https://github.com/actions/cache
         uses: actions/cache@v3
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
-          key: composer-${{ github.job }}-${{ runner.os }}-${{ matrix.php }}-${{ matrix.dependencies }}-${{ hashFiles('**/composer.json') }}
+          key: composer-${{ github.job }}-${{ runner.os }}-php${{ matrix.php }}-${{ matrix.dependencies }}-${{ hashFiles('composer.*', 'tools/psalm/composer.*') }}
           restore-keys: |
-            composer-${{ github.job }}-${{ runner.os }}-${{ matrix.php }}-${{ matrix.dependencies }}-
-            composer-${{ github.job }}-${{ runner.os }}-${{ matrix.php }}-
+            composer-${{ github.job }}-${{ runner.os }}-php${{ matrix.php }}-${{ matrix.dependencies }}-
+            composer-${{ github.job }}-${{ runner.os }}-php${{ matrix.php }}-
             composer-${{ github.job }}-${{ runner.os }}-
       - name: Install psalm
         run: composer install --prefer-dist --no-interaction --no-progress
@@ -195,17 +202,17 @@ jobs:
         with:
           php-version: ${{ env.PHP_VERSION_LATEST }}
           extensions: ${{ env.PHP_PROJECT_EXT }}
-          tools: composer:v2
+          tools: 'composer:v2'
           coverage: none
       - name: Get composer cache directory
         id: composer-cache
-        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
       - name: Cache dependencies
         # see https://github.com/actions/cache
         uses: actions/cache@v3
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
-          key: composer-${{ github.job }}-${{ runner.os }}-${{ hashFiles('**/composer.json') }}
+          key: composer-${{ github.job }}-${{ runner.os }}-${{ hashFiles('composer.*', 'tools/composer-unused/composer.*') }}
           restore-keys: |
             composer-${{ github.job }}-${{ runner.os }}-
       - name: Install composer-unused
@@ -233,17 +240,17 @@ jobs:
         with:
           php-version: ${{ env.PHP_VERSION_LATEST }}
           extensions: ${{ env.PHP_PROJECT_EXT }}
-          tools: composer:v2
+          tools: 'composer:v2'
           coverage: none
       - name: Get composer cache directory
         id: composer-cache
-        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
       - name: Cache dependencies
         # see https://github.com/actions/cache
         uses: actions/cache@v3
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
-          key: composer-${{ github.job }}-${{ runner.os }}-${{ hashFiles('**/composer.json') }}
+          key: composer-${{ github.job }}-${{ runner.os }}-${{ hashFiles('composer.*', 'tools/composer-require-checker/composer.*') }}
           restore-keys: |
             composer-${{ github.job }}-${{ runner.os }}-
       - name: Install composer-require-checker
@@ -255,7 +262,6 @@ jobs:
         run: >
           php tools/composer-require-checker/vendor/maglnet/composer-require-checker/bin/composer-require-checker
           --no-interaction
-          || :  # this report is optional
   coding-standards:
     name: Coding Standards
     runs-on: ubuntu-latest
@@ -268,19 +274,19 @@ jobs:
         # see https://github.com/shivammathur/setup-php
         uses: shivammathur/setup-php@v2
         with:
-          php-version: "8.1" ## php82 not supported yet ${{ env.PHP_VERSION_LATEST }}
+          php-version: "8.1" ## not supporting php82 yet ${{ env.PHP_VERSION_LATEST }}
           extensions: ${{ env.PHP_PROJECT_EXT }}
-          tools: composer:v2
+          tools: 'composer:v2'
           coverage: none
       - name: Get composer cache directory
         id: composer-cache
-        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
       - name: Cache dependencies
         # see https://github.com/actions/cache
         uses: actions/cache@v3
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
-          key: composer-${{ github.job }}-${{ runner.os }}-${{ hashFiles('**/composer.json') }}
+          key: composer-${{ github.job }}-${{ runner.os }}-${{ hashFiles('composer.*', 'tools/php-cs-fixer/composer.*') }}
           restore-keys: |
             composer-${{ github.job }}-${{ runner.os }}-
       - name: Install PHP-CS-Fixer
@@ -308,17 +314,17 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ env.PHP_VERSION_LATEST }}
-          tools: composer:v2
+          tools: 'composer:v2'
           coverage: none
       - name: Get composer cache directory
         id: composer-cache
-        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
       - name: Cache dependencies
         # see https://github.com/actions/cache
         uses: actions/cache@v3
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
-          key: composer-${{ github.job }}-${{ runner.os }}-${{ hashFiles('**/composer.json') }}
+          key: composer-${{ github.job }}-${{ runner.os }}-${{ hashFiles('composer.*', 'tools/composer-normalize/composer.*') }}
           restore-keys: |
             composer-${{ github.job }}-${{ runner.os }}-
       - name: Install composer-normalize
@@ -326,7 +332,7 @@ jobs:
         working-directory: tools/composer-normalize
       - name: Run composer-normalize tests
         run: >
-          composer -dtools/composer-normalize
+          composer -d tools/composer-normalize
           normalize
           --dry-run
           --diff

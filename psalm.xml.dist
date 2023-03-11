@@ -5,6 +5,8 @@
        errorLevel="1"
        checkForThrowsDocblock="true"
        findUnusedPsalmSuppress="false"
+       findUnusedVariablesAndParams="true"
+       findUnusedCode="true"
        ensureArrayStringOffsetsExist="true"
        ensureArrayIntOffsetsExist="true"
        cacheDirectory=".psalm.cache"
@@ -12,7 +14,4 @@
     <projectFiles>
         <directory name="src"/>
     </projectFiles>
-    <extraFiles>
-
-    </extraFiles>
 </psalm>

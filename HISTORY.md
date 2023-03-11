@@ -2,8 +2,66 @@
 
 All notable changes to this project will be documented in this file.
 
-## unreleased
+## 4.0.0 - unreleased
 
+* BREAKING changes
+  * Removed support for PHP `<8.0` ([#91] via [#250])
+  * Removed support for PHP `<8.1` (via [#250])
+  * Removed support for Composer `<2.3` ([#153] via [#250])
+  * CLI
+    * Removed deprecated composer command `make-bom`, call `composer CycloneDX:make-sbom` instead ([#293] via [#309])
+    * Changed option `output-file` to default to `-` now, which causes to print to STDOUT (via [#250])
+    * Removed option `exclude-dev` in favour of new option `omit` (via [#250])
+    * Removed option `exclude-plugins` in favour of new option `omit` (via [#250])
+    * Removed option `no-version-normalization` ([#102] via [#250])
+  * SBOM results
+    * Components' version is no longer artificially normalized ([#102] via [#250])
+  * Dependencies
+    * Requires `cyclonedx/cyclonedx-library:^2.0`, was `:^1.4.2` ([#128] via [#250])
+* Changed
+  * Evidence analysis prefers actually installed packages over lock file ([#122] via [#250])
+  * Root component's versions is unset, if version detection fails ([#154] via [#250])
+  * Composer packages of type "composer-installer" are treated as composer plugins (via [#250])
+* Added
+  * Evidence collection knows actually installed packages ([#122] via [#250])
+  * SBOM results
+    * Support for CycloneDX Spec v1.4 (via [#250])
+    * might have `serialnumber` populated ([#279] via [#250])
+    * might have `metadata.timestamp` populated ([#112] via [#250])
+    * might have `metadata.tools[].tool.externalReferences` populated ([#171] via [#250])
+    * might have `components[].component.author` populated ([#261] via [#250])
+    * might have `components[].component.properties` populated according to [`cdx:composer` Namespace Taxonomy](https://github.com/CycloneDX/cyclonedx-property-taxonomy/blob/main/cdx/composer.md) (via [#250])
+  * CLI
+    * New option `omit` (via [#250])
+    * New switch `validate` to override `no-validate` (via [#250])
+    * New switches `output-reproducible` and `no-output-reproducible` (via [#250])
+* Misc
+  * Added demo and reproducible continuous integration test "devReq" that is dedicated to composer's `require-dev` feature (via [#250])
+  * Reworked demo setups to be more global-install like (via [#250])
+
+[#91]:  https://github.com/CycloneDX/cyclonedx-php-composer/issues/91
+[#102]: https://github.com/CycloneDX/cyclonedx-php-composer/issues/102
+[#112]: https://github.com/CycloneDX/cyclonedx-php-composer/issues/112
+[#122]: https://github.com/CycloneDX/cyclonedx-php-composer/issues/122
+[#128]: https://github.com/CycloneDX/cyclonedx-php-composer/issues/128
+[#153]: https://github.com/CycloneDX/cyclonedx-php-composer/issues/153
+[#154]: https://github.com/CycloneDX/cyclonedx-php-composer/issues/154
+[#171]: https://github.com/CycloneDX/cyclonedx-php-composer/issues/171
+[#250]: https://github.com/CycloneDX/cyclonedx-php-composer/pull/250
+[#261]: https://github.com/CycloneDX/cyclonedx-php-composer/issues/261
+[#279]: https://github.com/CycloneDX/cyclonedx-php-composer/issues/279
+[#293]: https://github.com/CycloneDX/cyclonedx-php-composer/issues/293
+[#309]: https://github.com/CycloneDX/cyclonedx-php-composer/pull/309
+[#313]: https://github.com/CycloneDX/cyclonedx-php-composer/issues/313
+
+## 3.11.0 - 2023-02-11
+
+* Changed
+  * CLI via `composer make-bom` became deprecated, use `composer CycloneDX:make-sbom` instead. ([#293] via [#308])  
+    The composer command `make-bom` will be removed in the next major version.
+
+[#293]: https://github.com/CycloneDX/cyclonedx-php-composer/issues/293
+[#308]: https://github.com/CycloneDX/cyclonedx-php-composer/pull/308
 
 ## 3.11.0 - 2023-02-11
 

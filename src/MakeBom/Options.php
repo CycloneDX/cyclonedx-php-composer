@@ -23,240 +23,291 @@ declare(strict_types=1);
 
 namespace CycloneDX\Composer\MakeBom;
 
-use CycloneDX\Composer\Factories\SpecFactory;
-use CycloneDX\Composer\MakeBom\Exceptions\ValueError;
+use CycloneDX\Core\Spec\Format;
+use CycloneDX\Core\Spec\Version;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputDefinition;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 
 /**
+ * @psalm-type TOmittable = "dev"|"plugin"
+ *
  * @internal
  *
  * @author jkowalleck
  */
 class Options
 {
+    /**
+     * Env var to control `bom.metadata.tools.tool.version`.
+     * Non-documented private env vars usage, because this is not public API.
+     */
+    private const ENV_TOOLS_VERSION_OVERRIDE = 'CDX_CP_TOOLS_VERSION_OVERRIDE';
+
+    /**
+     * Env var to control whether to all own libs to `bom.metadata.tools.tool`.
+     * Non-documented private env vars usage, because this is not public API.
+     */
+    private const ENV_TOOLS_EXCLUDE_LIBS = 'CDX_CP_TOOLS_EXCLUDE_LIBS';
+
     private const OPTION_OUTPUT_FORMAT = 'output-format';
     private const OPTION_OUTPUT_FILE = 'output-file';
     private const OPTION_SPEC_VERSION = 'spec-version';
     private const OPTION_MAIN_COMPONENT_VERSION = 'mc-version';
+    private const OPTION_OMIT = 'omit';
 
-    private const SWITCH_EXCLUDE_DEV = 'exclude-dev';
-    private const SWITCH_EXCLUDE_PLUGINS = 'exclude-plugins';
-    private const SWITCH_NO_VALIDATE = 'no-validate';
-
-    // added in preparation for https://github.com/CycloneDX/cyclonedx-php-composer/issues/102
-    // @TODO remove with next major version
-    private const SWITCH_NO_VERSION_NORMALIZATION = 'no-version-normalization';
+    private const SWITCH_OUTPUT_REPRODUCIBLE = 'output-reproducible';
+    private const SWITCH_VALIDATE = 'validate';
 
     private const ARGUMENT_COMPOSER_FILE = 'composer-file';
 
-    public const OUTPUT_FORMAT_XML = 'XML';
-    public const OUTPUT_FORMAT_JSON = 'JSON';
+    /**
+     * Possible output formats.
+     * First in list is the default value.
+     *
+     * @psalm-var array<string, Format>
+     */
+    private const VALUES_OUTPUT_FORMAT_MAP = [
+        'XML' => Format::XML,
+        'JSON' => Format::JSON,
+    ];
 
-    public const OUTPUT_FILE_STDOUT = '-';
+    public const VALUE_OUTPUT_FILE_STDOUT = '-';
 
     /**
-     * @var string[]
+     * Possible omittables.
      *
-     * @psalm-var array<Options::OUTPUT_FORMAT_*, string>
+     * @psalm-var non-empty-list<TOmittable>
      */
-    private const OUTPUT_FILE_DEFAULT = [
-        self::OUTPUT_FORMAT_XML => 'bom.xml',
-        self::OUTPUT_FORMAT_JSON => 'bom.json',
+    private const VALUES_OMIT = [
+        'dev',
+        'plugin',
     ];
 
     /**
-     * @psalm-suppress MissingThrowsDocblock since {@see \Symfony\Component\Console\Command\Command::addOption()} is intended to work this way
+     * Possible spec versions.
+     * First in list is the default value.
+     *
+     * @psalm-var array<string, Version>
      */
-    public function configureCommand(Command $command): void
+    private const VALUE_SPEC_VERSION_MAP = [
+        '1.4' => Version::v1dot4,
+        '1.3' => Version::v1dot3,
+        '1.2' => Version::v1dot2,
+        '1.1' => Version::v1dot1,
+    ];
+
+    /**
+     * @param scalar[] $values
+     */
+    private static function formatChoice(array $values): string
     {
-        $command
-            ->addOption(
+        return '{choices: "'.
+            implode('", "', $values).
+            '"}';
+    }
+
+    /**
+     * @psalm-suppress MissingThrowsDocblock
+     * @psalm-suppress TooManyArguments as there is an optional 6th param of {@see Command::addOption()}
+     */
+    public function getDefinition(): InputDefinition
+    {
+        return new InputDefinition([
+            new InputOption(
                 self::OPTION_OUTPUT_FORMAT,
                 null,
                 InputOption::VALUE_REQUIRED,
                 'Which output format to use.'.\PHP_EOL.
-                'Values: "'.self::OUTPUT_FORMAT_XML.'", "'.self::OUTPUT_FORMAT_JSON.'"',
-                self::OUTPUT_FORMAT_XML
-            )
-            ->addOption(
+                self::formatChoice(array_keys(self::VALUES_OUTPUT_FORMAT_MAP)),
+                array_search($this->outputFormat, self::VALUES_OUTPUT_FORMAT_MAP, true),
+                array_keys(self::VALUES_OUTPUT_FORMAT_MAP)
+            ),
+            new InputOption(
                 self::OPTION_OUTPUT_FILE,
                 null,
                 InputOption::VALUE_REQUIRED,
                 'Path to the output file.'.\PHP_EOL.
-                'Set to "'.self::OUTPUT_FILE_STDOUT.'" to write to STDOUT.'.\PHP_EOL.
-                'Depending on the output-format, default is one of: "'.implode(
-                    '", "',
-                    array_values(self::OUTPUT_FILE_DEFAULT)
-                ).'"'
-            )
-            ->addOption(
-                self::SWITCH_EXCLUDE_DEV,
+                'Set to "'.self::VALUE_OUTPUT_FILE_STDOUT.'" to write to STDOUT',
+                $this->outputFile
+            ),
+            new InputOption(
+                self::OPTION_OMIT,
                 null,
-                InputOption::VALUE_NONE,
-                'Exclude dev dependencies'
-            )
-            ->addOption(
-                self::SWITCH_EXCLUDE_PLUGINS,
-                null,
-                InputOption::VALUE_NONE,
-                'Exclude composer plugins'
-            )
-            ->addOption(
+                InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY,
+                'Omit dependency types.'.\PHP_EOL.
+                self::formatChoice(self::VALUES_OMIT),
+                $this->omit,
+                self::VALUES_OMIT
+            ),
+            new InputOption(
                 self::OPTION_SPEC_VERSION,
                 null,
                 InputOption::VALUE_REQUIRED,
                 'Which version of CycloneDX spec to use.'.\PHP_EOL.
-                'Values: "'.implode('", "', array_keys(SpecFactory::SPECS)).'"',
-                SpecFactory::VERSION_LATEST
-            )
-            ->addOption(
-                self::SWITCH_NO_VALIDATE,
+                self::formatChoice(array_keys(self::VALUE_SPEC_VERSION_MAP)),
+                array_search($this->specVersion, self::VALUE_SPEC_VERSION_MAP, true),
+                array_keys(self::VALUE_SPEC_VERSION_MAP)
+            ),
+            new InputOption(
+                self::SWITCH_OUTPUT_REPRODUCIBLE,
                 null,
-                InputOption::VALUE_NONE,
-                'Don\'t validate the resulting output'
-            )
-            ->addOption(
+                InputOption::VALUE_NEGATABLE,
+                'Whether to go the extra mile and make the output reproducible.'.\PHP_EOL.
+                'This might result in loss of time- and random-based-values.',
+                $this->outputReproducible
+            ),
+            new InputOption(
+                self::SWITCH_VALIDATE,
+                null,
+                InputOption::VALUE_NEGATABLE,
+                'Validate the resulting output.',
+                $this->validate
+            ),
+            new InputOption(
                 self::OPTION_MAIN_COMPONENT_VERSION,
                 null,
                 InputOption::VALUE_REQUIRED,
                 'Version of the main component.'.\PHP_EOL.
                 'This will override auto-detection.',
-                null
-            )
-            ->addOption(
-                self::SWITCH_NO_VERSION_NORMALIZATION,
-                null,
-                InputOption::VALUE_NONE,
-                'Don\'t normalize component version strings.'.\PHP_EOL.
-                'Per default this plugin will normalize version strings by stripping leading "v".'.\PHP_EOL.
-                'This is a compatibility-switch. The next major-version of this plugin will not modify component versions.'
-            )
-            ->addArgument(
+                $this->mainComponentVersion
+            ),
+            new InputArgument(
                 self::ARGUMENT_COMPOSER_FILE,
                 InputArgument::OPTIONAL,
-                'Path to composer config file.'.\PHP_EOL.
-                'Defaults to "composer.json" file in working directory.'
-            );
+                'Path to Composer config file.'.\PHP_EOL.
+                '[default: "composer.json" file in current working directory]',
+                null
+            ),
+        ]);
     }
 
     /**
-     * @var string
-     *
-     * @psalm-var \CycloneDX\Core\Spec\Version::V_*
-     *
      * @readonly
      *
      * @psalm-allow-private-mutation
      */
-    public $specVersion = SpecFactory::VERSION_LATEST;
+    public Version $specVersion;
 
     /**
-     * @var bool
+     * @readonly
      *
+     * @var string[]
+     *
+     * @psalm-var list<TOmittable>
+     *
+     * @psalm-allow-private-mutation
+     */
+    public array $omit = [];
+
+    /**
      * @readonly
      *
      * @psalm-allow-private-mutation
      */
-    public $excludeDev = false;
+    public Format $outputFormat;
 
     /**
-     * @var bool
-     *
      * @readonly
      *
      * @psalm-allow-private-mutation
      */
-    public $excludePlugins = false;
+    public bool $outputReproducible = false;
 
     /**
-     * @var bool
-     *
      * @readonly
      *
      * @psalm-allow-private-mutation
      */
-    public $omitVersionNormalization = false;
+    public bool $validate = true;
 
     /**
-     * @var string
-     *
-     * @psalm-var Options::OUTPUT_FORMAT_*
-     *
      * @readonly
      *
      * @psalm-allow-private-mutation
+     *
+     * @psalm-var non-empty-string
      */
-    public $outputFormat = self::OUTPUT_FORMAT_XML;
+    public string $outputFile = self::VALUE_OUTPUT_FILE_STDOUT;
 
     /**
-     * @var bool
-     *
      * @readonly
      *
      * @psalm-allow-private-mutation
+     *
+     * @psalm-var null|non-empty-string
      */
-    public $skipOutputValidation = false;
+    public ?string $composerFile = null;
 
     /**
-     * @var string
-     *
      * @readonly
      *
      * @psalm-allow-private-mutation
+     *
+     * @psalm-var null|non-empty-string
      */
-    public $outputFile = self::OUTPUT_FILE_STDOUT;
+    public ?string $mainComponentVersion = null;
+
+    public function __construct()
+    {
+        $this->outputFormat = self::VALUES_OUTPUT_FORMAT_MAP[array_key_first(self::VALUES_OUTPUT_FORMAT_MAP)];
+        $this->specVersion = self::VALUE_SPEC_VERSION_MAP[array_key_first(self::VALUE_SPEC_VERSION_MAP)];
+    }
 
     /**
-     * @var string|null
-     *
-     * @readonly
-     *
-     * @psalm-allow-private-mutation
+     * @psalm-return null|non-empty-string
      */
-    public $composerFile;
+    public function getToolsVersionOverride(): ?string
+    {
+        $version = getenv(self::ENV_TOOLS_VERSION_OVERRIDE);
+
+        return \is_string($version) && '' !== $version
+        ? $version
+        : null;
+    }
+
+    public function getToolsExcludeLibs(): bool
+    {
+        return (bool) getenv(self::ENV_TOOLS_EXCLUDE_LIBS);
+    }
 
     /**
-     * @var string|null
-     *
-     * @readonly
-     *
-     * @psalm-allow-private-mutation
-     */
-    public $mainComponentVersion;
-
-    /**
-     * @throws ValueError
+     * @throws Errors\OptionError
      *
      * @return $this
      *
-     * @psalm-suppress MissingThrowsDocblock since {@see \Symfony\Component\Console\Input\InputInterface::getOption()} is intended to work this way
+     * @psalm-suppress MissingThrowsDocblock
      */
-    public function setFromInput(InputInterface $input): self
+    public function setFromInput(InputInterface $input): static
     {
         // region get from input
 
         $specVersion = $input->getOption(self::OPTION_SPEC_VERSION);
         \assert(\is_string($specVersion));
-        if (false === \array_key_exists($specVersion, SpecFactory::SPECS)) {
-            throw new ValueError('Invalid value for option "'.self::OPTION_SPEC_VERSION.'": '.$specVersion);
+        if (false === \array_key_exists($specVersion, self::VALUE_SPEC_VERSION_MAP)) {
+            throw new Errors\OptionError('Invalid value for option "'.self::OPTION_SPEC_VERSION.'": '.$specVersion);
         }
 
         $outputFormat = $input->getOption(self::OPTION_OUTPUT_FORMAT);
         \assert(\is_string($outputFormat));
         $outputFormat = strtoupper($outputFormat);
-        if (false === \in_array($outputFormat, [self::OUTPUT_FORMAT_XML, self::OUTPUT_FORMAT_JSON], true)) {
-            throw new ValueError('Invalid value for option "'.self::OPTION_OUTPUT_FORMAT.'": '.$outputFormat);
+        if (false === \array_key_exists($outputFormat, self::VALUES_OUTPUT_FORMAT_MAP)) {
+            throw new Errors\OptionError('Invalid value for option "'.self::OPTION_OUTPUT_FORMAT.'": '.$outputFormat);
         }
 
-        $excludeDev = false !== $input->getOption(self::SWITCH_EXCLUDE_DEV);
-        $excludePlugins = false !== $input->getOption(self::SWITCH_EXCLUDE_PLUGINS);
-        $skipOutputValidation = false !== $input->getOption(self::SWITCH_NO_VALIDATE);
-        $omitVersionNormalization = false !== $input->getOption(self::SWITCH_NO_VERSION_NORMALIZATION);
         $outputFile = $input->getOption(self::OPTION_OUTPUT_FILE);
-        \assert(null === $outputFile || \is_string($outputFile));
+        \assert(\is_string($outputFile));
+        if ('' === $outputFile) {
+            throw new Errors\OptionError('Invalid value for option "'.self::OPTION_OUTPUT_FILE.'": '.$outputFile);
+        }
+        // no additional restrictions to $outputFile - stuff like 'ftp://user:pass@host/path/file' is acceptable.
+
+        $omit = $input->getOption(self::OPTION_OMIT);
+        \assert(\is_array($omit));
+        $outputReproducible = false !== $input->getOption(self::SWITCH_OUTPUT_REPRODUCIBLE);
+        $validate = false !== $input->getOption(self::SWITCH_VALIDATE);
         $composerFile = $input->getArgument(self::ARGUMENT_COMPOSER_FILE);
         \assert(null === $composerFile || \is_string($composerFile));
         $mainComponentVersion = $input->getOption(self::OPTION_MAIN_COMPONENT_VERSION);
@@ -264,25 +315,23 @@ class Options
 
         // endregion get from input
 
-        // those regions are split,
-        // so the state does not modify unless everything is clear
+        /* those regions are split,
+         * so the state does not modify unless everything is clear
+         */
 
         // region set state
 
-        $this->specVersion = $specVersion;
-        $this->excludeDev = $excludeDev;
-        $this->excludePlugins = $excludePlugins;
-        $this->outputFormat = $outputFormat;
-        $this->skipOutputValidation = $skipOutputValidation;
-        $this->omitVersionNormalization = $omitVersionNormalization;
-        $this->outputFile = \is_string($outputFile) && '' !== $outputFile
-            ? $outputFile
-            : self::OUTPUT_FILE_DEFAULT[$outputFormat];
-        $this->composerFile = \is_string($composerFile) && '' !== $outputFile
-            ? $composerFile
-            : null;
-        $this->mainComponentVersion = \is_string($mainComponentVersion) && '' !== $mainComponentVersion
+        $this->specVersion = self::VALUE_SPEC_VERSION_MAP[$specVersion];
+        $this->omit = array_values(array_intersect(self::VALUES_OMIT, $omit));
+        $this->outputFormat = self::VALUES_OUTPUT_FORMAT_MAP[$outputFormat];
+        $this->outputReproducible = $outputReproducible;
+        $this->validate = $validate;
+        $this->outputFile = $outputFile;
+        $this->mainComponentVersion = '' !== $mainComponentVersion
             ? $mainComponentVersion
+            : null;
+        $this->composerFile = '' !== $composerFile
+            ? $composerFile
             : null;
 
         // endregion set state

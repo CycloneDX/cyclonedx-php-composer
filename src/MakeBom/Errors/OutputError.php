@@ -21,11 +21,15 @@ declare(strict_types=1);
  * Copyright (c) OWASP Foundation. All Rights Reserved.
  */
 
-namespace CycloneDX\Composer\MakeBom\Exceptions;
+namespace CycloneDX\Composer\MakeBom\Errors;
+
+use Exception;
 
 /**
  * @internal
+ *
+ * @author jkowalleck
  */
-class ValueError extends \Exception
+class OutputError extends Exception
 {
 }

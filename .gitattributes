@@ -1,34 +1,33 @@
-* text=auto
+* text=auto eol=lf
 
-*.txt         text eol=lf
-*.md          text eol=lf diff=markdown
-*.php         text eol=lf diff=php
-*.json        text eol=lf diff=json
-*.xml         text eol=lf diff=xml
-*.xml.dist    text eol=lf diff=xml
-*.xsd         text eol=lf diff=xml
-*.neon        text eol=lf diff=yaml
-*.neon.dist   text eol=lf diff=yaml
-composer.lock text eol=lf diff=json
+*.txt           text eol=lf
+*.md            text eol=lf diff=markdown
+*.php           text eol=lf diff=php
+*.json          text eol=lf diff=json
+*.xml           text eol=lf diff=xml
+*.xml.dist      text eol=lf diff=xml
+*.xsd           text eol=lf diff=xml
+*.neon          text eol=lf diff=yaml
+*.neon.dist     text eol=lf diff=yaml
+composer.lock   text eol=lf diff=json
 
 # files that are not bundled into the "dist" release are marked `export-ignore`
-.gitattributes          export-ignore
-.gitignore              export-ignore
-.editorconfig           export-ignore
-/.github                export-ignore
-/tests                  export-ignore
-/tools                  export-ignore
-/.php-cs-fixer.dist.php export-ignore
-/phpunit.xml.dist       export-ignore
-/psalm.xml.dist         export-ignore
-/.psalm                 export-ignore
-/HISTORY.md             export-ignore
-/CODEOWNERS             export-ignore
-/CONTRIBUTING.md        export-ignore
-/demo                   export-ignore
-/docs/dev               export-ignore
+/CODEOWNERS                     export-ignore
+/CONTRIBUTING.md                export-ignore
+.gitattributes                  export-ignore
+.gitignore                      export-ignore
+.editorconfig                   export-ignore
+/.*                             export-ignore
+/demo                           export-ignore
+/docs/dev                       export-ignore
+/tests                          export-ignore
+/tools                          export-ignore
+/composer-require-checker.json  export-ignore
+/phpunit.dist.xml               export-ignore
+/psalm.xml.dist                 export-ignore
 
-# files that are forced to be exported in "dist" releaes
-/NOTICE                 -export-ignore
-/LICENSE                -export-ignore
-/semver.txt             -export-ignore
+# files that are forced to be exported in "dist" releases
+/README.*       -export-ignore
+/NOTICE         -export-ignore
+/LICENSE        -export-ignore
+/semver.txt     -export-ignore

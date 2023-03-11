@@ -2,8 +2,8 @@
 
 There are multiple demo projects:
 
-* [`symfony`](symfony/README.md)
-  which composer-requires `symfony/symfony:@stable` in a fluid unlocked version.  
+* [`devReq`](devReq/README.md)
+  which composer-dev-requires a testing framework/package `phpunit` and others.  
   The demo is intended to run on every environment.  
   This also means, the output might not be reproducible on independent systems,
   due to the fact that version-locks are fluid, and the composer-lock file is not shipped as code.
@@ -14,6 +14,11 @@ There are multiple demo projects:
 * [`local`](local/README.md)
   which composer-requires a private/local package `cyclonedx/cyclonedx-php-composer-local-demo-dependency` and other locals.  
   The output is _reproducible_, due to the shipped composer-locked versions.
+* [`symfony`](symfony/README.md)
+  which composer-requires `symfony/symfony:@stable` in a fluid unlocked version.  
+  The demo is intended to run on every environment.  
+  This also means, the output might not be reproducible on independent systems,
+  due to the fact that version-locks are fluid, and the composer-lock file is not shipped as code.
 
 Purpose is to demonstrate how _cyclonedx-php-composer_ integrates,
 can be used,

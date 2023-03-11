@@ -1,0 +1,27 @@
+{
+  "symbol-whitelist": [
+    "// the following are definitely shipped with composer",
+    "Composer\\Command\\BaseCommand",
+    "Composer\\Composer",
+    "Composer\\Factory",
+    "Composer\\IO\\IOInterface",
+    "Composer\\Package\\CompletePackageInterface",
+    "Composer\\Package\\PackageInterface",
+    "Composer\\Package\\RootPackage",
+    "Composer\\Package\\RootPackageInterface",
+    "Composer\\PartialComposer",
+    "Composer\\Plugin\\Capability\\CommandProvider",
+    "Composer\\Plugin\\Capable",
+    "Composer\\Plugin\\PluginInterface",
+    "Composer\\Repository\\InstalledRepositoryInterface",
+    "Composer\\Repository\\LockArrayRepository",
+    "Composer\\Semver\\Constraint\\MatchAllConstraint",
+    "Symfony\\Component\\Console\\Command\\Command",
+    "Symfony\\Component\\Console\\Formatter\\OutputFormatter",
+    "Symfony\\Component\\Console\\Input\\InputArgument",
+    "Symfony\\Component\\Console\\Input\\InputDefinition",
+    "Symfony\\Component\\Console\\Input\\InputInterface",
+    "Symfony\\Component\\Console\\Input\\InputOption",
+    "Symfony\\Component\\Console\\Output\\OutputInterface"
+  ]
+}
