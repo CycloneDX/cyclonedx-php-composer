@@ -6,7 +6,7 @@ All notable changes to this project will be documented in this file.
 
 * BREAKING changes
   * Removed support for PHP `<8.0` ([#91] via [#250])
-  * Removed support for PHP `<8.1` (via [#250])
+  * Removed support for PHP `<8.1` ([#128] via [#250])
   * Removed support for Composer `<2.3` ([#153] via [#250])
   * CLI
     * Removed deprecated composer command `make-bom`, call `composer CycloneDX:make-sbom` instead ([#293] via [#309])
