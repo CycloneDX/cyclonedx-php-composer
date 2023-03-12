@@ -67,13 +67,13 @@ Arguments:
 
 Options:
       --output-format=OUTPUT-FORMAT                   Which output format to use.
-                                                      {choices: "XML", "JSON"} [default: "XML"]
+                                                      {choices: "JSON", "XML"} [default: "XML"]
       --output-file=OUTPUT-FILE                       Path to the output file.
                                                       Set to "-" to write to STDOUT [default: "-"]
       --omit=OMIT                                     Omit dependency types.
                                                       {choices: "dev", "plugin"} (multiple values allowed)
       --spec-version=SPEC-VERSION                     Which version of CycloneDX spec to use.
-                                                      {choices: "1.4", "1.3", "1.2", "1.1"} [default: "1.4"]
+                                                      {choices: "1.1", "1.2", "1.3", "1.4"} [default: "1.4"]
       --output-reproducible|--no-output-reproducible  Whether to go the extra mile and make the output reproducible.
                                                       This might result in loss of time- and random-based-values.
       --validate|--no-validate                        Validate the resulting output.

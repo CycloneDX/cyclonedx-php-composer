@@ -102,8 +102,10 @@ class Options
     /**
      * @param scalar[] $values
      */
-    private static function formatChoice(array $values): string
+    private static function formatChoice(array $values, int $sortFlag = \SORT_STRING): string
     {
+        sort($values, $sortFlag);
+
         return '{choices: "'.
             implode('", "', $values).
             '"}';
@@ -147,7 +149,7 @@ class Options
                 null,
                 InputOption::VALUE_REQUIRED,
                 'Which version of CycloneDX spec to use.'.\PHP_EOL.
-                self::formatChoice(array_keys(self::VALUE_SPEC_VERSION_MAP)),
+                self::formatChoice(array_keys(self::VALUE_SPEC_VERSION_MAP), \SORT_NUMERIC),
                 array_search($this->specVersion, self::VALUE_SPEC_VERSION_MAP, true),
                 array_keys(self::VALUE_SPEC_VERSION_MAP)
             ),
