@@ -4,13 +4,15 @@
     "license": "Apache-2.0",
     "type": "composer-plugin",
     "keywords": [
+        "composer",
         "CycloneDX",
-        "SBOM",
-        "software-bill-of-materials",
-        "BOM",
         "bill-of-materials",
+        "BOM",
+        "software-bill-of-materials",
+        "SBOM",
         "package-url",
-        "PURL"
+        "PURL",
+        "SPDX"
     ],
     "authors": [
         {
@@ -37,7 +39,7 @@
     "require": {
         "php": "^8.1",
         "composer-plugin-api": "^2.3",
-        "cyclonedx/cyclonedx-library": "^2.0.0-RC1",
+        "cyclonedx/cyclonedx-library": "2.0.0-RC1",
         "package-url/packageurl-php": "^1.0"
     },
     "require-dev": {
@@ -84,7 +86,7 @@
             "@composer -d tools/phpunit update",
             "@composer update"
         ],
-        "normalize": "@composer -dtools/composer-normalize normalize --diff $PWD/composer.json",
+        "normalize": "@composer -d tools/composer-normalize normalize --diff $PWD/composer.json",
         "test": [
             "@composer validate",
             "@test:psalm",
@@ -94,7 +96,7 @@
             "@test:composer-require-checker",
             "@test:composer-normalize"
         ],
-        "test:composer-normalize": "@composer -dtools/composer-normalize normalize --dry-run --diff $PWD/composer.json",
+        "test:composer-normalize": "@composer -d tools/composer-normalize normalize --dry-run $PWD/composer.json",
         "test:composer-require-checker": [
             "@putenv XDEBUG_MODE=off",
             "@php tools/composer-require-checker/vendor/maglnet/composer-require-checker/bin/composer-require-checker check"
