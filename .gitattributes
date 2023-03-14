@@ -27,6 +27,7 @@ composer.lock   text eol=lf diff=json
 /psalm.xml.dist                 export-ignore
 
 # files that are forced to be exported in "dist" releases
+/HISTORY.*      -export-ignore
 /README.*       -export-ignore
 /NOTICE         -export-ignore
 /LICENSE        -export-ignore
