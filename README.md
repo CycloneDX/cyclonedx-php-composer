@@ -88,19 +88,21 @@ For a demo of _cyclonedx-php-composer_ see the [demo projects][demo_readme].
 
 ## How it works
 
-This composer plugin actually utilizes composer itself, to collect evidence for installed composer packages.  
+This tool utilizes composer itself, to collect evidence for installed composer packages.  
 In terms of evidence collection, actually installed setups are preferred over pure lock file analysis.  
-Required  evidence:
-- composer config/manifest file (e.g. `composer.json` file)
-- any of:
-  - an actual composer setup (e.g. `vendor` directory, after running `composer install` on your project)
-  - a working composer lock file (e.g. `composer.lock` file)
+Required evidence:
+
+* composer config/manifest file (e.g. `composer.json` file)
+* any of:
+  * an actual composer setup (the result after running `composer install [...]` on your project)
+  * a working composer lock file (e.g. `composer.lock` file)
 
 ## Internals
 
-This _Composer_ plugin utilizes the [CycloneDX library][cyclonedx-library] to generate the actual data structures.
+This tool utilizes the [CycloneDX PHP library][cyclonedx-php-library] to generate the actual data structures,
+normalize/serializ them and validate the SBOM result.
 
-This _Composer_ plugin does **not** expose any additional _public_ API or classes - all code is marked as `@internal` and might change without any notice during version upgrades.
+This tool does **not** expose any additional _public_ API or classes - all code is marked as `@internal` and might change without any notice during version upgrades.
 
 ## Contributing
 
@@ -116,7 +118,7 @@ See the [LICENSE][license_file] file for the full license.
 [contributing_file]: https://github.com/CycloneDX/cyclonedx-php-composer/blob/master/CONTRIBUTING.md
 [demo_readme]: https://github.com/CycloneDX/cyclonedx-php-composer/blob/master/demo/README.md
 
-[cyclonedx-library]: https://packagist.org/packages/cyclonedx/cyclonedx-library
+[cyclonedx-php-library]: https://packagist.org/packages/cyclonedx/cyclonedx-library
 
 [shield_gh-workflow-test]: https://img.shields.io/github/actions/workflow/status/CycloneDX/cyclonedx-php-composer/php.yml?branch=master&logo=GitHub&logoColor=white "build"
 [shield_packagist-version]: https://img.shields.io/packagist/v/cyclonedx/cyclonedx-php-composer?logo=Packagist&logoColor=white "packagist"
