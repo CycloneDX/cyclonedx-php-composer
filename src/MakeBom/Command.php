@@ -51,8 +51,8 @@ class Command extends BaseCommand
      * @throws LogicException When the command name is empty
      */
     public function __construct(
-        private readonly Options $options,
         string $name,
+        private readonly Options $options,
         private readonly ComposerFactory $composerFactory,
     ) {
         parent::__construct($name);

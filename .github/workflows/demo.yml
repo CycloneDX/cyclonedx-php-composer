@@ -85,7 +85,7 @@ jobs:
         include:
           - # test with lowest combination
             php: "8.1"          # lowest
-            composer: "2.3.0"   # lowest
+            composer: "2.3"     # lowest
             # any other props
             spec-version: "1.4"
             subject: laravel-7.12.0

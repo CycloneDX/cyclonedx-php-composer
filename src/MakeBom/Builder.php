@@ -78,18 +78,17 @@ class Builder
 
         // region packages & components
         /**
-         * @psalm-var list<PackageInterface> $packages
+         * @var PackageInterface[] $packages
          *
          * @psalm-suppress MixedArgument
          * @psalm-suppress UnnecessaryVarAnnotation
          */
         $packages = array_values(
             method_exists($packagesRepo, 'getCanonicalPackages')
-            // since composer 2.4
             ? $packagesRepo->getCanonicalPackages()
             : $packagesRepo->getPackages()
         );
-        /** @psalm-var array<string, Models\Component> */
+        /** @psalm-var array<string, Models\Component> $components */
         $components = [];
         foreach ($packages as $package) {
             if ($this->omitPlugin && \in_array($package->getType(), self::ComposerPackageType_Plugin)) {
@@ -101,17 +100,17 @@ class Builder
         // endregion packages & components
 
         // region mark/omit dev-dependencies
-        $devDependencies = $packagesRepo instanceof InstalledRepositoryInterface
+        /** @var string[] $devDependencies */
+        $devDependencies = method_exists($packagesRepo, 'getDevPackageNames')
             ? $packagesRepo->getDevPackageNames()
             : $composer->getLocker()->getDevPackageNames();
         foreach ($rootPackage->getDevRequires() as $required) {
             $requiredPackage = $packagesRepo->findPackage($required->getTarget(), $required->getConstraint());
-            if (null === $requiredPackage) {
-                continue;
+            if (null !== $requiredPackage) {
+                $devDependencies[] = $requiredPackage->getName();
             }
-            $devDependencies[] = $requiredPackage->getName();
-            unset($required, $requiredPackage);
         }
+        unset($required, $requiredPackage);
         if ($withDevReqs) {
             foreach (array_unique($devDependencies) as $packageName) {
                 if (isset($components[$packageName])) {
@@ -124,17 +123,12 @@ class Builder
                 unset($components[$packageName]);
             }
         }
-        unset($devDependencies, $packageName);
+        unset($packageName, $devDependencies);
         // endregion mark dev-dependencies
 
         // region dependency graph
         /** ALL Components, also the RootComponent, to make circular dependencies visible */
         $allComponents = [$rootPackage->getName() => $rootComponent] + $components;
-        /**
-         * @var PackageInterface $package
-         *
-         * @psalm-suppress UnnecessaryVarAnnotation -- as it is needed for some IDE
-         */
         foreach ($packages as $package) {
             $component = $allComponents[$package->getName()] ?? null;
             if (null === $component) {
@@ -150,8 +144,8 @@ class Builder
                     $component->getDependencies()->addItems($dependency->getBomRef());
                 }
             }
-            unset($package, $component, $required, $dependency);
         }
+        unset($package, $component, $required, $dependency);
         foreach ([...$rootPackage->getRequires(), ...$rootPackage->getDevRequires()] as $required) {
             $requiredPackage = $packagesRepo->findPackage($required->getTarget(), $required->getConstraint());
             if (null === $requiredPackage) {
@@ -162,7 +156,7 @@ class Builder
                 $rootComponent->getDependencies()->addItems($dependency->getBomRef());
             }
         }
-        unset($allComponents);
+        unset($required, $requiredPackage, $dependency, $allComponents);
         // endregion dependency graph
 
         // region finalize components
@@ -179,7 +173,10 @@ class Builder
      */
     private function createComponentFromRootPackage(RootPackageInterface $package): Models\Component
     {
-        $component = $this->createComponentFromPackage($package, $this->mainComponentVersion);
+        $component = $this->createComponentFromPackage(
+            $package,
+            $this->mainComponentVersion
+        );
 
         if (RootPackage::DEFAULT_PRETTY_VERSION === $component->getVersion()) {
             $component->setVersion(null);
@@ -197,11 +194,11 @@ class Builder
      */
     private function getGroupAndName(string $composerPackageName): array
     {
-        $groupAndName = explode('/', $composerPackageName, 2);
+        $parts = explode('/', $composerPackageName, 2);
 
-        return 2 === \count($groupAndName)
-            ? [$groupAndName[0], $groupAndName[1]]
-            : [null, $groupAndName[0]];
+        return 2 === \count($parts)
+            ? [$parts[0], $parts[1]]
+            : [null, $parts[0]];
     }
 
     /**
