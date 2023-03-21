@@ -25,6 +25,10 @@ on:
     # this means: at 23:42 on Fridays
     - cron: '42 23 * * 5'
 
+  concurrency:
+    group: ${{ github.workflow }}-${{ github.ref }}
+    cancel-in-progress: true
+
 env:
   PHP_VERSION_LATEST: "8.2"
   PHP_PROJECT_EXT: dom,filter,json,libxml # via `composer info -pt` and removed dev req
