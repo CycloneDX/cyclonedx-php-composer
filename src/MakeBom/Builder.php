@@ -83,11 +83,9 @@ class Builder
          * @psalm-suppress MixedArgument
          * @psalm-suppress UnnecessaryVarAnnotation
          */
-        $packages = array_values(
-            method_exists($packagesRepo, 'getCanonicalPackages')
+        $packages = method_exists($packagesRepo, 'getCanonicalPackages')
             ? $packagesRepo->getCanonicalPackages()
-            : $packagesRepo->getPackages()
-        );
+            : $packagesRepo->getPackages();
         /** @psalm-var array<string, Models\Component> $components */
         $components = [];
         foreach ($packages as $package) {
