@@ -51,8 +51,8 @@ class Command extends BaseCommand
      * @throws LogicException When the command name is empty
      */
     public function __construct(
-        private readonly Options $options,
         string $name,
+        private readonly Options $options,
         private readonly ComposerFactory $composerFactory,
     ) {
         parent::__construct($name);
@@ -78,14 +78,11 @@ class Command extends BaseCommand
             $this->options->setFromInput($input);
         } catch (Throwable $error) {
             $io->writeErrorRaw((string) $error, true, IOInterface::DEBUG);
-            $io->writeError(sprintf(
-                '<error>InputError: %s</error>',
-                OutputFormatter::escape($error->getMessage())
-            ));
+            $io->writeError(sprintf('<error>InputError: %s</error>', OutputFormatter::escape($error->getMessage())));
 
             return self::INVALID;
         }
-        $io->writeErrorRaw(__METHOD__.' Options: '.var_export($this->options, true), true, IOInterface::DEBUG);
+        $io->writeErrorRaw(__METHOD__.' Options: '.var_export($this->options, true), verbosity: IOInterface::DEBUG);
 
         try {
             $spec = SpecFactory::makeForVersion($this->options->specVersion);
@@ -94,10 +91,7 @@ class Command extends BaseCommand
             $this->writeBom($bom, $io);
         } catch (Throwable $error) {
             $io->writeErrorRaw((string) $error, true, IOInterface::DEBUG);
-            $io->writeError(sprintf(
-                '<error>Error: %s</error>',
-                OutputFormatter::escape($error->getMessage())
-            ));
+            $io->writeError(sprintf('<error>Error: %s</error>', OutputFormatter::escape($error->getMessage())));
 
             return self::FAILURE;
         }
@@ -122,7 +116,9 @@ class Command extends BaseCommand
         $projectDir = null === $composerFile
              ? null
              : \dirname($composerFile);
-        $io->writeError(sprintf('<info>composerFile=%s projectDir=%s</info>', OutputFormatter::escape($composerFile ?? ''), OutputFormatter::escape($projectDir ?? '')), verbosity: IOInterface::DEBUG);
+        $io->writeError(
+            sprintf('<info>composerFile=%s projectDir=%s</info>', OutputFormatter::escape($composerFile ?? ''), OutputFormatter::escape($projectDir ?? '')),
+            verbosity: IOInterface::DEBUG);
         $subjectComposer = $this->composerFactory->createComposer($io, $composerFile, cwd: $projectDir, fullLoad: true);
         /** @psalm-suppress RedundantConditionGivenDocblockType -- as with lowest-compatible dependencies this is needed  */
         \assert($subjectComposer instanceof \Composer\Composer);
@@ -154,7 +150,7 @@ class Command extends BaseCommand
             Format::XML => new Serialization\XmlSerializer(new Serialization\DOM\NormalizerFactory($spec)),
             default => throw new DomainException("unsupported format: {$this->options->outputFormat->name}"),
         };
-        $io->writeErrorRaw('using '.$serializer::class, true, IOInterface::DEBUG);
+        $io->writeErrorRaw('using '.$serializer::class, verbosity: IOInterface::DEBUG);
 
         return $serializer->serialize($bom, prettyPrint: true);
     }
@@ -176,7 +172,7 @@ class Command extends BaseCommand
             Format::XML => new Validators\XmlValidator($spec),
             default => throw new DomainException("unsupported format: {$this->options->outputFormat->name}"),
         };
-        $io->writeErrorRaw('using '.$validator::class, true, IOInterface::DEBUG);
+        $io->writeErrorRaw('using '.$validator::class, verbosity: IOInterface::DEBUG);
 
         $validationError = $validator->validateString($bom);
         if (null !== $validationError) {
@@ -205,12 +201,7 @@ class Command extends BaseCommand
         }
 
         $io->writeError(
-            sprintf(
-                '<info>wrote %d bytes to %s</info>',
-                $written,
-                OutputFormatter::escape($outputFile)
-            ),
-            verbosity: IOInterface::VERY_VERBOSE
-        );
+            sprintf('<info>wrote %d bytes to %s</info>', $written, OutputFormatter::escape($outputFile)),
+            verbosity: IOInterface::VERY_VERBOSE);
     }
 }
