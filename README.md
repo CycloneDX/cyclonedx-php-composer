@@ -83,6 +83,8 @@ Options:
       --mc-version=MC-VERSION                         Version of the main component.
                                                       This will override auto-detection.
   -h, --help                                          Display help for the given command.
+  -q, --quiet                                         Do not output any message
+  -v|vv|vvv, --verbose                                Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug
 ```
 
 ## Demo
