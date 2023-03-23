@@ -19,27 +19,28 @@ final class BuilderTest extends TestCase {
 
     public function testCreateSbomFromComposer (): void {
         $builder = new Builder(false, false, null);
-        $composer = $this->createMock(Composer::class);
+        $composer = $this->createMock(Composer::class); // use actual
         $sbom = $builder->createSbomFromComposer($composer);
         self::assertFalse($sbom);
     }
+
     public function testCreateSbomFromComposerOmittingDev (): void {
         $builder = new Builder(true, false, null);
-        $composer = $this->createMock(Composer::class);
+        $composer = $this->createMock(Composer::class); // use actual
         $sbom = $builder->createSbomFromComposer($composer);
         self::assertFalse($sbom);
     }
 
     public function testCreateSbomFromComposerOmittingPlugins (): void {
         $builder = new Builder(false, true, null);
-        $composer = $this->createMock(Composer::class);
+        $composer = $this->createMock(Composer::class); // use actual
         $sbom = $builder->createSbomFromComposer($composer);
         self::assertFalse($sbom);
     }
 
     public function testCreateSbomFromComposerMCVersionOverride (): void {
         $builder = new Builder(false, false, 'v1.0-fake');
-        $composer = $this->createMock(Composer::class);
+        $composer = $this->createMock(Composer::class); // use actual
         $sbom = $builder->createSbomFromComposer($composer);
         self::assertFalse($sbom);
     }
@@ -48,20 +49,20 @@ final class BuilderTest extends TestCase {
 
     // region createToolsFromComposer
     public function testCreateToolsFromComposer (): void {
-        $composer = $this->createMock(Composer::class);
+        $composer = $this->createMock(Composer::class); // use actual
         $tools = [...Builder::createToolsFromComposer($composer, null, false)];
         self::assertFalse($tools);
     }
 
     public function testCreateToolsFromComposerVersionOverride (): void {
-        $composer = $this->createMock(Composer::class);
+        $composer = $this->createMock(Composer::class); // use actual
         $tools = [...Builder::createToolsFromComposer($composer, 'v1.0-fake', false)];
         self::assertFalse($tools);
 
     }
 
     public function testCreateToolsFromComposerExcludeLibs (): void {
-        $composer = $this->createMock(Composer::class);
+        $composer = $this->createMock(Composer::class); // use actual
         $tools = [...Builder::createToolsFromComposer($composer, null, true)];
         self::assertFalse($tools);
     }
