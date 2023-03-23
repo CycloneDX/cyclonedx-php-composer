@@ -138,7 +138,7 @@ class Command extends BaseCommand
 
         $io->writeError('<info>fetch tools...</info>', verbosity: IOInterface::VERBOSE);
         $bom->getMetadata()->getTools()->addItems(
-            ...$builder->createToolsFromComposer(
+            ...Builder::createToolsFromComposer(
                 $this->requireComposer(),
                 $this->options->getToolsVersionOverride(),
                 $this->options->getToolsExcludeLibs()

@@ -24,6 +24,7 @@ declare(strict_types=1);
 namespace CycloneDX\Composer\MakeBom;
 
 use Composer\Composer;
+use Composer\Package\BasePackage;
 use Composer\Package\CompletePackageInterface;
 use Composer\Package\PackageInterface;
 use Composer\Package\RootPackage;
@@ -73,7 +74,7 @@ class Builder
         $rootComponent = $this->createComponentFromRootPackage($rootPackage);
 
         $withDevReqs = false === $this->omitDev;
-        $packagesRepo = $this->getPackageRepo($composer, $withDevReqs);
+        $packagesRepo = self::getPackageRepo($composer, $withDevReqs);
 
         // region packages & components
         /**
@@ -188,8 +189,9 @@ class Builder
      * return tuple: ($group:?string, $name:string).
      *
      * @psalm-return array{0:null|string, 1:string}
+     * @psalm-pure
      */
-    private function getGroupAndName(string $composerPackageName): array
+    private static function getGroupAndName(string $composerPackageName): array
     {
         $parts = explode('/', $composerPackageName, 2);
 
@@ -203,7 +205,7 @@ class Builder
      */
     private function createComponentFromPackage(PackageInterface $package, ?string $versionOverride = null): Models\Component
     {
-        [$group, $name] = $this->getGroupAndName($package->getName());
+        [$group, $name] = self::getGroupAndName($package->getName());
         $version = $versionOverride ?? $package->getFullPrettyVersion();
         $distReference = $package->getDistReference();
         $sourceReference = $package->getSourceReference();
@@ -214,7 +216,7 @@ class Builder
         $component->setVersion($version);
         $component->getHashes()->set(Enums\HashAlgorithm::SHA_1, $package->getDistSha1Checksum());
         $component->getExternalReferences()->addItems(
-            ...$this->createExternalReferencesFromPackage($package)
+            ...self::createExternalReferencesFromPackage($package)
         );
 
         if (null !== $distReference && '' !== $distReference) {
@@ -274,7 +276,7 @@ class Builder
      *
      * @psalm-suppress MissingThrowsDocblock
      */
-    private function createExternalReferencesFromPackage(PackageInterface $package): Generator
+    private static function createExternalReferencesFromPackage(PackageInterface $package): Generator
     {
         foreach ($package->getDistUrls() as $distUrl) {
             yield new Models\ExternalReference(
@@ -318,7 +320,7 @@ class Builder
     /**
      * @throws Throwable when the repo could not be fetched
      */
-    private function getPackageRepo(Composer $composer, bool $withDevReqs): InstalledRepositoryInterface|LockArrayRepository
+    private static function getPackageRepo(Composer $composer, bool $withDevReqs): InstalledRepositoryInterface|LockArrayRepository
     {
         $packagesRepo = $composer->getRepositoryManager()->getLocalRepository();
         if (!$packagesRepo->isFresh()) {
@@ -336,9 +338,9 @@ class Builder
      *
      * @psalm-suppress MissingThrowsDocblock
      */
-    public function createToolsFromComposer(
+    public static function createToolsFromComposer(
         Composer $composer,
-        ?string $versionOverride = null, bool $excludeLibs = false
+        ?string $versionOverride, bool $excludeLibs
     ): Generator {
         $packageNames = [
             'cyclonedx/cyclonedx-php-composer',
@@ -348,14 +350,14 @@ class Builder
         }
 
         try {
-            $packagesRepo = $this->getPackageRepo($composer, true);
+            $packagesRepo = self::getPackageRepo($composer, true);
         } catch (\Throwable) {
             $packagesRepo = new LockArrayRepository();
         }
 
         foreach ($packageNames as $packageName) {
             try {
-                yield $this->createToolFromPackage(
+                yield self::createToolFromPackage(
                     $packagesRepo->findPackage($packageName, new MatchAllConstraint())
                     ?? throw new ValueError("package not found: $packageName"),
                     $versionOverride
@@ -369,9 +371,9 @@ class Builder
     /**
      * @psalm-suppress MissingThrowsDocblock
      */
-    private function createToolFromPackage(PackageInterface $package, ?string $versionOverride = null): Models\Tool
+    private static function createToolFromPackage(PackageInterface $package, ?string $versionOverride = null): Models\Tool
     {
-        [$group, $name] = $this->getGroupAndName($package->getName());
+        [$group, $name] = self::getGroupAndName($package->getName());
 
         $tool = new Models\Tool();
         $tool->setName($name);
@@ -379,7 +381,7 @@ class Builder
         $tool->setVersion($versionOverride ?? $package->getFullPrettyVersion());
         $tool->getHashes()->set(Enums\HashAlgorithm::SHA_1, $package->getDistSha1Checksum());
         $tool->getExternalReferences()->addItems(
-            ...$this->createExternalReferencesFromPackage($package)
+            ...self::createExternalReferencesFromPackage($package)
         );
 
         return $tool;
