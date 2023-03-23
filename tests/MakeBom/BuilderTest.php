@@ -40,7 +40,23 @@ use UnexpectedValueException;
 #[UsesClass(Plugin::class)]
 final class BuilderTest extends TestCase
 {
-    private const TempSetupDir = __DIR__.'/../_tmp/BuilderTest_setup';
+    /**
+     * The temp dir must be in a controlled depth/structure so that certain operations are working as expected.
+     * But the temp dir must be outside the 'tests' folder, so that phpunit does not scan them.
+     */
+    private static function getTempDir(): string
+    {
+        $tempSetupDir = __DIR__.'/../../.tmp/BuilderTest/setup';
+        if (is_dir($tempSetupDir) || mkdir($tempSetupDir, recursive: true)) {
+            return $tempSetupDir;
+        }
+        throw new UnexpectedValueException('failed to create tempDir: '.$tempSetupDir);
+    }
+
+    public static function tearDownAfterClass(): void
+    {
+        // !! TempDir is intentionally not cleared, to allow after-test debugging
+    }
 
     public function testCreateRandomBomSerialNumberHasCorrectFormat(): void
     {
@@ -162,10 +178,9 @@ final class BuilderTest extends TestCase
             false,
         ];
 
-        // !! TempDir is intentionally not cleared, to allow after-test debugging
-        @mkdir(self::TempSetupDir, recursive: true);
+        $tempSetupDir = self::getTempDir();
 
-        $tempDir = tempnam(self::TempSetupDir, 'notLocked_notInstalled_');
+        $tempDir = tempnam($tempSetupDir, 'notLocked_notInstalled_');
         yield basename($tempDir) => [
             static fn () => unlink($tempDir) &&
                 mkdir($tempDir, recursive: true) &&
@@ -176,7 +191,7 @@ final class BuilderTest extends TestCase
             false,
         ];
 
-        $tempDir = tempnam(self::TempSetupDir, 'locked_installed_');
+        $tempDir = tempnam($tempSetupDir, 'locked_installed_');
         yield basename($tempDir) => [
             static fn () => unlink($tempDir) &&
                 mkdir($tempDir, recursive: true) &&
@@ -189,7 +204,7 @@ final class BuilderTest extends TestCase
             false,
         ];
 
-        $tempDir = tempnam(self::TempSetupDir, 'notLocked_installed_');
+        $tempDir = tempnam($tempSetupDir, 'notLocked_installed_');
         yield basename($tempDir) => [
             static fn () => unlink($tempDir) &&
                 mkdir($tempDir, recursive: true) &&
