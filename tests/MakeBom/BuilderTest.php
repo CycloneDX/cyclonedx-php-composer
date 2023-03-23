@@ -15,6 +15,12 @@ use PHPUnit\Framework\Attributes\RunInSeparateProcess;
 #[CoversClass(Builder::class)]
 final class BuilderTest extends TestCase {
 
+    public function testCreateRandomBomSerialNumberHasCorrectFormat (): void {
+        $uuid4v1Format = "[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-4[0-9A-Fa-f]{3}-[89AB][0-9A-Fa-f]{3}-[0-9A-Fa-f]{12}";
+        $actual = Builder::createRandomBomSerialNumber();
+        self::assertMatchesRegularExpression("/^urn:uuid:$uuid4v1Format$/", $actual);
+    }
+
     // region createSbomFromComposer
 
     public function testCreateSbomFromComposer (): void {
