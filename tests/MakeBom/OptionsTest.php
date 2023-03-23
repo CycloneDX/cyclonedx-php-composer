@@ -30,6 +30,7 @@ use DomainException;
 use Generator;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\RunInSeparateProcess;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 use Symfony\Component\Console\Input\StringInput;
@@ -213,5 +214,38 @@ final class OptionsTest extends TestCase
             RuntimeException::class,
             '/option requires a value/i',
         ];
+    }
+
+
+    #[RunInSeparateProcess]
+    #[DataProvider('dpGetToolsExcludeLibs')]
+    public function testGetToolsExcludeLibs(string $envVal, bool $expected): void {
+        if ( false === putenv("CDX_CP_TOOLS_EXCLUDE_LIBS=$envVal") ) {
+         $this->markTestSkipped('putenv() failed ');
+        }
+        $actual = (new Options())->getToolsExcludeLibs();
+        self::assertSame($expected, $actual);
+    }
+
+    public static function dpGetToolsExcludeLibs (): Generator {
+        yield 'empty -> False' => ['', false];
+        yield '0 -> False' => ['0', false];
+        yield '1 -> True' => ['1', true];
+    }
+
+
+    #[RunInSeparateProcess]
+    #[DataProvider('dpGetToolsVersionOverride')]
+    public function testGetToolsVersionOverride(string $envVal, ?string $expected): void {
+        if ( false === putenv("CDX_CP_TOOLS_VERSION_OVERRIDE=$envVal") ) {
+            $this->markTestSkipped('putenv() failed ');
+        }
+        $actual = (new Options())->getToolsVersionOverride();
+        self::assertSame($expected, $actual);
+    }
+
+    public static function dpGetToolsVersionOverride () : Generator{
+        yield 'empty -> null' => ['', null];
+        yield 'foo' => ['foo', 'foo'];
     }
 }
