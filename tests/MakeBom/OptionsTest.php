@@ -216,35 +216,37 @@ final class OptionsTest extends TestCase
         ];
     }
 
-
     #[RunInSeparateProcess]
     #[DataProvider('dpGetToolsExcludeLibs')]
-    public function testGetToolsExcludeLibs(string $envVal, bool $expected): void {
-        if ( false === putenv("CDX_CP_TOOLS_EXCLUDE_LIBS=$envVal") ) {
-         $this->markTestSkipped('putenv() failed ');
+    public function testGetToolsExcludeLibs(string $envVal, bool $expected): void
+    {
+        if (false === putenv("CDX_CP_TOOLS_EXCLUDE_LIBS=$envVal")) {
+            $this->markTestSkipped('putenv() failed ');
         }
         $actual = (new Options())->getToolsExcludeLibs();
         self::assertSame($expected, $actual);
     }
 
-    public static function dpGetToolsExcludeLibs (): Generator {
+    public static function dpGetToolsExcludeLibs(): Generator
+    {
         yield 'empty -> False' => ['', false];
         yield '0 -> False' => ['0', false];
         yield '1 -> True' => ['1', true];
     }
 
-
     #[RunInSeparateProcess]
     #[DataProvider('dpGetToolsVersionOverride')]
-    public function testGetToolsVersionOverride(string $envVal, ?string $expected): void {
-        if ( false === putenv("CDX_CP_TOOLS_VERSION_OVERRIDE=$envVal") ) {
+    public function testGetToolsVersionOverride(string $envVal, ?string $expected): void
+    {
+        if (false === putenv("CDX_CP_TOOLS_VERSION_OVERRIDE=$envVal")) {
             $this->markTestSkipped('putenv() failed ');
         }
         $actual = (new Options())->getToolsVersionOverride();
         self::assertSame($expected, $actual);
     }
 
-    public static function dpGetToolsVersionOverride () : Generator{
+    public static function dpGetToolsVersionOverride(): Generator
+    {
         yield 'empty -> null' => ['', null];
         yield 'foo' => ['foo', 'foo'];
     }

@@ -24,7 +24,6 @@ declare(strict_types=1);
 namespace CycloneDX\Composer\MakeBom;
 
 use Composer\Composer;
-use Composer\Package\BasePackage;
 use Composer\Package\CompletePackageInterface;
 use Composer\Package\PackageInterface;
 use Composer\Package\RootPackage;
@@ -189,6 +188,7 @@ class Builder
      * return tuple: ($group:?string, $name:string).
      *
      * @psalm-return array{0:null|string, 1:string}
+     *
      * @psalm-pure
      */
     private static function getGroupAndName(string $composerPackageName): array

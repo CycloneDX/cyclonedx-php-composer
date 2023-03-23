@@ -41,17 +41,17 @@ class Plugin implements PluginInterface, Capable, CommandProvider
 {
     public function activate(Composer $composer, IOInterface $io): void
     {
-        /* nothing to do, but required by the `PluginInterface`  */
+        /* nothing to do, but required by the `PluginInterface` */
     }
 
     public function deactivate(Composer $composer, IOInterface $io): void
     {
-        /* nothing to do, but required by the `PluginInterface`  */
+        /* nothing to do, but required by the `PluginInterface` */
     }
 
     public function uninstall(Composer $composer, IOInterface $io): void
     {
-        /* nothing to do, but required by the `PluginInterface`  */
+        /* nothing to do, but required by the `PluginInterface` */
     }
 
     public function getCapabilities(): array
