@@ -13,6 +13,9 @@
 A plugin for PHP's _[Composer](https://getcomposer.org/)_
 that generates Software Bill of Materials (SBOM) in _[CycloneDX](https://cyclonedx.org/)_ format.
 
+Based on [OWASP Software Component Verification Standard for Software Bill of Materials](https://scvs.owasp.org/scvs/v2-software-bill-of-materials/)'s
+criteria, this tool is capable of producing SBOM documents almost passing Level-2 (only signing needs to be done externally).
+
 The resulting SBOM documents follow [official specifications and standards](https://github.com/CycloneDX/specification),
 and might have properties following [`cdx:composer` Namespace Taxonomy](https://github.com/CycloneDX/cyclonedx-property-taxonomy/blob/main/cdx/composer.md)
 .
