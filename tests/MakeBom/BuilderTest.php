@@ -67,36 +67,60 @@ final class BuilderTest extends TestCase
 
     // region createSbomFromComposer
 
-    public function testCreateSbomFromComposer(): void
+    #[DataProvider('dpCreateSbomFromComposer')]
+    public function testCreateSbomFromComposer(callable $setup, bool $locked, bool $installed)
     {
-        $builder = new Builder(false, false, null);
-        $composer = $this->createMock(Composer::class); // use actual
-        $sbom = $builder->createSbomFromComposer($composer);
-        self::assertFalse($sbom, '@TODO');
-    }
-
-    public function testCreateSbomFromComposerOmittingDev(): void
-    {
+        $setupManifest = $setup();
+        $composer = (new ComposerFactory())->createComposer(new NullIO(), $setupManifest, cwd: \dirname($setupManifest));
         $builder = new Builder(true, false, null);
-        $composer = $this->createMock(Composer::class); // use actual
+
         $sbom = $builder->createSbomFromComposer($composer);
+
         self::assertFalse($sbom, '@TODO');
     }
 
-    public function testCreateSbomFromComposerOmittingPlugins(): void
+    #[DataProvider('dpCreateSbomFromComposer')]
+    public function testCreateSbomFromComposerOmittingDev(callable $setup, bool $locked, bool $installed)
     {
-        $builder = new Builder(false, true, null);
-        $composer = $this->createMock(Composer::class); // use actual
+        $setupManifest = $setup();
+        $composer = (new ComposerFactory())->createComposer(new NullIO(), $setupManifest, cwd: \dirname($setupManifest));
+        $builder = new Builder(true, false, null);
+
         $sbom = $builder->createSbomFromComposer($composer);
+
         self::assertFalse($sbom, '@TODO');
     }
 
-    public function testCreateSbomFromComposerMCVersionOverride(): void
+    #[DataProvider('dpCreateSbomFromComposer')]
+    public function testCreateSbomFromComposerOmittingPlugins(callable $setup, bool $locked, bool $installed)
     {
-        $builder = new Builder(false, false, 'v1.0-fake');
-        $composer = $this->createMock(Composer::class); // use actual
+        $setupManifest = $setup();
+        $composer = (new ComposerFactory())->createComposer(new NullIO(), $setupManifest, cwd: \dirname($setupManifest));
+        $builder = new Builder(true, false, null);
+
         $sbom = $builder->createSbomFromComposer($composer);
+
         self::assertFalse($sbom, '@TODO');
+    }
+
+    #[DataProvider('dpCreateSbomFromComposer')]
+    public function testCreateSbomFromComposerMCVersionOverride(callable $setup, bool $locked, bool $installed)
+    {
+        $setupManifest = $setup();
+        $composer = (new ComposerFactory())->createComposer(new NullIO(), $setupManifest, cwd: \dirname($setupManifest));
+        $builder = new Builder(true, false, null);
+
+        $sbom = $builder->createSbomFromComposer($composer);
+
+        self::assertFalse($sbom, '@TODO');
+    }
+
+    /**
+     * @psalm-return \Generator<string, array{0:callable():string, 1:bool, 2:bool}>
+     */
+    public static function dpCreateSbomFromComposer(): Generator
+    {
+        yield from self::dpForSetup('testCreateSbomFromComposer');
     }
 
     // endregion createSbomFromComposer
@@ -116,12 +140,27 @@ final class BuilderTest extends TestCase
             static fn (Models\Tool $t): bool => 'cyclonedx' === $t->getVendor() && 'cyclonedx-php-composer' === $t->getName()
         );
         self::assertCount(1, $fTools, 'missing self');
+        /** @var Models\Tool $fTool */
+        $fTool = reset($fTools);
+        if ($installed || $locked) {
+            self::assertMatchesRegularExpression('/^v?4\./', $fTool->getVersion());
+        } else {
+            self::assertNull($fTool->getVersion());
+        }
 
         $fTools = array_filter(
             $tools,
             static fn (Models\Tool $t): bool => 'cyclonedx' === $t->getVendor() && 'cyclonedx-library' === $t->getName()
         );
         self::assertCount(1, $fTools, 'missing library');
+        /** @var Models\Tool $fTool */
+        $fTool = reset($fTools);
+        if ($installed || $locked) {
+            self::assertMatchesRegularExpression('/^v?2\./', $fTool->getVersion());
+        } else {
+            self::assertNull($fTool->getVersion());
+        }
+
     }
 
     #[DataProvider('dpCreateToolsFromComposer')]
@@ -138,13 +177,19 @@ final class BuilderTest extends TestCase
             static fn (Models\Tool $t): bool => 'cyclonedx' === $t->getVendor() && 'cyclonedx-php-composer' === $t->getName()
         );
         self::assertCount(1, $fTools, 'missing self');
-        self::assertSame($versionOverride, $fTools[0]->getVersion());
+        /** @var Models\Tool $fTool */
+        $fTool = reset($fTools);
+        self::assertSame($versionOverride, $fTool->getVersion());
 
         $fTools = array_filter(
             $tools,
             static fn (Models\Tool $t): bool => 'cyclonedx' === $t->getVendor() && 'cyclonedx-library' === $t->getName()
         );
         self::assertCount(1, $fTools, 'missing library');
+        /** @var Models\Tool $fTool */
+        $fTool = reset($fTools);
+        self::assertSame($versionOverride, $fTool->getVersion());
+
     }
 
     #[DataProvider('dpCreateToolsFromComposer')]
@@ -169,8 +214,18 @@ final class BuilderTest extends TestCase
      */
     public static function dpCreateToolsFromComposer(): Generator
     {
-        $setupManifest = __DIR__.'/../_data/setup/testCreateToolsFromComposer/composer.json';
-        $setupLock = __DIR__.'/../_data/setup/testCreateToolsFromComposer/composer.lock';
+        yield from self::dpForSetup('testCreateToolsFromComposer');
+    }
+
+    // endregion createToolsFromComposer
+
+    /**
+     * @psalm-return \Generator<string, array{0:callable():string, 1:bool, 2:bool}>
+     */
+    private static function dpForSetup(string $setupTemplate): Generator
+    {
+        $setupManifest =  __DIR__."/../_data/setup/$setupTemplate/composer.json";
+        $setupLock = __DIR__."/../_data/setup/$setupTemplate/composer.lock";
 
         yield 'locked NotInstalled' => [
             static fn () => $setupManifest,
@@ -183,10 +238,10 @@ final class BuilderTest extends TestCase
         $tempDir = tempnam($tempSetupDir, 'notLocked_notInstalled_');
         yield basename($tempDir) => [
             static fn () => unlink($tempDir) &&
-                mkdir($tempDir, recursive: true) &&
-                copy($setupManifest, "$tempDir/composer.json")
-                    ? "$tempDir/composer.json"
-                    : throw new UnexpectedValueException("setup failed: $tempDir"),
+            mkdir($tempDir, recursive: true) &&
+            copy($setupManifest, "$tempDir/composer.json")
+                ? "$tempDir/composer.json"
+                : throw new UnexpectedValueException("setup failed: $tempDir"),
             false,
             false,
         ];
@@ -194,30 +249,28 @@ final class BuilderTest extends TestCase
         $tempDir = tempnam($tempSetupDir, 'locked_installed_');
         yield basename($tempDir) => [
             static fn () => unlink($tempDir) &&
-                mkdir($tempDir, recursive: true) &&
-                copy($setupManifest, "$tempDir/composer.json") &&
-                copy($setupLock, "$tempDir/composer.lock") &&
-                false !== shell_exec('composer -d '.escapeshellarg($tempDir).' install --no-interaction --no-progress -q')
-                    ? "$tempDir/composer.json"
-                    : throw new UnexpectedValueException("setup failed: $tempDir"),
-            false,
-            false,
+            mkdir($tempDir, recursive: true) &&
+            copy($setupManifest, "$tempDir/composer.json") &&
+            copy($setupLock, "$tempDir/composer.lock") &&
+            false !== shell_exec('composer -d '.escapeshellarg($tempDir).' install --no-interaction --no-progress -q')
+                ? "$tempDir/composer.json"
+                : throw new UnexpectedValueException("setup failed: $tempDir"),
+            true,
+            true,
         ];
 
         $tempDir = tempnam($tempSetupDir, 'notLocked_installed_');
         yield basename($tempDir) => [
             static fn () => unlink($tempDir) &&
-                mkdir($tempDir, recursive: true) &&
-                copy($setupManifest, "$tempDir/composer.json") &&
-                copy($setupLock, "$tempDir/composer.lock") &&
-                false !== shell_exec('composer -d '.escapeshellarg($tempDir).' install --no-interaction -q') &&
-                unlink("$tempDir/composer.lock")
-                    ? "$tempDir/composer.json"
-                    : throw new UnexpectedValueException("setup failed: $tempDir"),
-            true,
+            mkdir($tempDir, recursive: true) &&
+            copy($setupManifest, "$tempDir/composer.json") &&
+            copy($setupLock, "$tempDir/composer.lock") &&
+            false !== shell_exec('composer -d '.escapeshellarg($tempDir).' install --no-interaction -q') &&
+            unlink("$tempDir/composer.lock")
+                ? "$tempDir/composer.json"
+                : throw new UnexpectedValueException("setup failed: $tempDir"),
+            false,
             true,
         ];
     }
-
-    // endregion createToolsFromComposer
 }
