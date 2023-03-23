@@ -363,7 +363,11 @@ class Builder
                     $versionOverride
                 );
             } catch (\Throwable) {
-                yield (new Models\Tool())->setName($packageName);
+                [$group, $name] = self::getGroupAndName($packageName);
+                yield (new Models\Tool())
+                    ->setName($name)
+                    ->setVendor($group)
+                    ->setVersion($versionOverride);
             }
         }
     }
