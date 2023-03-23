@@ -23,13 +23,13 @@ declare(strict_types=1);
 
 namespace CycloneDX\Tests\MakeBom;
 
-use Composer\Composer;
 use Composer\Factory as ComposerFactory;
 use Composer\IO\NullIO;
 use CycloneDX\Composer\MakeBom\Builder;
 use CycloneDX\Composer\Plugin;
 use CycloneDX\Core\Models;
 use Generator;
+use LogicException;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\UsesClass;
@@ -40,24 +40,6 @@ use UnexpectedValueException;
 #[UsesClass(Plugin::class)]
 final class BuilderTest extends TestCase
 {
-    /**
-     * The temp dir must be in a controlled depth/structure so that certain operations are working as expected.
-     * But the temp dir must be outside the 'tests' folder, so that phpunit does not scan them.
-     */
-    private static function getTempDir(): string
-    {
-        $tempSetupDir = __DIR__.'/../../.tmp/BuilderTest/setup';
-        if (is_dir($tempSetupDir) || mkdir($tempSetupDir, recursive: true)) {
-            return $tempSetupDir;
-        }
-        throw new UnexpectedValueException('failed to create tempDir: '.$tempSetupDir);
-    }
-
-    public static function tearDownAfterClass(): void
-    {
-        // !! TempDir is intentionally not cleared, to allow after-test debugging
-    }
-
     public function testCreateRandomBomSerialNumberHasCorrectFormat(): void
     {
         $uuid4v1Format = '[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-4[0-9A-Fa-f]{3}-[89ABab][0-9A-Fa-f]{3}-[0-9A-Fa-f]{12}';
@@ -68,48 +50,64 @@ final class BuilderTest extends TestCase
     // region createSbomFromComposer
 
     #[DataProvider('dpCreateSbomFromComposer')]
-    public function testCreateSbomFromComposer(callable $setup, bool $locked, bool $installed)
+    public function testCreateSbomFromComposer(callable $setup, bool $locked, bool $installed): void
     {
         $setupManifest = $setup();
         $composer = (new ComposerFactory())->createComposer(new NullIO(), $setupManifest, cwd: \dirname($setupManifest));
         $builder = new Builder(true, false, null);
 
+        if (false === $locked && false === $installed) {
+            $this->expectException(LogicException::class);
+            $this->expectExceptionMessageMatches('/no lockfile/i');
+        }
         $sbom = $builder->createSbomFromComposer($composer);
 
         self::assertFalse($sbom, '@TODO');
     }
 
     #[DataProvider('dpCreateSbomFromComposer')]
-    public function testCreateSbomFromComposerOmittingDev(callable $setup, bool $locked, bool $installed)
+    public function testCreateSbomFromComposerOmittingDev(callable $setup, bool $locked, bool $installed): void
     {
         $setupManifest = $setup();
         $composer = (new ComposerFactory())->createComposer(new NullIO(), $setupManifest, cwd: \dirname($setupManifest));
         $builder = new Builder(true, false, null);
 
+        if (false === $locked && false === $installed) {
+            $this->expectException(LogicException::class);
+            $this->expectExceptionMessageMatches('/no lockfile/i');
+        }
         $sbom = $builder->createSbomFromComposer($composer);
 
         self::assertFalse($sbom, '@TODO');
     }
 
     #[DataProvider('dpCreateSbomFromComposer')]
-    public function testCreateSbomFromComposerOmittingPlugins(callable $setup, bool $locked, bool $installed)
+    public function testCreateSbomFromComposerOmittingPlugins(callable $setup, bool $locked, bool $installed): void
     {
         $setupManifest = $setup();
         $composer = (new ComposerFactory())->createComposer(new NullIO(), $setupManifest, cwd: \dirname($setupManifest));
         $builder = new Builder(true, false, null);
 
+        if (false === $locked && false === $installed) {
+            $this->expectException(LogicException::class);
+            $this->expectExceptionMessageMatches('/no lockfile/i');
+        }
         $sbom = $builder->createSbomFromComposer($composer);
 
         self::assertFalse($sbom, '@TODO');
     }
 
     #[DataProvider('dpCreateSbomFromComposer')]
-    public function testCreateSbomFromComposerMCVersionOverride(callable $setup, bool $locked, bool $installed)
+    public function testCreateSbomFromComposerMCVersionOverride(callable $setup, bool $locked, bool $installed): void
     {
         $setupManifest = $setup();
         $composer = (new ComposerFactory())->createComposer(new NullIO(), $setupManifest, cwd: \dirname($setupManifest));
         $builder = new Builder(true, false, null);
 
+        if (false === $locked && false === $installed) {
+            $this->expectException(LogicException::class);
+            $this->expectExceptionMessageMatches('/no lockfile/i');
+        }
         $sbom = $builder->createSbomFromComposer($composer);
 
         self::assertFalse($sbom, '@TODO');
@@ -160,7 +158,6 @@ final class BuilderTest extends TestCase
         } else {
             self::assertNull($fTool->getVersion());
         }
-
     }
 
     #[DataProvider('dpCreateToolsFromComposer')]
@@ -189,7 +186,6 @@ final class BuilderTest extends TestCase
         /** @var Models\Tool $fTool */
         $fTool = reset($fTools);
         self::assertSame($versionOverride, $fTool->getVersion());
-
     }
 
     #[DataProvider('dpCreateToolsFromComposer')]
@@ -219,12 +215,27 @@ final class BuilderTest extends TestCase
 
     // endregion createToolsFromComposer
 
+    // region helpers
+
+    /**
+     * The temp dir must be in a controlled depth/structure so that certain operations are working as expected.
+     * But the temp dir must be outside the 'tests' folder, so that phpunit does not scan them.
+     */
+    private static function getTempDir(): string
+    {
+        $tempSetupDir = __DIR__.'/../../.tmp/BuilderTest/setup';
+        if (is_dir($tempSetupDir) || mkdir($tempSetupDir, recursive: true)) {
+            return $tempSetupDir;
+        }
+        throw new UnexpectedValueException('failed to create tempDir: '.$tempSetupDir);
+    }
+
     /**
      * @psalm-return \Generator<string, array{0:callable():string, 1:bool, 2:bool}>
      */
     private static function dpForSetup(string $setupTemplate): Generator
     {
-        $setupManifest =  __DIR__."/../_data/setup/$setupTemplate/composer.json";
+        $setupManifest = __DIR__."/../_data/setup/$setupTemplate/composer.json";
         $setupLock = __DIR__."/../_data/setup/$setupTemplate/composer.lock";
 
         yield 'locked NotInstalled' => [
@@ -238,10 +249,10 @@ final class BuilderTest extends TestCase
         $tempDir = tempnam($tempSetupDir, 'notLocked_notInstalled_');
         yield basename($tempDir) => [
             static fn () => unlink($tempDir) &&
-            mkdir($tempDir, recursive: true) &&
-            copy($setupManifest, "$tempDir/composer.json")
-                ? "$tempDir/composer.json"
-                : throw new UnexpectedValueException("setup failed: $tempDir"),
+                mkdir($tempDir, recursive: true) &&
+                copy($setupManifest, "$tempDir/composer.json")
+                    ? "$tempDir/composer.json"
+                    : throw new UnexpectedValueException("setup failed: $tempDir"),
             false,
             false,
         ];
@@ -249,12 +260,12 @@ final class BuilderTest extends TestCase
         $tempDir = tempnam($tempSetupDir, 'locked_installed_');
         yield basename($tempDir) => [
             static fn () => unlink($tempDir) &&
-            mkdir($tempDir, recursive: true) &&
-            copy($setupManifest, "$tempDir/composer.json") &&
-            copy($setupLock, "$tempDir/composer.lock") &&
-            false !== shell_exec('composer -d '.escapeshellarg($tempDir).' install --no-interaction --no-progress -q')
-                ? "$tempDir/composer.json"
-                : throw new UnexpectedValueException("setup failed: $tempDir"),
+                mkdir($tempDir, recursive: true) &&
+                copy($setupManifest, "$tempDir/composer.json") &&
+                copy($setupLock, "$tempDir/composer.lock") &&
+                false !== shell_exec('composer -d '.escapeshellarg($tempDir).' install --no-interaction --no-progress -q')
+                    ? "$tempDir/composer.json"
+                    : throw new UnexpectedValueException("setup failed: $tempDir"),
             true,
             true,
         ];
@@ -262,15 +273,17 @@ final class BuilderTest extends TestCase
         $tempDir = tempnam($tempSetupDir, 'notLocked_installed_');
         yield basename($tempDir) => [
             static fn () => unlink($tempDir) &&
-            mkdir($tempDir, recursive: true) &&
-            copy($setupManifest, "$tempDir/composer.json") &&
-            copy($setupLock, "$tempDir/composer.lock") &&
-            false !== shell_exec('composer -d '.escapeshellarg($tempDir).' install --no-interaction -q') &&
-            unlink("$tempDir/composer.lock")
-                ? "$tempDir/composer.json"
-                : throw new UnexpectedValueException("setup failed: $tempDir"),
+                mkdir($tempDir, recursive: true) &&
+                copy($setupManifest, "$tempDir/composer.json") &&
+                copy($setupLock, "$tempDir/composer.lock") &&
+                false !== shell_exec('composer -d '.escapeshellarg($tempDir).' install --no-interaction -q') &&
+                unlink("$tempDir/composer.lock")
+                    ? "$tempDir/composer.json"
+                    : throw new UnexpectedValueException("setup failed: $tempDir"),
             false,
             true,
         ];
     }
+
+    // endregion helpers
 }

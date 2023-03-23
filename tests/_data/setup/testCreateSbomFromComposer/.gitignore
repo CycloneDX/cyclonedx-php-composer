@@ -3,3 +3,4 @@
 !/.gitattributes
 
 !/composer.json
+!/composer.lock

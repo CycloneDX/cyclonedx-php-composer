@@ -1,6 +1,7 @@
 {
-    "name": "cyclonedx/cyclonedx-php-composer-tool4tests",
-    "description": "global-like cyclonedx/cyclonedx-php-composer for usage in tests",
+    "name": "cyclonedx/test_data_for_create-tool-from-composer",
+    "description": "test setup 'testCreateToolsFromComposer'",
+    "license": "Apache-2.0",
     "type": "metapackage",
     "authors": [
         {
