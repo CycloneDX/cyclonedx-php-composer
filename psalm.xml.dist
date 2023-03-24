@@ -7,6 +7,7 @@
        findUnusedPsalmSuppress="false"
        findUnusedVariablesAndParams="true"
        findUnusedCode="true"
+       findUnusedBaselineEntry="true"
        ensureArrayStringOffsetsExist="true"
        ensureArrayIntOffsetsExist="true"
        cacheDirectory=".psalm.cache"

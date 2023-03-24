@@ -1,6 +1,7 @@
 {
-    "name": "cyclonedx/cyclonedx-php-composer-tool4demo",
-    "description": "global-like cyclonedx/cyclonedx-php-composer for usage in demos",
+    "name": "cyclonedx/test_data_for_create-tool-from-composer",
+    "description": "test setup 'testCreateToolsFromComposer'",
+    "license": "Apache-2.0",
     "type": "metapackage",
     "authors": [
         {
@@ -14,7 +15,7 @@
     "repositories": [
         {
             "type": "path",
-            "url": "../../",
+            "url": "../../../../",
             "symlink": true
         }
     ],
@@ -22,8 +23,7 @@
     "prefer-stable": true,
     "config": {
         "allow-plugins": {
-            "cyclonedx/cyclonedx-php-composer": true,
-            "ergebnis/composer-normalize": true
+            "cyclonedx/cyclonedx-php-composer": true
         },
         "preferred-install": "dist",
         "sort-packages": true

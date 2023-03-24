@@ -18,3 +18,6 @@
 # these are the target of test tools and such
 /reports/
 /CI_reports/
+
+# general temp dir - utilized during tests for reasons
+/.tmp/

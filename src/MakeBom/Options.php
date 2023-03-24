@@ -266,8 +266,8 @@ class Options
         $version = getenv(self::ENV_TOOLS_VERSION_OVERRIDE);
 
         return \is_string($version) && '' !== $version
-        ? $version
-        : null;
+            ? $version
+            : null;
     }
 
     public function getToolsExcludeLibs(): bool

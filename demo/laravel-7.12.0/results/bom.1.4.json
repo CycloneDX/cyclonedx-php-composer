@@ -65,6 +65,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/asm89/stack-cors@1.3.0",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -119,6 +120,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/brick/math@0.9.3",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -169,6 +171,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/doctrine/inflector@2.0.6",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -224,6 +227,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/doctrine/lexer@1.2.3",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -279,6 +283,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/dragonmantank/cron-expression@v2.3.1",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -329,6 +334,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/egulias/email-validator@2.1.25",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -384,6 +390,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/fideloper/proxy@4.4.2",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -434,6 +441,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/fruitcake/laravel-cors@v1.0.6",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -484,6 +492,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/guzzlehttp/guzzle@6.5.8",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -539,6 +548,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/guzzlehttp/promises@1.5.2",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -589,6 +599,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/guzzlehttp/psr7@1.9.0",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -639,6 +650,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/laravel/framework@v7.30.6",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -693,6 +705,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/laravel/laravel@v7.12.0",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -738,6 +751,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/laravel/tinker@v2.7.3",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -788,6 +802,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/league/commonmark@1.6.7",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -853,6 +868,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/league/flysystem@1.1.10",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -903,6 +919,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/league/mime-type-detection@1.11.0",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -953,6 +970,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/monolog/monolog@2.8.0",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -1008,6 +1026,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/nesbot/carbon@2.63.0",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -1068,6 +1087,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/nikic/php-parser@v4.15.2",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -1118,6 +1138,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/opis/closure@3.6.3",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -1173,6 +1194,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/phpoption/phpoption@1.9.0",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -1223,6 +1245,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/psr/container@1.1.1",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -1278,6 +1301,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/psr/event-dispatcher@1.0.0",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -1328,6 +1352,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/psr/http-message@1.0.1",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -1378,6 +1403,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/psr/log@1.1.4",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -1428,6 +1454,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/psr/simple-cache@1.0.1",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -1473,6 +1500,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/psy/psysh@v0.11.9",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -1528,6 +1556,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/ralouphie/getallheaders@3.0.3",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -1578,6 +1607,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/ramsey/collection@1.2.2",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -1627,6 +1657,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/ramsey/uuid@4.2.3",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -1677,6 +1708,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/swiftmailer/swiftmailer@v6.3.0",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -1732,6 +1764,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/symfony/console@v5.4.16",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -1782,6 +1815,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/symfony/css-selector@v5.4.11",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -1832,6 +1866,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/symfony/deprecation-contracts@v2.5.2",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -1882,6 +1917,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/symfony/error-handler@v5.4.15",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -1932,6 +1968,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/symfony/event-dispatcher@v5.4.9",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -1982,6 +2019,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/symfony/event-dispatcher-contracts@v2.5.2",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -2032,6 +2070,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/symfony/finder@v5.4.11",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -2082,6 +2121,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/symfony/http-foundation@v5.4.16",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -2132,6 +2172,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/symfony/http-kernel@v5.4.16",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -2182,6 +2223,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/symfony/mime@v5.4.16",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -2232,6 +2274,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/symfony/polyfill-ctype@v1.27.0",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -2282,6 +2325,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/symfony/polyfill-iconv@v1.27.0",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -2332,6 +2376,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/symfony/polyfill-intl-grapheme@v1.27.0",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -2382,6 +2427,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/symfony/polyfill-intl-idn@v1.27.0",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -2432,6 +2478,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/symfony/polyfill-intl-normalizer@v1.27.0",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -2482,6 +2529,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/symfony/polyfill-mbstring@v1.27.0",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -2532,6 +2580,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/symfony/polyfill-php72@v1.27.0",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -2582,6 +2631,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/symfony/polyfill-php73@v1.27.0",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -2632,6 +2682,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/symfony/polyfill-php80@v1.27.0",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -2682,6 +2733,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/symfony/polyfill-php81@v1.27.0",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -2732,6 +2784,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/symfony/process@v5.4.11",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -2782,6 +2835,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/symfony/routing@v5.4.15",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -2832,6 +2886,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/symfony/service-contracts@v2.5.2",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -2882,6 +2937,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/symfony/string@v5.4.15",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -2932,6 +2988,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/symfony/translation@v5.4.14",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -2982,6 +3039,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/symfony/translation-contracts@v2.5.2",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -3032,6 +3090,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/symfony/var-dumper@v5.4.14",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -3082,6 +3141,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/tijsverkoyen/css-to-inline-styles@2.2.5",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -3137,6 +3197,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/vlucas/phpdotenv@v4.3.0",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -3187,6 +3248,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/voku/portable-ascii@1.6.1",
             "externalReferences": [
                 {
                     "type": "distribution",

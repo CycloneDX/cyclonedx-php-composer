@@ -55,6 +55,7 @@
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/doctrine/instantiator@1.5.0]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/doctrine/instantiator/zipball/0a0fa9780f5d4e507415a065172d26a98d02047b]]></url>
@@ -86,6 +87,7 @@
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/myclabs/deep-copy@1.11.0]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/myclabs/DeepCopy/zipball/14daed4296fae74d9e3201d2c4925d1acb7aa614]]></url>
@@ -114,6 +116,7 @@
           <id><![CDATA[BSD-3-Clause]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/nikic/php-parser@v4.15.4]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/nikic/PHP-Parser/zipball/6bb5176bc4af8bcb7d926f88718db9b96a2d4290]]></url>
@@ -142,6 +145,7 @@
           <id><![CDATA[BSD-3-Clause]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/phar-io/manifest@2.0.3]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/phar-io/manifest/zipball/97803eca37d319dfa7826cc2437fc020857acb53]]></url>
@@ -170,6 +174,7 @@
           <id><![CDATA[BSD-3-Clause]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/phar-io/version@3.2.1]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/phar-io/version/zipball/4f7fd7836c6f332bb2933569e566a0d6c4cbed74]]></url>
@@ -198,6 +203,7 @@
           <id><![CDATA[BSD-3-Clause]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/phpunit/php-code-coverage@9.2.26]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/443bc6912c9bd5b409254a40f4b0f4ced7c80ea1]]></url>
@@ -230,6 +236,7 @@
           <id><![CDATA[BSD-3-Clause]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/phpunit/php-file-iterator@3.0.6]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/sebastianbergmann/php-file-iterator/zipball/cf1c2e7c203ac650e352f4cc675a7021e7d1b3cf]]></url>
@@ -262,6 +269,7 @@
           <id><![CDATA[BSD-3-Clause]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/phpunit/php-invoker@3.1.1]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/sebastianbergmann/php-invoker/zipball/5a10147d0aaf65b58940a0b72f71c9ac0423cc67]]></url>
@@ -294,6 +302,7 @@
           <id><![CDATA[BSD-3-Clause]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/phpunit/php-text-template@2.0.4]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/sebastianbergmann/php-text-template/zipball/5da5f67fc95621df9ff4c4e5a84d6a8a2acf7c28]]></url>
@@ -326,6 +335,7 @@
           <id><![CDATA[BSD-3-Clause]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/phpunit/php-timer@5.0.3]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/sebastianbergmann/php-timer/zipball/5a63ce20ed1b5bf577850e2c4e87f4aa902afbd2]]></url>
@@ -358,6 +368,7 @@
           <id><![CDATA[BSD-3-Clause]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/phpunit/phpunit@9.5.26]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/sebastianbergmann/phpunit/zipball/851867efcbb6a1b992ec515c71cdcf20d895e9d2]]></url>
@@ -390,6 +401,7 @@
           <id><![CDATA[BSD-3-Clause]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/sebastian/cli-parser@1.0.1]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/sebastianbergmann/cli-parser/zipball/442e7c7e687e42adc03470c7b668bc4b2402c0b2]]></url>
@@ -422,6 +434,7 @@
           <id><![CDATA[BSD-3-Clause]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/sebastian/code-unit@1.0.8]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/sebastianbergmann/code-unit/zipball/1fc9f64c0927627ef78ba436c9b17d967e68e120]]></url>
@@ -454,6 +467,7 @@
           <id><![CDATA[BSD-3-Clause]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/sebastian/code-unit-reverse-lookup@2.0.3]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/sebastianbergmann/code-unit-reverse-lookup/zipball/ac91f01ccec49fb77bdc6fd1e548bc70f7faa3e5]]></url>
@@ -486,6 +500,7 @@
           <id><![CDATA[BSD-3-Clause]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/sebastian/comparator@4.0.8]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/sebastianbergmann/comparator/zipball/fa0f136dd2334583309d32b62544682ee972b51a]]></url>
@@ -518,6 +533,7 @@
           <id><![CDATA[BSD-3-Clause]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/sebastian/complexity@2.0.2]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/sebastianbergmann/complexity/zipball/739b35e53379900cc9ac327b2147867b8b6efd88]]></url>
@@ -550,6 +566,7 @@
           <id><![CDATA[BSD-3-Clause]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/sebastian/diff@4.0.4]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/sebastianbergmann/diff/zipball/3461e3fccc7cfdfc2720be910d3bd73c69be590d]]></url>
@@ -582,6 +599,7 @@
           <id><![CDATA[BSD-3-Clause]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/sebastian/environment@5.1.5]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/sebastianbergmann/environment/zipball/830c43a844f1f8d5b7a1f6d6076b784454d8b7ed]]></url>
@@ -614,6 +632,7 @@
           <id><![CDATA[BSD-3-Clause]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/sebastian/exporter@4.0.5]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/sebastianbergmann/exporter/zipball/ac230ed27f0f98f597c8a2b6eb7ac563af5e5b9d]]></url>
@@ -646,6 +665,7 @@
           <id><![CDATA[BSD-3-Clause]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/sebastian/global-state@5.0.5]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/sebastianbergmann/global-state/zipball/0ca8db5a5fc9c8646244e629625ac486fa286bf2]]></url>
@@ -678,6 +698,7 @@
           <id><![CDATA[BSD-3-Clause]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/sebastian/lines-of-code@1.0.3]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/sebastianbergmann/lines-of-code/zipball/c1c2e997aa3146983ed888ad08b15470a2e22ecc]]></url>
@@ -710,6 +731,7 @@
           <id><![CDATA[BSD-3-Clause]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/sebastian/object-enumerator@4.0.4]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/sebastianbergmann/object-enumerator/zipball/5c9eeac41b290a3712d88851518825ad78f45c71]]></url>
@@ -742,6 +764,7 @@
           <id><![CDATA[BSD-3-Clause]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/sebastian/object-reflector@2.0.4]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/sebastianbergmann/object-reflector/zipball/b4f479ebdbf63ac605d183ece17d8d7fe49c15c7]]></url>
@@ -774,6 +797,7 @@
           <id><![CDATA[BSD-3-Clause]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/sebastian/recursion-context@4.0.5]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/sebastianbergmann/recursion-context/zipball/e75bd0f07204fec2a0af9b0f3cfe97d05f92efc1]]></url>
@@ -806,6 +830,7 @@
           <id><![CDATA[BSD-3-Clause]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/sebastian/resource-operations@3.0.3]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/sebastianbergmann/resource-operations/zipball/0f4443cb3a1d92ce809899753bc0d5d5a8dd19a8]]></url>
@@ -838,6 +863,7 @@
           <id><![CDATA[BSD-3-Clause]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/sebastian/type@3.2.1]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/sebastianbergmann/type/zipball/75e2c2a32f5e0b3aef905b9ed0b179b953b3d7c7]]></url>
@@ -870,6 +896,7 @@
           <id><![CDATA[BSD-3-Clause]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/sebastian/version@3.0.2]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/sebastianbergmann/version/zipball/c6c1022351a901512170118436c764e473f6de8c]]></url>
@@ -902,6 +929,7 @@
           <id><![CDATA[BSD-3-Clause]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/theseer/tokenizer@1.2.1]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/theseer/tokenizer/zipball/34a41e998c2183e22995f158c581e7b5e755ab9e]]></url>

@@ -1,20 +1,24 @@
 {
-    "name": "cyclonedx/cyclonedx-php-composer-tool4demo",
-    "description": "global-like cyclonedx/cyclonedx-php-composer for usage in demos",
-    "type": "metapackage",
+    "name": "cyclonedx/test_data_for_create-sbom-from-composer",
+    "description": "test setup 'testCreateSbomFromComposer'",
+    "license": "Apache-2.0",
+    "type": "project",
+    "version": "dev-master",
     "authors": [
         {
             "name": "Jan Kowalleck"
         }
     ],
-    "require": {},
+    "require": {
+        "symfony/lock": "6.2.7"
+    },
     "require-dev": {
         "cyclonedx/cyclonedx-php-composer": "@dev"
     },
     "repositories": [
         {
             "type": "path",
-            "url": "../../",
+            "url": "../../../../",
             "symlink": true
         }
     ],
@@ -22,8 +26,7 @@
     "prefer-stable": true,
     "config": {
         "allow-plugins": {
-            "cyclonedx/cyclonedx-php-composer": true,
-            "ergebnis/composer-normalize": true
+            "cyclonedx/cyclonedx-php-composer": true
         },
         "preferred-install": "dist",
         "sort-packages": true
