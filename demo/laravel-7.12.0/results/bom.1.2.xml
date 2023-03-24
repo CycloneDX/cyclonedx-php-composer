@@ -29,6 +29,7 @@
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/asm89/stack-cors@1.3.0]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/asm89/stack-cors/zipball/b9c31def6a83f84b4d4a40d35996d375755f0e08]]></url>
@@ -60,6 +61,7 @@
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/brick/math@0.9.3]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/brick/math/zipball/ca57d18f028f84f777b2168cd1911b0dee2343ae]]></url>
@@ -88,6 +90,7 @@
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/doctrine/inflector@2.0.6]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/doctrine/inflector/zipball/d9d313a36c872fd6ee06d9a6cbcf713eaa40f024]]></url>
@@ -120,6 +123,7 @@
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/doctrine/lexer@1.2.3]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/doctrine/lexer/zipball/c268e882d4dbdd85e36e4ad69e02dc284f89d229]]></url>
@@ -152,6 +156,7 @@
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/dragonmantank/cron-expression@v2.3.1]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/dragonmantank/cron-expression/zipball/65b2d8ee1f10915efb3b55597da3404f096acba2]]></url>
@@ -180,6 +185,7 @@
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/egulias/email-validator@2.1.25]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/egulias/EmailValidator/zipball/0dbf5d78455d4d6a41d186da50adc1122ec066f4]]></url>
@@ -212,6 +218,7 @@
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/fideloper/proxy@4.4.2]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/fideloper/TrustedProxy/zipball/a751f2bc86dd8e6cfef12dc0cbdada82f5a18750]]></url>
@@ -240,6 +247,7 @@
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/fruitcake/laravel-cors@v1.0.6]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/fruitcake/laravel-cors/zipball/1d127dbec313e2e227d65e0c483765d8d7559bf6]]></url>
@@ -268,6 +276,7 @@
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/guzzlehttp/guzzle@6.5.8]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/guzzle/guzzle/zipball/a52f0440530b54fa079ce76e8c5d196a42cad981]]></url>
@@ -300,6 +309,7 @@
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/guzzlehttp/promises@1.5.2]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/guzzle/promises/zipball/b94b2807d85443f9719887892882d0329d1e2598]]></url>
@@ -328,6 +338,7 @@
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/guzzlehttp/psr7@1.9.0]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/guzzle/psr7/zipball/e98e3e6d4f86621a9b75f623996e6bbdeb4b9318]]></url>
@@ -356,6 +367,7 @@
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/laravel/framework@v7.30.6]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/laravel/framework/zipball/ecdafad1dda3c790af186a6d18479ea4757ef9ee]]></url>
@@ -387,6 +399,7 @@
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/laravel/laravel@v7.12.0]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/laravel/laravel/zipball/5639581ea56ecd556cdf6e6edc37ce5795740fd7]]></url>
@@ -411,6 +424,7 @@
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/laravel/tinker@v2.7.3]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/laravel/tinker/zipball/5062061b4924af3392225dd482ca7b4d85d8b8ef]]></url>
@@ -439,6 +453,7 @@
           <id><![CDATA[BSD-3-Clause]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/league/commonmark@1.6.7]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/thephpleague/commonmark/zipball/2b8185c13bc9578367a5bf901881d1c1b5bbd09b]]></url>
@@ -479,6 +494,7 @@
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/league/flysystem@1.1.10]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/thephpleague/flysystem/zipball/3239285c825c152bcc315fe0e87d6b55f5972ed1]]></url>
@@ -507,6 +523,7 @@
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/league/mime-type-detection@1.11.0]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/thephpleague/mime-type-detection/zipball/ff6248ea87a9f116e78edd6002e39e5128a0d4dd]]></url>
@@ -535,6 +552,7 @@
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/monolog/monolog@2.8.0]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/Seldaek/monolog/zipball/720488632c590286b88b80e62aa3d3d551ad4a50]]></url>
@@ -567,6 +585,7 @@
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/nesbot/carbon@2.63.0]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/briannesbitt/Carbon/zipball/ad35dd71a6a212b98e4b87e97389b6fa85f0e347]]></url>
@@ -603,6 +622,7 @@
           <id><![CDATA[BSD-3-Clause]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/nikic/php-parser@v4.15.2]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/nikic/PHP-Parser/zipball/f59bbe44bf7d96f24f3e2b4ddc21cd52c1d2adbc]]></url>
@@ -631,6 +651,7 @@
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/opis/closure@3.6.3]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/opis/closure/zipball/3d81e4309d2a927abbe66df935f4bb60082805ad]]></url>
@@ -663,6 +684,7 @@
           <id><![CDATA[Apache-2.0]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/phpoption/phpoption@1.9.0]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/schmittjoh/php-option/zipball/dc5ff11e274a90cc1c743f66c9ad700ce50db9ab]]></url>
@@ -691,6 +713,7 @@
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/psr/container@1.1.1]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/php-fig/container/zipball/8622567409010282b7aeebe4bb841fe98b58dcaf]]></url>
@@ -723,6 +746,7 @@
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/psr/event-dispatcher@1.0.0]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/php-fig/event-dispatcher/zipball/dbefd12671e8a14ec7f180cab83036ed26714bb0]]></url>
@@ -751,6 +775,7 @@
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/psr/http-message@1.0.1]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/php-fig/http-message/zipball/f6561bf28d520154e4b0ec72be95418abe6d9363]]></url>
@@ -779,6 +804,7 @@
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/psr/log@1.1.4]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/php-fig/log/zipball/d49695b909c3b7628b6289db5479a1c204601f11]]></url>
@@ -807,6 +833,7 @@
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/psr/simple-cache@1.0.1]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/php-fig/simple-cache/zipball/408d5eafb83c57f6365a3ca330ff23aa4a5fa39b]]></url>
@@ -831,6 +858,7 @@
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/psy/psysh@v0.11.9]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/bobthecow/psysh/zipball/1acec99d6684a54ff92f8b548a4e41b566963778]]></url>
@@ -863,6 +891,7 @@
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/ralouphie/getallheaders@3.0.3]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/ralouphie/getallheaders/zipball/120b605dfeb996808c31b6477290a714d356e822]]></url>
@@ -891,6 +920,7 @@
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/ramsey/collection@1.2.2]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/ramsey/collection/zipball/cccc74ee5e328031b15640b51056ee8d3bb66c0a]]></url>
@@ -918,6 +948,7 @@
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/ramsey/uuid@4.2.3]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/ramsey/uuid/zipball/fc9bb7fb5388691fd7373cd44dcb4d63bbcf24df]]></url>
@@ -946,6 +977,7 @@
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/swiftmailer/swiftmailer@v6.3.0]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/swiftmailer/swiftmailer/zipball/8a5d5072dca8f48460fce2f4131fcc495eec654c]]></url>
@@ -978,6 +1010,7 @@
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/symfony/console@v5.4.16]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/symfony/console/zipball/8e9b9c8dfb33af6057c94e1b44846bee700dc5ef]]></url>
@@ -1006,6 +1039,7 @@
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/symfony/css-selector@v5.4.11]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/symfony/css-selector/zipball/c1681789f059ab756001052164726ae88512ae3d]]></url>
@@ -1034,6 +1068,7 @@
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/symfony/deprecation-contracts@v2.5.2]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/symfony/deprecation-contracts/zipball/e8b495ea28c1d97b5e0c121748d6f9b53d075c66]]></url>
@@ -1062,6 +1097,7 @@
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/symfony/error-handler@v5.4.15]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/symfony/error-handler/zipball/539cf1428b8442303c6e876ad7bf5a7babd91091]]></url>
@@ -1090,6 +1126,7 @@
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/symfony/event-dispatcher@v5.4.9]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/symfony/event-dispatcher/zipball/8e6ce1cc0279e3ff3c8ff0f43813bc88d21ca1bc]]></url>
@@ -1118,6 +1155,7 @@
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/symfony/event-dispatcher-contracts@v2.5.2]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/symfony/event-dispatcher-contracts/zipball/f98b54df6ad059855739db6fcbc2d36995283fe1]]></url>
@@ -1146,6 +1184,7 @@
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/symfony/finder@v5.4.11]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/symfony/finder/zipball/7872a66f57caffa2916a584db1aa7f12adc76f8c]]></url>
@@ -1174,6 +1213,7 @@
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/symfony/http-foundation@v5.4.16]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/symfony/http-foundation/zipball/5032c5849aef24741e1970cb03511b0dd131d838]]></url>
@@ -1202,6 +1242,7 @@
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/symfony/http-kernel@v5.4.16]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/symfony/http-kernel/zipball/b432c57c5de73634b1859093c1f58e3cd84455a1]]></url>
@@ -1230,6 +1271,7 @@
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/symfony/mime@v5.4.16]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/symfony/mime/zipball/46eeedb08f0832b1b61a84c612d945fc85ee4734]]></url>
@@ -1258,6 +1300,7 @@
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/symfony/polyfill-ctype@v1.27.0]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/symfony/polyfill-ctype/zipball/5bbc823adecdae860bb64756d639ecfec17b050a]]></url>
@@ -1286,6 +1329,7 @@
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/symfony/polyfill-iconv@v1.27.0]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/symfony/polyfill-iconv/zipball/927013f3aac555983a5059aada98e1907d842695]]></url>
@@ -1314,6 +1358,7 @@
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/symfony/polyfill-intl-grapheme@v1.27.0]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/symfony/polyfill-intl-grapheme/zipball/511a08c03c1960e08a883f4cffcacd219b758354]]></url>
@@ -1342,6 +1387,7 @@
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/symfony/polyfill-intl-idn@v1.27.0]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/symfony/polyfill-intl-idn/zipball/639084e360537a19f9ee352433b84ce831f3d2da]]></url>
@@ -1370,6 +1416,7 @@
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/symfony/polyfill-intl-normalizer@v1.27.0]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/symfony/polyfill-intl-normalizer/zipball/19bd1e4fcd5b91116f14d8533c57831ed00571b6]]></url>
@@ -1398,6 +1445,7 @@
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/symfony/polyfill-mbstring@v1.27.0]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/symfony/polyfill-mbstring/zipball/8ad114f6b39e2c98a8b0e3bd907732c207c2b534]]></url>
@@ -1426,6 +1474,7 @@
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/symfony/polyfill-php72@v1.27.0]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/symfony/polyfill-php72/zipball/869329b1e9894268a8a61dabb69153029b7a8c97]]></url>
@@ -1454,6 +1503,7 @@
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/symfony/polyfill-php73@v1.27.0]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/symfony/polyfill-php73/zipball/9e8ecb5f92152187c4799efd3c96b78ccab18ff9]]></url>
@@ -1482,6 +1532,7 @@
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/symfony/polyfill-php80@v1.27.0]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/symfony/polyfill-php80/zipball/7a6ff3f1959bb01aefccb463a0f2cd3d3d2fd936]]></url>
@@ -1510,6 +1561,7 @@
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/symfony/polyfill-php81@v1.27.0]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/symfony/polyfill-php81/zipball/707403074c8ea6e2edaf8794b0157a0bfa52157a]]></url>
@@ -1538,6 +1590,7 @@
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/symfony/process@v5.4.11]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/symfony/process/zipball/6e75fe6874cbc7e4773d049616ab450eff537bf1]]></url>
@@ -1566,6 +1619,7 @@
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/symfony/routing@v5.4.15]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/symfony/routing/zipball/5c9b129efe9abce9470e384bf65d8a7e262eee69]]></url>
@@ -1594,6 +1648,7 @@
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/symfony/service-contracts@v2.5.2]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/symfony/service-contracts/zipball/4b426aac47d6427cc1a1d0f7e2ac724627f5966c]]></url>
@@ -1622,6 +1677,7 @@
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/symfony/string@v5.4.15]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/symfony/string/zipball/571334ce9f687e3e6af72db4d3b2a9431e4fd9ed]]></url>
@@ -1650,6 +1706,7 @@
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/symfony/translation@v5.4.14]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/symfony/translation/zipball/f0ed07675863aa6e3939df8b1bc879450b585cab]]></url>
@@ -1678,6 +1735,7 @@
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/symfony/translation-contracts@v2.5.2]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/symfony/translation-contracts/zipball/136b19dd05cdf0709db6537d058bcab6dd6e2dbe]]></url>
@@ -1706,6 +1764,7 @@
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/symfony/var-dumper@v5.4.14]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/symfony/var-dumper/zipball/6894d06145fefebd9a4c7272baa026a1c394a430]]></url>
@@ -1734,6 +1793,7 @@
           <id><![CDATA[BSD-3-Clause]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/tijsverkoyen/css-to-inline-styles@2.2.5]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/tijsverkoyen/CssToInlineStyles/zipball/4348a3a06651827a27d989ad1d13efec6bb49b19]]></url>
@@ -1766,6 +1826,7 @@
           <id><![CDATA[BSD-3-Clause]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/vlucas/phpdotenv@v4.3.0]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/vlucas/phpdotenv/zipball/67a491df68208bef8c37092db11fa3885008efcf]]></url>
@@ -1794,6 +1855,7 @@
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/voku/portable-ascii@1.6.1]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/voku/portable-ascii/zipball/87337c91b9dfacee02452244ee14ab3c43bc485a]]></url>

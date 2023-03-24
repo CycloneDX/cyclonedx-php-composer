@@ -6,6 +6,7 @@
       <name><![CDATA[local-demo-dependency]]></name>
       <version><![CDATA[1.33.7]]></version>
       <description><![CDATA[a package that is hosted locally and required in a local demo]]></description>
+      <purl><![CDATA[pkg:composer/cyclonedx-demo/local-demo-dependency@1.33.7]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[packages/local-demo-dependency]]></url>
@@ -17,6 +18,7 @@
       <name><![CDATA[local-demo-issue-158]]></name>
       <version><![CDATA[dev-issue-158]]></version>
       <description><![CDATA[a package that reproduces issue#158]]></description>
+      <purl><![CDATA[pkg:composer/cyclonedx-demo/local-demo-issue-158@dev-issue-158]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[packages/local-demo-issue-158]]></url>
@@ -35,6 +37,7 @@
       <group><![CDATA[cyclonedx-demo]]></group>
       <name><![CDATA[local-dependency-with-minimal-setup]]></name>
       <version><![CDATA[dev-component-author]]></version>
+      <purl><![CDATA[pkg:composer/cyclonedx-demo/local-dependency-with-minimal-setup@dev-component-author]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[packages/local-dependency-with-minimal-setup]]></url>

@@ -90,6 +90,7 @@
             "group": "cyclonedx-demo",
             "description": "a package that is hosted locally and required in a local demo",
             "author": "Jan Kowalleck",
+            "purl": "pkg:composer/cyclonedx-demo/local-demo-dependency@1.33.7",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -115,6 +116,7 @@
             "group": "cyclonedx-demo",
             "description": "a package that reproduces issue#158",
             "author": "Jan Kowalleck",
+            "purl": "pkg:composer/cyclonedx-demo/local-demo-issue-158@dev-issue-158",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -148,6 +150,7 @@
             "name": "local-dependency-with-minimal-setup",
             "version": "dev-component-author",
             "group": "cyclonedx-demo",
+            "purl": "pkg:composer/cyclonedx-demo/local-dependency-with-minimal-setup@dev-component-author",
             "externalReferences": [
                 {
                     "type": "distribution",

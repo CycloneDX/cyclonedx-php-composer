@@ -2,15 +2,15 @@
     "$schema": "http://cyclonedx.org/schema/bom-1.4.schema.json",
     "bomFormat": "CycloneDX",
     "specVersion": "1.4",
-    "serialNumber": "urn:uuid:1c9f87d4-818a-48cc-904b-5e892d6c312d",
+    "serialNumber": "urn:uuid:fbe82700-0eb3-4ac8-a187-08d5c608a729",
     "version": 1,
     "metadata": {
-        "timestamp": "2023-03-10T08:54:03Z",
+        "timestamp": "2023-03-24T19:16:30Z",
         "tools": [
             {
                 "vendor": "cyclonedx",
                 "name": "cyclonedx-php-composer",
-                "version": "dev-next",
+                "version": "4.x-dev",
                 "externalReferences": [
                     {
                         "type": "distribution",
@@ -36,11 +36,11 @@
             {
                 "vendor": "cyclonedx",
                 "name": "cyclonedx-library",
-                "version": "2.x-dev 5187a0c",
+                "version": "v2.1.0",
                 "externalReferences": [
                     {
                         "type": "distribution",
-                        "url": "https://api.github.com/repos/CycloneDX/cyclonedx-php-library/zipball/5187a0c268a07c084196e6ceee973053dc717021"
+                        "url": "https://api.github.com/repos/CycloneDX/cyclonedx-php-library/zipball/cf95f5496e9117127f5aab8adc79beb2bc63c3dc"
                     },
                     {
                         "type": "vcs",
@@ -65,22 +65,22 @@
             }
         ],
         "component": {
-            "bom-ref": "cyclonedx/cyclonedx-php-composer-demo-dev-next",
+            "bom-ref": "cyclonedx/cyclonedx-php-composer-demo-dev-master",
             "type": "application",
             "name": "cyclonedx-php-composer-demo",
-            "version": "dev-next",
+            "version": "dev-master",
             "group": "cyclonedx",
             "description": "demo of cyclonedx/cyclonedx-php-composer with symfony/symfony",
             "author": "Jan Kowalleck",
-            "purl": "pkg:composer/cyclonedx/cyclonedx-php-composer-demo@dev-next",
+            "purl": "pkg:composer/cyclonedx/cyclonedx-php-composer-demo@dev-master",
             "properties": [
                 {
                     "name": "cdx:composer:package:distReference",
-                    "value": "7d0ff5fbe72e6e861cb106a54b2646f3a26f74b5"
+                    "value": "85ab9f9ef70b7c4e79cf5900f68c92736e180163"
                 },
                 {
                     "name": "cdx:composer:package:sourceReference",
-                    "value": "7d0ff5fbe72e6e861cb106a54b2646f3a26f74b5"
+                    "value": "85ab9f9ef70b7c4e79cf5900f68c92736e180163"
                 },
                 {
                     "name": "cdx:composer:package:type",
@@ -105,6 +105,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/doctrine/event-manager@2.0.0",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -160,6 +161,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/doctrine/persistence@3.1.4",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -215,6 +217,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/friendsofphp/proxy-manager-lts@v1.0.14",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -269,6 +272,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/laminas/laminas-code@4.10.0",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -344,6 +348,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/psr/cache@3.0.0",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -389,6 +394,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/psr/clock@1.0.0",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -444,6 +450,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/psr/container@2.0.2",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -499,6 +506,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/psr/event-dispatcher@1.0.0",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -549,6 +557,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/psr/link@2.0.1",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -599,6 +608,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/psr/log@3.0.0",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -649,6 +659,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/symfony/contracts@v3.2.1",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -699,6 +710,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/symfony/polyfill-ctype@v1.27.0",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -749,6 +761,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/symfony/polyfill-intl-grapheme@v1.27.0",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -799,6 +812,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/symfony/polyfill-intl-icu@v1.27.0",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -849,6 +863,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/symfony/polyfill-intl-idn@v1.27.0",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -899,6 +914,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/symfony/polyfill-intl-normalizer@v1.27.0",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -949,6 +965,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/symfony/polyfill-mbstring@v1.27.0",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -999,6 +1016,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/symfony/polyfill-php72@v1.27.0",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -1049,6 +1067,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/symfony/polyfill-uuid@v1.27.0",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -1099,6 +1118,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/symfony/symfony@v6.2.7",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -1154,6 +1174,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/twig/twig@v3.5.1",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -1300,7 +1321,7 @@
             ]
         },
         {
-            "ref": "cyclonedx/cyclonedx-php-composer-demo-dev-next",
+            "ref": "cyclonedx/cyclonedx-php-composer-demo-dev-master",
             "dependsOn": [
                 "symfony/symfony-6.2.7.0"
             ]

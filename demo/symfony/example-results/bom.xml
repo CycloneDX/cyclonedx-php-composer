@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bom xmlns="http://cyclonedx.org/schema/bom/1.4" version="1" serialNumber="urn:uuid:a1701527-0d0f-4ad7-b672-f7a87a009e27">
+<bom xmlns="http://cyclonedx.org/schema/bom/1.4" version="1" serialNumber="urn:uuid:11a9877d-e1da-41e1-8972-0a858dc6b2f1">
   <metadata>
-    <timestamp><![CDATA[2023-03-10T08:54:04Z]]></timestamp>
+    <timestamp><![CDATA[2023-03-24T19:16:31Z]]></timestamp>
     <tools>
       <tool>
         <vendor><![CDATA[cyclonedx]]></vendor>
         <name><![CDATA[cyclonedx-php-composer]]></name>
-        <version><![CDATA[dev-next]]></version>
+        <version><![CDATA[4.x-dev]]></version>
         <externalReferences>
           <reference type="distribution">
             <url><![CDATA[../..]]></url>
@@ -28,10 +28,10 @@
       <tool>
         <vendor><![CDATA[cyclonedx]]></vendor>
         <name><![CDATA[cyclonedx-library]]></name>
-        <version><![CDATA[2.x-dev 5187a0c]]></version>
+        <version><![CDATA[v2.1.0]]></version>
         <externalReferences>
           <reference type="distribution">
-            <url><![CDATA[https://api.github.com/repos/CycloneDX/cyclonedx-php-library/zipball/5187a0c268a07c084196e6ceee973053dc717021]]></url>
+            <url><![CDATA[https://api.github.com/repos/CycloneDX/cyclonedx-php-library/zipball/cf95f5496e9117127f5aab8adc79beb2bc63c3dc]]></url>
           </reference>
           <reference type="vcs">
             <url><![CDATA[https://github.com/CycloneDX/cyclonedx-php-library.git]]></url>
@@ -51,16 +51,16 @@
         </externalReferences>
       </tool>
     </tools>
-    <component type="application" bom-ref="cyclonedx/cyclonedx-php-composer-demo-dev-next">
+    <component type="application" bom-ref="cyclonedx/cyclonedx-php-composer-demo-dev-master">
       <author><![CDATA[Jan Kowalleck]]></author>
       <group><![CDATA[cyclonedx]]></group>
       <name><![CDATA[cyclonedx-php-composer-demo]]></name>
-      <version><![CDATA[dev-next]]></version>
+      <version><![CDATA[dev-master]]></version>
       <description><![CDATA[demo of cyclonedx/cyclonedx-php-composer with symfony/symfony]]></description>
-      <purl><![CDATA[pkg:composer/cyclonedx/cyclonedx-php-composer-demo@dev-next]]></purl>
+      <purl><![CDATA[pkg:composer/cyclonedx/cyclonedx-php-composer-demo@dev-master]]></purl>
       <properties>
-        <property name="cdx:composer:package:distReference"><![CDATA[7d0ff5fbe72e6e861cb106a54b2646f3a26f74b5]]></property>
-        <property name="cdx:composer:package:sourceReference"><![CDATA[7d0ff5fbe72e6e861cb106a54b2646f3a26f74b5]]></property>
+        <property name="cdx:composer:package:distReference"><![CDATA[85ab9f9ef70b7c4e79cf5900f68c92736e180163]]></property>
+        <property name="cdx:composer:package:sourceReference"><![CDATA[85ab9f9ef70b7c4e79cf5900f68c92736e180163]]></property>
         <property name="cdx:composer:package:type"><![CDATA[project]]></property>
       </properties>
     </component>
@@ -77,6 +77,7 @@
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/doctrine/event-manager@2.0.0]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/doctrine/event-manager/zipball/750671534e0241a7c50ea5b43f67e23eb5c96f32]]></url>
@@ -114,6 +115,7 @@
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/doctrine/persistence@3.1.4]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/doctrine/persistence/zipball/8bf8ab15960787f1a49d405f6eb8c787b4841119]]></url>
@@ -151,6 +153,7 @@
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/friendsofphp/proxy-manager-lts@v1.0.14]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/FriendsOfPHP/proxy-manager-lts/zipball/a527c9d9d5348e012bd24482d83a5cd643bcbc9e]]></url>
@@ -187,6 +190,7 @@
           <id><![CDATA[BSD-3-Clause]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/laminas/laminas-code@4.10.0]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/laminas/laminas-code/zipball/ad8b36073f9ac792716478befadca0798cc15635]]></url>
@@ -240,6 +244,7 @@
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/psr/cache@3.0.0]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/php-fig/cache/zipball/aa5030cfa5405eccfdcb1083ce040c2cb8d253bf]]></url>
@@ -269,6 +274,7 @@
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/psr/clock@1.0.0]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/php-fig/clock/zipball/e41a24703d4560fd0acb709162f73b8adfc3aa0d]]></url>
@@ -306,6 +312,7 @@
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/psr/container@2.0.2]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/php-fig/container/zipball/c71ecc56dfe541dbd90c5360474fbc405f8d5963]]></url>
@@ -343,6 +350,7 @@
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/psr/event-dispatcher@1.0.0]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/php-fig/event-dispatcher/zipball/dbefd12671e8a14ec7f180cab83036ed26714bb0]]></url>
@@ -376,6 +384,7 @@
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/psr/link@2.0.1]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/php-fig/link/zipball/84b159194ecfd7eaa472280213976e96415433f7]]></url>
@@ -409,6 +418,7 @@
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/psr/log@3.0.0]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/php-fig/log/zipball/fe5ea303b0887d5caefd3d431c3e61ad47037001]]></url>
@@ -442,6 +452,7 @@
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/symfony/contracts@v3.2.1]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/symfony/contracts/zipball/8ec95320f72fd012bf6335498c8f6c8d64957346]]></url>
@@ -475,6 +486,7 @@
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/symfony/polyfill-ctype@v1.27.0]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/symfony/polyfill-ctype/zipball/5bbc823adecdae860bb64756d639ecfec17b050a]]></url>
@@ -508,6 +520,7 @@
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/symfony/polyfill-intl-grapheme@v1.27.0]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/symfony/polyfill-intl-grapheme/zipball/511a08c03c1960e08a883f4cffcacd219b758354]]></url>
@@ -541,6 +554,7 @@
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/symfony/polyfill-intl-icu@v1.27.0]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/symfony/polyfill-intl-icu/zipball/a3d9148e2c363588e05abbdd4ee4f971f0a5330c]]></url>
@@ -574,6 +588,7 @@
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/symfony/polyfill-intl-idn@v1.27.0]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/symfony/polyfill-intl-idn/zipball/639084e360537a19f9ee352433b84ce831f3d2da]]></url>
@@ -607,6 +622,7 @@
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/symfony/polyfill-intl-normalizer@v1.27.0]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/symfony/polyfill-intl-normalizer/zipball/19bd1e4fcd5b91116f14d8533c57831ed00571b6]]></url>
@@ -640,6 +656,7 @@
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/symfony/polyfill-mbstring@v1.27.0]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/symfony/polyfill-mbstring/zipball/8ad114f6b39e2c98a8b0e3bd907732c207c2b534]]></url>
@@ -673,6 +690,7 @@
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/symfony/polyfill-php72@v1.27.0]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/symfony/polyfill-php72/zipball/869329b1e9894268a8a61dabb69153029b7a8c97]]></url>
@@ -706,6 +724,7 @@
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/symfony/polyfill-uuid@v1.27.0]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/symfony/polyfill-uuid/zipball/f3cf1a645c2734236ed1e2e671e273eeb3586166]]></url>
@@ -739,6 +758,7 @@
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/symfony/symfony@v6.2.7]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/symfony/symfony/zipball/80cac46a31d4561804c17d101591a4f59e6db3a2]]></url>
@@ -776,6 +796,7 @@
           <id><![CDATA[BSD-3-Clause]]></id>
         </license>
       </licenses>
+      <purl><![CDATA[pkg:composer/twig/twig@v3.5.1]]></purl>
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[https://api.github.com/repos/twigphp/Twig/zipball/a6e0510cc793912b451fd40ab983a1d28f611c15]]></url>
@@ -859,7 +880,7 @@
       <dependency ref="symfony/polyfill-ctype-1.27.0.0"/>
       <dependency ref="symfony/polyfill-mbstring-1.27.0.0"/>
     </dependency>
-    <dependency ref="cyclonedx/cyclonedx-php-composer-demo-dev-next">
+    <dependency ref="cyclonedx/cyclonedx-php-composer-demo-dev-master">
       <dependency ref="symfony/symfony-6.2.7.0"/>
     </dependency>
   </dependencies>

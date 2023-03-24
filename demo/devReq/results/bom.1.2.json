@@ -70,6 +70,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/doctrine/instantiator@1.5.0",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -110,6 +111,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/myclabs/deep-copy@1.11.0",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -146,6 +148,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/nikic/php-parser@v4.15.4",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -182,6 +185,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/phar-io/manifest@2.0.3",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -218,6 +222,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/phar-io/version@3.2.1",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -254,6 +259,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/phpunit/php-code-coverage@9.2.26",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -295,6 +301,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/phpunit/php-file-iterator@3.0.6",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -336,6 +343,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/phpunit/php-invoker@3.1.1",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -377,6 +385,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/phpunit/php-text-template@2.0.4",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -418,6 +427,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/phpunit/php-timer@5.0.3",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -459,6 +469,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/phpunit/phpunit@9.5.26",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -500,6 +511,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/sebastian/cli-parser@1.0.1",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -541,6 +553,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/sebastian/code-unit@1.0.8",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -582,6 +595,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/sebastian/code-unit-reverse-lookup@2.0.3",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -623,6 +637,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/sebastian/comparator@4.0.8",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -664,6 +679,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/sebastian/complexity@2.0.2",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -705,6 +721,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/sebastian/diff@4.0.4",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -746,6 +763,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/sebastian/environment@5.1.5",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -787,6 +805,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/sebastian/exporter@4.0.5",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -828,6 +847,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/sebastian/global-state@5.0.5",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -869,6 +889,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/sebastian/lines-of-code@1.0.3",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -910,6 +931,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/sebastian/object-enumerator@4.0.4",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -951,6 +973,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/sebastian/object-reflector@2.0.4",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -992,6 +1015,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/sebastian/recursion-context@4.0.5",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -1033,6 +1057,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/sebastian/resource-operations@3.0.3",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -1074,6 +1099,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/sebastian/type@3.2.1",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -1115,6 +1141,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/sebastian/version@3.0.2",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -1156,6 +1183,7 @@
                     }
                 }
             ],
+            "purl": "pkg:composer/theseer/tokenizer@1.2.1",
             "externalReferences": [
                 {
                     "type": "distribution",
