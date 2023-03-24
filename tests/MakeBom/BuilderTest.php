@@ -185,8 +185,6 @@ final class BuilderTest extends TestCase
             $sbom->getComponents()->findItem('packageurl-php', 'package-url')[0]->getBomRef(),
         ], $component->getDependencies()->getItems());
 
-        // continue
-
         // dev requirements
     }
 
@@ -211,23 +209,7 @@ final class BuilderTest extends TestCase
     {
         $setupManifest = $setup();
         $composer = (new ComposerFactory())->createComposer(new NullIO(), $setupManifest, cwd: \dirname($setupManifest));
-        $builder = new Builder(true, false, null);
-
-        if (false === $locked && false === $installed) {
-            $this->expectException(LogicException::class);
-            $this->expectExceptionMessageMatches('/no lockfile/i');
-        }
-        $sbom = $builder->createSbomFromComposer($composer);
-
-        self::assertFalse($sbom, '@TODO');
-    }
-
-    #[DataProvider('dpCreateSbomFromComposer')]
-    public function testCreateSbomFromComposerMCVersionOverride(callable $setup, bool $locked, bool $installed): void
-    {
-        $setupManifest = $setup();
-        $composer = (new ComposerFactory())->createComposer(new NullIO(), $setupManifest, cwd: \dirname($setupManifest));
-        $builder = new Builder(true, false, null);
+        $builder = new Builder(false, true, null);
 
         if (false === $locked && false === $installed) {
             $this->expectException(LogicException::class);
