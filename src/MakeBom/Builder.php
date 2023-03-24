@@ -35,7 +35,6 @@ use CycloneDX\Composer\Properties;
 use CycloneDX\Core\Enums;
 use CycloneDX\Core\Factories\LicenseFactory;
 use CycloneDX\Core\Models;
-use Exception;
 use Generator;
 use PackageUrl\PackageUrl;
 use RuntimeException;
@@ -394,25 +393,5 @@ class Builder
                 $package->getAuthors()
             )
         ));
-    }
-
-    /**
-     * @throws Exception if an appropriate source of randomness cannot be found
-     */
-    public static function createRandomBomSerialNumber(): string
-    {
-        return sprintf(
-            'urn:uuid:%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
-            random_int(0, 0xFFFF),
-            random_int(0, 0xFFFF),
-            random_int(0, 0xFFFF),
-            // UUID version 4
-            random_int(0, 0x0FFF) | 0x4000,
-            // UUID version 4 variant 1
-            random_int(0, 0x3FFF) | 0x8000,
-            random_int(0, 0xFFFF),
-            random_int(0, 0xFFFF),
-            random_int(0, 0xFFFF),
-        );
     }
 }
