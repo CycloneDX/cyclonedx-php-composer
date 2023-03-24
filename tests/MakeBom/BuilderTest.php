@@ -56,6 +56,65 @@ final class BuilderTest extends TestCase
         }
         $sbom = $builder->createSbomFromComposer($composer);
 
+        self::assertRootComponent($sbom, true);
+        self::assertComponentSymfonyLock($sbom);
+        self::assertComponentPsrLog($sbom);
+        self::assertComponentCdxPlugin($sbom);
+
+        // dev requirements
+    }
+
+    #[DataProvider('dpCreateSbomFromComposer')]
+    public function testCreateSbomFromComposerOmittingDev(callable $setup, bool $locked, bool $installed): void
+    {
+        $setupManifest = $setup();
+        $composer = (new ComposerFactory())->createComposer(new NullIO(), $setupManifest, cwd: \dirname($setupManifest));
+        $builder = new Builder(true, false, null);
+
+        if (false === $locked && false === $installed) {
+            $this->expectException(LogicException::class);
+            $this->expectExceptionMessageMatches('/no lockfile/i');
+        }
+        $sbom = $builder->createSbomFromComposer($composer);
+
+        self::assertRootComponent($sbom, false);
+        self::assertComponentSymfonyLock($sbom);
+        self::assertComponentPsrLog($sbom);
+        $fComponents = $sbom->getComponents()->findItem('cyclonedx-php-composer', 'cyclonedx');
+        self::assertCount(0, $fComponents);
+    }
+
+    #[DataProvider('dpCreateSbomFromComposer')]
+    public function testCreateSbomFromComposerOmittingPlugins(callable $setup, bool $locked, bool $installed): void
+    {
+        $setupManifest = $setup();
+        $composer = (new ComposerFactory())->createComposer(new NullIO(), $setupManifest, cwd: \dirname($setupManifest));
+        $builder = new Builder(false, true, null);
+
+        if (false === $locked && false === $installed) {
+            $this->expectException(LogicException::class);
+            $this->expectExceptionMessageMatches('/no lockfile/i');
+        }
+        $sbom = $builder->createSbomFromComposer($composer);
+
+        self::assertRootComponent($sbom, false);
+        self::assertComponentSymfonyLock($sbom);
+        self::assertComponentPsrLog($sbom);
+        $fComponents = $sbom->getComponents()->findItem('cyclonedx-php-composer', 'cyclonedx');
+        self::assertCount(0, $fComponents);
+    }
+
+    /**
+     * @psalm-return \Generator<string, array{0:callable():string, 1:bool, 2:bool}>
+     */
+    public static function dpCreateSbomFromComposer(): Generator
+    {
+        yield from self::dpForSetup('testCreateSbomFromComposer');
+    }
+
+    // region helpers
+
+    private static function assertRootComponent (Models\Bom $sbom, bool $expectCdxPlugin): void {
         $component = $sbom->getMetadata()->getComponent();
         self::assertSame(Enums\ComponentType::Application, $component->getType());
         self::assertSame('test_data_for_create-sbom-from-composer', $component->getName());
@@ -72,11 +131,14 @@ final class BuilderTest extends TestCase
         /** @var Models\Property $componentProperty */
         $componentProperty = reset($fComponentProperties);
         self::assertSame('project', $componentProperty->getValue());
-        self::assertEquals([
-            $sbom->getComponents()->findItem('lock', 'symfony')[0]->getBomRef(),
-            $sbom->getComponents()->findItem('cyclonedx-php-composer', 'cyclonedx')[0]->getBomRef(),
-        ], $component->getDependencies()->getItems());
+        $expectedDeps = [            $sbom->getComponents()->findItem('lock', 'symfony')[0]->getBomRef()];
+        if ($expectCdxPlugin)  {
+            $expectedDeps[] = $sbom->getComponents()->findItem('cyclonedx-php-composer', 'cyclonedx')[0]->getBomRef();
+        }
+        self::assertEquals($expectedDeps, $component->getDependencies()->getItems());
+    }
 
+    private static function assertComponentSymfonyLock (Models\Bom $sbom): void {
         $fComponents = $sbom->getComponents()->findItem('lock', 'symfony');
         self::assertCount(1, $fComponents);
         $component = $fComponents[0];
@@ -112,7 +174,9 @@ final class BuilderTest extends TestCase
         self::assertEquals(
             [$sbom->getComponents()->findItem('log', 'psr')[0]->getBomRef()],
             $component->getDependencies()->getItems());
+    }
 
+    public static function assertComponentPsrLog(Models\Bom $sbom): void {
         $fComponents = $sbom->getComponents()->findItem('log', 'psr');
         self::assertCount(1, $fComponents);
         $component = $fComponents[0];
@@ -146,7 +210,10 @@ final class BuilderTest extends TestCase
             self::assertEquals($expectedUrls, $fExtRefUrls);
         }
         self::assertEquals([], $component->getDependencies()->getItems());
+    }
 
+
+    private static function assertComponentCdxPlugin(Models\Bom $sbom): void{
         $fComponents = $sbom->getComponents()->findItem('cyclonedx-php-composer', 'cyclonedx');
         self::assertCount(1, $fComponents);
         $component = $fComponents[0];
@@ -185,48 +252,9 @@ final class BuilderTest extends TestCase
             $sbom->getComponents()->findItem('packageurl-php', 'package-url')[0]->getBomRef(),
         ], $component->getDependencies()->getItems());
 
-        // dev requirements
     }
 
-    #[DataProvider('dpCreateSbomFromComposer')]
-    public function testCreateSbomFromComposerOmittingDev(callable $setup, bool $locked, bool $installed): void
-    {
-        $setupManifest = $setup();
-        $composer = (new ComposerFactory())->createComposer(new NullIO(), $setupManifest, cwd: \dirname($setupManifest));
-        $builder = new Builder(true, false, null);
-
-        if (false === $locked && false === $installed) {
-            $this->expectException(LogicException::class);
-            $this->expectExceptionMessageMatches('/no lockfile/i');
-        }
-        $sbom = $builder->createSbomFromComposer($composer);
-
-        self::assertFalse($sbom, '@TODO');
-    }
-
-    #[DataProvider('dpCreateSbomFromComposer')]
-    public function testCreateSbomFromComposerOmittingPlugins(callable $setup, bool $locked, bool $installed): void
-    {
-        $setupManifest = $setup();
-        $composer = (new ComposerFactory())->createComposer(new NullIO(), $setupManifest, cwd: \dirname($setupManifest));
-        $builder = new Builder(false, true, null);
-
-        if (false === $locked && false === $installed) {
-            $this->expectException(LogicException::class);
-            $this->expectExceptionMessageMatches('/no lockfile/i');
-        }
-        $sbom = $builder->createSbomFromComposer($composer);
-
-        self::assertFalse($sbom, '@TODO');
-    }
-
-    /**
-     * @psalm-return \Generator<string, array{0:callable():string, 1:bool, 2:bool}>
-     */
-    public static function dpCreateSbomFromComposer(): Generator
-    {
-        yield from self::dpForSetup('testCreateSbomFromComposer');
-    }
+    // endregion helpers
 
     // endregion createSbomFromComposer
 
