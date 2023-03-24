@@ -247,6 +247,8 @@ class Builder
 
         // TODO continue set needed information
 
+        $component->setPackageUrl(        $this->createPurlFromComponent($component));
+
         return $component;
     }
 

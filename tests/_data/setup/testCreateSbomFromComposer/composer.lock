@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d12cba3ba7ec2f95e8a3662a05a57839",
+    "content-hash": "3a103758ea30861aa594ee07c5f86328",
     "packages": [
         {
             "name": "psr/log",
@@ -218,16 +218,16 @@
         },
         {
             "name": "cyclonedx/cyclonedx-library",
-            "version": "v2.0.0",
+            "version": "v2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/CycloneDX/cyclonedx-php-library.git",
-                "reference": "1fe60a0054ea34197e87b0dd1bc7271e51d56324"
+                "reference": "cf95f5496e9117127f5aab8adc79beb2bc63c3dc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/CycloneDX/cyclonedx-php-library/zipball/1fe60a0054ea34197e87b0dd1bc7271e51d56324",
-                "reference": "1fe60a0054ea34197e87b0dd1bc7271e51d56324",
+                "url": "https://api.github.com/repos/CycloneDX/cyclonedx-php-library/zipball/cf95f5496e9117127f5aab8adc79beb2bc63c3dc",
+                "reference": "cf95f5496e9117127f5aab8adc79beb2bc63c3dc",
                 "shasum": ""
             },
             "require": {
@@ -304,7 +304,7 @@
                     "type": "other"
                 }
             ],
-            "time": "2023-03-20T16:54:48+00:00"
+            "time": "2023-03-24T08:49:07+00:00"
         },
         {
             "name": "cyclonedx/cyclonedx-php-composer",
@@ -312,11 +312,11 @@
             "dist": {
                 "type": "path",
                 "url": "../../../..",
-                "reference": "ca9b682963fbe18bef870c4c15a8ffbdfcb2ac52"
+                "reference": "c0ab6427ced71f521e24a28ba19cdd4b5c1b5ae3"
             },
             "require": {
                 "composer-plugin-api": "^2.3",
-                "cyclonedx/cyclonedx-library": "^2.0",
+                "cyclonedx/cyclonedx-library": "^2.1",
                 "package-url/packageurl-php": "^1.0",
                 "php": "^8.1"
             },

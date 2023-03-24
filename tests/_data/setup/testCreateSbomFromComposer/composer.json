@@ -2,7 +2,8 @@
     "name": "cyclonedx/test_data_for_create-sbom-from-composer",
     "description": "test setup 'testCreateSbomFromComposer'",
     "license": "Apache-2.0",
-    "type": "metapackage",
+    "type": "project",
+    "version": "dev-master",
     "authors": [
         {
             "name": "Jan Kowalleck"
