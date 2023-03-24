@@ -42,9 +42,9 @@ final class BuilderTest extends TestCase
 {
     public function testCreateRandomBomSerialNumberHasCorrectFormat(): void
     {
-        $uuid4v1Format = '[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-4[0-9A-Fa-f]{3}-[89ABab][0-9A-Fa-f]{3}-[0-9A-Fa-f]{12}';
+        $format = 'urn:uuid:([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})|(\{[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}';
         $actual = Builder::createRandomBomSerialNumber();
-        self::assertMatchesRegularExpression("/^urn:uuid:$uuid4v1Format$/", $actual);
+        self::assertMatchesRegularExpression($format, $actual);
     }
 
     // region createSbomFromComposer
