@@ -30,6 +30,7 @@ use CycloneDX\Core\Serialization;
 use CycloneDX\Core\Spec\Format;
 use CycloneDX\Core\Spec\Spec;
 use CycloneDX\Core\Spec\SpecFactory;
+use CycloneDX\Core\Utils\BomUtility;
 use CycloneDX\Core\Validation\Validator;
 use CycloneDX\Core\Validation\Validators;
 use DateTime;
@@ -128,7 +129,7 @@ class Command extends BaseCommand
 
         if (!$this->options->outputReproducible) {
             try {
-                $bom->setSerialNumber(Builder::createRandomBomSerialNumber());
+                $bom->setSerialNumber(BomUtility::randomSerialNumber());
             } catch (\Exception) {
                 /* pass */
             }
