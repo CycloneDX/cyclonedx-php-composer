@@ -8,7 +8,7 @@ Based on [OWASP Software Component Verification Standard for Software Bill of Ma
 (SCVS SBOM) criteria, this tool is now capable of producing SBOM documents almost passing Level-2 (only signing needs to be done externally).  
 Affective changes based on these SCVS SBOM criteria:
 * 2.1  - Added Support for CycloneDX 1.4 (via [#250])
-* 2.3  - Each SBOM has a unique identifier ([#279] via [#250])
+* 2.3  - Each SBOM has a unique identifier ([#279] via [#250], [#353])
 * 2.7  - SBOM is timestamped ([#112] via [#250])
 * 2.9  - Accuracy of Inventory was improved  ([#102], [#122], [#261], [#313] via [#250])
 * 2.10 - Accuracy of Inventory of all test was improved ([#102], [#122], [#261], [#313] via [#250])
