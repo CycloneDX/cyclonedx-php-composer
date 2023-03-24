@@ -40,13 +40,6 @@ use UnexpectedValueException;
 #[UsesClass(Plugin::class)]
 final class BuilderTest extends TestCase
 {
-    public function testCreateRandomBomSerialNumberHasCorrectFormat(): void
-    {
-        $format = 'urn:uuid:([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})|(\{[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}';
-        $actual = Builder::createRandomBomSerialNumber();
-        self::assertMatchesRegularExpression($format, $actual);
-    }
-
     // region createSbomFromComposer
 
     #[DataProvider('dpCreateSbomFromComposer')]
