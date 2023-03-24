@@ -30,7 +30,7 @@ Affective changes based on these SCVS SBOM criteria:
   * SBOM results
     * Components' version is no longer artificially normalized ([#102] via [#250])
   * Dependencies
-    * Requires `cyclonedx/cyclonedx-library:^2.0`, was `:^1.4.2` ([#128] via [#250])
+    * Requires `cyclonedx/cyclonedx-library:^2.1`, was `:^1.4.2` ([#128] via [#250], [#353])
 * Changed
   * Evidence analysis prefers actually installed packages over lock file ([#122] via [#250])
   * Root component's versions is unset, if version detection fails ([#154] via [#250])
@@ -39,7 +39,7 @@ Affective changes based on these SCVS SBOM criteria:
   * Evidence collection knows actually installed packages ([#122] via [#250])
   * SBOM results
     * Support for CycloneDX Spec v1.4 (via [#250])
-    * might have `serialnumber` populated ([#279] via [#250])
+    * might have `serialnumber` populated ([#279] via [#250], [#353])
     * might have `metadata.timestamp` populated ([#112] via [#250])
     * might have `metadata.tools[].tool.externalReferences` populated ([#171] via [#250])
     * might have `components[].component.author` populated ([#261] via [#250])
@@ -66,6 +66,7 @@ Affective changes based on these SCVS SBOM criteria:
 [#293]: https://github.com/CycloneDX/cyclonedx-php-composer/issues/293
 [#309]: https://github.com/CycloneDX/cyclonedx-php-composer/pull/309
 [#313]: https://github.com/CycloneDX/cyclonedx-php-composer/issues/313
+[#353]: https://github.com/CycloneDX/cyclonedx-php-composer/pull/353
 
 ## 3.11.0 - 2023-02-11
 
