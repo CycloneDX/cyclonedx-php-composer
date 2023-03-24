@@ -114,7 +114,8 @@ final class BuilderTest extends TestCase
 
     // region helpers
 
-    private static function assertRootComponent (Models\Bom $sbom, bool $expectCdxPlugin): void {
+    private static function assertRootComponent(Models\Bom $sbom, bool $expectCdxPlugin): void
+    {
         $component = $sbom->getMetadata()->getComponent();
         self::assertSame(Enums\ComponentType::Application, $component->getType());
         self::assertSame('test_data_for_create-sbom-from-composer', $component->getName());
@@ -131,14 +132,15 @@ final class BuilderTest extends TestCase
         /** @var Models\Property $componentProperty */
         $componentProperty = reset($fComponentProperties);
         self::assertSame('project', $componentProperty->getValue());
-        $expectedDeps = [            $sbom->getComponents()->findItem('lock', 'symfony')[0]->getBomRef()];
-        if ($expectCdxPlugin)  {
+        $expectedDeps = [$sbom->getComponents()->findItem('lock', 'symfony')[0]->getBomRef()];
+        if ($expectCdxPlugin) {
             $expectedDeps[] = $sbom->getComponents()->findItem('cyclonedx-php-composer', 'cyclonedx')[0]->getBomRef();
         }
         self::assertEquals($expectedDeps, $component->getDependencies()->getItems());
     }
 
-    private static function assertComponentSymfonyLock (Models\Bom $sbom): void {
+    private static function assertComponentSymfonyLock(Models\Bom $sbom): void
+    {
         $fComponents = $sbom->getComponents()->findItem('lock', 'symfony');
         self::assertCount(1, $fComponents);
         $component = $fComponents[0];
@@ -176,7 +178,8 @@ final class BuilderTest extends TestCase
             $component->getDependencies()->getItems());
     }
 
-    public static function assertComponentPsrLog(Models\Bom $sbom): void {
+    public static function assertComponentPsrLog(Models\Bom $sbom): void
+    {
         $fComponents = $sbom->getComponents()->findItem('log', 'psr');
         self::assertCount(1, $fComponents);
         $component = $fComponents[0];
@@ -212,8 +215,8 @@ final class BuilderTest extends TestCase
         self::assertEquals([], $component->getDependencies()->getItems());
     }
 
-
-    private static function assertComponentCdxPlugin(Models\Bom $sbom): void{
+    private static function assertComponentCdxPlugin(Models\Bom $sbom): void
+    {
         $fComponents = $sbom->getComponents()->findItem('cyclonedx-php-composer', 'cyclonedx');
         self::assertCount(1, $fComponents);
         $component = $fComponents[0];
@@ -251,7 +254,6 @@ final class BuilderTest extends TestCase
             $sbom->getComponents()->findItem('cyclonedx-library', 'cyclonedx')[0]->getBomRef(),
             $sbom->getComponents()->findItem('packageurl-php', 'package-url')[0]->getBomRef(),
         ], $component->getDependencies()->getItems());
-
     }
 
     // endregion helpers
