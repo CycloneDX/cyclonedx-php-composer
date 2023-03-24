@@ -65,16 +65,16 @@ final class BuilderTest extends TestCase
         self::assertCount(1, $component->getLicenses());
         self::assertSame('Apache-2.0', $component->getLicenses()->getItems()[0]->getId());
         self::assertSame('Jan Kowalleck', $component->getAuthor());
-        self::assertSame('pkg:composer/cyclonedx/test_data_for_create-sbom-from-composer@dev-master', (string)$component->getPackageUrl());
+        self::assertSame('pkg:composer/cyclonedx/test_data_for_create-sbom-from-composer@dev-master', (string) $component->getPackageUrl());
         $componentProperties = $component->getProperties()->getItems();
-        $fComponentProperties = array_filter($componentProperties, static fn($c) => $c->getName() === 'cdx:composer:package:type');
+        $fComponentProperties = array_filter($componentProperties, static fn ($c) => 'cdx:composer:package:type' === $c->getName());
         self::assertCount(1, $fComponentProperties);
         /** @var Models\Property $componentProperty */
         $componentProperty = reset($fComponentProperties);
         self::assertSame('project', $componentProperty->getValue());
         self::assertEquals([
             $sbom->getComponents()->findItem('lock', 'symfony')[0]->getBomRef(),
-            $sbom->getComponents()->findItem('cyclonedx-php-composer', 'cyclonedx')[0]->getBomRef()
+            $sbom->getComponents()->findItem('cyclonedx-php-composer', 'cyclonedx')[0]->getBomRef(),
         ], $component->getDependencies()->getItems());
 
         $fComponents = $sbom->getComponents()->findItem('lock', 'symfony');
@@ -87,7 +87,7 @@ final class BuilderTest extends TestCase
         self::assertCount(1, $component->getLicenses());
         self::assertSame('MIT', $component->getLicenses()->getItems()[0]->getId());
         self::assertSame('Jérémy Derussé, Symfony Community', $component->getAuthor());
-        self::assertSame('pkg:composer/symfony/lock@v6.2.7', (string)$component->getPackageUrl());
+        self::assertSame('pkg:composer/symfony/lock@v6.2.7', (string) $component->getPackageUrl());
         $componentProperties = $component->getProperties()->getItems();
         foreach ([
                      'cdx:composer:package:type' => ['library'],
@@ -95,8 +95,8 @@ final class BuilderTest extends TestCase
                      'cdx:composer:package:sourceReference' => ['febdeed9473e568ff34bf4350c04760f5357dfe2'],
                  ] as $propertyName => $expectedValues) {
             $fComponentPropertyValues = array_values(array_map(
-                static fn($p) => $p->getValue(),
-                array_filter($componentProperties, static fn($c) => $c->getName() === $propertyName)));
+                static fn ($p) => $p->getValue(),
+                array_filter($componentProperties, static fn ($c) => $c->getName() === $propertyName)));
             self::assertEquals($expectedValues, $fComponentPropertyValues);
         }
         $extRefs = $component->getExternalReferences()->getItems();
@@ -105,10 +105,9 @@ final class BuilderTest extends TestCase
                      [Enums\ExternalReferenceType::VCS, ['https://github.com/symfony/lock.git', 'https://github.com/symfony/lock/tree/v6.2.7']],
                  ] as [$extRefType, $expectedUrls]) {
             $fExtRefUrls = array_values(array_map(
-                static fn($er) => $er->getUrl(),
-                array_filter($extRefs, static fn($er) => $er->getType() === $extRefType)));
+                static fn ($er) => $er->getUrl(),
+                array_filter($extRefs, static fn ($er) => $er->getType() === $extRefType)));
             self::assertEquals($expectedUrls, $fExtRefUrls);
-
         }
         self::assertEquals(
             [$sbom->getComponents()->findItem('log', 'psr')[0]->getBomRef()],
@@ -124,7 +123,7 @@ final class BuilderTest extends TestCase
         self::assertCount(1, $component->getLicenses());
         self::assertSame('MIT', $component->getLicenses()->getItems()[0]->getId());
         self::assertSame('PHP-FIG', $component->getAuthor());
-        self::assertSame('pkg:composer/psr/log@3.0.0', (string)$component->getPackageUrl());
+        self::assertSame('pkg:composer/psr/log@3.0.0', (string) $component->getPackageUrl());
         $componentProperties = $component->getProperties()->getItems();
         foreach ([
                      'cdx:composer:package:type' => ['library'],
@@ -132,8 +131,8 @@ final class BuilderTest extends TestCase
                      'cdx:composer:package:sourceReference' => ['fe5ea303b0887d5caefd3d431c3e61ad47037001'],
                  ] as $propertyName => $expectedValues) {
             $fComponentPropertyValues = array_values(array_map(
-                static fn($p) => $p->getValue(),
-                array_filter($componentProperties, static fn($c) => $c->getName() === $propertyName)));
+                static fn ($p) => $p->getValue(),
+                array_filter($componentProperties, static fn ($c) => $c->getName() === $propertyName)));
             self::assertEquals($expectedValues, $fComponentPropertyValues);
         }
         $extRefs = $component->getExternalReferences()->getItems();
@@ -142,10 +141,9 @@ final class BuilderTest extends TestCase
                      [Enums\ExternalReferenceType::VCS, ['https://github.com/php-fig/log.git', 'https://github.com/php-fig/log/tree/3.0.0']],
                  ] as [$extRefType, $expectedUrls]) {
             $fExtRefUrls = array_values(array_map(
-                static fn($er) => $er->getUrl(),
-                array_filter($extRefs, static fn($er) => $er->getType() === $extRefType)));
+                static fn ($er) => $er->getUrl(),
+                array_filter($extRefs, static fn ($er) => $er->getType() === $extRefType)));
             self::assertEquals($expectedUrls, $fExtRefUrls);
-
         }
         self::assertEquals([], $component->getDependencies()->getItems());
 
@@ -159,15 +157,15 @@ final class BuilderTest extends TestCase
         self::assertCount(1, $component->getLicenses());
         self::assertSame('Apache-2.0', $component->getLicenses()->getItems()[0]->getId());
         self::assertSame('Jan Kowalleck', $component->getAuthor());
-        self::assertSame('pkg:composer/cyclonedx/cyclonedx-php-composer@dev-master', (string)$component->getPackageUrl());
+        self::assertSame('pkg:composer/cyclonedx/cyclonedx-php-composer@dev-master', (string) $component->getPackageUrl());
         $componentProperties = $component->getProperties()->getItems();
         foreach ([
                      'cdx:composer:package:isDevRequirement' => ['true'],
                      'cdx:composer:package:type' => ['composer-plugin'],
                  ] as $propertyName => $expectedValues) {
             $fComponentPropertyValues = array_values(array_map(
-                static fn($p) => $p->getValue(),
-                array_filter($componentProperties, static fn($c) => $c->getName() === $propertyName)));
+                static fn ($p) => $p->getValue(),
+                array_filter($componentProperties, static fn ($c) => $c->getName() === $propertyName)));
             self::assertEquals($expectedValues, $fComponentPropertyValues);
         }
         $extRefs = $component->getExternalReferences()->getItems();
@@ -178,10 +176,9 @@ final class BuilderTest extends TestCase
                      [Enums\ExternalReferenceType::IssueTracker, ['https://github.com/CycloneDX/cyclonedx-php-composer/issues']],
                  ] as [$extRefType, $expectedUrls]) {
             $fExtRefUrls = array_values(array_map(
-                static fn($er) => $er->getUrl(),
-                array_filter($extRefs, static fn($er) => $er->getType() === $extRefType)));
+                static fn ($er) => $er->getUrl(),
+                array_filter($extRefs, static fn ($er) => $er->getType() === $extRefType)));
             self::assertEquals($expectedUrls, $fExtRefUrls);
-
         }
         self::assertEquals([
             $sbom->getComponents()->findItem('cyclonedx-library', 'cyclonedx')[0]->getBomRef(),
@@ -263,7 +260,7 @@ final class BuilderTest extends TestCase
 
         $fTools = array_filter(
             $tools,
-            static fn(Models\Tool $t): bool => 'cyclonedx' === $t->getVendor() && 'cyclonedx-php-composer' === $t->getName()
+            static fn (Models\Tool $t): bool => 'cyclonedx' === $t->getVendor() && 'cyclonedx-php-composer' === $t->getName()
         );
         self::assertCount(1, $fTools, 'missing self');
         /** @var Models\Tool $fTool */
@@ -276,7 +273,7 @@ final class BuilderTest extends TestCase
 
         $fTools = array_filter(
             $tools,
-            static fn(Models\Tool $t): bool => 'cyclonedx' === $t->getVendor() && 'cyclonedx-library' === $t->getName()
+            static fn (Models\Tool $t): bool => 'cyclonedx' === $t->getVendor() && 'cyclonedx-library' === $t->getName()
         );
         self::assertCount(1, $fTools, 'missing library');
         /** @var Models\Tool $fTool */
@@ -299,7 +296,7 @@ final class BuilderTest extends TestCase
 
         $fTools = array_filter(
             $tools,
-            static fn(Models\Tool $t): bool => 'cyclonedx' === $t->getVendor() && 'cyclonedx-php-composer' === $t->getName()
+            static fn (Models\Tool $t): bool => 'cyclonedx' === $t->getVendor() && 'cyclonedx-php-composer' === $t->getName()
         );
         self::assertCount(1, $fTools, 'missing self');
         /** @var Models\Tool $fTool */
@@ -308,7 +305,7 @@ final class BuilderTest extends TestCase
 
         $fTools = array_filter(
             $tools,
-            static fn(Models\Tool $t): bool => 'cyclonedx' === $t->getVendor() && 'cyclonedx-library' === $t->getName()
+            static fn (Models\Tool $t): bool => 'cyclonedx' === $t->getVendor() && 'cyclonedx-library' === $t->getName()
         );
         self::assertCount(1, $fTools, 'missing library');
         /** @var Models\Tool $fTool */
@@ -326,7 +323,7 @@ final class BuilderTest extends TestCase
 
         $fTools = array_filter(
             $tools,
-            static fn(Models\Tool $t): bool => 'cyclonedx' === $t->getVendor() && 'cyclonedx-php-composer' === $t->getName()
+            static fn (Models\Tool $t): bool => 'cyclonedx' === $t->getVendor() && 'cyclonedx-php-composer' === $t->getName()
         );
         self::assertCount(1, $fTools, 'missing self');
 
@@ -351,11 +348,11 @@ final class BuilderTest extends TestCase
      */
     private static function getTempDir(): string
     {
-        $tempSetupDir = __DIR__ . '/../../.tmp/BuilderTest/setup';
+        $tempSetupDir = __DIR__.'/../../.tmp/BuilderTest/setup';
         if (is_dir($tempSetupDir) || mkdir($tempSetupDir, recursive: true)) {
             return $tempSetupDir;
         }
-        throw new UnexpectedValueException('failed to create tempDir: ' . $tempSetupDir);
+        throw new UnexpectedValueException('failed to create tempDir: '.$tempSetupDir);
     }
 
     /**
@@ -363,11 +360,11 @@ final class BuilderTest extends TestCase
      */
     private static function dpForSetup(string $setupTemplate): Generator
     {
-        $setupManifest = __DIR__ . "/../_data/setup/$setupTemplate/composer.json";
-        $setupLock = __DIR__ . "/../_data/setup/$setupTemplate/composer.lock";
+        $setupManifest = __DIR__."/../_data/setup/$setupTemplate/composer.json";
+        $setupLock = __DIR__."/../_data/setup/$setupTemplate/composer.lock";
 
         yield 'locked NotInstalled' => [
-            static fn() => $setupManifest,
+            static fn () => $setupManifest,
             true,
             false,
         ];
@@ -376,7 +373,7 @@ final class BuilderTest extends TestCase
 
         $tempDir = tempnam($tempSetupDir, 'notLocked_notInstalled_');
         yield basename($tempDir) => [
-            static fn() => unlink($tempDir) &&
+            static fn () => unlink($tempDir) &&
             mkdir($tempDir, recursive: true) &&
             copy($setupManifest, "$tempDir/composer.json")
                 ? "$tempDir/composer.json"
@@ -387,11 +384,11 @@ final class BuilderTest extends TestCase
 
         $tempDir = tempnam($tempSetupDir, 'locked_installed_');
         yield basename($tempDir) => [
-            static fn() => unlink($tempDir) &&
+            static fn () => unlink($tempDir) &&
             mkdir($tempDir, recursive: true) &&
             copy($setupManifest, "$tempDir/composer.json") &&
             copy($setupLock, "$tempDir/composer.lock") &&
-            false !== shell_exec('composer -d ' . escapeshellarg($tempDir) . ' install --no-interaction --no-progress -q')
+            false !== shell_exec('composer -d '.escapeshellarg($tempDir).' install --no-interaction --no-progress -q')
                 ? "$tempDir/composer.json"
                 : throw new UnexpectedValueException("setup failed: $tempDir"),
             true,
@@ -400,11 +397,11 @@ final class BuilderTest extends TestCase
 
         $tempDir = tempnam($tempSetupDir, 'notLocked_installed_');
         yield basename($tempDir) => [
-            static fn() => unlink($tempDir) &&
+            static fn () => unlink($tempDir) &&
             mkdir($tempDir, recursive: true) &&
             copy($setupManifest, "$tempDir/composer.json") &&
             copy($setupLock, "$tempDir/composer.lock") &&
-            false !== shell_exec('composer -d ' . escapeshellarg($tempDir) . ' install --no-interaction -q') &&
+            false !== shell_exec('composer -d '.escapeshellarg($tempDir).' install --no-interaction -q') &&
             unlink("$tempDir/composer.lock")
                 ? "$tempDir/composer.json"
                 : throw new UnexpectedValueException("setup failed: $tempDir"),
