@@ -2,6 +2,7 @@
     "name": "cyclonedx/cyclonedx-php-composer-tool4demo",
     "description": "global-like cyclonedx/cyclonedx-php-composer for usage in demos",
     "type": "metapackage",
+    "license": "Apache-2.0",
     "authors": [
         {
             "name": "Jan Kowalleck"
