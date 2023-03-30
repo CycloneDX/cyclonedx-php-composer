@@ -44,7 +44,7 @@ final class BuilderTest extends TestCase
     // region createSbomFromComposer
 
     #[DataProvider('dpCreateSbomFromComposer')]
-    public function testCreateSbomFromComposer(callable $setup, bool $locked, bool $installed): void
+    public function testCreateSbomFromComposer(callable $setup, bool $locked, bool $installed, bool $noDev): void
     {
         $setupManifest = $setup();
         $composer = (new ComposerFactory())->createComposer(new NullIO(), $setupManifest, cwd: \dirname($setupManifest));
@@ -56,16 +56,23 @@ final class BuilderTest extends TestCase
         }
         $sbom = $builder->createSbomFromComposer($composer);
 
-        self::assertRootComponent($sbom, true);
+        self::assertRootComponent($sbom, !($installed && $noDev));
         self::assertComponentSymfonyLock($sbom);
         self::assertComponentPsrLog($sbom);
-        self::assertComponentCdxPlugin($sbom);
+        if ($installed && $noDev) {
+            $fComponents = $sbom->getComponents()->findItem('cyclonedx-php-composer', 'cyclonedx');
+            self::assertCount(0, $fComponents);
+        } else {
+            self::assertComponentCdxPlugin($sbom);
+        }
+        $fComponents = $sbom->getComponents()->findItem('cyclonedx-library', 'cyclonedx');
+        self::assertCount($installed && $noDev ? 0 : 1, $fComponents);
 
         // dev requirements
     }
 
     #[DataProvider('dpCreateSbomFromComposer')]
-    public function testCreateSbomFromComposerOmittingDev(callable $setup, bool $locked, bool $installed): void
+    public function testCreateSbomFromComposerOmittingDev(callable $setup, bool $locked, bool $installed, bool $noDev): void
     {
         $setupManifest = $setup();
         $composer = (new ComposerFactory())->createComposer(new NullIO(), $setupManifest, cwd: \dirname($setupManifest));
@@ -82,10 +89,12 @@ final class BuilderTest extends TestCase
         self::assertComponentPsrLog($sbom);
         $fComponents = $sbom->getComponents()->findItem('cyclonedx-php-composer', 'cyclonedx');
         self::assertCount(0, $fComponents);
+        $fComponents = $sbom->getComponents()->findItem('cyclonedx-library', 'cyclonedx');
+        self::assertCount(0, $fComponents);
     }
 
     #[DataProvider('dpCreateSbomFromComposer')]
-    public function testCreateSbomFromComposerOmittingPlugins(callable $setup, bool $locked, bool $installed): void
+    public function testCreateSbomFromComposerOmittingPlugins(callable $setup, bool $locked, bool $installed, bool $noDev): void
     {
         $setupManifest = $setup();
         $composer = (new ComposerFactory())->createComposer(new NullIO(), $setupManifest, cwd: \dirname($setupManifest));
@@ -109,7 +118,7 @@ final class BuilderTest extends TestCase
      */
     public static function dpCreateSbomFromComposer(): Generator
     {
-        yield from self::dpForSetup('testCreateSbomFromComposer');
+        yield from self::dpForSetup('testCreateSbomFromComposer', true);
     }
 
     // region helpers
@@ -154,9 +163,9 @@ final class BuilderTest extends TestCase
         self::assertSame('pkg:composer/symfony/lock@v6.2.7', (string) $component->getPackageUrl());
         $componentProperties = $component->getProperties()->getItems();
         foreach ([
-                     'cdx:composer:package:type' => ['library'],
-                     'cdx:composer:package:distReference' => ['febdeed9473e568ff34bf4350c04760f5357dfe2'],
-                     'cdx:composer:package:sourceReference' => ['febdeed9473e568ff34bf4350c04760f5357dfe2'],
+                   'cdx:composer:package:type' => ['library'],
+                   'cdx:composer:package:distReference' => ['febdeed9473e568ff34bf4350c04760f5357dfe2'],
+                   'cdx:composer:package:sourceReference' => ['febdeed9473e568ff34bf4350c04760f5357dfe2'],
                  ] as $propertyName => $expectedValues) {
             $fComponentPropertyValues = array_values(array_map(
                 static fn ($p) => $p->getValue(),
@@ -165,8 +174,8 @@ final class BuilderTest extends TestCase
         }
         $extRefs = $component->getExternalReferences()->getItems();
         foreach ([
-                     [Enums\ExternalReferenceType::Distribution, ['https://api.github.com/repos/symfony/lock/zipball/febdeed9473e568ff34bf4350c04760f5357dfe2']],
-                     [Enums\ExternalReferenceType::VCS, ['https://github.com/symfony/lock.git', 'https://github.com/symfony/lock/tree/v6.2.7']],
+                   [Enums\ExternalReferenceType::Distribution, ['https://api.github.com/repos/symfony/lock/zipball/febdeed9473e568ff34bf4350c04760f5357dfe2']],
+                   [Enums\ExternalReferenceType::VCS, ['https://github.com/symfony/lock.git', 'https://github.com/symfony/lock/tree/v6.2.7']],
                  ] as [$extRefType, $expectedUrls]) {
             $fExtRefUrls = array_values(array_map(
                 static fn ($er) => $er->getUrl(),
@@ -193,9 +202,9 @@ final class BuilderTest extends TestCase
         self::assertSame('pkg:composer/psr/log@3.0.0', (string) $component->getPackageUrl());
         $componentProperties = $component->getProperties()->getItems();
         foreach ([
-                     'cdx:composer:package:type' => ['library'],
-                     'cdx:composer:package:distReference' => ['fe5ea303b0887d5caefd3d431c3e61ad47037001'],
-                     'cdx:composer:package:sourceReference' => ['fe5ea303b0887d5caefd3d431c3e61ad47037001'],
+                   'cdx:composer:package:type' => ['library'],
+                   'cdx:composer:package:distReference' => ['fe5ea303b0887d5caefd3d431c3e61ad47037001'],
+                   'cdx:composer:package:sourceReference' => ['fe5ea303b0887d5caefd3d431c3e61ad47037001'],
                  ] as $propertyName => $expectedValues) {
             $fComponentPropertyValues = array_values(array_map(
                 static fn ($p) => $p->getValue(),
@@ -204,8 +213,8 @@ final class BuilderTest extends TestCase
         }
         $extRefs = $component->getExternalReferences()->getItems();
         foreach ([
-                     [Enums\ExternalReferenceType::Distribution, ['https://api.github.com/repos/php-fig/log/zipball/fe5ea303b0887d5caefd3d431c3e61ad47037001']],
-                     [Enums\ExternalReferenceType::VCS, ['https://github.com/php-fig/log.git', 'https://github.com/php-fig/log/tree/3.0.0']],
+                   [Enums\ExternalReferenceType::Distribution, ['https://api.github.com/repos/php-fig/log/zipball/fe5ea303b0887d5caefd3d431c3e61ad47037001']],
+                   [Enums\ExternalReferenceType::VCS, ['https://github.com/php-fig/log.git', 'https://github.com/php-fig/log/tree/3.0.0']],
                  ] as [$extRefType, $expectedUrls]) {
             $fExtRefUrls = array_values(array_map(
                 static fn ($er) => $er->getUrl(),
@@ -263,7 +272,7 @@ final class BuilderTest extends TestCase
     // region createToolsFromComposer
 
     #[DataProvider('dpCreateToolsFromComposer')]
-    public function testCreateToolsFromComposer(callable $setup, bool $locked, bool $installed): void
+    public function testCreateToolsFromComposer(callable $setup, bool $locked, bool $installed, bool $noDev): void
     {
         $setupManifest = $setup();
         $composer = (new ComposerFactory())->createComposer(new NullIO(), $setupManifest, cwd: \dirname($setupManifest));
@@ -298,7 +307,7 @@ final class BuilderTest extends TestCase
     }
 
     #[DataProvider('dpCreateToolsFromComposer')]
-    public function testCreateToolsFromComposerVersionOverride(callable $setup, bool $locked, bool $installed): void
+    public function testCreateToolsFromComposerVersionOverride(callable $setup, bool $locked, bool $installed, bool $noDev): void
     {
         $setupManifest = $setup();
         $composer = (new ComposerFactory())->createComposer(new NullIO(), $setupManifest, cwd: \dirname($setupManifest));
@@ -326,7 +335,7 @@ final class BuilderTest extends TestCase
     }
 
     #[DataProvider('dpCreateToolsFromComposer')]
-    public function testCreateToolsFromComposerExcludeLibs(callable $setup, bool $locked, bool $installed): void
+    public function testCreateToolsFromComposerExcludeLibs(callable $setup, bool $locked, bool $installed, bool $noDev): void
     {
         $setupManifest = $setup();
         $composer = (new ComposerFactory())->createComposer(new NullIO(), $setupManifest, cwd: \dirname($setupManifest));
@@ -347,7 +356,7 @@ final class BuilderTest extends TestCase
      */
     public static function dpCreateToolsFromComposer(): Generator
     {
-        yield from self::dpForSetup('testCreateToolsFromComposer');
+        yield from self::dpForSetup('testCreateToolsFromComposer', false);
     }
 
     // endregion createToolsFromComposer
@@ -370,7 +379,7 @@ final class BuilderTest extends TestCase
     /**
      * @psalm-return \Generator<string, array{0:callable():string, 1:bool, 2:bool}>
      */
-    private static function dpForSetup(string $setupTemplate): Generator
+    private static function dpForSetup(string $setupTemplate, bool $createNoDev): Generator
     {
         $setupManifest = __DIR__."/../_data/setup/$setupTemplate/composer.json";
         $setupLock = __DIR__."/../_data/setup/$setupTemplate/composer.lock";
@@ -378,6 +387,7 @@ final class BuilderTest extends TestCase
         yield 'locked NotInstalled' => [
             static fn () => $setupManifest,
             true,
+            false,
             false,
         ];
 
@@ -392,6 +402,7 @@ final class BuilderTest extends TestCase
                 : throw new UnexpectedValueException("setup failed: $tempDir"),
             false,
             false,
+            false,
         ];
 
         $tempDir = tempnam($tempSetupDir, 'locked_installed_');
@@ -400,11 +411,12 @@ final class BuilderTest extends TestCase
             mkdir($tempDir, recursive: true) &&
             copy($setupManifest, "$tempDir/composer.json") &&
             copy($setupLock, "$tempDir/composer.lock") &&
-            false !== shell_exec('composer -d '.escapeshellarg($tempDir).' install --no-interaction --no-progress -q')
+            false !== shell_exec('composer -d '.escapeshellarg($tempDir).' install --dev --no-interaction --no-progress -q')
                 ? "$tempDir/composer.json"
                 : throw new UnexpectedValueException("setup failed: $tempDir"),
             true,
             true,
+            false,
         ];
 
         $tempDir = tempnam($tempSetupDir, 'notLocked_installed_');
@@ -413,13 +425,45 @@ final class BuilderTest extends TestCase
             mkdir($tempDir, recursive: true) &&
             copy($setupManifest, "$tempDir/composer.json") &&
             copy($setupLock, "$tempDir/composer.lock") &&
-            false !== shell_exec('composer -d '.escapeshellarg($tempDir).' install --no-interaction -q') &&
+            false !== shell_exec('composer -d '.escapeshellarg($tempDir).' install --dev --no-interaction -q') &&
             unlink("$tempDir/composer.lock")
                 ? "$tempDir/composer.json"
                 : throw new UnexpectedValueException("setup failed: $tempDir"),
             false,
             true,
+            false,
         ];
+
+        if ($createNoDev) {
+            $tempDir = tempnam($tempSetupDir, 'locked_installed_noDev_');
+            yield basename($tempDir) => [
+                static fn () => unlink($tempDir) &&
+                mkdir($tempDir, recursive: true) &&
+                copy($setupManifest, "$tempDir/composer.json") &&
+                copy($setupLock, "$tempDir/composer.lock") &&
+                false !== shell_exec('composer -d '.escapeshellarg($tempDir).' install --no-dev --no-interaction --no-progress -q')
+                    ? "$tempDir/composer.json"
+                    : throw new UnexpectedValueException("setup failed: $tempDir"),
+                true,
+                true,
+                true,
+            ];
+
+            $tempDir = tempnam($tempSetupDir, 'notLocked_installed_noDev_');
+            yield basename($tempDir) => [
+                static fn () => unlink($tempDir) &&
+                mkdir($tempDir, recursive: true) &&
+                copy($setupManifest, "$tempDir/composer.json") &&
+                copy($setupLock, "$tempDir/composer.lock") &&
+                false !== shell_exec('composer -d '.escapeshellarg($tempDir).' install --no-dev --no-interaction -q') &&
+                unlink("$tempDir/composer.lock")
+                    ? "$tempDir/composer.json"
+                    : throw new UnexpectedValueException("setup failed: $tempDir"),
+                false,
+                true,
+                true,
+            ];
+        }
     }
 
     // endregion helpers
