@@ -7,25 +7,25 @@ All notable changes to this project will be documented in this file.
 Based on [OWASP Software Component Verification Standard for Software Bill of Materials](https://scvs.owasp.org/scvs/v2-software-bill-of-materials/)
 (SCVS SBOM) criteria, this tool is now capable of producing SBOM documents almost passing Level-2 (only signing needs to be done externally).  
 Affective changes based on these SCVS SBOM criteria:
-* 2.1  - Added Support for CycloneDX 1.4 (via [#250])
-* 2.3  - Each SBOM has a unique identifier ([#279] via [#250], [#353])
-* 2.7  - SBOM is timestamped ([#112] via [#250])
-* 2.9  - Accuracy of Inventory was improved  ([#102], [#122], [#261], [#313] via [#250])
-* 2.10 - Accuracy of Inventory of all test was improved ([#102], [#122], [#261], [#313] via [#250])
-* 2.11 - SBOM metadata was enhanced ([#171] via [#250])
-* 2.15 - SPDX license expression detection fixed ([#128] via [#250])
+
+* 2.1  – Added Support for CycloneDX 1.4 (via [#250])
+* 2.3  – SBOM has a unique identifier ([#279] via [#250], [#353])
+* 2.7  – SBOM is timestamped ([#112] via [#250])
+* 2.9  – Accuracy of Inventory was improved  ([#102], [#122], [#261], [#313] via [#250])
+* 2.10 – Accuracy of Inventory of all test components was improved ([#102], [#122], [#261], [#313] via [#250])
+* 2.11 – SBOM metadata was enhanced ([#171] via [#250])
+* 2.15 – SPDX license expression detection fixed ([#128] via [#250])
 
 ### 4.0.0 - Details
 
 * BREAKING changes
-  * Removed support for PHP `<8.0` ([#91] via [#250])
-  * Removed support for PHP `<8.1` ([#128] via [#250])
+* Removed support for PHP `<8.1` ([#91], [#128] via [#250])
   * Removed support for Composer `<2.3` ([#153] via [#250])
   * CLI
     * Removed deprecated composer command `make-bom`, call `composer CycloneDX:make-sbom` instead ([#293] via [#309])
     * Changed option `output-file` to default to `-` now, which causes to print to STDOUT (via [#250])
-    * Removed option `exclude-dev` in favour of new option `omit` (via [#250])
-    * Removed option `exclude-plugins` in favour of new option `omit` (via [#250])
+    * Removed option `exclude-dev` in favor of new option `omit` (via [#250])
+    * Removed option `exclude-plugins` in favor of new option `omit` (via [#250])
     * Removed option `no-version-normalization` ([#102] via [#250])
   * SBOM results
     * Components' version is no longer artificially normalized ([#102] via [#250])
