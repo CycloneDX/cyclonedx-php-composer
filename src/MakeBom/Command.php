@@ -90,9 +90,20 @@ class Command extends BaseCommand
             $bom = $this->generateBom($io, $spec);
             $this->validateBom($bom, $spec, $io);
             $this->writeBom($bom, $io);
-        } catch (Throwable $error) {
+        } catch (Errors\ValidationError $error) {
             $io->writeErrorRaw((string) $error, true, IOInterface::DEBUG);
-            $io->writeError(sprintf('<error>Error: %s</error>', OutputFormatter::escape($error->getMessage())));
+            $io->writeError(
+                [
+                    '<error>Failed to generate a formally valid BOM.</error>',
+                    '<warning>Please report the issue and provide the manifests of the current project to:</warning>',
+                    '<warning>https://github.com/CycloneDX/cyclonedx-php-composer/issues/new?template=ValidationError-report.md&labels=ValidationError&title=%5BValidationError%5D</warning>',
+                ]
+            );
+
+            return self::FAILURE;
+        } catch (Throwable $error) {
+            $io->writeErrorRaw($error::class.' - '.$error, true, IOInterface::DEBUG);
+            $io->writeError(sprintf('<error>Unexpected Error: %s</error>', OutputFormatter::escape($error->getMessage())));
 
             return self::FAILURE;
         }
@@ -157,7 +168,8 @@ class Command extends BaseCommand
     }
 
     /**
-     * @throws Throwable on error
+     * @throws Errors\ValidationError on validation errors
+     * @throws Throwable              on error
      */
     private function validateBom(string $bom, Spec $spec, IOInterface $io): void
     {
@@ -175,7 +187,11 @@ class Command extends BaseCommand
         };
         $io->writeErrorRaw('using '.$validator::class, verbosity: IOInterface::DEBUG);
 
-        $validationError = $validator->validateString($bom);
+        try {
+            $validationError = $validator->validateString($bom);
+        } catch (Throwable $err) {
+            throw new Errors\ValidationError('unexpected '.$err::class, previous: $err);
+        }
         if (null !== $validationError) {
             throw new Errors\ValidationError($validationError->getMessage());
         }
