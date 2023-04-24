@@ -165,7 +165,7 @@ class Options
                 self::SWITCH_VALIDATE,
                 null,
                 InputOption::VALUE_NEGATABLE,
-                'Validate the resulting output.',
+                'Formal validate the resulting BOM.',
                 $this->validate
             ),
             new InputOption(

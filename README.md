@@ -72,7 +72,7 @@ Options:
                                                       {choices: "1.1", "1.2", "1.3", "1.4"} [default: "1.4"]
       --output-reproducible|--no-output-reproducible  Whether to go the extra mile and make the output reproducible.
                                                       This might result in loss of time- and random-based-values.
-      --validate|--no-validate                        Validate the resulting output.
+      --validate|--no-validate                        Formal validate the resulting BOM.
       --mc-version=MC-VERSION                         Version of the main component.
                                                       This will override auto-detection.
   -h, --help                                          Display help for the given command.
