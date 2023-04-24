@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## unreleased
 
+## 4.0.1 - 2023-04-24
+
 * Fixed
   * Improved error reporting in case an invalid BOM would be created (via [#363]) 
 
