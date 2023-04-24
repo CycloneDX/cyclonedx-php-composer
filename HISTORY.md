@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## unreleased
+
+* Fixed
+  * Improved error reporting in case an invalid BOM would be created (via [#363]) 
+
+[#363]: https://github.com/CycloneDX/cyclonedx-php-composer/pull/363
+
 ## 4.0.0 - 2023-03-31
 
 Based on [OWASP Software Component Verification Standard for Software Bill of Materials](https://scvs.owasp.org/scvs/v2-software-bill-of-materials/)
