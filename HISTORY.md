@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 ## unreleased
 
+* Fixed
+  * Typo: "compoer" -> "composer" ([#367] via [#368])
+
+[#367]: https://github.com/CycloneDX/cyclonedx-php-composer/issues/367
+[#368]: https://github.com/CycloneDX/cyclonedx-php-composer/pull/368
+
 ## 4.0.1 - 2023-04-24
 
 * Fixed

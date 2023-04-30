@@ -134,7 +134,7 @@ class Command extends BaseCommand
         $subjectComposer = $this->composerFactory->createComposer($io, $composerFile, cwd: $projectDir, fullLoad: true);
         /** @psalm-suppress RedundantConditionGivenDocblockType -- as with lowest-compatible dependencies this is needed  */
         \assert($subjectComposer instanceof \Composer\Composer);
-        $io->writeError('<info>generate base SBOM from compoers\'s evidences...</info>', verbosity: IOInterface::VERBOSE);
+        $io->writeError('<info>generate base SBOM from composers\'s evidences...</info>', verbosity: IOInterface::VERBOSE);
         $bom = $builder->createSbomFromComposer($subjectComposer);
         unset($subjectComposer);
 
