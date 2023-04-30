@@ -112,8 +112,8 @@
         "normalize": "Normalize composer.json",
         "test": "Run all tests!",
         "test:composer-normalize": "Test if composer.json was normalized",
-        "test:composer-require-checker": "Test compoer requirements with composer-require-checker.",
-        "test:composer-unused": "Test compoer requirements with composer-unused.",
+        "test:composer-require-checker": "Test composer requirements with composer-require-checker.",
+        "test:composer-unused": "Test composer requirements with composer-unused.",
         "test:cs-fixer": "Test coding standards with PHP-CS-fixer.",
         "test:phpunit": "Run tests with PHPUnit.",
         "test:psalm": "Run static code analysis with Psalm."
