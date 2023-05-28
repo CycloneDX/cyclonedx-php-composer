@@ -203,7 +203,7 @@ class Builder
     /**
      * @psalm-suppress MissingThrowsDocblock
      */
-    private function createComponentFromPackage(PackageInterface $package, ?string $versionOverride = null): Models\Component
+    private function createComponentFromPackage(PackageInterface $package, string $versionOverride = null): Models\Component
     {
         [$group, $name] = self::getGroupAndName($package->getName());
         $version = $versionOverride ?? $package->getFullPrettyVersion();
@@ -377,7 +377,7 @@ class Builder
     /**
      * @psalm-suppress MissingThrowsDocblock
      */
-    private static function createToolFromPackage(PackageInterface $package, ?string $versionOverride = null): Models\Tool
+    private static function createToolFromPackage(PackageInterface $package, string $versionOverride = null): Models\Tool
     {
         [$group, $name] = self::getGroupAndName($package->getName());
 
