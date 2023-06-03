@@ -17,10 +17,12 @@
             <directory>tests</directory>
         </testsuite>
     </testsuites>
-    <coverage cacheDirectory=".phpunit.cache/code-coverage">
+    <source>
         <include>
-            <directory suffix=".php">src</directory>
+            <directory>src</directory>
         </include>
+    </source>
+    <coverage cacheDirectory=".phpunit.cache/code-coverage">
         <report>
             <clover outputFile="reports/coverage.clover.xml"/>
             <html outputDirectory="reports/coverage.html"/>

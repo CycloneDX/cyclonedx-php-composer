@@ -76,6 +76,13 @@
         }
     },
     "scripts": {
+        "clean": [
+            "rm -rf reports",
+            "@php tools/psalm/vendor/vimeo/psalm/psalm --clear-cache",
+            "@php tools/psalm/vendor/vimeo/psalm/psalm --clear-global-cache",
+            "rm -rf .*.cache",
+            "rm -rf .tmp"
+        ],
         "cs-fix": "@php tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/php-cs-fixer fix --diff",
         "dev-setup": [
             "@composer -d tools/composer-normalize update",
@@ -107,6 +114,7 @@
         "test:psalm": "@php tools/psalm/vendor/vimeo/psalm/psalm"
     },
     "scripts-descriptions": {
+        "clean": "Remove all results, caches, temp-files and so on.",
         "cs-fix": "Fix files according to coding standards.",
         "dev-setup": "Install dev-requirements and tools.",
         "normalize": "Normalize composer.json",
