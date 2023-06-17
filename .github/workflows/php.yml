@@ -82,6 +82,7 @@ jobs:
         shell: bash
         run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
       - name: Cache dependencies
+        if: ${{ steps.composer-cache.outputs.dir }}
         # see https://github.com/actions/cache
         uses: actions/cache@v3
         with:
@@ -162,6 +163,7 @@ jobs:
         id: composer-cache
         run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
       - name: Cache dependencies
+        if: ${{ steps.composer-cache.outputs.dir }}
         # see https://github.com/actions/cache
         uses: actions/cache@v3
         with:
@@ -228,6 +230,7 @@ jobs:
         id: composer-cache
         run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
       - name: Cache dependencies
+        if: ${{ steps.composer-cache.outputs.dir }}
         # see https://github.com/actions/cache
         uses: actions/cache@v3
         with:
@@ -266,6 +269,7 @@ jobs:
         id: composer-cache
         run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
       - name: Cache dependencies
+        if: ${{ steps.composer-cache.outputs.dir }}
         # see https://github.com/actions/cache
         uses: actions/cache@v3
         with:
@@ -302,6 +306,7 @@ jobs:
         id: composer-cache
         run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
       - name: Cache dependencies
+        if: ${{ steps.composer-cache.outputs.dir }}
         # see https://github.com/actions/cache
         uses: actions/cache@v3
         with:
@@ -340,6 +345,7 @@ jobs:
         id: composer-cache
         run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
       - name: Cache dependencies
+        if: ${{ steps.composer-cache.outputs.dir }}
         # see https://github.com/actions/cache
         uses: actions/cache@v3
         with:
