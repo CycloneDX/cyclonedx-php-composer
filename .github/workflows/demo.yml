@@ -83,7 +83,7 @@ jobs:
           - output-format: json
             spec-version: "1.1"
         include:
-          - # test with lowest combination
+          - # test with the lowest combination
             php: "8.1"          # lowest
             composer: "2.3"     # lowest
             # any other props
@@ -161,6 +161,7 @@ jobs:
           composer CycloneDX:make-sbom
           -vvv
           $OMIT_RULES
+          --validate
           --spec-version=${{ matrix.spec-version }}
           --output-reproducible
           --output-format=${{ matrix.output-format }}
@@ -174,6 +175,7 @@ jobs:
           composer CycloneDX:make-sbom
           -vvv
           $OMIT_RULES
+          --validate
           --spec-version=${{ matrix.spec-version }}
           --output-reproducible
           --output-format=${{ matrix.output-format }}
