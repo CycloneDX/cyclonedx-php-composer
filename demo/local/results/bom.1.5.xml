@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bom xmlns="http://cyclonedx.org/schema/bom/1.5" version="1">
+  <metadata>
+    <tools>
+      <tool>
+        <vendor><![CDATA[cyclonedx]]></vendor>
+        <name><![CDATA[cyclonedx-php-composer]]></name>
+        <version><![CDATA[in-dev]]></version>
+        <externalReferences>
+          <reference type="distribution">
+            <url><![CDATA[../..]]></url>
+          </reference>
+          <reference type="website">
+            <url><![CDATA[https://github.com/CycloneDX/cyclonedx-php-composer/#readme]]></url>
+            <comment><![CDATA[as detected from Composer manifest 'homepage']]></comment>
+          </reference>
+          <reference type="issue-tracker">
+            <url><![CDATA[https://github.com/CycloneDX/cyclonedx-php-composer/issues]]></url>
+            <comment><![CDATA[as detected from Composer manifest 'support.issues']]></comment>
+          </reference>
+          <reference type="vcs">
+            <url><![CDATA[https://github.com/CycloneDX/cyclonedx-php-composer/]]></url>
+            <comment><![CDATA[as detected from Composer manifest 'support.source']]></comment>
+          </reference>
+        </externalReferences>
+      </tool>
+    </tools>
+    <component type="application" bom-ref="cyclonedx-demo/cyclonedx-php-composer-local-dev-master">
+      <author><![CDATA[Jan Kowalleck]]></author>
+      <group><![CDATA[cyclonedx-demo]]></group>
+      <name><![CDATA[cyclonedx-php-composer-local]]></name>
+      <version><![CDATA[dev-master]]></version>
+      <description><![CDATA[demo of cyclonedx/cyclonedx-php-composer with a local dependency]]></description>
+      <purl><![CDATA[pkg:composer/cyclonedx-demo/cyclonedx-php-composer-local@dev-master]]></purl>
+      <externalReferences>
+        <reference type="website">
+          <url><![CDATA[https://cyclonedx.org/]]></url>
+          <comment><![CDATA[as detected from Composer manifest 'homepage']]></comment>
+        </reference>
+        <reference type="other">
+          <url><![CDATA[support@cyclonedx.org]]></url>
+          <comment><![CDATA[as detected from Composer manifest 'support.email']]></comment>
+        </reference>
+        <reference type="issue-tracker">
+          <url><![CDATA[https://github.com/CycloneDX/cyclonedx-php-composer/issues]]></url>
+          <comment><![CDATA[as detected from Composer manifest 'support.issues']]></comment>
+        </reference>
+        <reference type="other">
+          <url><![CDATA[https://groups.io/g/CycloneDX]]></url>
+          <comment><![CDATA[as detected from Composer manifest 'support.forum']]></comment>
+        </reference>
+        <reference type="chat">
+          <url><![CDATA[https://cyclonedx.org/slack/invite]]></url>
+          <comment><![CDATA[as detected from Composer manifest 'support.chat']]></comment>
+        </reference>
+        <reference type="documentation">
+          <url><![CDATA[https://github.com/CycloneDX/cyclonedx-php-composer/blob/master/demo/local/README.md]]></url>
+          <comment><![CDATA[as detected from Composer manifest 'support.docs']]></comment>
+        </reference>
+      </externalReferences>
+      <properties>
+        <property name="cdx:composer:package:type"><![CDATA[project]]></property>
+      </properties>
+    </component>
+  </metadata>
+  <components>
+    <component type="library" bom-ref="cyclonedx-demo/local-demo-dependency-1.33.7.0">
+      <author><![CDATA[Jan Kowalleck]]></author>
+      <group><![CDATA[cyclonedx-demo]]></group>
+      <name><![CDATA[local-demo-dependency]]></name>
+      <version><![CDATA[1.33.7]]></version>
+      <description><![CDATA[a package that is hosted locally and required in a local demo]]></description>
+      <purl><![CDATA[pkg:composer/cyclonedx-demo/local-demo-dependency@1.33.7]]></purl>
+      <externalReferences>
+        <reference type="distribution">
+          <url><![CDATA[packages/local-demo-dependency]]></url>
+        </reference>
+      </externalReferences>
+      <properties>
+        <property name="cdx:composer:package:distReference"><![CDATA[6166868f2e7db756aa6c51f466d267232a74b702]]></property>
+        <property name="cdx:composer:package:type"><![CDATA[library]]></property>
+      </properties>
+    </component>
+    <component type="library" bom-ref="cyclonedx-demo/local-demo-issue-158-dev-issue-158">
+      <author><![CDATA[Jan Kowalleck]]></author>
+      <group><![CDATA[cyclonedx-demo]]></group>
+      <name><![CDATA[local-demo-issue-158]]></name>
+      <version><![CDATA[dev-issue-158]]></version>
+      <description><![CDATA[a package that reproduces issue#158]]></description>
+      <purl><![CDATA[pkg:composer/cyclonedx-demo/local-demo-issue-158@dev-issue-158]]></purl>
+      <externalReferences>
+        <reference type="distribution">
+          <url><![CDATA[packages/local-demo-issue-158]]></url>
+        </reference>
+        <reference type="website">
+          <url><![CDATA[https://github.com/CycloneDX/cyclonedx-php-composer/issues/158]]></url>
+          <comment><![CDATA[as detected from Composer manifest 'homepage']]></comment>
+        </reference>
+        <reference type="issue-tracker">
+          <url><![CDATA[https://pear.php.net/bugs/search.php?cmd=display&package_name%5B%5D=PEAR_Exception]]></url>
+          <comment><![CDATA[as detected from Composer manifest 'support.issues']]></comment>
+        </reference>
+      </externalReferences>
+      <properties>
+        <property name="cdx:composer:package:distReference"><![CDATA[189236989b5f92038f280867115ac65185ba92df]]></property>
+        <property name="cdx:composer:package:type"><![CDATA[library]]></property>
+      </properties>
+    </component>
+    <component type="library" bom-ref="cyclonedx-demo/local-dependency-with-minimal-setup-dev-component-author">
+      <group><![CDATA[cyclonedx-demo]]></group>
+      <name><![CDATA[local-dependency-with-minimal-setup]]></name>
+      <version><![CDATA[dev-component-author]]></version>
+      <purl><![CDATA[pkg:composer/cyclonedx-demo/local-dependency-with-minimal-setup@dev-component-author]]></purl>
+      <externalReferences>
+        <reference type="distribution">
+          <url><![CDATA[packages/local-dependency-with-minimal-setup]]></url>
+        </reference>
+      </externalReferences>
+      <properties>
+        <property name="cdx:composer:package:distReference"><![CDATA[5cdadb5ab51e8009613e68c49f8d07fcd512da78]]></property>
+        <property name="cdx:composer:package:type"><![CDATA[library]]></property>
+      </properties>
+    </component>
+  </components>
+  <dependencies>
+    <dependency ref="cyclonedx-demo/local-demo-dependency-1.33.7.0">
+      <dependency ref="cyclonedx-demo/local-dependency-with-minimal-setup-dev-component-author"/>
+    </dependency>
+    <dependency ref="cyclonedx-demo/local-demo-issue-158-dev-issue-158"/>
+    <dependency ref="cyclonedx-demo/local-dependency-with-minimal-setup-dev-component-author"/>
+    <dependency ref="cyclonedx-demo/cyclonedx-php-composer-local-dev-master">
+      <dependency ref="cyclonedx-demo/local-demo-dependency-1.33.7.0"/>
+      <dependency ref="cyclonedx-demo/local-demo-issue-158-dev-issue-158"/>
+    </dependency>
+  </dependencies>
+</bom>
