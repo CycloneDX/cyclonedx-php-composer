@@ -17,9 +17,11 @@ as "laravel-7.12.0".
 * [`results/bom.1.2.xml`](results/bom.1.2.xml)
 * [`results/bom.1.3.xml`](results/bom.1.3.xml)
 * [`results/bom.1.4.xml`](results/bom.1.4.xml)
+* [`results/bom.1.5.xml`](results/bom.1.5.xml)
 * [`results/bom.1.2.json`](results/bom.1.2.json)
 * [`results/bom.1.3.json`](results/bom.1.3.json)
 * [`results/bom.1.4.json`](results/bom.1.4.json)
+* [`results/bom.1.5.json`](results/bom.1.5.json)
 
 ## Setup
 

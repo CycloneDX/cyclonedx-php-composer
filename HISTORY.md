@@ -4,6 +4,15 @@ All notable changes to this project will be documented in this file.
 
 ## unreleased
 
+Added support for [_CycloneDX) Specification-1.5](https://github.com/CycloneDX/specification/releases/tag/1.5).
+
+* Changed
+  * CLI switch `--spec-version` now supports value `1.5` to reflect _CycloneDX_ Specification-1.5 ([#380] via [#])
+* Dependencies
+  * Requires `cyclonedx/cyclonedx-library:^2.3`, was `:^2.1` ([#380] via [#])
+
+[#380]: https://github.com/CycloneDX/cyclonedx-php-composer/issues/380
+
 ## 4.0.2 - 2023-04-30
 
 * Fixed
@@ -36,7 +45,7 @@ Affective changes based on these SCVS SBOM criteria:
 ### 4.0.0 - Details
 
 * BREAKING changes
-* Removed support for PHP `<8.1` ([#91], [#128] via [#250])
+  * Removed support for PHP `<8.1` ([#91], [#128] via [#250])
   * Removed support for Composer `<2.3` ([#153] via [#250])
   * CLI
     * Removed deprecated composer command `make-bom`, call `composer CycloneDX:make-sbom` instead ([#293] via [#309])

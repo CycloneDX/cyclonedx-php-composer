@@ -39,7 +39,7 @@
     "require": {
         "php": "^8.1",
         "composer-plugin-api": "^2.3",
-        "cyclonedx/cyclonedx-library": "^2.1",
+        "cyclonedx/cyclonedx-library": "^2.3",
         "package-url/packageurl-php": "^1.0"
     },
     "require-dev": {
