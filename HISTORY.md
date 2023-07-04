@@ -6,7 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ## 4.1.0 - 2023-07-04
 
-Added support for [_CycloneDX) Specification-1.5](https://github.com/CycloneDX/specification/releases/tag/1.5).
+Added support for [_CycloneDX_ Specification-1.5](https://github.com/CycloneDX/specification/releases/tag/1.5).
 
 * Changed
   * This tool supports _CycloneDX_ Specification-1.5 now ([#380] via [#383])
