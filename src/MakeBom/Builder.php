@@ -289,6 +289,7 @@ class Builder
 
         foreach ($package->getSourceUrls() as $sourceUrl) {
             yield new Models\ExternalReference(
+                // see https://github.com/CycloneDX/specification/issues/98
                 Enums\ExternalReferenceType::VCS,
                 $sourceUrl
             );
