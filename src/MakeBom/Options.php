@@ -71,7 +71,7 @@ class Options
      */
     private const VALUES_OUTPUT_FORMAT_MAP = [
         'XML' => Format::XML,
-        // First in list is the default value.
+        // first in list is the default value - see constructor
         'JSON' => Format::JSON,
     ];
 
@@ -95,7 +95,7 @@ class Options
      */
     private const VALUE_SPEC_VERSION_MAP = [
         '1.4' => Version::v1dot4,
-        // First in list is the default value.
+        // first in list is the default value - see constructor
         '1.5' => Version::v1dot5,
         '1.3' => Version::v1dot3,
         '1.2' => Version::v1dot2,
