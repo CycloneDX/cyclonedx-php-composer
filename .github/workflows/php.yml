@@ -101,7 +101,7 @@ jobs:
           composer remove --dev 'roave/security-advisories'
           composer update --prefer-dist --no-interaction --no-progress --prefer-lowest
       - name: Install highest dependencies
-        if: ${{ matrix.dependencies == 'highest' }}
+        if: ${{ matrix.dependencies != 'lowest' }}
         run: composer update --prefer-dist --no-interaction --no-progress
       - name: Run PHPUnit tests
         run: >
@@ -125,7 +125,7 @@ jobs:
           path: ${{ env.REPORTS_DIR }}
           if-no-files-found: error
   code-checker:
-    name: Code analysis p${{ matrix.php }} c${{ matrix.composer }} ${{ matrix.dependencies }}
+    name: Code Analysis p${{ matrix.php }} c${{ matrix.composer }} ${{ matrix.dependencies }}
     runs-on: ubuntu-latest
     timeout-minutes: 30
     env:
@@ -155,7 +155,7 @@ jobs:
         # see https://github.com/shivammathur/setup-php
         uses: shivammathur/setup-php@v2
         with:
-          php-version: ${{ matrix.php }}
+          php-version: ${{ env.PHP_VERSION_LATEST }}
           extensions: ${{ env.PHP_PROJECT_EXT }}
           tools: composer:${{ matrix.composer }}
           coverage: none
@@ -182,14 +182,16 @@ jobs:
           # removing security-foo here is fine, as no code is run, only parsed
           composer remove --dev 'roave/security-advisories' \
              --no-update --no-install
+          composer config platform.php ${{ matrix.php }}
           composer update \
             --no-interaction --no-progress \
             --prefer-dist \
             --prefer-lowest \
             --with='composer/composer:~${{ matrix.composer }}.0'
       - name: Install highest dependencies with composer:~${{ matrix.composer }}.0
-        if: ${{ matrix.dependencies == 'highest' }}
+        if: ${{ matrix.dependencies != 'lowest' }}
         run: >
+          composer config platform.php ${{ matrix.php }} &&
           composer update
           --no-interaction --no-progress
           --prefer-dist
@@ -202,6 +204,7 @@ jobs:
           --long-progress
           --php-version='${{ matrix.php }}'
           --report='${{ env.REPORTS_DIR }}/psalm.php${{ matrix.php }}_${{ matrix.dependencies }}.junit.xml'
+          --stats
       - name: Artifact reports
         if: ${{ ! cancelled() }}
         # see https://github.com/actions/upload-artifact
@@ -298,7 +301,7 @@ jobs:
         # see https://github.com/shivammathur/setup-php
         uses: shivammathur/setup-php@v2
         with:
-          php-version: "8.1" ## not supporting php82 yet ${{ env.PHP_VERSION_LATEST }}
+          php-version: ${{ env.PHP_VERSION_LATEST }}
           extensions: ${{ env.PHP_PROJECT_EXT }}
           tools: 'composer:v2'
           coverage: none
