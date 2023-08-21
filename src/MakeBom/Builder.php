@@ -258,7 +258,7 @@ class Builder
 
         try {
             $purl = new PackageUrl('composer', $component->getName());
-        } catch (\Throwable) {
+        } catch (Throwable) {
             return null;
         }
 
@@ -354,7 +354,7 @@ class Builder
 
         try {
             $packagesRepo = self::getPackageRepo($composer, true);
-        } catch (\Throwable) {
+        } catch (Throwable) {
             $packagesRepo = new LockArrayRepository();
         }
 
@@ -365,7 +365,7 @@ class Builder
                     ?? throw new ValueError("package not found: $packageName"),
                     $versionOverride
                 );
-            } catch (\Throwable) {
+            } catch (Throwable) {
                 [$group, $name] = self::getGroupAndName($packageName);
                 yield (new Models\Tool())
                     ->setName($name)
