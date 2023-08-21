@@ -35,6 +35,7 @@ use CycloneDX\Core\Validation\Validator;
 use CycloneDX\Core\Validation\Validators;
 use DateTime;
 use DomainException;
+use Exception;
 use Symfony\Component\Console\Exception\LogicException;
 use Symfony\Component\Console\Formatter\OutputFormatter;
 use Symfony\Component\Console\Input\InputInterface;
@@ -141,7 +142,7 @@ class Command extends BaseCommand
         if (!$this->options->outputReproducible) {
             try {
                 $bom->setSerialNumber(BomUtility::randomSerialNumber());
-            } catch (\Exception) {
+            } catch (Exception) {
                 /* pass */
             }
             $bom->getMetadata()->setTimestamp(new DateTime());
