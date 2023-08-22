@@ -8,7 +8,7 @@ on:
   pull_request:
   workflow_dispatch:
   schedule:
-    # schedule weekly tests, since dependencies are not intended to be pinned
+    # schedule weekly tests, since dependencies are not intended to be locked
     # this means: at 23:42 on Fridays
     - cron: '42 23 * * 5'
 
