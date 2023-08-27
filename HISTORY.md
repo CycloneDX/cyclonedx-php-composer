@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## unreleased
 
+## 4.1.1 - 2023-08-27
+
 * Dependencies
   * Requires `cyclonedx/cyclonedx-library:^2.3||^3.0`, was `:^2.3` (via [#398])
 * Style
