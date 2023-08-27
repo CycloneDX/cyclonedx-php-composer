@@ -4,10 +4,15 @@ All notable changes to this project will be documented in this file.
 
 ## unreleased
 
+## 4.1.1 - 2023-08-28
+
+* Dependencies
+  * Requires `cyclonedx/cyclonedx-library:^2.3||^3.0`, was `:^2.3` (via [#398])
 * Style
   * Applied latest PHP Coding Standards (via [#395])
 
 [#395]: https://github.com/CycloneDX/cyclonedx-php-composer/pull/395
+[#398]: https://github.com/CycloneDX/cyclonedx-php-composer/pull/398
 
 ## 4.1.0 - 2023-07-04
 
