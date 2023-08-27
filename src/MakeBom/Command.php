@@ -28,7 +28,6 @@ use Composer\Factory as ComposerFactory;
 use Composer\IO\IOInterface;
 use CycloneDX\Core\Serialization;
 use CycloneDX\Core\Spec\Format;
-use CycloneDX\Core\Spec\Spec;
 use CycloneDX\Core\Spec\SpecFactory;
 use CycloneDX\Core\Utils\BomUtility;
 use CycloneDX\Core\Validation\Validator;
@@ -44,6 +43,8 @@ use Throwable;
 
 /**
  * @internal
+ *
+ * @template TSpec
  *
  * @author jkowalleck
  */
@@ -87,7 +88,7 @@ class Command extends BaseCommand
         $io->writeErrorRaw(__METHOD__.' Options: '.var_export($this->options, true), verbosity: IOInterface::DEBUG);
 
         try {
-            $spec = SpecFactory::makeForVersion($this->options->specVersion);
+            $spec = $this->makeSpec();
             $bom = $this->generateBom($io, $spec);
             $this->validateBom($bom, $spec, $io);
             $this->writeBom($bom, $io);
@@ -114,8 +115,22 @@ class Command extends BaseCommand
 
     /**
      * @throws Throwable on error
+     *
+     * @return TSpec
+     *
+     * @psalm-suppress InvalidReturnType,InvalidReturnStatement -- psalm has issues with template TSpec
      */
-    private function generateBom(IOInterface $io, Spec $spec): string
+    private function makeSpec()
+    {
+        return SpecFactory::makeForVersion($this->options->specVersion);
+    }
+
+    /**
+     * @param TSpec $spec
+     *
+     * @throws Throwable on error
+     */
+    private function generateBom(IOInterface $io, $spec): string
     {
         $io->writeError('<info>generate BOM...</info>', verbosity: IOInterface::VERBOSE);
 
@@ -157,7 +172,11 @@ class Command extends BaseCommand
             ));
 
         $io->writeError('<info>serialize BOM...</info>', verbosity: IOInterface::VERBOSE);
-        /** @var Serialization\Serializer */
+        /**
+         * @var Serialization\Serializer $serializer
+         *
+         * @psalm-suppress MixedArgumentTypeCoercion -- psalm has issues wth template TSpec for $spec
+         */
         $serializer = match ($this->options->outputFormat) {
             Format::JSON => new Serialization\JsonSerializer(new Serialization\JSON\NormalizerFactory($spec)),
             Format::XML => new Serialization\XmlSerializer(new Serialization\DOM\NormalizerFactory($spec)),
@@ -169,10 +188,12 @@ class Command extends BaseCommand
     }
 
     /**
+     * @param TSpec $spec
+     *
      * @throws Errors\ValidationError on validation errors
      * @throws Throwable              on error
      */
-    private function validateBom(string $bom, Spec $spec, IOInterface $io): void
+    private function validateBom(string $bom, $spec, IOInterface $io): void
     {
         if (false === $this->options->validate) {
             $io->writeError('<info>skipped BOM validation.</info>', verbosity: IOInterface::VERBOSE);
@@ -180,7 +201,11 @@ class Command extends BaseCommand
             return;
         }
         $io->writeError('<info>validate BOM...</info>', verbosity: IOInterface::VERBOSE);
-        /** @var Validator */
+        /**
+         * @var Validator $validator
+         *
+         * @psalm-suppress MixedArgumentTypeCoercion -- psalm has issues wth template TSpec for $spec
+         **/
         $validator = match ($this->options->outputFormat) {
             Format::JSON => new Validators\JsonStrictValidator($spec),
             Format::XML => new Validators\XmlValidator($spec),
