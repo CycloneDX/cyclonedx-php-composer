@@ -36,6 +36,7 @@ env:
   DEMO_TOOL_PATH: demo/.tool
   CDX_CP_TOOLS_VERSION_OVERRIDE: in-dev
   CDX_CP_TOOLS_EXCLUDE_LIBS: 1
+  CDX_CP_TOOLS_EXCLUDE_COMPOSER: 1
 
 jobs:
   reproducible:
