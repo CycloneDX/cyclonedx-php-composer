@@ -277,7 +277,16 @@ final class BuilderTest extends TestCase
         $setupManifest = $setup();
         $composer = (new ComposerFactory())->createComposer(new NullIO(), $setupManifest, cwd: \dirname($setupManifest));
 
-        $tools = [...Builder::createToolsFromComposer($composer, null, false)];
+        $tools = [...Builder::createToolsFromComposer($composer, null, false, false)];
+
+        $fTools = array_filter(
+            $tools,
+            static fn (Models\Tool $t): bool => null === $t->getVendor() && 'composer' === $t->getName()
+        );
+        self::assertCount(1, $fTools, 'missing composer');
+        /** @var Models\Tool $fTool */
+        $fTool = reset($fTools);
+        self::assertMatchesRegularExpression('/^v?\d+\./', $fTool->getVersion());
 
         $fTools = array_filter(
             $tools,
@@ -300,7 +309,7 @@ final class BuilderTest extends TestCase
         /** @var Models\Tool $fTool */
         $fTool = reset($fTools);
         if ($installed || $locked) {
-            self::assertMatchesRegularExpression('/^v?2\./', $fTool->getVersion());
+            self::assertMatchesRegularExpression('/^v?[23]\./', $fTool->getVersion());
         } else {
             self::assertNull($fTool->getVersion());
         }
@@ -313,25 +322,39 @@ final class BuilderTest extends TestCase
         $composer = (new ComposerFactory())->createComposer(new NullIO(), $setupManifest, cwd: \dirname($setupManifest));
 
         $versionOverride = uniqid('v1.0-fake', true);
-        $tools = [...Builder::createToolsFromComposer($composer, $versionOverride, false)];
+        $tools = [...Builder::createToolsFromComposer($composer, $versionOverride, false, false)];
 
-        $fTools = array_filter(
-            $tools,
-            static fn (Models\Tool $t): bool => 'cyclonedx' === $t->getVendor() && 'cyclonedx-php-composer' === $t->getName()
-        );
-        self::assertCount(1, $fTools, 'missing self');
-        /** @var Models\Tool $fTool */
-        $fTool = reset($fTools);
-        self::assertSame($versionOverride, $fTool->getVersion());
+        $expectedTools = [['cyclonedx', 'cyclonedx-library'], ['cyclonedx', 'cyclonedx-php-composer']];
+        foreach ($expectedTools as [$expectedVendor, $expectedName]) {
+            $fTools = array_filter(
+                $tools,
+                static fn (Models\Tool $t): bool => $expectedVendor === $t->getVendor() && $expectedName === $t->getName()
+            );
+            self::assertCount(1, $fTools, "missing $expectedVendor/$expectedName");
+            /** @var Models\Tool $fTool */
+            $fTool = reset($fTools);
+            self::assertSame($versionOverride, $fTool->getVersion());
+        }
+    }
 
-        $fTools = array_filter(
-            $tools,
-            static fn (Models\Tool $t): bool => 'cyclonedx' === $t->getVendor() && 'cyclonedx-library' === $t->getName()
-        );
-        self::assertCount(1, $fTools, 'missing library');
-        /** @var Models\Tool $fTool */
-        $fTool = reset($fTools);
-        self::assertSame($versionOverride, $fTool->getVersion());
+    #[DataProvider('dpCreateToolsFromComposer')]
+    public function testCreateToolsFromComposerExcludeComposer(callable $setup, bool $locked, bool $installed, bool $noDev): void
+    {
+        $setupManifest = $setup();
+        $composer = (new ComposerFactory())->createComposer(new NullIO(), $setupManifest, cwd: \dirname($setupManifest));
+
+        $tools = [...Builder::createToolsFromComposer($composer, null, false, true)];
+
+        $expectedTools = [['cyclonedx', 'cyclonedx-library'], ['cyclonedx', 'cyclonedx-php-composer']];
+        foreach ($expectedTools as [$expectedVendor, $expectedName]) {
+            $fTools = array_filter(
+                $tools,
+                static fn (Models\Tool $t): bool => $expectedVendor === $t->getVendor() && $expectedName === $t->getName()
+            );
+            self::assertCount(1, $fTools, "missing $expectedVendor/$expectedName");
+        }
+
+        self::assertSameSize($expectedTools, $tools, 'unexpected other elements');
     }
 
     #[DataProvider('dpCreateToolsFromComposer')]
@@ -340,15 +363,18 @@ final class BuilderTest extends TestCase
         $setupManifest = $setup();
         $composer = (new ComposerFactory())->createComposer(new NullIO(), $setupManifest, cwd: \dirname($setupManifest));
 
-        $tools = [...Builder::createToolsFromComposer($composer, null, true)];
+        $tools = [...Builder::createToolsFromComposer($composer, null, true, false)];
 
-        $fTools = array_filter(
-            $tools,
-            static fn (Models\Tool $t): bool => 'cyclonedx' === $t->getVendor() && 'cyclonedx-php-composer' === $t->getName()
-        );
-        self::assertCount(1, $fTools, 'missing self');
+        $expectedTools = [[null, 'composer'], ['cyclonedx', 'cyclonedx-php-composer']];
+        foreach ($expectedTools as [$expectedVendor, $expectedName]) {
+            $fTools = array_filter(
+                $tools,
+                static fn (Models\Tool $t): bool => $expectedVendor === $t->getVendor() && $expectedName === $t->getName()
+            );
+            self::assertCount(1, $fTools, "missing $expectedVendor/$expectedName");
+        }
 
-        self::assertCount(1, $tools, 'unexpected other elements');
+        self::assertSameSize($expectedTools, $tools, 'unexpected other elements');
     }
 
     /**
