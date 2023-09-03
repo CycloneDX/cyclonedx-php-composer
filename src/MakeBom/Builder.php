@@ -343,8 +343,17 @@ class Builder
      */
     public static function createToolsFromComposer(
         Composer $composer,
-        ?string $versionOverride, bool $excludeLibs
+        ?string $versionOverride, bool $excludeLibs, bool $excludeComposer
     ): Generator {
+        if (!$excludeComposer) {
+            yield (new Models\Tool())
+                ->setName('composer')
+                ->setVersion($versionOverride ?? $composer::getVersion()) // use the self-proclaimed `version`
+                // omit `vendor` and `externalReferences`, because we cannot be sure about the used tool's actual origin
+                // omit `hashes`, because unfortunately there is no agreed process of generating them
+            ;
+        }
+
         $packageNames = [
             'cyclonedx/cyclonedx-php-composer',
         ];

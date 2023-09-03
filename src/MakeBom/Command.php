@@ -168,7 +168,8 @@ class Command extends BaseCommand
             ...Builder::createToolsFromComposer(
                 $this->requireComposer(),
                 $this->options->getToolsVersionOverride(),
-                $this->options->getToolsExcludeLibs()
+                $this->options->getToolsExcludeLibs(),
+                $this->options->getToolsExcludeComposer()
             ));
 
         $io->writeError('<info>serialize BOM...</info>', verbosity: IOInterface::VERBOSE);
