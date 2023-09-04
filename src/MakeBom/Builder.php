@@ -379,7 +379,15 @@ class Builder
                 yield (new Models\Tool())
                     ->setName($name)
                     ->setVendor($group)
-                    ->setVersion($versionOverride);
+                    ->setVersion(
+                        $versionOverride
+                        ?? (trim(
+                            // try sibling of (global) installation
+                            @file_get_contents(\dirname(__DIR__, 4)."/$group/$name/semver.txt")
+                            ?: // fallback: empty string
+                            ''
+                        ) ?: null)
+                    );
             }
         }
     }
