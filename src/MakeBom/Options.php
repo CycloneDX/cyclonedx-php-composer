@@ -47,10 +47,16 @@ class Options
     private const ENV_TOOLS_VERSION_OVERRIDE = 'CDX_CP_TOOLS_VERSION_OVERRIDE';
 
     /**
-     * Env var to control whether to all own libs to `bom.metadata.tools.tool`.
+     * Env var to control whether to exclude all own libs to `bom.metadata.tools.tool`.
      * Non-documented private env vars usage, because this is not public API.
      */
     private const ENV_TOOLS_EXCLUDE_LIBS = 'CDX_CP_TOOLS_EXCLUDE_LIBS';
+
+    /**
+     * Env var to control whether to exclude `composer` to `bom.metadata.tools.tool`.
+     * Non-documented private env vars usage, because this is not public API.
+     */
+    private const ENV_TOOLS_EXCLUDE_COMPOSER = 'CDX_CP_TOOLS_EXCLUDE_COMPOSER';
 
     private const OPTION_OUTPUT_FORMAT = 'output-format';
     private const OPTION_OUTPUT_FILE = 'output-file';
@@ -276,6 +282,11 @@ class Options
     public function getToolsExcludeLibs(): bool
     {
         return (bool) getenv(self::ENV_TOOLS_EXCLUDE_LIBS);
+    }
+
+    public function getToolsExcludeComposer(): bool
+    {
+        return (bool) getenv(self::ENV_TOOLS_EXCLUDE_COMPOSER);
     }
 
     /**
