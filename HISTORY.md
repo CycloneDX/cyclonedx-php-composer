@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## unreleased
 
+## 4.2.0 - 2023-09-04
+
 * Added
   * SBOM result might have additional items in `metadata.tools` populated ([#402] via [#403]; [#404] via [#405])
 
