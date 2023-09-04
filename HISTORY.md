@@ -5,10 +5,12 @@ All notable changes to this project will be documented in this file.
 ## unreleased
 
 * Added
-  * SBOM result might have additional items in `metadata.tools` populated ([#402] vial [#403])
+  * SBOM result might have additional items in `metadata.tools` populated ([#402] via [#403]; [#404] via [#405])
 
 [#402]: https://github.com/CycloneDX/cyclonedx-php-composer/issues/402
 [#403]: https://github.com/CycloneDX/cyclonedx-php-composer/pull/403
+[#404]: https://github.com/CycloneDX/cyclonedx-php-composer/issues/404
+[#405]: https://github.com/CycloneDX/cyclonedx-php-composer/pull/405
 
 ## 4.1.1 - 2023-08-28
 
