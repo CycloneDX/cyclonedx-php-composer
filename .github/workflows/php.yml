@@ -95,14 +95,17 @@ jobs:
       - name: Install PHPUnit
         run: composer install --prefer-dist --no-interaction --no-progress
         working-directory: tools/phpunit
-      - name: Install lowest dependencies
-        if: ${{ matrix.dependencies == 'lowest' }}
+      - name: Install (${{ matrix.dependencies }})
+        shell: bash
         run: |
-          composer remove --dev 'roave/security-advisories'
-          composer update --prefer-dist --no-interaction --no-progress --prefer-lowest
-      - name: Install highest dependencies
-        if: ${{ matrix.dependencies != 'lowest' }}
-        run: composer update --prefer-dist --no-interaction --no-progress
+          # removing security-foo here is fine, as no code is run, only parsed
+          composer remove --dev 'roave/security-advisories' \
+             --no-update --no-install
+          composer config platform.php ${{ matrix.php }}
+          composer update \
+            --no-interaction --no-progress \
+            --prefer-dist \
+            ${{ matrix.dependencies == 'lowest' && '--prefer-lowest' || '' }}
       - name: Run PHPUnit tests
         run: >
           php
@@ -177,8 +180,7 @@ jobs:
       - name: Install psalm
         run: composer install --no-interaction --no-progress --prefer-dist
         working-directory: tools/psalm
-      - name: Install lowest dependencies with composer:~${{ matrix.composer }}.0
-        if: ${{ matrix.dependencies == 'lowest' }}
+      - name: Install (composer:~${{ matrix.composer }}.0 ${{ matrix.dependencies }})
         run: |
           # removing security-foo here is fine, as no code is run, only parsed
           composer remove --dev 'roave/security-advisories' \
@@ -187,16 +189,8 @@ jobs:
           composer update \
             --no-interaction --no-progress \
             --prefer-dist \
-            --prefer-lowest \
+            ${{ matrix.dependencies == 'lowest' && '--prefer-lowest' || '' }} \
             --with='composer/composer:~${{ matrix.composer }}.0'
-      - name: Install highest dependencies with composer:~${{ matrix.composer }}.0
-        if: ${{ matrix.dependencies != 'lowest' }}
-        run: >
-          composer config platform.php ${{ matrix.php }} &&
-          composer update
-          --no-interaction --no-progress
-          --prefer-dist
-          --with='composer/composer:~${{ matrix.composer }}.0'
       - name: Run Psalm tests
         run: >
           php tools/psalm/vendor/vimeo/psalm/psalm
