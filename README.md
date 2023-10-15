@@ -1,5 +1,8 @@
+# CycloneDX PHP Composer Plugin
+
 [![shield_packagist-version]][link_packagist]
 [![shield_gh-workflow-test]][link_gh-workflow-test]
+[![shield_ossf-best-practices]][link_ossf-best-practices]
 [![shield_license]][license_file]  
 [![shield_website]][link_website]
 [![shield_slack]][link_slack]
@@ -7,8 +10,6 @@
 [![shield_twitter-follow]][link_twitter]
 
 ----
-
-# CycloneDX PHP Composer Plugin
 
 A plugin for PHP's _[Composer](https://getcomposer.org/)_
 that generates Software Bill of Materials (SBOM) in _[CycloneDX](https://cyclonedx.org/)_ format.
@@ -120,12 +121,14 @@ See the [LICENSE][license_file] file for the full license.
 
 [shield_gh-workflow-test]: https://img.shields.io/github/actions/workflow/status/CycloneDX/cyclonedx-php-composer/php.yml?branch=master&logo=GitHub&logoColor=white "build"
 [shield_packagist-version]: https://img.shields.io/packagist/v/cyclonedx/cyclonedx-php-composer?logo=Packagist&logoColor=white "packagist"
+[shield_ossf-best-practices]: https://img.shields.io/cii/level/7953?label=OpenSSF%20best%20practices "OpenSSF best practices"
 [shield_license]: https://img.shields.io/github/license/CycloneDX/cyclonedx-php-composer?logo=open%20source%20initiative&logoColor=white "license"
 [shield_website]: https://img.shields.io/badge/https://-cyclonedx.org-blue.svg "homepage"
 [shield_slack]: https://img.shields.io/badge/slack-join-blue?logo=Slack&logoColor=white "slack join"
 [shield_groups]: https://img.shields.io/badge/discussion-groups.io-blue.svg "groups discussion"
 [shield_twitter-follow]: https://img.shields.io/badge/Twitter-follow-blue?logo=Twitter&logoColor=white "twitter follow"
 [link_gh-workflow-test]: https://github.com/CycloneDX/cyclonedx-php-composer/actions/workflows/php.yml?query=branch%3Amaster
+[link_ossf-best-practices]: https://www.bestpractices.dev/projects/7953
 [link_packagist]: https://packagist.org/packages/cyclonedx/cyclonedx-php-composer
 [link_website]: https://cyclonedx.org/
 [link_slack]: https://cyclonedx.org/slack/invite
