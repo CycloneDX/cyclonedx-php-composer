@@ -21,7 +21,7 @@ declare(strict_types=1);
  * Copyright (c) OWASP Foundation. All Rights Reserved.
  */
 
-namespace CycloneDX\Tests\MakeBom;
+namespace CycloneDX\Tests\Unit\MakeBom;
 
 use CycloneDX\Composer\MakeBom\Options;
 use CycloneDX\Core\Spec\Format;

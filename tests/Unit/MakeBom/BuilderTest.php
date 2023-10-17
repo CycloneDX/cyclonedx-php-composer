@@ -21,7 +21,7 @@ declare(strict_types=1);
  * Copyright (c) OWASP Foundation. All Rights Reserved.
  */
 
-namespace CycloneDX\Tests\MakeBom;
+namespace CycloneDX\Tests\Unit\MakeBom;
 
 use Composer\Factory as ComposerFactory;
 use Composer\IO\NullIO;
@@ -395,7 +395,7 @@ final class BuilderTest extends TestCase
      */
     private static function getTempDir(): string
     {
-        $tempSetupDir = __DIR__.'/../../.tmp/BuilderTest/setup';
+        $tempSetupDir = __DIR__.'/../../../.tmp/BuilderTest/setup';
         if (is_dir($tempSetupDir) || mkdir($tempSetupDir, recursive: true)) {
             return $tempSetupDir;
         }
@@ -407,8 +407,8 @@ final class BuilderTest extends TestCase
      */
     private static function dpForSetup(string $setupTemplate, bool $createNoDev): Generator
     {
-        $setupManifest = __DIR__."/../_data/setup/$setupTemplate/composer.json";
-        $setupLock = __DIR__."/../_data/setup/$setupTemplate/composer.lock";
+        $setupManifest = __DIR__."/../../_data/setup/$setupTemplate/composer.json";
+        $setupLock = __DIR__."/../../_data/setup/$setupTemplate/composer.lock";
 
         yield 'locked NotInstalled' => [
             static fn () => $setupManifest,
