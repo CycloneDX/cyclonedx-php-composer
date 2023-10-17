@@ -74,7 +74,7 @@ final class CommandMakeSbomAsExpectedTest extends CommandTestCase
 
         $exitCode = $app->run($in, $out);
 
-        self::assertSame(0, $exitCode);
+        self::assertSame(0, $exitCode, $out->fetch());
 
         if ('1' === getenv('CDX_CP_TESTS_UPDATE_SNAPSHOTS')) {
             copy($outFile, $expectedSbomFile);

@@ -48,7 +48,7 @@ final class CommandMakeSbomTest extends CommandTestCase
             'command' => 'CycloneDX:make-sbom',
             ...$input,
             '--output-file' => $outFile,
-            'composer-file' => self::DEMO_ROOT.'/symfony/project/composer.json',
+            'composer-file' => self::DEMO_ROOT.'/laravel-7.12.0/project/composer.json',
         ]);
         $out = new BufferedOutput(BufferedOutput::VERBOSITY_NORMAL);
         $app = self::make_app((new Plugin())->getCommands()[0]);

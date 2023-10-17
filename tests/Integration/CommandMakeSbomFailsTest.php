@@ -71,7 +71,7 @@ final class CommandMakeSbomFailsTest extends CommandTestCase
         yield 'not possible target-file' => [
             [
                 '--output-file' => self::DEMO_ROOT.'/does-not-exist/result/bom',
-                'composer-file' => self::DEMO_ROOT.'/symfony/project/composer.json',
+                'composer-file' => self::DEMO_ROOT.'/laravel-7.12.0/project/composer.json',
             ],
             'failed to open output: '.self::DEMO_ROOT.'/does-not-exist/result/bom',
         ];
