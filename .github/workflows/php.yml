@@ -117,8 +117,8 @@ jobs:
           -d memory_limit=-1
           tools/phpunit/vendor/phpunit/phpunit/phpunit
           --no-progress
-          --log-junit=${{ env.REPORTS_DIR }}/tests.${{ matrix.os }}_php${{ matrix.php }}_${{ matrix.dependencies }}.junit.xml
-          --coverage-clover=${{ env.REPORTS_DIR }}/coverage.${{ matrix.os}}_php${{ matrix.php }}_${{ matrix.dependencies }}.clover.xml
+          --log-junit='${{ env.REPORTS_DIR }}/tests/${{ matrix.os }}_php${{ matrix.php }}_${{ matrix.dependencies }}.junit.xml'
+          --coverage-clover='${{ env.REPORTS_DIR }}/coverage/${{ matrix.os}}_php${{ matrix.php }}_${{ matrix.dependencies }}.clover.xml
       - name: Artifact reports
         if: ${{ ! cancelled() }}
         # see https://github.com/actions/upload-artifact
@@ -127,6 +127,27 @@ jobs:
           name: ${{ env.REPORTS_ARTIFACT }}
           path: ${{ env.REPORTS_DIR }}
           if-no-files-found: error
+  report-coverage:
+    name: Publish test coverage
+    needs: [ "phpunit" ]
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: fetch test artifacts
+        # see https://github.com/actions/download-artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: ${{ env.TESTS_REPORTS_ARTIFACT }}
+          path: ${{ env.REPORTS_DIR }}
+      - name: Run codacy-coverage-reporter
+        env:
+          CODACY_PROJECT_TOKEN: ${{ secrets.CODACY_PROJECT_TOKEN }}
+        if: ${{ env.CODACY_PROJECT_TOKEN != '' }} ## see https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#example-using-secrets
+        # see https://github.com/codacy/codacy-coverage-reporter-action
+        uses: codacy/codacy-coverage-reporter-action@v1
+        with:
+          project-token: ${{ env.CODACY_PROJECT_TOKEN }}
+          coverage-reports: ${{ env.REPORTS_DIR }}/coverage/*.clover.xml
   code-checker:
     name: Code Analysis p${{ matrix.php }} c${{ matrix.composer }} ${{ matrix.dependencies }}
     runs-on: ubuntu-latest
@@ -364,3 +385,4 @@ jobs:
           --no-update-lock
           --no-interaction
           $PWD/composer.json
+
