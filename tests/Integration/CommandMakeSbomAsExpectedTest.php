@@ -55,7 +55,7 @@ final class CommandMakeSbomAsExpectedTest extends CommandTestCase
     }
 
     #[DataProvider('dp')]
-    public function test(string $outputFormat, string $specV, string $composeFile,
+    public function test(string $outputFormat, string $specV, string $composeFile, array $omit,
         string $expectedSbomFile): void
     {
         $outFile = tempnam(sys_get_temp_dir(), 'CommandMakeSbomAsExpectedTest');
@@ -66,6 +66,7 @@ final class CommandMakeSbomAsExpectedTest extends CommandTestCase
             '--output-reproducible' => true,
             '--validate' => true,
             '--output-file' => $outFile,
+            '--omit' => $omit,
             'composer-file' => $composeFile,
         ]);
         $out = new BufferedOutput(BufferedOutput::VERBOSITY_NORMAL);
@@ -96,6 +97,7 @@ final class CommandMakeSbomAsExpectedTest extends CommandTestCase
                         $outputFormat,
                         $specV,
                         $composeFile,
+                        'devReq' === $purpose ? [] : ['dev'],
                         $snapshotFile,
                     ];
                 }

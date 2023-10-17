@@ -44,34 +44,6 @@
         </reference>
       </externalReferences>
     </component>
-    <component type="library">
-      <group><![CDATA[roave]]></group>
-      <name><![CDATA[security-advisories]]></name>
-      <version><![CDATA[dev-latest cd9af30]]></version>
-      <description><![CDATA[Prevents installation of composer packages with known security vulnerabilities: no API, simply require it]]></description>
-      <licenses>
-        <license>
-          <id><![CDATA[MIT]]></id>
-        </license>
-      </licenses>
-      <purl><![CDATA[pkg:composer/roave/security-advisories@dev-latest%20cd9af30]]></purl>
-      <externalReferences>
-        <reference type="distribution">
-          <url><![CDATA[https://api.github.com/repos/Roave/SecurityAdvisories/zipball/cd9af30140f6f34d9132986f4c6f04cf5e90cdc8]]></url>
-        </reference>
-        <reference type="vcs">
-          <url><![CDATA[https://github.com/Roave/SecurityAdvisories.git]]></url>
-        </reference>
-        <reference type="issue-tracker">
-          <url><![CDATA[https://github.com/Roave/SecurityAdvisories/issues]]></url>
-          <comment><![CDATA[as detected from Composer manifest 'support.issues']]></comment>
-        </reference>
-        <reference type="vcs">
-          <url><![CDATA[https://github.com/Roave/SecurityAdvisories/tree/latest]]></url>
-          <comment><![CDATA[as detected from Composer manifest 'support.source']]></comment>
-        </reference>
-      </externalReferences>
-    </component>
   </components>
   <externalReferences>
     <reference type="website">

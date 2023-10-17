@@ -110,43 +110,6 @@
                     "url": "packages/local-dependency-with-minimal-setup"
                 }
             ]
-        },
-        {
-            "bom-ref": "roave/security-advisories-dev-latest",
-            "type": "library",
-            "name": "security-advisories",
-            "version": "dev-latest cd9af30",
-            "group": "roave",
-            "description": "Prevents installation of composer packages with known security vulnerabilities: no API, simply require it",
-            "author": "Marco Pivetta, Ilya Tribusean",
-            "licenses": [
-                {
-                    "license": {
-                        "id": "MIT"
-                    }
-                }
-            ],
-            "purl": "pkg:composer/roave/security-advisories@dev-latest%20cd9af30",
-            "externalReferences": [
-                {
-                    "type": "distribution",
-                    "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/cd9af30140f6f34d9132986f4c6f04cf5e90cdc8"
-                },
-                {
-                    "type": "vcs",
-                    "url": "https://github.com/Roave/SecurityAdvisories.git"
-                },
-                {
-                    "type": "issue-tracker",
-                    "url": "https://github.com/Roave/SecurityAdvisories/issues",
-                    "comment": "as detected from Composer manifest 'support.issues'"
-                },
-                {
-                    "type": "vcs",
-                    "url": "https://github.com/Roave/SecurityAdvisories/tree/latest",
-                    "comment": "as detected from Composer manifest 'support.source'"
-                }
-            ]
         }
     ],
     "dependencies": [
@@ -163,14 +126,10 @@
             "ref": "cyclonedx-demo/local-dependency-with-minimal-setup-dev-component-author"
         },
         {
-            "ref": "roave/security-advisories-dev-latest"
-        },
-        {
             "ref": "cyclonedx-demo/cyclonedx-php-composer-local-dev-master",
             "dependsOn": [
                 "cyclonedx-demo/local-demo-dependency-1.33.7.0",
-                "cyclonedx-demo/local-demo-issue-158-dev-issue-158",
-                "roave/security-advisories-dev-latest"
+                "cyclonedx-demo/local-demo-issue-158-dev-issue-158"
             ]
         }
     ]
