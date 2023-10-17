@@ -137,7 +137,7 @@ jobs:
         # see https://github.com/actions/download-artifact
         uses: actions/download-artifact@v3
         with:
-          name: ${{ env.TESTS_REPORTS_ARTIFACT }}
+          name: ${{ env.REPORTS_ARTIFACT }}
           path: ${{ env.REPORTS_DIR }}
       - name: Run codacy-coverage-reporter
         env:
