@@ -21,14 +21,22 @@ declare(strict_types=1);
  * Copyright (c) OWASP Foundation. All Rights Reserved.
  */
 
-namespace CycloneDX\Tests\Integration\MakeBom;
+namespace CycloneDX\Tests\Integration;
 
+use Composer\Console\Application;
 use CycloneDX\Composer\MakeBom\Command;
-use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
-#[CoversClass(Command::class)]
-final class CommandTest extends TestCase {
+abstract class CommandTestCase extends TestCase
+{
+    protected const DEMO_ROOT = __DIR__.'/../../demo';
 
+    protected static function make_app(Command $command): Application
+    {
+        $app = new Application();
+        $app->add($command);
+        $app->setAutoExit(false);
+
+        return $app;
+    }
 }
-

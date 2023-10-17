@@ -234,7 +234,7 @@ class Command extends BaseCommand
         $outputFile = $this->options->outputFile;
         $outputStream = Options::VALUE_OUTPUT_FILE_STDOUT === $outputFile
             ? \STDOUT
-            : fopen($outputFile, 'wb');
+            : @fopen($outputFile, 'wb');
         if (false === $outputStream) {
             throw new Errors\OutputError("failed to open output: $outputFile");
         }
