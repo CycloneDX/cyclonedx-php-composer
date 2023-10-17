@@ -217,7 +217,7 @@ jobs:
           --no-cache
           --long-progress
           --php-version='${{ matrix.php }}'
-          --report='${{ env.REPORTS_DIR }}/psalm.php${{ matrix.php }}_${{ matrix.dependencies }}.junit.xml'
+          --report='${{ env.REPORTS_DIR }}/psalm/php${{ matrix.php }}_${{ matrix.dependencies }}.junit.xml'
           --stats
       - name: Artifact reports
         if: ${{ ! cancelled() }}
