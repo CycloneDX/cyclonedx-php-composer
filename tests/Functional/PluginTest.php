@@ -21,7 +21,7 @@ declare(strict_types=1);
  * Copyright (c) OWASP Foundation. All Rights Reserved.
  */
 
-namespace CycloneDX\Tests;
+namespace CycloneDX\Tests\Functional;
 
 use Composer\Plugin\Capability\CommandProvider;
 use Composer\Plugin\Capable;
@@ -44,7 +44,7 @@ final class PluginTest extends TestCase
     /**
      * path to composer.json file.
      */
-    private const COMPOSER_JSON_FILE_PATH = __DIR__.'/../composer.json';
+    private const COMPOSER_JSON_FILE_PATH = __DIR__.'/../../composer.json';
 
     /**
      * assert the correct setup as described in
