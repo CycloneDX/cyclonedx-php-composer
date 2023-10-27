@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file.
 
 ## unreleased
 
+
+## 4.2.1 - 2023-10-27
+
 * Docs
   * Moved all non-public API into a sub-namespace called `_internal`, so that its reliability is obvious. (via [#427])
 
