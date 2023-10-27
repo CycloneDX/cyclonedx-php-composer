@@ -21,15 +21,25 @@ declare(strict_types=1);
  * Copyright (c) OWASP Foundation. All Rights Reserved.
  */
 
-namespace CycloneDX\Composer\MakeBom\Errors;
-
-use DomainException;
+namespace CycloneDX\Composer\_internal;
 
 /**
+ * CDX properties' names and well-known values - specific to this very tool.
+ *
+ * Based on {@link https://github.com/CycloneDX/cyclonedx-property-taxonomy/blob/main/cdx/composer.md `cdx:composer` Namespace Taxonomy}
+ *
  * @internal
  *
  * @author jkowalleck
  */
-class OptionError extends DomainException
+abstract class Properties
 {
+    public const Name_PackageType = 'cdx:composer:package:type';
+    public const Name_DevRequirement = 'cdx:composer:package:isDevRequirement';
+
+    public const Name_SourceReference = 'cdx:composer:package:sourceReference';
+    public const Name_DistReference = 'cdx:composer:package:distReference';
+
+    public const Value_True = 'true';
+    public const Value_False = 'false';
 }

@@ -21,7 +21,7 @@ declare(strict_types=1);
  * Copyright (c) OWASP Foundation. All Rights Reserved.
  */
 
-namespace CycloneDX\Composer\MakeBom;
+namespace CycloneDX\Composer\_internal\MakeBom;
 
 use Composer\Command\BaseCommand;
 use Composer\Factory as ComposerFactory;

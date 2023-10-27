@@ -25,7 +25,7 @@ namespace CycloneDX\Tests\Unit\MakeBom;
 
 use Composer\Factory as ComposerFactory;
 use Composer\IO\NullIO;
-use CycloneDX\Composer\MakeBom\Builder;
+use CycloneDX\Composer\_internal\MakeBom\Builder;
 use CycloneDX\Composer\Plugin;
 use CycloneDX\Core\Enums;
 use CycloneDX\Core\Models;

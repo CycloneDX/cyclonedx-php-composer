@@ -23,9 +23,9 @@ declare(strict_types=1);
 
 namespace CycloneDX\Tests\Integration;
 
-use CycloneDX\Composer\MakeBom\Builder;
-use CycloneDX\Composer\MakeBom\Command;
-use CycloneDX\Composer\MakeBom\Options;
+use CycloneDX\Composer\_internal\MakeBom\Builder;
+use CycloneDX\Composer\_internal\MakeBom\Command;
+use CycloneDX\Composer\_internal\MakeBom\Options;
 use CycloneDX\Composer\Plugin;
 use Generator;
 use PHPUnit\Framework\Attributes\CoversClass;
