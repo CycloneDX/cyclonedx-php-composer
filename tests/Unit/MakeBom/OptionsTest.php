@@ -23,7 +23,7 @@ declare(strict_types=1);
 
 namespace CycloneDX\Tests\Unit\MakeBom;
 
-use CycloneDX\Composer\MakeBom\Options;
+use CycloneDX\Composer\_internal\MakeBom\Options;
 use CycloneDX\Core\Spec\Format;
 use CycloneDX\Core\Spec\Version;
 use DomainException;

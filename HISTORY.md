@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 
 ## unreleased
 
+* Docs
+  * Moved all non-public API into a sub-namespace called `_internal`, so that its reliability is obvious. (via [#427])
+
+[#427]: https://github.com/CycloneDX/cyclonedx-php-composer/pull/427
+
 ## 4.2.0 - 2023-09-04
 
 * Added

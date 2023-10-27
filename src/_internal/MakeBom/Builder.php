@@ -21,7 +21,7 @@ declare(strict_types=1);
  * Copyright (c) OWASP Foundation. All Rights Reserved.
  */
 
-namespace CycloneDX\Composer\MakeBom;
+namespace CycloneDX\Composer\_internal\MakeBom;
 
 use Composer\Composer;
 use Composer\Package\CompletePackageInterface;
@@ -31,7 +31,7 @@ use Composer\Package\RootPackageInterface;
 use Composer\Repository\InstalledRepositoryInterface;
 use Composer\Repository\LockArrayRepository;
 use Composer\Semver\Constraint\MatchAllConstraint;
-use CycloneDX\Composer\Properties;
+use CycloneDX\Composer\_internal\Properties;
 use CycloneDX\Core\Enums;
 use CycloneDX\Core\Factories\LicenseFactory;
 use CycloneDX\Core\Models;

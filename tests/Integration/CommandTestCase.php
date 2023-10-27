@@ -24,7 +24,7 @@ declare(strict_types=1);
 namespace CycloneDX\Tests\Integration;
 
 use Composer\Console\Application;
-use CycloneDX\Composer\MakeBom\Command;
+use CycloneDX\Composer\_internal\MakeBom\Command;
 use PHPUnit\Framework\TestCase;
 
 abstract class CommandTestCase extends TestCase

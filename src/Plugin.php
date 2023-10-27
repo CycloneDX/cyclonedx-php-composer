@@ -31,8 +31,6 @@ use Composer\Plugin\Capable;
 use Composer\Plugin\PluginInterface;
 
 /**
- * @internal
- *
  * @author jkowalleck
  *
  * @psalm-suppress UnusedClass
@@ -67,9 +65,9 @@ class Plugin implements PluginInterface, Capable, CommandProvider
     public function getCommands(): array
     {
         return [
-            new MakeBom\Command(
+            new _internal\MakeBom\Command(
                 'CycloneDX:make-sbom',
-                new MakeBom\Options(),
+                new _internal\MakeBom\Options(),
                 new Factory()
             ),
         ];
