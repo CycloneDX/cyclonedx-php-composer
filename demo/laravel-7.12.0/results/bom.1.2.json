@@ -42,11 +42,13 @@
             "externalReferences": [
                 {
                     "type": "distribution",
-                    "url": "https://api.github.com/repos/asm89/stack-cors/zipball/b9c31def6a83f84b4d4a40d35996d375755f0e08"
+                    "url": "https://api.github.com/repos/asm89/stack-cors/zipball/b9c31def6a83f84b4d4a40d35996d375755f0e08",
+                    "comment": "dist reference: b9c31def6a83f84b4d4a40d35996d375755f0e08"
                 },
                 {
                     "type": "vcs",
-                    "url": "https://github.com/asm89/stack-cors.git"
+                    "url": "https://github.com/asm89/stack-cors.git",
+                    "comment": "source reference: b9c31def6a83f84b4d4a40d35996d375755f0e08"
                 },
                 {
                     "type": "website",
@@ -83,11 +85,13 @@
             "externalReferences": [
                 {
                     "type": "distribution",
-                    "url": "https://api.github.com/repos/brick/math/zipball/ca57d18f028f84f777b2168cd1911b0dee2343ae"
+                    "url": "https://api.github.com/repos/brick/math/zipball/ca57d18f028f84f777b2168cd1911b0dee2343ae",
+                    "comment": "dist reference: ca57d18f028f84f777b2168cd1911b0dee2343ae"
                 },
                 {
                     "type": "vcs",
-                    "url": "https://github.com/brick/math.git"
+                    "url": "https://github.com/brick/math.git",
+                    "comment": "source reference: ca57d18f028f84f777b2168cd1911b0dee2343ae"
                 },
                 {
                     "type": "issue-tracker",
@@ -120,11 +124,13 @@
             "externalReferences": [
                 {
                     "type": "distribution",
-                    "url": "https://api.github.com/repos/doctrine/inflector/zipball/d9d313a36c872fd6ee06d9a6cbcf713eaa40f024"
+                    "url": "https://api.github.com/repos/doctrine/inflector/zipball/d9d313a36c872fd6ee06d9a6cbcf713eaa40f024",
+                    "comment": "dist reference: d9d313a36c872fd6ee06d9a6cbcf713eaa40f024"
                 },
                 {
                     "type": "vcs",
-                    "url": "https://github.com/doctrine/inflector.git"
+                    "url": "https://github.com/doctrine/inflector.git",
+                    "comment": "source reference: d9d313a36c872fd6ee06d9a6cbcf713eaa40f024"
                 },
                 {
                     "type": "website",
@@ -162,11 +168,13 @@
             "externalReferences": [
                 {
                     "type": "distribution",
-                    "url": "https://api.github.com/repos/doctrine/lexer/zipball/c268e882d4dbdd85e36e4ad69e02dc284f89d229"
+                    "url": "https://api.github.com/repos/doctrine/lexer/zipball/c268e882d4dbdd85e36e4ad69e02dc284f89d229",
+                    "comment": "dist reference: c268e882d4dbdd85e36e4ad69e02dc284f89d229"
                 },
                 {
                     "type": "vcs",
-                    "url": "https://github.com/doctrine/lexer.git"
+                    "url": "https://github.com/doctrine/lexer.git",
+                    "comment": "source reference: c268e882d4dbdd85e36e4ad69e02dc284f89d229"
                 },
                 {
                     "type": "website",
@@ -204,11 +212,13 @@
             "externalReferences": [
                 {
                     "type": "distribution",
-                    "url": "https://api.github.com/repos/dragonmantank/cron-expression/zipball/65b2d8ee1f10915efb3b55597da3404f096acba2"
+                    "url": "https://api.github.com/repos/dragonmantank/cron-expression/zipball/65b2d8ee1f10915efb3b55597da3404f096acba2",
+                    "comment": "dist reference: 65b2d8ee1f10915efb3b55597da3404f096acba2"
                 },
                 {
                     "type": "vcs",
-                    "url": "https://github.com/dragonmantank/cron-expression.git"
+                    "url": "https://github.com/dragonmantank/cron-expression.git",
+                    "comment": "source reference: 65b2d8ee1f10915efb3b55597da3404f096acba2"
                 },
                 {
                     "type": "issue-tracker",
@@ -241,11 +251,13 @@
             "externalReferences": [
                 {
                     "type": "distribution",
-                    "url": "https://api.github.com/repos/egulias/EmailValidator/zipball/0dbf5d78455d4d6a41d186da50adc1122ec066f4"
+                    "url": "https://api.github.com/repos/egulias/EmailValidator/zipball/0dbf5d78455d4d6a41d186da50adc1122ec066f4",
+                    "comment": "dist reference: 0dbf5d78455d4d6a41d186da50adc1122ec066f4"
                 },
                 {
                     "type": "vcs",
-                    "url": "https://github.com/egulias/EmailValidator.git"
+                    "url": "https://github.com/egulias/EmailValidator.git",
+                    "comment": "source reference: 0dbf5d78455d4d6a41d186da50adc1122ec066f4"
                 },
                 {
                     "type": "website",
@@ -283,11 +295,13 @@
             "externalReferences": [
                 {
                     "type": "distribution",
-                    "url": "https://api.github.com/repos/fideloper/TrustedProxy/zipball/a751f2bc86dd8e6cfef12dc0cbdada82f5a18750"
+                    "url": "https://api.github.com/repos/fideloper/TrustedProxy/zipball/a751f2bc86dd8e6cfef12dc0cbdada82f5a18750",
+                    "comment": "dist reference: a751f2bc86dd8e6cfef12dc0cbdada82f5a18750"
                 },
                 {
                     "type": "vcs",
-                    "url": "https://github.com/fideloper/TrustedProxy.git"
+                    "url": "https://github.com/fideloper/TrustedProxy.git",
+                    "comment": "source reference: a751f2bc86dd8e6cfef12dc0cbdada82f5a18750"
                 },
                 {
                     "type": "issue-tracker",
@@ -320,11 +334,13 @@
             "externalReferences": [
                 {
                     "type": "distribution",
-                    "url": "https://api.github.com/repos/fruitcake/laravel-cors/zipball/1d127dbec313e2e227d65e0c483765d8d7559bf6"
+                    "url": "https://api.github.com/repos/fruitcake/laravel-cors/zipball/1d127dbec313e2e227d65e0c483765d8d7559bf6",
+                    "comment": "dist reference: 1d127dbec313e2e227d65e0c483765d8d7559bf6"
                 },
                 {
                     "type": "vcs",
-                    "url": "https://github.com/fruitcake/laravel-cors.git"
+                    "url": "https://github.com/fruitcake/laravel-cors.git",
+                    "comment": "source reference: 1d127dbec313e2e227d65e0c483765d8d7559bf6"
                 },
                 {
                     "type": "issue-tracker",
@@ -357,11 +373,13 @@
             "externalReferences": [
                 {
                     "type": "distribution",
-                    "url": "https://api.github.com/repos/guzzle/guzzle/zipball/a52f0440530b54fa079ce76e8c5d196a42cad981"
+                    "url": "https://api.github.com/repos/guzzle/guzzle/zipball/a52f0440530b54fa079ce76e8c5d196a42cad981",
+                    "comment": "dist reference: a52f0440530b54fa079ce76e8c5d196a42cad981"
                 },
                 {
                     "type": "vcs",
-                    "url": "https://github.com/guzzle/guzzle.git"
+                    "url": "https://github.com/guzzle/guzzle.git",
+                    "comment": "source reference: a52f0440530b54fa079ce76e8c5d196a42cad981"
                 },
                 {
                     "type": "website",
@@ -399,11 +417,13 @@
             "externalReferences": [
                 {
                     "type": "distribution",
-                    "url": "https://api.github.com/repos/guzzle/promises/zipball/b94b2807d85443f9719887892882d0329d1e2598"
+                    "url": "https://api.github.com/repos/guzzle/promises/zipball/b94b2807d85443f9719887892882d0329d1e2598",
+                    "comment": "dist reference: b94b2807d85443f9719887892882d0329d1e2598"
                 },
                 {
                     "type": "vcs",
-                    "url": "https://github.com/guzzle/promises.git"
+                    "url": "https://github.com/guzzle/promises.git",
+                    "comment": "source reference: b94b2807d85443f9719887892882d0329d1e2598"
                 },
                 {
                     "type": "issue-tracker",
@@ -436,11 +456,13 @@
             "externalReferences": [
                 {
                     "type": "distribution",
-                    "url": "https://api.github.com/repos/guzzle/psr7/zipball/e98e3e6d4f86621a9b75f623996e6bbdeb4b9318"
+                    "url": "https://api.github.com/repos/guzzle/psr7/zipball/e98e3e6d4f86621a9b75f623996e6bbdeb4b9318",
+                    "comment": "dist reference: e98e3e6d4f86621a9b75f623996e6bbdeb4b9318"
                 },
                 {
                     "type": "vcs",
-                    "url": "https://github.com/guzzle/psr7.git"
+                    "url": "https://github.com/guzzle/psr7.git",
+                    "comment": "source reference: e98e3e6d4f86621a9b75f623996e6bbdeb4b9318"
                 },
                 {
                     "type": "issue-tracker",
@@ -473,11 +495,13 @@
             "externalReferences": [
                 {
                     "type": "distribution",
-                    "url": "https://api.github.com/repos/laravel/framework/zipball/ecdafad1dda3c790af186a6d18479ea4757ef9ee"
+                    "url": "https://api.github.com/repos/laravel/framework/zipball/ecdafad1dda3c790af186a6d18479ea4757ef9ee",
+                    "comment": "dist reference: ecdafad1dda3c790af186a6d18479ea4757ef9ee"
                 },
                 {
                     "type": "vcs",
-                    "url": "https://github.com/laravel/framework.git"
+                    "url": "https://github.com/laravel/framework.git",
+                    "comment": "source reference: ecdafad1dda3c790af186a6d18479ea4757ef9ee"
                 },
                 {
                     "type": "website",
@@ -514,11 +538,13 @@
             "externalReferences": [
                 {
                     "type": "distribution",
-                    "url": "https://api.github.com/repos/laravel/laravel/zipball/5639581ea56ecd556cdf6e6edc37ce5795740fd7"
+                    "url": "https://api.github.com/repos/laravel/laravel/zipball/5639581ea56ecd556cdf6e6edc37ce5795740fd7",
+                    "comment": "dist reference: 5639581ea56ecd556cdf6e6edc37ce5795740fd7"
                 },
                 {
                     "type": "vcs",
-                    "url": "https://github.com/laravel/laravel.git"
+                    "url": "https://github.com/laravel/laravel.git",
+                    "comment": "source reference: 5639581ea56ecd556cdf6e6edc37ce5795740fd7"
                 },
                 {
                     "type": "vcs",
@@ -546,11 +572,13 @@
             "externalReferences": [
                 {
                     "type": "distribution",
-                    "url": "https://api.github.com/repos/laravel/tinker/zipball/5062061b4924af3392225dd482ca7b4d85d8b8ef"
+                    "url": "https://api.github.com/repos/laravel/tinker/zipball/5062061b4924af3392225dd482ca7b4d85d8b8ef",
+                    "comment": "dist reference: 5062061b4924af3392225dd482ca7b4d85d8b8ef"
                 },
                 {
                     "type": "vcs",
-                    "url": "https://github.com/laravel/tinker.git"
+                    "url": "https://github.com/laravel/tinker.git",
+                    "comment": "source reference: 5062061b4924af3392225dd482ca7b4d85d8b8ef"
                 },
                 {
                     "type": "issue-tracker",
@@ -583,11 +611,13 @@
             "externalReferences": [
                 {
                     "type": "distribution",
-                    "url": "https://api.github.com/repos/thephpleague/commonmark/zipball/2b8185c13bc9578367a5bf901881d1c1b5bbd09b"
+                    "url": "https://api.github.com/repos/thephpleague/commonmark/zipball/2b8185c13bc9578367a5bf901881d1c1b5bbd09b",
+                    "comment": "dist reference: 2b8185c13bc9578367a5bf901881d1c1b5bbd09b"
                 },
                 {
                     "type": "vcs",
-                    "url": "https://github.com/thephpleague/commonmark.git"
+                    "url": "https://github.com/thephpleague/commonmark.git",
+                    "comment": "source reference: 2b8185c13bc9578367a5bf901881d1c1b5bbd09b"
                 },
                 {
                     "type": "website",
@@ -635,11 +665,13 @@
             "externalReferences": [
                 {
                     "type": "distribution",
-                    "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/3239285c825c152bcc315fe0e87d6b55f5972ed1"
+                    "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/3239285c825c152bcc315fe0e87d6b55f5972ed1",
+                    "comment": "dist reference: 3239285c825c152bcc315fe0e87d6b55f5972ed1"
                 },
                 {
                     "type": "vcs",
-                    "url": "https://github.com/thephpleague/flysystem.git"
+                    "url": "https://github.com/thephpleague/flysystem.git",
+                    "comment": "source reference: 3239285c825c152bcc315fe0e87d6b55f5972ed1"
                 },
                 {
                     "type": "issue-tracker",
@@ -672,11 +704,13 @@
             "externalReferences": [
                 {
                     "type": "distribution",
-                    "url": "https://api.github.com/repos/thephpleague/mime-type-detection/zipball/ff6248ea87a9f116e78edd6002e39e5128a0d4dd"
+                    "url": "https://api.github.com/repos/thephpleague/mime-type-detection/zipball/ff6248ea87a9f116e78edd6002e39e5128a0d4dd",
+                    "comment": "dist reference: ff6248ea87a9f116e78edd6002e39e5128a0d4dd"
                 },
                 {
                     "type": "vcs",
-                    "url": "https://github.com/thephpleague/mime-type-detection.git"
+                    "url": "https://github.com/thephpleague/mime-type-detection.git",
+                    "comment": "source reference: ff6248ea87a9f116e78edd6002e39e5128a0d4dd"
                 },
                 {
                     "type": "issue-tracker",
@@ -709,11 +743,13 @@
             "externalReferences": [
                 {
                     "type": "distribution",
-                    "url": "https://api.github.com/repos/Seldaek/monolog/zipball/720488632c590286b88b80e62aa3d3d551ad4a50"
+                    "url": "https://api.github.com/repos/Seldaek/monolog/zipball/720488632c590286b88b80e62aa3d3d551ad4a50",
+                    "comment": "dist reference: 720488632c590286b88b80e62aa3d3d551ad4a50"
                 },
                 {
                     "type": "vcs",
-                    "url": "https://github.com/Seldaek/monolog.git"
+                    "url": "https://github.com/Seldaek/monolog.git",
+                    "comment": "source reference: 720488632c590286b88b80e62aa3d3d551ad4a50"
                 },
                 {
                     "type": "website",
@@ -751,11 +787,13 @@
             "externalReferences": [
                 {
                     "type": "distribution",
-                    "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/ad35dd71a6a212b98e4b87e97389b6fa85f0e347"
+                    "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/ad35dd71a6a212b98e4b87e97389b6fa85f0e347",
+                    "comment": "dist reference: ad35dd71a6a212b98e4b87e97389b6fa85f0e347"
                 },
                 {
                     "type": "vcs",
-                    "url": "https://github.com/briannesbitt/Carbon.git"
+                    "url": "https://github.com/briannesbitt/Carbon.git",
+                    "comment": "source reference: ad35dd71a6a212b98e4b87e97389b6fa85f0e347"
                 },
                 {
                     "type": "website",
@@ -798,11 +836,13 @@
             "externalReferences": [
                 {
                     "type": "distribution",
-                    "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/f59bbe44bf7d96f24f3e2b4ddc21cd52c1d2adbc"
+                    "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/f59bbe44bf7d96f24f3e2b4ddc21cd52c1d2adbc",
+                    "comment": "dist reference: f59bbe44bf7d96f24f3e2b4ddc21cd52c1d2adbc"
                 },
                 {
                     "type": "vcs",
-                    "url": "https://github.com/nikic/PHP-Parser.git"
+                    "url": "https://github.com/nikic/PHP-Parser.git",
+                    "comment": "source reference: f59bbe44bf7d96f24f3e2b4ddc21cd52c1d2adbc"
                 },
                 {
                     "type": "issue-tracker",
@@ -835,11 +875,13 @@
             "externalReferences": [
                 {
                     "type": "distribution",
-                    "url": "https://api.github.com/repos/opis/closure/zipball/3d81e4309d2a927abbe66df935f4bb60082805ad"
+                    "url": "https://api.github.com/repos/opis/closure/zipball/3d81e4309d2a927abbe66df935f4bb60082805ad",
+                    "comment": "dist reference: 3d81e4309d2a927abbe66df935f4bb60082805ad"
                 },
                 {
                     "type": "vcs",
-                    "url": "https://github.com/opis/closure.git"
+                    "url": "https://github.com/opis/closure.git",
+                    "comment": "source reference: 3d81e4309d2a927abbe66df935f4bb60082805ad"
                 },
                 {
                     "type": "website",
@@ -877,11 +919,13 @@
             "externalReferences": [
                 {
                     "type": "distribution",
-                    "url": "https://api.github.com/repos/schmittjoh/php-option/zipball/dc5ff11e274a90cc1c743f66c9ad700ce50db9ab"
+                    "url": "https://api.github.com/repos/schmittjoh/php-option/zipball/dc5ff11e274a90cc1c743f66c9ad700ce50db9ab",
+                    "comment": "dist reference: dc5ff11e274a90cc1c743f66c9ad700ce50db9ab"
                 },
                 {
                     "type": "vcs",
-                    "url": "https://github.com/schmittjoh/php-option.git"
+                    "url": "https://github.com/schmittjoh/php-option.git",
+                    "comment": "source reference: dc5ff11e274a90cc1c743f66c9ad700ce50db9ab"
                 },
                 {
                     "type": "issue-tracker",
@@ -914,11 +958,13 @@
             "externalReferences": [
                 {
                     "type": "distribution",
-                    "url": "https://api.github.com/repos/php-fig/container/zipball/8622567409010282b7aeebe4bb841fe98b58dcaf"
+                    "url": "https://api.github.com/repos/php-fig/container/zipball/8622567409010282b7aeebe4bb841fe98b58dcaf",
+                    "comment": "dist reference: 8622567409010282b7aeebe4bb841fe98b58dcaf"
                 },
                 {
                     "type": "vcs",
-                    "url": "https://github.com/php-fig/container.git"
+                    "url": "https://github.com/php-fig/container.git",
+                    "comment": "source reference: 8622567409010282b7aeebe4bb841fe98b58dcaf"
                 },
                 {
                     "type": "website",
@@ -956,11 +1002,13 @@
             "externalReferences": [
                 {
                     "type": "distribution",
-                    "url": "https://api.github.com/repos/php-fig/event-dispatcher/zipball/dbefd12671e8a14ec7f180cab83036ed26714bb0"
+                    "url": "https://api.github.com/repos/php-fig/event-dispatcher/zipball/dbefd12671e8a14ec7f180cab83036ed26714bb0",
+                    "comment": "dist reference: dbefd12671e8a14ec7f180cab83036ed26714bb0"
                 },
                 {
                     "type": "vcs",
-                    "url": "https://github.com/php-fig/event-dispatcher.git"
+                    "url": "https://github.com/php-fig/event-dispatcher.git",
+                    "comment": "source reference: dbefd12671e8a14ec7f180cab83036ed26714bb0"
                 },
                 {
                     "type": "issue-tracker",
@@ -993,11 +1041,13 @@
             "externalReferences": [
                 {
                     "type": "distribution",
-                    "url": "https://api.github.com/repos/php-fig/http-message/zipball/f6561bf28d520154e4b0ec72be95418abe6d9363"
+                    "url": "https://api.github.com/repos/php-fig/http-message/zipball/f6561bf28d520154e4b0ec72be95418abe6d9363",
+                    "comment": "dist reference: f6561bf28d520154e4b0ec72be95418abe6d9363"
                 },
                 {
                     "type": "vcs",
-                    "url": "https://github.com/php-fig/http-message.git"
+                    "url": "https://github.com/php-fig/http-message.git",
+                    "comment": "source reference: f6561bf28d520154e4b0ec72be95418abe6d9363"
                 },
                 {
                     "type": "website",
@@ -1030,11 +1080,13 @@
             "externalReferences": [
                 {
                     "type": "distribution",
-                    "url": "https://api.github.com/repos/php-fig/log/zipball/d49695b909c3b7628b6289db5479a1c204601f11"
+                    "url": "https://api.github.com/repos/php-fig/log/zipball/d49695b909c3b7628b6289db5479a1c204601f11",
+                    "comment": "dist reference: d49695b909c3b7628b6289db5479a1c204601f11"
                 },
                 {
                     "type": "vcs",
-                    "url": "https://github.com/php-fig/log.git"
+                    "url": "https://github.com/php-fig/log.git",
+                    "comment": "source reference: d49695b909c3b7628b6289db5479a1c204601f11"
                 },
                 {
                     "type": "website",
@@ -1067,11 +1119,13 @@
             "externalReferences": [
                 {
                     "type": "distribution",
-                    "url": "https://api.github.com/repos/php-fig/simple-cache/zipball/408d5eafb83c57f6365a3ca330ff23aa4a5fa39b"
+                    "url": "https://api.github.com/repos/php-fig/simple-cache/zipball/408d5eafb83c57f6365a3ca330ff23aa4a5fa39b",
+                    "comment": "dist reference: 408d5eafb83c57f6365a3ca330ff23aa4a5fa39b"
                 },
                 {
                     "type": "vcs",
-                    "url": "https://github.com/php-fig/simple-cache.git"
+                    "url": "https://github.com/php-fig/simple-cache.git",
+                    "comment": "source reference: 408d5eafb83c57f6365a3ca330ff23aa4a5fa39b"
                 },
                 {
                     "type": "vcs",
@@ -1099,11 +1153,13 @@
             "externalReferences": [
                 {
                     "type": "distribution",
-                    "url": "https://api.github.com/repos/bobthecow/psysh/zipball/1acec99d6684a54ff92f8b548a4e41b566963778"
+                    "url": "https://api.github.com/repos/bobthecow/psysh/zipball/1acec99d6684a54ff92f8b548a4e41b566963778",
+                    "comment": "dist reference: 1acec99d6684a54ff92f8b548a4e41b566963778"
                 },
                 {
                     "type": "vcs",
-                    "url": "https://github.com/bobthecow/psysh.git"
+                    "url": "https://github.com/bobthecow/psysh.git",
+                    "comment": "source reference: 1acec99d6684a54ff92f8b548a4e41b566963778"
                 },
                 {
                     "type": "website",
@@ -1141,11 +1197,13 @@
             "externalReferences": [
                 {
                     "type": "distribution",
-                    "url": "https://api.github.com/repos/ralouphie/getallheaders/zipball/120b605dfeb996808c31b6477290a714d356e822"
+                    "url": "https://api.github.com/repos/ralouphie/getallheaders/zipball/120b605dfeb996808c31b6477290a714d356e822",
+                    "comment": "dist reference: 120b605dfeb996808c31b6477290a714d356e822"
                 },
                 {
                     "type": "vcs",
-                    "url": "https://github.com/ralouphie/getallheaders.git"
+                    "url": "https://github.com/ralouphie/getallheaders.git",
+                    "comment": "source reference: 120b605dfeb996808c31b6477290a714d356e822"
                 },
                 {
                     "type": "issue-tracker",
@@ -1178,11 +1236,13 @@
             "externalReferences": [
                 {
                     "type": "distribution",
-                    "url": "https://api.github.com/repos/ramsey/collection/zipball/cccc74ee5e328031b15640b51056ee8d3bb66c0a"
+                    "url": "https://api.github.com/repos/ramsey/collection/zipball/cccc74ee5e328031b15640b51056ee8d3bb66c0a",
+                    "comment": "dist reference: cccc74ee5e328031b15640b51056ee8d3bb66c0a"
                 },
                 {
                     "type": "vcs",
-                    "url": "https://github.com/ramsey/collection.git"
+                    "url": "https://github.com/ramsey/collection.git",
+                    "comment": "source reference: cccc74ee5e328031b15640b51056ee8d3bb66c0a"
                 },
                 {
                     "type": "issue-tracker",
@@ -1214,11 +1274,13 @@
             "externalReferences": [
                 {
                     "type": "distribution",
-                    "url": "https://api.github.com/repos/ramsey/uuid/zipball/fc9bb7fb5388691fd7373cd44dcb4d63bbcf24df"
+                    "url": "https://api.github.com/repos/ramsey/uuid/zipball/fc9bb7fb5388691fd7373cd44dcb4d63bbcf24df",
+                    "comment": "dist reference: fc9bb7fb5388691fd7373cd44dcb4d63bbcf24df"
                 },
                 {
                     "type": "vcs",
-                    "url": "https://github.com/ramsey/uuid.git"
+                    "url": "https://github.com/ramsey/uuid.git",
+                    "comment": "source reference: fc9bb7fb5388691fd7373cd44dcb4d63bbcf24df"
                 },
                 {
                     "type": "issue-tracker",
@@ -1251,11 +1313,13 @@
             "externalReferences": [
                 {
                     "type": "distribution",
-                    "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/8a5d5072dca8f48460fce2f4131fcc495eec654c"
+                    "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/8a5d5072dca8f48460fce2f4131fcc495eec654c",
+                    "comment": "dist reference: 8a5d5072dca8f48460fce2f4131fcc495eec654c"
                 },
                 {
                     "type": "vcs",
-                    "url": "https://github.com/swiftmailer/swiftmailer.git"
+                    "url": "https://github.com/swiftmailer/swiftmailer.git",
+                    "comment": "source reference: 8a5d5072dca8f48460fce2f4131fcc495eec654c"
                 },
                 {
                     "type": "website",
@@ -1293,11 +1357,13 @@
             "externalReferences": [
                 {
                     "type": "distribution",
-                    "url": "https://api.github.com/repos/symfony/console/zipball/8e9b9c8dfb33af6057c94e1b44846bee700dc5ef"
+                    "url": "https://api.github.com/repos/symfony/console/zipball/8e9b9c8dfb33af6057c94e1b44846bee700dc5ef",
+                    "comment": "dist reference: 8e9b9c8dfb33af6057c94e1b44846bee700dc5ef"
                 },
                 {
                     "type": "vcs",
-                    "url": "https://github.com/symfony/console.git"
+                    "url": "https://github.com/symfony/console.git",
+                    "comment": "source reference: 8e9b9c8dfb33af6057c94e1b44846bee700dc5ef"
                 },
                 {
                     "type": "website",
@@ -1330,11 +1396,13 @@
             "externalReferences": [
                 {
                     "type": "distribution",
-                    "url": "https://api.github.com/repos/symfony/css-selector/zipball/c1681789f059ab756001052164726ae88512ae3d"
+                    "url": "https://api.github.com/repos/symfony/css-selector/zipball/c1681789f059ab756001052164726ae88512ae3d",
+                    "comment": "dist reference: c1681789f059ab756001052164726ae88512ae3d"
                 },
                 {
                     "type": "vcs",
-                    "url": "https://github.com/symfony/css-selector.git"
+                    "url": "https://github.com/symfony/css-selector.git",
+                    "comment": "source reference: c1681789f059ab756001052164726ae88512ae3d"
                 },
                 {
                     "type": "website",
@@ -1367,11 +1435,13 @@
             "externalReferences": [
                 {
                     "type": "distribution",
-                    "url": "https://api.github.com/repos/symfony/deprecation-contracts/zipball/e8b495ea28c1d97b5e0c121748d6f9b53d075c66"
+                    "url": "https://api.github.com/repos/symfony/deprecation-contracts/zipball/e8b495ea28c1d97b5e0c121748d6f9b53d075c66",
+                    "comment": "dist reference: e8b495ea28c1d97b5e0c121748d6f9b53d075c66"
                 },
                 {
                     "type": "vcs",
-                    "url": "https://github.com/symfony/deprecation-contracts.git"
+                    "url": "https://github.com/symfony/deprecation-contracts.git",
+                    "comment": "source reference: e8b495ea28c1d97b5e0c121748d6f9b53d075c66"
                 },
                 {
                     "type": "website",
@@ -1404,11 +1474,13 @@
             "externalReferences": [
                 {
                     "type": "distribution",
-                    "url": "https://api.github.com/repos/symfony/error-handler/zipball/539cf1428b8442303c6e876ad7bf5a7babd91091"
+                    "url": "https://api.github.com/repos/symfony/error-handler/zipball/539cf1428b8442303c6e876ad7bf5a7babd91091",
+                    "comment": "dist reference: 539cf1428b8442303c6e876ad7bf5a7babd91091"
                 },
                 {
                     "type": "vcs",
-                    "url": "https://github.com/symfony/error-handler.git"
+                    "url": "https://github.com/symfony/error-handler.git",
+                    "comment": "source reference: 539cf1428b8442303c6e876ad7bf5a7babd91091"
                 },
                 {
                     "type": "website",
@@ -1441,11 +1513,13 @@
             "externalReferences": [
                 {
                     "type": "distribution",
-                    "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/8e6ce1cc0279e3ff3c8ff0f43813bc88d21ca1bc"
+                    "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/8e6ce1cc0279e3ff3c8ff0f43813bc88d21ca1bc",
+                    "comment": "dist reference: 8e6ce1cc0279e3ff3c8ff0f43813bc88d21ca1bc"
                 },
                 {
                     "type": "vcs",
-                    "url": "https://github.com/symfony/event-dispatcher.git"
+                    "url": "https://github.com/symfony/event-dispatcher.git",
+                    "comment": "source reference: 8e6ce1cc0279e3ff3c8ff0f43813bc88d21ca1bc"
                 },
                 {
                     "type": "website",
@@ -1478,11 +1552,13 @@
             "externalReferences": [
                 {
                     "type": "distribution",
-                    "url": "https://api.github.com/repos/symfony/event-dispatcher-contracts/zipball/f98b54df6ad059855739db6fcbc2d36995283fe1"
+                    "url": "https://api.github.com/repos/symfony/event-dispatcher-contracts/zipball/f98b54df6ad059855739db6fcbc2d36995283fe1",
+                    "comment": "dist reference: f98b54df6ad059855739db6fcbc2d36995283fe1"
                 },
                 {
                     "type": "vcs",
-                    "url": "https://github.com/symfony/event-dispatcher-contracts.git"
+                    "url": "https://github.com/symfony/event-dispatcher-contracts.git",
+                    "comment": "source reference: f98b54df6ad059855739db6fcbc2d36995283fe1"
                 },
                 {
                     "type": "website",
@@ -1515,11 +1591,13 @@
             "externalReferences": [
                 {
                     "type": "distribution",
-                    "url": "https://api.github.com/repos/symfony/finder/zipball/7872a66f57caffa2916a584db1aa7f12adc76f8c"
+                    "url": "https://api.github.com/repos/symfony/finder/zipball/7872a66f57caffa2916a584db1aa7f12adc76f8c",
+                    "comment": "dist reference: 7872a66f57caffa2916a584db1aa7f12adc76f8c"
                 },
                 {
                     "type": "vcs",
-                    "url": "https://github.com/symfony/finder.git"
+                    "url": "https://github.com/symfony/finder.git",
+                    "comment": "source reference: 7872a66f57caffa2916a584db1aa7f12adc76f8c"
                 },
                 {
                     "type": "website",
@@ -1552,11 +1630,13 @@
             "externalReferences": [
                 {
                     "type": "distribution",
-                    "url": "https://api.github.com/repos/symfony/http-foundation/zipball/5032c5849aef24741e1970cb03511b0dd131d838"
+                    "url": "https://api.github.com/repos/symfony/http-foundation/zipball/5032c5849aef24741e1970cb03511b0dd131d838",
+                    "comment": "dist reference: 5032c5849aef24741e1970cb03511b0dd131d838"
                 },
                 {
                     "type": "vcs",
-                    "url": "https://github.com/symfony/http-foundation.git"
+                    "url": "https://github.com/symfony/http-foundation.git",
+                    "comment": "source reference: 5032c5849aef24741e1970cb03511b0dd131d838"
                 },
                 {
                     "type": "website",
@@ -1589,11 +1669,13 @@
             "externalReferences": [
                 {
                     "type": "distribution",
-                    "url": "https://api.github.com/repos/symfony/http-kernel/zipball/b432c57c5de73634b1859093c1f58e3cd84455a1"
+                    "url": "https://api.github.com/repos/symfony/http-kernel/zipball/b432c57c5de73634b1859093c1f58e3cd84455a1",
+                    "comment": "dist reference: b432c57c5de73634b1859093c1f58e3cd84455a1"
                 },
                 {
                     "type": "vcs",
-                    "url": "https://github.com/symfony/http-kernel.git"
+                    "url": "https://github.com/symfony/http-kernel.git",
+                    "comment": "source reference: b432c57c5de73634b1859093c1f58e3cd84455a1"
                 },
                 {
                     "type": "website",
@@ -1626,11 +1708,13 @@
             "externalReferences": [
                 {
                     "type": "distribution",
-                    "url": "https://api.github.com/repos/symfony/mime/zipball/46eeedb08f0832b1b61a84c612d945fc85ee4734"
+                    "url": "https://api.github.com/repos/symfony/mime/zipball/46eeedb08f0832b1b61a84c612d945fc85ee4734",
+                    "comment": "dist reference: 46eeedb08f0832b1b61a84c612d945fc85ee4734"
                 },
                 {
                     "type": "vcs",
-                    "url": "https://github.com/symfony/mime.git"
+                    "url": "https://github.com/symfony/mime.git",
+                    "comment": "source reference: 46eeedb08f0832b1b61a84c612d945fc85ee4734"
                 },
                 {
                     "type": "website",
@@ -1663,11 +1747,13 @@
             "externalReferences": [
                 {
                     "type": "distribution",
-                    "url": "https://api.github.com/repos/symfony/polyfill-ctype/zipball/5bbc823adecdae860bb64756d639ecfec17b050a"
+                    "url": "https://api.github.com/repos/symfony/polyfill-ctype/zipball/5bbc823adecdae860bb64756d639ecfec17b050a",
+                    "comment": "dist reference: 5bbc823adecdae860bb64756d639ecfec17b050a"
                 },
                 {
                     "type": "vcs",
-                    "url": "https://github.com/symfony/polyfill-ctype.git"
+                    "url": "https://github.com/symfony/polyfill-ctype.git",
+                    "comment": "source reference: 5bbc823adecdae860bb64756d639ecfec17b050a"
                 },
                 {
                     "type": "website",
@@ -1700,11 +1786,13 @@
             "externalReferences": [
                 {
                     "type": "distribution",
-                    "url": "https://api.github.com/repos/symfony/polyfill-iconv/zipball/927013f3aac555983a5059aada98e1907d842695"
+                    "url": "https://api.github.com/repos/symfony/polyfill-iconv/zipball/927013f3aac555983a5059aada98e1907d842695",
+                    "comment": "dist reference: 927013f3aac555983a5059aada98e1907d842695"
                 },
                 {
                     "type": "vcs",
-                    "url": "https://github.com/symfony/polyfill-iconv.git"
+                    "url": "https://github.com/symfony/polyfill-iconv.git",
+                    "comment": "source reference: 927013f3aac555983a5059aada98e1907d842695"
                 },
                 {
                     "type": "website",
@@ -1737,11 +1825,13 @@
             "externalReferences": [
                 {
                     "type": "distribution",
-                    "url": "https://api.github.com/repos/symfony/polyfill-intl-grapheme/zipball/511a08c03c1960e08a883f4cffcacd219b758354"
+                    "url": "https://api.github.com/repos/symfony/polyfill-intl-grapheme/zipball/511a08c03c1960e08a883f4cffcacd219b758354",
+                    "comment": "dist reference: 511a08c03c1960e08a883f4cffcacd219b758354"
                 },
                 {
                     "type": "vcs",
-                    "url": "https://github.com/symfony/polyfill-intl-grapheme.git"
+                    "url": "https://github.com/symfony/polyfill-intl-grapheme.git",
+                    "comment": "source reference: 511a08c03c1960e08a883f4cffcacd219b758354"
                 },
                 {
                     "type": "website",
@@ -1774,11 +1864,13 @@
             "externalReferences": [
                 {
                     "type": "distribution",
-                    "url": "https://api.github.com/repos/symfony/polyfill-intl-idn/zipball/639084e360537a19f9ee352433b84ce831f3d2da"
+                    "url": "https://api.github.com/repos/symfony/polyfill-intl-idn/zipball/639084e360537a19f9ee352433b84ce831f3d2da",
+                    "comment": "dist reference: 639084e360537a19f9ee352433b84ce831f3d2da"
                 },
                 {
                     "type": "vcs",
-                    "url": "https://github.com/symfony/polyfill-intl-idn.git"
+                    "url": "https://github.com/symfony/polyfill-intl-idn.git",
+                    "comment": "source reference: 639084e360537a19f9ee352433b84ce831f3d2da"
                 },
                 {
                     "type": "website",
@@ -1811,11 +1903,13 @@
             "externalReferences": [
                 {
                     "type": "distribution",
-                    "url": "https://api.github.com/repos/symfony/polyfill-intl-normalizer/zipball/19bd1e4fcd5b91116f14d8533c57831ed00571b6"
+                    "url": "https://api.github.com/repos/symfony/polyfill-intl-normalizer/zipball/19bd1e4fcd5b91116f14d8533c57831ed00571b6",
+                    "comment": "dist reference: 19bd1e4fcd5b91116f14d8533c57831ed00571b6"
                 },
                 {
                     "type": "vcs",
-                    "url": "https://github.com/symfony/polyfill-intl-normalizer.git"
+                    "url": "https://github.com/symfony/polyfill-intl-normalizer.git",
+                    "comment": "source reference: 19bd1e4fcd5b91116f14d8533c57831ed00571b6"
                 },
                 {
                     "type": "website",
@@ -1848,11 +1942,13 @@
             "externalReferences": [
                 {
                     "type": "distribution",
-                    "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/8ad114f6b39e2c98a8b0e3bd907732c207c2b534"
+                    "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/8ad114f6b39e2c98a8b0e3bd907732c207c2b534",
+                    "comment": "dist reference: 8ad114f6b39e2c98a8b0e3bd907732c207c2b534"
                 },
                 {
                     "type": "vcs",
-                    "url": "https://github.com/symfony/polyfill-mbstring.git"
+                    "url": "https://github.com/symfony/polyfill-mbstring.git",
+                    "comment": "source reference: 8ad114f6b39e2c98a8b0e3bd907732c207c2b534"
                 },
                 {
                     "type": "website",
@@ -1885,11 +1981,13 @@
             "externalReferences": [
                 {
                     "type": "distribution",
-                    "url": "https://api.github.com/repos/symfony/polyfill-php72/zipball/869329b1e9894268a8a61dabb69153029b7a8c97"
+                    "url": "https://api.github.com/repos/symfony/polyfill-php72/zipball/869329b1e9894268a8a61dabb69153029b7a8c97",
+                    "comment": "dist reference: 869329b1e9894268a8a61dabb69153029b7a8c97"
                 },
                 {
                     "type": "vcs",
-                    "url": "https://github.com/symfony/polyfill-php72.git"
+                    "url": "https://github.com/symfony/polyfill-php72.git",
+                    "comment": "source reference: 869329b1e9894268a8a61dabb69153029b7a8c97"
                 },
                 {
                     "type": "website",
@@ -1922,11 +2020,13 @@
             "externalReferences": [
                 {
                     "type": "distribution",
-                    "url": "https://api.github.com/repos/symfony/polyfill-php73/zipball/9e8ecb5f92152187c4799efd3c96b78ccab18ff9"
+                    "url": "https://api.github.com/repos/symfony/polyfill-php73/zipball/9e8ecb5f92152187c4799efd3c96b78ccab18ff9",
+                    "comment": "dist reference: 9e8ecb5f92152187c4799efd3c96b78ccab18ff9"
                 },
                 {
                     "type": "vcs",
-                    "url": "https://github.com/symfony/polyfill-php73.git"
+                    "url": "https://github.com/symfony/polyfill-php73.git",
+                    "comment": "source reference: 9e8ecb5f92152187c4799efd3c96b78ccab18ff9"
                 },
                 {
                     "type": "website",
@@ -1959,11 +2059,13 @@
             "externalReferences": [
                 {
                     "type": "distribution",
-                    "url": "https://api.github.com/repos/symfony/polyfill-php80/zipball/7a6ff3f1959bb01aefccb463a0f2cd3d3d2fd936"
+                    "url": "https://api.github.com/repos/symfony/polyfill-php80/zipball/7a6ff3f1959bb01aefccb463a0f2cd3d3d2fd936",
+                    "comment": "dist reference: 7a6ff3f1959bb01aefccb463a0f2cd3d3d2fd936"
                 },
                 {
                     "type": "vcs",
-                    "url": "https://github.com/symfony/polyfill-php80.git"
+                    "url": "https://github.com/symfony/polyfill-php80.git",
+                    "comment": "source reference: 7a6ff3f1959bb01aefccb463a0f2cd3d3d2fd936"
                 },
                 {
                     "type": "website",
@@ -1996,11 +2098,13 @@
             "externalReferences": [
                 {
                     "type": "distribution",
-                    "url": "https://api.github.com/repos/symfony/polyfill-php81/zipball/707403074c8ea6e2edaf8794b0157a0bfa52157a"
+                    "url": "https://api.github.com/repos/symfony/polyfill-php81/zipball/707403074c8ea6e2edaf8794b0157a0bfa52157a",
+                    "comment": "dist reference: 707403074c8ea6e2edaf8794b0157a0bfa52157a"
                 },
                 {
                     "type": "vcs",
-                    "url": "https://github.com/symfony/polyfill-php81.git"
+                    "url": "https://github.com/symfony/polyfill-php81.git",
+                    "comment": "source reference: 707403074c8ea6e2edaf8794b0157a0bfa52157a"
                 },
                 {
                     "type": "website",
@@ -2033,11 +2137,13 @@
             "externalReferences": [
                 {
                     "type": "distribution",
-                    "url": "https://api.github.com/repos/symfony/process/zipball/6e75fe6874cbc7e4773d049616ab450eff537bf1"
+                    "url": "https://api.github.com/repos/symfony/process/zipball/6e75fe6874cbc7e4773d049616ab450eff537bf1",
+                    "comment": "dist reference: 6e75fe6874cbc7e4773d049616ab450eff537bf1"
                 },
                 {
                     "type": "vcs",
-                    "url": "https://github.com/symfony/process.git"
+                    "url": "https://github.com/symfony/process.git",
+                    "comment": "source reference: 6e75fe6874cbc7e4773d049616ab450eff537bf1"
                 },
                 {
                     "type": "website",
@@ -2070,11 +2176,13 @@
             "externalReferences": [
                 {
                     "type": "distribution",
-                    "url": "https://api.github.com/repos/symfony/routing/zipball/5c9b129efe9abce9470e384bf65d8a7e262eee69"
+                    "url": "https://api.github.com/repos/symfony/routing/zipball/5c9b129efe9abce9470e384bf65d8a7e262eee69",
+                    "comment": "dist reference: 5c9b129efe9abce9470e384bf65d8a7e262eee69"
                 },
                 {
                     "type": "vcs",
-                    "url": "https://github.com/symfony/routing.git"
+                    "url": "https://github.com/symfony/routing.git",
+                    "comment": "source reference: 5c9b129efe9abce9470e384bf65d8a7e262eee69"
                 },
                 {
                     "type": "website",
@@ -2107,11 +2215,13 @@
             "externalReferences": [
                 {
                     "type": "distribution",
-                    "url": "https://api.github.com/repos/symfony/service-contracts/zipball/4b426aac47d6427cc1a1d0f7e2ac724627f5966c"
+                    "url": "https://api.github.com/repos/symfony/service-contracts/zipball/4b426aac47d6427cc1a1d0f7e2ac724627f5966c",
+                    "comment": "dist reference: 4b426aac47d6427cc1a1d0f7e2ac724627f5966c"
                 },
                 {
                     "type": "vcs",
-                    "url": "https://github.com/symfony/service-contracts.git"
+                    "url": "https://github.com/symfony/service-contracts.git",
+                    "comment": "source reference: 4b426aac47d6427cc1a1d0f7e2ac724627f5966c"
                 },
                 {
                     "type": "website",
@@ -2144,11 +2254,13 @@
             "externalReferences": [
                 {
                     "type": "distribution",
-                    "url": "https://api.github.com/repos/symfony/string/zipball/571334ce9f687e3e6af72db4d3b2a9431e4fd9ed"
+                    "url": "https://api.github.com/repos/symfony/string/zipball/571334ce9f687e3e6af72db4d3b2a9431e4fd9ed",
+                    "comment": "dist reference: 571334ce9f687e3e6af72db4d3b2a9431e4fd9ed"
                 },
                 {
                     "type": "vcs",
-                    "url": "https://github.com/symfony/string.git"
+                    "url": "https://github.com/symfony/string.git",
+                    "comment": "source reference: 571334ce9f687e3e6af72db4d3b2a9431e4fd9ed"
                 },
                 {
                     "type": "website",
@@ -2181,11 +2293,13 @@
             "externalReferences": [
                 {
                     "type": "distribution",
-                    "url": "https://api.github.com/repos/symfony/translation/zipball/f0ed07675863aa6e3939df8b1bc879450b585cab"
+                    "url": "https://api.github.com/repos/symfony/translation/zipball/f0ed07675863aa6e3939df8b1bc879450b585cab",
+                    "comment": "dist reference: f0ed07675863aa6e3939df8b1bc879450b585cab"
                 },
                 {
                     "type": "vcs",
-                    "url": "https://github.com/symfony/translation.git"
+                    "url": "https://github.com/symfony/translation.git",
+                    "comment": "source reference: f0ed07675863aa6e3939df8b1bc879450b585cab"
                 },
                 {
                     "type": "website",
@@ -2218,11 +2332,13 @@
             "externalReferences": [
                 {
                     "type": "distribution",
-                    "url": "https://api.github.com/repos/symfony/translation-contracts/zipball/136b19dd05cdf0709db6537d058bcab6dd6e2dbe"
+                    "url": "https://api.github.com/repos/symfony/translation-contracts/zipball/136b19dd05cdf0709db6537d058bcab6dd6e2dbe",
+                    "comment": "dist reference: 136b19dd05cdf0709db6537d058bcab6dd6e2dbe"
                 },
                 {
                     "type": "vcs",
-                    "url": "https://github.com/symfony/translation-contracts.git"
+                    "url": "https://github.com/symfony/translation-contracts.git",
+                    "comment": "source reference: 136b19dd05cdf0709db6537d058bcab6dd6e2dbe"
                 },
                 {
                     "type": "website",
@@ -2255,11 +2371,13 @@
             "externalReferences": [
                 {
                     "type": "distribution",
-                    "url": "https://api.github.com/repos/symfony/var-dumper/zipball/6894d06145fefebd9a4c7272baa026a1c394a430"
+                    "url": "https://api.github.com/repos/symfony/var-dumper/zipball/6894d06145fefebd9a4c7272baa026a1c394a430",
+                    "comment": "dist reference: 6894d06145fefebd9a4c7272baa026a1c394a430"
                 },
                 {
                     "type": "vcs",
-                    "url": "https://github.com/symfony/var-dumper.git"
+                    "url": "https://github.com/symfony/var-dumper.git",
+                    "comment": "source reference: 6894d06145fefebd9a4c7272baa026a1c394a430"
                 },
                 {
                     "type": "website",
@@ -2292,11 +2410,13 @@
             "externalReferences": [
                 {
                     "type": "distribution",
-                    "url": "https://api.github.com/repos/tijsverkoyen/CssToInlineStyles/zipball/4348a3a06651827a27d989ad1d13efec6bb49b19"
+                    "url": "https://api.github.com/repos/tijsverkoyen/CssToInlineStyles/zipball/4348a3a06651827a27d989ad1d13efec6bb49b19",
+                    "comment": "dist reference: 4348a3a06651827a27d989ad1d13efec6bb49b19"
                 },
                 {
                     "type": "vcs",
-                    "url": "https://github.com/tijsverkoyen/CssToInlineStyles.git"
+                    "url": "https://github.com/tijsverkoyen/CssToInlineStyles.git",
+                    "comment": "source reference: 4348a3a06651827a27d989ad1d13efec6bb49b19"
                 },
                 {
                     "type": "website",
@@ -2334,11 +2454,13 @@
             "externalReferences": [
                 {
                     "type": "distribution",
-                    "url": "https://api.github.com/repos/vlucas/phpdotenv/zipball/67a491df68208bef8c37092db11fa3885008efcf"
+                    "url": "https://api.github.com/repos/vlucas/phpdotenv/zipball/67a491df68208bef8c37092db11fa3885008efcf",
+                    "comment": "dist reference: 67a491df68208bef8c37092db11fa3885008efcf"
                 },
                 {
                     "type": "vcs",
-                    "url": "https://github.com/vlucas/phpdotenv.git"
+                    "url": "https://github.com/vlucas/phpdotenv.git",
+                    "comment": "source reference: 67a491df68208bef8c37092db11fa3885008efcf"
                 },
                 {
                     "type": "issue-tracker",
@@ -2371,11 +2493,13 @@
             "externalReferences": [
                 {
                     "type": "distribution",
-                    "url": "https://api.github.com/repos/voku/portable-ascii/zipball/87337c91b9dfacee02452244ee14ab3c43bc485a"
+                    "url": "https://api.github.com/repos/voku/portable-ascii/zipball/87337c91b9dfacee02452244ee14ab3c43bc485a",
+                    "comment": "dist reference: 87337c91b9dfacee02452244ee14ab3c43bc485a"
                 },
                 {
                     "type": "vcs",
-                    "url": "https://github.com/voku/portable-ascii.git"
+                    "url": "https://github.com/voku/portable-ascii.git",
+                    "comment": "source reference: 87337c91b9dfacee02452244ee14ab3c43bc485a"
                 },
                 {
                     "type": "website",

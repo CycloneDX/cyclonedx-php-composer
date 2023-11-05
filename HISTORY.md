@@ -7,6 +7,9 @@ All notable changes to this project will be documented in this file.
 * Fix
   * SBOM results might have the `externalReferences[].hashes` populated ([#430] via [#])  
     They might have wrongly appeared as component's hashes before.
+* Added
+  * SBOM results might have the `externalReferences[].comment` populated (via [#])
+
 
 [#430]: https://github.com/CycloneDX/cyclonedx-php-composer/issues/430
 [#]:
