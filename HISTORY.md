@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 ## unreleased
 
+* Fix
+  * SBOM results might have the `externalReferences[].hashes` populated ([#430] via [#])  
+    They might have wrongly appeared as component's hashes before.
+
+[#430]: https://github.com/CycloneDX/cyclonedx-php-composer/issues/430
+[#]:
 
 ## 4.2.1 - 2023-10-27
 
