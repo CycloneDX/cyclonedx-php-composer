@@ -6,7 +6,7 @@ All notable changes to this project will be documented in this file.
 
 * Fix
   * SBOM results might have the `externalReferences[].hashes` populated ([#430] via [#432])  
-    They might have wrongly appeared as component's hashes before.
+    They might have wrongly appeared as `components[].hashes` before.
 * Added
   * SBOM results might have the `externalReferences[].comment` populated (via [#432])
 
