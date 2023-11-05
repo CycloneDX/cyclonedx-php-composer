@@ -54,6 +54,7 @@
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[packages/local-demo-dependency]]></url>
+          <comment><![CDATA[dist reference: 6166868f2e7db756aa6c51f466d267232a74b702]]></comment>
         </reference>
       </externalReferences>
     </component>
@@ -67,6 +68,7 @@
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[packages/local-demo-issue-158]]></url>
+          <comment><![CDATA[dist reference: 189236989b5f92038f280867115ac65185ba92df]]></comment>
         </reference>
         <reference type="website">
           <url><![CDATA[https://github.com/CycloneDX/cyclonedx-php-composer/issues/158]]></url>
@@ -86,6 +88,7 @@
       <externalReferences>
         <reference type="distribution">
           <url><![CDATA[packages/local-dependency-with-minimal-setup]]></url>
+          <comment><![CDATA[dist reference: 5cdadb5ab51e8009613e68c49f8d07fcd512da78]]></comment>
         </reference>
       </externalReferences>
     </component>

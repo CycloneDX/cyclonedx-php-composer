@@ -214,7 +214,6 @@ class Builder
         $component->setBomRefValue($package->getUniqueName());
         $component->setGroup($group);
         $component->setVersion($version);
-        $component->getHashes()->set(Enums\HashAlgorithm::SHA_1, $package->getDistSha1Checksum());
         $component->getExternalReferences()->addItems(
             ...self::createExternalReferencesFromPackage($package)
         );
@@ -265,11 +264,6 @@ class Builder
         $purl->setNamespace($component->getGroup());
         $purl->setVersion($component->getVersion());
 
-        $sha1Sum = $component->getHashes()->get(Enums\HashAlgorithm::SHA_1);
-        if (null !== $sha1Sum) {
-            $purl->setChecksums(["sha1:$sha1Sum"]);
-        }
-
         return $purl;
     }
 
@@ -280,19 +274,26 @@ class Builder
      */
     private static function createExternalReferencesFromPackage(PackageInterface $package): Generator
     {
+        $ref = $package->getDistReference();
+        $comment = null !== $ref && '' !== $ref ? 'dist reference: '.$ref : null;
         foreach ($package->getDistUrls() as $distUrl) {
-            yield new Models\ExternalReference(
+            $er = new Models\ExternalReference(
                 Enums\ExternalReferenceType::Distribution,
                 $distUrl
             );
+            $er->getHashes()->set(Enums\HashAlgorithm::SHA_1, $package->getDistSha1Checksum());
+            $er->setComment($comment);
+            yield $er;
         }
 
+        $ref = $package->getSourceReference();
+        $comment = null !== $ref && '' !== $ref ? 'source reference: '.$ref : null;
         foreach ($package->getSourceUrls() as $sourceUrl) {
-            yield new Models\ExternalReference(
+            yield (new Models\ExternalReference(
                 // see https://github.com/CycloneDX/specification/issues/98
                 Enums\ExternalReferenceType::VCS,
                 $sourceUrl
-            );
+            ))->setComment($comment);
         }
 
         if ($package instanceof CompletePackageInterface) {
@@ -404,7 +405,6 @@ class Builder
         $tool->setName($name);
         $tool->setVendor($group);
         $tool->setVersion($versionOverride ?? $package->getFullPrettyVersion());
-        $tool->getHashes()->set(Enums\HashAlgorithm::SHA_1, $package->getDistSha1Checksum());
         $tool->getExternalReferences()->addItems(
             ...self::createExternalReferencesFromPackage($package)
         );

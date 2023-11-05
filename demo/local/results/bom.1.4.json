@@ -73,7 +73,8 @@
             "externalReferences": [
                 {
                     "type": "distribution",
-                    "url": "packages/local-demo-dependency"
+                    "url": "packages/local-demo-dependency",
+                    "comment": "dist reference: 6166868f2e7db756aa6c51f466d267232a74b702"
                 }
             ],
             "properties": [
@@ -99,7 +100,8 @@
             "externalReferences": [
                 {
                     "type": "distribution",
-                    "url": "packages/local-demo-issue-158"
+                    "url": "packages/local-demo-issue-158",
+                    "comment": "dist reference: 189236989b5f92038f280867115ac65185ba92df"
                 },
                 {
                     "type": "website",
@@ -133,7 +135,8 @@
             "externalReferences": [
                 {
                     "type": "distribution",
-                    "url": "packages/local-dependency-with-minimal-setup"
+                    "url": "packages/local-dependency-with-minimal-setup",
+                    "comment": "dist reference: 5cdadb5ab51e8009613e68c49f8d07fcd512da78"
                 }
             ],
             "properties": [
