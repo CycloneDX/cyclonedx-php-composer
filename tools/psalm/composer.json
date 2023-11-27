@@ -3,15 +3,12 @@
     "type": "metapackage",
     "description": "psalm and plugins",
     "require-dev": {
-        "vimeo/psalm": "5.6.0",
+        "vimeo/psalm": "5.16.0",
         "roave/security-advisories": "dev-latest"
     },
     "config": {
         "preferred-install": "dist",
-        "sort-packages": true,
-        "allow-plugins": {
-            "composer/package-versions-deprecated": false
-        }
+        "sort-packages": true
     },
     "prefer-stable": true
 }
