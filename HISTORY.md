@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 ## unreleased
 
 * Misc
-  * Officially support php 8.3 (via [#342])
+  * Officially support PHP 8.3 (via [#342])
 
 [#342]: https://github.com/CycloneDX/cyclonedx-php-composer/pull/342
 
