@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## unreleased
 
+## 4.2.3 - 2023-11-27
+
 * Misc
   * Officially support PHP 8.3 (via [#342])
 
