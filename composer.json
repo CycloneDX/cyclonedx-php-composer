@@ -44,7 +44,8 @@
     },
     "require-dev": {
         "composer/composer": "^2.3.0",
-        "roave/security-advisories": "dev-latest"
+        "roave/security-advisories": "dev-latest",
+        "symfony/console": "<7"
     },
     "prefer-stable": true,
     "autoload": {
