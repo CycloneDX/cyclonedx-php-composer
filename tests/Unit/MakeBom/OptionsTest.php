@@ -62,7 +62,7 @@ final class OptionsTest extends TestCase
                 'outputFormat' => Format::XML,
                 'outputFile' => Options::VALUE_OUTPUT_FILE_STDOUT,
                 'omit' => [],
-                'specVersion' => Version::v1dot4,
+                'specVersion' => Version::v1dot5,
                 'validate' => true,
                 'mainComponentVersion' => null,
                 'composerFile' => null,
