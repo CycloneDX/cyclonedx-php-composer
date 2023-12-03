@@ -4,14 +4,19 @@ All notable changes to this project will be documented in this file.
 
 ## unreleased
 
+## 5.0.0 - 2023-12-03
+
 * BREAKING changes
-  * CLI switch `--spec-version` defaults to `1.5`, was `1.4` (via [#441])
+  * CLI switch `--spec-version` defaults to `1.5`, was `1.4` ([#442] via [#441])
 * Dependencies
-    * Raised dependency `cyclonedx/cyclonedx-library:^3.1`, was `:^2.3 || ^3.0` (via [#441])
+  * Raised dependency `cyclonedx/cyclonedx-library:^3.1`, was `:^2.3 || ^3.0` (via [#441])
 
 [#441]: https://github.com/CycloneDX/cyclonedx-php-composer/pull/441
+[#442]: https://github.com/CycloneDX/cyclonedx-php-composer/issues/442
 
 ## 4.2.3 - 2023-11-27
+
+Maintenance release.
 
 * Misc
   * Officially support PHP 8.3 (via [#342])
