@@ -61,14 +61,14 @@ final class CommandMakeSbomTest extends CommandTestCase
 
     public static function dp(): Generator
     {
-        yield 'not reproducible defaults to XML 1.4 with serialnumber' => [
+        yield 'not reproducible defaults to XML 1.5 with serialnumber' => [
             ['--output-reproducible' => false],
-            '<bom xmlns="http://cyclonedx.org/schema/bom/1.4" version="1" serialNumber="',
+            '<bom xmlns="http://cyclonedx.org/schema/bom/1.5" version="1" serialNumber="',
         ];
-        yield 'reproducible defaults to XML 1.4 with no serial number nor timestamp' => [
+        yield 'reproducible defaults to XML 1.5 with no serial number nor timestamp' => [
             ['--output-reproducible' => true],
             <<<'XML'
-                <bom xmlns="http://cyclonedx.org/schema/bom/1.4" version="1">
+                <bom xmlns="http://cyclonedx.org/schema/bom/1.5" version="1">
                   <metadata>
                     <tools>
                 XML,

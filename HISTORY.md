@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 
 ## unreleased
 
+* BREAKING changes
+  * CLI switch `--spec-version` defaults to `1.5`, was `1.4` (via [#])
+* Dependencies
+    * Raised dependency `cyclonedx/cyclonedx-library:^3.1`, was `:^2.3 || ^3.0` (via [#])
+
+[#]: 
+
 ## 4.2.3 - 2023-11-27
 
 * Misc
@@ -169,8 +176,8 @@ Maintenance Release.
 
 ## 3.10.0 - 2022-04-02
 
-* Changed
-  * Raised dependency `cyclonedx/cyclonedx-library:^1.4.2`, was `cyclonedx/cyclonedx-library:^1.3.1`. (via [#192])
+* Dependencies
+  * Raised dependency `cyclonedx/cyclonedx-library:^1.4.2`, was `:^1.3.1`. (via [#192])
 * Misc
   * Adjusted internal typing and typehints. (via [#192])
   * Improved compatibility to Composer v2.3 (via [#212])

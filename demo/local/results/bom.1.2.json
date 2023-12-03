@@ -94,7 +94,7 @@
                 },
                 {
                     "type": "issue-tracker",
-                    "url": "https://pear.php.net/bugs/search.php?cmd=display&package_name[]=PEAR_Exception",
+                    "url": "https://pear.php.net/bugs/search.php?cmd=display&package_name%5B%5D=PEAR_Exception",
                     "comment": "as detected from Composer manifest 'support.issues'"
                 }
             ]
