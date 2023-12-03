@@ -5,11 +5,11 @@ All notable changes to this project will be documented in this file.
 ## unreleased
 
 * BREAKING changes
-  * CLI switch `--spec-version` defaults to `1.5`, was `1.4` (via [#])
+  * CLI switch `--spec-version` defaults to `1.5`, was `1.4` (via [#441])
 * Dependencies
-    * Raised dependency `cyclonedx/cyclonedx-library:^3.1`, was `:^2.3 || ^3.0` (via [#])
+    * Raised dependency `cyclonedx/cyclonedx-library:^3.1`, was `:^2.3 || ^3.0` (via [#441])
 
-[#]: 
+[#441]: https://github.com/CycloneDX/cyclonedx-php-composer/pull/441
 
 ## 4.2.3 - 2023-11-27
 
