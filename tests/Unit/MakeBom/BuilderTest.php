@@ -114,7 +114,7 @@ final class BuilderTest extends TestCase
     }
 
     /**
-     * @psalm-return \Generator<string, array{0:callable():string, 1:bool, 2:bool}>
+     * @psalm-return Generator<string, array{0:callable():string, 1:bool, 2:bool}>
      */
     public static function dpCreateSbomFromComposer(): Generator
     {
@@ -378,7 +378,7 @@ final class BuilderTest extends TestCase
     }
 
     /**
-     * @psalm-return \Generator<string, array{0:callable():string, 1:bool, 2:bool}>
+     * @psalm-return Generator<string, array{0:callable():string, 1:bool, 2:bool}>
      */
     public static function dpCreateToolsFromComposer(): Generator
     {
@@ -403,7 +403,7 @@ final class BuilderTest extends TestCase
     }
 
     /**
-     * @psalm-return \Generator<string, array{0:callable():string, 1:bool, 2:bool}>
+     * @psalm-return Generator<string, array{0:callable():string, 1:bool, 2:bool}>
      */
     private static function dpForSetup(string $setupTemplate, bool $createNoDev): Generator
     {
