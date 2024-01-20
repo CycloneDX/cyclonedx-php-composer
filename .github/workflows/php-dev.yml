@@ -58,7 +58,7 @@ jobs:
       - name: Cache dependencies
         if: ${{ steps.composer-cache.outputs.dir }}
         # see https://github.com/actions/cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
           key: composer-${{ github.job }}-${{ runner.os }}-php${{ matrix.php }}-${{ hashFiles('composer.*', 'tools/*/composer.*') }}
