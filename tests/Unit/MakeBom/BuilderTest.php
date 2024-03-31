@@ -163,10 +163,10 @@ final class BuilderTest extends TestCase
         self::assertSame('pkg:composer/symfony/lock@v6.2.7', (string) $component->getPackageUrl());
         $componentProperties = $component->getProperties()->getItems();
         foreach ([
-                     'cdx:composer:package:type' => ['library'],
-                     'cdx:composer:package:distReference' => ['febdeed9473e568ff34bf4350c04760f5357dfe2'],
-                     'cdx:composer:package:sourceReference' => ['febdeed9473e568ff34bf4350c04760f5357dfe2'],
-                 ] as $propertyName => $expectedValues) {
+            'cdx:composer:package:type' => ['library'],
+            'cdx:composer:package:distReference' => ['febdeed9473e568ff34bf4350c04760f5357dfe2'],
+            'cdx:composer:package:sourceReference' => ['febdeed9473e568ff34bf4350c04760f5357dfe2'],
+        ] as $propertyName => $expectedValues) {
             $fComponentPropertyValues = array_values(array_map(
                 static fn ($p) => $p->getValue(),
                 array_filter($componentProperties, static fn ($c) => $c->getName() === $propertyName)));
@@ -174,9 +174,9 @@ final class BuilderTest extends TestCase
         }
         $extRefs = $component->getExternalReferences()->getItems();
         foreach ([
-                     [Enums\ExternalReferenceType::Distribution, ['https://api.github.com/repos/symfony/lock/zipball/febdeed9473e568ff34bf4350c04760f5357dfe2']],
-                     [Enums\ExternalReferenceType::VCS, ['https://github.com/symfony/lock.git', 'https://github.com/symfony/lock/tree/v6.2.7']],
-                 ] as [$extRefType, $expectedUrls]) {
+            [Enums\ExternalReferenceType::Distribution, ['https://api.github.com/repos/symfony/lock/zipball/febdeed9473e568ff34bf4350c04760f5357dfe2']],
+            [Enums\ExternalReferenceType::VCS, ['https://github.com/symfony/lock.git', 'https://github.com/symfony/lock/tree/v6.2.7']],
+        ] as [$extRefType, $expectedUrls]) {
             $fExtRefUrls = array_values(array_map(
                 static fn ($er) => $er->getUrl(),
                 array_filter($extRefs, static fn ($er) => $er->getType() === $extRefType)));
@@ -202,10 +202,10 @@ final class BuilderTest extends TestCase
         self::assertSame('pkg:composer/psr/log@3.0.0', (string) $component->getPackageUrl());
         $componentProperties = $component->getProperties()->getItems();
         foreach ([
-                     'cdx:composer:package:type' => ['library'],
-                     'cdx:composer:package:distReference' => ['fe5ea303b0887d5caefd3d431c3e61ad47037001'],
-                     'cdx:composer:package:sourceReference' => ['fe5ea303b0887d5caefd3d431c3e61ad47037001'],
-                 ] as $propertyName => $expectedValues) {
+            'cdx:composer:package:type' => ['library'],
+            'cdx:composer:package:distReference' => ['fe5ea303b0887d5caefd3d431c3e61ad47037001'],
+            'cdx:composer:package:sourceReference' => ['fe5ea303b0887d5caefd3d431c3e61ad47037001'],
+        ] as $propertyName => $expectedValues) {
             $fComponentPropertyValues = array_values(array_map(
                 static fn ($p) => $p->getValue(),
                 array_filter($componentProperties, static fn ($c) => $c->getName() === $propertyName)));
@@ -213,9 +213,9 @@ final class BuilderTest extends TestCase
         }
         $extRefs = $component->getExternalReferences()->getItems();
         foreach ([
-                     [Enums\ExternalReferenceType::Distribution, ['https://api.github.com/repos/php-fig/log/zipball/fe5ea303b0887d5caefd3d431c3e61ad47037001']],
-                     [Enums\ExternalReferenceType::VCS, ['https://github.com/php-fig/log.git', 'https://github.com/php-fig/log/tree/3.0.0']],
-                 ] as [$extRefType, $expectedUrls]) {
+            [Enums\ExternalReferenceType::Distribution, ['https://api.github.com/repos/php-fig/log/zipball/fe5ea303b0887d5caefd3d431c3e61ad47037001']],
+            [Enums\ExternalReferenceType::VCS, ['https://github.com/php-fig/log.git', 'https://github.com/php-fig/log/tree/3.0.0']],
+        ] as [$extRefType, $expectedUrls]) {
             $fExtRefUrls = array_values(array_map(
                 static fn ($er) => $er->getUrl(),
                 array_filter($extRefs, static fn ($er) => $er->getType() === $extRefType)));
@@ -239,9 +239,9 @@ final class BuilderTest extends TestCase
         self::assertSame('pkg:composer/cyclonedx/cyclonedx-php-composer@dev-master', (string) $component->getPackageUrl());
         $componentProperties = $component->getProperties()->getItems();
         foreach ([
-                     'cdx:composer:package:isDevRequirement' => ['true'],
-                     'cdx:composer:package:type' => ['composer-plugin'],
-                 ] as $propertyName => $expectedValues) {
+            'cdx:composer:package:isDevRequirement' => ['true'],
+            'cdx:composer:package:type' => ['composer-plugin'],
+        ] as $propertyName => $expectedValues) {
             $fComponentPropertyValues = array_values(array_map(
                 static fn ($p) => $p->getValue(),
                 array_filter($componentProperties, static fn ($c) => $c->getName() === $propertyName)));
@@ -249,11 +249,11 @@ final class BuilderTest extends TestCase
         }
         $extRefs = $component->getExternalReferences()->getItems();
         foreach ([
-                     [Enums\ExternalReferenceType::Distribution, ['../../../..']],
-                     [Enums\ExternalReferenceType::VCS, ['https://github.com/CycloneDX/cyclonedx-php-composer/']],
-                     [Enums\ExternalReferenceType::Website, ['https://github.com/CycloneDX/cyclonedx-php-composer/#readme']],
-                     [Enums\ExternalReferenceType::IssueTracker, ['https://github.com/CycloneDX/cyclonedx-php-composer/issues']],
-                 ] as [$extRefType, $expectedUrls]) {
+            [Enums\ExternalReferenceType::Distribution, ['../../../..']],
+            [Enums\ExternalReferenceType::VCS, ['https://github.com/CycloneDX/cyclonedx-php-composer/']],
+            [Enums\ExternalReferenceType::Website, ['https://github.com/CycloneDX/cyclonedx-php-composer/#readme']],
+            [Enums\ExternalReferenceType::IssueTracker, ['https://github.com/CycloneDX/cyclonedx-php-composer/issues']],
+        ] as [$extRefType, $expectedUrls]) {
             $fExtRefUrls = array_values(array_map(
                 static fn ($er) => $er->getUrl(),
                 array_filter($extRefs, static fn ($er) => $er->getType() === $extRefType)));

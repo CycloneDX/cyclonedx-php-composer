@@ -71,7 +71,7 @@ final class OptionsTest extends TestCase
         foreach ([
             'XML' => Format::XML,
             'JSON' => Format::JSON,
-         ] as $outputFormatIn => $outputFormat) {
+        ] as $outputFormatIn => $outputFormat) {
             yield "outputFormat $outputFormatIn" => [
                 '--output-format '.escapeshellarg($outputFormatIn),
                 ['outputFormat' => $outputFormat],
@@ -96,7 +96,7 @@ final class OptionsTest extends TestCase
             '1.3' => Version::v1dot3,
             '1.2' => Version::v1dot2,
             '1.1' => Version::v1dot1,
-         ] as $specVersionIn => $specVersion) {
+        ] as $specVersionIn => $specVersion) {
             yield "specVersion '$specVersionIn'" => [
                 '--spec-version '.escapeshellarg($specVersionIn),
                 ['specVersion' => $specVersion],
