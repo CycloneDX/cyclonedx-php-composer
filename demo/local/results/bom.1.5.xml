@@ -6,6 +6,24 @@
         <vendor><![CDATA[cyclonedx]]></vendor>
         <name><![CDATA[cyclonedx-php-composer]]></name>
         <version><![CDATA[in-dev]]></version>
+        <externalReferences>
+          <reference type="distribution">
+            <url><![CDATA[../..]]></url>
+            <comment><![CDATA[dist reference: 87e586b743c3cc6b470a8a6fc5c4f244e84abdf5]]></comment>
+          </reference>
+          <reference type="website">
+            <url><![CDATA[https://github.com/CycloneDX/cyclonedx-php-composer/#readme]]></url>
+            <comment><![CDATA[as detected from Composer manifest 'homepage']]></comment>
+          </reference>
+          <reference type="issue-tracker">
+            <url><![CDATA[https://github.com/CycloneDX/cyclonedx-php-composer/issues]]></url>
+            <comment><![CDATA[as detected from Composer manifest 'support.issues']]></comment>
+          </reference>
+          <reference type="vcs">
+            <url><![CDATA[https://github.com/CycloneDX/cyclonedx-php-composer/]]></url>
+            <comment><![CDATA[as detected from Composer manifest 'support.source']]></comment>
+          </reference>
+        </externalReferences>
       </tool>
     </tools>
     <component type="application" bom-ref="cyclonedx-demo/cyclonedx-php-composer-local-dev-master">

@@ -1,11 +1,11 @@
 {
-    "$schema": "http://cyclonedx.org/schema/bom-1.4.schema.json",
+    "$schema": "http://cyclonedx.org/schema/bom-1.5.schema.json",
     "bomFormat": "CycloneDX",
-    "specVersion": "1.4",
-    "serialNumber": "urn:uuid:a4c6dc61-0aac-4cc0-a1e7-a9d285333758",
+    "specVersion": "1.5",
+    "serialNumber": "urn:uuid:66d7b97d-9a31-4860-a806-a6137427453f",
     "version": 1,
     "metadata": {
-        "timestamp": "2023-11-05T18:38:07Z",
+        "timestamp": "2024-04-23T12:39:42Z",
         "tools": [
             {
                 "name": "composer",
@@ -19,7 +19,7 @@
                     {
                         "type": "distribution",
                         "url": "../..",
-                        "comment": "dist reference: 16688304929eaab0147c1e6c27c0f31ed03b45ea"
+                        "comment": "dist reference: 87e586b743c3cc6b470a8a6fc5c4f244e84abdf5"
                     },
                     {
                         "type": "website",
@@ -41,22 +41,27 @@
             {
                 "vendor": "cyclonedx",
                 "name": "cyclonedx-library",
-                "version": "v3.0.0",
+                "version": "v3.2.0",
                 "externalReferences": [
                     {
                         "type": "distribution",
-                        "url": "https://api.github.com/repos/CycloneDX/cyclonedx-php-library/zipball/c2f0a54db011fcc261cd1e1ce7bce2da3d51a070",
-                        "comment": "dist reference: c2f0a54db011fcc261cd1e1ce7bce2da3d51a070"
+                        "url": "https://api.github.com/repos/CycloneDX/cyclonedx-php-library/zipball/660d554d972656171f137093a9cc77256b7dee0c",
+                        "comment": "dist reference: 660d554d972656171f137093a9cc77256b7dee0c"
                     },
                     {
                         "type": "vcs",
                         "url": "https://github.com/CycloneDX/cyclonedx-php-library.git",
-                        "comment": "source reference: c2f0a54db011fcc261cd1e1ce7bce2da3d51a070"
+                        "comment": "source reference: 660d554d972656171f137093a9cc77256b7dee0c"
                     },
                     {
                         "type": "website",
                         "url": "https://github.com/CycloneDX/cyclonedx-php-library/#readme",
                         "comment": "as detected from Composer manifest 'homepage'"
+                    },
+                    {
+                        "type": "documentation",
+                        "url": "https://cyclonedx-php-library.readthedocs.io",
+                        "comment": "as detected from Composer manifest 'support.docs'"
                     },
                     {
                         "type": "issue-tracker",
@@ -83,11 +88,11 @@
             "properties": [
                 {
                     "name": "cdx:composer:package:distReference",
-                    "value": "5a39e7a4b37375d9015f56ec7364e4558a7c220a"
+                    "value": "e99a748d960458fe396721144f3d06d189ad9316"
                 },
                 {
                     "name": "cdx:composer:package:sourceReference",
-                    "value": "5a39e7a4b37375d9015f56ec7364e4558a7c220a"
+                    "value": "e99a748d960458fe396721144f3d06d189ad9316"
                 },
                 {
                     "name": "cdx:composer:package:type",
