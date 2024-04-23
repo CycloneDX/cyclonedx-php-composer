@@ -26,6 +26,8 @@ and how the generated output will look like.
 
 ## Maintenance
 
+Resulting SBOM data may be generated during [integration tests](../tests/Integration/CommandMakeSbomAsExpectedTest.php).
+
 Files in `**/project/**` are marked as `linguist-vendored` in the `.gitattributes`.  
 Therefore, the requirements/dependencies are
 [not maintained by dependabot](https://docs.github.com/en/code-security/supply-chain-security/configuration-options-for-dependency-updates#vendor).

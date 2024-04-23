@@ -4,8 +4,19 @@ All notable changes to this project will be documented in this file.
 
 ## unreleased
 
+<!-- add unreleased items here -->
+
+Added _basic_ support for [_CycloneDX_ Specification-1.6](https://github.com/CycloneDX/specification/releases/tag/1.6).
+
+* Changed
+  * This tool supports _CycloneDX_ Specification-1.6 now (via [#])
+* Added
+  * CLI switch `--spec-version` now supports value `1.6` to reflect _CycloneDX_ Specification-1.6 (via [#])  
+    Default value for that switch is unchanged - still `1.5`.
 * Style
   * Applied latest PHP Coding Standards (via [#469])
+* Dependencies
+  * Raised dependency `cyclonedx/cyclonedx-library:^3.2`, was `:^3.1` (via [#])
 
 [#469]: https://github.com/CycloneDX/cyclonedx-php-composer/pull/469
 
