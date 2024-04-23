@@ -6,6 +6,8 @@ All notable changes to this project will be documented in this file.
 
 * Style
   * Applied latest PHP Coding Standards (via [#469])
+* Dependencies
+  * Raised dependency `cyclonedx/cyclonedx-library:^3.2`, was `:^3.1` (via [#])
 
 [#469]: https://github.com/CycloneDX/cyclonedx-php-composer/pull/469
 
