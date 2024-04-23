@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 
 ## unreleased
 
+Added _basic_ support for [_CycloneDX_ Specification-1.6](https://github.com/CycloneDX/specification/releases/tag/1.6).
+
+* Changed
+  * This tool supports _CycloneDX_ Specification-1.6 now (via [#])
+* Added
+  * CLI switch `--spec-version` now supports value `1.6` to reflect _CycloneDX_ Specification-1.6 (via [#])  
+    Default value for that switch is unchanged - still `1.5`.
 * Style
   * Applied latest PHP Coding Standards (via [#469])
 * Dependencies
