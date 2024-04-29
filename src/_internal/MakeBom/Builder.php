@@ -33,7 +33,6 @@ use Composer\Repository\LockArrayRepository;
 use Composer\Semver\Constraint\MatchAllConstraint;
 use CycloneDX\Composer\_internal\Properties;
 use CycloneDX\Core\Enums;
-use CycloneDX\Core\Enums\LicenseAcknowledgement;
 use CycloneDX\Core\Factories\LicenseFactory;
 use CycloneDX\Core\Models;
 use Generator;
@@ -236,7 +235,7 @@ class Builder
             $component->getLicenses()->addItems(
                 ...array_map(
                     fn ($l) => $this->licenseFactory->makeFromString($l)
-                        ->setAcknowledgement(LicenseAcknowledgement::Declared),
+                        ->setAcknowledgement(Enums\LicenseAcknowledgement::Declared),
                     $package->getLicense()
                 )
             );
