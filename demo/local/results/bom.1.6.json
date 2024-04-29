@@ -77,18 +77,26 @@
             "group": "cyclonedx-demo",
             "description": "a package that is hosted locally and required in a local demo",
             "author": "Jan Kowalleck",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "Apache-2.0",
+                        "acknowledgement": "declared"
+                    }
+                }
+            ],
             "purl": "pkg:composer/cyclonedx-demo/local-demo-dependency@1.33.7",
             "externalReferences": [
                 {
                     "type": "distribution",
                     "url": "packages/local-demo-dependency",
-                    "comment": "dist reference: 6166868f2e7db756aa6c51f466d267232a74b702"
+                    "comment": "dist reference: 0f3c3d45329014fcb6a18e73f975008b7eee0c90"
                 }
             ],
             "properties": [
                 {
                     "name": "cdx:composer:package:distReference",
-                    "value": "6166868f2e7db756aa6c51f466d267232a74b702"
+                    "value": "0f3c3d45329014fcb6a18e73f975008b7eee0c90"
                 },
                 {
                     "name": "cdx:composer:package:type",
@@ -104,12 +112,20 @@
             "group": "cyclonedx-demo",
             "description": "a package that reproduces issue#158",
             "author": "Jan Kowalleck",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "Apache-2.0",
+                        "acknowledgement": "declared"
+                    }
+                }
+            ],
             "purl": "pkg:composer/cyclonedx-demo/local-demo-issue-158@dev-issue-158",
             "externalReferences": [
                 {
                     "type": "distribution",
                     "url": "packages/local-demo-issue-158",
-                    "comment": "dist reference: 189236989b5f92038f280867115ac65185ba92df"
+                    "comment": "dist reference: 0a81eb04585ab16145687d0d324871413132ffcc"
                 },
                 {
                     "type": "website",
@@ -125,7 +141,7 @@
             "properties": [
                 {
                     "name": "cdx:composer:package:distReference",
-                    "value": "189236989b5f92038f280867115ac65185ba92df"
+                    "value": "0a81eb04585ab16145687d0d324871413132ffcc"
                 },
                 {
                     "name": "cdx:composer:package:type",
@@ -134,12 +150,12 @@
             ]
         },
         {
-            "bom-ref": "cyclonedx-demo/local-dependency-with-minimal-setup-dev-component-author",
+            "bom-ref": "cyclonedx-demo/local-dependency-with-minimal-setup-dev-feat/license-acknowledgement",
             "type": "library",
             "name": "local-dependency-with-minimal-setup",
-            "version": "dev-component-author",
+            "version": "dev-feat/license-acknowledgement",
             "group": "cyclonedx-demo",
-            "purl": "pkg:composer/cyclonedx-demo/local-dependency-with-minimal-setup@dev-component-author",
+            "purl": "pkg:composer/cyclonedx-demo/local-dependency-with-minimal-setup@dev-feat/license-acknowledgement",
             "externalReferences": [
                 {
                     "type": "distribution",
@@ -163,14 +179,14 @@
         {
             "ref": "cyclonedx-demo/local-demo-dependency-1.33.7.0",
             "dependsOn": [
-                "cyclonedx-demo/local-dependency-with-minimal-setup-dev-component-author"
+                "cyclonedx-demo/local-dependency-with-minimal-setup-dev-feat/license-acknowledgement"
             ]
         },
         {
             "ref": "cyclonedx-demo/local-demo-issue-158-dev-issue-158"
         },
         {
-            "ref": "cyclonedx-demo/local-dependency-with-minimal-setup-dev-component-author"
+            "ref": "cyclonedx-demo/local-dependency-with-minimal-setup-dev-feat/license-acknowledgement"
         },
         {
             "ref": "cyclonedx-demo/cyclonedx-php-composer-local-dev-master",
