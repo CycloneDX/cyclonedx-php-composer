@@ -2,10 +2,10 @@
     "$schema": "http://cyclonedx.org/schema/bom-1.5.schema.json",
     "bomFormat": "CycloneDX",
     "specVersion": "1.5",
-    "serialNumber": "urn:uuid:5633a613-92e9-4f81-9ce9-f18ed86b31a9",
+    "serialNumber": "urn:uuid:429b2121-c8ee-422c-9471-feb27fbaa882",
     "version": 1,
     "metadata": {
-        "timestamp": "2024-04-23T12:46:28Z",
+        "timestamp": "2024-04-29T07:11:10Z",
         "tools": [
             {
                 "name": "composer",
@@ -19,7 +19,7 @@
                     {
                         "type": "distribution",
                         "url": "../..",
-                        "comment": "dist reference: 87e586b743c3cc6b470a8a6fc5c4f244e84abdf5"
+                        "comment": "dist reference: 88cf1cf6c9034567cbcf9fcd776c71aeed6c35a8"
                     },
                     {
                         "type": "website",
@@ -41,17 +41,17 @@
             {
                 "vendor": "cyclonedx",
                 "name": "cyclonedx-library",
-                "version": "v3.2.0",
+                "version": "v3.3.0",
                 "externalReferences": [
                     {
                         "type": "distribution",
-                        "url": "https://api.github.com/repos/CycloneDX/cyclonedx-php-library/zipball/660d554d972656171f137093a9cc77256b7dee0c",
-                        "comment": "dist reference: 660d554d972656171f137093a9cc77256b7dee0c"
+                        "url": "https://api.github.com/repos/CycloneDX/cyclonedx-php-library/zipball/34fb57c387abe57d3926e05511475ed4a04c1ed7",
+                        "comment": "dist reference: 34fb57c387abe57d3926e05511475ed4a04c1ed7"
                     },
                     {
                         "type": "vcs",
                         "url": "https://github.com/CycloneDX/cyclonedx-php-library.git",
-                        "comment": "source reference: 660d554d972656171f137093a9cc77256b7dee0c"
+                        "comment": "source reference: 34fb57c387abe57d3926e05511475ed4a04c1ed7"
                     },
                     {
                         "type": "website",
@@ -88,11 +88,11 @@
             "properties": [
                 {
                     "name": "cdx:composer:package:distReference",
-                    "value": "8581146a4e66613487b04e05554a2881f6d9ad78"
+                    "value": "88cf1cf6c9034567cbcf9fcd776c71aeed6c35a8"
                 },
                 {
                     "name": "cdx:composer:package:sourceReference",
-                    "value": "8581146a4e66613487b04e05554a2881f6d9ad78"
+                    "value": "88cf1cf6c9034567cbcf9fcd776c71aeed6c35a8"
                 },
                 {
                     "name": "cdx:composer:package:type",
