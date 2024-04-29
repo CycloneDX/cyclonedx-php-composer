@@ -19,6 +19,13 @@
             "group": "cyclonedx-demo",
             "description": "demo of cyclonedx/cyclonedx-php-composer with a local dependency",
             "author": "Jan Kowalleck",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "Apache-2.0"
+                    }
+                }
+            ],
             "purl": "pkg:composer/cyclonedx-demo/cyclonedx-php-composer-local@dev-master",
             "externalReferences": [
                 {

@@ -1,6 +1,7 @@
 {
     "name": "cyclonedx-demo/local-demo-issue-158",
     "description": "a package that reproduces issue#158",
+    "license": "Apache-2.0",
     "type": "library",
     "version": "dev-issue-158",
     "authors": [

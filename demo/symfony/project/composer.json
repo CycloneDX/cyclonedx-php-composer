@@ -1,6 +1,7 @@
 {
     "name": "cyclonedx/cyclonedx-php-composer-demo",
     "description": "demo of cyclonedx/cyclonedx-php-composer with symfony/symfony",
+    "license": "Apache-2.0",
     "type": "project",
     "authors": [
         {

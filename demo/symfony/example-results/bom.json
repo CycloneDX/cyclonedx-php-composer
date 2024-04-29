@@ -2,10 +2,10 @@
     "$schema": "http://cyclonedx.org/schema/bom-1.6.schema.json",
     "bomFormat": "CycloneDX",
     "specVersion": "1.6",
-    "serialNumber": "urn:uuid:7dd03cef-34e1-45af-8283-55bb3dba10fe",
+    "serialNumber": "urn:uuid:752eaa36-0cec-48cd-9a6c-65236f588efd",
     "version": 1,
     "metadata": {
-        "timestamp": "2024-04-29T07:45:49Z",
+        "timestamp": "2024-04-29T12:26:02Z",
         "tools": [
             {
                 "name": "composer",
@@ -84,15 +84,23 @@
             "group": "cyclonedx",
             "description": "demo of cyclonedx/cyclonedx-php-composer with symfony/symfony",
             "author": "Jan Kowalleck",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "Apache-2.0",
+                        "acknowledgement": "declared"
+                    }
+                }
+            ],
             "purl": "pkg:composer/cyclonedx/cyclonedx-php-composer-demo@dev-master",
             "properties": [
                 {
                     "name": "cdx:composer:package:distReference",
-                    "value": "7a84aa17c223881c6ad67cdf56401e9c09e3bf6c"
+                    "value": "d03acdc46afe71026f767cbf6a2c42b1ed5e4001"
                 },
                 {
                     "name": "cdx:composer:package:sourceReference",
-                    "value": "7a84aa17c223881c6ad67cdf56401e9c09e3bf6c"
+                    "value": "d03acdc46afe71026f767cbf6a2c42b1ed5e4001"
                 },
                 {
                     "name": "cdx:composer:package:type",

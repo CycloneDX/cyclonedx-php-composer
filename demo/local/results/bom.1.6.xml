@@ -14,6 +14,11 @@
       <name><![CDATA[cyclonedx-php-composer-local]]></name>
       <version><![CDATA[dev-master]]></version>
       <description><![CDATA[demo of cyclonedx/cyclonedx-php-composer with a local dependency]]></description>
+      <licenses>
+        <license acknowledgement="declared">
+          <id><![CDATA[Apache-2.0]]></id>
+        </license>
+      </licenses>
       <purl><![CDATA[pkg:composer/cyclonedx-demo/cyclonedx-php-composer-local@dev-master]]></purl>
       <externalReferences>
         <reference type="website">
