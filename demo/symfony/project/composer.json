@@ -29,10 +29,10 @@
             "@create-sbom-results:XML"
         ],
         "create-sbom-results:JSON": [
-            "@composer -d ../../.tool CycloneDX:make-sbom --validate --omit=dev --output-format=JSON --output-file=$PWD/../example-results/bom.json $PWD/composer.json"
+            "@composer -d ../../.tool CycloneDX:make-sbom --validate --omit=dev --spec-version=1.6 --output-format=JSON --output-file=$PWD/../example-results/bom.json $PWD/composer.json"
         ],
         "create-sbom-results:XML": [
-            "@composer -d ../../.tool CycloneDX:make-sbom --validate --omit=dev --output-format=XML --output-file=$PWD/../example-results/bom.xml $PWD/composer.json"
+            "@composer -d ../../.tool CycloneDX:make-sbom --validate --omit=dev --spec-version=1.6 --output-format=XML --output-file=$PWD/../example-results/bom.xml $PWD/composer.json"
         ],
         "setup": [
             "@composer -d ../../.tool update",
