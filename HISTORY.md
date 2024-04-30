@@ -6,6 +6,8 @@ All notable changes to this project will be documented in this file.
 
 <!-- add unreleased items here -->
 
+## 5.2.0 - 2024-04-30
+
 * Added
   * Declared licenses are marked as such ([#474] via [#479]) 
 * Dependencies
