@@ -21,7 +21,7 @@ on:
     - cron: '42 23 * * 5'
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
+  group: '${{ github.workflow }}-${{ github.ref }}'
   cancel-in-progress: true
 
 env:
