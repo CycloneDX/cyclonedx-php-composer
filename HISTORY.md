@@ -6,6 +6,14 @@ All notable changes to this project will be documented in this file.
 
 <!-- add unreleased items here -->
 
+* Added
+  * Declared licenses are marked as such ([#474] via [#479]) 
+* Dependencies
+  * Raised dependency `cyclonedx/cyclonedx-library:^3.3`, was `:^3.2` (via [#479])
+
+[#474]: https://github.com/CycloneDX/cyclonedx-php-composer/issues/474
+[#479]: https://github.com/CycloneDX/cyclonedx-php-composer/pull/479
+
 ## 5.1.0 - 2024-04-23
 
 Added _basic_ support for [_CycloneDX_ Specification-1.6](https://github.com/CycloneDX/specification/releases/tag/1.6).

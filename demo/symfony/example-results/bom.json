@@ -1,11 +1,11 @@
 {
-    "$schema": "http://cyclonedx.org/schema/bom-1.5.schema.json",
+    "$schema": "http://cyclonedx.org/schema/bom-1.6.schema.json",
     "bomFormat": "CycloneDX",
-    "specVersion": "1.5",
-    "serialNumber": "urn:uuid:5633a613-92e9-4f81-9ce9-f18ed86b31a9",
+    "specVersion": "1.6",
+    "serialNumber": "urn:uuid:752eaa36-0cec-48cd-9a6c-65236f588efd",
     "version": 1,
     "metadata": {
-        "timestamp": "2024-04-23T12:46:28Z",
+        "timestamp": "2024-04-29T12:26:02Z",
         "tools": [
             {
                 "name": "composer",
@@ -19,7 +19,7 @@
                     {
                         "type": "distribution",
                         "url": "../..",
-                        "comment": "dist reference: 87e586b743c3cc6b470a8a6fc5c4f244e84abdf5"
+                        "comment": "dist reference: 88cf1cf6c9034567cbcf9fcd776c71aeed6c35a8"
                     },
                     {
                         "type": "website",
@@ -41,17 +41,17 @@
             {
                 "vendor": "cyclonedx",
                 "name": "cyclonedx-library",
-                "version": "v3.2.0",
+                "version": "v3.3.0",
                 "externalReferences": [
                     {
                         "type": "distribution",
-                        "url": "https://api.github.com/repos/CycloneDX/cyclonedx-php-library/zipball/660d554d972656171f137093a9cc77256b7dee0c",
-                        "comment": "dist reference: 660d554d972656171f137093a9cc77256b7dee0c"
+                        "url": "https://api.github.com/repos/CycloneDX/cyclonedx-php-library/zipball/34fb57c387abe57d3926e05511475ed4a04c1ed7",
+                        "comment": "dist reference: 34fb57c387abe57d3926e05511475ed4a04c1ed7"
                     },
                     {
                         "type": "vcs",
                         "url": "https://github.com/CycloneDX/cyclonedx-php-library.git",
-                        "comment": "source reference: 660d554d972656171f137093a9cc77256b7dee0c"
+                        "comment": "source reference: 34fb57c387abe57d3926e05511475ed4a04c1ed7"
                     },
                     {
                         "type": "website",
@@ -84,15 +84,23 @@
             "group": "cyclonedx",
             "description": "demo of cyclonedx/cyclonedx-php-composer with symfony/symfony",
             "author": "Jan Kowalleck",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "Apache-2.0",
+                        "acknowledgement": "declared"
+                    }
+                }
+            ],
             "purl": "pkg:composer/cyclonedx/cyclonedx-php-composer-demo@dev-master",
             "properties": [
                 {
                     "name": "cdx:composer:package:distReference",
-                    "value": "8581146a4e66613487b04e05554a2881f6d9ad78"
+                    "value": "d03acdc46afe71026f767cbf6a2c42b1ed5e4001"
                 },
                 {
                     "name": "cdx:composer:package:sourceReference",
-                    "value": "8581146a4e66613487b04e05554a2881f6d9ad78"
+                    "value": "d03acdc46afe71026f767cbf6a2c42b1ed5e4001"
                 },
                 {
                     "name": "cdx:composer:package:type",
@@ -113,7 +121,8 @@
             "licenses": [
                 {
                     "license": {
-                        "id": "MIT"
+                        "id": "MIT",
+                        "acknowledgement": "declared"
                     }
                 }
             ],
@@ -171,7 +180,8 @@
             "licenses": [
                 {
                     "license": {
-                        "id": "MIT"
+                        "id": "MIT",
+                        "acknowledgement": "declared"
                     }
                 }
             ],
@@ -229,7 +239,8 @@
             "licenses": [
                 {
                     "license": {
-                        "id": "MIT"
+                        "id": "MIT",
+                        "acknowledgement": "declared"
                     }
                 }
             ],
@@ -286,7 +297,8 @@
             "licenses": [
                 {
                     "license": {
-                        "id": "BSD-3-Clause"
+                        "id": "BSD-3-Clause",
+                        "acknowledgement": "declared"
                     }
                 }
             ],
@@ -364,7 +376,8 @@
             "licenses": [
                 {
                     "license": {
-                        "id": "MIT"
+                        "id": "MIT",
+                        "acknowledgement": "declared"
                     }
                 }
             ],
@@ -412,7 +425,8 @@
             "licenses": [
                 {
                     "license": {
-                        "id": "MIT"
+                        "id": "MIT",
+                        "acknowledgement": "declared"
                     }
                 }
             ],
@@ -470,7 +484,8 @@
             "licenses": [
                 {
                     "license": {
-                        "id": "MIT"
+                        "id": "MIT",
+                        "acknowledgement": "declared"
                     }
                 }
             ],
@@ -528,7 +543,8 @@
             "licenses": [
                 {
                     "license": {
-                        "id": "MIT"
+                        "id": "MIT",
+                        "acknowledgement": "declared"
                     }
                 }
             ],
@@ -581,7 +597,8 @@
             "licenses": [
                 {
                     "license": {
-                        "id": "MIT"
+                        "id": "MIT",
+                        "acknowledgement": "declared"
                     }
                 }
             ],
@@ -634,7 +651,8 @@
             "licenses": [
                 {
                     "license": {
-                        "id": "MIT"
+                        "id": "MIT",
+                        "acknowledgement": "declared"
                     }
                 }
             ],
@@ -687,7 +705,8 @@
             "licenses": [
                 {
                     "license": {
-                        "id": "MIT"
+                        "id": "MIT",
+                        "acknowledgement": "declared"
                     }
                 }
             ],
@@ -740,7 +759,8 @@
             "licenses": [
                 {
                     "license": {
-                        "id": "MIT"
+                        "id": "MIT",
+                        "acknowledgement": "declared"
                     }
                 }
             ],
@@ -793,7 +813,8 @@
             "licenses": [
                 {
                     "license": {
-                        "id": "MIT"
+                        "id": "MIT",
+                        "acknowledgement": "declared"
                     }
                 }
             ],
@@ -846,7 +867,8 @@
             "licenses": [
                 {
                     "license": {
-                        "id": "MIT"
+                        "id": "MIT",
+                        "acknowledgement": "declared"
                     }
                 }
             ],
@@ -899,7 +921,8 @@
             "licenses": [
                 {
                     "license": {
-                        "id": "MIT"
+                        "id": "MIT",
+                        "acknowledgement": "declared"
                     }
                 }
             ],
@@ -952,7 +975,8 @@
             "licenses": [
                 {
                     "license": {
-                        "id": "MIT"
+                        "id": "MIT",
+                        "acknowledgement": "declared"
                     }
                 }
             ],
@@ -1005,7 +1029,8 @@
             "licenses": [
                 {
                     "license": {
-                        "id": "MIT"
+                        "id": "MIT",
+                        "acknowledgement": "declared"
                     }
                 }
             ],
@@ -1058,7 +1083,8 @@
             "licenses": [
                 {
                     "license": {
-                        "id": "MIT"
+                        "id": "MIT",
+                        "acknowledgement": "declared"
                     }
                 }
             ],
@@ -1111,7 +1137,8 @@
             "licenses": [
                 {
                     "license": {
-                        "id": "MIT"
+                        "id": "MIT",
+                        "acknowledgement": "declared"
                     }
                 }
             ],
@@ -1164,7 +1191,8 @@
             "licenses": [
                 {
                     "license": {
-                        "id": "MIT"
+                        "id": "MIT",
+                        "acknowledgement": "declared"
                     }
                 }
             ],
@@ -1217,7 +1245,8 @@
             "licenses": [
                 {
                     "license": {
-                        "id": "MIT"
+                        "id": "MIT",
+                        "acknowledgement": "declared"
                     }
                 }
             ],
@@ -1270,7 +1299,8 @@
             "licenses": [
                 {
                     "license": {
-                        "id": "MIT"
+                        "id": "MIT",
+                        "acknowledgement": "declared"
                     }
                 }
             ],
@@ -1328,7 +1358,8 @@
             "licenses": [
                 {
                     "license": {
-                        "id": "BSD-3-Clause"
+                        "id": "BSD-3-Clause",
+                        "acknowledgement": "declared"
                     }
                 }
             ],

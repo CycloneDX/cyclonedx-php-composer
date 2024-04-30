@@ -1,6 +1,7 @@
 {
     "name": "cyclonedx-demo/cyclonedx-php-composer-local",
     "description": "demo of cyclonedx/cyclonedx-php-composer with a local dependency",
+    "license": "Apache-2.0",
     "type": "project",
     "version": "dev-master",
     "authors": [

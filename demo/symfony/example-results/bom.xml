@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bom xmlns="http://cyclonedx.org/schema/bom/1.5" version="1" serialNumber="urn:uuid:cb056c9d-443c-4cf1-895b-e09cd0fbf095">
+<bom xmlns="http://cyclonedx.org/schema/bom/1.6" version="1" serialNumber="urn:uuid:28ad714a-221d-46f4-b5ad-c8c91b8c021d">
   <metadata>
-    <timestamp><![CDATA[2024-04-23T12:46:29Z]]></timestamp>
+    <timestamp><![CDATA[2024-04-29T12:26:03Z]]></timestamp>
     <tools>
       <tool>
         <name><![CDATA[composer]]></name>
@@ -14,7 +14,7 @@
         <externalReferences>
           <reference type="distribution">
             <url><![CDATA[../..]]></url>
-            <comment><![CDATA[dist reference: 87e586b743c3cc6b470a8a6fc5c4f244e84abdf5]]></comment>
+            <comment><![CDATA[dist reference: 88cf1cf6c9034567cbcf9fcd776c71aeed6c35a8]]></comment>
           </reference>
           <reference type="website">
             <url><![CDATA[https://github.com/CycloneDX/cyclonedx-php-composer/#readme]]></url>
@@ -33,15 +33,15 @@
       <tool>
         <vendor><![CDATA[cyclonedx]]></vendor>
         <name><![CDATA[cyclonedx-library]]></name>
-        <version><![CDATA[v3.2.0]]></version>
+        <version><![CDATA[v3.3.0]]></version>
         <externalReferences>
           <reference type="distribution">
-            <url><![CDATA[https://api.github.com/repos/CycloneDX/cyclonedx-php-library/zipball/660d554d972656171f137093a9cc77256b7dee0c]]></url>
-            <comment><![CDATA[dist reference: 660d554d972656171f137093a9cc77256b7dee0c]]></comment>
+            <url><![CDATA[https://api.github.com/repos/CycloneDX/cyclonedx-php-library/zipball/34fb57c387abe57d3926e05511475ed4a04c1ed7]]></url>
+            <comment><![CDATA[dist reference: 34fb57c387abe57d3926e05511475ed4a04c1ed7]]></comment>
           </reference>
           <reference type="vcs">
             <url><![CDATA[https://github.com/CycloneDX/cyclonedx-php-library.git]]></url>
-            <comment><![CDATA[source reference: 660d554d972656171f137093a9cc77256b7dee0c]]></comment>
+            <comment><![CDATA[source reference: 34fb57c387abe57d3926e05511475ed4a04c1ed7]]></comment>
           </reference>
           <reference type="website">
             <url><![CDATA[https://github.com/CycloneDX/cyclonedx-php-library/#readme]]></url>
@@ -68,10 +68,15 @@
       <name><![CDATA[cyclonedx-php-composer-demo]]></name>
       <version><![CDATA[dev-master]]></version>
       <description><![CDATA[demo of cyclonedx/cyclonedx-php-composer with symfony/symfony]]></description>
+      <licenses>
+        <license acknowledgement="declared">
+          <id><![CDATA[Apache-2.0]]></id>
+        </license>
+      </licenses>
       <purl><![CDATA[pkg:composer/cyclonedx/cyclonedx-php-composer-demo@dev-master]]></purl>
       <properties>
-        <property name="cdx:composer:package:distReference"><![CDATA[8581146a4e66613487b04e05554a2881f6d9ad78]]></property>
-        <property name="cdx:composer:package:sourceReference"><![CDATA[8581146a4e66613487b04e05554a2881f6d9ad78]]></property>
+        <property name="cdx:composer:package:distReference"><![CDATA[d03acdc46afe71026f767cbf6a2c42b1ed5e4001]]></property>
+        <property name="cdx:composer:package:sourceReference"><![CDATA[d03acdc46afe71026f767cbf6a2c42b1ed5e4001]]></property>
         <property name="cdx:composer:package:type"><![CDATA[project]]></property>
       </properties>
     </component>
@@ -84,7 +89,7 @@
       <version><![CDATA[2.0.0]]></version>
       <description><![CDATA[The Doctrine Event Manager is a simple PHP event system that was built to be used with the various Doctrine projects.]]></description>
       <licenses>
-        <license>
+        <license acknowledgement="declared">
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
@@ -124,7 +129,7 @@
       <version><![CDATA[3.2.0]]></version>
       <description><![CDATA[The Doctrine Persistence project is a set of shared interfaces and functionality that the different Doctrine object mappers share.]]></description>
       <licenses>
-        <license>
+        <license acknowledgement="declared">
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
@@ -164,7 +169,7 @@
       <version><![CDATA[v1.0.16]]></version>
       <description><![CDATA[Adding support for a wider range of PHP versions to ocramius/proxy-manager]]></description>
       <licenses>
-        <license>
+        <license acknowledgement="declared">
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
@@ -203,7 +208,7 @@
       <version><![CDATA[4.13.0]]></version>
       <description><![CDATA[Extensions to the PHP Reflection API, static code scanning, and code generation]]></description>
       <licenses>
-        <license>
+        <license acknowledgement="declared">
           <id><![CDATA[BSD-3-Clause]]></id>
         </license>
       </licenses>
@@ -259,7 +264,7 @@
       <version><![CDATA[3.0.0]]></version>
       <description><![CDATA[Common interface for caching libraries]]></description>
       <licenses>
-        <license>
+        <license acknowledgement="declared">
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
@@ -291,7 +296,7 @@
       <version><![CDATA[1.0.0]]></version>
       <description><![CDATA[Common interface for reading the clock.]]></description>
       <licenses>
-        <license>
+        <license acknowledgement="declared">
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
@@ -331,7 +336,7 @@
       <version><![CDATA[2.0.2]]></version>
       <description><![CDATA[Common Container Interface (PHP FIG PSR-11)]]></description>
       <licenses>
-        <license>
+        <license acknowledgement="declared">
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
@@ -371,7 +376,7 @@
       <version><![CDATA[1.0.0]]></version>
       <description><![CDATA[Standard interfaces for event handling.]]></description>
       <licenses>
-        <license>
+        <license acknowledgement="declared">
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
@@ -407,7 +412,7 @@
       <version><![CDATA[2.0.1]]></version>
       <description><![CDATA[Common interfaces for HTTP links]]></description>
       <licenses>
-        <license>
+        <license acknowledgement="declared">
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
@@ -443,7 +448,7 @@
       <version><![CDATA[3.0.0]]></version>
       <description><![CDATA[Common interface for logging libraries]]></description>
       <licenses>
-        <license>
+        <license acknowledgement="declared">
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
@@ -479,7 +484,7 @@
       <version><![CDATA[v3.3.0]]></version>
       <description><![CDATA[A set of abstractions extracted out of the Symfony components]]></description>
       <licenses>
-        <license>
+        <license acknowledgement="declared">
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
@@ -515,7 +520,7 @@
       <version><![CDATA[v1.28.0]]></version>
       <description><![CDATA[Symfony polyfill for ctype functions]]></description>
       <licenses>
-        <license>
+        <license acknowledgement="declared">
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
@@ -551,7 +556,7 @@
       <version><![CDATA[v1.28.0]]></version>
       <description><![CDATA[Symfony polyfill for intl's grapheme_* functions]]></description>
       <licenses>
-        <license>
+        <license acknowledgement="declared">
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
@@ -587,7 +592,7 @@
       <version><![CDATA[v1.28.0]]></version>
       <description><![CDATA[Symfony polyfill for intl's ICU-related data and classes]]></description>
       <licenses>
-        <license>
+        <license acknowledgement="declared">
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
@@ -623,7 +628,7 @@
       <version><![CDATA[v1.28.0]]></version>
       <description><![CDATA[Symfony polyfill for intl's idn_to_ascii and idn_to_utf8 functions]]></description>
       <licenses>
-        <license>
+        <license acknowledgement="declared">
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
@@ -659,7 +664,7 @@
       <version><![CDATA[v1.28.0]]></version>
       <description><![CDATA[Symfony polyfill for intl's Normalizer class and related functions]]></description>
       <licenses>
-        <license>
+        <license acknowledgement="declared">
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
@@ -695,7 +700,7 @@
       <version><![CDATA[v1.28.0]]></version>
       <description><![CDATA[Symfony polyfill for the Mbstring extension]]></description>
       <licenses>
-        <license>
+        <license acknowledgement="declared">
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
@@ -731,7 +736,7 @@
       <version><![CDATA[v1.28.0]]></version>
       <description><![CDATA[Symfony polyfill backporting some PHP 7.2+ features to lower PHP versions]]></description>
       <licenses>
-        <license>
+        <license acknowledgement="declared">
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
@@ -767,7 +772,7 @@
       <version><![CDATA[v1.28.0]]></version>
       <description><![CDATA[Symfony polyfill backporting some PHP 8.0+ features to lower PHP versions]]></description>
       <licenses>
-        <license>
+        <license acknowledgement="declared">
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
@@ -803,7 +808,7 @@
       <version><![CDATA[v1.28.0]]></version>
       <description><![CDATA[Symfony polyfill backporting some PHP 8.3+ features to lower PHP versions]]></description>
       <licenses>
-        <license>
+        <license acknowledgement="declared">
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
@@ -839,7 +844,7 @@
       <version><![CDATA[v1.28.0]]></version>
       <description><![CDATA[Symfony polyfill for uuid functions]]></description>
       <licenses>
-        <license>
+        <license acknowledgement="declared">
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
@@ -875,7 +880,7 @@
       <version><![CDATA[v6.3.7]]></version>
       <description><![CDATA[The Symfony PHP framework]]></description>
       <licenses>
-        <license>
+        <license acknowledgement="declared">
           <id><![CDATA[MIT]]></id>
         </license>
       </licenses>
@@ -915,7 +920,7 @@
       <version><![CDATA[v3.7.1]]></version>
       <description><![CDATA[Twig, the flexible, fast, and secure template language for PHP]]></description>
       <licenses>
-        <license>
+        <license acknowledgement="declared">
           <id><![CDATA[BSD-3-Clause]]></id>
         </license>
       </licenses>

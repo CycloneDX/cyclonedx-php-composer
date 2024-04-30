@@ -234,7 +234,8 @@ class Builder
             $component->setAuthor($this->createAuthorString($package));
             $component->getLicenses()->addItems(
                 ...array_map(
-                    $this->licenseFactory->makeFromString(...),
+                    fn ($l) => $this->licenseFactory->makeFromString($l)
+                        ->setAcknowledgement(Enums\LicenseAcknowledgement::Declared),
                     $package->getLicense()
                 )
             );
