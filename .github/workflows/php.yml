@@ -126,7 +126,7 @@ jobs:
         # see https://github.com/actions/upload-artifact
         uses: actions/upload-artifact@v4
         with:
-          name: '${{ env.TESTS_REPORTS_ARTIFACT }}_phpunit_${{ matrix.os }}_php${{ matrix.php }}_${{ matrix.dependencies }}'
+          name: '${{ env.TESTS_REPORTS_ARTIFACT }}_${{ matrix.os }}_php${{ matrix.php }}_${{ matrix.dependencies }}'
           path: ${{ env.REPORTS_DIR }}
           if-no-files-found: error
   report-coverage:
@@ -139,7 +139,7 @@ jobs:
         # see https://github.com/actions/download-artifact
         uses: actions/download-artifact@v4
         with:
-          pattern: '${{ env.TESTS_REPORTS_ARTIFACT }}_phpunit_*'
+          pattern: '${{ env.TESTS_REPORTS_ARTIFACT }}_*'
           merge-multiple: true
           path: ${{ env.REPORTS_DIR }}
       - name: Run codacy-coverage-reporter
@@ -228,7 +228,7 @@ jobs:
         # see https://github.com/actions/upload-artifact
         uses: actions/upload-artifact@v4
         with:
-          name: '${{ env.TYPES_REPORTS_ARTIFACT }}_psalm_p${{ matrix.php }}_c${{ matrix.composer }}_${{ matrix.dependencies }}'
+          name: '${{ env.TYPES_REPORTS_ARTIFACT }}_php${{ matrix.php }}_composer${{ matrix.composer }}_${{ matrix.dependencies }}'
           path: ${{ env.REPORTS_DIR }}
           if-no-files-found: error
   composer-unused:
