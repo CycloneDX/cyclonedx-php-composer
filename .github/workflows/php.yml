@@ -220,7 +220,7 @@ jobs:
           --no-diff
           --no-cache
           --long-progress
-          --php-version='${{ matrix.php }}'
+          --output-format=github
           --report='${{ env.REPORTS_DIR }}/psalm/p${{ matrix.php }}_c${{ matrix.composer }}_${{ matrix.dependencies }}.junit.xml'
           --stats
       - name: Artifact reports
