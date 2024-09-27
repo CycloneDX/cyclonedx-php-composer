@@ -111,7 +111,7 @@ This tool does **not** expose any additional _public_ API or classes - all code 
 ## Contributing
 
 Feel free to open issues, bugreports or pull requests.  
-See the [CONTRIBUTING][contributing_file] file for details.
+See the [CONTRIBUTING][contributing_file] file for details, and how to run/setup locally.
 
 ## License
 
