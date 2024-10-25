@@ -4,14 +4,14 @@ name: PHP CI
 
 on:
   push:
-    branches: ["master", "next"]
+    branches: ["main", "master", "next"]
     tags: ["v*"]
   pull_request:
   workflow_dispatch:
   schedule:
-    # schedule weekly tests, since dependencies are not intended to be locked
-    # this means: at 23:42 on Fridays
-    - cron: '42 23 * * 5'
+    # schedule dayly tests, since dependencies are not intended to be locked
+    # this means: at 23:42
+    - cron: '42 23 * * *'
 
 concurrency:
   group: '${{ github.workflow }}-${{ github.ref }}'
