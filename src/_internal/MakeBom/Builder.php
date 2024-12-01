@@ -60,7 +60,7 @@ class Builder
         private readonly bool $omitDev,
         private readonly bool $omitPlugin,
         private readonly ?string $mainComponentVersion,
-        private readonly LicenseFactory $licenseFactory = new LicenseFactory()
+        private readonly LicenseFactory $licenseFactory = new LicenseFactory(),
     ) {
     }
 
@@ -345,7 +345,7 @@ class Builder
      */
     public static function createToolsFromComposer(
         Composer $composer,
-        ?string $versionOverride, bool $excludeLibs, bool $excludeComposer
+        ?string $versionOverride, bool $excludeLibs, bool $excludeComposer,
     ): Generator {
         if (!$excludeComposer) {
             yield (new Models\Tool())

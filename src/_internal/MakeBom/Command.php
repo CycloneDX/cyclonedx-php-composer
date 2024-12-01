@@ -81,7 +81,7 @@ class Command extends BaseCommand
             $this->options->setFromInput($input);
         } catch (Throwable $error) {
             $io->writeErrorRaw((string) $error, true, IOInterface::DEBUG);
-            $io->writeError(sprintf('<error>InputError: %s</error>', OutputFormatter::escape($error->getMessage())));
+            $io->writeError(\sprintf('<error>InputError: %s</error>', OutputFormatter::escape($error->getMessage())));
 
             return self::INVALID;
         }
@@ -105,7 +105,7 @@ class Command extends BaseCommand
             return self::FAILURE;
         } catch (Throwable $error) {
             $io->writeErrorRaw($error::class.' - '.$error, true, IOInterface::DEBUG);
-            $io->writeError(sprintf('<error>Unexpected Error: %s</error>', OutputFormatter::escape($error->getMessage())));
+            $io->writeError(\sprintf('<error>Unexpected Error: %s</error>', OutputFormatter::escape($error->getMessage())));
 
             return self::FAILURE;
         }
@@ -145,7 +145,7 @@ class Command extends BaseCommand
              ? null
              : \dirname($composerFile);
         $io->writeError(
-            sprintf('<info>composerFile=%s projectDir=%s</info>', OutputFormatter::escape($composerFile ?? ''), OutputFormatter::escape($projectDir ?? '')),
+            \sprintf('<info>composerFile=%s projectDir=%s</info>', OutputFormatter::escape($composerFile ?? ''), OutputFormatter::escape($projectDir ?? '')),
             verbosity: IOInterface::DEBUG);
         $subjectComposer = $this->composerFactory->createComposer($io, $composerFile, cwd: $projectDir, fullLoad: true);
         /** @psalm-suppress RedundantConditionGivenDocblockType -- as with lowest-compatible dependencies this is needed  */
@@ -245,7 +245,7 @@ class Command extends BaseCommand
         }
 
         $io->writeError(
-            sprintf('<info>wrote %d bytes to %s</info>', $written, OutputFormatter::escape($outputFile)),
+            \sprintf('<info>wrote %d bytes to %s</info>', $written, OutputFormatter::escape($outputFile)),
             verbosity: IOInterface::VERY_VERBOSE);
     }
 }
