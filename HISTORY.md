@@ -6,6 +6,11 @@ All notable changes to this project will be documented in this file.
 
 <!-- add unreleased items here -->
 
+* Style
+  * Applied latest PHP Coding Standards (via [#507])
+
+[#507]: https://github.com/CycloneDX/cyclonedx-php-composer/pull/507
+
 ## 5.2.0 - 2024-04-30
 
 * Added
