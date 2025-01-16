@@ -25,7 +25,7 @@ If applicable, add screenshots or past the output to help explain your problem.
 
 ## Environment
 
-- _cyclonedx-php-composer_ version: <!-- e.g. `v3.2.0` -->
+- _cyclonedx-php-composer_ version: <!-- e.g. `v3.2.0` - get via `composer [global] show cyclonedx/cyclonedx-php-composer` -->
 - Composer version: <!-- get via `composer -V` -->
 - PHP version: <!-- get via `php -v` -->
 - OS: <!-- e.g. windows 11, ubuntu linux, ... -->
