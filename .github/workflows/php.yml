@@ -164,6 +164,8 @@ jobs:
           - "8.1"  # lowest supported
         composer:
           - "v2"   # latest 2.x
+          - "2.8"
+          - "2.7"
           - "2.6"
           - "2.5"
           - "2.4"
