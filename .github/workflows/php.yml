@@ -18,7 +18,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  PHP_VERSION_LATEST: "8.3"
+  PHP_VERSION_LATEST: "8.4"
   PHP_PROJECT_EXT: dom,json,libxml  # via `composer info -pt`
   REPORTS_DIR: CI_reports
   TESTS_REPORTS_ARTIFACT: tests-reports
@@ -51,18 +51,19 @@ jobs:
       matrix:
         os: [ "ubuntu-latest" ]
         php:
-          - "8.3" # highest supported
+          - "8.4" # highest supported
+          - "8.3"
           - "8.2"
           - "8.1" # lowest supported
         dependencies: [ "lowest", "highest" ]
         include:
           - # Windows highest
             os: windows-latest
-            php: "8.3"
+            php: "8.4"
             dependencies: "highest"
           - # MacOS highest
             os: macos-latest
-            php: "8.3"
+            php: "8.4"
             dependencies: "highest"
     timeout-minutes: 30
     steps:
@@ -160,7 +161,7 @@ jobs:
       fail-fast: false
       matrix:
         php:
-          - "8.3"  # highest supported
+          - "8.4"  # highest supported
           - "8.1"  # lowest supported
         composer:
           - "v2"   # latest 2.x
