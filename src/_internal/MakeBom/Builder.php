@@ -378,19 +378,18 @@ class Builder
                 );
             } catch (Throwable) {
                 [$group, $name] = self::getGroupAndName($packageName);
+                /** @psalm-suppress RiskyTruthyFalsyComparison -- false positive - see the `?: ''` */
+                $version = $versionOverride ?? (trim(
+                    // Try sibling of (global) installation
+                    // !! Don't refer to the `vendor` dir, it is a configurable and might be called differently !!
+                    @file_get_contents(\dirname(__DIR__, 4)."/$group/$name/semver.txt")
+                        ?: // fallback: empty string
+                        ''
+                ) ?: null);
                 yield (new Models\Tool())
                     ->setName($name)
                     ->setVendor($group)
-                    ->setVersion(
-                        $versionOverride
-                        ?? (trim(
-                            // try sibling of (global) installation
-                            // !! dont refer to the `vendor` dir, it is a configurable and might be called differently !!
-                            @file_get_contents(\dirname(__DIR__, 4)."/$group/$name/semver.txt")
-                            ?: // fallback: empty string
-                            ''
-                        ) ?: null)
-                    );
+                    ->setVersion($version);
             }
         }
     }
