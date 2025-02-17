@@ -15,4 +15,8 @@
     <projectFiles>
         <directory name="src"/>
     </projectFiles>
+    <issueHandlers>
+        <ClassMustBeFinal errorLevel="suppress"/><!-- all is internal anyway... -->
+        <ImplicitToStringCast errorLevel="info"/>
+    </issueHandlers>
 </psalm>

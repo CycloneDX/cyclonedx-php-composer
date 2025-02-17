@@ -29,6 +29,7 @@ use Composer\IO\IOInterface;
 use Composer\Plugin\Capability\CommandProvider;
 use Composer\Plugin\Capable;
 use Composer\Plugin\PluginInterface;
+use Override;
 
 /**
  * @author jkowalleck
@@ -37,21 +38,25 @@ use Composer\Plugin\PluginInterface;
  */
 class Plugin implements PluginInterface, Capable, CommandProvider
 {
+    #[Override]
     public function activate(Composer $composer, IOInterface $io): void
     {
         /* nothing to do, but required by the `PluginInterface` */
     }
 
+    #[Override]
     public function deactivate(Composer $composer, IOInterface $io): void
     {
         /* nothing to do, but required by the `PluginInterface` */
     }
 
+    #[Override]
     public function uninstall(Composer $composer, IOInterface $io): void
     {
         /* nothing to do, but required by the `PluginInterface` */
     }
 
+    #[Override]
     public function getCapabilities(): array
     {
         return [
@@ -62,6 +67,7 @@ class Plugin implements PluginInterface, Capable, CommandProvider
     /**
      * @psalm-suppress MissingThrowsDocblock - Exceptions are handled by caller
      */
+    #[Override]
     public function getCommands(): array
     {
         return [
