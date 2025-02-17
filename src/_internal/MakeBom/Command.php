@@ -35,6 +35,7 @@ use CycloneDX\Core\Validation\Validators;
 use DateTime;
 use DomainException;
 use Exception;
+use Override;
 use Symfony\Component\Console\Exception\LogicException;
 use Symfony\Component\Console\Formatter\OutputFormatter;
 use Symfony\Component\Console\Input\InputInterface;
@@ -61,6 +62,7 @@ class Command extends BaseCommand
         parent::__construct($name);
     }
 
+    #[Override]
     protected function configure(): void
     {
         $this
@@ -73,6 +75,7 @@ class Command extends BaseCommand
      * ALL LOG OUTPUT MUST BE WRITTEN AS ERROR, SO OUTPUT REDIRECT/PIPE OF RESULT WORKS PROPERLY
      */
 
+    #[Override]
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = $this->getIO();
