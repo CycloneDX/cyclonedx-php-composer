@@ -6,6 +6,12 @@ All notable changes to this project will be documented in this file.
 
 <!-- add unreleased items here -->
 
+* Misc
+  * Added`Override` markers where needed (via [#531])  
+    See also: <https://wiki.php.net/rfc/marking_overriden_methods>
+
+[#531]: https://github.com/CycloneDX/cyclonedx-php-composer/pull/531
+
 ## 5.2.1 - 2025-01-27
 
 * Added
