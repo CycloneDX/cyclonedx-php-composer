@@ -173,6 +173,10 @@ jobs:
           - "2.4"
           - "2.3"  # lowest supported
         dependencies: [ "highest" ]
+        exclude:
+          - # incompatible combination
+            php: "8.4"
+            composer: "2.3"
         include:
           - # lowest supported
             php: "8.1"
