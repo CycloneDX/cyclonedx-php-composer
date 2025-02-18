@@ -18,7 +18,8 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  PHP_VERSION_LATEST: "8.4"
+  PHP_VERSION_LOWEST: "8.1"  # lowest supported
+  PHP_VERSION_LATEST: "8.4"  # highest supported
   PHP_PROJECT_EXT: dom,json,libxml  # via `composer info -pt`
   REPORTS_DIR: CI_reports
   TESTS_REPORTS_ARTIFACT: tests-reports
@@ -322,7 +323,7 @@ jobs:
         # see https://github.com/shivammathur/setup-php
         uses: shivammathur/setup-php@v2
         with:
-          php-version: ${{ env.PHP_VERSION_LATEST }}
+          php-version: ${{ env.PHP_VERSION_LOWEST }}
           extensions: ${{ env.PHP_PROJECT_EXT }}
           tools: 'composer:v2'
           coverage: none
@@ -344,8 +345,7 @@ jobs:
       - name: Run PHP-CS-Fixer tests
         run: >
           php tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/php-cs-fixer
-          fix
-          --dry-run
+          check
           --diff
           --using-cache=no
           --show-progress=dots

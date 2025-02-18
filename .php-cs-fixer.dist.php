@@ -33,11 +33,18 @@ return (new PhpCsFixer\Config())
      * assistance via tool: https://mlocati.github.io/php-cs-fixer-configurator/
      */
         [
+            // region migrate
+            // lowest supported PHP
+            '@PHP80Migration:risky' => true, // there is no `PHP81Migration:risky`
             '@PHP81Migration' => true,
-            '@PHP80Migration:risky' => true,
+            // lowest supported Phpunit
             '@PHPUnit100Migration:risky' => true,
+            // endregion migrate
+            // region general code style
             '@Symfony' => true,
             '@Symfony:risky' => true,
+            // endregion general code style
+            // region customs
             'declare_strict_types' => true,
             'header_comment' => ['header' => $header],
             'global_namespace_import' => true,
@@ -48,6 +55,7 @@ return (new PhpCsFixer\Config())
                     'psalm-suppress', // needed when PSALM introduced some issues that only manual hints can solve
                 ],
             ],
+            // endregion customs
         ]
     )
     ->setRiskyAllowed(true)
