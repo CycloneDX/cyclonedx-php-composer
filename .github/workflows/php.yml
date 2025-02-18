@@ -186,7 +186,7 @@ jobs:
         # see https://github.com/shivammathur/setup-php
         uses: shivammathur/setup-php@v2
         with:
-          php-version: ${{ env.PHP_VERSION_LATEST }}
+          php-version: ${{ matrix.php }}
           extensions: ${{ env.PHP_PROJECT_EXT }}
           tools: composer:${{ matrix.composer }}
           coverage: none
