@@ -18,7 +18,8 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  PHP_VERSION_LATEST: "8.3"
+  PHP_VERSION_LOWEST: "8.1"  # lowest supported
+  PHP_VERSION_LATEST: "8.4"  # highest supported
   PHP_PROJECT_EXT: dom,json,libxml  # via `composer info -pt`
   REPORTS_DIR: CI_reports
   TESTS_REPORTS_ARTIFACT: tests-reports
@@ -51,18 +52,19 @@ jobs:
       matrix:
         os: [ "ubuntu-latest" ]
         php:
-          - "8.3" # highest supported
+          - "8.4" # highest supported
+          - "8.3"
           - "8.2"
           - "8.1" # lowest supported
         dependencies: [ "lowest", "highest" ]
         include:
           - # Windows highest
             os: windows-latest
-            php: "8.3"
+            php: "8.4"
             dependencies: "highest"
           - # MacOS highest
             os: macos-latest
-            php: "8.3"
+            php: "8.4"
             dependencies: "highest"
     timeout-minutes: 30
     steps:
@@ -103,7 +105,6 @@ jobs:
           # removing security-foo here is fine, as no code is run, only parsed
           composer remove --dev 'roave/security-advisories' \
              --no-update --no-install
-          composer config platform.php ${{ matrix.php }}
           composer update \
             --no-interaction --no-progress \
             --prefer-dist \
@@ -160,7 +161,7 @@ jobs:
       fail-fast: false
       matrix:
         php:
-          - "8.3"  # highest supported
+          - "8.4"  # highest supported
           - "8.1"  # lowest supported
         composer:
           - "v2"   # latest 2.x
@@ -171,10 +172,14 @@ jobs:
           - "2.4"
           - "2.3"  # lowest supported
         dependencies: [ "highest" ]
+        exclude:
+          - # incompatible combination
+            php: "8.4"
+            composer: "2.3"
         include:
           - # lowest supported
             php: "8.1"
-            composer: "2.3"
+            composer: "2.3.0"
             dependencies: "lowest"
     steps:
       - name: Checkout
@@ -184,7 +189,7 @@ jobs:
         # see https://github.com/shivammathur/setup-php
         uses: shivammathur/setup-php@v2
         with:
-          php-version: ${{ env.PHP_VERSION_LATEST }}
+          php-version: ${{ matrix.php }}
           extensions: ${{ env.PHP_PROJECT_EXT }}
           tools: composer:${{ matrix.composer }}
           coverage: none
@@ -197,10 +202,11 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
-          key: composer-${{ github.job }}-${{ runner.os }}-php${{ matrix.php }}-${{ matrix.dependencies }}-${{ hashFiles('composer.*', 'tools/psalm/composer.*') }}
+          key: composer-${{ github.job }}-${{ runner.os }}-php${{ matrix.php }}-c${{ matrix.composer }}-${{ matrix.dependencies }}-${{ hashFiles('composer.*', 'tools/psalm/composer.*') }}
           restore-keys: |
-            composer-${{ github.job }}-${{ runner.os }}-php${{ matrix.php }}-${{ matrix.dependencies }}-
-            composer-${{ github.job }}-${{ runner.os }}-php${{ matrix.php }}-
+            composer-${{ github.job }}-${{ runner.os }}-p${{ matrix.php }}-c${{ matrix.composer }}-${{ matrix.dependencies }}-
+            composer-${{ github.job }}-${{ runner.os }}-p${{ matrix.php }}-c${{ matrix.composer }}-
+            composer-${{ github.job }}-${{ runner.os }}-p${{ matrix.php }}-
             composer-${{ github.job }}-${{ runner.os }}-
       - name: Install psalm
         run: composer install --no-interaction --no-progress --prefer-dist
@@ -210,7 +216,6 @@ jobs:
           # removing security-foo here is fine, as no code is run, only parsed
           composer remove --dev 'roave/security-advisories' \
              --no-update --no-install
-          composer config platform.php ${{ matrix.php }}
           composer update \
             --no-interaction --no-progress \
             --prefer-dist \
@@ -321,7 +326,7 @@ jobs:
         # see https://github.com/shivammathur/setup-php
         uses: shivammathur/setup-php@v2
         with:
-          php-version: ${{ env.PHP_VERSION_LATEST }}
+          php-version: ${{ env.PHP_VERSION_LOWEST }}
           extensions: ${{ env.PHP_PROJECT_EXT }}
           tools: 'composer:v2'
           coverage: none
@@ -343,8 +348,7 @@ jobs:
       - name: Run PHP-CS-Fixer tests
         run: >
           php tools/php-cs-fixer/vendor/friendsofphp/php-cs-fixer/php-cs-fixer
-          fix
-          --dry-run
+          check
           --diff
           --using-cache=no
           --show-progress=dots
