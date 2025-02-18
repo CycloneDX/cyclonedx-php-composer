@@ -105,7 +105,6 @@ jobs:
           # removing security-foo here is fine, as no code is run, only parsed
           composer remove --dev 'roave/security-advisories' \
              --no-update --no-install
-          composer config platform.php ${{ matrix.php }}
           composer update \
             --no-interaction --no-progress \
             --prefer-dist \
@@ -205,9 +204,9 @@ jobs:
           path: ${{ steps.composer-cache.outputs.dir }}
           key: composer-${{ github.job }}-${{ runner.os }}-php${{ matrix.php }}-c${{ matrix.composer }}-${{ matrix.dependencies }}-${{ hashFiles('composer.*', 'tools/psalm/composer.*') }}
           restore-keys: |
-            composer-${{ github.job }}-${{ runner.os }}-php${{ matrix.php }}-c${{ matrix.composer }}-${{ matrix.dependencies }}-
-            composer-${{ github.job }}-${{ runner.os }}-php${{ matrix.php }}-c${{ matrix.composer }}-
-            composer-${{ github.job }}-${{ runner.os }}-php${{ matrix.php }}-
+            composer-${{ github.job }}-${{ runner.os }}-p${{ matrix.php }}-c${{ matrix.composer }}-${{ matrix.dependencies }}-
+            composer-${{ github.job }}-${{ runner.os }}-p${{ matrix.php }}-c${{ matrix.composer }}-
+            composer-${{ github.job }}-${{ runner.os }}-p${{ matrix.php }}-
             composer-${{ github.job }}-${{ runner.os }}-
       - name: Install psalm
         run: composer install --no-interaction --no-progress --prefer-dist
@@ -217,7 +216,6 @@ jobs:
           # removing security-foo here is fine, as no code is run, only parsed
           composer remove --dev 'roave/security-advisories' \
              --no-update --no-install
-          composer config platform.php ${{ matrix.php }}
           composer update \
             --no-interaction --no-progress \
             --prefer-dist \
