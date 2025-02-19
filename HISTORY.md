@@ -6,6 +6,8 @@ All notable changes to this project will be documented in this file.
 
 <!-- add unreleased items here -->
 
+## 5.2.2 - 2025-02-18
+
 * Added
   * Officially support PHP 8.4 ([#500] via [#522])
 * Misc
