@@ -24,6 +24,8 @@ concurrency:
   group: '${{ github.workflow }}-${{ github.ref }}'
   cancel-in-progress: true
 
+permissions: {}
+
 env:
   PHP_VERSION_LATEST: "8.4"
   PHP_PROJECT_EXT: dom,json,libxml  # via `composer info -pt`
