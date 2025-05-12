@@ -13,6 +13,8 @@ on:
     # this means: at 23:42
     - cron: '42 23 * * *'
 
+permissions: {}
+
 concurrency:
   group: '${{ github.workflow }}-${{ github.ref }}'
   cancel-in-progress: true

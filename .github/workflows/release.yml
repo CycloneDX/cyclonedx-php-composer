@@ -26,10 +26,14 @@ name: Release
 on:
   workflow_dispatch
 
+permissions: {}
+
 jobs:
   release:
     name: Release
-    permissions: write-all
+    permissions:
+      id-token: write
+      contents: write  # to create a release
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
