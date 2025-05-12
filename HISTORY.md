@@ -6,6 +6,10 @@ All notable changes to this project will be documented in this file.
 
 <!-- add unreleased items here -->
 
+## 5.2.3 - 2025-05-12
+
+Maintenance release.
+
 ## 5.2.2 - 2025-02-18
 
 * Added
