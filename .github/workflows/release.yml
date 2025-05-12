@@ -45,14 +45,21 @@ jobs:
         run: |
           VERSION=`cat semver.txt`
           echo "version=$VERSION" >> $GITHUB_OUTPUT
+          if [[ "$VERSION" =~ (alpha|beta|rc) ]]
+          then
+            echo "prerelease=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "prerelease=false" >> "$GITHUB_OUTPUT"
+          fi
       - name: Create github release and git tag for release
         id: create_release
-        # see https://github.com/actions/create-release
-        uses: actions/create-release@v1
+        # see https://github.com/softprops/action-gh-release
+        uses: softprops/action-gh-release@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          release_name: ${{ steps.set_version.outputs.version }}
+          name: ${{ steps.set_version.outputs.version }}
           tag_name: v${{ steps.set_version.outputs.version }}
           draft: false
-          prerelease: false
+          prerelease: ${{ steps.set_version.outputs.prerelease }}
+          target_commitish: ${{ github.head_ref || github.ref_name }}
