@@ -6,7 +6,7 @@
         "php": "^8.1.31"
     },
     "require-dev": {
-        "icanhazstring/composer-unused": "0.9.2",
+        "icanhazstring/composer-unused": "0.9.3",
         "roave/security-advisories": "dev-latest"
     },
     "prefer-stable": true,
