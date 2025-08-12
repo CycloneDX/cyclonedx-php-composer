@@ -7,7 +7,7 @@
     },
     "require-dev": {
         "roave/security-advisories": "dev-latest",
-        "vimeo/psalm": "6.13.0"
+        "vimeo/psalm": "6.13.1"
     },
     "prefer-stable": true,
     "config": {
