@@ -92,6 +92,7 @@ final class OptionsTest extends TestCase
             ['omit' => ['dev', 'plugin']],
         ];
         foreach ([
+            '1.7' => Version::v1dot7,
             '1.6' => Version::v1dot6,
             '1.5' => Version::v1dot5,
             '1.4' => Version::v1dot4,

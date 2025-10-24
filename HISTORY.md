@@ -6,6 +6,15 @@ All notable changes to this project will be documented in this file.
 
 <!-- add unreleased items here -->
 
+Added _basic_ support for [_CycloneDX_ Specification-1.7](https://github.com/CycloneDX/specification/releases/tag/1.7).
+
+* Changed
+  * This tool supports _CycloneDX_ Specification-1.7 now (via [#])
+* Dependencies
+  * Raised dependency `cyclonedx/cyclonedx-library:^3.8`, was `:^3.3` (via [#])
+
+[#]:
+
 ## 5.2.3 - 2025-05-12
 
 Maintenance release.

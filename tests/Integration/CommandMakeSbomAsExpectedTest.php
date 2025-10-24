@@ -86,7 +86,7 @@ final class CommandMakeSbomAsExpectedTest extends CommandTestCase
     {
         foreach (['devReq', 'laravel-7.12.0', 'local'] as $purpose) {
             foreach (['json', 'xml'] as $outputFormat) {
-                $specVs = ['1.6', '1.5', '1.4', '1.3', '1.2'];
+                $specVs = ['1.7', '1.6', '1.5', '1.4', '1.3', '1.2'];
                 if ('xml' === $outputFormat) {
                     $specVs[] = '1.1';
                 }

@@ -35,7 +35,7 @@
     "require": {
         "php": "^8.1",
         "composer-plugin-api": "^2.3",
-        "cyclonedx/cyclonedx-library": "^3.3",
+        "cyclonedx/cyclonedx-library": "^3.8",
         "package-url/packageurl-php": "^1.0"
     },
     "require-dev": {
@@ -55,6 +55,7 @@
     },
     "config": {
         "allow-plugins": {
+            "cyclonedx/cyclonedx-php-composer": true,
             "ergebnis/composer-normalize": true,
             "icanhazstring/composer-unused": true
         },

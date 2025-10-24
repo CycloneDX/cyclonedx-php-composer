@@ -102,6 +102,7 @@ class Options
     private const VALUE_SPEC_VERSION_MAP = [
         '1.5' => Version::v1dot5,
         // first in list is the default value - see constructor
+        '1.7' => Version::v1dot7,
         '1.6' => Version::v1dot6,
         '1.4' => Version::v1dot4,
         '1.3' => Version::v1dot3,
