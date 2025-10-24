@@ -9,11 +9,11 @@ All notable changes to this project will be documented in this file.
 Added _basic_ support for [_CycloneDX_ Specification-1.7](https://github.com/CycloneDX/specification/releases/tag/1.7).
 
 * Changed
-  * This tool supports _CycloneDX_ Specification-1.7 now (via [#])
+  * This tool supports _CycloneDX_ Specification-1.7 now (via [#579])
 * Dependencies
-  * Raised dependency `cyclonedx/cyclonedx-library:^3.8`, was `:^3.3` (via [#])
+  * Raised dependency `cyclonedx/cyclonedx-library:^3.8`, was `:^3.3` (via [#579])
 
-[#]:
+[#579]: https://github.com/CycloneDX/cyclonedx-php-composer/pull/579
 
 ## 5.2.3 - 2025-05-12
 
