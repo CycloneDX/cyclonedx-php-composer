@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bom xmlns="http://cyclonedx.org/schema/bom/1.6" version="1" serialNumber="urn:uuid:28ad714a-221d-46f4-b5ad-c8c91b8c021d">
+<bom xmlns="http://cyclonedx.org/schema/bom/1.6" version="1" serialNumber="urn:uuid:d7e54475-eb80-4622-82dd-53cbeb2334e5">
   <metadata>
-    <timestamp><![CDATA[2024-04-29T12:26:03Z]]></timestamp>
+    <timestamp><![CDATA[2025-10-24T13:24:53Z]]></timestamp>
     <tools>
       <tool>
         <name><![CDATA[composer]]></name>
-        <version><![CDATA[2.7.4]]></version>
+        <version><![CDATA[2.8.12]]></version>
       </tool>
       <tool>
         <vendor><![CDATA[cyclonedx]]></vendor>
         <name><![CDATA[cyclonedx-php-composer]]></name>
-        <version><![CDATA[4.x-dev]]></version>
+        <version><![CDATA[5.x-dev]]></version>
         <externalReferences>
           <reference type="distribution">
             <url><![CDATA[../..]]></url>
-            <comment><![CDATA[dist reference: 88cf1cf6c9034567cbcf9fcd776c71aeed6c35a8]]></comment>
+            <comment><![CDATA[dist reference: 346194aeb64639d0c587257cc9c91a7b950a426a]]></comment>
           </reference>
           <reference type="website">
             <url><![CDATA[https://github.com/CycloneDX/cyclonedx-php-composer/#readme]]></url>
@@ -33,15 +33,15 @@
       <tool>
         <vendor><![CDATA[cyclonedx]]></vendor>
         <name><![CDATA[cyclonedx-library]]></name>
-        <version><![CDATA[v3.3.0]]></version>
+        <version><![CDATA[v3.8.0]]></version>
         <externalReferences>
           <reference type="distribution">
-            <url><![CDATA[https://api.github.com/repos/CycloneDX/cyclonedx-php-library/zipball/34fb57c387abe57d3926e05511475ed4a04c1ed7]]></url>
-            <comment><![CDATA[dist reference: 34fb57c387abe57d3926e05511475ed4a04c1ed7]]></comment>
+            <url><![CDATA[https://api.github.com/repos/CycloneDX/cyclonedx-php-library/zipball/0c6fdbc1241d9435426eef0ce45ed7fb6a9a1c9f]]></url>
+            <comment><![CDATA[dist reference: 0c6fdbc1241d9435426eef0ce45ed7fb6a9a1c9f]]></comment>
           </reference>
           <reference type="vcs">
             <url><![CDATA[https://github.com/CycloneDX/cyclonedx-php-library.git]]></url>
-            <comment><![CDATA[source reference: 34fb57c387abe57d3926e05511475ed4a04c1ed7]]></comment>
+            <comment><![CDATA[source reference: 0c6fdbc1241d9435426eef0ce45ed7fb6a9a1c9f]]></comment>
           </reference>
           <reference type="website">
             <url><![CDATA[https://github.com/CycloneDX/cyclonedx-php-library/#readme]]></url>
@@ -75,8 +75,8 @@
       </licenses>
       <purl><![CDATA[pkg:composer/cyclonedx/cyclonedx-php-composer-demo@dev-master]]></purl>
       <properties>
-        <property name="cdx:composer:package:distReference"><![CDATA[d03acdc46afe71026f767cbf6a2c42b1ed5e4001]]></property>
-        <property name="cdx:composer:package:sourceReference"><![CDATA[d03acdc46afe71026f767cbf6a2c42b1ed5e4001]]></property>
+        <property name="cdx:composer:package:distReference"><![CDATA[779a263523245868e6f1446d345910446289e5b9]]></property>
+        <property name="cdx:composer:package:sourceReference"><![CDATA[779a263523245868e6f1446d345910446289e5b9]]></property>
         <property name="cdx:composer:package:type"><![CDATA[project]]></property>
       </properties>
     </component>

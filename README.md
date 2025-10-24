@@ -74,7 +74,7 @@ Options:
                                                       {choices: "dev", "plugin"}
                                                       (multiple values allowed)
       --spec-version=SPEC-VERSION                     Which version of CycloneDX spec to use.
-                                                      {choices: "1.1", "1.2", "1.3", "1.4", "1.5", "1.6"}
+                                                      {choices: "1.1", "1.2", "1.3", "1.4", "1.5", "1.6", "1.7"}
                                                       [default: "1.5"]
       --output-reproducible|--no-output-reproducible  Whether to go the extra mile and make the output reproducible.
                                                       This might result in loss of time- and random-based-values.

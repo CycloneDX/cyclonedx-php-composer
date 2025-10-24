@@ -1,0 +1,199 @@
+{
+    "$schema": "http://cyclonedx.org/schema/bom-1.7.schema.json",
+    "bomFormat": "CycloneDX",
+    "specVersion": "1.7",
+    "version": 1,
+    "metadata": {
+        "tools": [
+            {
+                "vendor": "cyclonedx",
+                "name": "cyclonedx-php-composer",
+                "version": "in-dev"
+            }
+        ],
+        "component": {
+            "bom-ref": "cyclonedx-demo/cyclonedx-php-composer-local-dev-master",
+            "type": "application",
+            "name": "cyclonedx-php-composer-local",
+            "version": "dev-master",
+            "group": "cyclonedx-demo",
+            "description": "demo of cyclonedx/cyclonedx-php-composer with a local dependency",
+            "author": "Jan Kowalleck",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "Apache-2.0",
+                        "acknowledgement": "declared"
+                    }
+                }
+            ],
+            "purl": "pkg:composer/cyclonedx-demo/cyclonedx-php-composer-local@dev-master",
+            "externalReferences": [
+                {
+                    "type": "website",
+                    "url": "https://cyclonedx.org/",
+                    "comment": "as detected from Composer manifest 'homepage'"
+                },
+                {
+                    "type": "other",
+                    "url": "support@cyclonedx.org",
+                    "comment": "as detected from Composer manifest 'support.email'"
+                },
+                {
+                    "type": "issue-tracker",
+                    "url": "https://github.com/CycloneDX/cyclonedx-php-composer/issues",
+                    "comment": "as detected from Composer manifest 'support.issues'"
+                },
+                {
+                    "type": "other",
+                    "url": "https://groups.io/g/CycloneDX",
+                    "comment": "as detected from Composer manifest 'support.forum'"
+                },
+                {
+                    "type": "chat",
+                    "url": "https://cyclonedx.org/slack/invite",
+                    "comment": "as detected from Composer manifest 'support.chat'"
+                },
+                {
+                    "type": "documentation",
+                    "url": "https://github.com/CycloneDX/cyclonedx-php-composer/blob/master/demo/local/README.md",
+                    "comment": "as detected from Composer manifest 'support.docs'"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "cdx:composer:package:type",
+                    "value": "project"
+                }
+            ]
+        }
+    },
+    "components": [
+        {
+            "bom-ref": "cyclonedx-demo/local-demo-dependency-1.33.7.0",
+            "type": "library",
+            "name": "local-demo-dependency",
+            "version": "1.33.7",
+            "group": "cyclonedx-demo",
+            "description": "a package that is hosted locally and required in a local demo",
+            "author": "Jan Kowalleck",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "Apache-2.0",
+                        "acknowledgement": "declared"
+                    }
+                }
+            ],
+            "purl": "pkg:composer/cyclonedx-demo/local-demo-dependency@1.33.7",
+            "externalReferences": [
+                {
+                    "type": "distribution",
+                    "url": "packages/local-demo-dependency",
+                    "comment": "dist reference: 0f3c3d45329014fcb6a18e73f975008b7eee0c90"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "cdx:composer:package:distReference",
+                    "value": "0f3c3d45329014fcb6a18e73f975008b7eee0c90"
+                },
+                {
+                    "name": "cdx:composer:package:type",
+                    "value": "library"
+                }
+            ]
+        },
+        {
+            "bom-ref": "cyclonedx-demo/local-demo-issue-158-dev-issue-158",
+            "type": "library",
+            "name": "local-demo-issue-158",
+            "version": "dev-issue-158",
+            "group": "cyclonedx-demo",
+            "description": "a package that reproduces issue#158",
+            "author": "Jan Kowalleck",
+            "licenses": [
+                {
+                    "license": {
+                        "id": "Apache-2.0",
+                        "acknowledgement": "declared"
+                    }
+                }
+            ],
+            "purl": "pkg:composer/cyclonedx-demo/local-demo-issue-158@dev-issue-158",
+            "externalReferences": [
+                {
+                    "type": "distribution",
+                    "url": "packages/local-demo-issue-158",
+                    "comment": "dist reference: 0a81eb04585ab16145687d0d324871413132ffcc"
+                },
+                {
+                    "type": "website",
+                    "url": "https://github.com/CycloneDX/cyclonedx-php-composer/issues/158",
+                    "comment": "as detected from Composer manifest 'homepage'"
+                },
+                {
+                    "type": "issue-tracker",
+                    "url": "https://pear.php.net/bugs/search.php?cmd=display&package_name%5B%5D=PEAR_Exception",
+                    "comment": "as detected from Composer manifest 'support.issues'"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "cdx:composer:package:distReference",
+                    "value": "0a81eb04585ab16145687d0d324871413132ffcc"
+                },
+                {
+                    "name": "cdx:composer:package:type",
+                    "value": "library"
+                }
+            ]
+        },
+        {
+            "bom-ref": "cyclonedx-demo/local-dependency-with-minimal-setup-dev-feat/license-acknowledgement",
+            "type": "library",
+            "name": "local-dependency-with-minimal-setup",
+            "version": "dev-feat/license-acknowledgement",
+            "group": "cyclonedx-demo",
+            "purl": "pkg:composer/cyclonedx-demo/local-dependency-with-minimal-setup@dev-feat/license-acknowledgement",
+            "externalReferences": [
+                {
+                    "type": "distribution",
+                    "url": "packages/local-dependency-with-minimal-setup",
+                    "comment": "dist reference: 5cdadb5ab51e8009613e68c49f8d07fcd512da78"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "cdx:composer:package:distReference",
+                    "value": "5cdadb5ab51e8009613e68c49f8d07fcd512da78"
+                },
+                {
+                    "name": "cdx:composer:package:type",
+                    "value": "library"
+                }
+            ]
+        }
+    ],
+    "dependencies": [
+        {
+            "ref": "cyclonedx-demo/local-demo-dependency-1.33.7.0",
+            "dependsOn": [
+                "cyclonedx-demo/local-dependency-with-minimal-setup-dev-feat/license-acknowledgement"
+            ]
+        },
+        {
+            "ref": "cyclonedx-demo/local-demo-issue-158-dev-issue-158"
+        },
+        {
+            "ref": "cyclonedx-demo/local-dependency-with-minimal-setup-dev-feat/license-acknowledgement"
+        },
+        {
+            "ref": "cyclonedx-demo/cyclonedx-php-composer-local-dev-master",
+            "dependsOn": [
+                "cyclonedx-demo/local-demo-dependency-1.33.7.0",
+                "cyclonedx-demo/local-demo-issue-158-dev-issue-158"
+            ]
+        }
+    ]
+}
