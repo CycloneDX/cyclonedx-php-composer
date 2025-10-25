@@ -27,6 +27,7 @@ use CycloneDX\Composer\_internal\MakeBom\Builder;
 use CycloneDX\Composer\_internal\MakeBom\Command;
 use CycloneDX\Composer\_internal\MakeBom\Options;
 use CycloneDX\Composer\Plugin;
+use CycloneDX\Core\Spec\Version as SpecVersion;
 use Generator;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -55,14 +56,14 @@ final class CommandMakeSbomAsExpectedTest extends CommandTestCase
     }
 
     #[DataProvider('dp')]
-    public function test(string $outputFormat, string $specV, string $composeFile, array $omit,
+    public function test(string $outputFormat, SpecVersion $specV, string $composeFile, array $omit,
         string $expectedSbomFile): void
     {
         $outFile = tempnam(sys_get_temp_dir(), 'CommandMakeSbomAsExpectedTest');
         $in = new ArrayInput([
             'command' => 'CycloneDX:make-sbom',
             '--output-format' => $outputFormat,
-            '--spec-version' => $specV,
+            '--spec-version' => $specV->value,
             '--output-reproducible' => true,
             '--validate' => true,
             '--output-file' => $outFile,
@@ -86,14 +87,15 @@ final class CommandMakeSbomAsExpectedTest extends CommandTestCase
     {
         foreach (['devReq', 'laravel-7.12.0', 'local'] as $purpose) {
             foreach (['json', 'xml'] as $outputFormat) {
-                $specVs = ['1.7', '1.6', '1.5', '1.4', '1.3', '1.2'];
-                if ('xml' === $outputFormat) {
-                    $specVs[] = '1.1';
+                $specVs = SpecVersion::cases();
+                if ('json' === $outputFormat) {
+                    // remove unsupported versions
+                    $specVs = array_filter($specVs, fn ($sv) => SpecVersion::v1dot1 !== $sv);
                 }
                 foreach ($specVs as $specV) {
                     $composeFile = self::DEMO_ROOT."/$purpose/project/composer.json";
-                    $snapshotFile = self::DEMO_ROOT."/$purpose/results/bom.$specV.$outputFormat";
-                    yield "demo: $purpose $outputFormat $specV" => [
+                    $snapshotFile = self::DEMO_ROOT."/$purpose/results/bom.{$specV->value}.$outputFormat";
+                    yield "demo: $purpose $outputFormat {$specV->value}" => [
                         $outputFormat,
                         $specV,
                         $composeFile,
