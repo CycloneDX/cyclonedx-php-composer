@@ -91,16 +91,9 @@ final class OptionsTest extends TestCase
             '--omit=dev --omit plugin --omit invalid-value',
             ['omit' => ['dev', 'plugin']],
         ];
-        foreach ([
-            '1.6' => Version::v1dot6,
-            '1.5' => Version::v1dot5,
-            '1.4' => Version::v1dot4,
-            '1.3' => Version::v1dot3,
-            '1.2' => Version::v1dot2,
-            '1.1' => Version::v1dot1,
-        ] as $specVersionIn => $specVersion) {
-            yield "specVersion '$specVersionIn'" => [
-                '--spec-version '.escapeshellarg($specVersionIn),
+        foreach (Version::cases() as $specVersion) {
+            yield "specVersion '{$specVersion->value}'" => [
+                '--spec-version '.escapeshellarg($specVersion->value),
                 ['specVersion' => $specVersion],
             ];
         }

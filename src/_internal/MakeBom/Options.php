@@ -23,8 +23,8 @@ declare(strict_types=1);
 
 namespace CycloneDX\Composer\_internal\MakeBom;
 
-use CycloneDX\Core\Spec\Format;
-use CycloneDX\Core\Spec\Version;
+use CycloneDX\Core\Spec\Format as SpecFormat;
+use CycloneDX\Core\Spec\Version as SpecVersion;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputDefinition;
@@ -73,12 +73,11 @@ class Options
      * Possible output formats.
      * First in list is the default value.
      *
-     * @psalm-var array<string, Format>
+     * @psalm-var array<string, SpecFormat>
      */
     private const VALUES_OUTPUT_FORMAT_MAP = [
-        'XML' => Format::XML,
-        // first in list is the default value - see constructor
-        'JSON' => Format::JSON,
+        'JSON' => SpecFormat::JSON,
+        'XML' => SpecFormat::XML,
     ];
 
     public const VALUE_OUTPUT_FILE_STDOUT = '-';
@@ -91,22 +90,6 @@ class Options
     private const VALUES_OMIT = [
         'dev',
         'plugin',
-    ];
-
-    /**
-     * Possible spec versions.
-     * First in list is the default value.
-     *
-     * @psalm-var array<string, Version>
-     */
-    private const VALUE_SPEC_VERSION_MAP = [
-        '1.5' => Version::v1dot5,
-        // first in list is the default value - see constructor
-        '1.6' => Version::v1dot6,
-        '1.4' => Version::v1dot4,
-        '1.3' => Version::v1dot3,
-        '1.2' => Version::v1dot2,
-        '1.1' => Version::v1dot1,
     ];
 
     /**
@@ -127,6 +110,8 @@ class Options
      */
     public function getDefinition(): InputDefinition
     {
+        $specVersionValues = array_map(fn ($sv) => $sv->value, SpecVersion::cases());
+
         return new InputDefinition([
             new InputOption(
                 self::OPTION_OUTPUT_FORMAT,
@@ -159,9 +144,9 @@ class Options
                 null,
                 InputOption::VALUE_REQUIRED,
                 'Which version of CycloneDX spec to use.'.\PHP_EOL.
-                self::formatChoice(array_keys(self::VALUE_SPEC_VERSION_MAP), \SORT_NUMERIC),
-                array_search($this->specVersion, self::VALUE_SPEC_VERSION_MAP, true),
-                array_keys(self::VALUE_SPEC_VERSION_MAP)
+                self::formatChoice($specVersionValues, \SORT_NUMERIC),
+                $this->specVersion->value,
+                $specVersionValues
             ),
             new InputOption(
                 self::SWITCH_OUTPUT_REPRODUCIBLE,
@@ -201,7 +186,7 @@ class Options
      *
      * @psalm-allow-private-mutation
      */
-    public Version $specVersion;
+    public SpecVersion $specVersion = SpecVersion::v1dot5;
 
     /**
      * @readonly
@@ -219,7 +204,7 @@ class Options
      *
      * @psalm-allow-private-mutation
      */
-    public Format $outputFormat;
+    public SpecFormat $outputFormat = SpecFormat::XML;
 
     /**
      * @readonly
@@ -262,12 +247,6 @@ class Options
      */
     public ?string $mainComponentVersion = null;
 
-    public function __construct()
-    {
-        $this->outputFormat = self::VALUES_OUTPUT_FORMAT_MAP[array_key_first(self::VALUES_OUTPUT_FORMAT_MAP)];
-        $this->specVersion = self::VALUE_SPEC_VERSION_MAP[array_key_first(self::VALUE_SPEC_VERSION_MAP)];
-    }
-
     /**
      * @psalm-return null|non-empty-string
      */
@@ -301,17 +280,18 @@ class Options
     {
         // region get from input
 
-        $specVersion = $input->getOption(self::OPTION_SPEC_VERSION);
-        \assert(\is_string($specVersion));
-        if (false === \array_key_exists($specVersion, self::VALUE_SPEC_VERSION_MAP)) {
-            throw new Errors\OptionError('Invalid value for option "'.self::OPTION_SPEC_VERSION.'": '.$specVersion);
+        $specVersionRaw = $input->getOption(self::OPTION_SPEC_VERSION);
+        \assert(\is_string($specVersionRaw));
+        $specVersion = SpecVersion::tryFrom($specVersionRaw);
+        if (null === $specVersion) {
+            throw new Errors\OptionError('Invalid value for option "'.self::OPTION_SPEC_VERSION.'": '.$specVersionRaw);
         }
 
-        $outputFormat = $input->getOption(self::OPTION_OUTPUT_FORMAT);
-        \assert(\is_string($outputFormat));
-        $outputFormat = strtoupper($outputFormat);
-        if (false === \array_key_exists($outputFormat, self::VALUES_OUTPUT_FORMAT_MAP)) {
-            throw new Errors\OptionError('Invalid value for option "'.self::OPTION_OUTPUT_FORMAT.'": '.$outputFormat);
+        $outputFormatRaw = $input->getOption(self::OPTION_OUTPUT_FORMAT);
+        \assert(\is_string($outputFormatRaw));
+        $outputFormat = self::VALUES_OUTPUT_FORMAT_MAP[strtoupper($outputFormatRaw)] ?? null;
+        if (null === $outputFormat) {
+            throw new Errors\OptionError('Invalid value for option "'.self::OPTION_OUTPUT_FORMAT.'": '.$outputFormatRaw);
         }
 
         $outputFile = $input->getOption(self::OPTION_OUTPUT_FILE);
@@ -338,9 +318,9 @@ class Options
 
         // region set state
 
-        $this->specVersion = self::VALUE_SPEC_VERSION_MAP[$specVersion];
         $this->omit = array_values(array_intersect(self::VALUES_OMIT, $omit));
-        $this->outputFormat = self::VALUES_OUTPUT_FORMAT_MAP[$outputFormat];
+        $this->specVersion = $specVersion;
+        $this->outputFormat = $outputFormat;
         $this->outputReproducible = $outputReproducible;
         $this->validate = $validate;
         $this->outputFile = $outputFile;

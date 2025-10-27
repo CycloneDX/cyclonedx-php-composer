@@ -27,7 +27,7 @@ use Composer\Command\BaseCommand;
 use Composer\Factory as ComposerFactory;
 use Composer\IO\IOInterface;
 use CycloneDX\Core\Serialization;
-use CycloneDX\Core\Spec\Format;
+use CycloneDX\Core\Spec\Format as SpecFormat;
 use CycloneDX\Core\Spec\SpecFactory;
 use CycloneDX\Core\Utils\BomUtility;
 use CycloneDX\Core\Validation\Validator;
@@ -182,8 +182,8 @@ class Command extends BaseCommand
          * @psalm-suppress MixedArgumentTypeCoercion -- psalm has issues wth template TSpec for $spec
          */
         $serializer = match ($this->options->outputFormat) {
-            Format::JSON => new Serialization\JsonSerializer(new Serialization\JSON\NormalizerFactory($spec)),
-            Format::XML => new Serialization\XmlSerializer(new Serialization\DOM\NormalizerFactory($spec)),
+            SpecFormat::JSON => new Serialization\JsonSerializer(new Serialization\JSON\NormalizerFactory($spec)),
+            SpecFormat::XML => new Serialization\XmlSerializer(new Serialization\DOM\NormalizerFactory($spec)),
             default => throw new DomainException("unsupported format: {$this->options->outputFormat->name}"),
         };
         $io->writeErrorRaw('using '.$serializer::class, verbosity: IOInterface::DEBUG);
@@ -211,8 +211,8 @@ class Command extends BaseCommand
          * @psalm-suppress MixedArgumentTypeCoercion -- psalm has issues wth template TSpec for $spec
          **/
         $validator = match ($this->options->outputFormat) {
-            Format::JSON => new Validators\JsonStrictValidator($spec),
-            Format::XML => new Validators\XmlValidator($spec),
+            SpecFormat::JSON => new Validators\JsonStrictValidator($spec),
+            SpecFormat::XML => new Validators\XmlValidator($spec),
             default => throw new DomainException("unsupported format: {$this->options->outputFormat->name}"),
         };
         $io->writeErrorRaw('using '.$validator::class, verbosity: IOInterface::DEBUG);

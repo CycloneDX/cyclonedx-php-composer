@@ -55,6 +55,7 @@
     },
     "config": {
         "allow-plugins": {
+            "cyclonedx/cyclonedx-php-composer": true,
             "ergebnis/composer-normalize": true,
             "icanhazstring/composer-unused": true
         },
