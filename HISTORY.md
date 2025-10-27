@@ -13,6 +13,9 @@ Added _basic_ support for [_CycloneDX_ Specification-1.7](https://github.com/Cyc
 * Changed
   * This tool may support _CycloneDX_ Specification-1.7 now (via [#579])  
     This feature depends on `cyclonedx/cyclonedx-library:^3.8`.
+* Refactor
+  * Reworked internals to automatically support any SpecVersion provided by `cyclonedx/cyclonedx-library`. (via [#579])  
+    Previously, the supported versions were managed by this very tool and needed manual updates.
 
 [#579]: https://github.com/CycloneDX/cyclonedx-php-composer/pull/579
 
