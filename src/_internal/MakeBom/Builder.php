@@ -206,7 +206,7 @@ class Builder
     private function createComponentFromPackage(PackageInterface $package, ?string $versionOverride = null): Models\Component
     {
         [$group, $name] = self::getGroupAndName($package->getName());
-        $version = $versionOverride ?? $package->getFullPrettyVersion();
+        $version = $versionOverride ?? $package->getPrettyVersion();
         $distReference = $package->getDistReference();
         $sourceReference = $package->getSourceReference();
 
@@ -404,7 +404,7 @@ class Builder
         $tool = new Models\Tool();
         $tool->setName($name);
         $tool->setVendor($group);
-        $tool->setVersion($versionOverride ?? $package->getFullPrettyVersion());
+        $tool->setVersion($versionOverride ?? $package->getPrettyVersion());
         $tool->getExternalReferences()->addItems(
             ...self::createExternalReferencesFromPackage($package)
         );
