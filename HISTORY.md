@@ -6,6 +6,12 @@ All notable changes to this project will be documented in this file.
 
 <!-- add unreleased items here -->
 
+* Breaking Change
+  * Fix: no longer issue git/hg commit ids when running on dev-resourc. ([#586] via [#588])
+
+[#586]: https://github.com/CycloneDX/cyclonedx-php-composer/issues/586
+[#588]: https://github.com/CycloneDX/cyclonedx-php-composer/pull/588
+
 ## 5.3.0 - 2025-10-27
 
 Added _basic_ support for [_CycloneDX_ Specification-1.7](https://github.com/CycloneDX/specification/releases/tag/1.7).
