@@ -34,7 +34,11 @@ abstract class CommandTestCase extends TestCase
     protected static function make_app(Command $command): Application
     {
         $app = new Application();
-        $app->add($command);
+        if (method_exists($app, 'addCommand')) {
+            $app->addCommand($command);
+        } else {
+            $app->add($command);
+        }
         $app->setAutoExit(false);
 
         return $app;
