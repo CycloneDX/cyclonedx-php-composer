@@ -55,6 +55,7 @@ jobs:
         os: [ "ubuntu-latest" ]
         php:
           - "8.5" # highest supported
+          - "8.4"
           - "8.3"
           - "8.2"
           - "8.1" # lowest supported
