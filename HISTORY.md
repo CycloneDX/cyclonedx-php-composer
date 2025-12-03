@@ -6,6 +6,13 @@ All notable changes to this project will be documented in this file.
 
 <!-- add unreleased items here -->
 
+* Added
+  * Officially support PHP 8.5 ([#595] via [#587])
+
+[#595]: https://github.com/CycloneDX/cyclonedx-php-composer/pull/595
+[#587]: https://github.com/CycloneDX/cyclonedx-php-composer/issues/587
+
+
 ## 6.0.0 - 2025-11-17
 
 * Breaking Change
