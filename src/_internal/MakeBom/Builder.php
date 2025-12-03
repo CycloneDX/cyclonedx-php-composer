@@ -33,7 +33,7 @@ use Composer\Repository\LockArrayRepository;
 use Composer\Semver\Constraint\MatchAllConstraint;
 use CycloneDX\Composer\_internal\Properties;
 use CycloneDX\Core\Enums;
-use CycloneDX\Core\Factories\LicenseFactory;
+use CycloneDX\Contrib\License\Factories\LicenseFactory;
 use CycloneDX\Core\Models;
 use Generator;
 use PackageUrl\PackageUrl;

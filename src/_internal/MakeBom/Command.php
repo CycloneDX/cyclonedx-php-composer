@@ -29,7 +29,7 @@ use Composer\IO\IOInterface;
 use CycloneDX\Core\Serialization;
 use CycloneDX\Core\Spec\Format as SpecFormat;
 use CycloneDX\Core\Spec\SpecFactory;
-use CycloneDX\Core\Utils\BomUtility;
+use CycloneDX\Contrib\Bom\Utils\BomUtils;
 use CycloneDX\Core\Validation\Validator;
 use CycloneDX\Core\Validation\Validators;
 use DateTime;
@@ -159,7 +159,7 @@ class Command extends BaseCommand
 
         if (!$this->options->outputReproducible) {
             try {
-                $bom->setSerialNumber(BomUtility::randomSerialNumber());
+                $bom->setSerialNumber(BomUtils::randomSerialNumber());
             } catch (Exception) {
                 /* pass */
             }

@@ -6,6 +6,13 @@ All notable changes to this project will be documented in this file.
 
 <!-- add unreleased items here -->
 
+* Refactor
+  * Migrated to `cyclonedx/cyclonedx-library:^3.9` (via [#])
+* Dependencies
+  * Raised dependency `cyclonedx/cyclonedx-library:^3.9`, was `:^3.3` (via [#])
+
+[#]: 
+
 ## 6.0.0 - 2025-11-17
 
 * Breaking Change
