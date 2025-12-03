@@ -6,12 +6,16 @@ All notable changes to this project will be documented in this file.
 
 <!-- add unreleased items here -->
 
+* Added
+  * Officially support PHP 8.5 ([#595] via [#587])
 * Refactor
   * Migrated to `cyclonedx/cyclonedx-library:^3.9` (via [#594])
 * Dependencies
   * Raised dependency `cyclonedx/cyclonedx-library:^3.9`, was `:^3.3` (via [#594])
 
 [#594]: https://github.com/CycloneDX/cyclonedx-php-composer/pull/594
+[#595]: https://github.com/CycloneDX/cyclonedx-php-composer/pull/595
+[#587]: https://github.com/CycloneDX/cyclonedx-php-composer/issues/587
 
 ## 6.0.0 - 2025-11-17
 
