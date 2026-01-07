@@ -40,6 +40,7 @@
     },
     "require-dev": {
         "composer/composer": "^2.3.0",
+        "marc-mabe/php-enum": "^4.6",
         "roave/security-advisories": "dev-latest"
     },
     "prefer-stable": true,
