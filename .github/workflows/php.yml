@@ -22,7 +22,7 @@ concurrency:
 env:
   PHP_VERSION_LOWEST: "8.1"  # lowest supported
   PHP_VERSION_LATEST: "8.5"  # highest supported
-  PHP_PROJECT_EXT: dom,json,libxml,phar,bcmath,json,mbstring,sodium,intl  # via `composer info -pt`
+  PHP_PROJECT_EXT: dom,json,libxml,phar,bcmath,json,mbstring,sodium,intl  # via `composer info -pt` in toot and all tools
   REPORTS_DIR: CI_reports
   TESTS_REPORTS_ARTIFACT: tests-reports
   TYPES_REPORTS_ARTIFACT: types-reports
