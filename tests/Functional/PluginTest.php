@@ -30,7 +30,6 @@ use CycloneDX\Composer\_internal\MakeBom\Command;
 use CycloneDX\Composer\_internal\MakeBom\Options;
 use CycloneDX\Composer\Plugin;
 use PHPUnit\Framework\Attributes\CoversClass;
-use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Depends;
 use PHPUnit\Framework\Attributes\DoesNotPerformAssertions;
 use PHPUnit\Framework\Attributes\UsesClass;
