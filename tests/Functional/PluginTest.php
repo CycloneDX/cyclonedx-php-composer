@@ -50,7 +50,6 @@ final class PluginTest extends TestCase
      * assert the correct setup as described in
      * {@link https://getcomposer.org/doc/articles/plugins.md#plugin-package the docs}.
      */
-    #[CoversNothing]
     public function testPackageIsComposerPlugin(): void
     {
         $composerJson = $this->getComposerJson();
@@ -61,7 +60,6 @@ final class PluginTest extends TestCase
      * assert the correct setup as described in
      * {@link https://getcomposer.org/doc/articles/plugins.md#plugin-package the docs}.
      */
-    #[CoversNothing]
     public function testPluginIsRegistered(): string
     {
         $composerJson = $this->getComposerJson();
