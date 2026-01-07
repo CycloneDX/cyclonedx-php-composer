@@ -6,6 +6,8 @@ All notable changes to this project will be documented in this file.
 
 <!-- add unreleased items here -->
 
+## 6.1.0 - 2026-01-07
+
 * Added
   * Officially support PHP 8.5 ([#595] via [#587])
 * Refactor
