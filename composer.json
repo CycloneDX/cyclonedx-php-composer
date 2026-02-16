@@ -35,7 +35,8 @@
     "require": {
         "php": "^8.1",
         "composer-plugin-api": "^2.3",
-        "cyclonedx/cyclonedx-library": "^v4.0.0-rc.2",
+        "composer/spdx-licenses": "^1.5.7",
+        "cyclonedx/cyclonedx-library": "^4.0.0-rc.2",
         "package-url/packageurl-php": "^1.0"
     },
     "require-dev": {
