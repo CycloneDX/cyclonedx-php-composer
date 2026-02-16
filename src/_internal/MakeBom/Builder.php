@@ -265,7 +265,7 @@ class Builder
         $purl->setNamespace($component->getGroup());
         $purl->setVersion($component->getVersion());
 
-        return (string)$purl;
+        return (string) $purl;
     }
 
     /**
