@@ -27,6 +27,7 @@ use Composer\Command\BaseCommand;
 use Composer\Factory as ComposerFactory;
 use Composer\IO\IOInterface;
 use CycloneDX\Contrib\Bom\Utils\BomUtils;
+use CycloneDX\Contrib\License\Factories\LicenseFactory;
 use CycloneDX\Core\Serialization;
 use CycloneDX\Core\Spec\Format as SpecFormat;
 use CycloneDX\Core\Spec\SpecFactory;
@@ -140,7 +141,11 @@ class Command extends BaseCommand
         $builder = new Builder(
             \in_array('dev', $this->options->omit),
             \in_array('plugin', $this->options->omit),
-            $this->options->mainComponentVersion
+            $this->options->mainComponentVersion,
+            new LicenseFactory(
+                new \CycloneDX\Core\Spdx\LicenseIdentifiers(),
+                new \Composer\Spdx\SpdxLicenses()
+            )
         );
 
         $composerFile = $this->options->composerFile;

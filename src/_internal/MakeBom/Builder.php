@@ -60,7 +60,7 @@ class Builder
         private readonly bool $omitDev,
         private readonly bool $omitPlugin,
         private readonly ?string $mainComponentVersion,
-        private readonly LicenseFactory $licenseFactory = new LicenseFactory(),
+        private readonly LicenseFactory $licenseFactory,
     ) {
     }
 
@@ -252,7 +252,7 @@ class Builder
         return $component;
     }
 
-    private function createPurlFromComponent(Models\Component $component): ?PackageUrl
+    private function createPurlFromComponent(Models\Component $component): ?string
     {
         // TODO build from non-packagist sources
 
@@ -265,7 +265,7 @@ class Builder
         $purl->setNamespace($component->getGroup());
         $purl->setVersion($component->getVersion());
 
-        return $purl;
+        return (string)$purl;
     }
 
     /**
