@@ -25,10 +25,13 @@ namespace CycloneDX\Tests\Unit\MakeBom;
 
 use Composer\Factory as ComposerFactory;
 use Composer\IO\NullIO;
+use Composer\Spdx\SpdxLicenses;
 use CycloneDX\Composer\_internal\MakeBom\Builder;
 use CycloneDX\Composer\Plugin;
+use CycloneDX\Contrib\License\Factories\LicenseFactory;
 use CycloneDX\Core\Enums;
 use CycloneDX\Core\Models;
+use CycloneDX\Core\Spdx\LicenseIdentifiers;
 use Generator;
 use LogicException;
 use PHPUnit\Framework\Attributes\CoversClass;
@@ -48,7 +51,12 @@ final class BuilderTest extends TestCase
     {
         $setupManifest = $setup();
         $composer = (new ComposerFactory())->createComposer(new NullIO(), $setupManifest, cwd: \dirname($setupManifest));
-        $builder = new Builder(false, false, null);
+        $builder = new Builder(false, false, null,
+            new LicenseFactory(
+                new LicenseIdentifiers(),
+                new SpdxLicenses()
+            )
+        );
 
         if (false === $locked && false === $installed) {
             $this->expectException(LogicException::class);
@@ -76,7 +84,12 @@ final class BuilderTest extends TestCase
     {
         $setupManifest = $setup();
         $composer = (new ComposerFactory())->createComposer(new NullIO(), $setupManifest, cwd: \dirname($setupManifest));
-        $builder = new Builder(true, false, null);
+        $builder = new Builder(true, false, null,
+            new LicenseFactory(
+                new LicenseIdentifiers(),
+                new SpdxLicenses()
+            )
+        );
 
         if (false === $locked && false === $installed) {
             $this->expectException(LogicException::class);
@@ -98,7 +111,12 @@ final class BuilderTest extends TestCase
     {
         $setupManifest = $setup();
         $composer = (new ComposerFactory())->createComposer(new NullIO(), $setupManifest, cwd: \dirname($setupManifest));
-        $builder = new Builder(false, true, null);
+        $builder = new Builder(false, true, null,
+            new LicenseFactory(
+                new LicenseIdentifiers(),
+                new SpdxLicenses()
+            )
+        );
 
         if (false === $locked && false === $installed) {
             $this->expectException(LogicException::class);

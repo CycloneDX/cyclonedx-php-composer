@@ -27,6 +27,7 @@ use Composer\Command\BaseCommand;
 use Composer\Factory as ComposerFactory;
 use Composer\IO\IOInterface;
 use CycloneDX\Contrib\Bom\Utils\BomUtils;
+use CycloneDX\Contrib\License\Factories\LicenseFactory;
 use CycloneDX\Core\Serialization;
 use CycloneDX\Core\Spec\Format as SpecFormat;
 use CycloneDX\Core\Spec\SpecFactory;
@@ -91,9 +92,8 @@ class Command extends BaseCommand
         $io->writeErrorRaw(__METHOD__.' Options: '.var_export($this->options, true), verbosity: IOInterface::DEBUG);
 
         try {
-            $spec = $this->makeSpec();
-            $bom = $this->generateBom($io, $spec);
-            $this->validateBom($bom, $spec, $io);
+            $bom = $this->generateBom($io, $this->makeSpec());
+            $this->validateBom($bom, $io);
             $this->writeBom($bom, $io);
         } catch (Errors\ValidationError $error) {
             $io->writeErrorRaw((string) $error, true, IOInterface::DEBUG);
@@ -140,7 +140,11 @@ class Command extends BaseCommand
         $builder = new Builder(
             \in_array('dev', $this->options->omit),
             \in_array('plugin', $this->options->omit),
-            $this->options->mainComponentVersion
+            $this->options->mainComponentVersion,
+            new LicenseFactory(
+                new \CycloneDX\Core\Spdx\LicenseIdentifiers(),
+                new \Composer\Spdx\SpdxLicenses()
+            )
         );
 
         $composerFile = $this->options->composerFile;
@@ -192,12 +196,10 @@ class Command extends BaseCommand
     }
 
     /**
-     * @param TSpec $spec
-     *
      * @throws Errors\ValidationError on validation errors
      * @throws Throwable              on error
      */
-    private function validateBom(string $bom, $spec, IOInterface $io): void
+    private function validateBom(string $bom, IOInterface $io): void
     {
         if (false === $this->options->validate) {
             $io->writeError('<info>skipped BOM validation.</info>', verbosity: IOInterface::VERBOSE);
@@ -211,8 +213,8 @@ class Command extends BaseCommand
          * @psalm-suppress MixedArgumentTypeCoercion -- psalm has issues wth template TSpec for $spec
          **/
         $validator = match ($this->options->outputFormat) {
-            SpecFormat::JSON => new Validators\JsonStrictValidator($spec),
-            SpecFormat::XML => new Validators\XmlValidator($spec),
+            SpecFormat::JSON => new Validators\JsonStrictValidator($this->options->specVersion),
+            SpecFormat::XML => new Validators\XmlValidator($this->options->specVersion),
             default => throw new DomainException("unsupported format: {$this->options->outputFormat->name}"),
         };
         $io->writeErrorRaw('using '.$validator::class, verbosity: IOInterface::DEBUG);
