@@ -7,9 +7,9 @@ All notable changes to this project will be documented in this file.
 <!-- add unreleased items here -->
 
 * Refactor
-    * Migrated to `cyclonedx/cyclonedx-library:^4.0` (via [#619])
+  * Migrated to `cyclonedx/cyclonedx-library:^4.0` (via [#619])
 * Dependencies
-    * Raised dependency `cyclonedx/cyclonedx-library:^4.0`, was `:^4.0` (via [#619])
+  * Raised dependency `cyclonedx/cyclonedx-library:^4.0`, was `:^4.0` (via [#619])
 
 [#619]: https://github.com/CycloneDX/cyclonedx-php-composer/pull/619
 
