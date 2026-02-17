@@ -10,7 +10,10 @@ All notable changes to this project will be documented in this file.
   * Migrated to `cyclonedx/cyclonedx-library:^4.0` (via [#619])
 * Dependencies
   * Raised dependency `cyclonedx/cyclonedx-library:^4.0`, was `:^3.9` (via [#619])
+* Style
+  * Applied latest PHP Coding Standards (via [#617])
 
+[#617]: https://github.com/CycloneDX/cyclonedx-php-composer/pull/617
 [#619]: https://github.com/CycloneDX/cyclonedx-php-composer/pull/619
 
 ## 6.1.0 - 2026-01-07

@@ -110,7 +110,7 @@ class Options
      */
     public function getDefinition(): InputDefinition
     {
-        $specVersionValues = array_map(fn ($sv) => $sv->value, SpecVersion::cases());
+        $specVersionValues = array_map(static fn ($sv) => $sv->value, SpecVersion::cases());
 
         return new InputDefinition([
             new InputOption(
