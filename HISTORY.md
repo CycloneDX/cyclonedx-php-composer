@@ -6,6 +6,8 @@ All notable changes to this project will be documented in this file.
 
 <!-- add unreleased items here -->
 
+## 6.2.0 - 2026-01-17
+
 * Refactor
   * Migrated to `cyclonedx/cyclonedx-library:^4.0` (via [#619])
 * Dependencies
