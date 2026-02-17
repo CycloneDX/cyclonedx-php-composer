@@ -90,7 +90,7 @@ final class CommandMakeSbomAsExpectedTest extends CommandTestCase
                 $specVs = SpecVersion::cases();
                 if ('json' === $outputFormat) {
                     // remove unsupported versions
-                    $specVs = array_filter($specVs, fn ($sv) => SpecVersion::v1dot1 !== $sv);
+                    $specVs = array_filter($specVs, static fn ($sv) => SpecVersion::v1dot1 !== $sv);
                 }
                 foreach ($specVs as $specV) {
                     $composeFile = self::DEMO_ROOT."/$purpose/project/composer.json";
