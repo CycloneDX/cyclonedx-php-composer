@@ -128,7 +128,7 @@ jobs:
       - name: Artifact reports
         if: ${{ ! cancelled() }}
         # see https://github.com/actions/upload-artifact
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: '${{ env.TESTS_REPORTS_ARTIFACT }}_${{ matrix.os }}_php${{ matrix.php }}_${{ matrix.dependencies }}'
           path: ${{ env.REPORTS_DIR }}
@@ -237,7 +237,7 @@ jobs:
       - name: Artifact reports
         if: ${{ ! cancelled() }}
         # see https://github.com/actions/upload-artifact
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: '${{ env.TYPES_REPORTS_ARTIFACT }}_php${{ matrix.php }}_composer${{ matrix.composer }}_${{ matrix.dependencies }}'
           path: ${{ env.REPORTS_DIR }}
