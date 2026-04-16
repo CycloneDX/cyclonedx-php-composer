@@ -35,10 +35,10 @@ jobs:
     steps:
       - name: Checkout
         # see https://github.com/actions/checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
       - name: Setup PHP
         # see https://github.com/shivammathur/setup-php
-        uses: shivammathur/setup-php@v2
+        uses: shivammathur/setup-php@accd6127cb78bee3e8082180cb391013d204ef9f # v2
         with:
           php-version: ${{ env.PHP_VERSION_LATEST }}
           extensions: ${{ env.PHP_PROJECT_EXT }}
@@ -73,12 +73,12 @@ jobs:
     steps:
       - name: Checkout
         # see https://github.com/actions/checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
       - name: dir setup
         run: mkdir ${{ env.REPORTS_DIR }}
       - name: Setup PHP
         # see https://github.com/shivammathur/setup-php
-        uses: shivammathur/setup-php@v2
+        uses: shivammathur/setup-php@accd6127cb78bee3e8082180cb391013d204ef9f # v2
         with:
           php-version: ${{ matrix.php }}
           extensions: ${{ env.PHP_PROJECT_EXT }}
@@ -91,7 +91,7 @@ jobs:
       - name: Cache dependencies
         if: ${{ steps.composer-cache.outputs.dir }}
         # see https://github.com/actions/cache
-        uses: actions/cache@v5
+        uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
           key: composer-${{ github.job }}-${{ runner.os }}-php${{ matrix.php }}-${{ matrix.dependencies }}-${{ hashFiles('composer.*', 'tools/phpunit/composer.*') }}
@@ -128,7 +128,7 @@ jobs:
       - name: Artifact reports
         if: ${{ ! cancelled() }}
         # see https://github.com/actions/upload-artifact
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
         with:
           name: '${{ env.TESTS_REPORTS_ARTIFACT }}_${{ matrix.os }}_php${{ matrix.php }}_${{ matrix.dependencies }}'
           path: ${{ env.REPORTS_DIR }}
@@ -141,7 +141,7 @@ jobs:
     steps:
       - name: fetch test artifacts
         # see https://github.com/actions/download-artifact
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7
         with:
           pattern: '${{ env.TESTS_REPORTS_ARTIFACT }}_*'
           merge-multiple: true
@@ -152,7 +152,7 @@ jobs:
         ## see https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#example-using-secrets
         if: ${{ env.CODACY_PROJECT_TOKEN != '' }}
         # see https://github.com/codacy/codacy-coverage-reporter-action
-        uses: codacy/codacy-coverage-reporter-action@v1
+        uses: codacy/codacy-coverage-reporter-action@89d6c85cfafaec52c72b6c5e8b2878d33104c699 # v1
         with:
           project-token: ${{ env.CODACY_PROJECT_TOKEN }}
           coverage-reports: ${{ env.REPORTS_DIR }}/coverage/*.clover.xml
@@ -188,10 +188,10 @@ jobs:
     steps:
       - name: Checkout
         # see https://github.com/actions/checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
       - name: Setup PHP
         # see https://github.com/shivammathur/setup-php
-        uses: shivammathur/setup-php@v2
+        uses: shivammathur/setup-php@accd6127cb78bee3e8082180cb391013d204ef9f # v2
         with:
           php-version: ${{ matrix.php }}
           extensions: ${{ env.PHP_PROJECT_EXT }}
@@ -203,7 +203,7 @@ jobs:
       - name: Cache dependencies
         if: ${{ steps.composer-cache.outputs.dir }}
         # see https://github.com/actions/cache
-        uses: actions/cache@v5
+        uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
           key: composer-${{ github.job }}-${{ runner.os }}-php${{ matrix.php }}-c${{ matrix.composer }}-${{ matrix.dependencies }}-${{ hashFiles('composer.*', 'tools/psalm/composer.*') }}
@@ -237,7 +237,7 @@ jobs:
       - name: Artifact reports
         if: ${{ ! cancelled() }}
         # see https://github.com/actions/upload-artifact
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
         with:
           name: '${{ env.TYPES_REPORTS_ARTIFACT }}_php${{ matrix.php }}_composer${{ matrix.composer }}_${{ matrix.dependencies }}'
           path: ${{ env.REPORTS_DIR }}
@@ -249,10 +249,10 @@ jobs:
     steps:
       - name: Checkout
         # see https://github.com/actions/checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
       - name: Setup PHP
         # see https://github.com/shivammathur/setup-php
-        uses: shivammathur/setup-php@v2
+        uses: shivammathur/setup-php@accd6127cb78bee3e8082180cb391013d204ef9f # v2
         with:
           php-version: ${{ env.PHP_VERSION_LATEST }}
           extensions: ${{ env.PHP_PROJECT_EXT }}
@@ -264,7 +264,7 @@ jobs:
       - name: Cache dependencies
         if: ${{ steps.composer-cache.outputs.dir }}
         # see https://github.com/actions/cache
-        uses: actions/cache@v5
+        uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
           key: composer-${{ github.job }}-${{ runner.os }}-${{ hashFiles('composer.*', 'tools/composer-unused/composer.*') }}
@@ -288,10 +288,10 @@ jobs:
     steps:
       - name: Checkout
         # see https://github.com/actions/checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
       - name: Setup PHP
         # see https://github.com/shivammathur/setup-php
-        uses: shivammathur/setup-php@v2
+        uses: shivammathur/setup-php@accd6127cb78bee3e8082180cb391013d204ef9f # v2
         with:
           php-version: ${{ env.PHP_VERSION_LATEST }}
           extensions: ${{ env.PHP_PROJECT_EXT }}
@@ -303,7 +303,7 @@ jobs:
       - name: Cache dependencies
         if: ${{ steps.composer-cache.outputs.dir }}
         # see https://github.com/actions/cache
-        uses: actions/cache@v5
+        uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
           key: composer-${{ github.job }}-${{ runner.os }}-${{ hashFiles('composer.*', 'tools/composer-require-checker/composer.*') }}
@@ -325,10 +325,10 @@ jobs:
     steps:
       - name: Checkout
         # see https://github.com/actions/checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
       - name: Setup PHP
         # see https://github.com/shivammathur/setup-php
-        uses: shivammathur/setup-php@v2
+        uses: shivammathur/setup-php@accd6127cb78bee3e8082180cb391013d204ef9f # v2
         with:
           php-version: ${{ env.PHP_VERSION_LOWEST }}
           extensions: ${{ env.PHP_PROJECT_EXT }}
@@ -340,7 +340,7 @@ jobs:
       - name: Cache dependencies
         if: ${{ steps.composer-cache.outputs.dir }}
         # see https://github.com/actions/cache
-        uses: actions/cache@v5
+        uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
           key: composer-${{ github.job }}-${{ runner.os }}-${{ hashFiles('composer.*', 'tools/php-cs-fixer/composer.*') }}
@@ -364,10 +364,10 @@ jobs:
     steps:
       - name: Checkout
         # see https://github.com/actions/checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
       - name: Setup PHP
         # see https://github.com/shivammathur/setup-php
-        uses: shivammathur/setup-php@v2
+        uses: shivammathur/setup-php@accd6127cb78bee3e8082180cb391013d204ef9f # v2
         with:
           php-version: ${{ env.PHP_VERSION_LATEST }}
           tools: 'composer:v2'
@@ -378,7 +378,7 @@ jobs:
       - name: Cache dependencies
         if: ${{ steps.composer-cache.outputs.dir }}
         # see https://github.com/actions/cache
-        uses: actions/cache@v5
+        uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
           key: composer-${{ github.job }}-${{ runner.os }}-${{ hashFiles('composer.*', 'tools/composer-normalize/composer.*') }}
