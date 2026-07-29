@@ -219,6 +219,9 @@ jobs:
       - name: Install (composer:~${{ matrix.composer }}.0 ${{ matrix.dependencies }})
         run: |
           # removing security-foo here is fine, as no code is run, only parsed
+          if ! composer config audit.block-insecure false; then
+            echo "Composer version does not support audit.block-insecure; continuing."
+          fi
           composer remove --dev 'roave/security-advisories' \
              --no-update --no-install
           composer update \
