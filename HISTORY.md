@@ -7,8 +7,10 @@ All notable changes to this project will be documented in this file.
 <!-- add unreleased items here -->
 
 * Dependencies
-  * Support dependency `cyclonedx/cyclonedx-library:^5.0` (via [#])
-  * Support dependency `package-url/packageurl-php:^2.0` (via [#])
+  * Support dependency `cyclonedx/cyclonedx-library:^5.0` (via [#683])
+  * Support dependency `package-url/packageurl-php:^2.0` (via [#683])
+
+[#683]: https://github.com/CycloneDX/cyclonedx-php-composer/pull/683
 
 ## 6.2.0 - 2026-01-17
 
